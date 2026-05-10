@@ -68,7 +68,7 @@
       "login_form_password_label": "Mot de passe",
       "login_form_submit": "Entrer",
       "admin_link": "Êtes-vous le propriétaire du magasin?",
-      "admin_link_html": "Êtes-vous le propriétaire du magasin? <a href=\"\/admin\" class=\"link underlined-link\">Se connecter ici<\/a>" ,
+      "admin_link_html": "Êtes-vous le propriétaire du magasin? <a href=\"/admin\" class=\"link underlined-link\">Se connecter ici</a>",
       "login": "Ce magasin sera alimenté par",
       "powered_by_shopify_html": "This shop will be powered by {{ shopify }}"
     },
@@ -99,7 +99,7 @@
         "one": "{{ count }} résultat pour “{{ terms }}”",
         "other": "{{ count }} résultat pour “{{ terms }}”"
       },
-      "use_fewer_filters_html": "Utiliser moins de filtres ou <a class=\"{{ class }}\" href=\"{{ link }}\">supprimer tous<\/a>",
+      "use_fewer_filters_html": "Utiliser moins de filtres ou <a class=\"{{ class }}\" href=\"{{ link }}\">supprimer tous</a>",
       "search_title": "Recherche",
       "placeholder": "Recherche",
       "clear": "Supprimer",
@@ -142,10 +142,10 @@
       "basket_error": "Une erreur s'est produite lors de la mise à jour de votre corbeille. Veuillez réessayer.",
       "cart_quantity_error_html": "Vous ne pouvez ajouter que {{ quantity }} de cet article à votre sac.",
       "bag_quantity_error_html": "Vous ne pouvez ajouter que {{ quantity }} de cet article à votre corbeille.",
-      "basket_quantity_error_html": "Vous ne pouvez ajouter que {{ quantity }} de cet article à votre panier.",        
-      "taxes_and_shipping_policy_at_checkout_html": "Les taxes et <a class=\"shipping-policy-link\" href=\"{{ link }}\">les frais de port<\/a> sont calculés au moment du paiement",
+      "basket_quantity_error_html": "Vous ne pouvez ajouter que {{ quantity }} de cet article à votre panier.",
+      "taxes_and_shipping_policy_at_checkout_html": "Les taxes et <a class=\"shipping-policy-link\" href=\"{{ link }}\">les frais de port</a> sont calculés au moment du paiement",
       "taxes_included_but_shipping_at_checkout": "Les taxes sont incluses et les frais de port sont calculés au moment du paiement",
-      "taxes_included_and_shipping_policy_html": "Les taxes sont incluses. <a class=\"shipping-policy-link\" href=\"{{ link }}\">Les frais de port<\/a> sont calculés au moment du paiement.",
+      "taxes_included_and_shipping_policy_html": "Les taxes sont incluses. <a class=\"shipping-policy-link\" href=\"{{ link }}\">Les frais de port</a> sont calculés au moment du paiement.",
       "taxes_and_shipping_at_checkout": "Les taxes et les frais de port sont calculés au moment du paiement",
       "estimate": "Estimer",
       "zip": "Code postal",
@@ -174,7 +174,7 @@
       "empty": "Cette collection ne contient aucun produit.",
       "link": "Continuer les achats",
       "no_products": "Aucun produit trouvé.",
-      "use_fewer_filters_html": "Utiliser moins de filtres ou <a class=\"{{ class }}\" href=\"{{ link }}\">supprimer tous<\/a>"
+      "use_fewer_filters_html": "Utiliser moins de filtres ou <a class=\"{{ class }}\" href=\"{{ link }}\">supprimer tous</a>"
     },
     "video": {
       "load_video": "Télécharger la vidéo :: {{ description }}"
@@ -211,6 +211,19 @@
       "products_promotion_label": "Produits de la promotion",
       "view_story": "Voir l'histoire",
       "view_story_with_title": "Voir l'histoire : {{ title }}"
+    },
+    "comparison_table": {
+      "aria_label": "Tableau de comparaison des caractéristiques",
+      "feature_col": "Caractéristique"
+    },
+    "store_finder": {
+      "heading": "Trouvez Varty près de chez vous",
+      "intro": "Disponible dans des points de vente au Québec.",
+      "search_placeholder": "Rechercher par nom ou ville…",
+      "all_regions": "Toutes les régions",
+      "no_results": "Aucun résultat. Essayez une autre recherche.",
+      "cta_label": "Voir tous les points de vente",
+      "directions_label": "Itinéraire"
     }
   },
   "accessibility": {
@@ -232,7 +245,7 @@
     "unmute": "Activer le son",
     "discount": "Code de réduction",
     "discount_applied": "Réduction {{ code }} appliquée"
- },
+  },
   "collections": {
     "page_title": "collections",
     "product": "produit",
@@ -249,7 +262,7 @@
       "add_to_cart": "Ajouter au panier",
       "add_to_bag": "Ajouter au sac",
       "add_to_basket": "Ajouter à la corbeille",
-      "pre_order" : "Précommande",
+      "pre_order": "Précommande",
       "color_swatch_tag": "Couleur",
       "on_sale": "Vente",
       "product_variants": "Variantes du produit",
@@ -277,8 +290,8 @@
         "view_store_info": "Voir les informations sur le magasin",
         "check_other_stores": "Vérifier la disponibilité dans d'autres magasins",
         "pick_up_available": "Retrait disponible",
-        "pick_up_available_at_html": "Retrait disponible à <span class=\"color-foreground\">{{ location_name }}<\/span>",
-        "pick_up_unavailable_at_html": "Retrait actuellement indisponible à <span class=\"color-foreground\">{{ location_name }}<\/span>",
+        "pick_up_available_at_html": "Retrait disponible à <span class=\"color-foreground\">{{ location_name }}</span>",
+        "pick_up_unavailable_at_html": "Retrait actuellement indisponible à <span class=\"color-foreground\">{{ location_name }}</span>",
         "unavailable": "Impossible de charger la disponibilité du retrait",
         "refresh": "Rafraîchir",
         "available_to_pickup_at": "Disponible pour le retrait chez {{ store_name }}",
@@ -314,7 +327,7 @@
       "xr_button": "Vue dans l'espace",
       "xr_button_label": "Vue dans l'espace, charge l'objet dans une fenêtre de réalité augmentée",
       "include_taxes": "Les taxes sont incluses.",
-      "shipping_policy_html": "<a class=\"shipping-policy-link\" href=\"{{ link }}\">Les frais de port<\/a> sont calculés au moment du paiement.",
+      "shipping_policy_html": "<a class=\"shipping-policy-link\" href=\"{{ link }}\">Les frais de port</a> sont calculés au moment du paiement.",
       "change_button": "Modifier",
       "error_message_required": "Ce champ est obligatoire.",
       "custom_error": "Veuillez remplir tous les champs obligatoires.",
@@ -392,9 +405,9 @@
       "address1": "Adresse 1",
       "address2": "Adresse 2",
       "city": "Ville",
-      "country": "Pays\/région",
+      "country": "Pays/région",
       "province": "Province",
-      "zip": "Code postal\/Code postal",
+      "zip": "Code postal/Code postal",
       "phone": "Téléphone",
       "set_default": "Définir comme adresse par défaut",
       "add": "Ajouter une adresse",
@@ -563,4 +576,4 @@
     "change_my_store": "Changer mon magasin",
     "select_your_store": "Sélectionnez votre magasin"
   }
-}  
+}
