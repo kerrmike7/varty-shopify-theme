@@ -14,7 +14,9 @@
           }
         }
       },
-      "block_order": ["heading_awards"],
+      "block_order": [
+        "heading_awards"
+      ],
       "settings": {
         "section_width": "narrow",
         "center_text": true,
@@ -67,7 +69,12 @@
           }
         }
       },
-      "block_order": ["subheading_award", "heading_award", "text_award", "button_press"],
+      "block_order": [
+        "subheading_award",
+        "heading_award",
+        "text_award",
+        "button_press"
+      ],
       "settings": {
         "section_width": "wide",
         "swap_media": true,

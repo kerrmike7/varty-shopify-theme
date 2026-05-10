@@ -12,17 +12,11 @@
             "heading_color": "solid",
             "heading_gradient": "linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(101,101,101,1) 100%)"
           }
-        },
-        "text_wholesale": {
-          "type": "text",
-          "settings": {
-            "text": "We partner with grocery stores, health food retailers, and food service operators across Canada.",
-            "dim_text": false,
-            "text_size": "default"
-          }
         }
       },
-      "block_order": ["heading_wholesale", "text_wholesale"],
+      "block_order": [
+        "heading_wholesale"
+      ],
       "settings": {
         "height_mode": "percents",
         "desktop_height": 55,
@@ -45,28 +39,32 @@
       "type": "multicolumn",
       "blocks": {
         "col_quality": {
-          "type": "column",
+          "type": "image",
           "settings": {
             "title": "Premium quality",
             "text": "<p>Certified organic, 3–4 ingredients. A product your customers can trust and read on the label.</p>"
           }
         },
         "col_demand": {
-          "type": "column",
+          "type": "image",
           "settings": {
             "title": "Growing demand",
             "text": "<p>Clean-label oat beverages are the fastest-growing category in plant-based dairy. Varty leads on transparency.</p>"
           }
         },
         "col_partner": {
-          "type": "column",
+          "type": "image",
           "settings": {
             "title": "Partner support",
             "text": "<p>Dedicated wholesale team, flexible minimum orders, Tuesday fulfillment cadence for retail replenishment.</p>"
           }
         }
       },
-      "block_order": ["col_quality", "col_demand", "col_partner"],
+      "block_order": [
+        "col_quality",
+        "col_demand",
+        "col_partner"
+      ],
       "settings": {
         "heading": "Why stock Varty?",
         "columns_desktop": 3,
@@ -103,7 +101,10 @@
           }
         }
       },
-      "block_order": ["heading_form", "text_form"],
+      "block_order": [
+        "heading_form",
+        "text_form"
+      ],
       "settings": {
         "color_type": "custom",
         "background_color_type": "solid",

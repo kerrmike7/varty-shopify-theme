@@ -22,7 +22,10 @@
           }
         }
       },
-      "block_order": ["heading_finder", "text_finder"],
+      "block_order": [
+        "heading_finder",
+        "text_finder"
+      ],
       "settings": {
         "section_width": "narrow",
         "center_text": true,
@@ -76,7 +79,10 @@
           }
         }
       },
-      "block_order": ["heading_wholesale", "button_wholesale"],
+      "block_order": [
+        "heading_wholesale",
+        "button_wholesale"
+      ],
       "settings": {
         "section_width": "narrow",
         "center_text": true,
