@@ -1,0 +1,109 @@
+{
+  "sections": {
+    "awards_hero": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_awards": {
+          "type": "heading",
+          "settings": {
+            "heading": "Recognised for Building a Cleaner Food System",
+            "heading_size": "heading_l",
+            "heading_tag": "h1",
+            "heading_color": "solid",
+            "heading_gradient": "linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(101,101,101,1) 100%)"
+          }
+        }
+      },
+      "block_order": ["heading_awards"],
+      "settings": {
+        "section_width": "narrow",
+        "center_text": true,
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_color": "#5463B3",
+        "text_color": "#ffffff",
+        "desktop_padding_top": 100,
+        "desktop_padding_bottom": 100,
+        "mobile_padding_top": 64,
+        "mobile_padding_bottom": 64
+      }
+    },
+    "award_futurpreneur": {
+      "type": "media-with-text",
+      "blocks": {
+        "subheading_award": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "2024",
+            "subheading_size": "default",
+            "subheading_tag": "h3"
+          }
+        },
+        "heading_award": {
+          "type": "heading",
+          "settings": {
+            "heading": "Futurpreneur / RBC Future Launch Emerging Entrepreneur Award",
+            "heading_size": "heading_m",
+            "heading_tag": "h2",
+            "heading_color": "solid",
+            "heading_gradient": "linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(101,101,101,1) 100%)"
+          }
+        },
+        "text_award": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Futurpreneur Foundation and RBC Future Launch empower young entrepreneurs with $80,000 in Start-up Awards. Varty All Natural was recognised as an emerging entrepreneur committed to building a cleaner, more transparent food system in Canada.</p>",
+            "dim_text": false,
+            "text_size": "default"
+          }
+        },
+        "button_press": {
+          "type": "button",
+          "settings": {
+            "button_label": "Read press release",
+            "button_link": "",
+            "target_blank": true,
+            "button_style": "solid"
+          }
+        }
+      },
+      "block_order": ["subheading_award", "heading_award", "text_award", "button_press"],
+      "settings": {
+        "section_width": "wide",
+        "swap_media": true,
+        "media_size": "half",
+        "media_ratio": "square",
+        "narrow_content": true,
+        "vertical_text_alignment": "center",
+        "horizontal_text_alignment": "flex-start",
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_color": "#F0E8C8",
+        "text_color": "#2D2D5E",
+        "fill_section": false,
+        "desktop_padding_top": 80,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48
+      }
+    },
+    "main-page": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "hide_heading": true,
+        "section_width": "wide",
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "awards_hero",
+    "award_futurpreneur",
+    "main-page"
+  ]
+}

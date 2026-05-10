@@ -1,61 +1,175 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "image_banner_tGVrGT": {
+    "image_banner_hero": {
       "type": "image-banner",
       "blocks": {
-        "heading_JJhGd7": {
+        "heading_about": {
           "type": "heading",
           "settings": {
-            "heading": "Our Story",
-            "heading_size": "heading_xl",
-            "heading_tag": "h2",
+            "heading": "Clean ingredients. Honest labels. Made in Canada.",
+            "heading_size": "heading_l",
+            "heading_tag": "h1",
             "heading_color": "solid",
-            "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)"
+            "heading_gradient": "linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(101,101,101,1) 100%)"
           }
         }
       },
-      "block_order": [
-        "heading_JJhGd7"
-      ],
+      "block_order": ["heading_about"],
       "settings": {
-        "content_on_hover": false,
         "height_mode": "percents",
-        "desktop_height": 100,
-        "desktop_pixels_height": 600,
-        "section_link": "",
-        "target_blank": false,
+        "desktop_height": 60,
+        "mobile_height": 40,
         "section_width": "overlap",
         "center_text": true,
-        "vertical_content_position": "end",
-        "horizontal_content_position": "flex-start",
-        "narrow_content": true,
-        "fill_content": false,
-        "overlay_color": "#5b6f42",
-        "overlay_gradient": "linear-gradient(358deg, rgba(85, 95, 18, 0.8), rgba(211, 210, 137, 0.1) 100%)",
-        "overlay_opacity": 0,
-        "mobile_height": 35,
-        "mobile_pixels_height": 400,
-        "content_under_image": false,
-        "only_first_image": false,
+        "vertical_content_position": "center",
+        "overlay_color": "#5463B3",
+        "overlay_opacity": 30,
         "color_type": "invert",
+        "background_color": "#F0E8C8",
+        "text_color": "#ffffff",
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
+    },
+    "brand_story": {
+      "type": "media-with-text",
+      "blocks": {
+        "subheading_founders": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Our story",
+            "subheading_size": "default",
+            "subheading_tag": "h3"
+          }
+        },
+        "heading_founders": {
+          "type": "heading",
+          "settings": {
+            "heading": "Founded by Lina and Tony in Montréal",
+            "heading_size": "heading_m",
+            "heading_tag": "h2",
+            "heading_color": "solid",
+            "heading_gradient": "linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(101,101,101,1) 100%)"
+          }
+        },
+        "text_founders": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We started Varty because we read the labels. Every \"clean\" oat beverage we found had 10+ ingredients, gums, stabilisers, or things we couldn't pronounce. So we built the one we actually wanted to drink — 3 to 4 real organic ingredients. Nothing hidden. Nothing masked.</p><p>Made in Saint-Laurent, Québec, and certified organic by Ecocert Canada.</p>",
+            "dim_text": false,
+            "text_size": "default"
+          }
+        }
+      },
+      "block_order": ["subheading_founders", "heading_founders", "text_founders"],
+      "settings": {
+        "section_width": "wide",
+        "swap_media": false,
+        "media_size": "half",
+        "media_ratio": "portrait",
+        "narrow_content": true,
+        "vertical_text_alignment": "center",
+        "horizontal_text_alignment": "flex-start",
+        "color_type": "custom",
         "background_color_type": "solid",
-        "background_gradient": "",
-        "background_color": "#ffffff",
-        "text_color": "#000000",
+        "background_color": "#F0E8C8",
+        "text_color": "#2D2D5E",
         "fill_section": false,
-        "desktop_padding_top": -160,
-        "desktop_padding_bottom": -160,
-        "mobile_padding_top": -80,
-        "mobile_padding_bottom": -80
+        "desktop_padding_top": 80,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 0
+      }
+    },
+    "values_block": {
+      "type": "icons-with-text",
+      "blocks": {
+        "value_organic": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "heading": "Certified Organic",
+            "text": "<p>Ecocert-certified from field to carton. Every ingredient meets certified organic standards.</p>"
+          }
+        },
+        "value_transparent": {
+          "type": "item",
+          "settings": {
+            "icon": "info",
+            "heading": "Total Transparency",
+            "text": "<p>Short ingredient list isn't a marketing claim — it's a standard. No asterisks. No hidden ingredients.</p>"
+          }
+        },
+        "value_canadian": {
+          "type": "item",
+          "settings": {
+            "icon": "plant",
+            "heading": "Made in Canada",
+            "text": "<p>Produced at our facility in Saint-Laurent, Québec, using the freshest locally-sourced oats.</p>"
+          }
+        }
+      },
+      "block_order": ["value_organic", "value_transparent", "value_canadian"],
+      "settings": {
+        "heading": "What we stand for",
+        "desktop_grid_type": "3",
+        "mobile_layout": "1",
+        "center_text": true,
+        "icon_or_image_size": 80,
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_color": "#ffffff",
+        "text_color": "#2D2D5E",
+        "desktop_padding_top": 80,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48
+      }
+    },
+    "award_callout": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_award": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Recognition",
+            "subheading_size": "default",
+            "subheading_tag": "h3"
+          }
+        },
+        "heading_award": {
+          "type": "heading",
+          "settings": {
+            "heading": "Futurpreneur / RBC Future Launch Emerging Entrepreneur Award — 2024",
+            "heading_size": "heading_m",
+            "heading_tag": "h2",
+            "heading_color": "solid",
+            "heading_gradient": "linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(101,101,101,1) 100%)"
+          }
+        },
+        "text_award": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Recognised as an emerging entrepreneur building a cleaner food system in Canada. Funded in part by Futurpreneur Foundation and RBC Future Launch.</p>",
+            "dim_text": false,
+            "text_size": "default"
+          }
+        }
+      },
+      "block_order": ["subheading_award", "heading_award", "text_award"],
+      "settings": {
+        "section_width": "narrow",
+        "center_text": true,
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_color": "#5463B3",
+        "text_color": "#ffffff",
+        "desktop_padding_top": 80,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48
       }
     },
     "main-page": {
@@ -63,956 +177,8 @@
       "disabled": true,
       "settings": {
         "heading": "",
-        "hide_heading": false,
-        "heading_size": "default",
-        "heading_tag": "h2",
-        "heading_color": "solid",
-        "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
-        "text_size": "default",
+        "hide_heading": true,
         "section_width": "wide",
-        "desktop_padding_top": 0,
-        "desktop_padding_bottom": 0,
-        "mobile_padding_top": 0,
-        "mobile_padding_bottom": 0
-      }
-    },
-    "bc578b95-b199-4c27-9608-2bb7394ffbe7": {
-      "type": "rich-text",
-      "blocks": {
-        "subheading_PxdX6z": {
-          "type": "subheading",
-          "settings": {
-            "subheading": "our manifesto",
-            "subheading_size": "default",
-            "subheading_tag": "h3"
-          }
-        },
-        "template--19235367452978__bc578b95-b199-4c27-9608-2bb7394ffbe7-1686251731b47f866c-1": {
-          "type": "heading",
-          "settings": {
-            "heading": "Built for how you actually live, every day",
-            "heading_size": "heading_l",
-            "heading_tag": "h2",
-            "heading_color": "solid",
-            "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)"
-          }
-        },
-        "text_8KW4Yt": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Functional drinks designed to support your energy, focus, and recovery—without noise, without compromise. We create modern botanical blends that fit seamlessly into your daily rhythm. No extremes, no overpromises—just clean formulations that work with your body, not against it.</p>",
-            "dim_text": false,
-            "text_size": "default"
-          }
-        }
-      },
-      "block_order": [
-        "subheading_PxdX6z",
-        "template--19235367452978__bc578b95-b199-4c27-9608-2bb7394ffbe7-1686251731b47f866c-1",
-        "text_8KW4Yt"
-      ],
-      "settings": {
-        "section_width": "narrow",
-        "center_text": true,
-        "color_type": "default",
-        "background_color_type": "solid",
-        "background_gradient": "",
-        "background_color": "#ffffff",
-        "text_color": "#000000",
-        "desktop_padding_top": 0,
-        "desktop_padding_bottom": -160,
-        "mobile_padding_top": 0,
-        "mobile_padding_bottom": -40
-      }
-    },
-    "b833d0f2-b6b0-47c9-835d-0f3a2de746cd": {
-      "type": "media-with-text",
-      "blocks": {
-        "subheading_i4UKfQ": {
-          "type": "subheading",
-          "settings": {
-            "subheading": "Our Philosophy",
-            "subheading_size": "default",
-            "subheading_tag": "h3"
-          }
-        },
-        "template--18897235280146__b833d0f2-b6b0-47c9-835d-0f3a2de746cd-16835718968f2c7baf-0": {
-          "type": "heading",
-          "settings": {
-            "heading": "What we believe in and stand for",
-            "heading_size": "heading_l",
-            "heading_tag": "h2",
-            "heading_color": "gradient",
-            "heading_gradient": "linear-gradient(90deg, rgba(114, 255, 179, 1) 14%, rgba(255, 250, 99, 1) 85%)"
-          }
-        },
-        "template--18897235280146__b833d0f2-b6b0-47c9-835d-0f3a2de746cd-16835718968f2c7baf-1": {
-          "type": "text",
-          "settings": {
-            "text": "<p>We believe that feeling good shouldn’t be complicated. That’s why every formula starts with intention: fewer ingredients, clearer purpose, real effect. No unnecessary additives. No artificial shortcuts. Only what actually supports how you want to feel.</p>",
-            "dim_text": false,
-            "text_size": "default"
-          }
-        }
-      },
-      "block_order": [
-        "subheading_i4UKfQ",
-        "template--18897235280146__b833d0f2-b6b0-47c9-835d-0f3a2de746cd-16835718968f2c7baf-0",
-        "template--18897235280146__b833d0f2-b6b0-47c9-835d-0f3a2de746cd-16835718968f2c7baf-1"
-      ],
-      "settings": {
-        "link": "",
-        "target_blank": false,
-        "video_focal_point": "center center",
-        "section_width": "wide",
-        "swap_media": false,
-        "media_size": "half",
-        "media_ratio": "square",
-        "narrow_content": true,
-        "vertical_text_alignment": "center",
-        "horizontal_text_alignment": "center",
-        "color_type": "custom",
-        "background_color_type": "solid",
-        "background_gradient": "",
-        "background_color": "#5d4497",
-        "text_color": "#e9fb8f",
-        "fill_section": false,
-        "desktop_padding_top": 12,
-        "desktop_padding_bottom": -80,
-        "mobile_padding_top": 0,
-        "mobile_padding_bottom": 0
-      }
-    },
-    "rich_text_P3yc6t": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_wdgmb7": {
-          "type": "heading",
-          "settings": {
-            "heading": "Benefits",
-            "heading_size": "heading_l",
-            "heading_tag": "h2",
-            "heading_color": "solid",
-            "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)"
-          }
-        }
-      },
-      "block_order": [
-        "heading_wdgmb7"
-      ],
-      "settings": {
-        "section_width": "narrow",
-        "center_text": true,
-        "color_type": "default",
-        "background_color_type": "solid",
-        "background_gradient": "",
-        "background_color": "#cafff2",
-        "text_color": "#f8359e",
-        "desktop_padding_top": 0,
-        "desktop_padding_bottom": -32,
-        "mobile_padding_top": 0,
-        "mobile_padding_bottom": 0
-      }
-    },
-    "icons_with_text_NRzx3b": {
-      "type": "icons-with-text",
-      "blocks": {
-        "item_jeYhe8": {
-          "type": "item",
-          "settings": {
-            "icon": "leaf",
-            "heading": "Natural Ingredients",
-            "text": "<p>Made with carefully selected natural components.</p>",
-            "page": "ingredients",
-            "page_content_in_popup": false
-          }
-        },
-        "item_fiPkXW": {
-          "type": "item",
-          "settings": {
-            "icon": "heart",
-            "heading": "Real Effect",
-            "text": "<p>Energy, focus, or calm—when you need it.</p>",
-            "page": "",
-            "page_content_in_popup": true
-          }
-        },
-        "item_TYYD8P": {
-          "type": "item",
-          "settings": {
-            "icon": "plant",
-            "heading": "Daily Use",
-            "text": "<p>Fits easily into your everyday routine.</p>",
-            "page": "",
-            "page_content_in_popup": true
-          }
-        }
-      },
-      "block_order": [
-        "item_jeYhe8",
-        "item_fiPkXW",
-        "item_TYYD8P"
-      ],
-      "settings": {
-        "heading": "",
-        "desktop_grid_type": "slider",
-        "max_columns": "default",
-        "mobile_layout": "2",
-        "mobile_navigation": "arrows",
-        "center_text": true,
-        "icon_or_image_size": 160,
-        "fill_container": false,
-        "context_icon_radius": "default",
-        "icon_weight": "bold",
-        "item_heading_size": "heading_s",
-        "item_heading_color": "solid",
-        "item_heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
-        "text_size": "default",
-        "dim_text": false,
-        "heading_size": "heading_xl",
-        "heading_tag": "h2",
-        "heading_color": "solid",
-        "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
-        "color_type": "custom",
-        "background_color_type": "solid",
-        "background_gradient": "",
-        "background_color": "#fffdf3",
-        "text_color": "#db2828",
-        "desktop_padding_top": -160,
-        "desktop_padding_bottom": 40,
-        "mobile_padding_top": -80,
-        "mobile_padding_bottom": -12
-      }
-    },
-    "scrolling_promotion_YBPfGm": {
-      "type": "scrolling-promotion",
-      "blocks": {
-        "text_iV6Tye": {
-          "type": "text",
-          "settings": {
-            "desktop_text": "Lemon",
-            "mobile_text": "",
-            "text_link": "",
-            "target_blank": false
-          }
-        },
-        "text_Rj3aEU": {
-          "type": "text",
-          "settings": {
-            "desktop_text": "Blueberry",
-            "mobile_text": "",
-            "text_link": "",
-            "target_blank": false
-          }
-        },
-        "text_KCxCQa": {
-          "type": "text",
-          "settings": {
-            "desktop_text": "Ginger",
-            "mobile_text": "",
-            "text_link": "",
-            "target_blank": false
-          }
-        },
-        "text_kJmEYy": {
-          "type": "text",
-          "settings": {
-            "desktop_text": "Orange",
-            "mobile_text": "",
-            "text_link": "",
-            "target_blank": false
-          }
-        }
-      },
-      "block_order": [
-        "text_iV6Tye",
-        "text_Rj3aEU",
-        "text_KCxCQa",
-        "text_kJmEYy"
-      ],
-      "disabled": true,
-      "settings": {
-        "text_size": "heading_l",
-        "heading_color": "solid",
-        "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
-        "line_show": "disable",
-        "line_padding": 20,
-        "gap_items": 48,
-        "scroll_direction": "left",
-        "speed": 1.6,
-        "image_ratio": "original",
-        "image_radius": "default",
-        "image_on_hover": false,
-        "hover_image_width": 30,
-        "color_type": "custom",
-        "background_color_type": "solid",
-        "background_gradient": "",
-        "background_color": "#f9d05e",
-        "text_color": "#db2828",
-        "layout_margins": "default",
-        "desktop_padding_top": -40,
-        "desktop_padding_bottom": -40,
-        "mobile_padding_top": -28,
-        "mobile_padding_bottom": -28
-      }
-    },
-    "horizontal_scrolling_banners_hnXbkp": {
-      "type": "horizontal-scrolling-banners",
-      "blocks": {
-        "media_CbrKF8": {
-          "type": "media",
-          "settings": {
-            "desktop_size": "big",
-            "video_focal_point": "center center"
-          }
-        },
-        "text_cFe7J8": {
-          "type": "text",
-          "settings": {
-            "desktop_size": "small",
-            "center_text": false,
-            "vertical_content_position": "center",
-            "horizontal_content_position": "center",
-            "narrow_content": true,
-            "context_image_width": 120,
-            "image_ratio": "original",
-            "context_image_radius": "default",
-            "context_image_link": "",
-            "context_image_target_blank": false,
-            "number": "",
-            "subheading": "Thoughtfully crafted",
-            "heading": "Every drink is built around a clear function. We combine {botanicals, adaptogens, and minerals} to create balanced blends.",
-            "text": "",
-            "dim_text": false,
-            "button_label": "",
-            "button_link": "",
-            "target_blank": false,
-            "button_style": "solid",
-            "number_size": "default",
-            "subheading_size": "default",
-            "subheading_tag": "h3",
-            "heading_size": "heading_m",
-            "heading_tag": "h2",
-            "heading_color": "solid",
-            "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
-            "text_size": "default",
-            "color_type": "custom",
-            "background_color_type": "solid",
-            "background_gradient": "",
-            "background_color": "#d31f2e",
-            "text_color": "#f9d05e"
-          }
-        },
-        "media_with_text_QTqCgK": {
-          "type": "media_with_text",
-          "settings": {
-            "desktop_size": "small",
-            "content_position": "top",
-            "video_focal_point": "center center",
-            "overlay_color": "#000000",
-            "overlay_gradient": "",
-            "overlay_opacity": 70,
-            "fit_media": false,
-            "center_text": true,
-            "vertical_content_position": "center",
-            "horizontal_content_position": "center",
-            "narrow_content": true,
-            "context_image_width": 120,
-            "image_ratio": "original",
-            "context_image_radius": "default",
-            "context_image_link": "",
-            "context_image_target_blank": false,
-            "number": "1",
-            "subheading": "",
-            "heading": "From idea to final formulation, every step is guided by intention and precision",
-            "text": "",
-            "dim_text": false,
-            "button_label": "",
-            "button_link": "",
-            "target_blank": false,
-            "button_style": "solid",
-            "number_size": "default",
-            "subheading_size": "default",
-            "subheading_tag": "h3",
-            "heading_size": "heading_s",
-            "heading_tag": "h2",
-            "heading_color": "solid",
-            "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
-            "text_size": "default",
-            "media_background_color": "#fffdf3",
-            "color_type": "custom",
-            "background_color_type": "solid",
-            "background_gradient": "",
-            "background_color": "#5d4497",
-            "text_color": "#e9fb8f"
-          }
-        },
-        "media_with_text_MWm3mr": {
-          "type": "media_with_text",
-          "settings": {
-            "desktop_size": "big",
-            "content_position": "overlay",
-            "video_focal_point": "center center",
-            "overlay_color": "#000000",
-            "overlay_gradient": "linear-gradient(0deg, rgba(75, 116, 44, 1), rgba(211, 225, 207, 0.15) 100%)",
-            "overlay_opacity": 50,
-            "fit_media": true,
-            "center_text": false,
-            "vertical_content_position": "end",
-            "horizontal_content_position": "flex-start",
-            "narrow_content": true,
-            "context_image_width": 120,
-            "image_ratio": "original",
-            "context_image_radius": "default",
-            "context_image_link": "",
-            "context_image_target_blank": false,
-            "number": "",
-            "subheading": "",
-            "heading": "We select only essential ingredients that serve a clear purpose in each blend.",
-            "text": "",
-            "dim_text": false,
-            "button_label": "",
-            "button_link": "",
-            "target_blank": false,
-            "button_style": "solid",
-            "number_size": "default",
-            "subheading_size": "default",
-            "subheading_tag": "h3",
-            "heading_size": "heading_l",
-            "heading_tag": "h2",
-            "heading_color": "solid",
-            "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
-            "text_size": "default",
-            "media_background_color": "#047e04",
-            "color_type": "custom",
-            "background_color_type": "solid",
-            "background_gradient": "",
-            "background_color": "#5d4497",
-            "text_color": "#fffdf3"
-          }
-        },
-        "media_with_text_WpmiYe": {
-          "type": "media_with_text",
-          "settings": {
-            "desktop_size": "small",
-            "content_position": "bottom",
-            "video_focal_point": "center center",
-            "overlay_color": "#000000",
-            "overlay_gradient": "",
-            "overlay_opacity": 70,
-            "fit_media": false,
-            "center_text": true,
-            "vertical_content_position": "center",
-            "horizontal_content_position": "center",
-            "narrow_content": true,
-            "context_image_width": 120,
-            "image_ratio": "original",
-            "context_image_radius": "default",
-            "context_image_link": "",
-            "context_image_target_blank": false,
-            "number": "2",
-            "subheading": "",
-            "heading": "We maintain full transparency so you always understand what you’re taking and why it works.",
-            "text": "",
-            "dim_text": false,
-            "button_label": "",
-            "button_link": "",
-            "target_blank": false,
-            "button_style": "solid",
-            "number_size": "default",
-            "subheading_size": "default",
-            "subheading_tag": "h3",
-            "heading_size": "heading_s",
-            "heading_tag": "h2",
-            "heading_color": "solid",
-            "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
-            "text_size": "default",
-            "media_background_color": "#fffdf3",
-            "color_type": "custom",
-            "background_color_type": "solid",
-            "background_gradient": "",
-            "background_color": "#e8eab8",
-            "text_color": "#5d4497"
-          }
-        }
-      },
-      "block_order": [
-        "media_CbrKF8",
-        "text_cFe7J8",
-        "media_with_text_QTqCgK",
-        "media_with_text_MWm3mr",
-        "media_with_text_WpmiYe"
-      ],
-      "name": "t:sections.horizontal-banners.name",
-      "settings": {
-        "mobile_height": 60,
-        "show_scroll_down": false,
-        "text": "Scroll down",
-        "text_size": "default",
-        "scroll_down_color": "#000000",
-        "text_position": "center",
-        "animate_scroll_down": true
-      }
-    },
-    "testimonials_WRVUfq": {
-      "type": "testimonials",
-      "blocks": {
-        "testimonial_xprziL": {
-          "type": "testimonial",
-          "settings": {
-            "stars": 5,
-            "heading": "Wellness That Fits Your Everyday Life",
-            "heading_size": "heading_m",
-            "heading_color": "solid",
-            "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
-            "text": "<p>“The balance between taste, performance, and design makes it feel like something you naturally reach for every day, whether you’re working, traveling, or just trying to stay focused. It doesn’t feel like a supplement—it feels like part of your lifestyle. Plus, it looks as good as it feels.”</p>",
-            "text_size": "default",
-            "autor_name": "",
-            "autor_position": "",
-            "autor_size": "default",
-            "page": ""
-          }
-        },
-        "testimonial_D8GYiK": {
-          "type": "testimonial",
-          "settings": {
-            "stars": 5,
-            "heading": "Smart Choice",
-            "heading_size": "heading_l",
-            "heading_color": "solid",
-            "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
-            "text": "<p>“The ingredient list is clear, minimal, and purposeful, which makes it easy to understand exactly what you’re consuming and why it’s there. Performance feels consistent rather than overstated. It integrates naturally into a daily routine, whether used in the morning, during work sessions, or in moments when focus needs a subtle boost.”</p>",
-            "text_size": "default",
-            "autor_name": "",
-            "autor_position": "",
-            "autor_size": "default",
-            "page": ""
-          }
-        },
-        "testimonial_NErcAQ": {
-          "type": "testimonial",
-          "settings": {
-            "stars": 5,
-            "heading": "Elevated Everyday Essentials",
-            "heading_size": "heading_m",
-            "heading_color": "solid",
-            "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
-            "text": "<p>“A refined take on functional drinks that feels both modern and intentional. Clean ingredients, balanced formulas, and a minimalist aesthetic make it stand out in a crowded category. It’s wellness, reimagined with style.”</p>",
-            "text_size": "default",
-            "autor_name": "",
-            "autor_position": "",
-            "autor_size": "default",
-            "page": ""
-          }
-        },
-        "testimonial_jC38UD": {
-          "type": "testimonial",
-          "settings": {
-            "stars": 5,
-            "heading": "Clean, Intentional, Effective",
-            "heading_size": "heading_m",
-            "heading_color": "solid",
-            "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
-            "text": "<p>“A refreshing approach to daily wellness, built around simplicity and purpose. Each drink feels considered, from ingredients to effect, without overcomplicating the experience. It’s the kind of ritual you want to keep.”</p>",
-            "text_size": "default",
-            "autor_name": "",
-            "autor_position": "",
-            "autor_size": "default",
-            "page": ""
-          }
-        },
-        "testimonial_CM9j7c": {
-          "type": "testimonial",
-          "settings": {
-            "stars": 5,
-            "heading": "Where Wellness Meets Performance",
-            "heading_size": "heading_s",
-            "heading_color": "solid",
-            "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
-            "text": "<p>“Positioned at the intersection of lifestyle and functionality, this brand delivers a well-rounded product experience. It balances clean formulation with consistent results, appealing to both wellness-focused and performance-driven consumers. A strong contender in the modern beverage space.”</p>",
-            "text_size": "default",
-            "autor_name": "",
-            "autor_position": "",
-            "autor_size": "default",
-            "page": ""
-          }
-        }
-      },
-      "block_order": [
-        "testimonial_xprziL",
-        "testimonial_D8GYiK",
-        "testimonial_NErcAQ",
-        "testimonial_jC38UD",
-        "testimonial_CM9j7c"
-      ],
-      "settings": {
-        "show_rating": true,
-        "heading": "In the press",
-        "heading_size": "label_font_uppercase",
-        "heading_tag": "h3",
-        "heading_color": "solid",
-        "heading_gradient": "",
-        "button_label": "",
-        "button_link": "",
-        "target_blank": false,
-        "button_style": "solid",
-        "testimonial_label": "Show full review",
-        "center_text": false,
-        "desktop_grid_type": "3",
-        "mobile_layout": "1",
-        "mobile_navigation": "arrows",
-        "image_ratio": "original",
-        "image_width": 120,
-        "image_radius": "0px",
-        "color_type": "default",
-        "background_color_type": "solid",
-        "background_gradient": "",
-        "background_color": "#ffffff",
-        "text_color": "#000000",
-        "desktop_padding_top": 0,
-        "desktop_padding_bottom": 48,
-        "mobile_padding_top": 0,
-        "mobile_padding_bottom": -12
-      }
-    },
-    "rich_text_Ed4cyT": {
-      "type": "rich-text",
-      "blocks": {
-        "subheading_Lb9FBy": {
-          "type": "subheading",
-          "settings": {
-            "subheading": "Built daily",
-            "subheading_size": "default",
-            "subheading_tag": "h3"
-          }
-        },
-        "heading_A9YX63": {
-          "type": "heading",
-          "settings": {
-            "heading": "Designed for real life",
-            "heading_size": "heading_l",
-            "heading_tag": "h2",
-            "heading_color": "gradient",
-            "heading_gradient": "linear-gradient(90deg, rgba(219, 40, 40, 1) 50%, rgba(254, 182, 19, 1) 100%)"
-          }
-        },
-        "text_PNCPtC": {
-          "type": "text",
-          "settings": {
-            "text": "<p>For workdays that don’t slow down, moments when you need to reset, and everything in between. Our products are made for consistency, balance, and feeling good every day—not extremes.</p>",
-            "dim_text": false,
-            "text_size": "default"
-          }
-        }
-      },
-      "block_order": [
-        "subheading_Lb9FBy",
-        "heading_A9YX63",
-        "text_PNCPtC"
-      ],
-      "settings": {
-        "section_width": "narrow",
-        "center_text": true,
-        "color_type": "default",
-        "background_color_type": "solid",
-        "background_gradient": "",
-        "background_color": "#ffffff",
-        "text_color": "#000000",
-        "desktop_padding_top": -160,
-        "desktop_padding_bottom": 0,
-        "mobile_padding_top": -80,
-        "mobile_padding_bottom": 0
-      }
-    },
-    "split_banner_LzbgUm": {
-      "type": "split-banner",
-      "blocks": {
-        "banner_iUEFg4": {
-          "type": "banner",
-          "settings": {
-            "target_blank": false,
-            "center_text": true,
-            "vertical_content_position": "end",
-            "horizontal_content_position": "center",
-            "overlay_color": "#73452e",
-            "overlay_gradient": "",
-            "overlay_opacity": 15,
-            "context_image_width": 120,
-            "context_image_ratio": "original",
-            "context_image_radius": "default",
-            "context_image_link": "",
-            "context_target_blank": false,
-            "subheading": "Collection",
-            "heading": "Mind Focus",
-            "heading_color": "solid",
-            "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
-            "text": "",
-            "dim_text": false,
-            "button_label": "Discover",
-            "button_style": "outlined",
-            "color_type": "invert",
-            "background_color": "#ffffff",
-            "text_color": "#000000"
-          }
-        },
-        "banner_itdrqB": {
-          "type": "banner",
-          "settings": {
-            "target_blank": false,
-            "center_text": true,
-            "vertical_content_position": "end",
-            "horizontal_content_position": "center",
-            "overlay_color": "#536726",
-            "overlay_gradient": "",
-            "overlay_opacity": 15,
-            "context_image_width": 120,
-            "context_image_ratio": "original",
-            "context_image_radius": "default",
-            "context_image_link": "",
-            "context_target_blank": false,
-            "subheading": "Ideas",
-            "heading": "Mix and Enjoy",
-            "heading_color": "solid",
-            "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
-            "text": "",
-            "dim_text": false,
-            "button_label": "Show Recipes",
-            "button_style": "outlined",
-            "color_type": "invert",
-            "background_color": "#ffffff",
-            "text_color": "#000000"
-          }
-        }
-      },
-      "block_order": [
-        "banner_iUEFg4",
-        "banner_itdrqB"
-      ],
-      "settings": {
-        "content_on_hover": true,
-        "height_mode": "percents",
-        "desktop_height": 70,
-        "mobile_height": 60,
-        "desktop_pixels_height": 600,
-        "mobile_pixels_height": 400,
-        "section_width": "full-width",
-        "narrow_content": true,
-        "subheading_size": "default",
-        "subheading_tag": "h3",
-        "heading_size": "heading_l",
-        "heading_tag": "h2",
-        "main_text_size": "default",
-        "desktop_padding_top": -160,
-        "desktop_padding_bottom": -160,
-        "mobile_padding_top": -80,
-        "mobile_padding_bottom": -80
-      }
-    },
-    "featured_blog_af44fP": {
-      "type": "featured-blog",
-      "blocks": {
-        "title_QJg6fF": {
-          "type": "title",
-          "settings": {
-            "use_accent_color": false,
-            "title_size": "heading_m",
-            "heading_color": "solid",
-            "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)"
-          }
-        },
-        "info_GgyqjF": {
-          "type": "info",
-          "settings": {
-            "show_date": true,
-            "show_author": false,
-            "show_number_of_comments": true,
-            "text_size": "default"
-          }
-        },
-        "excerpt_nYccwN": {
-          "type": "excerpt",
-          "settings": {
-            "text_size": "default"
-          }
-        },
-        "read_more_egWxwt": {
-          "type": "read_more",
-          "settings": {
-            "button_label": "Keep reading"
-          }
-        }
-      },
-      "block_order": [
-        "title_QJg6fF",
-        "info_GgyqjF",
-        "excerpt_nYccwN",
-        "read_more_egWxwt"
-      ],
-      "settings": {
-        "subheading": "",
-        "heading": "Journal",
-        "button_label": "Read more",
-        "button_style": "outlined",
-        "blog": "",
-        "image_ratio": "original",
-        "focal_point": "center center",
-        "context_image_radius": "default",
-        "subheading_size": "default",
-        "subheading_tag": "h4",
-        "heading_size": "heading_xl",
-        "heading_tag": "h3",
-        "heading_color": "solid",
-        "heading_gradient": "",
-        "color_type": "default",
-        "background_color_type": "solid",
-        "background_gradient": "",
-        "background_color": "#e9e9e9",
-        "text_color": "#088b6f",
-        "layout_margins": "enable",
-        "desktop_padding_top": 0,
-        "desktop_padding_bottom": -48,
-        "mobile_padding_top": 0,
-        "mobile_padding_bottom": 0
-      }
-    },
-    "8c585246-bdbf-4ef4-bf4a-aab5145d027e": {
-      "type": "slideshow-with-media",
-      "blocks": {
-        "template--18897235280146__8c585246-bdbf-4ef4-bf4a-aab5145d027e-168357216279ff5310-0": {
-          "type": "image_slide",
-          "settings": {
-            "block_link": "",
-            "block_target_blank": false,
-            "fill_content": false,
-            "overlay_color": "#000000",
-            "overlay_gradient": "",
-            "overlay_opacity": 0,
-            "center_text": false,
-            "vertical_content_position": "center",
-            "horizontal_content_position": "center",
-            "narrow_content": true,
-            "context_image_width": 120,
-            "image_ratio": "original",
-            "context_image_radius": "default",
-            "context_image_link": "",
-            "context_image_target_blank": false,
-            "subheading": "",
-            "heading": "",
-            "text": "",
-            "dim_text": false,
-            "button_label_1": "",
-            "button_link_1": "",
-            "target_blank_1": false,
-            "button_style_1": "solid",
-            "button_label_2": "",
-            "button_link_2": "",
-            "target_blank_2": false,
-            "button_style_2": "outlined",
-            "countdown_enable": false,
-            "countdown_end_date": "",
-            "countdown_end_time": "",
-            "countdown_expiration_action": "hide_timer",
-            "countdown_complete_message": "",
-            "countdown_text": "base",
-            "countdown_text_size": "heading_m",
-            "countdown_text_color": "#000000",
-            "countdown_show_background": true,
-            "countdown_background_color": "#e8e8e8",
-            "countdown_background_gradient": "linear-gradient(180deg, rgba(235, 235, 235, 1), rgba(255, 255, 255, 1) 100%)",
-            "countdown_corner_radius": 2,
-            "countdown_show_outline": true,
-            "countdown_outline_color": "#dcdcdc",
-            "countdown_show_labels": true,
-            "countdown_labels_color": "#565656",
-            "countdown_enable_animation": true,
-            "subheading_size": "default",
-            "subheading_tag": "h3",
-            "heading_size": "default",
-            "heading_tag": "h2",
-            "heading_color": "solid",
-            "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
-            "main_text_size": "default"
-          }
-        },
-        "5aecb60e-c2a0-4075-9db2-3833f1a697ec": {
-          "type": "image_slide",
-          "settings": {
-            "block_link": "",
-            "block_target_blank": false,
-            "fill_content": false,
-            "overlay_color": "#000000",
-            "overlay_gradient": "",
-            "overlay_opacity": 0,
-            "center_text": false,
-            "vertical_content_position": "center",
-            "horizontal_content_position": "center",
-            "narrow_content": true,
-            "context_image_width": 120,
-            "image_ratio": "original",
-            "context_image_radius": "default",
-            "context_image_link": "",
-            "context_image_target_blank": false,
-            "subheading": "",
-            "heading": "",
-            "text": "",
-            "dim_text": false,
-            "button_label_1": "",
-            "button_link_1": "",
-            "target_blank_1": false,
-            "button_style_1": "solid",
-            "button_label_2": "",
-            "button_link_2": "",
-            "target_blank_2": false,
-            "button_style_2": "outlined",
-            "countdown_enable": false,
-            "countdown_end_date": "",
-            "countdown_end_time": "",
-            "countdown_expiration_action": "hide_timer",
-            "countdown_complete_message": "",
-            "countdown_text": "base",
-            "countdown_text_size": "heading_m",
-            "countdown_text_color": "#000000",
-            "countdown_show_background": true,
-            "countdown_background_color": "#e8e8e8",
-            "countdown_background_gradient": "linear-gradient(180deg, rgba(235, 235, 235, 1), rgba(255, 255, 255, 1) 100%)",
-            "countdown_corner_radius": 2,
-            "countdown_show_outline": true,
-            "countdown_outline_color": "#dcdcdc",
-            "countdown_show_labels": true,
-            "countdown_labels_color": "#565656",
-            "countdown_enable_animation": true,
-            "subheading_size": "default",
-            "subheading_tag": "h3",
-            "heading_size": "default",
-            "heading_tag": "h2",
-            "heading_color": "solid",
-            "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
-            "main_text_size": "default"
-          }
-        }
-      },
-      "block_order": [
-        "template--18897235280146__8c585246-bdbf-4ef4-bf4a-aab5145d027e-168357216279ff5310-0",
-        "5aecb60e-c2a0-4075-9db2-3833f1a697ec"
-      ],
-      "disabled": true,
-      "settings": {
-        "height_mode": "percents",
-        "desktop_height": 65,
-        "mobile_height": 50,
-        "desktop_pixels_height": 600,
-        "mobile_pixels_height": 400,
-        "section_width": "wide",
-        "controls": "arrows_with_numbers",
-        "fill_controls": true,
-        "enable_autoplay": false,
-        "autoplay_speed": 7,
-        "color_type": "default",
-        "background_color_type": "solid",
-        "background_gradient": "",
-        "background_color": "#ffffff",
-        "text_color": "#000000",
-        "fill_section": false,
         "desktop_padding_top": 0,
         "desktop_padding_bottom": 0,
         "mobile_padding_top": 0,
@@ -1021,18 +187,10 @@
     }
   },
   "order": [
-    "image_banner_tGVrGT",
-    "main-page",
-    "bc578b95-b199-4c27-9608-2bb7394ffbe7",
-    "b833d0f2-b6b0-47c9-835d-0f3a2de746cd",
-    "rich_text_P3yc6t",
-    "icons_with_text_NRzx3b",
-    "scrolling_promotion_YBPfGm",
-    "horizontal_scrolling_banners_hnXbkp",
-    "testimonials_WRVUfq",
-    "rich_text_Ed4cyT",
-    "split_banner_LzbgUm",
-    "featured_blog_af44fP",
-    "8c585246-bdbf-4ef4-bf4a-aab5145d027e"
+    "image_banner_hero",
+    "brand_story",
+    "values_block",
+    "award_callout",
+    "main-page"
   ]
 }
