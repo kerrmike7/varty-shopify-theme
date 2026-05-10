@@ -1,0 +1,95 @@
+{% style %}
+
+    {{ logo_settings.logo_font | font_face: font_display: 'swap' }}
+    {{ logo_settings.logo_font | font_face: font_display: 'swap' }}
+    #shopify-section-{{ section.id }} {
+        --logo-font-family: {{ logo_settings.logo_font.family }}, {{ logo_settings.logo_font.fallback_families }};
+        --logo-font-style: {{ logo_settings.logo_font.style }};
+        --logo-font-weight: {{ logo_settings.logo_font.weight }};
+        --logo-font-size: {{ logo_settings.logo_font_size | divided_by: 16.0 | round: 4 }}rem;
+        --logo-vertical-alignment: {{ logo_settings.logo_vertical_alignment }};
+        --logo-horizontal-alignment: {{ logo_settings.logo_horizontal_alignment }};
+        --logo-height: {{ logo_settings.logo_height }}px;
+    }    
+{% endstyle %}
+
+{% liquid
+  assign has_two_child = false
+  assign first_child = false
+  assign second_child = false
+  unless section.id contains 'main-password-header'
+    if settings.allow_transparent_navigation and logo_settings.image_transparent_navigation != blank
+        if section.id contains 'header' or section.id contains 'sidebar' and section.settings.color_type == 'default'
+            assign first_child = true
+        endif
+    endif
+  endunless
+  if logo_settings.image_logo != blank or logo_settings.image_logo != blank and logo_settings.image_transparent_navigation == 'blank'
+    assign second_child = true
+  endif
+  if first_child and second_child
+    assign has_two_child = true
+  endif
+%}
+
+<div class="{{ logo_settings.logo_vertical_alignment }} {% if section_navigation_block %} section-navigation-block{% if settings.enable_drawer_animations %} stagger__item{% endif %}{% endif %} logo {% if main-sidebar__block %} main-sidebar__block{% endif %} {% if section.id contains 'header' %} logo--header{% elsif section.id contains 'footer' %} logo--footer{% else %} logo--{{ section.id }}{% endif %} logo--{{ settings.white_space }} logo--{{ logo_settings.logo_horizontal_alignment }} {% unless logo_settings.not_rotate %} logo--rotate{% endunless %} {% if section.settings.color_type == 'custom' %} color-custom{% elsif section.settings.color_type == 'invert' %} color-invert{% endif %}" data-block-index="{{ for_loop.index0 }}" {{ block_item.shopify_attributes }}>
+    {%- if logo_settings.logo_type == 'text' -%}
+        <a class="logo__title {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %}" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">{% if logo_settings.text_logo != blank %}{{ logo_settings.text_logo }}{% else %}{{ shop.name }}{% endif %}</a>
+    {%- else -%}
+        <a class="logo__image {% if has_two_child %}has-two-child{% endif %} {% if settings.allow_transparent_navigation and logo_settings.image_transparent_navigation != blank %}scroll-color global-text{% endif %}" href="{{ routes.root_url }}" aria-label="{{ shop.name }}" {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}>
+            {% if first_child %}
+                <img srcset="{%- if logo_settings.image_transparent_navigation.width >= 165 -%}{{ logo_settings.image_transparent_navigation | image_url: width: 165 }} 165w,{%- endif -%}
+                        {%- if logo_settings.image_transparent_navigation.width >= 375 -%}{{ logo_settings.image_transparent_navigation | image_url: width: 375 }} 375w,{%- endif -%}
+                        {%- if logo_settings.image_transparent_navigation.width >= 550 -%}{{ logo_settings.image_transparent_navigation | image_url: width: 550 }} 550w,{%- endif -%}
+                        {%- if logo_settings.image_transparent_navigation.width >= 750 -%}{{ logo_settings.image_transparent_navigation | image_url: width: 750 }} 750w,{%- endif -%}
+                        {%- if logo_settings.image_transparent_navigation.width >= 1100 -%}{{ logo_settings.image_transparent_navigation | image_url: width: 1100 }} 1100w,{%- endif -%}
+                        {%- if logo_settings.image_transparent_navigation.width >= 1500 -%}{{ logo_settings.image_transparent_navigation | image_url: width: 1500 }} 1500w,{%- endif -%}
+                            {{ logo_settings.image_transparent_navigation | image_url: height: logo_height }}"
+                            src="{{ logo_settings.image_transparent_navigation | image_url: height: logo_height }}"
+                            loading="eager"
+                            draggable="false"
+                            sizes="calc({{ logo_height }}px * 1)"
+                            width="{{ logo_settings.logo_height | times: logo_settings.image_transparent_navigation.aspect_ratio | ceil }}"
+                            height="{{ logo_settings.logo_height }}"
+                            alt="{{ logo_settings.image_transparent_navigation.alt | default: shop.name | escape }}"
+                            class="logo__image-item logo__image-item--transparent"
+                        />
+            {% endif %}
+            {% if second_child %}
+                {%- assign logo_height = logo_settings.logo_height | times: logo_settings.image_logo.aspect_ratio | ceil -%}
+                <img srcset="{%- if logo_settings.image_logo.width >= 165 -%}{{ logo_settings.image_logo | image_url: width: 165 }} 165w,{%- endif -%}
+                {%- if logo_settings.image_logo.width >= 375 -%}{{ logo_settings.image_logo | image_url: width: 375 }} 375w,{%- endif -%}
+                {%- if logo_settings.image_logo.width >= 550 -%}{{ logo_settings.image_logo | image_url: width: 550 }} 550w,{%- endif -%}
+                {%- if logo_settings.image_logo.width >= 750 -%}{{ logo_settings.image_logo | image_url: width: 750 }} 750w,{%- endif -%}
+                {%- if logo_settings.image_logo.width >= 1100 -%}{{ logo_settings.image_logo | image_url: width: 1100 }} 1100w,{%- endif -%}
+                {%- if logo_settings.image_logo.width >= 1500 -%}{{ logo_settings.image_logo | image_url: width: 1500 }} 1500w,{%- endif -%}
+                    {{ logo_settings.image_logo | image_url: height: logo_height }}"
+                    src="{{ logo_settings.image_logo | image_url: height: logo_height }}"
+                    loading="eager"
+                    draggable="false"
+                    width="{{ logo_settings.logo_height | times: logo_settings.image_logo.aspect_ratio | ceil }}"
+                    height="{{ logo_settings.logo_height }}"
+                    sizes="calc({{ logo_height }}px * 1)"
+                    alt="{{ logo_settings.image_logo.alt | default: shop.name | escape }}"
+                    class="logo__image-item logo__image-item--solid"
+                /> 
+            {% endif %}
+            {% if logo_settings.image_logo == blank and logo_settings.image_transparent_navigation == blank or logo_settings.image_logo == blank and settings.allow_transparent_navigation == false %}
+                <a class="logo__title {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %}" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">{{ shop.name }}</a>
+            {%- endif -%}
+        </a>
+    {%- endif -%}
+    {%- if logo_settings.tagline_text != blank -%}
+        {% liquid
+            if settings.typography_preset == 'custom' and logo_settings.tagline_size == 'default'
+                if settings.uppercase_label
+                        assign uppercase_font = true
+                endif
+                if settings.bolder_font_label
+                        assign bolder_font = true
+                endif
+            endif
+        %}
+        <div class="logo__tagline {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %} logo__tagline--{{ settings.typography_preset }} {% if logo_settings.tagline_size != 'default' %}{{ logo_settings.tagline_size }}{% else %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}{% endif %} richtext {% if settings.enable_animated_underline %}richtext-link--underline{% endif %}">{{ logo_settings.tagline_text }}</div>
+    {%- endif -%}
+</div> 

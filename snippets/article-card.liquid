@@ -1,0 +1,183 @@
+{%- liquid 
+    assign settings_page_width = settings.max_page_width | append: 'px'
+    if settings.max_page_width == 'full_width'
+        assign settings_page_width = '100vw'
+    endif
+
+    assign eager_count = 2
+
+    if section.index == 1 and article_index <= eager_count 
+      assign is_in_eager_range = true
+    else
+      assign is_in_eager_range = false
+    endif
+  
+    if section.index == 1 and article_index == 1
+      assign should_high_priority = true
+    else
+      assign should_high_priority = false
+    endif
+
+    if should_high_priority == false and is_in_eager_range == false or settings.images_loading != 'disable'
+      assign should_lazy_load = true
+    else
+      assign should_lazy_load = false
+    endif
+
+    if blog_columns_count == '1'
+        assign card_image_width_fraction = 0.6
+    else
+        assign card_image_width_fraction = 0.5
+    endif
+
+    if blog_columns_count == '2'
+        if settings.white_space == 'spacious'
+            assign column_gap = '64px'
+        else
+            assign column_gap = '40px'
+        endif
+    else
+        assign column_gap = '0px'
+    endif
+-%}
+
+<article class="article-card__container article-card__container--{{ blog_columns_count }} article-card__container--{{ settings.white_space }} {% if settings.show_lines %}article-card__container--lines{% endif %}{% if article.image == blank %} article-card--no-image{% endif %}" aria-labelledby="Article-{{ article.id }}">
+    <a href="{{ article.url }}" class="article-card article-card--{{ settings.white_space }} article-card--{{ blog_columns_count }} {% if settings.show_lines %}article-card--lines{% endif %}">
+        <div class="article-card__info {% if article.image %}with-image{% endif %}">
+            {%- for block in section.blocks -%}
+            {%- case block.type -%}
+                {%- when 'title'-%}
+                    {% liquid
+                        assign uppercase_font = false
+                        assign bolder_font = false
+                        if settings.typography_preset == 'custom' and block.settings.title_size == 'default'
+                            if settings.uppercase_heading_xs
+                              assign uppercase_font = true
+                            endif
+                            if settings.bolder_font_heading_xs
+                              assign bolder_font = true
+                            endif
+                        endif
+                    %}
+                    <h3 class="article-card__item {% if settings.accent_color_for_headings %}article-card__title--accent{% endif %} article-card__title article-card__title--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if block.settings.title_size != 'default' %}{{ block.settings.title_size }}{% endif %} {% if block.settings.use_accent_color %}article-card__title--accent{% endif %}" id="Article-{{ article.id }}" {{ block.shopify_attributes }}>
+                        {% if block.settings.heading_color == 'gradient' and block.settings.heading_gradient != blank %}
+                            <span class="gradient-heading-text gradient-heading-text--{{ block.id }}">{{ article.title | escape }}</span>
+                        {% else %}
+                            {{ article.title | escape }}
+                        {% endif %}
+                    </h3>
+                {%- when 'info' -%}
+                    {%- if block.settings.show_date or block.settings.show_author or block.settings.show_number_of_comments and article.comments_count > 0 and blog.comments_enabled? -%}
+                        {% liquid
+                            assign uppercase_font = false
+                            assign bolder_font = false
+                            if settings.typography_preset == 'custom' and block.settings.text_size == 'default'
+                                if settings.uppercase_label
+                                  assign uppercase_font = true
+                                endif
+                                if settings.bolder_font_label
+                                  assign bolder_font = true
+                                endif
+                            endif
+                        %}
+                    <div class="article-card__item info info--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if block.settings.text_size != 'default' %}{{ block.settings.text_size }}{% endif %} {% if settings.dim_text %}dim{% endif %}"{{ block.shopify_attributes }}>
+                        {%- if block.settings.show_date -%}
+                            <span class="info__date">
+                            {{- article.published_at | date: format: 'abbreviated_date' -}}
+                            </span>
+                        {%- endif -%}
+                        {%- if block.settings.show_author -%}
+                            <span class="info__author">{{ article.author }}</span>
+                        {%- endif -%}
+                        {%- if block.settings.show_number_of_comments and article.comments_count > 0 and blog.comments_enabled? -%}
+                            <span class="info__comments-count">{% if article.comments_count == 1 %}{{ 'blogs.article.comments.one' | t: count: article.comments_count }}{% else %}{{ 'blogs.article.comments.other' | t: count: article.comments_count }}{% endif %}</span>
+                        {%- endif -%}
+                    </div>
+                {%- endif -%}
+                {%- when 'excerpt'-%}
+                {%- if article.excerpt.size > 0 or article.content.size > 0 -%}
+                    {% liquid
+                        assign uppercase_font = false
+                        assign bolder_font = false
+                        if settings.typography_preset == 'custom' and block.settings.text_size == 'default'
+                            if settings.uppercase_body_m
+                              assign uppercase_font = true
+                            endif
+                            if settings.bolder_font_body_m
+                              assign bolder_font = true
+                            endif
+                        endif
+                    %}
+                    <p class="article-card__item article-card__excerpt {% if settings.typography_preset != 'custom' %}body-secondary-text--{{ settings.typography_preset }}{% else %}body-text--{{ settings.typography_preset }}{% endif %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if block.settings.text_size != 'default' %}{{ block.settings.text_size }}{% endif %}" {{ block.shopify_attributes }}>
+                    {{ article.excerpt_or_content | strip_html }}
+                    </p>
+                {%- endif -%}
+                {%- when 'read_more'-%}
+                <div class="article-card__item article-card__button" {{ block.shopify_attributes }}>
+                    <object>
+                        <a class="article-card__link link-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if settings.enable_animated_underline %}link-button--underline{% endif %}" href="{{ article.url }}" aria-label="{{ block.settings.button_label }}">{{ block.settings.button_label }}</a>
+                    </object>
+                </div>
+            {%- endcase -%}
+            {%- endfor -%}
+        </div>
+        {%- if article.image -%}
+            {% capture image_sizes %}
+                {% if settings_page_width != '100vw' %}
+                  (min-width: {{ settings_page_width }}) calc(({{ settings_page_width }} - {{ column_gap }}) / {{ blog_columns_count }} * {{ card_image_width_fraction }}),
+                {% endif %}
+                (min-width: 1025px) calc((100vw - {{ column_gap }}) / {{ blog_columns_count }} * {{ card_image_width_fraction }}),
+                (min-width: 769px) calc(100vw * {{ card_image_width_fraction }}),
+                100vw
+            {% endcapture %}
+
+            <div class="article-card__image-wrapper">
+                <div class="article-card__image lazy-image-container ratio-{{ section.settings.image_ratio }}" {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}>
+                    {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
+                {% if settings.images_loading != 'disable' %}
+                    <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ article.image.aspect_ratio }}">
+                {% endif %}
+                    <img draggable="false"
+                    srcset="{%- if article.image.width >= 375 -%}{{ article.image | image_url: width: 375 }} 375w,{%- endif -%}
+                    {%- if article.image.width >= 450 -%}{{ article.image | image_url: width: 450 }} 450w,{%- endif -%}
+                    {%- if article.image.width >= 550 -%}{{ article.image | image_url: width: 550 }} 550w,{%- endif -%}
+                    {%- if article.image.width >= 750 -%}{{ article.image | image_url: width: 750 }} 750w,{%- endif -%}
+                    {%- if article.image.width >= 1100 -%}{{ article.image | image_url: width: 1100 }} 1100w,{%- endif -%}
+                    {%- if article.image.width >= 1500 -%}{{ article.image | image_url: width: 1500 }} 1500w,{%- endif -%}
+                    {{ article.image | image_url }} {{ article.image.width }}w"
+                    src="{{ article.image | image_url: width: 1000 }}"
+                    sizes="{{ image_sizes | strip_newlines | strip }}"                
+                    alt="{{ article.image.alt | escape }}"
+                    {% if should_high_priority %}
+                        fetchpriority="high"
+                    {% endif %}                  
+                    {% if should_lazy_load %}
+                        loading="lazy"
+                    {% endif %}
+                    {% if settings.images_loading != 'disable' %}
+                        onload="this.parentNode.classList.add('lazyloaded');"
+                    {% endif %}
+                    width="{{ article.image.width }}"
+                    height="{{ article.image.height }}"
+                    class="motion-reduce"
+                    >
+                {% if settings.images_loading != 'disable' %}
+                    {% if settings.images_loading != 'fade_scale' %}
+                    <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                        <img 
+                        alt="{{ article.image.alt | escape }}" 
+                        src="{{ article.image | image_url: width: 10 }}"
+                        draggable="false"
+                        width="10" 
+                        height="10">
+                    </div>
+                    {% endif %}
+                </figure>
+                {% endif %}
+                    {% comment %}theme-check-enable ImgLazyLoading{% endcomment %}
+                </div>
+            </div>
+        {%- endif -%}
+    </a>
+  </article>
+  

@@ -1,0 +1,690 @@
+/* Customer */
+.account-wrapper {
+    max-width: 480px;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    width: 100%;
+}
+.heading, .subheading {
+    margin-bottom: 32px;
+}
+.heading#recover {
+    margin-bottom: 16px;
+}
+.heading.center, .subheading.center, .account-top.center {
+    text-align: center;
+}
+.field .subheading {
+    margin-bottom: 0;
+    margin-top: 16px;
+}
+.subheading.error-color {
+    color: rgb(var(--error-color));
+}
+.subheading.success-color {
+    color: rgb(var(--success-color));
+}
+.heading.center, .subheading.center {
+    text-align: center;
+}
+.heading--minimal_uppercase, .heading--avant_garde, .heading--brutalist,
+.subheading--minimal_uppercase, .subheading--avant_garde, .subheading--brutalist,
+.have-account--minimal_uppercase, .have-account--brutalist,
+.form--minimal_uppercase, .form--brutalist,
+.title-list--minimal_uppercase, .title-list--avant_garde, .title-list--brutalist {
+    text-transform: uppercase; 
+}
+.have-account--minimal_uppercase, .have-account--brutalist,
+.form--minimal_uppercase, .form--brutalist,
+.subheading--minimal_uppercase, .subheading--avant_garde, .subheading--brutalist,
+.title-list--minimal_uppercase, .title-list--avant_garde {
+    letter-spacing: 0.02em;
+}
+.heading--contrast, .heading--brutalist,
+.title-list--brutalist {
+    letter-spacing: -0.01em;
+}
+.have-account--minimal_heavy, .have-account--brutalist,
+.form--minimal_heavy, .form--brutalist,
+.subheading--brutalist,
+.label--minimal_heavy, .label--brutalist,
+.input--minimal_heavy, .input--brutalist,
+.title-list--minimal_basic, .title-list--minimal_uppercase, .title-list--avant_garde  {
+    font: var(--base-body-l-font);
+}
+.have-account--duet,
+.form--duet,
+.subheading--minimal_basic, .subheading--avant_garde,
+.label--duet,
+.input--duet {
+    font: var(--base-body-m-font);
+}
+.have-account--avant_garde,
+.form--avant_garde {
+    font: var(--accent-body-s-font);
+}
+.have-account--minimal_uppercase, .have-account--minimal_basic, .have-account--classic,
+.form--minimal_uppercase, .form--minimal_basic, .form--classic,
+.subheading--minimal_uppercase, .label--minimal_uppercase,
+.input--minimal_uppercase, .input--minimal_basic,
+.input--classic, .input--avant_garde {
+    font: var(--base-body-s-font);
+}
+.have-account--contrast,
+.form--contrast,
+.label--minimal_basic, .label--classic, .label--avant_garde, .label--contrast,
+.input--contrast {
+    font: var(--base-label-font);
+}
+.heading--minimal_uppercase, .heading--minimal_basic, .heading--avant_garde,
+.subheading--minimal_heavy,
+.title-list--minimal_heavy {
+    font: var(--base-heading-xs-font);
+}
+.heading--minimal_heavy {
+    font: var(--base-heading-s-font);
+}
+.heading--classic, .title-list--contrast {
+    font: var(--accent-heading-s-font);
+}
+.heading--brutalist, .title-list--brutalist {
+    font: var(--base-heading-m-font);
+}
+.heading--contrast {
+    font: var(--accent-heading-m-font);
+}
+.heading--duet,
+.subheading--classic, .subheading--contrast,
+.title-list--classic, .title-list--duet {
+    font: var(--accent-body-l-font);
+}
+.subheading--duet {
+    font: var(--accent-body-m-font);
+}
+.heading--custom {
+    font: var(--heading-xs-font);
+    letter-spacing: var(--heading-xs-letter-spacing);
+}
+.subheading--custom,
+.label--custom,
+.input--custom,
+.form--custom,
+.have-account--custom {
+    font: var(--body-s-font);
+    letter-spacing: var(--body-s-letter-spacing);
+}
+.title-list--custom {
+    font: var(--body-l-font);
+    letter-spacing: var(--body-l-letter-spacing);
+}
+
+.form-font div {
+    font: inherit;
+}
+.account-page .unit-price {
+    justify-content: flex-end;
+}
+.have-account {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 0;
+    color: rgb(var(--layout-text-color));
+    margin-top: 32px;
+    flex-wrap: wrap;
+}
+.have-account.center {
+    justify-content: center;
+}
+.have-account__link, #customer_login_link {
+    color: rgb(var(--accent-button-color));
+}
+.have-account.forgot-password {
+    margin-top: 16px;
+}
+.account-page {
+    color: rgb(var(--layout-text-color));
+}
+.account-page .big-button, 
+.customer-account .big-button,
+.address-edit-block .big-button {
+    margin-top: 32px;
+    width: 100%;
+}
+.account-page .outlined-button, 
+.customer-account .outlined-button,
+.address-edit-block .outlined-button {
+    margin-top: 8px;
+    width: 100%;
+}
+#recover, #recover+div, #recover:target ~ #login, #recover:target ~ #login + div {
+    display: none;
+}
+#recover:target, #recover:target+div {
+    display: block;
+}
+.account-top {
+    margin-top: 24px;
+}
+.account-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: var(--padding-top);
+    gap: 240px;
+}
+.account-info__block--order {
+    flex: 1 1 auto;
+    max-width: 100%;
+}
+.account-info__block--details {
+    min-width: 240px;
+}
+.account-info__block--details .outlined-button {
+    margin-top: 24px;
+    margin-bottom: 0;
+    gap: 4px;
+}
+.account-info__block--details .button--account {
+    display: inline-flex;
+    width: fit-content;
+}
+.subheading[autofocus] {
+    outline: none;
+}
+.addresses-count {
+    display: flex;
+    align-items: center;
+    padding: 0 4px;
+    justify-content: center;
+    color: rgb(var(--layout-background-color));
+    background-color: rgb(var(--accent-button-color));
+    border-radius: 2000px;
+    transition: background-color var(--animation-duration) var(--transition-timing-function);
+}
+.table-wrapper a {
+    color: rgb(var(--accent-button-color));
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+    text-underline-offset: .3em;
+    transition: color var(--animation-duration) var(--transition-timing-function);
+}
+
+@media (hover: hover) {
+    .outlined-button:hover .addresses-count {
+        background-color: rgb(var(--hover-button-color));
+    }
+    .table-wrapper a:hover {
+        color: rgb(var(--hover-button-color));
+    }
+}
+.order-table, .order-details {
+    border-collapse: collapse;
+    color: rgb(var(--layout-text-color));
+    width: 100%;
+    max-width: 100%;
+}
+.order-table thead, .order-details thead {
+    border-bottom: 1px solid rgb(var(--layout-text-color));
+}
+.order-table thead th, .order-details thead th {
+    padding-bottom: 24px;
+    font-weight: inherit;
+}
+.order-table th {
+    flex: 1 1 calc(20% - 40px * 4 / 5);
+}
+.order-table td, .order-details tbody td, .order-details tfoot tr:first-child td,
+.order-details tfoot tr:last-child td {
+    padding-top: 24px;
+}
+.order-table th:not(:last-child), .order-table td:not(:last-child) {
+    padding-inline-end: 10px;
+}
+.order-details th:not(:last-child), .order-details td:not(:last-child) {
+    padding-inline-end: 16px;
+}
+.order-table th, .order-table td, .order-details th, .order-details td {
+    text-align: start;
+}
+.order-table th:last-child, .order-table td:last-child,.order-details th:last-child, .order-details td:last-child,
+.order-details th:nth-child(3), .order-details td:nth-child(3) {
+    text-align: end;
+}
+.order-details th:nth-child(4), .order-details td:nth-child(4) {
+    text-align: center;
+}
+.account-info .pagination-wrapper {
+    margin-top: 24px;
+}
+.account-info__block--order .heading {
+    margin-bottom: 16px;
+}
+.account-info__block--order .order-date {
+    margin-bottom: 32px;
+}
+.visually-hidden {
+    display: none;
+}
+.account-info__block--addresses {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+}
+.account-addresses {
+    margin-top: var(--padding-top);
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+.account-address {
+    flex: 0 1 calc((100% - 80px) / 3);
+    min-width: 180px;
+}
+.default-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.default-tag {
+    color: rgb(var(--layout-background-color));
+    background-color: rgb(var(--layout-text-color));
+    padding: 3px 6px;
+    min-width: max-content;
+    border-radius: var(--field-radius);
+}
+.heading--accent .default-tag {
+    background-color: rgb(var(--accent-button-color));
+}
+.account-address__actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+}
+.account-address__action {
+    padding: 6px 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: rgb(var(--layout-text-color));
+}
+.account-address__action > svg path {
+    fill: rgb(var(--layout-text-color));
+}
+.address-edit-block {
+    display: none;
+}
+.address-edit-block.open {
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    max-height: calc(100% - 65px - 65px);
+    width: 720px;
+    max-width: calc(100% - 50px - 50px);
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+    z-index: 50;
+    background-color: rgb(var(--layout-background-color));
+}
+.address-edit-wrapper {  
+    padding: 42px 64px 64px;
+}
+.address-edit-block.open::-webkit-scrollbar { 
+    width: 0;
+    height: 0;
+    display: none;
+}
+.address-edit-block.open::-moz-scrollbar { 
+    width: 0;
+    height: 0;
+    display: none;
+    scrollbar-width: none;
+}
+.solid-button.add-address {
+    width: auto;
+    margin-top: var(--padding-top);
+}
+.solid-button.add-address.center {
+    margin-inline-end: auto;
+    margin-inline-start: auto;
+    display: block;
+}
+.fields-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+.fields-wrapper .fields-row .field {
+    margin-bottom: 0;
+    flex: 1 1 calc(50% - 8px);
+    min-width: 200px;
+}
+.field input {
+    height: auto;
+}
+.field input[type="checkbox"] {
+    height: 24px;
+}
+select {
+    width: 100%;
+}
+.select select.input {
+    line-height: calc(2.75rem - 1rem - var(--outline-thickness));
+}
+
+.login-page .errors, .customer-page .errors {
+    margin-bottom: 32px;
+}
+a.have-account,
+.account-address__actions button,
+.account-address__actions button.button-delete {
+    transition: opacity var(--animation-duration) var(--transition-timing-function);
+}
+.return {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.account-top.center .return {
+    justify-content: center;
+}
+.return svg {
+    fill: rgb(var(--layout-text-color));
+}
+@media (hover: hover) {
+    a.have-account:hover, 
+    .account-address__actions button:hover {
+        opacity: 0.7;
+    }
+    .account-address__actions button.button-delete:hover {
+        opacity: 0.5;
+    }
+}
+.address-edit-block .button-wrapper {
+    top: 16px;
+    padding-inline-end: 16px;
+}
+.customer-page, .login-page {
+    --padding-top: 128px;
+    --padding-bottom: 160px;
+    padding-bottom: var(--padding-bottom);
+}
+.login-page {
+    padding-top: var(--padding-top);
+}
+
+/* Styles for full-width page without sidebars */
+/* Laptop */
+@media screen and (max-width: 1440px) {
+    .login-page, 
+    .customer-page {
+        --padding-bottom: 128px;
+        --padding-top: 96px;
+    }
+    .account-info {
+        gap: 160px;
+    }
+    .account-info__block--addresses {
+        gap: 32px;
+    }
+}
+/* Max page width 1200px or 1400px */
+@media screen and (min-width: 1200px) {
+    .page-width.login-page, 
+    .page-width.customer-page {
+        --padding-bottom: 128px;
+        --padding-top: 96px;
+    }
+    .page-width .account-info {
+        gap: 160px;
+    }
+    .page-width .account-info__block--addresses {
+        gap: 32px;
+    }
+}
+/* Tablet */
+@media screen and (max-width: 1024px) {
+    .login-page, 
+    .customer-page {
+        --padding-bottom: 96px;
+        --padding-top: 64px;
+    }
+    .account-info {
+        gap: 48px;
+        flex-direction: column;
+    }
+}
+/* Mobile */
+@media screen and (max-width: 768px) {
+    .heading--brutalist, .title-list--brutalist {
+        font: var(--base-heading-s-font);
+        letter-spacing: normal;
+    }
+    .heading--contrast {
+        font: var(--accent-heading-s-font);
+        letter-spacing: normal;
+    }
+    .login-page, 
+    .customer-page {
+        --padding-bottom: 64px;
+    }
+    .heading, .subheading, .account-info__block--order .order-date, .login-page .errors, .customer-page .errors {
+        margin-bottom: 24px;
+    }
+    .account-info {
+        gap: 24px;
+    }
+    .account-address {
+        flex: 0 1 calc((100% - 40px) / 2);
+    }
+    .address-edit-block.open {
+        max-height: calc(100% - 16px - 16px);
+        max-width: calc(100% - 16px - 16px);
+    }
+    .address-edit-wrapper {  
+        padding: 45px 24px 24px;
+    }
+    .order-table thead, .order-details thead,
+    .order-details tfoot td:first-of-type {
+        display: none;
+    }
+    .order-table tr, .order-details tr {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 100%;
+        border-top: 1px solid rgb(var(--layout-text-color));
+        gap: 0;
+    }
+    .order-table td, .order-details td,
+    .order-table td:not(:last-child), .order-details td:not(:last-child) {
+        display: flex;
+        text-align: end;
+        padding-inline-end: 0;
+        padding-top: 16px;
+    }
+    .order-table td:first-child, .order-details td:first-child {
+        padding-top: 24px;
+    }
+    .order-table td:last-child, .order-details td:last-child {
+        padding-bottom: 24px;
+    }
+    .order-table td::before, .order-details td::before {
+        content: attr(data-label);
+        flex-grow: 1;
+        text-align: start;
+        padding-inline-end: 16px;
+        display: inline-block;
+        min-width: max-content;
+    }
+    .order-details tfoot tr:not(:first-child) {
+        border-top: none;
+    }
+    .order-details tfoot tr:not(:last-child) td:last-child {
+        padding-bottom: 0;
+    }
+    .order-details tfoot tr:last-child {
+        border-bottom: 1px solid rgb(var(--layout-text-color));
+    }
+    .account-info .pagination-wrapper {
+        margin-top: 0;
+    }
+}
+/* Mobile-mini */
+@media screen and (max-width: 500px) {
+    .login-page, 
+    .customer-page {
+        --padding-bottom: 48px;
+        --padding-top: 48px;
+    }
+    .account-info {
+        gap: 16px;
+    }
+    .account-addresses {
+        flex-direction: column;
+    }
+    .account-address {
+        flex: 1 1 100%;
+    }
+}
+
+/* Sidebars */
+/* Max page width 1200px or 1400px */
+@container inside-content (min-width: 1200px) {
+    .page-width.login-page, 
+    .page-width.customer-page {
+        --padding-bottom: 128px;
+        --padding-top: 96px;
+    }
+    .page-width .account-info {
+        gap: 160px;
+    }
+    .page-width .account-info__block--addresses {
+        gap: 32px;
+    }
+}
+@media (min-width: 921px) {
+    /* Laptop */
+    @media screen and (max-width: 1440px) {
+        .login-page, 
+        .customer-page {
+            --padding-bottom: 128px;
+            --padding-top: 96px;
+        }
+        .account-info {
+            gap: 160px;
+        }
+        .account-info__block--addresses {
+            gap: 32px;
+        }
+    }
+    /* Tablet */
+    @media screen and (max-width: 1024px) {
+        .login-page, 
+        .customer-page {
+            --padding-bottom: 96px;
+            --padding-top: 64px;
+        }
+        .account-info {
+            gap: 48px;
+            flex-direction: column;
+        }
+    }
+    /* Mobile */
+    @media screen and (max-width: 768px) {
+        .heading--brutalist, .title-list--brutalist {
+            font: var(--base-heading-s-font);
+            letter-spacing: normal;
+        }
+        .heading--contrast {
+            font: var(--accent-heading-s-font);
+            letter-spacing: normal;
+        }
+        .login-page, 
+        .customer-page {
+            --padding-bottom: 64px;
+        }
+        .heading, .subheading, .account-info__block--order .order-date, .login-page .errors, .customer-page .errors {
+            margin-bottom: 24px;
+        }
+        .account-info {
+            gap: 24px;
+        }
+        .account-address {
+            flex: 0 1 calc((100% - 40px) / 2);
+        }
+        .address-edit-block.open {
+            max-height: calc(100% - 16px - 16px);
+            max-width: calc(100% - 16px - 16px);
+        }
+        .address-edit-wrapper {  
+            padding: 45px 24px 24px;
+        }
+        .order-table thead, .order-details thead,
+        .order-details tfoot td:first-of-type {
+            display: none;
+        }
+        .order-table tr, .order-details tr {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            width: 100%;
+            border-top: 1px solid rgb(var(--layout-text-color));
+            gap: 0;
+        }
+        .order-table td, .order-details td,
+        .order-table td:not(:last-child), .order-details td:not(:last-child) {
+            display: flex;
+            text-align: end;
+            padding-inline-end: 0;
+            padding-top: 16px;
+        }
+        .order-table td:first-child, .order-details td:first-child {
+            padding-top: 24px;
+        }
+        .order-table td:last-child, .order-details td:last-child {
+            padding-bottom: 24px;
+        }
+        .order-table td::before, .order-details td::before {
+            content: attr(data-label);
+            flex-grow: 1;
+            text-align: start;
+            padding-inline-end: 16px;
+            display: inline-block;
+            min-width: max-content;
+        }
+        .order-details tfoot tr:not(:first-child) {
+            border-top: none;
+        }
+        .order-details tfoot tr:not(:last-child) td:last-child {
+            padding-bottom: 0;
+        }
+        .order-details tfoot tr:last-child {
+            border-bottom: 1px solid rgb(var(--layout-text-color));
+        }
+        .account-info .pagination-wrapper {
+            margin-top: 0;
+        }
+    }
+    /* Mobile-mini */
+    @media screen and (max-width: 500px) {
+        .login-page, 
+        .customer-page {
+            --padding-bottom: 48px;
+            --padding-top: 48px;
+        }
+        .account-info {
+            gap: 16px;
+        }
+        .account-addresses {
+            flex-direction: column;
+        }
+        .account-address {
+            flex: 1 1 100%;
+        }
+    }
+}

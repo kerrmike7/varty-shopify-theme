@@ -1,0 +1,244 @@
+{% liquid
+  if object_settings.discount_code_heading != null
+    assign heading = object_settings.discount_code_heading
+  else
+    assign heading = object_settings.heading
+  endif
+
+  if object_settings.discount_code_heading_size != null
+    assign heading_size = object_settings.discount_code_heading_size
+  else
+    assign heading_size = object_settings.heading_size
+  endif
+
+  if object_settings.discount_code_show_collapsible != null
+    assign show_collapsible = object_settings.discount_code_show_collapsible
+  else
+    assign show_collapsible = object_settings.show_collapsible
+  endif
+
+  if object_settings.discount_code_label != null
+    assign label = object_settings.discount_code_label
+  else
+    assign label = object_settings.label
+  endif
+
+  assign uppercase_title_block = false
+  assign bolder_font_block = false
+
+  if settings.typography_preset == 'custom' and heading_size == 'default'
+    if settings.uppercase_body_s
+      assign uppercase_title_block = true
+    endif
+    if settings.bolder_font_body_s
+      assign bolder_font_block = true
+    endif
+  endif
+
+  if settings.typography_preset == 'custom'
+    assign secondary_weight = settings.custom_icon_weight
+  else
+    if settings.typography_preset == 'brutalist' or settings.typography_preset == 'duet' or settings.typography_preset == 'avant_garde' or settings.typography_preset == 'contrast'
+      assign secondary_weight = settings.accent_icon_weight
+      if settings.swap_fonts
+        assign secondary_weight = settings.base_icon_weight
+      endif
+    else
+      assign secondary_weight = settings.base_icon_weight
+      if settings.swap_fonts
+        assign secondary_weight = settings.accent_icon_weight
+      endif
+    endif
+  endif
+
+  if settings.typography_preset == 'custom'
+    assign weight_accordion_title = settings.custom_icon_weight
+  else
+    if settings.typography_preset == 'avant_garde' or settings.typography_preset == 'duet'
+      assign weight_accordion_title = settings.accent_icon_weight
+      if settings.swap_fonts
+        assign weight_accordion_title = settings.base_icon_weight
+      endif
+    else
+      assign weight_accordion_title = settings.base_icon_weight
+      if settings.swap_fonts
+        assign weight_accordion_title = settings.accent_icon_weight
+      endif
+    endif
+  endif
+
+  assign uppercase_font = false
+  assign bolder_font = false
+  if settings.typography_preset == 'custom'
+    if settings.uppercase_body_s
+        assign uppercase_font = true
+    endif
+    if settings.bolder_font_body_s
+      assign bolder_font = true
+    endif
+  endif
+%}
+
+{% liquid
+  assign discount_codes = cart.cart_level_discount_applications | where: 'type', 'discount_code' | map: 'title'
+
+  for item in cart.items
+    for allocation in item.line_level_discount_allocations
+      if allocation.discount_application.type == 'discount_code'
+        assign discount_codes = item.line_level_discount_allocations | slice: forloop.index0 | map: 'discount_application' | map: 'title' | concat: discount_codes
+      endif
+    endfor
+  endfor
+
+  assign discount_codes = discount_codes | uniq
+%}
+
+<accordion-block
+  class="accordion-discount-code accordion-block {% if settings.enable_drawer_animations and cart_drawer %} stagger__item{% endif %} {% if show_lines and show_collapsible %} with-lines{% endif %}"
+  {% if settings.enable_drawer_animations and cart_drawer %} style="--item-index: {{ animated_drawer_item_index }};"{% endif %}
+  {% if block %}
+    {{- block.shopify_attributes }}
+  {% endif %}
+>
+  <div class="product__accordion accordion no-js-hidden {% if show_lines and show_collapsible %} with-lines{% endif %}">
+    <div
+      class="accordion-toggle {% unless show_collapsible %}not_collapsible is-open{% endunless %}"
+      {% unless show_collapsible %}
+        open
+      {% endunless %}
+    >
+      {% if show_collapsible or heading != blank %}
+        <div class="accordion__summary" tabindex="0">
+          {% liquid
+            assign heading_text = heading
+            assign final_text = ''
+            assign split_text_curly = heading_text | split: '{'
+            for part in split_text_curly
+                if part contains '}'
+                    assign split_curly = part | split: '}'
+                    assign styled_text = split_curly[0]
+                    assign after_curly = split_curly[1]
+                    assign final_text = final_text | append: '<span class="styled">' | append: styled_text | append: '</span>' | append: after_curly
+                else
+                    assign final_text = final_text | append: part
+                endif
+            endfor
+        %} 
+          <div class="summary__title">
+            <div class="summary__title-name {% if heading_size != 'default' %}{{ heading_size }}{% else %}{% if uppercase_title_block %} uppercase{% endif %}{% if bolder_font_block %} bolder-font{% endif %}{% endif %}">
+              <h2 class="h4 accordion__title custom-heading accordion__title--{{ settings.typography_preset }} {% if heading_size != 'default' %}{{ heading_size }}{% else %}{% if uppercase_title_block %} uppercase{% endif %}{% if bolder_font_block %} bolder-font{% endif %}{% endif %}">
+                {{ final_text }}
+              </h2>
+            </div>
+            <span class="icon-accordion">
+              <span class="icon-accordion__close">
+                {% assign icon_full = 'plus' | append: "-" | append: weight_accordion_title %}
+                {% render 'icon', icon: icon_full %}  
+              </span>
+              <span class="icon-accordion__open">
+                {% assign icon_full = 'minus' | append: "-" | append: weight_accordion_title %}
+                {% render 'icon', icon: icon_full %}  
+              </span>
+            </span>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="accordion__panel">
+        <div class="accordion__content">
+          <cart-discount-component
+            data-section-id="{{ section_id }}"
+          >
+            <div class="cart-discount">
+              <div class="cart-discount__content">
+                <form
+                  class="cart-discount__form"
+                >
+                  <label
+                    class="
+                      {% if label != blank %} 
+                        secondary-text {% if settings.dim_text %}dim{% endif %} label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}
+                      {% else %} 
+                        visually-hidden 
+                      {% endif %}"
+                    for="cart-discount"
+                  >
+                    {%- if label != blank -%}
+                      {{ label }}
+                    {%- else -%}
+                      {{ 'accessibility.discount' | t }}
+                    {%- endif -%}
+                  </label>
+
+                  <div class="cart-discount__input-wrapper">
+                    <input
+                      id="cart-discount"
+                      class="cart-discount__input input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}"
+                      type="text"
+                      name="discount"
+                      placeholder="{{ 'discount_code.enter_discount_code' | t }}"
+                    >
+
+                    <div class="cart-discount__button-wrapper {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %}">
+                      <button
+                        class="cart-discount__button button solid-button button--{{ settings.typography_preset }} button--submit {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}"
+                        type="submit"
+                      >
+                        <span class="cart-discount__button-text">
+                          {{ 'discount_code.apply' | t }}
+                        </span>
+
+                        <div class="loading-overlay__spinner hidden">
+                          <svg aria-hidden="true" focusable="false" class="spinner"
+                            width="24px"
+                            height="24px"
+                            viewBox="0 0 66 66"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <circle class="path" fill="none" stroke-width="5" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                          </svg>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div
+                    class="cart-discount__error hidden error-color label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}"
+                    role="alert"
+                    data-discount-code-error="{{ 'discount_code.discount_code_error' | t }}"
+                    data-existing-discount-code-error="{{ 'discount_code.existing_discount_code_error' | t }}"
+                    data-shipping-discount-code-warning="{{ 'discount_code.shipping_discount_code_warning' | t }}"
+                  >
+                    <small class="cart-discount__error-text"></small>
+                  </div>
+                </form>
+              </div>
+
+              <ul class="cart-discount__codes">
+                {% for discount_code in discount_codes %}
+                  <li
+                    class="cart-discount__pill active-facets__button button--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}"
+                    data-discount-code="{{ discount_code }}"
+                    aria-label="{{ 'accessibility.discount_applied' | t: code: discount_code }}"
+                  >
+                    <p class="cart-discount__pill-code">
+                      {{ discount_code }}
+                    </p>
+
+                    <button
+                      type="button"
+                      class="cart-discount__pill-remove svg-wrapper svg-wrapper--smaller button-unstyled hover-opacity"
+                      aria-label="{{ 'discount_code.remove_discount' | t: code: discount_code }}"
+                    >
+                      {% assign icon_full = 'cross' | append: "-" | append: secondary_weight %}
+                      {% render 'icon', icon: icon_full %}  
+                    </button>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </cart-discount-component>
+        </div>
+      </div>
+    </div>
+  </div>
+</accordion-block>

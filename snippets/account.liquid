@@ -1,0 +1,78 @@
+{% style %}
+{% unless section.id contains 'menu-drawer' %}
+    #shopify-section-{{ section.id }} {
+        --account-vertical-alignment: {{ account_settings.account_vertical_alignment }};
+        --account-horizontal-alignment: {{ account_settings.account_horizontal_alignment }};
+    }
+{% endunless %}
+{% if settings.typography_preset != 'custom' %}
+.account-container .account__icon {
+    height: max(24px, var(--fluid-preset-body-s-lh));
+}
+{% else %}
+.account-container .account__icon {
+    height: max(24px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+}
+.navigations-heading-m .account-container .account__icon {
+    height: max(24px, calc(var(--heading-m-font-size) * var(--heading-m-line-height)));
+}
+.navigations-heading-s .account-container .account__icon {
+    height: max(24px, calc(var(--heading-s-font-size) * var(--heading-s-line-height)));
+}
+.navigations-heading-xs .account-container .account__icon {
+    height: max(24px, calc(var(--heading-xs-font-size) * var(--heading-xs-line-height)));
+}
+.navigations-body-l .account-container .account__icon {
+    height: max(24px, calc(var(--body-l-font-size) * var(--body-l-line-height)));
+}
+.navigations-body-m .account-container .account__icon {
+    height: max(24px, calc(var(--body-m-font-size) * var(--body-m-line-height)));
+}
+.navigations-label .account-container .account__icon {
+    height: max(24px, calc(var(--label-font-size) * var(--label-line-height)));
+}
+{% endif %}
+{% endstyle %}
+
+
+{%- liquid 
+	if settings.typography_preset == 'avant_garde'
+			assign weight = settings.accent_icon_weight
+			if settings.swap_fonts
+					assign weight = settings.base_icon_weight
+			endif
+	else 
+			assign weight =  settings.base_icon_weight
+			if settings.swap_fonts
+					assign weight = settings.accent_icon_weight
+			endif
+	endif
+
+    assign uppercase_font = false
+    assign bolder_font = false
+    if settings.typography_preset == 'custom'
+        assign weight = settings.custom_icon_weight
+        if settings.uppercase_body_s and settings.navigation_item_size == 'default'
+            assign uppercase_font = true
+        endif
+        if settings.bolder_font_body_s and settings.navigation_item_size == 'default'
+            assign bolder_font = true
+        endif
+    endif
+-%}
+
+<div class="account-block{% if section_navigation_block %} section-navigation-block{% if settings.enable_drawer_animations %} stagger__item{% endif %}{% endif %} {% if main-sidebar__block %} main-sidebar__block{% endif %} {% if section.id contains 'footer' %}account-block--footer{% else %}account-block--{{ section.id }}{% endif %} account-block--{{ account_settings.account_alignment }}" {{ block_item.shopify_attributes }}>
+    <div class="account-container account-container--{{ account_settings.account_style }}
+                account-container--{{ settings.typography_preset }} {% if settings.navigation_item_size != 'default' and settings.typography_preset == 'custom' %}{{ settings.navigation_item_size }}{% else %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}{% endif %}">
+        <a class="account account--{{ account_settings.account_style }} {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' %}{% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %}{% endif %} hover-opacity {% if section.settings.color_type == 'custom' %}color-custom{% elsif section.settings.color_type == 'invert' %}color-invert{% endif %}" href="{{ routes.account_url }}" aria-label="{{ 'customer.account.go_to_account' | t }}">
+            {%- if account_settings.account_style == 'text' -%}
+                <span class="account__title">{{ 'customer.account.title' | t }}</span>
+            {%- elsif account_settings.account_style == 'icon' -%}
+            <span class="account__icon">
+                {% assign icon_full = 'user' | append: "-" | append: weight %}
+                {% render 'icon', icon: icon_full %}  
+            </span>
+            {%- endif -%}
+        </a>
+    </div>
+</div>

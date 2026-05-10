@@ -1,0 +1,77 @@
+{% if news_settings.news_style != 'disable' %}
+{% style %}
+#shopify-section-{{ section.id }} {
+    --news-horizontal-alignment: {{ news_settings.news_horizontal_alignment }};
+}
+{% if settings.typography_preset != 'custom' %}
+.news-container .news__icon {
+    height: max(24px, var(--fluid-preset-body-s-lh));
+}
+{% else %}
+.news-container .news__icon {
+    height: max(24px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+}
+.navigations-heading-m .news-container .news__icon {
+    height: max(24px, calc(var(--heading-m-font-size) * var(--heading-m-line-height)));
+}
+.navigations-heading-s .news-container .news__icon {
+    height: max(24px, calc(var(--heading-s-font-size) * var(--heading-s-line-height)));
+}
+.navigations-heading-xs .news-container .news__icon {
+    height: max(24px, calc(var(--heading-xs-font-size) * var(--heading-xs-line-height)));
+}
+.navigations-body-l .news-container .news__icon {
+    height: max(24px, calc(var(--body-l-font-size) * var(--body-l-line-height)));
+}
+.navigations-body-m .news-container .news__icon {
+    height: max(24px, calc(var(--body-m-font-size) * var(--body-m-line-height)));
+}
+.navigations-label .news-container .news__icon {
+    height: max(24px, calc(var(--label-font-size) * var(--label-line-height)));
+}
+{% endif %}
+{% endstyle %}
+
+
+{%- liquid 
+	if settings.typography_preset == 'avant_garde'
+			assign weight = settings.accent_icon_weight
+			if settings.swap_fonts
+					assign weight = settings.base_icon_weight
+			endif
+	else 
+			assign weight =  settings.base_icon_weight
+			if settings.swap_fonts
+					assign weight = settings.accent_icon_weight
+			endif
+	endif
+
+    assign uppercase_font = false
+    assign bolder_font = false
+    if settings.typography_preset == 'custom'
+        assign weight = settings.custom_icon_weight
+        if settings.uppercase_body_s and settings.navigation_item_size == 'default'
+            assign uppercase_font = true
+        endif
+        if settings.bolder_font_body_s and settings.navigation_item_size == 'default'
+            assign bolder_font = true
+        endif
+    endif
+-%}
+
+<div class="news-block news-block--{{ section.id }}{% if section_navigation_block %} section-navigation-block{% if settings.enable_drawer_animations %} stagger__item{% endif %}{% endif %}" {{ block_item.shopify_attributes }}>
+    <div class="news-container news-container--{{ account_settings.news_style }} news-container--{{ settings.typography_preset }} {% if settings.navigation_item_size != 'default' and settings.typography_preset == 'custom' %}{{ settings.navigation_item_size }}{% else %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}{% endif %}">
+        <button class="news news-drawer-opener news--{{ news_settings.news_style }} {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' %}{% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %}{% endif %} hover-opacity {% if section.settings.color_type == 'custom' %}color-custom{% elsif section.settings.color_type == 'invert' %}color-invert{% endif %}" aria-label="{{ 'general.news_drawer' | t }}" role="button">
+            {%- if news_settings.news_style == 'text' -%}
+                <span class="news__title news-container--{{ settings.typography_preset }} {% if settings.navigation_item_size != 'default' and settings.typography_preset == 'custom' %}{{ settings.navigation_item_size }}{% else %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}{% endif %}">{{ news_settings.news_heading }}</span>
+            {%- elsif news_settings.news_style == 'icon' -%}
+            <span class="news__icon">
+                {% assign icon_full = news_settings.news_icon | append: "-" | append: weight %}
+                {% render 'icon-accordion-2', icon: icon_full %}    
+            </span>
+            {%- endif -%}
+            <span class="news-indicator" aria-hidden="true"></span>
+        </button>
+    </div>
+</div>
+{% endif %}

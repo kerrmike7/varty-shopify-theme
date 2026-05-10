@@ -1,0 +1,357 @@
+{% layout none %}
+
+<!doctype html>
+{% capture is_rtl %}{% render 'rtl-check' %}{% endcapture %}
+<html class="no-js html-{% if is_rtl == 'true' %}rtl{% else %}ltr{% endif %}{% if settings.enable_page_fade_in %} html-fade-in{% endif %}" 
+  lang="{{ request.locale.iso_code }}"
+  dir="{% if is_rtl == 'true' %}rtl{% else %}ltr{% endif %}"
+>
+  <head>
+    <script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}" defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_background }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+    {% comment %} <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    {%- unless settings.base_font.system? and settings.accent_font.system? -%}
+      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    {%- endunless -%} {% endcomment %}
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+
+    {%- assign formatted_balance = gift_card.balance | money_without_trailing_zeros | strip_html -%}
+
+    <title>{{ 'gift_cards.issued.title' | t: value: formatted_balance, shop: shop.name }}</title>
+
+    <meta name="description" content="{{ 'gift_cards.issued.subtext' | t }}">
+
+    {{ content_for_header }}
+
+    {%- liquid
+      assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
+      assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
+      assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+    %}
+
+    {% style %}
+      {{ settings.base_font | font_face: font_display: 'swap' }}
+      {{ body_font_bold | font_face: font_display: 'swap' }}
+      {{ body_font_italic | font_face: font_display: 'swap' }}
+      {{ body_font_bold_italic | font_face: font_display: 'swap' }}
+      {{ settings.accent_font | font_face: font_display: 'swap' }}
+      {{ settings.custom_font | font_face: font_display: 'swap' }}
+      
+      :root {
+        --layout-background-color: 
+        {{ settings.layout_background_color.red }},
+        {{ settings.layout_background_color.green }},
+        {{ settings.layout_background_color.blue }};
+        --layout-text-color: 
+        {{ settings.layout_text_color.red }},
+        {{ settings.layout_text_color.green }}, 
+        {{ settings.layout_text_color.blue }};
+        --base-button-color: 
+        {{ settings.base_button_color.red }},
+        {{ settings.base_button_color.green }},
+        {{ settings.base_button_color.blue }};
+        --accent-button-color: 
+        {{ settings.accent_button_color.red }},
+        {{ settings.accent_button_color.green }},
+        {{ settings.accent_button_color.blue }};
+        --hover-button-color: 
+        {{ settings.hover_button_color.red }},
+        {{ settings.hover_button_color.green }},
+        {{ settings.hover_button_color.blue }};
+        --popup-background-color: 
+        {{ settings.popup_background_color.red }},
+        {{ settings.popup_background_color.green }},
+        {{ settings.popup_background_color.blue }};
+        --error-color: 
+        {{ settings.error_color.red }},
+        {{ settings.error_color.green }},
+        {{ settings.error_color.blue }};
+        --success-color:
+         {{ settings.success_color.red }},
+         {{ settings.success_color.green }},
+         {{ settings.success_color.blue }};
+         --pickup-available-text: 
+        {{ settings.pickup_available_text.red }}, 
+        {{ settings.pickup_available_text.green }}, 
+        {{ settings.pickup_available_text.blue }};
+        --pickup-available-icon: 
+        {{ settings.pickup_available_icon.red }}, 
+        {{ settings.pickup_available_icon.green }}, 
+        {{ settings.pickup_available_icon.blue }};
+        --pickup-out-of-stock-text: 
+        {{ settings.pickup_out_of_stock_text.red }}, 
+        {{ settings.pickup_out_of_stock_text.green }}, 
+        {{ settings.pickup_out_of_stock_text.blue }};
+        --pickup-out-of-stock-icon: 
+        {{ settings.pickup_out_of_stock_icon.red }}, 
+        {{ settings.pickup_out_of_stock_icon.green }}, 
+        {{ settings.pickup_out_of_stock_icon.blue }};
+
+        --page-width: {{ settings.desktop_max_width }}px;
+        --line-width: {{ settings.line_width }}px;
+        --line-opacity: {{ settings.line_opacity | divided_by: 100.0 }};
+        --outline-thickness: {{ settings.border_thickness }}px;
+        --button-radius: {%- render 'radius-xxl-then-var', v: settings.button_radius -%};
+        --field-radius: {%- render 'radius-xxl-then-var', v: settings.field_radius -%};
+        --images-and-section-radius: {%- render 'radius-xxl-then-var', v: settings.images_and_sections_radius -%};
+        --other-buttons-radius: {%- render 'radius-xxl-then-var', v: settings.other_buttons_radius -%};
+        --close-button-shadow: {{ settings.close_button_shadow | divided_by: 100.0 }};
+        --animation-duration: {{ settings.animation_duration }}s;
+        --transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1.0);
+        --card-product-spacing: {{ settings.product_card_inner_spacing }}%;
+        --images-duration: {{ settings.images_duration }}s;
+        --images-delay: {{ settings.images_delay }}s;
+
+        {% if settings.enable_page_fade_in %} 
+        --fade-in-duration: {{ settings.page_fade_in_duration }}s;
+        {% endif %}
+      }
+      {% if settings.select_text_accent_color %}
+        ::selection {
+          background-color: rgba(var(--accent-button-color), .4);
+        }
+      {% endif %} 
+    {% endstyle %}
+    {% render 'font-variables' %}
+    {{ 'base.css' | asset_url | stylesheet_tag: preload: true }}
+    {% if is_rtl == 'true' %}
+      {{ 'rtl.css' | asset_url | stylesheet_tag: preload: true }}
+    {% endif %}
+    {{ 'template-giftcard.css' | asset_url | stylesheet_tag }}
+
+
+    <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+      if (Shopify.designMode) {
+        document.documentElement.classList.add('shopify-design-mode');
+      }
+    </script>
+  </head>
+
+  {% liquid
+    assign uppercase_buttons = false
+    assign bolder_font_buttons = false
+    if settings.typography_preset == 'custom' and settings.regular_button_size == 'default'
+      if settings.uppercase_body_s
+        assign uppercase_buttons = true
+      endif
+      if settings.bolder_font_body_s
+        assign bolder_font_buttons = true
+      endif
+    endif
+  %} 
+  <body class="gift-card body {% if settings.enable_page_fade_in %} fade-in {% endif %}{% if settings.typography_preset == 'custom' %} custom-type-preset{% if uppercase_buttons %} buttons-uppercase{% endif %}{% if bolder_font_buttons %} buttons-font-bolder{% endif %}{% endif %}">
+    <header class="gift-card__header">
+      <h1 class="gift-card__heading subheading--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %}">{{ 'gift_cards.issued.subtext' | t }}</h1>
+    </header>
+    <main class="gift-card__main {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %}">
+      <div class="gift-card__image-wrapper" {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}>
+        {% if settings.logo_image != blank %}
+          {%- assign logo_alt = settings.logo_image.alt | default: shop.name | escape -%}
+          <img
+            class="gift-card__image"
+            srcset="{%- if settings.logo_image.width >= 165 -%}{{ settings.logo_image | image_url: width: 165 }} 165w,{%- endif -%}
+            {%- if settings.logo_image.width >= 375 -%}{{ settings.logo_image | image_url: width: 375 }} 375w,{%- endif -%}
+            {%- if settings.logo_image.width >= 550 -%}{{ settings.logo_image | image_url: width: 550 }} 550w,{%- endif -%}
+            {%- if settings.logo_image.width >= 750 -%}{{ settings.logo_image | image_url: width: 750 }} 750w,{%- endif -%}
+            {%- if settings.logo_image.width >= 1100 -%}{{ settings.logo_image | image_url: width: 1100 }} 1100w,{%- endif -%}
+            {%- if settings.logo_image.width >= 1500 -%}{{ settings.logo_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+            {{ settings.logo_image | image_url }} {{ settings.logo_image.width }}w"
+            src="{{ settings.logo_image | image_url: width: settings.logo_image.width }}"
+            sizes="calc({{ settings.logo_image_width }}px / 1)"
+            loading="lazy"
+            draggable="false"
+            alt="{{ logo_alt }}"
+            style="object-position: {{ settings.logo_image.presentation.focal_point }}"
+            width="{{ settings.logo_image.width }}"
+            height="{{ settings.logo_image.width | divided_by: settings.logo_image.aspect_ratio | ceil }}">
+        {% else %}
+          <img
+            class="gift-card__image"
+            src="{{ 'gift-card/card.svg' | shopify_asset_url }}"
+            alt="{{ 'gift_cards.issued.subtext' | t }}"
+            draggable="false"
+            height="260"
+            width="400"
+            loading="lazy">
+        {% endif %}
+      </div>
+      <h2 class="gift-card__shop-name heading--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_heading_xs %} uppercase{% endif %}{% if settings.bolder_font_heading_xs %} bolder-font{% endif %}{% endif %}">{{ shop.name }}</h2>
+      <div class="gift-card__value heading--{{ settings.typography_preset }} {% if settings.accent_color_for_headings %}heading--accent{% endif %}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_heading_xs %} uppercase{% endif %}{% if settings.bolder_font_heading_xs %} bolder-font{% endif %}{% endif %}">
+        <div class="gift-card__price">
+          {% if settings.currency_code_enabled %}
+            {{ 'gift_cards.issued.price_value' | t }} {{ gift_card.initial_value | money_with_currency }}
+          {% else %}
+            {{ 'gift_cards.issued.price_value' | t }} {{ gift_card.initial_value | money }}
+          {% endif %}
+        </div>
+        {%- if gift_card.enabled == false or gift_card.expired -%}
+          <p class="gift-card__label subheading--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %}">{{ 'gift_cards.issued.expired' | t }}</p>
+        {%- endif -%}
+        {%- if gift_card.balance != gift_card.initial_value -%}
+          <p class="gift-card__label subheading--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %}">
+            {% if settings.currency_code_enabled %}
+              {{ 'gift_cards.issued.remaining_html' | t: balance: gift_card.balance | money_with_currency }}
+            {% else %}
+              {{ 'gift_cards.issued.remaining_html' | t: balance: gift_card.balance | money }}
+            {% endif %}
+          </p>
+        {%- endif -%}
+      </div>
+      <div class="gift-card__info subheading--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %}">
+        <p class="gift-card__number">{{ gift_card.code | format_code }}</p>
+        <p class="gift-card__text {% if settings.dim_text %}dim{% endif %}">
+          <span>{{ 'gift_cards.issued.text_1' | t }}</span>
+          <span>{{ 'gift_cards.issued.text_2' | t }}</span>
+        </p>
+      </div>
+      <a
+        href="{{ request.origin }}"
+        class="solid-button gift-card__shopping big-button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}"
+        target="_blank"
+        rel="noopener"
+        aria-describedby="a11y-new-window-message">
+        {{ 'gift_cards.issued.shop_link' | t }}
+      </a>
+      <div class="gift-card__qr-code" data-identifier="{{ gift_card.qr_identifier }}"></div>
+      {%- if gift_card.pass_url -%}
+        <a href="{{ gift_card.pass_url }}" class="gift_card__apple-wallet no-print">
+          <img
+            src="{{ 'gift-card/add-to-apple-wallet.svg' | shopify_asset_url }}"
+            width="120"
+            height="40"
+            class="gift-card__image"
+            alt="{{ 'gift_cards.issued.add_to_apple_wallet' | t }}"
+            loading="lazy"
+            draggable="false">
+        </a>
+      {%- endif -%}
+      <button class="gift-card__print  subheading--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %}" onclick="window.print();">
+        {{ 'gift_cards.issued.print_gift_card' | t }}
+      </button>
+    </main>
+  </body>
+</html>
+
+<script>
+  var string = { qrImageAlt: {{ 'gift_cards.issued.qr_image_alt' | t | json }} };
+  document.addEventListener('DOMContentLoaded', function() {
+   new QRCode( document.querySelector('.gift-card__qr-code'), {
+    text: document.querySelector('.gift-card__qr-code').dataset.identifier,
+    width: 120,
+    height: 120,
+    imageAltText: string.qrImageAlt
+    });
+  });
+
+  function nextFrame(fn) {
+    requestAnimationFrame(() => requestAnimationFrame(fn));
+  }
+  
+  function runIdle(fn, timeout = 1500) {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(fn, { timeout });
+    } else {
+      setTimeout(fn, 0);
+    }
+  }
+  
+  let _fadeInDurationCache;
+  
+  function getFadeInDurationInlineOnly() {
+    const inline = document.documentElement.style.getPropertyValue('--fade-in-duration');
+    if (inline && inline.trim()) return inline.trim();
+    return null;
+  }
+  
+  function getFadeInDurationComputed(cb) {
+    if (_fadeInDurationCache !== undefined) return cb(_fadeInDurationCache);
+  
+    nextFrame(() => {
+      runIdle(() => {
+        const duration = getComputedStyle(document.documentElement)
+          .getPropertyValue('--fade-in-duration')
+          .trim();
+  
+        _fadeInDurationCache = duration || null;
+        cb(_fadeInDurationCache);
+      }, 2000);
+    });
+  }
+  
+  let _headerHeightScheduled = false;
+  let _lastHeaderHeightPx = null;
+  
+  
+  function hideFadeInOverlayAfterDelay(durationSeconds) {
+    const s = String(durationSeconds).trim();
+  
+    let durationMs = 0;
+    if (s.endsWith('ms')) durationMs = parseFloat(s);
+    else if (s.endsWith('s')) durationMs = parseFloat(s) * 1000;
+    else durationMs = parseFloat(s) * 1000;
+  
+    if (!Number.isFinite(durationMs) || durationMs <= 0) return;
+  
+    const delay = 400;
+    setTimeout(() => {
+      document.body.style.setProperty('--fade-in-element-display', 'none');
+    }, durationMs + delay);
+  }
+  
+  function configurePageFadeInOnLoad_deferred() {
+    const inline = getFadeInDurationInlineOnly();
+    if (inline) {
+      hideFadeInOverlayAfterDelay(inline);
+    }
+  
+    const target = document.querySelector('.inside-content.fade-in--content');
+    if (!target) {
+      let tries = 0;
+      const t = setInterval(() => {
+        tries++;
+        const el = document.querySelector('.inside-content.fade-in--content');
+        if (el || tries > 20) {
+          clearInterval(t);
+          if (el) armFadeInFor(el);
+        }
+      }, 250);
+      return;
+    }
+  
+    armFadeInFor(target);
+  
+    function armFadeInFor(el) {
+      if (!('IntersectionObserver' in window)) {
+        if (!inline) getFadeInDurationComputed((d) => d && hideFadeInOverlayAfterDelay(d));
+        return;
+      }
+  
+      const io = new IntersectionObserver((entries) => {
+        const e = entries && entries[0];
+        if (!e || !e.isIntersecting) return;
+  
+        io.disconnect();
+        if (!inline) {
+          getFadeInDurationComputed((d) => {
+            if (d) hideFadeInOverlayAfterDelay(d);
+          });
+        }  
+      }, { root: null, rootMargin: '500px 0px', threshold: 0.01 });
+  
+      io.observe(el);
+    }
+  }
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('loaded');
+    configurePageFadeInOnLoad_deferred();
+  });
+</script>

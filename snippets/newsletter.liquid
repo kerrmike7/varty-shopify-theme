@@ -1,0 +1,161 @@
+<div class="newsletter-container {% if section_navigation_block %} section-navigation-block{% if settings.enable_drawer_animations %} stagger__item{% endif %}{% endif %} {% if main-sidebar__block %} main-sidebar__block{% endif %} {% if content_wrapper_block %}{% unless forloop_first %}content-wrapper--block{% endunless %}{% endif %} {% if section.id contains 'footer' %}newsletter-container--footer{% else %}newsletter-container--{{ section.id }}{% endif %}{% if mega_drawer %} newsletter-container--menu-drawer{% endif %} newsletter-container--{{ newsletter_settings.newsletter_horizontal_alignment }} {% unless mega_drawer %}newsletter-container--{{ section.settings.grid_columns }} newsletter-container--{{ newsletter_settings.block_width }}{% endunless %}{% if newsletter_settings.show_bottom_line and mega_drawer %} full-bottom-line{% endif %}" 
+    style="--newsletter-vertical-alignment: {{ newsletter_settings.newsletter_vertical_alignment }}; --newsletter-horizontal-alignment: {{ newsletter_settings.newsletter_horizontal_alignment }}; --item-index: {{ animated_drawer_item_index | default: for_loop.index }};{% if mega_drawer %} --spacing: {{ newsletter_settings.top_spacing }}; --mobile-spacing: {{ newsletter_settings.mobile_top_spacing }};{% endif %}" data-block-index="{{ for_loop.index0 }}" {{ block_item.shopify_attributes }}>
+    {% style %}
+        {% if settings.typography_preset != 'custom' %}
+        .newsletter__field-icon {
+            height: max(24px, var(--fluid-preset-body-s-lh));
+        }
+        {% else %}
+        .newsletter__field-icon {
+            height: max(24px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+        }
+        .navigations-heading-m .newsletter__field-icon {
+            height: max(24px, calc(var(--heading-m-font-size) * var(--heading-m-line-height)));
+        }
+        .navigations-heading-s .newsletter__field-icon {
+            height: max(24px, calc(var(--heading-s-font-size) * var(--heading-s-line-height)));
+        }
+        .navigations-heading-xs .newsletter__field-icon {
+            height: max(24px, calc(var(--heading-xs-font-size) * var(--heading-xs-line-height)));
+        }
+        .navigations-body-l .newsletter__field-icon {
+            height: max(24px, calc(var(--body-l-font-size) * var(--body-l-line-height)));
+        }
+        .navigations-body-m .newsletter__field-icon {
+            height: max(24px, calc(var(--body-m-font-size) * var(--body-m-line-height)));
+        }
+        .navigations-label .newsletter__field-icon {
+            height: max(24px, calc(var(--label-font-size) * var(--label-line-height)));
+        }
+        {% endif %}
+    {% endstyle %}
+
+        {%- liquid 
+            if settings.typography_preset == 'avant_garde'
+                    assign weight = settings.accent_icon_weight
+                    if settings.swap_fonts
+                            assign weight = settings.base_icon_weight
+                    endif
+            else 
+                    assign weight =  settings.base_icon_weight
+                    if settings.swap_fonts
+                            assign weight = settings.accent_icon_weight
+                    endif
+            endif
+            assign uppercase_font_heading = false
+            assign bolder_font_heading = false
+            if settings.typography_preset == 'custom'
+                assign weight = settings.custom_icon_weight
+                if settings.uppercase_body_s and newsletter_settings.heading_size == 'default'
+                    assign uppercase_font_heading = true
+                endif
+                if settings.bolder_font_body_s and newsletter_settings.heading_size == 'default'
+                    assign bolder_font_heading = true
+                endif
+            endif
+            assign uppercase_font_text = false
+            assign bolder_font_text = false
+            if settings.typography_preset == 'custom'
+                if settings.uppercase_body_s and newsletter_settings.text_size == 'default'
+                    assign uppercase_font_text = true
+                endif
+                if settings.bolder_font_body_s and newsletter_settings.text_size == 'default'
+                    assign bolder_font_text = true
+                endif
+            endif
+            assign uppercase_font = false
+            assign bolder_font = false
+            if settings.typography_preset == 'custom'
+                if settings.uppercase_body_s and settings.navigation_item_size == 'default'
+                    assign uppercase_font = true
+                endif
+                if settings.bolder_font_body_s and settings.navigation_item_size == 'default'
+                    assign bolder_font = true
+                endif
+            endif
+        -%}
+    <div class="newsletter {% if section.id contains 'footer' %}newsletter--footer{% else %}newsletter--{{ section.id }}{% endif %} {% if mega_drawer %} newsletter--menu-drawer{% endif %} {% if section.settings.color_type == 'custom' %}color-custom{% elsif section.settings.color_type == 'invert' %}color-invert{% endif %}">
+        {% if newsletter_settings.newsletter_label != blank %}
+            {% liquid
+                assign heading_text = newsletter_settings.newsletter_label
+                assign final_text = ''
+                assign split_text_curly = heading_text | split: '{'
+                for part in split_text_curly
+                    if part contains '}'
+                        assign split_curly = part | split: '}'
+                        assign styled_text = split_curly[0]
+                        assign after_curly = split_curly[1]
+                        assign final_text = final_text | append: '<span class="styled">' | append: styled_text | append: '</span>' | append: after_curly
+                    else
+                        assign final_text = final_text | append: part
+                    endif
+                endfor
+              %}
+            <p class="newsletter__title custom-heading {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %} newsletter__title--{{ settings.typography_preset }} subheading {% if settings.dim_text %}dim{% endif %}
+                {% if newsletter_settings.heading_size != 'default' %}{{ newsletter_settings.heading_size }}{% else %}{% if uppercase_font_heading %} uppercase{% endif %}{% if bolder_font_heading %} bolder-font{% endif %}{% endif %}">{{ final_text }}</p>
+        {% endif %}
+        {% form 'customer', class: 'newsletter-form' %}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            {%- if form.posted_successfully? -%}
+                <h3 class="subheading subheading--{{ settings.typography_preset }} {% if settings.navigation_item_size != 'default' and settings.typography_preset == 'custom' %}{{ settings.navigation_item_size }}{% else %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}{% endif %} success-color" id="Newsletter-success--{{ section.id }}" tabindex="-1" autofocus>{{ 'newsletter.success' | t }}</h3>
+            {%- endif -%}
+            {%- if form.errors -%}
+                <h2 class="subheading subheading--{{ settings.typography_preset }} {% if settings.navigation_item_size != 'default' and settings.typography_preset == 'custom' %}{{ settings.navigation_item_size }}{% else %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}{% endif %} error-color" tabindex="-1" autofocus id="Newsletter-error--{{ section.id }}">
+                    {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
+                </h2>
+            {%- endif -%}
+            <div class="newsletter__form {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %}">
+                <label class="visually-hidden" for="NewsletterForm--{{ block.id }}" aria-hidden="true">{{ 'templates.contact.form.email' | t | append: '*' }}</label>
+                <input 
+                    class="newsletter__field newsletter__field--{{ settings.typography_preset }} {% if settings.navigation_item_size != 'default' and settings.typography_preset == 'custom' %}{{ settings.navigation_item_size }}{% else %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}{% endif %} required {% if form.errors %}invalid{% endif %}" 
+                    id="NewsletterForm--{{ block.id }}"
+                    type="email"
+                    dir="ltr"
+                    name="contact[email]"
+                    value="{{ form.email }}"
+                    aria-required="true"
+                    required="required"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autocomplete="email"
+                    {% if form.errors %}
+                        autofocus
+                        aria-invalid="true"
+                        aria-describedby="Newsletter-error--{{ block.id }}"
+                    {% elsif form.posted_successfully? %}
+                        aria-describedby="Newsletter-success--{{ block.id }}"
+                    {% endif %}
+                    placeholder="{{ newsletter_settings.newsletter_placeholder }}"
+                >
+                <button type="submit" class="newsletter__field-icon" name="commit" id="Subscribe-block" aria-label="{{ 'newsletter.button_label' | t }}">
+                    {% assign icon_full = 'arrow-thin' | append: "-" | append: weight %}
+                    {% render 'icon', icon: icon_full %}  
+                </button>
+            </div>
+            {%- if newsletter_settings.enable_checkbox and newsletter_settings.checkbox_label != blank -%}
+                <label class="field field--checkbox {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color no-default-color{% endif %}" for="NewsletterForm-checkbox--{{ block.id }}" style="text-align: start;">
+                    <input type="checkbox" id="NewsletterForm-checkbox--{{ block.id }}" name="contact[{{ 'templates.contact.form.checkbox' | t }}]" {%  if newsletter_settings.make_required %}required{% endif %}>
+                    <span class="label label-checkbox--{{ settings.typography_preset }} {% if newsletter_settings.text_size != 'default' %}{{ newsletter_settings.text_size }}{% else %}{% if uppercase_font_text %} uppercase{% endif %}{% if bolder_font_text %} bolder-font{% endif %}{% endif %} richtext {% if settings.enable_animated_underline %}richtext-link--underline{% endif %}">{{ newsletter_settings.checkbox_label }}</span>
+                </label>
+            {%- endif -%}
+        {% endform %}
+        {% if newsletter_settings.newsletter_caption != blank %}
+            {% liquid
+                assign uppercase_font_caption = false
+                assign bolder_font_caption = false
+                if settings.typography_preset == 'custom'
+                    if settings.uppercase_label and newsletter_settings.caption_size == 'default'
+                        assign uppercase_font_caption = true
+                    endif
+                    if settings.bolder_font_label and newsletter_settings.caption_size == 'default'
+                        assign bolder_font_caption = true
+                    endif
+                endif
+             %}
+            {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}<div class="no-default-color">{% endif %}
+            <div class="newsletter__text {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %} 
+                newsletter__text--{{ settings.typography_preset }} {% if newsletter_settings.caption_size != 'default' %}{{ newsletter_settings.caption_size }}{% else %}{% if uppercase_font_caption %} uppercase{% endif %}{% if bolder_font_caption %} bolder-font{% endif %}{% endif %} richtext {% if settings.enable_animated_underline %}richtext-link--underline{% endif %}">{{ newsletter_settings.newsletter_caption }}</div>
+            {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}</div>{% endif %}
+        {% endif %}
+    </div>
+</div>

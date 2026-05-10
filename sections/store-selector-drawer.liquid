@@ -1,0 +1,508 @@
+{%- liquid
+  assign weight = settings.base_icon_weight
+
+  if settings.typography_preset == 'avant_garde'
+    assign weight_close = settings.accent_icon_weight
+    if settings.swap_fonts
+      assign weight_close = settings.base_icon_weight
+    endif
+  else
+    assign weight_close = settings.base_icon_weight
+    if settings.swap_fonts
+      assign weight_close = settings.accent_icon_weight
+    endif
+  endif
+
+  assign uppercase_font = false
+  assign bolder_font = false
+  assign uppercase_body_m = false
+  assign bolder_body_m = false
+  assign uppercase_font_name = false
+  assign bolder_font_name = false
+  if settings.typography_preset == 'custom'
+    assign weight = settings.custom_icon_weight
+    assign weight_close = settings.custom_icon_weight
+    if settings.uppercase_body_s
+      assign uppercase_font = true
+    endif
+    if settings.bolder_font_body_s
+      assign bolder_font = true
+    endif
+    if settings.uppercase_body_m
+      assign uppercase_body_m = true
+    endif
+    if settings.bolder_font_body_m
+      assign bolder_body_m = true
+    endif
+    if settings.uppercase_body_l and section.settings.store_name_style == 'default'
+      assign uppercase_font_name = true
+    endif
+    if settings.bolder_font_body_l and section.settings.store_name_style == 'default'
+      assign bolder_font_name = true
+    endif
+  endif
+
+  assign animationDuration = 0
+  if settings.animation_duration == '0.3'
+    assign animationDuration = 'basic'
+  elsif settings.animation_duration == '0.5'
+    assign animationDuration = 'sophisticated'
+  endif
+
+  assign animated_drawer_item_index = 0
+-%}
+
+{% style %}
+  {% if settings.typography_preset != 'custom' %}
+  .store-selector-drawer .icon-accordion {
+    width: auto;
+    height: max(24px, var(--fluid-preset-body-s-lh));
+  }
+  .store-selector-drawer .heading_m.icon-accordion,
+  .store-selector-drawer .heading_m_uppercase.icon-accordion {
+    height: max(16px, var(--fluid-preset-m-lh));
+  }
+  .store-selector-drawer .heading_s.icon-accordion,
+  .store-selector-drawer .heading_s_uppercase.icon-accordion {
+    height: max(16px, var(--fluid-preset-s-lh));
+  }
+  .store-selector-drawer .heading_xs.icon-accordion,
+  .store-selector-drawer .heading_xs_uppercase.icon-accordion {
+    height: max(16px, var(--fluid-preset-xs-lh));
+  }
+  .store-selector-drawer .body_l.icon-accordion,
+  .store-selector-drawer .body_l_uppercase.icon-accordion {
+    height: max(16px, var(--fluid-preset-body-l-lh));
+  }
+  .store-selector-drawer .body_m.icon-accordion,
+  .store-selector-drawer .body_m_uppercase.icon-accordion {
+    height: max(16px, var(--fluid-preset-body-m-lh));
+  }
+  .store-selector-drawer .label_font.icon-accordion,
+  .store-selector-drawer .label_font_uppercase.icon-accordion {
+    height: max(16px, var(--fluid-preset-label-lh));
+  }
+  .store-accordion__checkbox-wrapper {
+    min-height: max(24px, var(--fluid-preset-body-s-lh));
+  }
+  .heading_m.store-accordion__checkbox-wrapper,
+  .heading_m_uppercase.store-accordion__checkbox-wrapper {
+    min-height: max(16px, var(--fluid-preset-m-lh));
+  }
+  .heading_s.store-accordion__checkbox-wrapper,
+  .heading_s_uppercase.store-accordion__checkbox-wrapper {
+    min-height: max(16px, var(--fluid-preset-s-lh));
+  }
+  .heading_xs.store-accordion__checkbox-wrapper,
+  .heading_xs_uppercase.store-accordion__checkbox-wrapper {
+    min-height: max(16px, var(--fluid-preset-xs-lh));
+  }
+  .body_l.store-accordion__checkbox-wrapper,
+  .body_l_uppercase.store-accordion__checkbox-wrapper {
+    min-height: max(16px, var(--fluid-preset-body-l-lh));
+  }
+  .body_m.store-accordion__checkbox-wrapper,
+  .body_m_uppercase.store-accordion__checkbox-wrapper {
+    min-height: max(16px, var(--fluid-preset-body-m-lh));
+  }
+  .label_font.store-accordion__checkbox-wrapper,
+  .label_font_uppercase.store-accordion__checkbox-wrapper {
+    min-height: max(16px, var(--fluid-preset-label-lh));
+  }
+  {% else %}
+  .store-selector-drawer .icon-accordion {
+    width: auto;
+    height: max(24px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+  }
+  .store-selector-drawer .heading_m.icon-accordion,
+  .store-selector-drawer .heading_m_uppercase.icon-accordion {
+    height: max(16px, calc(var(--heading-m-font-size) * var(--heading-m-line-height)));
+  }
+  .store-selector-drawer .heading_s.icon-accordion,
+  .store-selector-drawer .heading_s_uppercase.icon-accordion {
+    height: max(16px, calc(var(--heading-s-font-size) * var(--heading-s-line-height)));
+  }
+  .store-selector-drawer .heading_xs.icon-accordion,
+  .store-selector-drawer .heading_xs_uppercase.icon-accordion {
+    height: max(16px, calc(var(--heading-xs-font-size) * var(--heading-xs-line-height)));
+  }
+  .store-selector-drawer .body_l.icon-accordion,
+  .store-selector-drawer .body_l_uppercase.icon-accordion {
+    height: max(16px, calc(var(--body-l-font-size) * var(--body-l-line-height)));
+  }
+  .store-selector-drawer .body_m.icon-accordion,
+  .store-selector-drawer .body_m_uppercase.icon-accordion {
+    height: max(16px, calc(var(--body-m-font-size) * var(--body-m-line-height)));
+  }
+  .store-selector-drawer .label_font.icon-accordion,
+  .store-selector-drawer .label_font_uppercase.icon-accordion {
+    height: max(16px, calc(var(--label-font-size) * var(--label-line-height)));
+  }
+  .store-accordion__checkbox-wrapper {
+    min-height: max(24px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+  }
+  .heading_m.store-accordion__checkbox-wrapper,
+  .heading_m_uppercase.store-accordion__checkbox-wrapper {
+    min-height: max(16px, calc(var(--heading-m-font-size) * var(--heading-m-line-height)));
+  }
+  .heading_s.store-accordion__checkbox-wrapper,
+  .heading_s_uppercase.store-accordion__checkbox-wrapper {
+    min-height: max(16px, calc(var(--heading-s-font-size) * var(--heading-s-line-height)));
+  }
+  .heading_xs.store-accordion__checkbox-wrapper,
+  .heading_xs_uppercase.store-accordion__checkbox-wrapper {
+    min-height: max(16px, calc(var(--heading-xs-font-size) * var(--heading-xs-line-height)));
+  }
+  .body_l.store-accordion__checkbox-wrapper,
+  .body_l_uppercase.store-accordion__checkbox-wrapper {
+    min-height: max(16px, calc(var(--body-l-font-size) * var(--body-l-line-height)));
+  }
+  .body_m.store-accordion__checkbox-wrapper,
+  .body_m_uppercase.store-accordion__checkbox-wrapper {
+    min-height: max(16px, calc(var(--body-m-font-size) * var(--body-m-line-height)));
+  }
+  .label_font.store-accordion__checkbox-wrapper,
+  .label_font_uppercase.store-accordion__checkbox-wrapper {
+    min-height: max(16px, calc(var(--label-font-size) * var(--label-line-height)));
+  }
+  {% endif %}
+{% endstyle %}
+
+<store-selector-drawer class="store-selector-drawer-wrapper drawer">
+  <div id="StoreSelectorDrawer" class="store-selector-drawer">
+     <div class="scroll-area hide-scrollbar">
+      <div class="button-wrapper {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %}">
+        <button
+          class="drawer__close button-close"
+          type="button"
+          onclick="this.closest('store-selector-drawer').close()"
+          aria-label="{{ 'accessibility.close' | t }}"
+        >
+          {% assign icon_full = 'cross' | append: "-" | append: weight_close %}
+          {% render 'icon', icon: icon_full %}  
+        </button>
+      </div>
+    <div
+      class="store-selector-drawer__inner{% if settings.enable_drawer_animations %} stagger stagger--{{ animationDuration }}{% endif %}"
+      role="dialog"
+      aria-modal="true"
+      aria-label=""
+      tabindex="-1"
+    >
+      <div class="drawer__inner-wrapper">
+        {%- assign animated_drawer_item_index = animated_drawer_item_index | plus: 1 -%}
+        <h2 class="store-selector-drawer__heading drawer__heading body-secondary-text--{{ settings.typography_preset }} {% if section.settings.heading_size != 'default' %}{{ section.settings.heading_size }}{% endif %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}{% if settings.enable_drawer_animations %} stagger__item{% endif %}"{% if settings.enable_drawer_animations %} style="--item-index: {{ animated_drawer_item_index }};"{% endif %}>
+          {{ section.settings.heading }}
+        </h2>
+        {%- for block in section.blocks -%}
+          {%- assign animated_drawer_item_index = animated_drawer_item_index | plus: 1 -%}
+          {%- case block.type -%}
+            {% when 'store' %}
+              {% if block.settings.name != blank %}
+                {%- liquid
+                  if settings.typography_preset == 'classic' or settings.typography_preset == 'duet'
+                    assign weight = settings.accent_icon_weight
+                    if settings.swap_fonts
+                      assign weight = settings.base_icon_weight
+                    endif
+                  else
+                    assign weight = settings.base_icon_weight
+                    if settings.swap_fonts
+                      assign weight = settings.accent_icon_weight
+                    endif
+                  endif
+                  if settings.typography_preset == 'custom'
+                    assign weight = settings.custom_icon_weight
+                  endif
+                -%}
+
+                <article class="store-accordion product__accordion accordion {% unless block.settings.details != blank %}without-accordion-content{% endunless %}{% if settings.enable_drawer_animations %} stagger__item{% endif %}"{% if settings.enable_drawer_animations %} style="--item-index: {{ animated_drawer_item_index }};"{% endif %} {{ block.shopify_attributes }}>
+                  <accordion-block>
+                    <div class="accordion-toggle no-js-hidden accordion-toggle--{{ settings.white_space }}">
+                      <div tabindex="0" class="accordion__summary">
+                        <div class="summary__title">
+                          <div class="store-accordion__toggle-area summary__title-name">
+                            <div class="store-accordion__checkbox-wrapper {% if section.settings.store_name_style != 'default' %}{{ section.settings.store_name_style }}{% endif %}">
+                              <input class="store-accordion__checkbox" type="checkbox" type="checkbox" name="store" value="{{ block.settings.name }}" {% if block.settings.name == cart.attributes['store'] %}checked{% endif %}> 
+                            </div>
+                            {% if block.settings.image %}
+                              {{
+                                block.settings.image
+                                | image_url: width: 144
+                                | image_tag:
+                                class: 'store-accordion__image',
+                                alt: block.settings.name,
+                                loading: 'lazy'
+                              }}
+                            {% endif %}
+                            <div class="store-accordion__title-info">
+                              <h2 class="store-accordion__title h4 accordion__title accordion__title--{{ settings.typography_preset }} {% if section.settings.store_name_style != 'default' %}{{ section.settings.store_name_style }}{% else %}{% if uppercase_font_name %} uppercase{% endif %}{% if bolder_font_name %} bolder-font{% endif %}{% endif %}">
+                                {{ block.settings.name }}
+                              </h2>
+
+                              {% if block.settings.address != blank %}
+                                <address class="store-accordion__address body-text--{{ settings.typography_preset }}{% if uppercase_body_m %} uppercase{% endif %}{% if bolder_body_m %} bolder-font{% endif %} dim">{{ block.settings.address }}</address>
+                              {% endif %}
+
+                              <div class="accordion__panel">
+                                {% if block.settings.details != blank %}
+                                  <div class="accordion__content accordion__content--{{ settings.white_space }}">
+                                    <div class="accordion__text richtext {% if settings.enable_animated_underline %}richtext-link--underline{% endif %} body-text--{{ settings.typography_preset }}{% if uppercase_body_m %} uppercase{% endif %}{% if bolder_body_m %} bolder-font{% endif %}">
+                                      {{ block.settings.details }}
+                                    </div>
+                                  </div>
+                                {% endif %}
+                              </div>
+                            </div>
+                          </div>
+                          <span class="icon-accordion icon-accordion--{{ settings.typography_preset }} {% if section.settings.store_name_style != 'default' %}{{ section.settings.store_name_style }}{% endif %}">
+                            <span class="icon-accordion__close">
+                              {% assign icon_full = 'plus' | append: "-" | append: weight %}
+                              {% render 'icon', icon: icon_full %}  
+                            </span>
+                            <span class="icon-accordion__open">
+                              {% assign icon_full = 'minus' | append: "-" | append: weight %}
+                              {% render 'icon', icon: icon_full %}  
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </accordion-block>
+                </article>
+              {% endif %}
+          {%- endcase -%}
+        {% endfor %}
+      </div>
+
+      {%- assign animated_drawer_item_index = animated_drawer_item_index | plus: 1 -%}
+      <div class="drawer__footer{% if settings.enable_drawer_animations %} stagger__item{% endif %}"{% if settings.enable_drawer_animations %} style="--item-index: {{ animated_drawer_item_index }};"{% endif %}>
+        <div class="drawer__footer-actions {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %}">
+          <button
+            class="change-store-button footer-actions__button button solid-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}"
+            name="checkout"
+          >
+            <div class="change-store-button__loader loading-overlay__spinner hidden">
+              <svg aria-hidden="true" focusable="false" class="spinner" width="24px" height="24px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                <circle class="path" fill="none" stroke-width="5" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+              </svg>
+            </div>
+            <span class="change-store-button__text">{{ 'store_selector.change_my_store' | t }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</store-selector-drawer>
+
+{% schema %}
+{
+  "name": "t:sections.store_selector_drawer.name",
+  "tag": "section",
+  "limit": 1,
+  "class": "section-store-selector-drawer",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.store_selector_drawer.settings.info"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.store_selector_drawer.settings.learn_more"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Select pickup location",
+      "label": "t:sections.all.labels.heading.label"
+    },
+    {
+        "type": "select",
+        "id": "heading_size",
+        "label": "t:sections.all.size.heading_size.label",
+        "options": [
+          {
+            "value": "default",
+            "label": "t:sections.all.size.options__1.label"
+          },
+          {
+              "value": "heading_xl",
+              "label": "t:sections.all.size.options__2.label"
+          },
+          {
+              "value": "heading_xl_uppercase",
+              "label": "t:sections.all.size.options__3.label"
+          },
+          {
+              "value": "heading_l",
+              "label": "t:sections.all.size.options__4.label"
+          },
+          {
+              "value": "heading_l_uppercase",
+              "label": "t:sections.all.size.options__5.label"
+          },
+          {
+              "value": "heading_m",
+              "label": "t:sections.all.size.options__6.label"
+          },
+          {
+              "value": "heading_m_uppercase",
+              "label": "t:sections.all.size.options__7.label"
+          },
+          {
+              "value": "heading_s",
+              "label": "t:sections.all.size.options__8.label"
+          },
+          {
+              "value": "heading_s_uppercase",
+              "label": "t:sections.all.size.options__9.label"
+          },
+          {
+              "value": "heading_xs",
+              "label": "t:sections.all.size.options__10.label"
+          },
+          {
+              "value": "heading_xs_uppercase",
+              "label": "t:sections.all.size.options__11.label"
+          },
+          {
+              "value": "body_l",
+              "label": "t:sections.all.size.options__12.label"
+          },
+          {
+              "value": "body_l_uppercase",
+              "label": "t:sections.all.size.options__13.label"
+          },
+          {
+              "value": "body_m",
+              "label": "t:sections.all.size.options__14.label"
+          }, 
+          {
+              "value": "body_m_uppercase",
+              "label": "t:sections.all.size.options__15.label"
+          }, 
+          {
+              "value": "body_s",
+              "label": "t:sections.all.size.options__16.label"
+          }, 
+          {
+              "value": "body_s_uppercase",
+              "label": "t:sections.all.size.options__17.label"
+          }, 
+          {
+              "value": "label_font",
+              "label": "t:sections.all.size.options__18.label"
+          },
+          {
+              "value": "label_font_uppercase",
+              "label": "t:sections.all.size.options__19.label"
+          }
+        ],
+        "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "store_name_style",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:sections.all.size.options__1.label"
+        },
+        {
+          "value": "heading_s",
+          "label": "t:sections.all.size.options__8.label"
+        },
+        {
+          "value": "heading_s_uppercase",
+          "label": "t:sections.all.size.options__9.label"
+        },
+        {
+          "value": "heading_xs",
+          "label": "t:sections.all.size.options__10.label"
+        },
+        {
+          "value": "heading_xs_uppercase",
+          "label": "t:sections.all.size.options__11.label"
+        },
+        {
+          "value": "body_l",
+          "label": "t:sections.all.size.options__12.label"
+        },
+        {
+          "value": "body_l_uppercase",
+          "label": "t:sections.all.size.options__13.label"
+        },
+        {
+          "value": "body_m",
+          "label": "t:sections.all.size.options__14.label"
+        },
+        {
+          "value": "body_m_uppercase",
+          "label": "t:sections.all.size.options__15.label"
+        },
+        {
+          "value": "body_s",
+          "label": "t:sections.all.size.options__16.label"
+        },
+        {
+          "value": "body_s_uppercase",
+          "label": "t:sections.all.size.options__17.label"
+        },
+        {
+          "value": "label_font",
+          "label": "t:sections.all.size.options__18.label"
+        },
+        {
+          "value": "label_font_uppercase",
+          "label": "t:sections.all.size.options__19.label"
+        }
+      ],
+      "default": "default",
+      "label": "t:sections.store_selector_drawer.settings.store_name_style.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "store",
+      "name": "t:blocks.store.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "t:blocks.store.settings.store_name.label",
+          "info": "t:blocks.store.settings.store_name.info"
+        },
+        {
+          "type": "text",
+          "id": "address",
+          "label": "t:blocks.store.settings.address.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:blocks.store.settings.image.label"
+        },
+        {
+          "type": "richtext",
+          "id": "details",
+          "label": "t:blocks.store.settings.details.label"
+        }
+      ]
+    }
+  ],
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "presets": [
+    {
+      "name": "t:sections.store_selector_drawer.name",
+      "blocks": [
+        {
+          "type": "store"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

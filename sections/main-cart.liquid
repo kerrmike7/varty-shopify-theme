@@ -1,0 +1,1428 @@
+{%- liquid
+  if linklists.gift-wrapping.links.size > 0 and linklists.gift-wrapping.links.first.type == 'product_link'
+    assign gift_wrapping = linklists.gift-wrapping.links.first
+    assign gift_wrap_id = gift_wrapping.object.variants.first.id
+    assign gift_wraps_in_cart = 0
+    for item in cart.items
+      if item.id == gift_wrap_id
+        assign gift_wraps_in_cart = item.quantity
+        break
+      endif
+    endfor
+    assign items_in_cart = cart.item_count | minus: gift_wraps_in_cart
+  endif
+
+  assign weight =  settings.base_icon_weight
+
+  if settings.typography_preset == 'avant_garde' or settings.typography_preset == 'duet'
+    assign weight_accordion_title = settings.accent_icon_weight
+    if settings.swap_fonts
+        assign weight_accordion_title = settings.base_icon_weight
+    endif
+  else 
+    assign weight_accordion_title =  settings.base_icon_weight
+    if settings.swap_fonts
+        assign weight_accordion_title = settings.accent_icon_weight
+    endif
+  endif
+
+  if settings.typography_preset == 'avant_garde'
+        assign weight_discount = settings.accent_icon_weight
+        if settings.swap_fonts
+                assign weight_discount = settings.base_icon_weight
+        endif
+	else 
+        assign weight_discount =  settings.base_icon_weight
+        if settings.swap_fonts
+                assign weight_discount = settings.accent_icon_weight
+        endif
+	endif
+
+  assign uppercase_font = false
+    assign bolder_font = false
+    assign uppercase_body_l = false
+    assign bolder_body_l = false
+    assign uppercase_body_s = false
+    assign bolder_body_s = false
+    assign uppercase_price = false
+    assign bolder_price_font = false
+    assign uppercase_title = false
+    assign bolder_title_font = false
+    assign uppercase_text = false
+    assign bolder_text_font = false
+    assign uppercase_font_subtotal = false
+    assign bolder_font_subtotal = false
+    assign uppercase_font_label = false
+    assign bolder_font_label = false
+    assign uppercase_heading_xs = false
+    assign bolder_heading_xs = false
+    if settings.typography_preset == 'custom'
+        assign weight = settings.custom_icon_weight
+        assign weight_discount = settings.custom_icon_weight
+        assign weight_accordion_title = settings.custom_icon_weight
+        if settings.uppercase_body_s
+            assign uppercase_font = true
+            if settings.product_price_size == 'default'
+                assign uppercase_price = true
+            endif
+            if settings.product_title_size == 'default'
+                assign uppercase_title = true
+            endif
+            if settings.product_text_size == 'default'
+                assign uppercase_text = true
+            endif
+        endif
+        if settings.bolder_font_body_s
+            assign bolder_font = true
+            if settings.product_price_size == 'default'
+                assign bolder_price_font = true
+            endif
+            if settings.product_title_size == 'default'
+                assign bolder_title_font = true
+            endif
+            if settings.product_text_size == 'default'
+                assign bolder_text_font = true
+            endif
+        endif
+        if settings.uppercase_body_l
+            assign uppercase_body_l = true
+        endif
+        if settings.bolder_font_body_l
+            assign bolder_body_l = true
+        endif
+        if settings.uppercase_label
+            assign uppercase_font_label = true
+        endif
+        if settings.bolder_font_label
+            assign bolder_font_label = true
+        endif
+        if settings.uppercase_body_s
+            assign uppercase_body_s = true
+        endif
+        if settings.bolder_font_body_s
+            assign bolder_body_s = true
+        endif
+        if settings.uppercase_heading_xs
+            assign uppercase_heading_xs = true
+        endif
+        if settings.bolder_font_heading_xs
+            assign bolder_heading_xs = true
+        endif
+    endif
+-%}
+
+{% style %}
+    #shopify-section-{{ section.id }} {
+      --padding-top: {{ section.settings.desktop_padding_top }}px;
+      --padding-bottom: {{ section.settings.desktop_padding_bottom }}px;
+    }
+    {% if settings.typography_preset != 'custom' %}
+    .icon-accordion {
+      width: auto;
+      height: max(24px, var(--fluid-preset-body-s-lh));
+    }
+    .heading_m + .icon-accordion,
+    .heading_m_uppercase + .icon-accordion {
+      height: max(16px, var(--fluid-preset-m-lh));
+    }
+    .heading_s + .icon-accordion,
+    .heading_s_uppercase + .icon-accordion {
+      height: max(16px, var(--fluid-preset-s-lh));
+    }
+    .heading_xs + .icon-accordion,
+    .heading_xs_uppercase + .icon-accordion {
+      height: max(16px, var(--fluid-preset-xs-lh));
+    }
+    .body_l + .icon-accordion,
+    .body_l_uppercase + .icon-accordion {
+      height: max(16px, var(--fluid-preset-body-l-lh));
+    }
+    .body_m + .icon-accordion,
+    .body_m_uppercase + .icon-accordion {
+      height: max(16px, var(--fluid-preset-body-m-lh));
+    }
+    .label_font + .icon-accordion,
+    .label_font_uppercase + .icon-accordion {
+      height: max(16px, var(--fluid-preset-label-lh));
+    }
+    .card__vendor--minimal_uppercase .discounts__discount svg,
+    .card__vendor--minimal_basic .discounts__discount svg,
+    .card__vendor--classic .discounts__discount svg,
+    .card__vendor--contrast .discounts__discount svg,
+    .body-secondary-text--contrast .discounts__discount svg {
+      height: max(16px, var(--fluid-preset-label-lh));
+      width: max(16px, var(--fluid-preset-label-lh));
+    }
+    .card__vendor--minimal_heavy .discounts__discount svg,
+    .card__vendor--brutalist .discounts__discount svg,
+    .body-secondary-text--minimal_heavy .discounts__discount svg,
+    .body-secondary-text--brutalist .discounts__discount svg {
+      height: max(16px, var(--fluid-preset-body-l-lh));
+      width: max(16px, var(--fluid-preset-body-l-lh));
+    }
+    .card__vendor--avant_garde .discounts__discount svg,
+    .card__vendor--duet .discounts__discount svg,
+    .body-secondary-text--duet .discounts__discount svg {
+      height: max(16px, var(--fluid-preset-body-m-lh));
+      width: max(16px, var(--fluid-preset-body-m-lh));
+    }
+    .body-secondary-text--minimal_uppercase .discounts__discount svg,
+    .body-secondary-text--minimal_basic .discounts__discount svg,
+    .body-secondary-text--classic .discounts__discount svg,
+    .body-secondary-text--avant_garde .discounts__discount svg {
+      height: max(16px, var(--fluid-preset-body-s-lh));
+      width: max(16px, var(--fluid-preset-body-s-lh));
+    }
+    {% else %}
+    .icon-accordion {
+      height: max(24px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+    }
+    .heading_m + .icon-accordion,
+    .heading_m_uppercase + .icon-accordion {
+      height: max(16px, calc(var(--heading-m-font-size) * var(--heading-m-line-height)));
+    }
+    .heading_s + .icon-accordion,
+    .heading_s_uppercase + .icon-accordion {
+      height: max(16px, calc(var(--heading-s-font-size) * var(--heading-s-line-height)));
+    }
+    .heading_xs + .icon-accordion,
+    .heading_xs_uppercase + .icon-accordion {
+      height: max(16px, calc(var(--heading-xs-font-size) * var(--heading-xs-line-height)));
+    }
+    .body_l + .icon-accordion,
+    .body_l_uppercase + .icon-accordion {
+      height: max(16px, calc(var(--body-l-font-size) * var(--body-l-line-height)));
+    }
+    .body_m + .icon-accordion,
+    .body_m_uppercase + .icon-accordion {
+      height: max(16px, calc(var(--body-m-font-size) * var(--body-m-line-height)));
+    }
+    .label_font + .icon-accordion,
+    .label_font_uppercase + .icon-accordion {
+      height: max(16px, calc(var(--label-font-size) * var(--label-line-height)));
+    }
+    .body-secondary-text--custom .discounts__discount svg {
+      height: max(16px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+      width: max(16px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+    }
+    .card__vendor--custom .discounts__discount svg {
+      height: max(16px, calc(var(--label-font-size) * var(--label-line-height)));
+      width: max(16px, calc(var(--label-font-size) * var(--label-line-height)));
+    }
+    .card__vendor--custom.heading_s .discounts__discount svg,
+    .card__vendor--custom.heading_s_uppercase .discounts__discount svg {
+      height: max(16px, calc(var(--heading-s-font-size) * var(--heading-s-line-height)));
+      width: max(16px, calc(var(--heading-s-font-size) * var(--heading-s-line-height)));
+    }
+    .card__vendor--custom.heading_xs .discounts__discount svg,
+    .card__vendor--custom.heading_xs_uppercase .discounts__discount svg {
+      height: max(16px, calc(var(--heading-xs-font-size) * var(--heading-xs-line-height)));
+      width: max(16px, calc(var(--heading-xs-font-size) * var(--heading-xs-line-height)));
+    }
+    .card__vendor--custom.body_l .discounts__discount svg,
+    .card__vendor--custom.body_l_uppercase .discounts__discount svg {
+      height: max(16px, calc(var(--body-l-font-size) * var(--body-l-line-height)));
+      width: max(16px, calc(var(--body-l-font-size) * var(--body-l-line-height)));
+    }
+    .card__vendor--custom.body_m .discounts__discount svg,
+    .card__vendor--custom.body_m_uppercase .discounts__discount svg {
+      height: max(16px, calc(var(--body-m-font-size) * var(--body-m-line-height)));
+      width: max(16px, calc(var(--body-m-font-size) * var(--body-m-line-height)));
+    }
+    .card__vendor--custom.body_s .discounts__discount svg,
+    .card__vendor--custom.body_s_uppercase .discounts__discount svg {
+      height: max(16px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+      width: max(16px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+    }
+    {% endif %}
+    @media screen and (max-width: 920px) {
+      #shopify-section-{{ section.id }} {
+        --padding-top: {{ section.settings.mobile_padding_top }}px;
+        --padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
+      }
+    }
+{% endstyle %}
+
+{{ 'main-cart.css' | asset_url | stylesheet_tag }}
+
+{%- unless settings.enable_cart_drawer -%}
+  <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+{%- endunless -%}
+
+<shopify-section id="main-cart" data-id="{{ section.id }}">
+  <div class="section-padding--{{ settings.white_space }} ordinal-section ordinal-section--{{ settings.white_space }} {% if settings.show_lines %}ordinal-section--lines{% endif %}  {% if settings.max_page_width == '1400' or settings.max_page_width == '1200' %}page-width {% endif %} page-width--{{ settings.max_page_width }} {% if cart == empty %}template-cart-empty{% endif %}">
+    <div class="cart-wrapper cart-wrapper--{{ settings.white_space }} {% if settings.show_lines %} lines{% endif %}">
+      <div class="cart-header">
+        <{{ section.settings.heading_tag }} class="title-page heading--{{ settings.typography_preset }}
+          {% if section.settings.heading_size != 'default' %}{{ section.settings.heading_size }}
+            {% else %}{% if settings.typography_preset == 'custom' %}{% if uppercase_heading_xs %} uppercase{% endif %}{% if bolder_heading_xs %} bolder-font{% endif %}{% endif %}
+            {% endif %}
+          {% if settings.show_lines == true %} lines{% endif %}{% if settings.center_text %} center{% endif %} {% if settings.accent_color_for_headings %}heading--accent{% endif %}">
+            {%- if settings.cart_name == 'cart' -%}{{ 'cart.title_cart' | t }}{% elsif settings.cart_name == 'basket' %}{{ 'cart.title_basket' | t }}{%- else -%}{{ 'cart.title_bag' | t }}{%- endif -%}
+            <span> ({{ cart.item_count }})</span>
+        </{{ section.settings.heading_tag }}>
+      </div>
+      <div class="cart-page">
+        {% if cart == empty %}         
+        <div class="cart-page__content cart-empty">
+          <h2 class="cart-page__empty-text heading--{{ settings.typography_preset }}{% if uppercase_heading_xs %} uppercase{% endif %}{% if bolder_heading_xs %} bolder-font{% endif %} {% if settings.center_text %}center{% endif %} {% if settings.accent_color_for_headings %}heading--accent{% endif %}">
+            {%- if settings.cart_name == 'cart' -%}{{ 'cart.empty_cart' | t }}{%- elsif settings.cart_name == 'basket' -%}{{ 'cart.empty_basket' | t }}{%- else -%}{{ 'cart.empty_bag' | t }}{%- endif -%}
+          </h2>
+          <div class="cart-page__empty-actions {% if settings.center_text %}center{% endif %}" >
+            {%- if shop.customer_accounts_enabled and customer == null -%}
+              <a href="{{ routes.account_login_url }}" class="button solid-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}">{{ 'cart.login' | t }}</a>
+            {%- endif -%}
+              <a href="{{ routes.root_url }}" class="button outlined-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}">{{ 'cart.continue_shopping' | t }}</a>
+          </div>
+        </div>
+        {% else %}
+        <div class="cart-page__content">
+          <cart-items class="cart-page__block cart-page__block--items">
+              <form action="{{ routes.cart_url }}" class="cart__contents critical-hidden" method="post" id="cart">
+                  <div class="cart__items" id="main-cart-items" data-id="{{ section.id }}">
+                    <div class="js-contents">
+                      <table class="cart-items">
+                          <thead>
+                            <tr>
+                              <th class="body-secondary-text--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" scope="col">{{ 'sections.cart.headings.product' | t }}</th>
+                              <th class="body-secondary-text--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} right {% if settings.dim_text %}dim{% endif %}" scope="col">{{ 'sections.cart.headings.total' | t }}</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {%- for item in cart.items -%}
+                              <tr
+                                class="cart-item{% if settings.enable_blending %} enable-blending{% endif %}{% if item.parent_relationship.parent != null %} cart-item__nested-line{% endif %}"
+                                id="CartItem-{{ item.index | plus: 1 }}"
+                                {% if item.parent_relationship.parent != null %}
+                                  aria-label="{{- 'products.product.nested_label' | t: title: item.product.title, parent_title: item.parent_relationship.parent.title | escape -}}"
+                                {% endif %}
+                              >  
+                              <td class="cart-item__product">
+                                  {% if item.image or settings.product_placeholder %}
+                                  <span class="media-wrapper lazy-image-container ratio-{{ settings.cart_image_ratio }} {% if settings.cart_fit_product_media %}cart-item__media--fit{% endif %}" {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}>
+                                    {% comment %} theme-check-disable ImgLazyLoading {% endcomment %}
+                                    {% if item.image %}
+                                    {% if settings.images_loading != 'disable' %}
+                                        <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ item.image.aspect_ratio }}">
+                                    {% endif %}
+                                      <img class="cart-item__image"
+                                          srcset="{{ item.image | image_url: width: 100 }} 1x, {{ item.image | image_url: width: 200 }} 2x"
+                                          src="{{ item.image | image_url: width: 100 }}"
+                                          alt="{{ item.image.alt | escape | split: '#' | first }}"
+                                          {% if settings.images_loading != 'disable' %}
+                                            onload="this.parentNode.classList.add('lazyloaded');"
+                                            loading="lazy"
+                                          {% else %}
+                                            {% if section.index > 2 %}loading="lazy"{% endif %}
+                                          {% endif %}
+                                          draggable="false"
+                                          width="100"
+                                          height="127"/>
+                                          {% if settings.images_loading != 'disable' %}
+                                            {% if settings.images_loading != 'fade_scale' %}
+                                            <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                                                <img 
+                                                alt="{{ item.image.alt | escape }}" 
+                                                src="{{ item.image | image_url: width: 10 }}"
+                                                draggable="false"
+                                                width="10" 
+                                                height="10">
+                                            </div>
+                                            {% endif %}
+                                        </figure>
+                                        {% endif %}
+                                    {% elsif settings.product_placeholder %}
+                                    {% if settings.images_loading != 'disable' %}
+                                        <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ settings.product_placeholder.aspect_ratio }}">
+                                    {% endif %}
+                                      <img class="cart-item__image cart-item__image--placeholder"
+                                        srcset="{{ settings.product_placeholder | image_url: width: 100 }} 1x, {{ settings.product_placeholder | image_url: width: 200 }} 2x"
+                                        src="{{ settings.product_placeholder | image_url: width: 100 }}"
+                                        alt="{{ settings.product_placeholder.alt | escape | split: '#' | first }}"
+                                        {% if settings.images_loading != 'disable' %}
+                                          onload="this.parentNode.classList.add('lazyloaded');"
+                                          loading="lazy"
+                                        {% else %}
+                                          {% if section.index > 2 %}loading="lazy"{% endif %}
+                                        {% endif %}
+                                        draggable="false"
+                                        width="100"
+                                        height="127"/>
+                                      {% if settings.images_loading != 'disable' %}
+                                        {% if settings.images_loading != 'fade_scale' %}
+                                        <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                                            <img 
+                                            alt="{{ settings.product_placeholder.alt | escape }}" 
+                                            src="{{ settings.product_placeholder | image_url: width: 10 }}"
+                                            draggable="false"
+                                            width="10" 
+                                            height="10">
+                                        </div>
+                                        {% endif %}
+                                    </figure>
+                                    {% endif %}
+                                    {% endif %}
+                                    {% comment %} theme-check-enable ImgLazyLoading {% endcomment %}
+                                  </span>
+                                  {% endif %}
+                                  <div class="cart-item__details">
+                                    <div class="cart-item__first-row">
+                                      <a href="{{ item.product.url }}" class="cart-item__name hover-opacity card__title--{{ settings.typography_preset }} {% if settings.product_title_size != 'default' and settings.typography_preset == 'custom' %}{{ settings.product_title_size }}{% else %}{% if uppercase_title %} uppercase{% endif %}{% if bolder_title_font %} bolder-font{% endif %}{% endif %}">{{ item.product.title | escape }}</a>
+                                      <div class="cart-item__totals right">
+                                        <div class="loading-overlay__spinner hidden">
+                                          <svg aria-hidden="true" focusable="false" class="spinner" width="24px" height="24px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                                            <circle class="path" fill="none" stroke-width="5" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                                          </svg>
+                                        </div>
+                                        <div class="cart-item__price-wrapper card__title--{{ settings.typography_preset }} {% if settings.product_price_size != 'default' and settings.typography_preset == 'custom' %}{{ settings.product_price_size }}{% else %}{% if uppercase_price %} uppercase{% endif %}{% if bolder_price_font %} bolder-font{% endif %}{% endif %}">
+                                          {%- if item.original_line_price != item.final_line_price -%}
+                                            <dl class="cart-item__discounted-prices cart-item__discounted-prices--column">
+                                              <dt class="visually-hidden">
+                                                {{ 'products.product.price.sale_price' | t }}
+                                              </dt>
+                                              <dd class="price price--end sale-color">
+                                                <price-money><bdi>{{ item.final_line_price | money }}</bdi></price-money>
+                                              </dd>
+                                              <dt class="visually-hidden">
+                                                {{ 'products.product.price.regular_price' | t }}
+                                              </dt>
+                                              <dd class="price--on-sale {% if settings.dim_text %}dim{% endif %}">
+                                                <s class="price price-item--regular price--end">
+                                                <price-money><bdi>{{ item.original_line_price | money }}</bdi></price-money>
+                                                </s>
+                                              </dd>
+                                            </dl>
+                                          {%- else -%}
+                                            <span class="price price--end">
+                                              <price-money><bdi>{{ item.original_line_price | money }}</bdi></price-money>
+                                            </span>
+                                          {%- endif -%}
+                                        </div>
+                                      </div>
+                                    </div>
+                                      {%- if section.settings.show_vendor -%}
+                                      <p class="cart-item__vendor card__vendor--{{ settings.typography_preset }} {% if settings.product_text_size != 'default' and settings.typography_preset == 'custom' %}{{ settings.product_text_size }}{% else %}{% if uppercase_text %} uppercase{% endif %}{% if bolder_text_font %} bolder-font{% endif %}{% endif %} {% if settings.dim_text %}dim{% endif %}">{{ item.product.vendor }}</p>
+                                      {%- endif -%}
+                                      {%- if item.product.has_only_default_variant == false -%}
+                                      <dl>
+                                          {%- for option in item.options_with_values -%}
+                                          <div class="product-option card__vendor--{{ settings.typography_preset }} {% if settings.product_text_size != 'default' and settings.typography_preset == 'custom' %}{{ settings.product_text_size }}{% else %}{% if uppercase_text %} uppercase{% endif %}{% if bolder_text_font %} bolder-font{% endif %}{% endif %} {% if settings.dim_text %}dim{% endif %}">
+                                              <dt>{{ option.name }}: </dt>
+                                              <dd>{{ option.value }}</dd>
+                                          </div>
+                                          {%- endfor -%}
+                                      </dl>
+                                      {%- endif -%}
+                                      {% unless item.properties == empty %}
+                                      <dl>
+                                      {%- for property in item.properties -%}
+                                          {%- assign property_first_char = property.first | slice: 0 -%}
+                                          {%- if property.last != blank and property_first_char != '_' -%}
+                                          <div class="product-option card__vendor--{{ settings.typography_preset }} {% if settings.product_text_size != 'default' and settings.typography_preset == 'custom' %}{{ settings.product_text_size }}{% else %}{% if uppercase_text %} uppercase{% endif %}{% if bolder_text_font %} bolder-font{% endif %}{% endif %} {% if settings.dim_text %}dim{% endif %}">
+                                              <dt>{{ property.first }}: </dt>
+                                              <dd>
+                                              {%- if property.last contains '/uploads/' -%}
+                                                  <a href="{{ property.last }}" target="_blank">
+                                                  {{ property.last | split: '/' | last }}
+                                                  </a>
+                                              {%- else -%}
+                                                  {{ property.last }}
+                                              {%- endif -%}
+                                              </dd>
+                                          </div>
+                                          {%- endif -%}
+                                      {%- endfor -%}
+                                      </dl>
+                                      {% endunless %}
+                                      {% if settings.show_pre_order_badge and item.product.template_suffix == 'preorder' %}
+                                        <div class="product-option card__vendor--{{ settings.typography_preset }} {% if settings.product_text_size != 'default' and settings.typography_preset == 'custom' %}{{ settings.product_text_size }}{% else %}{% if uppercase_text %} uppercase{% endif %}{% if bolder_text_font %} bolder-font{% endif %}{% endif %} {% if settings.dim_text %}dim{% endif %}">{{ 'products.product.pre_order' | t }}</div>
+                                      {% endif %}
+                                      {%- if item.selling_plan_allocation != nil -%}
+                                          <div class="product-option card__vendor--{{ settings.typography_preset }} {% if settings.product_text_size != 'default' and settings.typography_preset == 'custom' %}{{ settings.product_text_size }}{% else %}{% if uppercase_text %} uppercase{% endif %}{% if bolder_text_font %} bolder-font{% endif %}{% endif %} {% if settings.dim_text %}dim{% endif %}">{{ item.selling_plan_allocation.selling_plan.name }}</div>
+                                      {%- endif -%}
+                                      <div class="cart-item__price-wrapper card__title--{{ settings.typography_preset }} {% if settings.product_price_size != 'default' and settings.typography_preset == 'custom' %}{{ settings.product_price_size }}{% else %}{% if uppercase_price %} uppercase{% endif %}{% if bolder_price_font %} bolder-font{% endif %}{% endif %}">
+                                        {%- if item.original_price != item.final_price -%}
+                                            <dl class="cart-item__discounted-prices">
+                                            <dt class="visually-hidden">
+                                                {{ 'products.product.price.sale_price' | t }}
+                                            </dt>
+                                            <dd class="price price--end sale-color">
+                                                <price-money><bdi>{{ item.final_price | money }}</bdi></price-money>
+                                            </dd>
+                                            <dt class="visually-hidden">
+                                              {{ 'products.product.price.regular_price' | t }}
+                                          </dt>
+                                          <dd class="price--on-sale {% if settings.dim_text %}dim{% endif %}">
+                                              <s class="price price-item--regular price--end compare_at_price">
+                                              <price-money><bdi>{{ item.original_price | money }}</bdi></price-money>
+                                              </s>
+                                          </dd>
+                                            </dl>
+                                        {%- else -%}
+                                            <span class="price price--end">
+                                            <price-money><bdi>{{ item.final_price | money }}</bdi></price-money>
+                                            </span>
+                                        {%- endif -%}
+                                        {%- if item.variant.available and item.unit_price_measurement -%}
+                                              <div class="unit-price card__vendor--{{ settings.typography_preset }} {% if settings.product_text_size != 'default' and settings.typography_preset == 'custom' %}{{ settings.product_text_size }}{% else %}{% if uppercase_text %} uppercase{% endif %}{% if bolder_text_font %} bolder-font{% endif %}{% endif %} dim">
+                                              <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+                                              <price-money><bdi>&#40;{{ item.variant.unit_price | money }}</bdi></price-money>
+                                              <span aria-hidden="true">/</span>
+                                              <span class="visually-hidden">&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span>
+                                              {%- if item.variant.unit_price_measurement.reference_value != 1 -%}
+                                                  {{- item.variant.unit_price_measurement.reference_value -}}
+                                              {%- endif -%}
+                                              {{ item.variant.unit_price_measurement.reference_unit }}&#41;
+                                              </div>
+                                          {%- endif -%}
+                                      </div>
+                                      <ul class="discounts card__vendor--{{ settings.typography_preset }} {% if settings.dim_text %}dim{% endif %} {% if settings.product_text_size != 'default' and settings.typography_preset == 'custom' %}{{ settings.product_text_size }}{% else %}{% if uppercase_text %} uppercase{% endif %}{% if bolder_text_font %} bolder-font{% endif %}{% endif %}" role="list" aria-label="{{ 'customer.order.discount' | t }}">
+                                        {%- for discount in item.line_level_discount_allocations -%}
+                                          <li class="discounts__discount">
+                                            {% assign icon_full = 'price-tag-alternative' | append: "-" | append: weight_discount %}
+                                            {% render 'icon-accordion-2', icon: icon_full %}
+                                            {{ discount.discount_application.title }}
+                                          </li>
+                                        {%- endfor -%}
+                                      </ul>
+                                      <div class="cart-item__details-actions-wrapper">
+                                        <div class="cart-item__details-actions">
+                                            <label class="visually-hidden" for="Quantity-{{ item.index | plus: 1 }}">{{ 'products.product.quantity.label' | t }}</label>
+                                            <quantity-input class="quantity">
+                                                {% assign can_update_quantity = item.instructions.can_update_quantity | default: true %}
+                                                <button class="quantity__button no-js-hidden" name="minus" type="button" {% if item.quantity == 0 %}disabled{% endif %} {% if can_update_quantity == false %}disabled{% endif %}>
+                                                  <span class="visually-hidden">{{ 'products.product.quantity.decrease' | t: product: item.product.title | escape }}</span>
+                                                  {% assign icon_full = 'minus' | append: "-" | append: weight %}
+                                                  {% render 'icon', icon: icon_full %}
+                                                </button>
+                                                <input class="quantity__input label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}"
+                                                type="number"
+                                                dir="ltr"
+                                                name="updates[]"
+                                                value="{{ item.quantity }}"
+                                                min="0"
+                                                {% if item.variant.quantity_rule.max != null %}
+                                                  max="{{ item.variant.quantity_rule.max }}"
+                                                {% endif %}
+                                                step="{{ item.variant.quantity_rule.increment }}"
+                                                aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
+                                                id="Quantity-{{ item.index | plus: 1 }}"
+                                                data-index="{{ item.index | plus: 1 }}"
+                                                onclick="this.select();"
+                                              {% if can_update_quantity == false %}disabled{% endif %}/>
+                                                <button class="quantity__button no-js-hidden" name="plus" type="button" {% if can_update_quantity == false %}disabled{% endif %}>
+                                                <span class="visually-hidden">{{ 'products.product.quantity.increase' | t: product: item.product.title | escape }}</span>
+                                                {% assign icon_full = 'plus' | append: "-" | append: weight %}
+                                                {% render 'icon', icon: icon_full %}
+                                                </button>
+                                            </quantity-input>
+                                            {% assign can_remove = item.instructions.can_remove | default: true %}
+                                            <cart-remove-button class="remove-button hover-opacity {% if settings.dim_text %}dim{% endif %}{% if can_remove == false %} hidden{% endif %}" id="Remove-{{ item.index | plus: 1 }}" data-index="{{ item.index | plus: 1 }}" {% assign can_remove = item.instructions.can_remove | default: true %}>
+                                                <a href="{{ item.url_to_remove }}" class="button button--tertiary" aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}">
+                                                  {% assign icon_full = 'remove' | append: "-" | append: weight %}
+                                                  {% render 'icon-accordion-2', icon: icon_full %}
+                                                </a>
+                                            </cart-remove-button>
+                                        </div>
+                                      </div>
+                                      <p class="cart-item__error form__message errors" id="Line-item-error-{{ item.index | plus: 1 }}">
+                                          <span class="cart-item__error-text label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}"></span>
+                                      </p>
+                                  </div>
+                                </td>
+                              </tr>
+                            {%- endfor -%}
+                          </tbody>
+                        </table>
+                    </div>
+                  </div>
+                  <p class="visually-hidden" id="cart-live-region-text" aria-live="polite" role="status"></p>
+                  <p class="visually-hidden" id="shopping-cart-line-item-status" aria-live="polite" aria-hidden="true" role="status">{{ 'accessibility.loading' | t }}</p>  
+                </form>
+                <a href="{{ routes.root_url }}" class="cart-return hover-opacity">
+                  {% assign icon_full = 'arrow-left' | append: "-" | append: weight %}
+                  {% render 'icon-accordion', icon: icon_full %}
+                  <p class="label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}">{{ 'cart.continue_shopping' | t }}</p>
+                </a>
+          </cart-items>
+          <div class="cart-page__block cart-page__block--price">
+            {% if settings.enable_free_shipping_bar_on_cart_page %} {% render 'free-shipping-bar', uppercase_font: uppercase_font, bolder_font: bolder_font %} {% endif %}         
+            <div class="cart-page__block-container">
+              {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                  {%- when '@app' -%}
+                    <div class="app" {{ block.shopify_attributes }}>{% render block %}</div>
+                  {%- when 'price' -%}
+                    {% liquid
+                      if settings.typography_preset == 'custom' and block.settings.subtotal_size == 'default'
+                        if settings.uppercase_body_l
+                          assign uppercase_font_subtotal = true
+                        endif
+                        if settings.bolder_font_body_l
+                          assign bolder_font_subtotal = true
+                        endif
+                      endif
+                    %}
+                  <div class="js-contents" {{ block.shopify_attributes }}>
+                    <div class="block-prices">
+                      {%- assign your_saved = 0 -%}
+                      {%- for item in cart.items -%}
+                      {%- if item.original_price != item.final_price -%}
+                      {% liquid
+                        assign your_saved = item.original_price | minus: item.final_price | times: item.quantity | plus: your_saved 
+                      %}
+                      {%- endif -%}
+                      {%- endfor -%}
+                      {%- if cart.cart_level_discount_applications.size > 0 -%}
+                        {%- for discount in cart.cart_level_discount_applications -%}
+                          {% liquid
+                            assign your_saved = discount.total_allocated_amount | plus: your_saved 
+                          %}
+                        {%- endfor -%}
+                      {%- endif -%}
+                      {%- if block.settings.show_cart_total -%}
+                        <div class="cart-totals body-secondary-text--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}">
+                          <p class="cart-totals__title">
+                            {%- if settings.cart_name == 'cart' -%}{{ 'sections.cart.cart_total' | t }}{%- elsif settings.cart_name == 'basket' -%}{{ 'sections.cart.basket_total' | t }}{%- else -%}{{ 'sections.cart.bag_total' | t }}{%- endif -%}
+                          </p>
+                          {%- assign cart_total = cart.original_total_price -%}
+                          <p class="cart-totals__value">{% if settings.currency_code_enabled %}{{ cart_total | money_with_currency }}{% else %}{{ cart_total | money }}{% endif %}</p>
+                        </div>
+                      {% endif %}
+                      {%- if cart.cart_level_discount_applications.size > 0 -%}
+                        <div class="discounts-wrapper body-secondary-text--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}">
+                          <ul class="discounts" role="list" aria-label="{{ 'customer.order.discount' | t }}">
+                            {%- for discount in cart.cart_level_discount_applications -%}
+                              <li class="discounts__discount discounts__discount--position">
+                                {% assign icon_full = 'price-tag-alternative' | append: "-" | append: weight_discount %}
+                                {% render 'icon-accordion-2', icon: icon_full %}
+                                {{ discount.title }}
+                                {% if settings.currency_code_enabled %}(-{{ discount.total_allocated_amount | money_with_currency }}){% else %}(-{{ discount.total_allocated_amount | money }}){% endif %}
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        </div>
+                      {%- endif -%}
+                      {%- if block.settings.show_saved and your_saved > 0 -%}
+                        <div class="discount body-secondary-text--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" aria-label="{{ 'customer.order.discount' | t }}">
+                          <p class="discount__title">{{ 'sections.cart.saved' | t }}</p>
+                          <p class="discount__value sale-color">{% if settings.currency_code_enabled %}{{ your_saved | money_with_currency }}{% else %}{{ your_saved | money }}{% endif %}</p>
+                        </div>
+                      {% endif %}
+                      <div class="totals total--{{ settings.typography_preset }} {% if block.settings.subtotal_size != 'default' %}{{ block.settings.subtotal_size }}{% else %}{% if uppercase_font_subtotal %} uppercase{% endif %}{% if bolder_font_subtotal %} bolder-font{% endif %}{% endif %}">
+                        <p class="totals__subtotal">{{ 'sections.cart.subtotal' | t }}</p>
+                        <p class="totals__subtotal-value">{% if settings.currency_code_enabled %}{{ cart.total_price | money_with_currency }}{% else %}{{ cart.total_price | money }}{% endif %}</p>
+                      </div>
+                    </div>
+                    <small class="tax-note product__shipping-policy--{{ settings.typography_preset }}{% if uppercase_font_label %} uppercase{% endif %}{% if bolder_font_label %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}">
+                      {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
+                        {{ 'sections.cart.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
+                      {%- elsif cart.taxes_included -%}
+                        {{ 'sections.cart.taxes_included_but_shipping_at_checkout' | t }}
+                      {%- elsif shop.shipping_policy.body != blank -%}
+                        {{ 'sections.cart.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url }}
+                      {%- else -%}
+                        {{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}
+                      {%- endif -%}
+                    </small>
+                  </div>
+                  {%- when 'checkout_button' -%}
+                  {%- if settings.enable_checkbox and settings.checkbox_label != blank -%}
+                    <label class="field field--checkbox" for="checkbox--cart-page" form="cart">
+                        <input form="cart" type="checkbox" id="checkbox--cart-page" name="enable-checkout" {%  if settings.make_required %}required{% endif %}>
+                        <span class="label label-checkbox--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %} richtext {% if settings.enable_animated_underline %}richtext-link--underline{% endif %}">{{ settings.checkbox_label }}</span>
+                    </label>
+                  {%- endif -%}
+                  <div class="cart__checkouts {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %}">
+                    <div class="cart__checkout" {{ block.shopify_attributes }}>
+                      <button type="submit" id="checkout" class="cart__checkout-button button solid-button big-button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}" name="checkout"{% if cart == empty %} disabled{% endif %} form="cart">
+                        {{ 'sections.cart.checkout' | t }}
+                      </button>
+                    </div>
+                    {%- if additional_checkout_buttons -%}
+                      <div class="cart__dynamic-checkout-buttons additional-checkout-buttons big-button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}">
+                        {{ content_for_additional_checkout_buttons }}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                  {%- when 'discount_code' -%}
+                    {% render 'cart-discount', block: block, section_id: section.id, object_settings: block.settings, show_lines: block.settings.show_lines %}
+                  {%- when 'order_note' -%}
+                    {% liquid 
+                      assign uppercase_title_block = false
+                      assign bolder_font_block = false
+                      if settings.typography_preset == 'custom' and block.settings.order_heading_size == 'default'
+                          if settings.uppercase_body_s 
+                              assign uppercase_title_block = true
+                          endif
+                          if settings.bolder_font_body_s 
+                              assign bolder_font_block = true
+                          endif
+                      endif
+
+                      assign heading_text = block.settings.order_heading
+                      assign final_text = ''
+                      assign split_text_curly = heading_text | split: '{'
+                      for part in split_text_curly
+                          if part contains '}'
+                              assign split_curly = part | split: '}'
+                              assign styled_text = split_curly[0]
+                              assign after_curly = split_curly[1]
+                              assign final_text = final_text | append: '<span class="styled">' | append: styled_text | append: '</span>' | append: after_curly
+                          else
+                              assign final_text = final_text | append: part
+                          endif
+                      endfor
+                  %}
+                  <accordion-block class="accordion-order-note accordion-block {% if block.settings.show_lines and block.settings.show_collapsible %} with-lines{% endif %}">
+                    <div class="product__accordion accordion no-js-hidden {% if block.settings.show_lines and block.settings.show_collapsible %} with-lines{% endif %}">
+                        <div class="accordion-toggle {% unless block.settings.show_collapsible %}not_collapsible is-open{% endunless %}" {% unless block.settings.show_collapsible %}open{% endunless %}>
+                        <div class="accordion__summary" tabindex="0">
+                            <div class="summary__title">
+                                <div class="summary__title-name {% if block.settings.order_heading_size != 'default' %}{{ block.settings.order_heading_size }}{% else %}{% if uppercase_title_block %} uppercase{% endif %}{% if bolder_font_block %} bolder-font{% endif %}{% endif %}">
+                                    <h2 class="h4 accordion__title custom-heading accordion__title--{{ settings.typography_preset }} {% if block.settings.order_heading_size != 'default' %}{{ block.settings.order_heading_size }}{% else %}{% if uppercase_title_block %} uppercase{% endif %}{% if bolder_font_block %} bolder-font{% endif %}{% endif %}">
+                                      {{ final_text }}
+                                    </h2>
+                                </div>
+                                <span class="icon-accordion">
+                                    <span class="icon-accordion__close">
+                                      {% assign icon_full = 'plus' | append: "-" | append: weight_accordion_title %}
+                                      {% render 'icon', icon: icon_full %}
+                                    </span>
+                                    <span class="icon-accordion__open">
+                                      {% assign icon_full = 'minus' | append: "-" | append: weight_accordion_title %}
+                                      {% render 'icon', icon: icon_full %}
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="accordion__panel">
+                            <div class="accordion__content">
+                                <cart-note class="cart__note">
+                                  <label class="secondary-text {% if settings.dim_text %}dim{% endif %} label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" for="Cart-note">{{ block.settings.order_label }}</label>
+                                  <textarea class="text-area input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" name="note" form="cart" id="Cart-note" placeholder="{{ block.settings.order_placeholder | strip_html }}">{{ cart.note }}</textarea>
+                                </cart-note>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                  </accordion-block>
+                  {%- when 'shipping_calculator' -%}
+                    {% liquid 
+                      assign uppercase_title_block = false
+                      assign bolder_font_block = false
+                      if settings.typography_preset == 'custom' and block.settings.shipping_heading_size == 'default'
+                          if settings.uppercase_body_s 
+                              assign uppercase_title_block = true
+                          endif
+                          if settings.bolder_font_body_s 
+                              assign bolder_font_block = true
+                          endif
+                      endif
+
+                      assign heading_text = block.settings.shipping_heading
+                      assign final_text = ''
+                      assign split_text_curly = heading_text | split: '{'
+                      for part in split_text_curly
+                          if part contains '}'
+                              assign split_curly = part | split: '}'
+                              assign styled_text = split_curly[0]
+                              assign after_curly = split_curly[1]
+                              assign final_text = final_text | append: '<span class="styled">' | append: styled_text | append: '</span>' | append: after_curly
+                          else
+                              assign final_text = final_text | append: part
+                          endif
+                      endfor
+                  %}
+                  <accordion-block class="accordion-shipping-calculator accordion-block {% if block.settings.show_lines %} with-lines{% endif %}">
+                    <div class="product__accordion accordion no-js-hidden {% if block.settings.show_lines %} with-lines{% endif %}" >
+                        <div class="accordion-toggle">
+                        <div class="accordion__summary" tabindex="0">
+                            <div class="summary__title">
+                                <div class="summary__title-name {% if block.settings.shipping_heading_size != 'default' %}{{ block.settings.shipping_heading_size }}{% else %}{% if uppercase_title_block %} uppercase{% endif %}{% if bolder_font_block %} bolder-font{% endif %}{% endif %}">
+                                    <h2 class="h4 accordion__title custom-heading accordion__title--{{ settings.typography_preset }} {% if block.settings.shipping_heading_size != 'default' %}{{ block.settings.shipping_heading_size }}{% else %}{% if uppercase_title_block %} uppercase{% endif %}{% if bolder_font_block %} bolder-font{% endif %}{% endif %}">
+                                      {{ final_text }}
+                                    </h2>
+                                </div>
+                                <span class="icon-accordion">
+                                    <span class="icon-accordion__close">
+                                      {% assign icon_full = 'plus' | append: "-" | append: weight_accordion_title %}
+                                      {% render 'icon', icon: icon_full %}  
+                                    </span>
+                                    <span class="icon-accordion__open">
+                                      {% assign icon_full = 'minus' | append: "-" | append: weight_accordion_title %}
+                                      {% render 'icon', icon: icon_full %}  
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="accordion__panel">
+                            <div class="accordion__content">
+                              <shipping-calculator>                    
+                                <form-state>
+                                    <div class="select">
+                                      <label class="secondary-text {% if settings.dim_text %}dim{% endif %} label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" for="ShippingCalculatorCountry">{{ 'sections.cart.shipping_country' | t | append: '*' }}</label>
+                                      <div class="select">
+                                        <select
+                                          id="ShippingCalculatorCountry"
+                                          class="input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}"
+                                          data-default="{% if shop.customer_accounts_enabled and customer %}{{ customer.default_address.country }}{% elsif block.settings.shipping_country != '' %}{{ block.settings.shipping_country }}{% endif %}"
+                                          autocomplete="country"
+                                          data-empty="---"
+                                          required>
+                                          {{ country_option_tags }}
+                                        </select>
+                                        <div class="select-icon ">
+                                            {% assign icon_full = 'close-chevron' | append: "-" | append: weight_accordion_title %}
+                                            {% render 'icon', icon: icon_full %}  
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="select" id="ShippingCalculatorProvinceContainer" style="display: none">
+                                      <label class="secondary-text {% if settings.dim_text %}dim{% endif %} label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" for="ShippingCalculatorProvince">{{ 'sections.cart.shipping_state' | t }}</label>
+                                      <div class="select">
+                                        <select
+                                          id="ShippingCalculatorProvince"
+                                          class="input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}"
+                                          data-default="{% if shop.customer_accounts_enabled and customer and customer.default_address.province != '' %}{{ customer.default_address.province }}{% endif %}"
+                                          autocomplete="address-level1">
+                                        </select>
+                                        <div class="select-icon">
+                                            {% assign icon_full = 'close-chevron' | append: "-" | append: weight_accordion_title %}
+                                            {% render 'icon', icon: icon_full %}  
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="field">
+                                      <label class="secondary-text {% if settings.dim_text %}dim{% endif %} label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" for="ShippingCalculatorZip">{{ 'sections.cart.zip' | t }}</label>
+                                      <input id="ShippingCalculatorZip" class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" type="text"{% if shop.customer_accounts_enabled and customer %} value="{{ customer.default_address.zip }}"{% endif %} autocapitalize="characters" autocomplete="postal-code" placeholder="{{ 'sections.cart.zip_placeholder' | t }}"/>
+                                    </div>
+                                    <div class="field form__message errors hidden error-color label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" id="ShippingCalculatorErrors">
+                                      <div class="errors"></div>
+                                    </div>
+                                    <div class="shipping-button {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %}">
+                                      <button class="button solid-button button--{{ settings.typography_preset }} button--submit {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}" type="button">{{ 'sections.cart.estimate' | t }}</button>
+                                    </div>
+                                  </form-state>
+                                  <div class="field form__message hidden body-secondary-text--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" id="ShippingCalculatorSuccess"></div>
+                                </shipping-calculator>
+                              </div>
+                          </div>
+                          </div>
+                      </div>
+                    </accordion-block>
+                {%- endcase -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    <div id="cart-errors" class="label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}"></div>
+  </div>
+</shopify-section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    function isIE() {
+      const ua = window.navigator.userAgent;
+      const msie = ua.indexOf('MSIE ');
+      const trident = ua.indexOf('Trident/');
+
+      return (msie > 0 || trident > 0);
+    }
+
+    if (!isIE()) return;
+    const cartSubmitInput = document.createElement('input');
+    cartSubmitInput.setAttribute('name', 'checkout');
+    cartSubmitInput.setAttribute('type', 'hidden');
+    document.querySelector('#cart').appendChild(cartSubmitInput);
+    document.querySelector('#checkout').addEventListener('click', function(event) {
+      document.querySelector('#cart').submit();
+    });
+  });
+</script>
+
+{% schema %}
+{
+    "name": "t:sections.main-cart.name",
+    "tag": "section",
+    "settings": [
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "t:sections.all.size.heading_size.label",
+          "options": [
+            {
+              "value": "default",
+              "label": "t:sections.all.size.options__1.label"
+            },
+            {
+                "value": "heading_xl",
+                "label": "t:sections.all.size.options__2.label"
+            },
+            {
+                "value": "heading_xl_uppercase",
+                "label": "t:sections.all.size.options__3.label"
+            },
+            {
+                "value": "heading_l",
+                "label": "t:sections.all.size.options__4.label"
+            },
+            {
+                "value": "heading_l_uppercase",
+                "label": "t:sections.all.size.options__5.label"
+            },
+            {
+                "value": "heading_m",
+                "label": "t:sections.all.size.options__6.label"
+            },
+            {
+                "value": "heading_m_uppercase",
+                "label": "t:sections.all.size.options__7.label"
+            },
+            {
+                "value": "heading_s",
+                "label": "t:sections.all.size.options__8.label"
+            },
+            {
+                "value": "heading_s_uppercase",
+                "label": "t:sections.all.size.options__9.label"
+            },
+            {
+                "value": "heading_xs",
+                "label": "t:sections.all.size.options__10.label"
+            },
+            {
+                "value": "heading_xs_uppercase",
+                "label": "t:sections.all.size.options__11.label"
+            },
+            {
+                "value": "body_l",
+                "label": "t:sections.all.size.options__12.label"
+            },
+            {
+                "value": "body_l_uppercase",
+                "label": "t:sections.all.size.options__13.label"
+            },
+            {
+                "value": "body_m",
+                "label": "t:sections.all.size.options__14.label"
+            }, 
+            {
+                "value": "body_m_uppercase",
+                "label": "t:sections.all.size.options__15.label"
+            }, 
+            {
+                "value": "body_s",
+                "label": "t:sections.all.size.options__16.label"
+            }, 
+            {
+                "value": "body_s_uppercase",
+                "label": "t:sections.all.size.options__17.label"
+            }, 
+            {
+                "value": "label_font",
+                "label": "t:sections.all.size.options__18.label"
+            },
+            {
+                "value": "label_font_uppercase",
+                "label": "t:sections.all.size.options__19.label"
+            }
+          ],
+          "default": "default"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "t:sections.all.tag.heading_label",
+          "options": [
+            {
+                "value": "h1",
+                "label": "t:sections.all.tag.options__1.label"
+            },
+            {
+                "value": "h2",
+                "label": "t:sections.all.tag.options__2.label"
+            },
+            {
+                "value": "h3",
+                "label": "t:sections.all.tag.options__3.label"
+            },
+            {
+                "value": "h4",
+                "label": "t:sections.all.tag.options__4.label"
+            },
+            {
+                "value": "h5",
+                "label": "t:sections.all.tag.options__5.label"
+            },
+            {
+                "value": "h6",
+                "label": "t:sections.all.tag.options__6.label"
+            },
+            {
+                "value": "div",
+                "label": "t:sections.all.tag.options__7.label"
+            },
+            {
+                "value": "span",
+                "label": "t:sections.all.tag.options__8.label"
+            }, 
+            {
+                "value": "p",
+                "label": "t:sections.all.tag.options__9.label"
+            }
+            ],
+          "default": "h1"
+        },
+        {
+            "type": "checkbox",
+            "id": "show_vendor",
+            "default": true,
+            "label": "t:sections.main-cart.settings.show_vendor.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.all.paddings.desktop_section_paddings.content"
+      }, 
+      {
+          "type": "range",
+          "id": "desktop_padding_top",
+          "min": -160,
+          "max": 160,
+          "step": 4,
+          "unit": "px",
+          "default": 0,
+          "label": "t:sections.all.paddings.padding_top.label"
+      }, 
+      {
+          "type": "range",
+          "id": "desktop_padding_bottom",
+          "min": -160,
+          "max": 160,
+          "step": 4,
+          "unit": "px",
+          "default": 0,
+          "label": "t:sections.all.paddings.padding_bottom.label"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.all.paddings.mobile_section_paddings.content"
+      }, 
+      {
+          "type": "range",
+          "id": "mobile_padding_top",
+          "min": -80,
+          "max": 80,
+          "step": 4,
+          "unit": "px",
+          "default": 0,
+          "label": "t:sections.all.paddings.padding_top.label"
+      }, 
+      {
+          "type": "range",
+          "id": "mobile_padding_bottom",
+          "min": -80,
+          "max": 80,
+          "step": 4,
+          "unit": "px",
+          "default": 0,
+          "label": "t:sections.all.paddings.padding_bottom.label"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "@app"
+      },
+      {
+        "type": "price",
+        "name": "t:sections.main-cart.blocks.price.name",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "show_cart_total",
+            "default": true,
+            "label": "t:sections.main-cart.blocks.price.settings.show_cart_total.label"
+          },
+          {
+            "type": "checkbox",
+            "id": "show_saved",
+            "default": true,
+            "label": "t:sections.main-cart.blocks.price.settings.show_saved.label"
+          },
+          {
+            "type": "select",
+            "id": "subtotal_size",
+            "label": "t:settings_schema.cart_drawer.settings.cart_drawer_subtotal_size.label",
+            "options": [
+              {
+                "value": "default",
+                "label": "t:sections.all.size.options__1.label"
+              },
+              {
+                  "value": "heading_m",
+                  "label": "t:sections.all.size.options__6.label"
+              },
+              {
+                  "value": "heading_m_uppercase",
+                  "label": "t:sections.all.size.options__7.label"
+              },
+              {
+                  "value": "heading_s",
+                  "label": "t:sections.all.size.options__8.label"
+              },
+              {
+                  "value": "heading_s_uppercase",
+                  "label": "t:sections.all.size.options__9.label"
+              },
+              {
+                  "value": "heading_xs",
+                  "label": "t:sections.all.size.options__10.label"
+              },
+              {
+                  "value": "heading_xs_uppercase",
+                  "label": "t:sections.all.size.options__11.label"
+              },
+              {
+                  "value": "body_l",
+                  "label": "t:sections.all.size.options__12.label"
+              },
+              {
+                  "value": "body_l_uppercase",
+                  "label": "t:sections.all.size.options__13.label"
+              },
+              {
+                  "value": "body_m",
+                  "label": "t:sections.all.size.options__14.label"
+              }, 
+              {
+                  "value": "body_m_uppercase",
+                  "label": "t:sections.all.size.options__15.label"
+              }, 
+              {
+                  "value": "body_s",
+                  "label": "t:sections.all.size.options__16.label"
+              }, 
+              {
+                  "value": "body_s_uppercase",
+                  "label": "t:sections.all.size.options__17.label"
+              }, 
+              {
+                  "value": "label_font",
+                  "label": "t:sections.all.size.options__18.label"
+              },
+              {
+                  "value": "label_font_uppercase",
+                  "label": "t:sections.all.size.options__19.label"
+              }
+            ],
+            "default": "default"
+          }
+        ]
+      },
+      {
+        "type": "checkout_button",
+        "name": "t:sections.main-cart.blocks.checkout_button.name"
+      },
+      {
+        "type": "discount_code",
+        "name": "t:sections.main-cart.blocks.discount_code.name",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "show_collapsible",
+            "default": true,
+            "label": "t:blocks.all.show_collapsible.label"
+          },
+          {
+            "type": "checkbox",
+            "id": "show_lines",
+            "default": false,
+            "label": "t:sections.all.show_lines.label"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "t:sections.all.labels.heading.label",
+            "info": "t:sections.all.labels.heading.info",
+            "default": "Discount"
+          },
+          {
+            "type": "select",
+            "id": "heading_size",
+            "label": "t:sections.all.size.heading_size.label",
+            "options": [
+              {
+                "value": "default",
+                "label": "t:sections.all.size.options__1.label"
+              },
+              {
+                  "value": "heading_m",
+                  "label": "t:sections.all.size.options__6.label"
+              },
+              {
+                  "value": "heading_m_uppercase",
+                  "label": "t:sections.all.size.options__7.label"
+              },
+              {
+                  "value": "heading_s",
+                  "label": "t:sections.all.size.options__8.label"
+              },
+              {
+                  "value": "heading_s_uppercase",
+                  "label": "t:sections.all.size.options__9.label"
+              },
+              {
+                  "value": "heading_xs",
+                  "label": "t:sections.all.size.options__10.label"
+              },
+              {
+                  "value": "heading_xs_uppercase",
+                  "label": "t:sections.all.size.options__11.label"
+              },
+              {
+                  "value": "body_l",
+                  "label": "t:sections.all.size.options__12.label"
+              },
+              {
+                  "value": "body_l_uppercase",
+                  "label": "t:sections.all.size.options__13.label"
+              },
+              {
+                  "value": "body_m",
+                  "label": "t:sections.all.size.options__14.label"
+              }, 
+              {
+                  "value": "body_m_uppercase",
+                  "label": "t:sections.all.size.options__15.label"
+              }, 
+              {
+                  "value": "body_s",
+                  "label": "t:sections.all.size.options__16.label"
+              }, 
+              {
+                  "value": "body_s_uppercase",
+                  "label": "t:sections.all.size.options__17.label"
+              }, 
+              {
+                  "value": "label_font",
+                  "label": "t:sections.all.size.options__18.label"
+              },
+              {
+                  "value": "label_font_uppercase",
+                  "label": "t:sections.all.size.options__19.label"
+              }
+            ],
+            "default": "default"
+          },
+          {
+            "type": "text",
+            "id": "label",
+            "label": "t:sections.all.labels.label.label"
+          }
+        ]
+      },
+      {
+        "type": "order_note",
+        "name": "t:sections.main-cart.blocks.order_note.name",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "show_collapsible",
+            "default": true,
+            "label": "t:sections.main-cart.blocks.order_note.settings.show_collapsible.label"
+          },
+          {
+            "type": "checkbox",
+            "id": "show_lines",
+            "default": false,
+            "label": "t:sections.all.show_lines.label"
+          },
+          {
+            "type": "text",
+            "id": "order_heading",
+            "label": "t:sections.main-cart.blocks.order_note.settings.order_heading.label",
+            "info": "t:sections.all.labels.heading.info",
+            "default": "Order note"
+          },
+          {
+            "type": "select",
+            "id": "order_heading_size",
+            "label": "t:sections.all.size.heading_size.label",
+            "options": [
+              {
+                "value": "default",
+                "label": "t:sections.all.size.options__1.label"
+              },
+              {
+                  "value": "heading_m",
+                  "label": "t:sections.all.size.options__6.label"
+              },
+              {
+                  "value": "heading_m_uppercase",
+                  "label": "t:sections.all.size.options__7.label"
+              },
+              {
+                  "value": "heading_s",
+                  "label": "t:sections.all.size.options__8.label"
+              },
+              {
+                  "value": "heading_s_uppercase",
+                  "label": "t:sections.all.size.options__9.label"
+              },
+              {
+                  "value": "heading_xs",
+                  "label": "t:sections.all.size.options__10.label"
+              },
+              {
+                  "value": "heading_xs_uppercase",
+                  "label": "t:sections.all.size.options__11.label"
+              },
+              {
+                  "value": "body_l",
+                  "label": "t:sections.all.size.options__12.label"
+              },
+              {
+                  "value": "body_l_uppercase",
+                  "label": "t:sections.all.size.options__13.label"
+              },
+              {
+                  "value": "body_m",
+                  "label": "t:sections.all.size.options__14.label"
+              }, 
+              {
+                  "value": "body_m_uppercase",
+                  "label": "t:sections.all.size.options__15.label"
+              }, 
+              {
+                  "value": "body_s",
+                  "label": "t:sections.all.size.options__16.label"
+              }, 
+              {
+                  "value": "body_s_uppercase",
+                  "label": "t:sections.all.size.options__17.label"
+              }, 
+              {
+                  "value": "label_font",
+                  "label": "t:sections.all.size.options__18.label"
+              },
+              {
+                  "value": "label_font_uppercase",
+                  "label": "t:sections.all.size.options__19.label"
+              }
+            ],
+            "default": "default"
+          },
+          {
+            "type": "text",
+            "id": "order_label",
+            "label": "t:sections.main-cart.blocks.order_note.settings.order_label.label",
+            "default": "Add a note to your order"
+          },
+          {
+            "type": "text",
+            "id": "order_placeholder",
+            "label": "t:sections.main-cart.blocks.order_note.settings.order_placeholder.label",
+            "default": "Write your comment for seller here"
+          }
+        ]
+      },
+      {
+        "type": "shipping_calculator",
+        "name": "t:sections.main-cart.blocks.shipping_calculator.name",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "show_lines",
+            "default": false,
+            "label": "t:sections.all.show_lines.label"
+          },
+          {
+            "type": "text",
+            "id": "shipping_heading",
+            "label": "t:sections.main-cart.blocks.shipping_calculator.settings.shipping_heading.label",
+            "info": "t:sections.all.labels.heading.info",
+            "default": "Estimate shipping"
+          },
+          {
+            "type": "select",
+            "id": "shipping_heading_size",
+            "label": "t:sections.all.size.heading_size.label",
+            "options": [
+              {
+                "value": "default",
+                "label": "t:sections.all.size.options__1.label"
+              },
+              {
+                  "value": "heading_m",
+                  "label": "t:sections.all.size.options__6.label"
+              },
+              {
+                  "value": "heading_m_uppercase",
+                  "label": "t:sections.all.size.options__7.label"
+              },
+              {
+                  "value": "heading_s",
+                  "label": "t:sections.all.size.options__8.label"
+              },
+              {
+                  "value": "heading_s_uppercase",
+                  "label": "t:sections.all.size.options__9.label"
+              },
+              {
+                  "value": "heading_xs",
+                  "label": "t:sections.all.size.options__10.label"
+              },
+              {
+                  "value": "heading_xs_uppercase",
+                  "label": "t:sections.all.size.options__11.label"
+              },
+              {
+                  "value": "body_l",
+                  "label": "t:sections.all.size.options__12.label"
+              },
+              {
+                  "value": "body_l_uppercase",
+                  "label": "t:sections.all.size.options__13.label"
+              },
+              {
+                  "value": "body_m",
+                  "label": "t:sections.all.size.options__14.label"
+              }, 
+              {
+                  "value": "body_m_uppercase",
+                  "label": "t:sections.all.size.options__15.label"
+              }, 
+              {
+                  "value": "body_s",
+                  "label": "t:sections.all.size.options__16.label"
+              }, 
+              {
+                  "value": "body_s_uppercase",
+                  "label": "t:sections.all.size.options__17.label"
+              }, 
+              {
+                  "value": "label_font",
+                  "label": "t:sections.all.size.options__18.label"
+              },
+              {
+                  "value": "label_font_uppercase",
+                  "label": "t:sections.all.size.options__19.label"
+              }
+            ],
+            "default": "default"
+          },
+          {
+            "type": "text",
+            "id": "shipping_country",
+            "label": "t:sections.main-cart.blocks.shipping_calculator.settings.shipping_country.label",
+            "info": "t:sections.main-cart.blocks.shipping_calculator.settings.shipping_country.info",
+            "default": "United States"
+          }
+        ]
+      }
+    ]
+}
+{% endschema %}

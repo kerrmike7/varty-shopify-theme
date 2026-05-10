@@ -1,0 +1,46 @@
+{% if text_settings.text_subheading != blank or text_settings.text_content != blank %}
+    {% liquid
+        assign uppercase_font_subheading = false
+        assign bolder_font_subheading = false
+        assign uppercase_font = false
+        assign bolder_font = false
+        if settings.typography_preset == 'custom' 
+            if text_settings.subheading_size == 'default'
+                if settings.uppercase_body_s
+                        assign uppercase_font_subheading = true
+                endif
+                if settings.bolder_font_body_s
+                        assign bolder_font_subheading = true
+                endif
+            endif  
+            if text_settings.text_size == 'default'
+                if settings.uppercase_body_s
+                        assign uppercase_font = true
+                endif
+                if settings.bolder_font_body_s
+                        assign bolder_font = true
+                endif
+            endif  
+        endif
+    %}
+<div 
+    class="block-{{ for_loop.index }} text__block text__block--{{ text_settings.text_horizontal_alignment }}
+        {% if section_navigation_block %} section-navigation-block {% if settings.enable_drawer_animations %} stagger__item{% endif %}{% endif %} 
+        {% if content_wrapper_block %}{% unless forloop_first %} content-wrapper--block {% endunless %}{% endif %}
+        {% unless mega_drawer %}text__block--{{ section.settings.grid_columns }} text__block--{{ text_settings.block_width }} {% endunless %}
+        {% if mega_drawer and text_settings.show_bottom_line %} full-bottom-line{% endif %}" 
+    style="
+        --text-horizontal-alignment: {{ text_settings.text_horizontal_alignment }}; 
+        --item-index: {{ animated_drawer_item_index | default: for_loop.index }};
+        {% unless mega_drawer %} --text-vertical-alignment: {{ text_settings.text_vertical_alignment }}; --text-font-case: {{ text_settings.text_font_case }}; {% endunless %}
+        {% if mega_drawer %} --spacing: {{ text_settings.top_spacing }}; --mobile-spacing: {{ text_settings.mobile_top_spacing }};{% endif %}" 
+    {{ block_item.shopify_attributes }}
+>
+    <div class="text__container text__container--{{ text_settings.text_horizontal_alignment }} {% if section.settings.color_type == 'custom' %}color-custom{% elsif section.settings.color_type == 'invert' %}color-invert{% endif %} {% if text_settings.use_accent_color %}color-accent{% endif %}">
+        {% if text_settings.text_subheading != blank %}
+            <p class="text__heading text__heading--{{ settings.typography_preset }} {% if text_settings.subheading_size != 'default' %}{{ text_settings.subheading_size }}{% else %}{% if uppercase_font_subheading %} uppercase{% endif %}{% if bolder_font_subheading %} bolder-font{% endif %}{% endif %} subheading {% if settings.dim_text %}dim{% endif %}">{{ text_settings.text_subheading }}</p>
+        {% endif %}
+        <div class="text__content richtext {% if settings.enable_animated_underline %}richtext-link--underline{% endif %} text__content--{{ settings.typography_preset }} {% if text_settings.text_size != 'default' %}{{ text_settings.text_size }}{% else %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}{% endif %}">{{ text_settings.text_content }}</div>
+    </div>
+</div>
+{% endif %}

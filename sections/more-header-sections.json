@@ -1,0 +1,111 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "More header sections",
+  "sections": {
+    "news_drawer_YMrmhD": {
+      "type": "news-drawer",
+      "blocks": {
+        "promo_code_8yWyxk": {
+          "type": "promo_code",
+          "settings": {
+            "image_ratio": "original",
+            "image_radius": "default",
+            "heading": "Get 10$ OFF on your first order",
+            "heading_size": "heading_xs",
+            "text": "",
+            "dim_text": false,
+            "text_size": "body_m",
+            "promo_code": "10-OFF",
+            "top_spacing": 2,
+            "mobile_top_spacing": 2
+          }
+        },
+        "line_7xJd9B": {
+          "type": "line",
+          "settings": {
+            "top_spacing": 2,
+            "mobile_top_spacing": 2
+          }
+        },
+        "text_VC9QNy": {
+          "type": "text",
+          "settings": {
+            "image_ratio": "landscape",
+            "image_radius": "default",
+            "subheading": "Feb 11, 2026",
+            "subheading_size": "default",
+            "heading": "What Is a Functional Drink?",
+            "heading_size": "heading_s",
+            "text": "<p>The beverage world is fizzing with innovation—enter functional beverages like our sparkling cans. These aren't just tasty; they deliver real wellness benefits beyond basic hydration, powering over 50% of the non-alcoholic market.</p>",
+            "dim_text": false,
+            "text_size": "body_s",
+            "button_label": "Keep Reading",
+            "target_blank": false,
+            "button_style": "solid",
+            "top_spacing": 2,
+            "mobile_top_spacing": 2
+          }
+        },
+        "line_WdWmUX": {
+          "type": "line",
+          "settings": {
+            "top_spacing": 2,
+            "mobile_top_spacing": 2
+          }
+        },
+        "products_3zD8Bk": {
+          "type": "products",
+          "settings": {
+            "title": "Hot New",
+            "title_size": "label_font_uppercase",
+            "text": "",
+            "dim_text": false,
+            "text_size": "default",
+            "product_list": [],
+            "image_ratio": "portrait",
+            "focal_point": "center center",
+            "show_vendor": false,
+            "show_price": true,
+            "max_product_name_characters": 100,
+            "enable_color_pills": true,
+            "top_spacing": 2,
+            "mobile_top_spacing": 2
+          }
+        }
+      },
+      "block_order": [
+        "promo_code_8yWyxk",
+        "line_7xJd9B",
+        "text_VC9QNy",
+        "line_WdWmUX",
+        "products_3zD8Bk"
+      ],
+      "name": "t:sections.news-drawer.name",
+      "settings": {
+        "heading": "News & Offers",
+        "heading_size": "label_font_uppercase",
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_gradient": "",
+        "background_color": "#db2828",
+        "text_color": "#fffdf3",
+        "overlay_type": "default",
+        "overlay_color": "#000000",
+        "overlay_opacity": 50,
+        "overlay_background_blur": 0
+      }
+    }
+  },
+  "order": [
+    "news_drawer_YMrmhD"
+  ]
+}

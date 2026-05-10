@@ -1,0 +1,79 @@
+{%- liquid
+  assign section_index = section_index | default: section.index | default: 99
+
+  assign loading_attr = 'lazy'
+  if settings.images_loading == 'disable' and section_index <= 2 
+    assign loading_attr = 'eager'
+  endif
+-%}
+
+{%- if block_or_section.settings.context_image_link != blank -%}
+{%- if double_hover -%}<object class="context-image context-image--{{ block_or_section.id }} {% if content_wrapper_block %}{% unless forloop_first %}content-wrapper--block{% endunless %}{% endif %} ratio-{{ block_or_section.settings.context_image_ratio }}" aria-label="{{ 'general.links.link_to_button_label' | t: label: block_or_section.settings.context_image_link }}" {% if shopify_attributes %}{{ block_or_section.shopify_attributes }}{% endif %}>{%- endif -%}  
+
+<a href="{{ block_or_section.settings.context_image_link }}" {% if block_or_section.settings.context_target_blank %}target="_blank"{% endif %} aria-label="{{ block_or_section.settings.context_image.alt | escape }}" class="context-image context-image--{{ block_or_section.id }} {% if content_wrapper_block %}{% unless forloop_first %}content-wrapper--block{% endunless %}{% endif %} ratio-{{ block_or_section.settings.context_image_ratio }} {% unless block.settings.context_image != blank %}context-image--placeholder{% endunless %} {% if double_hover %}elem-hover{% endif %}" {% if shopify_attributes %}{{ block.shopify_attributes }}{% endif %} {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}>
+{%- else -%}<div class="context-image context-image--{{ block_or_section.id }} {% if content_wrapper_block %}{% unless forloop_first %}content-wrapper--block{% endunless %}{% endif %} ratio-{{ block_or_section.settings.context_image_ratio }} {% unless block_or_section.settings.context_image != blank %}context-image--placeholder{% endunless %}" {% if shopify_attributes %}{{ block_or_section.shopify_attributes }}{% endif %} {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}>
+{%- endif -%}
+  {% style %}
+    .context-image--{{ block_or_section.id }} {
+      --context-image-width: {{ block_or_section.settings.context_image_width }}px;
+      {% if block_or_section.settings.context_image_radius == 'default' %}
+      --context-image-radius: var(--images-and-section-radius);
+      {% else %}
+      --context-image-radius: {%- render 'radius-xxl-then-var', v: block_or_section.settings.context_image_radius -%};
+      {% endif %}
+    }
+    .context-image-container--{{ block_or_section.id }} {
+      display: flex;
+      justify-content: {{ block_or_section.settings.context_image_horizontal_alignment }};
+      align-items: {{ block_or_section.settings.context_image_vertical_alignment }};
+    }
+    .context-image--{{ block_or_section.id }}.ratio-original .lazy-image {
+      aspect-ratio: var(--asp-rat);
+    }
+    
+  {% endstyle %}
+  
+  {%- if block_or_section.settings.context_image != blank -%}
+  {% if settings.images_loading != 'disable' %}
+   <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--asp-rat: {{ block_or_section.settings.context_image.aspect_ratio }};">
+  {% endif %}
+    <img
+    class="context-image__image"
+    srcset="{%- if block_or_section.settings.context_image.width >= 165 -%}{{ block_or_section.settings.context_image | image_url: width: 165 }} 165w,{%- endif -%}
+    {%- if block_or_section.settings.context_image.width >= 375 -%}{{ block_or_section.settings.context_image | image_url: width: 375 }} 375w,{%- endif -%}
+    {%- if block_or_section.settings.context_image.width >= 550 -%}{{ block_or_section.settings.context_image | image_url: width: 550 }} 550w,{%- endif -%}
+    {%- if block_or_section.settings.context_image.width >= 750 -%}{{ block_or_section.settings.context_image | image_url: width: 750 }} 750w,{%- endif -%}
+    {%- if block_or_section.settings.context_image.width >= 1100 -%}{{ block_or_section.settings.context_image | image_url: width: 1100 }} 1100w,{%- endif -%}
+    {%- if block_or_section.settings.context_image.width >= 1500 -%}{{ block_or_section.settings.context_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+    {{ block_or_section.settings.context_image | image_url }} {{ block_or_section.settings.context_image.width }}w"
+    src="{{ block_or_section.settings.context_image | image_url: width: block_or_section.settings.context_image.width }}"
+    sizes="calc({{ block_or_section.settings.context_image_width }}px / 1)"
+    loading="{{ loading_attr }}"
+    draggable="false"
+    alt="{{ block_or_section.settings.context_image.alt | escape }}"
+    style="object-position: {{ block_or_section.settings.context_image.presentation.focal_point }}"
+    {% if settings.images_loading != 'disable' %}
+      onload="this.parentNode.classList.add('lazyloaded');"
+    {% endif %}
+    width="{{ block_or_section.settings.context_image.width }}"
+    height="{{ block_or_section.settings.context_image.width | divided_by: block_or_section.settings.context_image.aspect_ratio | ceil }}">
+  {% if settings.images_loading != 'disable' %}
+      {% if settings.images_loading != 'fade_scale' %}
+      <div class="lazy-image__preloader lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+        <img 
+        alt="{{ block_or_section.settings.context_image.alt | escape }}" 
+        src="{{ block_or_section.settings.context_image | image_url: width: 10 }}"
+        draggable="false"
+        width="10" 
+        height="10">
+      </div>
+      {% endif %}
+  </figure>
+  {% endif %}
+    {%- else -%}
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+  {%- endif -%}
+  {%- if block_or_section.settings.context_image_link != blank -%}
+  </a>{%- if double_hover -%}</object>{%- endif -%}  
+  {%- else -%}</div>
+  {%- endif -%}

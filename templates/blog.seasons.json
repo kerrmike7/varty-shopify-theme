@@ -1,0 +1,66 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-blog": {
+      "type": "main-blog",
+      "blocks": {
+        "e7023741-6210-4c57-99c7-35c69a9be98b": {
+          "type": "title",
+          "settings": {
+            "use_accent_color": false,
+            "title_size": "heading_s_uppercase"
+          }
+        },
+        "16030d84-7fbd-4818-a2d3-442a2ea51a3b": {
+          "type": "info",
+          "settings": {
+            "show_date": false,
+            "show_author": false,
+            "show_number_of_comments": false
+          }
+        },
+        "f92259ef-0a71-4c51-ae7f-7c9e850d0dc9": {
+          "type": "excerpt",
+          "settings": {
+          }
+        },
+        "bd1ff19b-5e70-4f23-8583-e90395baf1e4": {
+          "type": "read_more",
+          "settings": {
+            "button_label": "Read more"
+          }
+        }
+      },
+      "block_order": [
+        "e7023741-6210-4c57-99c7-35c69a9be98b",
+        "16030d84-7fbd-4818-a2d3-442a2ea51a3b",
+        "f92259ef-0a71-4c51-ae7f-7c9e850d0dc9",
+        "bd1ff19b-5e70-4f23-8583-e90395baf1e4"
+      ],
+      "settings": {
+        "show_number_of_posts": false,
+        "enable_filtering_by_tags": true,
+        "posts_per_page": 12,
+        "grid_type": "2",
+        "image_ratio": "original",
+        "focal_point": "center center",
+        "context_image_radius": "default",
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main-blog"
+  ]
+}

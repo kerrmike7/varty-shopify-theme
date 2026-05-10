@@ -1,0 +1,97 @@
+<custom-options class="section-block custom-options custom-options--radio product-form__input {% if block.settings.pills_layout != 'original' %}stretched{% endif %}" style="--spacing: {{ block.settings.top_spacing }};--mobile-spacing: {{ block.settings.mobile_top_spacing }};" {{ block.shopify_attributes }}>
+    {% liquid 
+      assign product_form_id = 'product-form-' | append: section.id
+      assign options = block.settings.options | split: ','
+      assign default_option = ''
+      if settings.show_selected_option
+        for option in options
+            if forloop.first
+                assign default_option = option
+                break
+            endif
+        endfor
+      endif
+    %}
+    {% style %}
+        {% if settings.typography_preset != 'custom' %}
+        .tooltip__icon svg {
+            width: max(16px, var(--fluid-preset-body-s-lh));
+            height: max(16px, var(--fluid-preset-body-s-lh));
+        }
+        {% else %}
+        .tooltip__icon svg {
+            width: max(16px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+            height: max(16px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+        }
+        {% endif %}
+    {% endstyle %}
+    {% if block.settings.option_label != blank %}
+        <p class="form__label  label--{{ settings.typography_preset }}">
+            <tooltip-component class="tooltip form__label-name">
+                <span class="{% if block.settings.label_size != 'default' %}{{ block.settings.label_size }}{% else %}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %}{% endif %} {% if settings.dim_text %}dim{% endif %}">{{ block.settings.option_label }}</span>
+                {% if block.settings.info_tooltip != blank %}
+                    <span class="tooltip__icon{% if settings.dim_text %} tooltip__icon--dim{% endif %}">
+                        {% assign icon_full = 'help' | append: "-" | append: weight_accordion_title %}
+                        {% render 'icon-accordion', icon: icon_full %}
+                        <span class="tooltip__text color__swatch-tooltip--{{ settings.typography_preset }}">{{ block.settings.info_tooltip }}</span>
+                    </span>
+                {% endif %}
+            </tooltip-component>
+            {% if settings.show_selected_option %} 
+                <span class="current-option{% if settings.dim_text %} dim{% endif %} {% if block.settings.label_size != 'default' %}{{ block.settings.label_size }}{% else %}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %}{% endif %}" data-selected-custom-option>&#x2014; {{  default_option }}</span>
+            {% endif %}
+        </p>
+    {% endif %}
+    {% if options.size > 0 %}
+    <div class="form__variants {% if block.settings.pills_layout == 'two' %} form__variants--two-columns {% elsif block.settings.pills_layout == 'three' %} form__variants--three-columns{% endif %}"">
+        {% for option in options %}
+            {% liquid
+                assign swatch_file_extension = 'png'
+                
+                capture color_file_name
+                    render 'filename-normalize', value: option, keep_case: true
+                endcapture
+                assign color_file_name = color_file_name | append: '.' | append: swatch_file_extension
+
+                capture color_value
+                    render 'filename-normalize', value: option
+                endcapture
+
+                assign img_file = images[color_file_name] | downcase
+                assign color_image = images[color_file_name] | split: '/' | last | file_img_url: '248x248' | prepend: 'https:' | split: '?' | first
+                assign color_swatch_fallback = swatch_value
+                assign swatch_config = settings.swatch_config | newline_to_br | split: '<br />'
+                assign color_swatch_fallback = option
+                assign downcased_option_name = option | downcase | lstrip | replace: ' ', '_'
+                for swatch in swatch_config
+                    assign swatch_parts = swatch | strip | split: ':'
+                    assign swatch_name = swatch_parts.first | downcase | lstrip | replace: ' ', '_'
+                    if swatch_name == downcased_option_name
+                        assign swatch_value = swatch_parts.last | strip
+                        if swatch_value contains '#'
+                            assign color_swatch_fallback = swatch_value
+                        endif
+                        break
+                    endif
+                endfor
+            %}
+            <input type="radio" id="{{ block.id }}-{{ block.settings.option_name }}-{{ forloop.index0 }}"
+            name="properties[{{ block.settings.option_name }}]"
+            value="{{ option | escape }}"
+            {% if value.selected or forloop.first %}checked{% endif %}
+            form="{{ product_form_id }}"
+            >
+            <label for="{{ block.id }}-{{ block.settings.option_name }}-{{ forloop.index0 }}"
+            class="color__swatch input--{{ settings.typography_preset }}"
+            style="{% if images[color_file_name] != blank and img_file contains color_value %}--swatch-background: url({{ color_image }}); --swatch-background-color: {{ color_swatch_fallback }};{% else %}--swatch-background: {{ color_swatch_fallback }}; --swatch-background-color: {{ option }};{% endif %}">
+                <span class="color__swatch-dot"></span>
+                {% if block.settings.show_color_name == false %}
+                    <span class="color__swatch-tooltip color__swatch-tooltip--{{ settings.typography_preset }}">{{ option }}</span>
+                {% else %}
+                    <span class="color__swatch-name {% if block.settings.text_size != 'default' %}{{ block.settings.text_size }}{% else %}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %}{% endif %}">{{ option }}</span>
+                {% endif %}
+            </label>
+        {% endfor %}
+    </div>
+    {% endif %}
+</custom-options>

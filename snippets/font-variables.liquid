@@ -1,0 +1,598 @@
+{% style %}
+{% liquid
+  assign fluid_range = 1545
+  assign mob_s = settings.mobile_font_scale | times: 1.0 | divided_by: 100.0
+  assign desk_s = settings.desktop_font_scale | times: 1.0 | divided_by: 100.0
+  assign mob_xlm_fs = 32 | times: mob_s | round | at_least: 12 | at_most: 128
+  assign mob_xlm_lh = 46 | times: mob_s | round | at_least: 16 | at_most: 128
+  assign p_xl_fs_m = mob_xlm_fs
+  assign p_xl_fs_d = 128 | times: desk_s | round | at_least: 12 | at_most: 128
+  assign p_xl_lh_m = mob_xlm_lh
+  assign p_xl_lh_d = 128 | times: desk_s | round | at_least: 16 | at_most: 128
+  assign p_l_fs_m = mob_xlm_fs
+  assign p_l_fs_d = 80 | times: desk_s | round | at_least: 12 | at_most: 128
+  assign p_l_lh_m = mob_xlm_lh
+  assign p_l_lh_d = 96 | times: desk_s | round | at_least: 16 | at_most: 128
+  assign p_m_fs_m = mob_xlm_fs
+  assign p_m_fs_d = 48 | times: desk_s | round | at_least: 12 | at_most: 128
+  assign p_m_lh_m = mob_xlm_lh
+  assign p_m_lh_d = 64 | times: desk_s | round | at_least: 16 | at_most: 128
+  assign p_s_fs_m = 32 | times: mob_s | round | at_least: 12 | at_most: 128
+  assign p_s_fs_d = 32 | times: desk_s | round | at_least: 12 | at_most: 128
+  assign p_s_lh_m = 46 | times: mob_s | round | at_least: 16 | at_most: 128
+  assign p_s_lh_d = 46 | times: desk_s | round | at_least: 16 | at_most: 128
+  assign p_xs_fs_m = 24 | times: mob_s | round | at_least: 12 | at_most: 128
+  assign p_xs_fs_d = 24 | times: desk_s | round | at_least: 12 | at_most: 128
+  assign p_xs_lh_m = 36 | times: mob_s | round | at_least: 16 | at_most: 128
+  assign p_xs_lh_d = 36 | times: desk_s | round | at_least: 16 | at_most: 128
+  assign p_bl_fs_m = 18 | times: mob_s | round | at_least: 12
+  assign p_bl_fs_d = 18 | times: desk_s | round | at_least: 12
+  assign p_bl_lh_m = 28 | times: mob_s | round | at_least: 16
+  assign p_bl_lh_d = 28 | times: desk_s | round | at_least: 16
+  assign p_bm_fs_m = 16 | times: mob_s | round | at_least: 12
+  assign p_bm_fs_d = 16 | times: desk_s | round | at_least: 12
+  assign p_bm_lh_m = 26 | times: mob_s | round | at_least: 16
+  assign p_bm_lh_d = 26 | times: desk_s | round | at_least: 16
+  assign p_bs_fs_m = 14 | times: mob_s | round | at_least: 12
+  assign p_bs_fs_d = 14 | times: desk_s | round | at_least: 12
+  assign p_bs_lh_m = 24 | times: mob_s | round | at_least: 16
+  assign p_bs_lh_d = 24 | times: desk_s | round | at_least: 16
+  assign p_lb_fs_m = 12 | times: mob_s | round | at_least: 12
+  assign p_lb_fs_d = 12 | times: desk_s | round | at_least: 12
+  assign p_lb_lh_m = 16 | times: mob_s | round | at_least: 16
+  assign p_lb_lh_d = 16 | times: desk_s | round | at_least: 16
+  assign ch_fs_m = 24 | times: mob_s | round | at_least: 12
+  assign ch_fs_d = 24 | times: desk_s | round | at_least: 12
+  assign ch_lh_m = 36 | times: mob_s | round | at_least: 16
+  assign ch_lh_d = 36 | times: desk_s | round | at_least: 16
+  assign rating_unit_m = 17 | times: mob_s | divided_by: 10.0 | round: 1
+  assign rating_unit_d = 17 | times: desk_s | divided_by: 10.0 | round: 1
+  assign ui24_m = 24 | times: mob_s | round | at_least: 16
+  assign ui24_d = 24 | times: desk_s | round | at_least: 16
+  assign ui28_m = 28 | times: mob_s | round | at_least: 16
+  assign ui28_d = 28 | times: desk_s | round | at_least: 16
+  assign ui16_m = 16 | times: mob_s | round | at_least: 16
+  assign ui16_d = 16 | times: desk_s | round | at_least: 16
+  assign ui26_m = 26 | times: mob_s | round | at_least: 16
+  assign ui26_d = 26 | times: desk_s | round | at_least: 16
+  assign ui36_m = 36 | times: mob_s | round | at_least: 16
+  assign ui36_d = 36 | times: desk_s | round | at_least: 16
+  if settings.typography_preset == 'custom'
+    assign cxl_m = settings.heading_xl_mobile_size
+    assign cxl_d = settings.heading_xl_desktop_size
+    assign cl_m = settings.heading_l_mobile_size
+    assign cl_d = settings.heading_l_desktop_size
+    assign cm_m = settings.heading_m_mobile_size
+    assign cm_d = settings.heading_m_desktop_size
+    assign cs_m = settings.heading_s_mobile_size
+    assign cs_d = settings.heading_s_desktop_size
+    assign cxs_m = settings.heading_xs_mobile_size
+    assign cxs_d = settings.heading_xs_desktop_size
+    assign cbl_m = settings.body_l_mobile_size
+    assign cbl_d = settings.body_l_desktop_size
+    assign cbm_m = settings.body_m_mobile_size
+    assign cbm_d = settings.body_m_desktop_size
+    assign cbs_m = settings.body_s_mobile_size
+    assign cbs_d = settings.body_s_desktop_size
+    assign clb_m = settings.label_mobile_size
+    assign clb_d = settings.label_desktop_size
+  endif
+%}
+    :root {
+        {% if settings.swap_fonts %}
+          --base-font-family: {{ settings.accent_font.family }}, {{ settings.accent_font.fallback_families }};
+          --base-font-style: {{ settings.accent_font.style }};
+          --base-font-weight: {{ settings.accent_font.weight }};
+          --accent-font-family: {{ settings.base_font.family }}, {{ settings.base_font.fallback_families }};
+          --accent-font-style: {{ settings.base_font.style }};
+          --accent-font-weight: {{ settings.base_font.weight }};
+        {% else %}
+          --base-font-family: {{ settings.base_font.family }}, {{ settings.base_font.fallback_families }};
+          --base-font-style: {{ settings.base_font.style }};
+          --base-font-weight: {{ settings.base_font.weight }};
+          --accent-font-family: {{ settings.accent_font.family }}, {{ settings.accent_font.fallback_families }};
+          --accent-font-style: {{ settings.accent_font.style }};
+          --accent-font-weight: {{ settings.accent_font.weight }};
+        {% endif %}
+        --custom-font-family: {{ settings.custom_font.family }}, {{ settings.custom_font.fallback_families }};
+        --custom-font-style: {{ settings.custom_font.style }};
+        --custom-font-weight: {{ settings.custom_font.weight }};
+
+        --fluid-menu-ui-24: clamp({{ ui24_m | at_most: ui24_d | divided_by: 16.0 | round: 4 }}rem, calc({{ ui24_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ ui24_d | minus: ui24_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ ui24_m | at_least: ui24_d | divided_by: 16.0 | round: 4 }}rem);
+        --fluid-menu-ui-28: clamp({{ ui28_m | at_most: ui28_d | divided_by: 16.0 | round: 4 }}rem, calc({{ ui28_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ ui28_d | minus: ui28_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ ui28_m | at_least: ui28_d | divided_by: 16.0 | round: 4 }}rem);
+        --fluid-menu-ui-16: clamp({{ ui16_m | at_most: ui16_d | divided_by: 16.0 | round: 4 }}rem, calc({{ ui16_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ ui16_d | minus: ui16_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ ui16_m | at_least: ui16_d | divided_by: 16.0 | round: 4 }}rem);
+        --fluid-menu-ui-26: clamp({{ ui26_m | at_most: ui26_d | divided_by: 16.0 | round: 4 }}rem, calc({{ ui26_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ ui26_d | minus: ui26_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ ui26_m | at_least: ui26_d | divided_by: 16.0 | round: 4 }}rem);
+        --fluid-menu-ui-36: clamp({{ ui36_m | at_most: ui36_d | divided_by: 16.0 | round: 4 }}rem, calc({{ ui36_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ ui36_d | minus: ui36_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ ui36_m | at_least: ui36_d | divided_by: 16.0 | round: 4 }}rem);
+
+        {% if settings.typography_preset != 'custom' %}
+        --fluid-preset-xl-fs: clamp({{ p_xl_fs_m | at_most: p_xl_fs_d | divided_by: 16.0 | round: 4 }}rem, calc({{ p_xl_fs_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ p_xl_fs_d | minus: p_xl_fs_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ p_xl_fs_m | at_least: p_xl_fs_d | divided_by: 16.0 | round: 4 }}rem);
+        --fluid-preset-xl-lh: clamp({{ p_xl_lh_m | at_most: p_xl_lh_d | divided_by: 16.0 | round: 4 }}rem, calc({{ p_xl_lh_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ p_xl_lh_d | minus: p_xl_lh_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ p_xl_lh_m | at_least: p_xl_lh_d | divided_by: 16.0 | round: 4 }}rem);
+        --fluid-preset-l-fs: clamp({{ p_l_fs_m | at_most: p_l_fs_d | divided_by: 16.0 | round: 4 }}rem, calc({{ p_l_fs_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ p_l_fs_d | minus: p_l_fs_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ p_l_fs_m | at_least: p_l_fs_d | divided_by: 16.0 | round: 4 }}rem);
+        --fluid-preset-l-lh: clamp({{ p_l_lh_m | at_most: p_l_lh_d | divided_by: 16.0 | round: 4 }}rem, calc({{ p_l_lh_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ p_l_lh_d | minus: p_l_lh_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ p_l_lh_m | at_least: p_l_lh_d | divided_by: 16.0 | round: 4 }}rem);
+        --fluid-preset-m-fs: clamp({{ p_m_fs_m | at_most: p_m_fs_d | divided_by: 16.0 | round: 4 }}rem, calc({{ p_m_fs_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ p_m_fs_d | minus: p_m_fs_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ p_m_fs_m | at_least: p_m_fs_d | divided_by: 16.0 | round: 4 }}rem);
+        --fluid-preset-m-lh: clamp({{ p_m_lh_m | at_most: p_m_lh_d | divided_by: 16.0 | round: 4 }}rem, calc({{ p_m_lh_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ p_m_lh_d | minus: p_m_lh_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ p_m_lh_m | at_least: p_m_lh_d | divided_by: 16.0 | round: 4 }}rem);
+        --fluid-preset-s-fs: clamp({{ p_s_fs_m | at_most: p_s_fs_d | divided_by: 16.0 | round: 4 }}rem, calc({{ p_s_fs_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ p_s_fs_d | minus: p_s_fs_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ p_s_fs_m | at_least: p_s_fs_d | divided_by: 16.0 | round: 4 }}rem);
+        --fluid-preset-s-lh: clamp({{ p_s_lh_m | at_most: p_s_lh_d | divided_by: 16.0 | round: 4 }}rem, calc({{ p_s_lh_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ p_s_lh_d | minus: p_s_lh_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ p_s_lh_m | at_least: p_s_lh_d | divided_by: 16.0 | round: 4 }}rem);
+        --fluid-preset-xs-fs: clamp({{ p_xs_fs_m | at_most: p_xs_fs_d | divided_by: 16.0 | round: 4 }}rem, calc({{ p_xs_fs_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ p_xs_fs_d | minus: p_xs_fs_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ p_xs_fs_m | at_least: p_xs_fs_d | divided_by: 16.0 | round: 4 }}rem);
+        --fluid-preset-xs-lh: clamp({{ p_xs_lh_m | at_most: p_xs_lh_d | divided_by: 16.0 | round: 4 }}rem, calc({{ p_xs_lh_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ p_xs_lh_d | minus: p_xs_lh_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ p_xs_lh_m | at_least: p_xs_lh_d | divided_by: 16.0 | round: 4 }}rem);
+        --fluid-preset-body-l-fs: clamp({{ p_bl_fs_m | at_most: p_bl_fs_d | divided_by: 16.0 | round: 4 }}rem, calc({{ p_bl_fs_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ p_bl_fs_d | minus: p_bl_fs_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ p_bl_fs_m | at_least: p_bl_fs_d | divided_by: 16.0 | round: 4 }}rem);
+        --fluid-preset-body-l-lh: clamp({{ p_bl_lh_m | at_most: p_bl_lh_d | divided_by: 16.0 | round: 4 }}rem, calc({{ p_bl_lh_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ p_bl_lh_d | minus: p_bl_lh_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ p_bl_lh_m | at_least: p_bl_lh_d | divided_by: 16.0 | round: 4 }}rem);
+        --fluid-preset-body-m-fs: clamp({{ p_bm_fs_m | at_most: p_bm_fs_d | divided_by: 16.0 | round: 4 }}rem, calc({{ p_bm_fs_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ p_bm_fs_d | minus: p_bm_fs_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ p_bm_fs_m | at_least: p_bm_fs_d | divided_by: 16.0 | round: 4 }}rem);
+        --fluid-preset-body-m-lh: clamp({{ p_bm_lh_m | at_most: p_bm_lh_d | divided_by: 16.0 | round: 4 }}rem, calc({{ p_bm_lh_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ p_bm_lh_d | minus: p_bm_lh_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ p_bm_lh_m | at_least: p_bm_lh_d | divided_by: 16.0 | round: 4 }}rem);
+        --fluid-preset-body-s-fs: clamp({{ p_bs_fs_m | at_most: p_bs_fs_d | divided_by: 16.0 | round: 4 }}rem, calc({{ p_bs_fs_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ p_bs_fs_d | minus: p_bs_fs_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ p_bs_fs_m | at_least: p_bs_fs_d | divided_by: 16.0 | round: 4 }}rem);
+        --fluid-preset-body-s-lh: clamp({{ p_bs_lh_m | at_most: p_bs_lh_d | divided_by: 16.0 | round: 4 }}rem, calc({{ p_bs_lh_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ p_bs_lh_d | minus: p_bs_lh_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ p_bs_lh_m | at_least: p_bs_lh_d | divided_by: 16.0 | round: 4 }}rem);
+        --fluid-preset-label-fs: clamp({{ p_lb_fs_m | at_most: p_lb_fs_d | divided_by: 16.0 | round: 4 }}rem, calc({{ p_lb_fs_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ p_lb_fs_d | minus: p_lb_fs_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ p_lb_fs_m | at_least: p_lb_fs_d | divided_by: 16.0 | round: 4 }}rem);
+        --fluid-preset-label-lh: clamp({{ p_lb_lh_m | at_most: p_lb_lh_d | divided_by: 16.0 | round: 4 }}rem, calc({{ p_lb_lh_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ p_lb_lh_d | minus: p_lb_lh_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ p_lb_lh_m | at_least: p_lb_lh_d | divided_by: 16.0 | round: 4 }}rem);
+        --fluid-challenge-fs: clamp({{ ch_fs_m | at_most: ch_fs_d | divided_by: 16.0 | round: 4 }}rem, calc({{ ch_fs_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ ch_fs_d | minus: ch_fs_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ ch_fs_m | at_least: ch_fs_d | divided_by: 16.0 | round: 4 }}rem);
+        --fluid-challenge-lh: clamp({{ ch_lh_m | at_most: ch_lh_d | divided_by: 16.0 | round: 4 }}rem, calc({{ ch_lh_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ ch_lh_d | minus: ch_lh_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ ch_lh_m | at_least: ch_lh_d | divided_by: 16.0 | round: 4 }}rem);
+        --fluid-rating-star: clamp({{ rating_unit_m | at_most: rating_unit_d }}, calc({{ rating_unit_m }} + (min(100vw, 1920px) - 375px) / {{ fluid_range }}px * ({{ rating_unit_d | minus: rating_unit_m }})), {{ rating_unit_m | at_least: rating_unit_d }});
+        --base-heading-xl-font: var(--base-font-style) var(--base-font-weight) var(--fluid-preset-xl-fs) / var(--fluid-preset-xl-lh) var(--base-font-family);
+        --base-heading-l-font: var(--base-font-style) var(--base-font-weight) var(--fluid-preset-l-fs) / var(--fluid-preset-l-lh) var(--base-font-family);
+        --base-heading-m-font: var(--base-font-style) var(--base-font-weight) var(--fluid-preset-m-fs) / var(--fluid-preset-m-lh) var(--base-font-family);
+        --base-heading-s-font: var(--base-font-style) var(--base-font-weight) var(--fluid-preset-s-fs) / var(--fluid-preset-s-lh) var(--base-font-family);
+        --base-heading-xs-font: var(--base-font-style) var(--base-font-weight) var(--fluid-preset-xs-fs) / var(--fluid-preset-xs-lh) var(--base-font-family);
+        --base-body-l-font: var(--base-font-style) var(--base-font-weight) var(--fluid-preset-body-l-fs) / var(--fluid-preset-body-l-lh) var(--base-font-family);
+        --base-body-m-font: var(--base-font-style) var(--base-font-weight) var(--fluid-preset-body-m-fs) / var(--fluid-preset-body-m-lh) var(--base-font-family);
+        --base-body-s-font: var(--base-font-style) var(--base-font-weight) var(--fluid-preset-body-s-fs) / var(--fluid-preset-body-s-lh) var(--base-font-family);
+        --base-label-font: var(--base-font-style) var(--base-font-weight) var(--fluid-preset-label-fs) / var(--fluid-preset-label-lh) var(--base-font-family);
+        --accent-heading-xl-font: var(--accent-font-style) var(--accent-font-weight) var(--fluid-preset-xl-fs) / var(--fluid-preset-xl-lh) var(--accent-font-family);
+        --accent-heading-l-font: var(--accent-font-style) var(--accent-font-weight) var(--fluid-preset-l-fs) / var(--fluid-preset-l-lh) var(--accent-font-family);
+        --accent-heading-m-font: var(--accent-font-style) var(--accent-font-weight) var(--fluid-preset-m-fs) / var(--fluid-preset-m-lh) var(--accent-font-family);
+        --accent-heading-s-font: var(--accent-font-style) var(--accent-font-weight) var(--fluid-preset-s-fs) / var(--fluid-preset-s-lh) var(--accent-font-family);
+        --accent-heading-xs-font: var(--accent-font-style) var(--accent-font-weight) var(--fluid-preset-xs-fs) / var(--fluid-preset-xs-lh) var(--accent-font-family);
+        --accent-body-l-font: var(--accent-font-style) var(--accent-font-weight) var(--fluid-preset-body-l-fs) / var(--fluid-preset-body-l-lh) var(--accent-font-family);
+        --accent-body-m-font: var(--accent-font-style) var(--accent-font-weight) var(--fluid-preset-body-m-fs) / var(--fluid-preset-body-m-lh) var(--accent-font-family);
+        --accent-body-s-font: var(--accent-font-style) var(--accent-font-weight) var(--fluid-preset-body-s-fs) / var(--fluid-preset-body-s-lh) var(--accent-font-family);
+        --accent-label-font: var(--accent-font-style) var(--accent-font-weight) var(--fluid-preset-label-fs) / var(--fluid-preset-label-lh) var(--accent-font-family);
+
+        --menu-ic-xl: var(--fluid-preset-xl-lh);
+        --menu-ic-l: var(--fluid-preset-l-lh);
+        --menu-ic-m: var(--fluid-preset-m-lh);
+        --menu-ic-s: var(--fluid-preset-s-lh);
+        --menu-ic-xs: var(--fluid-preset-xs-lh);
+        --menu-ic-bl: var(--fluid-preset-body-l-lh);
+        --menu-ic-bm: var(--fluid-preset-body-m-lh);
+        --menu-ic-bs: var(--fluid-preset-body-s-lh);
+        --menu-ic-lb: var(--fluid-preset-label-lh);
+        --menu-dd-xl1-fs: var(--fluid-preset-l-fs);
+        --menu-dd-xl1-lh: var(--fluid-preset-l-lh);
+        --menu-dd-xl2-fs: var(--fluid-preset-m-fs);
+        --menu-dd-xl2-lh: var(--fluid-preset-m-lh);
+        --menu-dd-l2-fs: var(--fluid-preset-s-fs);
+        --menu-dd-l2-lh: var(--fluid-preset-s-lh);
+        --menu-dd-m2-fs: var(--fluid-preset-xs-fs);
+        --menu-dd-m2-lh: var(--fluid-preset-xs-lh);
+        --menu-dd-s2-fs: var(--fluid-preset-body-l-fs);
+        --menu-dd-s2-lh: var(--fluid-preset-body-l-lh);
+        --menu-dd-xs2-fs: var(--fluid-preset-body-m-fs);
+        --menu-dd-xs2-lh: var(--fluid-preset-body-m-lh);
+        --menu-dd-bm2-fs: var(--fluid-preset-body-s-fs);
+        --menu-dd-bm2-lh: var(--fluid-preset-body-s-lh);
+        --menu-dd-lb-fs: var(--fluid-preset-label-fs);
+        --menu-dd-lb-lh: var(--fluid-preset-label-lh);
+
+        {% else %}
+          --heading-xl-font-size: clamp({{ cxl_m | at_most: cxl_d | divided_by: 16.0 | round: 4 }}rem, calc({{ cxl_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ cxl_d | minus: cxl_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ cxl_m | at_least: cxl_d | divided_by: 16.0 | round: 4 }}rem);
+          --heading-xl-line-height: {{ settings.heading_xl_line_height }};
+          --heading-xl-letter-spacing: {{ settings.heading_xl_letter_spacing | divided_by: 1000.0 }}em;
+          --heading-l-font-size: clamp({{ cl_m | at_most: cl_d | divided_by: 16.0 | round: 4 }}rem, calc({{ cl_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ cl_d | minus: cl_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ cl_m | at_least: cl_d | divided_by: 16.0 | round: 4 }}rem);
+          --heading-l-line-height: {{ settings.heading_l_line_height }};
+          --heading-l-letter-spacing: {{ settings.heading_l_letter_spacing | divided_by: 1000.0 }}em;
+          --heading-m-font-size: clamp({{ cm_m | at_most: cm_d | divided_by: 16.0 | round: 4 }}rem, calc({{ cm_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ cm_d | minus: cm_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ cm_m | at_least: cm_d | divided_by: 16.0 | round: 4 }}rem);
+          --heading-m-line-height: {{ settings.heading_m_line_height }};
+          --heading-m-letter-spacing: {{ settings.heading_m_letter_spacing | divided_by: 1000.0 }}em;
+          --heading-s-font-size: clamp({{ cs_m | at_most: cs_d | divided_by: 16.0 | round: 4 }}rem, calc({{ cs_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ cs_d | minus: cs_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ cs_m | at_least: cs_d | divided_by: 16.0 | round: 4 }}rem);
+          --heading-s-line-height: {{ settings.heading_s_line_height }};
+          --heading-s-letter-spacing: {{ settings.heading_s_letter_spacing | divided_by: 1000.0 }}em;
+          --heading-xs-font-size: clamp({{ cxs_m | at_most: cxs_d | divided_by: 16.0 | round: 4 }}rem, calc({{ cxs_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ cxs_d | minus: cxs_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ cxs_m | at_least: cxs_d | divided_by: 16.0 | round: 4 }}rem);
+          --heading-xs-line-height: {{ settings.heading_xs_line_height }};
+          --heading-xs-letter-spacing: {{ settings.heading_xs_letter_spacing | divided_by: 1000.0 }}em;
+          --body-l-font-size: clamp({{ cbl_m | at_most: cbl_d | divided_by: 16.0 | round: 4 }}rem, calc({{ cbl_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ cbl_d | minus: cbl_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ cbl_m | at_least: cbl_d | divided_by: 16.0 | round: 4 }}rem);
+          --body-l-line-height: {{ settings.body_l_line_height }};
+          --body-l-letter-spacing: {{ settings.body_l_letter_spacing | divided_by: 1000.0 }}em;
+          --body-m-font-size: clamp({{ cbm_m | at_most: cbm_d | divided_by: 16.0 | round: 4 }}rem, calc({{ cbm_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ cbm_d | minus: cbm_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ cbm_m | at_least: cbm_d | divided_by: 16.0 | round: 4 }}rem);
+          --body-m-line-height: {{ settings.body_m_line_height }};
+          --body-m-letter-spacing: {{ settings.body_m_letter_spacing | divided_by: 1000.0 }}em;
+          --body-s-font-size: clamp({{ cbs_m | at_most: cbs_d | divided_by: 16.0 | round: 4 }}rem, calc({{ cbs_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ cbs_d | minus: cbs_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ cbs_m | at_least: cbs_d | divided_by: 16.0 | round: 4 }}rem);
+          --body-s-line-height: {{ settings.body_s_line_height }};
+          --body-s-letter-spacing: {{ settings.body_s_letter_spacing | divided_by: 1000.0 }}em;
+          --label-font-size: clamp({{ clb_m | at_most: clb_d | divided_by: 16.0 | round: 4 }}rem, calc({{ clb_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ clb_d | minus: clb_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ clb_m | at_least: clb_d | divided_by: 16.0 | round: 4 }}rem);
+          --label-line-height: {{ settings.label_line_height }};
+          --label-letter-spacing: {{ settings.label_letter_spacing | divided_by: 1000.0 }}em;
+          --fluid-challenge-fs: clamp({{ cxs_m | at_most: cxs_d | divided_by: 16.0 | round: 4 }}rem, calc({{ cxs_m | divided_by: 16.0 | round: 4 }}rem + (min(100vw, 1920px) - 375px) * ({{ cxs_d | minus: cxs_m }}) / {{ fluid_range | times: 16 }}px * 1rem), {{ cxs_m | at_least: cxs_d | divided_by: 16.0 | round: 4 }}rem);
+          --fluid-challenge-lh: calc(var(--fluid-challenge-fs) * {{ settings.heading_xs_line_height }});
+          --fluid-rating-star: clamp({{ rating_unit_m | at_most: rating_unit_d }}, calc({{ rating_unit_m }} + (min(100vw, 1920px) - 375px) / {{ fluid_range }}px * ({{ rating_unit_d | minus: rating_unit_m }})), {{ rating_unit_m | at_least: rating_unit_d }});
+
+          --menu-ic-xl: calc(var(--heading-xl-font-size) * var(--heading-xl-line-height));
+          --menu-ic-l: calc(var(--heading-l-font-size) * var(--heading-l-line-height));
+          --menu-ic-m: calc(var(--heading-m-font-size) * var(--heading-m-line-height));
+          --menu-ic-s: calc(var(--heading-s-font-size) * var(--heading-s-line-height));
+          --menu-ic-xs: calc(var(--heading-xs-font-size) * var(--heading-xs-line-height));
+          --menu-ic-bl: calc(var(--body-l-font-size) * var(--body-l-line-height));
+          --menu-ic-bm: calc(var(--body-m-font-size) * var(--body-m-line-height));
+          --menu-ic-bs: calc(var(--body-s-font-size) * var(--body-s-line-height));
+          --menu-ic-lb: calc(var(--label-font-size) * var(--label-line-height));
+          --menu-dd-xl1-fs: var(--heading-l-font-size);
+          --menu-dd-xl1-lh: var(--heading-l-line-height);
+          --menu-dd-xl2-fs: var(--heading-m-font-size);
+          --menu-dd-xl2-lh: var(--heading-m-line-height);
+          --menu-dd-l2-fs: var(--heading-s-font-size);
+          --menu-dd-l2-lh: var(--heading-s-line-height);
+          --menu-dd-m2-fs: var(--heading-xs-font-size);
+          --menu-dd-m2-lh: var(--heading-xs-line-height);
+          --menu-dd-s2-fs: var(--body-l-font-size);
+          --menu-dd-s2-lh: var(--body-l-line-height);
+          --menu-dd-xs2-fs: var(--body-m-font-size);
+          --menu-dd-xs2-lh: var(--body-m-line-height);
+          --menu-dd-bm2-fs: var(--body-s-font-size);
+          --menu-dd-bm2-lh: var(--body-s-line-height);
+          --menu-dd-lb-fs: var(--label-font-size);
+          --menu-dd-lb-lh: var(--label-line-height);
+
+          {% if settings.font_heading_xl == 'base' %}
+            --heading-xl-font: var(--base-font-style) var(--base-font-weight) var(--heading-xl-font-size)/var(--heading-xl-line-height) var(--base-font-family);
+          {% elsif settings.font_heading_xl == 'accent' %}
+            --heading-xl-font: var(--accent-font-style) var(--accent-font-weight) var(--heading-xl-font-size)/var(--heading-xl-line-height) var(--accent-font-family);
+          {% elsif settings.font_heading_xl == 'secondary' %}
+            --heading-xl-font: var(--custom-font-style) var(--custom-font-weight) var(--heading-xl-font-size)/var(--heading-xl-line-height) var(--custom-font-family);
+          {% endif %}
+          {% if settings.font_heading_l == 'base' %}
+            --heading-l-font: var(--base-font-style) var(--base-font-weight) var(--heading-l-font-size)/var(--heading-l-line-height) var(--base-font-family);
+          {% elsif settings.font_heading_l == 'accent' %}
+            --heading-l-font: var(--accent-font-style) var(--accent-font-weight) var(--heading-l-font-size)/var(--heading-l-line-height) var(--accent-font-family);
+          {% elsif settings.font_heading_l == 'secondary' %}
+            --heading-l-font: var(--custom-font-style) var(--custom-font-weight) var(--heading-l-font-size)/var(--heading-l-line-height) var(--custom-font-family);
+          {% endif %}
+          {% if settings.font_heading_m == 'base' %}
+            --heading-m-font: var(--base-font-style) var(--base-font-weight) var(--heading-m-font-size)/var(--heading-m-line-height) var(--base-font-family);
+          {% elsif settings.font_heading_m == 'accent' %}
+            --heading-m-font: var(--accent-font-style) var(--accent-font-weight) var(--heading-m-font-size)/var(--heading-m-line-height) var(--accent-font-family);
+          {% elsif settings.font_heading_m == 'secondary' %}
+            --heading-m-font: var(--custom-font-style) var(--custom-font-weight) var(--heading-m-font-size)/var(--heading-m-line-height) var(--custom-font-family);
+          {% endif %}
+          {% if settings.font_heading_s == 'base' %}
+            --heading-s-font: var(--base-font-style) var(--base-font-weight) var(--heading-s-font-size)/var(--heading-s-line-height) var(--base-font-family);
+          {% elsif settings.font_heading_s == 'accent' %}
+            --heading-s-font: var(--accent-font-style) var(--accent-font-weight) var(--heading-s-font-size)/var(--heading-s-line-height) var(--accent-font-family);
+          {% elsif settings.font_heading_s == 'secondary' %}
+            --heading-s-font: var(--custom-font-style) var(--custom-font-weight) var(--heading-s-font-size)/var(--heading-s-line-height) var(--custom-font-family);
+          {% endif %}
+          {% if settings.font_heading_xs == 'base' %}
+            --heading-xs-font: var(--base-font-style) var(--base-font-weight) var(--heading-xs-font-size)/var(--heading-xs-line-height) var(--base-font-family);
+          {% elsif settings.font_heading_xs == 'accent' %}
+            --heading-xs-font: var(--accent-font-style) var(--accent-font-weight) var(--heading-xs-font-size)/var(--heading-xs-line-height) var(--accent-font-family);
+          {% elsif settings.font_heading_xs == 'secondary' %}
+            --heading-xs-font: var(--custom-font-style) var(--custom-font-weight) var(--heading-xs-font-size)/var(--heading-xs-line-height) var(--custom-font-family);
+          {% endif %}
+          {% if settings.font_body_l == 'base' %}
+            --body-l-font: var(--base-font-style) var(--base-font-weight) var(--body-l-font-size)/var(--body-l-line-height) var(--base-font-family);
+          {% elsif settings.font_body_l == 'accent' %}
+            --body-l-font: var(--accent-font-style) var(--accent-font-weight) var(--body-l-font-size)/var(--body-l-line-height) var(--accent-font-family);
+          {% elsif settings.font_body_l == 'secondary' %}
+            --body-l-font: var(--custom-font-style) var(--custom-font-weight) var(--body-l-font-size)/var(--body-l-line-height) var(--custom-font-family);
+          {% endif %}
+          {% if settings.font_body_m == 'base' %}
+            --body-m-font: var(--base-font-style) var(--base-font-weight) var(--body-m-font-size)/var(--body-m-line-height) var(--base-font-family);
+          {% elsif settings.font_body_m == 'accent' %}
+            --body-m-font: var(--accent-font-style) var(--accent-font-weight) var(--body-m-font-size)/var(--body-m-line-height) var(--accent-font-family);
+          {% elsif settings.font_body_m == 'secondary' %}
+            --body-m-font: var(--custom-font-style) var(--custom-font-weight) var(--body-m-font-size)/var(--body-m-line-height) var(--custom-font-family);
+          {% endif %}
+          {% if settings.font_body_s == 'base' %}
+            --body-s-font: var(--base-font-style) var(--base-font-weight) var(--body-s-font-size)/var(--body-s-line-height) var(--base-font-family);
+          {% elsif settings.font_body_s == 'accent' %}
+            --body-s-font: var(--accent-font-style) var(--accent-font-weight) var(--body-s-font-size)/var(--body-s-line-height) var(--accent-font-family);
+          {% elsif settings.font_body_s == 'secondary' %}
+            --body-s-font: var(--custom-font-style) var(--custom-font-weight) var(--body-s-font-size)/var(--body-s-line-height) var(--custom-font-family);
+          {% endif %}
+          {% if settings.font_label == 'base' %}
+            --label-font: var(--base-font-style) var(--base-font-weight) var(--label-font-size)/var(--label-line-height) var(--base-font-family);
+          {% elsif settings.font_label == 'accent' %}
+            --label-font: var(--accent-font-style) var(--accent-font-weight) var(--label-font-size)/var(--label-line-height) var(--accent-font-family);
+          {% elsif settings.font_label == 'secondary' %}
+            --label-font: var(--custom-font-style) var(--custom-font-weight) var(--label-font-size)/var(--label-line-height) var(--custom-font-family);
+          {% endif %}
+        {% endif %}
+    }
+
+    {% if settings.typography_preset != 'custom' %}
+      .rating-star {
+          --font-size: var(--fluid-rating-star);
+      }
+
+      .shopify-challenge__message {
+          font-size: var(--fluid-challenge-fs);
+          line-height: var(--fluid-challenge-lh);
+      }
+
+      .heading_xl {
+          font-size: var(--fluid-preset-xl-fs) !important;
+          line-height: var(--fluid-preset-xl-lh) !important;
+          letter-spacing: -0.02em;
+          text-transform: none !important;
+      }
+      .heading_xl_uppercase {
+          font-size: var(--fluid-preset-xl-fs) !important;
+          line-height: var(--fluid-preset-xl-lh) !important;
+          letter-spacing: -0.02em !important;
+          text-transform: uppercase !important;
+      }
+      .heading_l {
+          font-size: var(--fluid-preset-l-fs) !important;
+          line-height: var(--fluid-preset-l-lh) !important;
+          letter-spacing: -0.02em !important;
+          text-transform: none !important;
+      }
+      .heading_l_uppercase {
+          font-size: var(--fluid-preset-l-fs) !important;
+          line-height: var(--fluid-preset-l-lh) !important;
+          letter-spacing: -0.02em !important;
+          text-transform: uppercase !important;
+      }
+      .heading_m {
+          font-size: var(--fluid-preset-m-fs) !important;
+          line-height: var(--fluid-preset-m-lh) !important;
+          letter-spacing: -0.01em !important;
+          text-transform: none !important;
+      }
+      .heading_m_uppercase {
+          font-size: var(--fluid-preset-m-fs) !important;
+          line-height: var(--fluid-preset-m-lh) !important;
+          letter-spacing: -0.01em !important;
+          text-transform: uppercase !important;
+      }
+      @media screen and (max-width: 768px) {
+          .heading_xl,
+          .heading_l,
+          .heading_m,
+          .heading_xl_uppercase,
+          .heading_l_uppercase,
+          .heading_m_uppercase {
+              letter-spacing: normal !important;
+          }
+      }
+      .heading_s {
+          font-size: var(--fluid-preset-s-fs) !important;
+          line-height: var(--fluid-preset-s-lh) !important;
+          text-transform: none !important;
+          letter-spacing: normal !important;
+      }
+      .heading_s_uppercase {
+          font-size: var(--fluid-preset-s-fs) !important;
+          line-height: var(--fluid-preset-s-lh) !important;
+          text-transform: uppercase !important;
+          letter-spacing: normal !important;
+      }
+      .heading_xs {
+          font-size: var(--fluid-preset-xs-fs) !important;
+          line-height: var(--fluid-preset-xs-lh) !important;
+          text-transform: none !important;
+          letter-spacing: normal !important;
+      }
+      .heading_xs_uppercase {
+          font-size: var(--fluid-preset-xs-fs) !important;
+          line-height: var(--fluid-preset-xs-lh) !important;
+          text-transform: uppercase !important;
+          letter-spacing: normal !important;
+      }
+      .body_l {
+          font-size: var(--fluid-preset-body-l-fs) !important;
+          line-height: var(--fluid-preset-body-l-lh) !important;
+          text-transform: none !important;
+          letter-spacing: normal !important;
+      }
+      .body_l_uppercase {
+          font-size: var(--fluid-preset-body-l-fs) !important;
+          line-height: var(--fluid-preset-body-l-lh) !important;
+          letter-spacing: 0.02em !important;
+          text-transform: uppercase !important;
+      }
+      .body_m {
+          font-size: var(--fluid-preset-body-m-fs) !important;
+          line-height: var(--fluid-preset-body-m-lh) !important;
+          text-transform: none !important;
+          letter-spacing: normal !important;
+      }
+      .body_m_uppercase {
+          font-size: var(--fluid-preset-body-m-fs) !important;
+          line-height: var(--fluid-preset-body-m-lh) !important;
+          letter-spacing: 0.02em !important;
+          text-transform: uppercase !important;
+      }
+      .body_s {
+          font-size: var(--fluid-preset-body-s-fs) !important;
+          line-height: var(--fluid-preset-body-s-lh) !important;
+          text-transform: none !important;
+          letter-spacing: normal !important;
+      }
+      .body_s_uppercase {
+          font-size: var(--fluid-preset-body-s-fs) !important;
+          line-height: var(--fluid-preset-body-s-lh) !important;
+          letter-spacing: 0.02em !important;
+          text-transform: uppercase !important;
+      }
+      .label_font {
+          font-size: var(--fluid-preset-label-fs) !important;
+          line-height: var(--fluid-preset-label-lh) !important;
+          text-transform: none !important;
+          letter-spacing: normal !important;
+      }
+      .label_font_uppercase {
+          font-size: var(--fluid-preset-label-fs) !important;
+          line-height: var(--fluid-preset-label-lh) !important;
+          letter-spacing: 0.02em !important;
+          text-transform: uppercase !important;
+      }
+    {% else %}
+      .rating-star {
+        --font-size: var(--fluid-rating-star);
+      }
+      .shopify-challenge__message {
+        font-size: var(--fluid-challenge-fs);
+        line-height: var(--fluid-challenge-lh);
+      }
+      .heading_xl,
+      .heading_xl .price-inside-button .price--custom {
+        font: var(--heading-xl-font) !important;
+        letter-spacing: var(--heading-xl-letter-spacing) !important;
+        text-transform: none !important;
+        {% if settings.bolder_font_heading_xl %}
+          font-weight: bold !important;
+        {% endif %}
+      }
+      .heading_xl_uppercase,
+      .heading_xl_uppercase .price-inside-button .price--custom {
+        font: var(--heading-xl-font) !important;
+        letter-spacing: var(--heading-xl-letter-spacing) !important;
+        text-transform: uppercase !important;
+        {% if settings.bolder_font_heading_xl %}
+          font-weight: bold !important;
+        {% endif %}
+      }
+      .heading_l,
+      .heading_l .price-inside-button .price--custom {
+        font: var(--heading-l-font) !important;
+        letter-spacing: var(--heading-l-letter-spacing) !important;
+        text-transform: none !important;
+        {% if settings.bolder_font_heading_l %}
+          font-weight: bold !important;
+        {% endif %}
+      }
+      .heading_l_uppercase,
+      .heading_l_uppercase .price-inside-button .price--custom {
+        font: var(--heading-l-font) !important;
+        letter-spacing: var(--heading-l-letter-spacing) !important;
+        text-transform: uppercase !important;
+        {% if settings.bolder_font_heading_l %}
+          font-weight: bold !important;
+        {% endif %}
+      }
+      .heading_m,
+      .heading_m .price-inside-button .price--custom {
+        font: var(--heading-m-font) !important;
+        letter-spacing: var(--heading-m-letter-spacing) !important;
+        text-transform: none !important;
+        {% if settings.bolder_font_heading_m %}
+          font-weight: bold !important;
+        {% endif %}
+      }
+      .heading_m_uppercase,
+      .heading_m_uppercase .price-inside-button .price--custom {
+        font: var(--heading-m-font) !important;
+        letter-spacing: var(--heading-m-letter-spacing) !important;
+        text-transform: uppercase !important;
+        {% if settings.bolder_font_heading_m %}
+          font-weight: bold !important;
+        {% endif %}
+      }
+      .heading_s,
+      .heading_s .price-inside-button .price--custom {
+        font: var(--heading-s-font) !important;
+        letter-spacing: var(--heading-s-letter-spacing) !important;
+        text-transform: none !important;
+        {% if settings.bolder_font_heading_s %}
+          font-weight: bold !important;
+        {% endif %}
+      }
+      .heading_s_uppercase,
+      .heading_s_uppercase .price-inside-button .price--custom {
+        font: var(--heading-s-font) !important;
+        letter-spacing: var(--heading-s-letter-spacing) !important;
+        text-transform: uppercase !important;
+        {% if settings.bolder_font_heading_s %}
+          font-weight: bold !important;
+        {% endif %}
+      }
+      .heading_xs,
+      .heading_xs .price-inside-button .price--custom {
+        font: var(--heading-xs-font) !important;
+        letter-spacing: var(--heading-xs-letter-spacing) !important;
+        text-transform: none !important;
+        {% if settings.bolder_font_heading_xs %}
+          font-weight: bold !important;
+        {% endif %}
+      }
+      .heading_xs_uppercase,
+      .heading_xs_uppercase .price-inside-button .price--custom {
+        font: var(--heading-xs-font) !important;
+        letter-spacing: var(--heading-xs-letter-spacing) !important;
+        text-transform: uppercase !important;
+        {% if settings.bolder_font_heading_xs %}
+          font-weight: bold !important;
+        {% endif %}
+      }
+      .body_l,
+      .body_l .price-inside-button .price--custom {
+        font: var(--body-l-font) !important;
+        letter-spacing: var(--body-l-letter-spacing) !important;
+        text-transform: none !important;
+        {% if settings.bolder_font_body_l %}
+          font-weight: bold !important;
+        {% endif %}
+      }
+      .body_l_uppercase,
+      .body_l_uppercase .price-inside-button .price--custom {
+        font: var(--body-l-font) !important;
+        letter-spacing: var(--body-l-letter-spacing) !important;
+        text-transform: uppercase !important;
+        {% if settings.bolder_font_body_l %}
+          font-weight: bold !important;
+        {% endif %}
+      }
+      .body_m,
+      .body_m .price-inside-button .price--custom {
+        font: var(--body-m-font) !important;
+        letter-spacing: var(--body-m-letter-spacing) !important;
+        text-transform: none !important;
+        {% if settings.bolder_font_body_m %}
+          font-weight: bold !important;
+        {% endif %}
+      }
+      .body_m_uppercase,
+      .body_m_uppercase .price-inside-button .price--custom {
+        font: var(--body-m-font) !important;
+        letter-spacing: var(--body-m-letter-spacing) !important;
+        text-transform: uppercase !important;
+        {% if settings.bolder_font_body_m %}
+          font-weight: bold !important;
+        {% endif %}
+      }
+      .body_s,
+      .body_s .price-inside-button .price--custom {
+        font: var(--body-s-font) !important;
+        letter-spacing: var(--body-s-letter-spacing) !important;
+        text-transform: none !important;
+        {% if settings.bolder_font_body_s %}
+          font-weight: bold !important;
+        {% endif %}
+      }
+      .body_s_uppercase,
+      .body_s_uppercase .price-inside-button .price--custom {
+        font: var(--body-s-font) !important;
+        letter-spacing: var(--body-s-letter-spacing) !important;
+        text-transform: uppercase !important;
+        {% if settings.bolder_font_body_s %}
+          font-weight: bold !important;
+        {% endif %}
+      }
+      .label_font,
+      .label_font .price-inside-button .price--custom {
+        font: var(--label-font) !important;
+        letter-spacing: var(--label-letter-spacing) !important;
+        text-transform: none !important;
+        {% if settings.bolder_font_label %}
+          font-weight: bold !important;
+        {% endif %}
+      }
+      .label_font_uppercase,
+      .label_font_uppercase .price-inside-button .price--custom {
+        font: var(--label-font) !important;
+        letter-spacing: var(--label-letter-spacing) !important;
+        text-transform: uppercase !important;
+        {% if settings.bolder_font_label %}
+          font-weight: bold !important;
+        {% endif %}
+      }
+    {% endif %}
+
+{% endstyle %}

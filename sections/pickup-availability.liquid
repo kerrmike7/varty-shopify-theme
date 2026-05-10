@@ -1,0 +1,133 @@
+{%- liquid 
+  if settings.typography_preset == 'avant_garde'
+    assign close_weight = settings.accent_icon_weight
+    if settings.swap_fonts
+            assign close_weight = settings.base_icon_weight
+    endif
+  else 
+    assign close_weight =  settings.base_icon_weight
+    if settings.swap_fonts
+        assign close_weight = settings.accent_icon_weight
+    endif
+  endif
+  if settings.typography_preset == 'custom'
+      assign close_weight = settings.custom_icon_weight
+  endif
+-%}
+{%- assign pick_up_availabilities = product_variant.store_availabilities | where: 'pick_up_enabled', true -%}
+{%- if pick_up_availabilities.size > 0 -%}
+  <pickup-availability-preview class="pickup-availability-preview">
+    {%- liquid
+      assign current_store = cart.attributes['store']
+
+      if current_store != blank
+        assign current_store_availability = nil
+        for availability in pick_up_availabilities 
+          if availability.location.name == current_store 
+            assign current_store_availability = availability 
+            break
+          endif 
+        endfor
+      endif
+
+      assign closest_location_availability = pick_up_availabilities.first
+
+      if current_store_availability.available and current_store_availability.pick_up_enabled
+        assign location_availability = current_store_availability
+      elsif closest_location_availability.available and closest_location_availability.pick_up_enabled
+        assign location_availability = closest_location_availability
+      else
+        assign location_availability = current_store_availability
+      endif
+    -%}
+
+    <div class="pickup-availability-info no-default-color">
+      {%- if location_availability.available -%}
+        <p class="pickup-caption-large caption-large--available pickup-caption-large--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_label %} uppercase{% endif %}{% if settings.bolder_font_label %} bolder-font{% endif %}{% endif %}">
+          {{- 'products.product.pickup_availability.pick_up_available_at_html' | t: location_name: location_availability.location.name -}}
+        </p>
+        <p class="caption pickup-caption--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_label %} uppercase{% endif %}{% if settings.bolder_font_label %} bolder-font{% endif %}{% endif %} {% if settings.dim_text %}dim{% endif %}">
+          {{ location_availability.pick_up_time }}
+        </p>
+        <button id="ShowPickupAvailabilityDrawer" 
+          class="link-button pickup-availability-button pickup-caption--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_label %} uppercase{% endif %}{% if settings.bolder_font_label %} bolder-font{% endif %}{% endif %} {% if settings.dim_text %}dim{% endif %} {% if settings.enable_animated_underline %}link-button--underline{% endif %}" 
+          aria-haspopup="dialog">
+          {%- if pick_up_availabilities.size == 1 -%}
+            {{ 'products.product.pickup_availability.view_store_info' | t }}
+          {%- else -%}
+            {{ 'products.product.pickup_availability.check_other_stores' | t }}
+          {%- endif -%}
+        </button>
+      {%- else -%}
+        <p class="pickup-caption-large caption-large--unavailable pickup-caption-large--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_label %} uppercase{% endif %}{% if settings.bolder_font_label %} bolder-font{% endif %}{% endif %}">
+          {{- 'products.product.pickup_availability.pick_up_unavailable_at_html' | t: location_name: location_availability.location.name -}}
+        </p>
+        {%- if pick_up_availabilities.size > 1 -%}
+          <button id="ShowPickupAvailabilityDrawer" 
+            class="link-button pickup-availability-button pickup-caption--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_label %} uppercase{% endif %}{% if settings.bolder_font_label %} bolder-font{% endif %}{% endif %} {% if settings.dim_text %}dim{% endif %} {% if settings.enable_animated_underline %}link-button--underline{% endif %}" 
+            aria-haspopup="dialog">
+            {{ 'products.product.pickup_availability.check_other_stores' | t }}
+          </button>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  </pickup-availability-preview>
+  
+  <pickup-availability-drawer tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="PickupAvailabilityHeading">
+    <div class="overlay"></div>
+    <div class="pickup-availability-drawer">
+      <div class="scroll-area hide-scrollbar">
+        <div class="button-wrapper {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %}">
+          {% style %}
+              #shopify-section-{{ section.id }} .button-close {
+                  --layout-text-color:
+                      {{ settings.layout_text_color.red }},
+                      {{ settings.layout_text_color.green }}, 
+                      {{ settings.layout_text_color.blue }};
+                  --layout-background-color:
+                      {{ settings.layout_background_color.red }},
+                      {{ settings.layout_background_color.green }},
+                      {{ settings.layout_background_color.blue }};
+              }
+          {% endstyle %}
+          <button type="button" class="pickup-availability-drawer-button button-close close-popup">
+              {% assign icon_full = 'cross' | append: "-" | append: close_weight %}
+              {% render 'icon', icon: icon_full %}  
+          </button>
+        </div>
+        <div class="pickup-availability-header">
+        <h2 class="pickup-availability-drawer-title pickup-title--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %}" id="PickupAvailabilityHeading">{{ product_variant.product.title | escape }}</h2>
+        </div>
+        {%- unless product_variant.product.has_only_default_variant -%}
+          <p class="pickup-availability-variant pickup-caption--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_label %} uppercase{% endif %}{% if settings.bolder_font_label %} bolder-font{% endif %}{% endif %} {% if settings.dim_text %}dim{% endif %}">
+            {%- for product_option in product_variant.product.options_with_values -%}
+              {{ product_option.name | escape }}:&nbsp;
+              {%- for value in product_option.values -%}
+                {%- if product_option.selected_value == value -%}
+                  <span>{{ value | escape }}</span>
+                {%- endif -%}
+              {%- endfor -%}
+              {%- unless forloop.last -%},&nbsp;{%- endunless forloop.last -%}
+            {%- endfor -%}
+          </p>
+        {%- endunless -%}
+        <ul class="pickup-availability-list" role="list" data-store-availability-drawer-content>
+          {%- for availability in pick_up_availabilities -%}
+            <li class="pickup-availability-list__item">
+              {%- if availability.available -%}
+                <p class="pickup-availability-drawer-preview pickup-caption-large caption-large--available pickup-caption-large--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_label %} uppercase{% endif %}{% if settings.bolder_font_label %} bolder-font{% endif %}{% endif %}">
+                  {{- 'products.product.pickup_availability.pick_up_available' | t -}}, {{ availability.pick_up_time | downcase }}
+                </p>
+              {%- endif -%}
+              {%- assign address = availability.location.address -%}
+              <address class="pickup-availability-address pickup-caption--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_label %} uppercase{% endif %}{% if settings.bolder_font_label %} bolder-font{% endif %}{% endif %} {% if settings.dim_text %}dim{% endif %}">
+                {{ address | format_address }}
+                {%- if address.phone.size > 0 -%}<p>{{ address.phone }}</p>{%- endif -%}
+              </address>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+  </pickup-availability-drawer>
+{%- endif -%}

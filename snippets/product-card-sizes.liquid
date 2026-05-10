@@ -1,0 +1,169 @@
+{%- liquid
+  assign settings_page_width = settings.max_page_width | append: 'px'
+  assign page_width_is_capped = true
+  assign page_width_cap_in_px = settings.max_page_width | plus: 0
+
+  if settings.max_page_width == 'full_width'
+    assign settings_page_width = '100vw'
+    assign page_width_is_capped = false
+    assign page_width_cap_in_px = 0
+  endif
+
+  assign sidebar_width_in_vw = 0
+  assign secondary_sidebar_width_in_px = 0
+
+  if settings.navigation_layout == 'sidebar_based'
+    if settings.sidebar_template contains 'main_xs'
+      assign sidebar_width_in_vw = 12.5
+    elsif settings.sidebar_template contains 'main_s'
+      assign sidebar_width_in_vw = 18.75
+    elsif settings.sidebar_template contains 'main_m'
+      assign sidebar_width_in_vw = 25
+    elsif settings.sidebar_template contains 'main_l'
+      assign sidebar_width_in_vw = 50
+    endif
+
+    if settings.sidebar_template contains 'secondary'
+      assign secondary_sidebar_width_in_px = 96
+    endif
+  endif
+
+  assign sidebar_hide_breakpoint = 920
+  assign mobile_content_breakpoint = 768
+  assign image_scale_factor = 1.1
+  assign size_multiplier = image_scale_factor
+  if alternative_grid and big_card
+    assign size_multiplier = image_scale_factor | times: 2
+  endif
+
+  if settings.white_space == 'spacious'
+    assign main_sidebar_min_width_in_px = 280
+  else
+    assign main_sidebar_min_width_in_px = 200
+  endif
+
+  unless mobile_media_width
+    assign mobile_media_width = desktop_media_width
+  endunless
+
+  assign desktop_media_width_as_number = desktop_media_width | plus: 0
+  assign desktop_media_width_has_units = false
+  if desktop_media_width != desktop_media_width_as_number and desktop_media_width != blank
+    assign desktop_media_width_has_units = true
+  endif
+
+  assign mobile_media_width_as_number = mobile_media_width | plus: 0
+  assign mobile_media_width_has_units = false
+  if mobile_media_width != mobile_media_width_as_number and mobile_media_width != blank
+    assign mobile_media_width_has_units = true
+  endif
+
+  assign main_sidebar_width_expr = '0px'
+  if sidebar_width_in_vw > 0
+    assign main_sidebar_width_expr = 'max(' | append: main_sidebar_min_width_in_px | append: 'px, ' | append: sidebar_width_in_vw | append: 'vw)'
+  endif
+
+  assign content_expr_without_sidebar = '100vw'
+  if page_width_is_capped
+    assign content_expr_without_sidebar = 'min(100vw, ' | append: page_width_cap_in_px | append: 'px)'
+  endif
+
+  assign content_expr_with_sidebar_raw = '100vw'
+  if sidebar_width_in_vw > 0
+    assign content_expr_with_sidebar_raw = content_expr_with_sidebar_raw | append: ' - ' | append: main_sidebar_width_expr
+  endif
+  if secondary_sidebar_width_in_px > 0
+    assign content_expr_with_sidebar_raw = content_expr_with_sidebar_raw | append: ' - ' | append: secondary_sidebar_width_in_px | append: 'px'
+  endif
+
+  assign content_expr_with_sidebar = content_expr_with_sidebar_raw
+  if page_width_is_capped
+    assign content_expr_with_sidebar = 'min(' | append: content_expr_with_sidebar_raw | append: ', ' | append: page_width_cap_in_px | append: 'px)'
+  endif
+
+  if desktop_media_width_has_units
+    assign desktop_width_without_sidebar = desktop_media_width
+    assign desktop_width_with_sidebar = desktop_media_width
+  else
+    assign desktop_width_without_sidebar = '(' | append: content_expr_without_sidebar | append: ') / ' | append: desktop_media_width
+    assign desktop_width_with_sidebar = '(' | append: content_expr_with_sidebar | append: ') / ' | append: desktop_media_width
+  endif
+
+  if mobile_media_width_has_units
+    assign mobile_width = mobile_media_width
+    assign mobile_width_with_sidebar = mobile_media_width
+  else
+    assign mobile_width = '(' | append: content_expr_without_sidebar | append: ') / ' | append: mobile_media_width
+    assign mobile_width_with_sidebar = '(' | append: content_expr_with_sidebar | append: ') / ' | append: mobile_media_width
+  endif
+
+  assign main_content_width_in_vw = 100 | minus: sidebar_width_in_vw
+
+  if sidebar_width_in_vw > 0
+    assign desktop_breakpoint_with_sidebar = mobile_content_breakpoint
+    assign desktop_breakpoint_with_sidebar = desktop_breakpoint_with_sidebar | plus: secondary_sidebar_width_in_px
+
+    assign sidebar_min_switch_breakpoint = main_sidebar_min_width_in_px | times: 100.0 | divided_by: sidebar_width_in_vw | ceil
+
+    assign desktop_breakpoint_with_sidebar_vw = desktop_breakpoint_with_sidebar
+    assign desktop_breakpoint_with_sidebar_vw = desktop_breakpoint_with_sidebar_vw | times: 100.0 | divided_by: main_content_width_in_vw | ceil
+
+    assign desktop_breakpoint_with_sidebar_min = mobile_content_breakpoint
+    assign desktop_breakpoint_with_sidebar_min = desktop_breakpoint_with_sidebar_min | plus: main_sidebar_min_width_in_px
+    assign desktop_breakpoint_with_sidebar_min = desktop_breakpoint_with_sidebar_min | plus: secondary_sidebar_width_in_px
+
+    if desktop_breakpoint_with_sidebar_vw < sidebar_min_switch_breakpoint
+      assign desktop_breakpoint_with_sidebar = desktop_breakpoint_with_sidebar_min
+    else
+      assign desktop_breakpoint_with_sidebar = desktop_breakpoint_with_sidebar_vw
+    endif
+  else
+    assign desktop_breakpoint_with_sidebar = mobile_content_breakpoint
+  endif
+
+  assign has_mobile_layout_with_sidebar = false
+  if sidebar_width_in_vw > 0 and desktop_breakpoint_with_sidebar > sidebar_hide_breakpoint
+    assign has_mobile_layout_with_sidebar = true
+  endif
+-%}
+
+{%- if desktop_media_width_has_units and mobile_media_width_has_units and desktop_media_width == mobile_media_width -%}
+  {{ desktop_media_width }}
+{%- elsif modal_container_width != blank and desktop_media_width and mobile_media_width -%}
+  {%- liquid
+    if desktop_media_width_has_units
+      assign desktop_width = desktop_media_width
+    else
+      assign desktop_width = '(min(100vw, ' | append: modal_container_width | append: ')) / ' | append: desktop_media_width
+    endif
+
+    if mobile_media_width_has_units
+      assign mobile_width = mobile_media_width
+    else
+      assign mobile_width = '(min(100vw, ' | append: modal_container_width | append: ')) / ' | append: mobile_media_width
+    endif
+  -%}
+  (min-width: {{ mobile_content_breakpoint }}px) calc({{ desktop_width }} * {{ size_multiplier }}), 
+  calc({{ mobile_width }} * {{ size_multiplier }})
+{%- elsif desktop_media_width and mobile_media_width -%}
+  {%- if sidebar_width_in_vw > 0 -%}
+    {%- if has_mobile_layout_with_sidebar -%}
+      (min-width: {{ desktop_breakpoint_with_sidebar }}px) calc({{ desktop_width_with_sidebar }} * {{ size_multiplier }}), 
+      (min-width: {{ sidebar_hide_breakpoint }}px) calc({{ mobile_width_with_sidebar }} * {{ size_multiplier }}), 
+      (min-width: {{ mobile_content_breakpoint }}px) calc({{ desktop_width_without_sidebar }} * {{ size_multiplier }}), 
+      calc({{ mobile_width }} * {{ size_multiplier }})
+    {%- else -%}
+      (min-width: {{ sidebar_hide_breakpoint }}px) calc({{ desktop_width_with_sidebar }} * {{ size_multiplier }}), 
+      (min-width: {{ mobile_content_breakpoint }}px) calc({{ desktop_width_without_sidebar }} * {{ size_multiplier }}), 
+      calc({{ mobile_width }} * {{ size_multiplier }})
+    {%- endif -%}
+  {%- else -%}
+    (min-width: {{ mobile_content_breakpoint }}px) calc({{ desktop_width_without_sidebar }} * {{ size_multiplier }}), 
+    calc({{ mobile_width }} * {{ size_multiplier }})
+  {%- endif -%}
+{%- else -%}
+  (min-width: {{ settings_page_width }}) {{ settings_page_width | minus: 130 | divided_by: 4 }}px, 
+  (min-width: 990px) calc((100vw - 130px) / 4), 
+  (min-width: 750px) calc((100vw - 120px) / 3), 
+  calc((100vw - 35px) / 2)
+{%- endif -%}

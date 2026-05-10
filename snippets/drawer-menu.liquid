@@ -1,0 +1,1620 @@
+
+{% style %}
+    .menu--{{ block.id }} {
+        --hor-menu-alignment: {{ horizontal_alignment }};
+        {% if block.settings.image_radius == 'default' %}
+            --image-border-radius: var(--images-and-section-radius);;
+        {% else %}
+            --image-border-radius: {{ block.settings.image_radius }};
+        {% endif %}
+        --highlight-color: {{ menu_settings.highlight_menu_item_color.red }},
+            {{ menu_settings.highlight_menu_item_color.green }},
+            {{ menu_settings.highlight_menu_item_color.blue }};
+    }
+	.menu__item--minimal_uppercase .dropdown-icon,
+	.menu__item--minimal_basic .dropdown-icon,
+	.menu__item--classic .dropdown-icon,
+	.menu__item--avant_garde .dropdown-icon,
+	.menu__item--minimal_uppercase + .dropdown-icon,
+	.menu__item--minimal_basic + .dropdown-icon,
+	.menu__item--classic + .dropdown-icon,
+	.menu__item--avant_garde + .dropdown-icon {
+	    height: var(--fluid-menu-ui-24);
+	}
+	.menu__item--minimal_heavy .dropdown-icon,
+	.menu__item--brutalist .dropdown-icon,
+	.menu__item--minimal_heavy + .dropdown-icon,
+	.menu__item--brutalist + .dropdown-icon {
+		height: var(--fluid-menu-ui-28);
+	}
+	.menu__item--contrast .dropdown-icon,
+	.menu__item--contrast + .dropdown-icon {
+		height: var(--fluid-menu-ui-16);
+	}
+	.menu__item--duet .dropdown-icon,
+	.menu__item--duet + .dropdown-icon {
+		height: var(--fluid-menu-ui-26);
+	}
+	.menu-container--menu-drawer .menu__list--main_menu .menu__item--classic .dropdown-icon,
+	.menu-container--menu-drawer .menu__list--main_menu .menu__item--avant_garde .dropdown-icon,
+	.menu-container--menu-drawer .menu__list--main_menu .menu__item--contrast .dropdown-icon,
+	.menu-container--menu-drawer .menu__list--main_menu .menu__item--brutalist .dropdown-icon,
+	.menu-container--menu-drawer .menu__list--main_menu .menu__item--classic + .dropdown-icon,
+	.menu-container--menu-drawer .menu__list--main_menu .menu__item--avant_garde + .dropdown-icon,
+	.menu-container--menu-drawer .menu__list--main_menu .menu__item--contrast + .dropdown-icon,
+	.menu-container--menu-drawer .menu__list--main_menu .menu__item--brutalist + .dropdown-icon {
+        height: var(--fluid-menu-ui-36);
+	}
+	.menu-container--menu-drawer .menu__list--main_menu .menu__item--duet .dropdown-icon,
+	.menu-container--menu-drawer .menu__list--main_menu .menu__item--duet + .dropdown-icon {
+        height: var(--fluid-menu-ui-28);
+	}
+    .heading_xl .dropdown-icon,
+	.heading_xl_uppercase .dropdown-icon,
+    .heading_xl + .dropdown-icon,
+	.heading_xl_uppercase + .dropdown-icon {
+        height: var(--menu-ic-xl) !important;
+	}
+    .heading_l .dropdown-icon,
+	.heading_l_uppercase .dropdown-icon,
+    .heading_l + .dropdown-icon,
+	.heading_l_uppercase + .dropdown-icon {
+        height: var(--menu-ic-l) !important;
+	}
+	.heading_m .dropdown-icon,
+	.heading_m_uppercase .dropdown-icon,
+    .heading_m + .dropdown-icon,
+	.heading_m_uppercase + .dropdown-icon {
+        height: var(--menu-ic-m) !important;
+	}
+	.heading_s .dropdown-icon,
+	.heading_s_uppercase .dropdown-icon,
+    .heading_s + .dropdown-icon,
+	.heading_s_uppercase + .dropdown-icon {
+		height: var(--menu-ic-s) !important;
+	}
+	.heading_xs .dropdown-icon,
+	.heading_xs_uppercase .dropdown-icon,
+	.heading_xs + .dropdown-icon,
+	.heading_xs_uppercase + .dropdown-icon {
+        height: var(--menu-ic-xs) !important;
+	}
+	.body_l .dropdown-icon,
+	.body_l_uppercase .dropdown-icon,
+	.body_l + .dropdown-icon,
+	.body_l_uppercase + .dropdown-icon {
+        height: var(--menu-ic-bl) !important;
+	}
+	.body_m .dropdown-icon,
+	.body_m_uppercase .dropdown-icon,
+	.body_m + .dropdown-icon,
+	.body_m_uppercase + .dropdown-icon {
+        height: var(--menu-ic-bm) !important;
+	}
+	.body_s .dropdown-icon,
+	.body_s_uppercase .dropdown-icon,
+	.body_s + .dropdown-icon,
+	.body_s_uppercase + .dropdown-icon {
+        height: var(--menu-ic-bs) !important;
+	}
+	.label_font .dropdown-icon,
+	.label_font_uppercase .dropdown-icon,
+	.label_font + .dropdown-icon,
+	.label_font_uppercase + .dropdown-icon  {
+        height: var(--menu-ic-lb) !important;
+	}
+{% endstyle %}
+
+{%- liquid
+    if settings.typography_preset == 'classic' or settings.typography_preset == 'brutalist' or settings.typography_preset == 'duet'
+        assign weight = settings.accent_icon_weight
+        if settings.swap_fonts
+                assign weight = settings.base_icon_weight
+        endif
+    else 
+        assign weight =  settings.base_icon_weight
+        if settings.swap_fonts
+                assign weight = settings.accent_icon_weight
+        endif
+    endif
+
+    assign uppercase_font = false
+    assign bolder_font = false
+    assign uppercase_font_nested = false
+    assign bolder_font_nested = false
+    assign uppercase_font_title = false
+    assign bolder_font_title = false
+    if settings.typography_preset == 'custom'
+        assign weight = settings.custom_icon_weight
+        if menu_settings.menu_font_size == 'default'
+            if settings.navigation_item_size == 'default'
+                if settings.uppercase_body_s
+                    assign uppercase_font = true
+                endif
+                if settings.bolder_font_body_s
+                    assign bolder_font = true
+                endif
+            endif
+        endif 
+        if menu_settings.nested_menu_size == 'default'
+            if settings.navigation_item_size == 'default'
+                if settings.uppercase_body_s
+                    assign uppercase_font_nested = true
+                endif
+                if settings.bolder_font_body_s
+                    assign bolder_font_nested = true
+                endif
+            endif
+        endif    
+        if menu_settings.title_font_size == 'default'
+            if settings.uppercase_body_s
+                assign uppercase_font_title = true
+            endif
+            if settings.bolder_font_body_s
+                assign bolder_font_title = true
+            endif
+        endif    
+    endif
+
+    assign banner_overlay_background = block.settings.overlay_color
+    if block.settings.overlay_gradient != blank
+      assign banner_overlay_background = block.settings.overlay_gradient
+    endif
+
+    assign onloadScript = ''
+    if settings.images_loading != 'disable'
+        assign onloadScript = 'this.parentNode.classList.add("lazyloaded");'
+    endif
+-%}
+
+<div class="menu mega-menu-drawer__menu {% if horizontal_alignment == 'center' %} center{% endif %} menu-{{ menu.handle }} {% if child_menu %}menu--child{% endif %} menu--{{ block.id }} {{ link_style }}{% if uppercase %} uppercase{% endif %}{% if link_style == 'subheading-font' and settings.use_heading_font_subheadings %} subheading-heading-font{% endif %}">
+    <nav class="menu__nav">
+        <ul class="menu__list menu__list--column" role="list">
+            {% for link in menu.links %}
+                <li class="menu__item {% if section.settings.color_type == 'custom' %}color-custom{% elsif section.settings.color_type == 'invert' %}color-invert{% endif %} {% if menu_settings.use_accent_color %}color-accent{% endif %}">
+                    <drawer-menu trigger="{{ click }}">
+                        {%- liquid
+                            assign enable_nested_menu = false
+                            assign link_title_handle = link.title | handle
+                            assign downcased_link_title = link.title | downcase
+                            for block in blocks
+                                assign menu_item_handle = block.settings.menu_dropdown_link | handle
+                                if menu_item_handle == link_title_handle and link.links.size == 0
+                                    assign enable_nested_menu = true
+                                    assign downcased_nested_highlighted_items = block.settings.nested_highlight_menu_item | downcase | split: ", "
+                                    assign nested_menu_block_id = block.id
+                                    assign highlight_color = block.settings.nested_highlight_menu_item_color
+                                    assign image_ratio = block.settings.image_ratio
+                                    assign image_radius = block.settings.image_radius
+                                    assign item_style = block.settings.item_style
+                                    assign item_heading_1 = block.settings.heading_1
+                                    assign item_img_1 = block.settings.image_1
+                                    assign item_link_1 = block.settings.link_1
+                                    assign item_heading_2 = block.settings.heading_2
+                                    assign item_img_2 = block.settings.image_2
+                                    assign item_link_2 = block.settings.link_2
+                                    assign item_heading_3 = block.settings.heading_3
+                                    assign item_img_3 = block.settings.image_3
+                                    assign item_link_3 = block.settings.link_3
+                                    assign item_heading_4 = block.settings.heading_4
+                                    assign item_img_4 = block.settings.image_4
+                                    assign item_link_4 = block.settings.link_4
+                                    assign item_heading_5 = block.settings.heading_5
+                                    assign item_img_5 = block.settings.image_5
+                                    assign item_link_5 = block.settings.link_5
+                                    assign item_heading_6 = block.settings.heading_6
+                                    assign item_img_6 = block.settings.image_6
+                                    assign item_link_6 = block.settings.link_6
+                                    assign item_heading_7 = block.settings.heading_7
+                                    assign item_img_7 = block.settings.image_7
+                                    assign item_link_7 = block.settings.link_7
+                                    assign item_heading_8 = block.settings.heading_8
+                                    assign item_img_8 = block.settings.image_8
+                                    assign item_link_8 = block.settings.link_8
+                                    assign item_heading_9 = block.settings.heading_9
+                                    assign item_img_9 = block.settings.image_9
+                                    assign item_link_9 = block.settings.link_9
+                                    assign item_heading_10 = block.settings.heading_10
+                                    assign item_img_10 = block.settings.image_10
+                                    assign item_link_10 = block.settings.link_10
+                                endif
+                            endfor
+                        -%}
+                        <summary class="top-level-item {% if settings.enable_drawer_animations %} stagger__item{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: {{ first_level_stagger_index | default: 1 | plus: forloop.index0 }};"{% endif %} open="false">
+                            <div class="menu__item-title flex--row align-center">
+                                {% liquid 
+                                    assign downcased_link_title = link.title | downcase
+                                    assign downcased_highlighted_items = menu_settings.highlight_menu_item | downcase | split: ", "
+                                    assign highlight_item = false
+                                    for highlighted_item in downcased_highlighted_items
+                                        if highlighted_item == downcased_link_title
+                                            assign highlight_item = true
+                                        endif
+                                    endfor
+                                %}
+                                {% if block.settings.show_collection_image and block.settings.show_only_for_nested == false %}
+                                    {% for collection in collections %}
+                                    {% if collection.url == link.url and collection.image %}
+                                        <div class="menu__item-image lazy-image-container ratio-{{ block.settings.image_ratio }}" {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}>
+                                        {% if settings.images_loading != 'disable' %}
+                                            <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ collection.image.aspect_ratio }}">
+                                        {% endif %}    
+                                            <img srcset="{%- if collection.image.width >= 165 -%}{{ collection.image | image_url: width: 165 }} 165w,{%- endif -%}
+                                            {%- if collection.image.width >= 375 -%}{{ collection.image | image_url: width: 375 }} 375w,{%- endif -%}
+                                            {%- if collection.image.width >= 550 -%}{{ collection.image | image_url: width: 550 }} 550w,{%- endif -%}
+                                                {{ collection.image | image_url: height: collection.image.height }}"
+                                                src="{{ collection.image | image_url: height: collection.image.height }}"
+                                                loading="lazy"
+                                                {% if settings.images_loading != 'disable' %}
+                                                    onload="this.parentNode.classList.add('lazyloaded');"
+                                                {% endif %}
+                                                draggable="false"
+                                                sizes="calc(40px * 1)"
+                                                width="{{ collection.image.width }}"
+                                                height="{{ collection.image.height }}"
+                                                alt="{{ collection.image.alt | default: collection.title | escape }}"
+                                                style="object-position: {{ block.settings.focal_point }}"
+                                            />
+                                        {% if settings.images_loading != 'disable' %}
+                                            {% if settings.images_loading != 'fade_scale' %}
+                                            <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                                                <img 
+                                                alt="{{ collection.image.alt | escape }}" 
+                                                src="{{ collection.image | image_url: width: 10 }}"
+                                                draggable="false"
+                                                width="10" 
+                                                height="10">
+                                            </div>
+                                            {% endif %}
+                                            </figure>
+                                        {% endif %}
+                                        </div> 
+                                    {% elsif collection.url == link.url and collection.products.first.featured_image %}
+                                        <div class="menu__item-image lazy-image-container ratio-{{ block.settings.image_ratio }}" {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}>
+                                        {% if settings.images_loading != 'disable' %}
+                                            <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ collection.products.first.featured_image.aspect_ratio }}">
+                                        {% endif %}  
+                                            <img srcset="{%- if collection.products.first.featured_image.width >= 165 -%}{{ collection.products.first.featured_image | image_url: width: 165 }} 165w,{%- endif -%}
+                                            {%- if collection.products.first.featured_image.width >= 375 -%}{{ collection.products.first.featured_image | image_url: width: 375 }} 375w,{%- endif -%}
+                                            {%- if collection.products.first.featured_image.width >= 550 -%}{{ collection.products.first.featured_image | image_url: width: 550 }} 550w,{%- endif -%}
+                                                {{ collection.products.first.featured_image | image_url: height: collection.products.first.featured_image.height }}"
+                                                src="{{ collection.products.first.featured_image | image_url: height: collection.products.first.featured_image.height }}"
+                                                loading="lazy"
+                                                {% if settings.images_loading != 'disable' %}
+                                                    onload="this.parentNode.classList.add('lazyloaded');"
+                                                {% endif %}
+                                                draggable="false"
+                                                sizes="calc(40px * 1)"
+                                                width="{{ collection.products.first.featured_image.width }}"
+                                                height="{{ collection.products.first.featured_image.height }}"
+                                                alt="{{ collection.products.first.featured_image.alt | default: collection.title | escape }}"
+                                                style="object-position: {{ block.settings.focal_point }}"
+                                            />
+                                        {% if settings.images_loading != 'disable' %}
+                                            {% if settings.images_loading != 'fade_scale' %}
+                                            <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                                                <img 
+                                                alt="{{ collection.products.first.featured_image.alt | escape }}" 
+                                                src="{{ collection.products.first.featured_image | image_url: width: 10 }}"
+                                                draggable="false"
+                                                width="10" 
+                                                height="10">
+                                            </div>
+                                            {% endif %}
+                                            </figure>
+                                        {% endif %}
+                                        </div> 
+                                    {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                <a href="{{ link.url }}" class="link-{{ downcased_link_title }} menu__link menu__item--{{ settings.typography_preset }} {% if menu_settings.menu_font_size != 'default' %}{{ menu_settings.menu_font_size }}{% else %}{% if settings.navigation_item_size != 'default' %} {{ settings.navigation_item_size }}{% endif %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}{% endif %} menu__item-link hover-link{% if highlight_item %} link--highlighted{% endif %}" {% if link.url contains 'http://' or link.url contains 'https://' %}target="_blank"{% endif %}>
+                                    <div class="menu__item-link-title {% if link.current and settings.underline_active_link == true %}underline-active{% endif %} {% if settings.enable_animated_underline and settings.enable_rolling_hover == false %}link-animation--underline{% elsif settings.enable_rolling_hover %}link-animation--slide{% else %}link-animation{% endif %}">
+                                        <span data-hover="{{ link.title | split: '<' | first | strip }}">{{ link.title }}</span>
+                                    </div>
+                                </a>
+                                {% if enable_nested_menu or link.links.size > 0 and show_nested %}
+                                    <div class="dropdown-icon dropdown-icon--chevron dropdown-icon--first-level" tabindex="0"> 		
+                                        {% assign icon_full = 'close-chevron' | append: "-" | append: weight %}
+                                        {% render 'icon', icon: icon_full %}  
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </summary>
+                        {% if enable_nested_menu %}
+                            <div class="nested-submenu scroll-area hide-scrollbar nested-submenu-second-level" tabindex="-1">
+                                <div class="menu-drawer__header{% if settings.enable_drawer_animations %} stagger__item{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 1;"{% endif %}>
+                                    <button class="body-secondary-text--{{ settings.typography_preset }} {% if section.settings.heading_size != 'default' %}{{ section.settings.heading_size }}{% else %}{% if uppercase_font_heading %} uppercase{% endif %}{% if bolder_font_heading %} bolder-font{% endif %}{% endif %}" inert>
+                                        <div class="dropdown-icon"> 		
+                                        {% assign icon_full = 'arrow-left' | append: "-" | append: weight %}
+                                        {% render 'icon-accordion', icon: icon_full %}
+                                        </div>
+                                        {{ section.settings.heading }}</button>
+                                </div>
+                                {%- liquid
+                                    assign enable_menu_img = false
+                                    assign link_title_handle = link.title | handle
+                                    assign overlay_gradient = blank
+                                    for block in blocks
+                                        assign menu_title_handle = block.settings.dropdown_link | handle
+                                        if menu_title_handle == link_title_handle
+                                            assign enable_menu_img = true
+                                            assign menu_img = block.settings.image
+                                            assign mega_menu_block_id = block.id
+                                            assign overlay_color = block.settings.overlay_color
+                                            assign overlay_gradient = block.settings.overlay_gradient
+                                            assign overlay_opacity = block.settings.overlay_opacity
+                                            assign text_color = block.settings.content_color
+                                            assign image_ratio = block.settings.image_ratio
+                                        endif
+                                    endfor
+                                -%}
+                                {%- if enable_menu_img and menu_img -%}
+                                    {% assign list_stagger_start = 3 %}
+                                    <a href="{{ link.url }}" class="menu-collection-banner menu-collection-banner--{{ mega_menu_block_id }}{% if settings.enable_drawer_animations %} stagger__item{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %} inert>
+                                        {%- liquid
+                                            assign widths = '50, 75, 100, 150, 200, 300, 400, 500, 650, 750, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750, 3000, 3200'
+                                        -%}
+                                        {%- capture sizes -%}
+                                            (max-width: 640px) 100vw, 640px
+                                        {%- endcapture -%}
+                                        <div class="menu-collection-img lazy-image-container ratio-{{ image_ratio }}"{% if settings.disable_right_click %} oncontextmenu="return false"{% endif %}>
+                                            {%- liquid
+                                                assign image_banner_overlay_background = overlay_color
+                                                if overlay_gradient != blank
+                                                    assign image_banner_overlay_background = overlay_gradient
+                                                endif
+                                            -%}
+                                            {% style %}
+                                                .menu-collection-banner--{{ mega_menu_block_id }} .menu-collection-img {
+                                                    --overlay-background: {{ image_banner_overlay_background }};
+                                                    --banner-overlay-opacity: {{ overlay_opacity | divided_by: 100.0 }};
+                                                    --layout-text-color:
+                                                        {{ text_color.red }},
+                                                        {{ text_color.green }}, 
+                                                        {{ text_color.blue }}; 
+                                                    color: rgb(var(--layout-text-color));
+                                                }
+                                            {% endstyle %}
+                                            {% if settings.images_loading != 'disable' %}
+                                                <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ menu_img.aspect_ratio }}">
+                                            {% endif %}
+                                            {{
+                                                menu_img
+                                                | image_url: width: 3200
+                                                | image_tag:
+                                                sizes: sizes,
+                                                widths: widths,
+                                                class: img_class,
+                                                alt: collection.image.alt,
+                                                draggable: false,
+                                                loading: 'lazy',
+                                                fetchpriority: 'low',
+                                                onload: onloadScript
+                                            }} 
+                                            {% if settings.images_loading != 'disable' %}
+                                                {% if settings.images_loading != 'fade_scale' %}
+                                                <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                                                    <img 
+                                                    alt="{{ menu_img.alt | escape }}" 
+                                                    src="{{ menu_img | image_url: width: 10 }}"
+                                                    draggable="false"
+                                                    width="10" 
+                                                    height="10">
+                                                </div>
+                                                {% endif %}
+                                                </figure>
+                                            {% endif %}
+                                            <p class="menu-collection-title menu__item--{{ settings.typography_preset }}{% if settings.enable_drawer_animations %} stagger__item{% endif %} {% if menu_settings.title_font_size != 'default' %}{{ menu_settings.title_font_size }}{% else %}{% if uppercase_font_title %} uppercase{% endif %}{% if bolder_font_title %} bolder-font{% endif %}{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %}>{{ link.title }}</p>
+                                        </div>
+                                    </a>
+                                {% elsif block.settings.show_collection_banner %}
+                                    {% assign list_stagger_start = 3 %}
+                                    {% for collection in collections %}
+                                        {% if collection.url == link.url and collection.image %}
+                                            <a href="{{ link.url }}" class="menu-collection-banner{% if settings.enable_drawer_animations %} stagger__item{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %} inert>
+                                                    {%- liquid
+                                                        assign widths = '50, 75, 100, 150, 200, 300, 400, 500, 650, 750, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750, 3000, 3200'
+                                                    -%}
+                                                    {%- capture sizes -%}
+                                                        (max-width: 640px) 100vw, 640px
+                                                    {%- endcapture -%}
+                                                    <div class="menu-collection-img lazy-image-container ratio-{{ block.settings.banner_image_ratio }}"{% if settings.disable_right_click %} oncontextmenu="return false"{% endif %}>
+                                                        {% style %}
+                                                            .menu-collection-img {
+                                                                --focal-point: {{ block.settings.banner_focal_point }};
+                                                                --overlay-background: {{ banner_overlay_background }};
+                                                                --banner-overlay-opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};
+                                                                --layout-text-color:
+                                                                    {{ block.settings.content_color.red }},
+                                                                    {{ block.settings.content_color.green }}, 
+                                                                    {{ block.settings.content_color.blue }}; 
+                                                                color: rgb(var(--layout-text-color));
+                                                            }
+                                                        {% endstyle %}
+                                                        {% if settings.images_loading != 'disable' %}
+                                                            <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ collection.image.aspect_ratio }}">
+                                                        {% endif %}
+                                                        {{
+                                                            collection.image
+                                                            | image_url: width: 3200
+                                                            | image_tag:
+                                                            sizes: sizes,
+                                                            widths: widths,
+                                                            class: img_class,
+                                                            alt: collection.image.alt,
+                                                            draggable: false,
+                                                            draggable: false,
+                                                            loading: 'lazy',
+                                                            fetchpriority: 'low',
+                                                            onload: onloadScript
+                                                        }}
+                                                        {% if settings.images_loading != 'disable' %}
+                                                            {% if settings.images_loading != 'fade_scale' %}
+                                                            <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                                                                <img 
+                                                                alt="{{ collection.image.alt | escape }}" 
+                                                                src="{{ collection.image | image_url: width: 10 }}"
+                                                                draggable="false"
+                                                                width="10" 
+                                                                height="10">
+                                                            </div>
+                                                            {% endif %}
+                                                            </figure>
+                                                        {% endif %}
+                                                        <p class="menu-collection-title menu__item--{{ settings.typography_preset }}{% if settings.enable_drawer_animations %} stagger__item{% endif %} {% if menu_settings.title_font_size != 'default' %}{{ menu_settings.title_font_size }}{% else %}{% if uppercase_font_title %} uppercase{% endif %}{% if bolder_font_title %} bolder-font{% endif %}{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %}>{{ link.title }}</p>
+                                                    </div>
+                                            </a>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                <p class="menu-collection-title menu__item--{{ settings.typography_preset }}{% if settings.enable_drawer_animations %} stagger__item{% endif %} {% if menu_settings.title_font_size != 'default' %}{{ menu_settings.title_font_size }}{% else %}{% if uppercase_font_title %} uppercase{% endif %}{% if bolder_font_title %} bolder-font{% endif %}{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %}>{{ link.title }}</p>
+                                {% assign nested_stagger_index = 3 %}
+                                <ul class="first-nested__list flex--column hide-scrollbar block-nested-menu--{{ nested_menu_block_id }}">
+                                    {% style %}
+                                    .block-nested-menu--{{ nested_menu_block_id }} {
+                                        {% if image_radius == 'default' %}
+                                            --image-border-radius: var(--images-and-section-radius);;
+                                        {% else %}
+                                            --image-border-radius: {{ image_radius }};
+                                        {% endif %}
+                                        --highlight-color: {{ highlight_color.red }},
+                                            {{ highlight_color.green }},
+                                            {{ highlight_color.blue }};
+                                    }
+                                    {% endstyle %}
+                                    {% if item_img_1 != blank or item_heading_1 != blank and item_link_1 != blank %}
+                                    {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                        image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'second', level_link: first_nested_link, item_heading: item_heading_1, item_image: item_img_1, item_link: item_link_1, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested, nested_drawer_stagger_index: nested_stagger_index -%}
+                                    {% assign nested_stagger_index = nested_stagger_index | plus: 1 %}
+                                    {% endif %}
+                                    {% if item_img_2 != blank or item_heading_2 != blank and item_link_2 != blank %}
+                                        {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                            image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'second', level_link: first_nested_link, item_heading: item_heading_2, item_image: item_img_2, item_link: item_link_2, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested, nested_drawer_stagger_index: nested_stagger_index -%}
+                                    {% assign nested_stagger_index = nested_stagger_index | plus: 1 %}
+                                    {% endif %}
+                                    {% if item_img_3 != blank or item_heading_3 != blank and item_link_3 != blank %}
+                                        {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks,  onloadScript: onloadScript,
+                                            image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'second', level_link: first_nested_link, item_heading: item_heading_3, item_image: item_img_3, item_link: item_link_3, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested, nested_drawer_stagger_index: nested_stagger_index -%}
+                                    {% assign nested_stagger_index = nested_stagger_index | plus: 1 %}
+                                    {% endif %}
+                                    {% if item_img_4 != blank or item_heading_4 != blank and item_link_4 != blank %}
+                                        {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                            image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'second', level_link: first_nested_link, item_heading: item_heading_4, item_image: item_img_4, item_link: item_link_4, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested, nested_drawer_stagger_index: nested_stagger_index -%}
+                                    {% assign nested_stagger_index = nested_stagger_index | plus: 1 %}
+                                    {% endif %}
+                                    {% if item_img_5 != blank or item_heading_5 != blank and item_link_5 != blank %}
+                                        {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                            image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'second', level_link: first_nested_link, item_heading: item_heading_5, item_image: item_img_5, item_link: item_link_5, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested, nested_drawer_stagger_index: nested_stagger_index -%}
+                                    {% assign nested_stagger_index = nested_stagger_index | plus: 1 %}
+                                    {% endif %}
+                                    {% if item_img_6 != blank or item_heading_6 != blank and item_link_6 != blank %}
+                                        {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                            image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'second', level_link: first_nested_link, item_heading: item_heading_6, item_image: item_img_6, item_link: item_link_6, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested, nested_drawer_stagger_index: nested_stagger_index -%}
+                                    {% assign nested_stagger_index = nested_stagger_index | plus: 1 %}
+                                    {% endif %}
+                                    {% if item_img_7 != blank or item_heading_7 != blank and item_link_7 != blank %}
+                                        {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                            image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'second', level_link: first_nested_link, item_heading: item_heading_7, item_image: item_img_7, item_link: item_link_7, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested, nested_drawer_stagger_index: nested_stagger_index -%}
+                                    {% assign nested_stagger_index = nested_stagger_index | plus: 1 %}
+                                    {% endif %}
+                                    {% if item_img_8 != blank or item_heading_8 != blank and item_link_8 != blank %}
+                                        {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                            image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'second', level_link: first_nested_link, item_heading: item_heading_8, item_image: item_img_8, item_link: item_link_8, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested, nested_drawer_stagger_index: nested_stagger_index -%}
+                                    {% assign nested_stagger_index = nested_stagger_index | plus: 1 %}
+                                    {% endif %}
+                                    {% if item_img_9 != blank or item_heading_9 != blank and item_link_9 != blank %}
+                                        {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                            image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'second', level_link: first_nested_link, item_heading: item_heading_9, item_image: item_img_9, item_link: item_link_9, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested, nested_drawer_stagger_index: nested_stagger_index -%}
+                                    {% assign nested_stagger_index = nested_stagger_index | plus: 1 %}
+                                    {% endif %}
+                                    {% if item_img_10 != blank or item_heading_10 != blank and item_link_10 != blank %}
+                                        {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                            image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'second', level_link: first_nested_link, item_heading: item_heading_10, item_image: item_img_10, item_link: item_link_10, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested, nested_drawer_stagger_index: nested_stagger_index -%}
+                                    {% assign nested_stagger_index = nested_stagger_index | plus: 1 %}
+                                    {% endif %}
+                                </ul>
+                                {% for collection in collections %}
+                                    {% if collection.url == link.url %}
+                                        <div class="button-block block__button collection-button{% if settings.enable_drawer_animations %} stagger__item{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: {{ nested_stagger_index }};"{% endif %}>
+                                            <a href="{{ link.url }}"  inert class="button solid-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}">{{ 'collections.shop_all' | t }}</a>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <span class='animation-item second-level'></span>
+                        {% endif %}
+                        {% if link.links.size > 0 %}
+                            <div class="nested-submenu scroll-area hide-scrollbar nested-submenu-second-level" tabindex="-1">
+                                {% assign list_stagger_start = 2 %}
+                                <div class="menu-drawer__header{% if settings.enable_drawer_animations %} stagger__item{% endif %}"{% if settings.enable_drawer_animations %} style="--item-index: 1;"{% endif %}>
+                                    <button class="body-secondary-text--{{ settings.typography_preset }} {% if section.settings.heading_size != 'default' %}{{ section.settings.heading_size }}{% else %}{% if uppercase_font_heading %} uppercase{% endif %}{% if bolder_font_heading %} bolder-font{% endif %}{% endif %}" inert>
+                                        <div class="dropdown-icon"> 		
+                                        {% assign icon_full = 'arrow-left' | append: "-" | append: weight %}
+                                        {% render 'icon-accordion', icon: icon_full %}
+                                        </div>
+                                        {{ section.settings.heading }}</button>
+                                </div>
+                                {%- liquid
+                                    assign enable_menu_img = false
+                                    assign link_title_handle = link.title | handle
+                                    assign overlay_gradient = blank
+                                    for block in blocks
+                                        assign menu_title_handle = block.settings.dropdown_link | handle
+                                        if menu_title_handle == link_title_handle
+                                            assign enable_menu_img = true
+                                            assign menu_img = block.settings.image
+                                            assign mega_menu_block_id = block.id
+                                            assign overlay_color = block.settings.overlay_color
+                                            assign overlay_gradient = block.settings.overlay_gradient
+                                            assign overlay_opacity = block.settings.overlay_opacity
+                                            assign text_color = block.settings.content_color
+                                            assign image_ratio = block.settings.image_ratio
+                                        endif
+                                    endfor
+                                -%}
+                                {%- if enable_menu_img and menu_img -%}
+                                    {% assign list_stagger_start = 3 %}
+                                    <a href="{{ link.url }}" class="menu-collection-banner menu-collection-banner--{{ mega_menu_block_id }}{% if settings.enable_drawer_animations %} stagger__item{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %} inert>
+                                        {%- liquid
+                                            assign widths = '50, 75, 100, 150, 200, 300, 400, 500, 650, 750, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750, 3000, 3200'
+                                        -%}
+                                        {%- capture sizes -%}
+                                            (max-width: 640px) 100vw, 640px
+                                        {%- endcapture -%}
+                                        <div class="menu-collection-img lazy-image-container ratio-{{ image_ratio }}"{% if settings.disable_right_click %} oncontextmenu="return false"{% endif %}>
+                                            {%- liquid
+                                                assign image_banner_overlay_background = overlay_color
+                                                if overlay_gradient != blank
+                                                    assign image_banner_overlay_background = overlay_gradient
+                                                endif
+                                            -%}
+                                            {% style %}
+                                                .menu-collection-banner--{{ mega_menu_block_id }} .menu-collection-img {
+                                                    --overlay-background: {{ image_banner_overlay_background }};
+                                                    --banner-overlay-opacity: {{ overlay_opacity | divided_by: 100.0 }};
+                                                    --layout-text-color:
+                                                        {{ text_color.red }},
+                                                        {{ text_color.green }}, 
+                                                        {{ text_color.blue }}; 
+                                                    color: rgb(var(--layout-text-color));
+                                                }
+                                            {% endstyle %}
+                                        {% if settings.images_loading != 'disable' %}
+                                            <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ menu_img.aspect_ratio }}">
+                                        {% endif %}
+                                            {{
+                                                menu_img
+                                                | image_url: width: 3200
+                                                | image_tag:
+                                                sizes: sizes,
+                                                widths: widths,
+                                                class: img_class,
+                                                alt: collection.image.alt,
+                                                draggable: false,
+                                                loading: 'lazy',
+                                                fetchpriority: 'low',
+                                                onload: onloadScript
+                                            }} 
+                                        {% if settings.images_loading != 'disable' %}
+                                            {% if settings.images_loading != 'fade_scale' %}
+                                            <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                                                <img 
+                                                alt="{{ menu_img.alt | escape }}" 
+                                                src="{{ menu_img | image_url: width: 10 }}"
+                                                draggable="false"
+                                                width="10" 
+                                                height="10">
+                                            </div>
+                                            {% endif %}
+                                            </figure>
+                                        {% endif %}
+                                            <p class="menu-collection-title menu__item--{{ settings.typography_preset }}{% if settings.enable_drawer_animations %} stagger__item{% endif %} {% if menu_settings.title_font_size != 'default' %}{{ menu_settings.title_font_size }}{% else %}{% if uppercase_font_title %} uppercase{% endif %}{% if bolder_font_title %} bolder-font{% endif %}{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %}>{{ link.title }}</p>
+                                        </div>
+                                    </a>
+                                {% elsif block.settings.show_collection_banner %}
+                                    {% assign list_stagger_start = 3 %}
+                                    {% for collection in collections %}
+                                        {% if collection.url == link.url and collection.image %}
+                                            <a href="{{ link.url }}" class="menu-collection-banner{% if settings.enable_drawer_animations %} stagger__item{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %} inert>
+                                                    {%- liquid
+                                                        assign widths = '50, 75, 100, 150, 200, 300, 400, 500, 650, 750, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750, 3000, 3200'
+                                                    -%}
+                                                    {%- capture sizes -%}
+                                                        (max-width: 640px) 100vw, 640px
+                                                    {%- endcapture -%}
+                                                    <div class="menu-collection-img lazy-image-container ratio-{{ block.settings.banner_image_ratio }}"{% if settings.disable_right_click %} oncontextmenu="return false"{% endif %}>
+                                                        {% style %}
+                                                            .menu-collection-img {
+                                                                --focal-point: {{ block.settings.banner_focal_point }};
+                                                                --overlay-background: {{ banner_overlay_background }};
+                                                                --banner-overlay-opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};
+                                                                --layout-text-color:
+                                                                    {{ block.settings.content_color.red }},
+                                                                    {{ block.settings.content_color.green }}, 
+                                                                    {{ block.settings.content_color.blue }}; 
+                                                                color: rgb(var(--layout-text-color));
+                                                            }
+                                                        {% endstyle %}
+                                                    {% if settings.images_loading != 'disable' %}
+                                                        <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ collection.image.aspect_ratio }}">
+                                                    {% endif %}
+                                                        {{
+                                                            collection.image
+                                                            | image_url: width: 3200
+                                                            | image_tag:
+                                                            sizes: sizes,
+                                                            widths: widths,
+                                                            class: img_class,
+                                                            alt: collection.image.alt,
+                                                            draggable: false,
+                                                            draggable: false,
+                                                            loading: 'lazy',
+                                                            fetchpriority: 'low',
+                                                            onload: onloadScript
+                                                        }} 
+                                                    {% if settings.images_loading != 'disable' %}
+                                                        {% if settings.images_loading != 'fade_scale' %}
+                                                        <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                                                            <img 
+                                                            alt="{{ collection.image.alt | escape }}" 
+                                                            src="{{ collection.image | image_url: width: 10 }}"
+                                                            draggable="false"
+                                                            width="10" 
+                                                            height="10">
+                                                        </div>
+                                                        {% endif %}
+                                                        </figure>
+                                                    {% endif %}
+                                                        <p class="menu-collection-title menu__item--{{ settings.typography_preset }}{% if settings.enable_drawer_animations %} stagger__item{% endif %} {% if menu_settings.title_font_size != 'default' %}{{ menu_settings.title_font_size }}{% else %}{% if uppercase_font_title %} uppercase{% endif %}{% if bolder_font_title %} bolder-font{% endif %}{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %}>{{ link.title }}</p>
+                                                    </div>
+                                            </a>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                    <p class="menu-collection-title menu__item--{{ settings.typography_preset }}{% if settings.enable_drawer_animations %} stagger__item{% endif %} {% if menu_settings.title_font_size != 'default' %}{{ menu_settings.title_font_size }}{% else %}{% if uppercase_font_title %} uppercase{% endif %}{% if bolder_font_title %} bolder-font{% endif %}{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %}>{{ link.title }}</p>
+                                <ul class="first-nested__list flex--column hide-scrollbar">
+                                    {% for first_nested_link in link.links %}
+                                        <li>
+                                            {%- liquid
+                                                assign enable_nested_menu = false
+                                                assign link_title_handle = first_nested_link.title | handle
+                                                assign downcased_link_title = first_nested_link.title | downcase
+                                                for block in blocks
+                                                    assign menu_item_handle = block.settings.menu_dropdown_link | handle
+                                                    if menu_item_handle == link_title_handle and first_nested_link.links.size == 0
+                                                        assign enable_nested_menu = true
+                                                        assign downcased_nested_highlighted_items = block.settings.nested_highlight_menu_item | downcase | split: ", "
+                                                        assign nested_menu_block_id = block.id
+                                                        assign highlight_color = block.settings.nested_highlight_menu_item_color
+                                                        assign image_ratio = block.settings.image_ratio
+                                                        assign image_radius = block.settings.image_radius
+                                                        assign item_style = block.settings.item_style
+                                                        assign item_heading_1 = block.settings.heading_1
+                                                        assign item_img_1 = block.settings.image_1
+                                                        assign item_link_1 = block.settings.link_1
+                                                        assign item_heading_2 = block.settings.heading_2
+                                                        assign item_img_2 = block.settings.image_2
+                                                        assign item_link_2 = block.settings.link_2
+                                                        assign item_heading_3 = block.settings.heading_3
+                                                        assign item_img_3 = block.settings.image_3
+                                                        assign item_link_3 = block.settings.link_3
+                                                        assign item_heading_4 = block.settings.heading_4
+                                                        assign item_img_4 = block.settings.image_4
+                                                        assign item_link_4 = block.settings.link_4
+                                                        assign item_heading_5 = block.settings.heading_5
+                                                        assign item_img_5 = block.settings.image_5
+                                                        assign item_link_5 = block.settings.link_5
+                                                        assign item_heading_6 = block.settings.heading_6
+                                                        assign item_img_6 = block.settings.image_6
+                                                        assign item_link_6 = block.settings.link_6
+                                                        assign item_heading_7 = block.settings.heading_7
+                                                        assign item_img_7 = block.settings.image_7
+                                                        assign item_link_7 = block.settings.link_7
+                                                        assign item_heading_8 = block.settings.heading_8
+                                                        assign item_img_8 = block.settings.image_8
+                                                        assign item_link_8 = block.settings.link_8
+                                                        assign item_heading_9 = block.settings.heading_9
+                                                        assign item_img_9 = block.settings.image_9
+                                                        assign item_link_9 = block.settings.link_9
+                                                        assign item_heading_10 = block.settings.heading_10
+                                                        assign item_img_10 = block.settings.image_10
+                                                        assign item_link_10 = block.settings.link_10
+                                                    endif
+                                                endfor
+                                            -%}
+                                            <drawer-menu trigger="click" level="child">
+                                                <summary class="second-level-item {% if settings.enable_drawer_animations %} stagger__item {% endif %}" 
+                                                    {% if settings.enable_drawer_animations %} style="--item-index: {{ list_stagger_start | default: 2 | plus: forloop.index0 }};"{% endif %} 
+                                                    open="false"
+                                                >
+                                                    <div class="menu__item-title menu__item--{{ settings.typography_preset }} {% if menu_settings.nested_menu_size != 'default' %}{{ menu_settings.nested_menu_size }}{% else %}{% if settings.navigation_item_size != 'default' %} {{ settings.navigation_item_size }}{% endif %}{% if uppercase_font_nested %} uppercase{% endif %}{% if bolder_font_nested %} bolder-font{% endif %}{% endif %}">
+                                                        {% liquid 
+                                                            assign downcased_link_title = first_nested_link.title | downcase
+                                                            assign downcased_highlighted_items = block.settings.highlight_menu_item | downcase | split: ", "
+                                                            assign highlight_item = false
+                                                            for highlighted_item in downcased_highlighted_items
+                                                                if highlighted_item == downcased_link_title
+                                                                    assign highlight_item = true
+                                                                endif
+                                                            endfor
+                                                        %}
+                                                        {% if block.settings.show_collection_image %}
+                                                            {% for collection in collections %}
+                                                            {% if collection.url == first_nested_link.url and collection.image %}
+                                                                <div class="menu__item-image lazy-image-container ratio-{{ block.settings.image_ratio }}" {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}>
+                                                                {% if settings.images_loading != 'disable' %}
+                                                                    <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ collection.image.aspect_ratio }}">
+                                                                {% endif %}      
+                                                                    <img srcset="{%- if collection.image.width >= 165 -%}{{ collection.image | image_url: width: 165 }} 165w,{%- endif -%}
+                                                                    {%- if collection.image.width >= 375 -%}{{ collection.image | image_url: width: 375 }} 375w,{%- endif -%}
+                                                                    {%- if collection.image.width >= 550 -%}{{ collection.image | image_url: width: 550 }} 550w,{%- endif -%}
+                                                                        {{ collection.image | image_url: height: collection.image.height }}"
+                                                                        src="{{ collection.image | image_url: height: collection.image.height }}"
+                                                                        loading="lazy"
+                                                                        {% if settings.images_loading != 'disable' %}
+                                                                            onload="this.parentNode.classList.add('lazyloaded');"
+                                                                        {% endif %}
+                                                                        draggable="false"
+                                                                        sizes="calc(40px * 1)"
+                                                                        width="{{ collection.image.width }}"
+                                                                        height="{{ collection.image.height }}"
+                                                                        alt="{{ collection.image.alt | default: collection.title | escape }}"
+                                                                        style="object-position: {{ block.settings.focal_point }}"
+                                                                    />
+                                                                {% if settings.images_loading != 'disable' %}
+                                                                    {% if settings.images_loading != 'fade_scale' %}
+                                                                    <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                                                                        <img 
+                                                                        alt="{{ collection.image.alt | escape }}" 
+                                                                        src="{{ collection.image | image_url: width: 10 }}"
+                                                                        draggable="false"
+                                                                        width="10" 
+                                                                        height="10">
+                                                                    </div>
+                                                                    {% endif %}
+                                                                    </figure>
+                                                                {% endif %}
+                                                                </div> 
+                                                            {% elsif collection.url == first_nested_link.url and collection.products.first.featured_image %}
+                                                                <div class="menu__item-image lazy-image-container ratio-{{ block.settings.image_ratio }}" {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}>
+                                                                    {% if settings.images_loading != 'disable' %}
+                                                                        <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ collection.products.first.featured_image.aspect_ratio }}">
+                                                                    {% endif %} 
+                                                                    <img srcset="{%- if collection.products.first.featured_image.width >= 165 -%}{{ collection.products.first.featured_image | image_url: width: 165 }} 165w,{%- endif -%}
+                                                                    {%- if collection.products.first.featured_image.width >= 375 -%}{{ collection.products.first.featured_image | image_url: width: 375 }} 375w,{%- endif -%}
+                                                                    {%- if collection.products.first.featured_image.width >= 550 -%}{{ collection.products.first.featured_image | image_url: width: 550 }} 550w,{%- endif -%}
+                                                                        {{ collection.products.first.featured_image | image_url: height: collection.products.first.featured_image.height }}"
+                                                                        src="{{ collection.products.first.featured_image | image_url: height: collection.products.first.featured_image.height }}"
+                                                                        loading="lazy"
+                                                                        {% if settings.images_loading != 'disable' %}
+                                                                            onload="this.parentNode.classList.add('lazyloaded');"
+                                                                        {% endif %}
+                                                                        draggable="false"
+                                                                        sizes="calc(40px * 1)"
+                                                                        width="{{ collection.products.first.featured_image.width }}"
+                                                                        height="{{ collection.products.first.featured_image.height }}"
+                                                                        alt="{{ collection.products.first.featured_image.alt | default: collection.title | escape }}"
+                                                                        style="object-position: {{ block.settings.focal_point }}"
+                                                                    />
+                                                                {% if settings.images_loading != 'disable' %}
+                                                                    {% if settings.images_loading != 'fade_scale' %}
+                                                                    <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                                                                        <img 
+                                                                        alt="{{ collection.products.first.featured_image.alt | escape }}" 
+                                                                        src="{{ collection.products.first.featured_image | image_url: width: 10 }}"
+                                                                        draggable="false"
+                                                                        width="10" 
+                                                                        height="10">
+                                                                    </div>
+                                                                    {% endif %}
+                                                                    </figure>
+                                                                {% endif %}
+                                                                </div> 
+                                                            {% endif %}
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                        <a href="{{ first_nested_link.url }}"  inert class="link-{{ downcased_link_title }} menu__link menu__item-link hover-link{% if highlight_item %} link--highlighted{% endif %} link--single" {% if first_nested_link.url contains 'http://' or first_nested_link.url contains 'https://' %}target="_blank"{% endif %}>
+                                                            <div class="menu__item-link-title {% if first_nested_link.current and settings.underline_active_link == true %}underline-active{% endif %} {% if settings.enable_animated_underline and settings.enable_rolling_hover == false %}link-animation--underline{% elsif settings.enable_rolling_hover %}link-animation--slide{% else %}link-animation{% endif %}">
+                                                                <span data-hover="{{ first_nested_link.title | split: '<' | first | strip }}">{{ first_nested_link.title }}</span>
+                                                            </div>
+                                                        </a>
+                                                        {% if first_nested_link.links.size > 0 or enable_nested_menu %}
+                                                            <button class="button-dropdown-icon" inert>
+                                                                <div class="dropdown-icon dropdown-icon--chevron" inert>
+                                                                    {% assign icon_full = 'close-chevron' | append: "-" | append: weight %}
+                                                                    {% render 'icon', icon: icon_full %}  
+                                                                </div>		
+                                                            </button>  
+                                                        {% endif %}
+                                                    </div>
+                                                </summary>
+                                                {% if enable_nested_menu %}
+                                                    <div class="nested-submenu scroll-area hide-scrollbar nested-submenu-third-level" tabindex="-1">
+                                                        {% assign list_stagger_start_3 = 2 %}
+                                                        <div class="menu-drawer__header{% if settings.enable_drawer_animations %} stagger__item{% endif %}"{% if settings.enable_drawer_animations %} style="--item-index: 1;"{% endif %}>
+                                                            <button class="body-secondary-text--{{ settings.typography_preset }} {% if section.settings.heading_size != 'default' %}{{ section.settings.heading_size }}{% else %}{% if uppercase_font_heading %} uppercase{% endif %}{% if bolder_font_heading %} bolder-font{% endif %}{% endif %}" inert>
+                                                                <div class="dropdown-icon"> 		
+                                                                {% assign icon_full = 'arrow-left' | append: "-" | append: weight %}
+                                                                {% render 'icon-accordion', icon: icon_full %}
+                                                                </div>
+                                                                {{ link.title }}</button>
+                                                        </div>
+                                                        {%- liquid
+                                                            assign enable_menu_img = false
+                                                            assign link_title_handle = first_nested_link.title | handle
+                                                            assign overlay_gradient = blank
+                                                            for block in blocks
+                                                                assign menu_title_handle = block.settings.dropdown_link | handle
+                                                                if menu_title_handle == link_title_handle
+                                                                    assign enable_menu_img = true
+                                                                    assign menu_img = block.settings.image
+                                                                    assign mega_menu_block_id = block.id
+                                                                    assign overlay_color = block.settings.overlay_color
+                                                                    assign overlay_gradient = block.settings.overlay_gradient
+                                                                    assign overlay_opacity = block.settings.overlay_opacity
+                                                                    assign text_color = block.settings.content_color
+                                                                    assign image_ratio = block.settings.image_ratio
+                                                                endif
+                                                            endfor
+                                                        -%}
+                                                        {%- if enable_menu_img and menu_img -%}
+                                                            {% assign list_stagger_start_3 = 3 %}
+                                                            <a href="{{ first_nested_link.url }}" class="menu-collection-banner menu-collection-banner--{{ mega_menu_block_id }}{% if settings.enable_drawer_animations %} stagger__item{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %} inert>
+                                                                {%- liquid
+                                                                    assign widths = '50, 75, 100, 150, 200, 300, 400, 500, 650, 750, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750, 3000, 3200'
+                                                                -%}
+                                                                {%- capture sizes -%}
+                                                                    (max-width: 640px) 100vw, 640px
+                                                                {%- endcapture -%}
+                                                                <div class="menu-collection-img lazy-image-container ratio-{{ image_ratio }}"{% if settings.disable_right_click %} oncontextmenu="return false"{% endif %}>
+                                                                    {%- liquid
+                                                                        assign image_banner_overlay_background = overlay_color
+                                                                        if overlay_gradient != blank
+                                                                            assign image_banner_overlay_background = overlay_gradient
+                                                                        endif
+                                                                    -%}
+                                                                    {% style %}
+                                                                        .menu-collection-banner--{{ mega_menu_block_id }} .menu-collection-img {
+                                                                            --overlay-background: {{ image_banner_overlay_background }};
+                                                                            --banner-overlay-opacity: {{ overlay_opacity | divided_by: 100.0 }};
+                                                                            --layout-text-color:
+                                                                                {{ text_color.red }},
+                                                                                {{ text_color.green }}, 
+                                                                                {{ text_color.blue }}; 
+                                                                            color: rgb(var(--layout-text-color));
+                                                                        }
+                                                                    {% endstyle %}
+                                                                    {% if settings.images_loading != 'disable' %}
+                                                                        <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ menu_img.aspect_ratio }}">
+                                                                    {% endif %}
+                                                                    {{
+                                                                        menu_img
+                                                                        | image_url: width: 3200
+                                                                        | image_tag:
+                                                                        sizes: sizes,
+                                                                        widths: widths,
+                                                                        class: img_class,
+                                                                        alt: collection.image.alt,
+                                                                        draggable: false,
+                                                                        loading: 'lazy',
+                                                                        fetchpriority: 'low',
+                                                                        onload: onloadScript
+                                                                    }} 
+                                                                {% if settings.images_loading != 'disable' %}
+                                                                    {% if settings.images_loading != 'fade_scale' %}
+                                                                    <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                                                                        <img 
+                                                                        alt="{{ menu_img.alt | escape }}" 
+                                                                        src="{{ menu_img | image_url: width: 10 }}"
+                                                                        draggable="false"
+                                                                        width="10" 
+                                                                        height="10">
+                                                                    </div>
+                                                                    {% endif %}
+                                                                    </figure>
+                                                                {% endif %}
+                                                                    <p class="menu-collection-title menu__item--{{ settings.typography_preset }}{% if settings.enable_drawer_animations %} stagger__item{% endif %} {% if menu_settings.title_font_size != 'default' %}{{ menu_settings.title_font_size }}{% else %}{% if uppercase_font_title %} uppercase{% endif %}{% if bolder_font_title %} bolder-font{% endif %}{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %}>{{ first_nested_link.title }}</p>
+                                                                </div>
+                                                            </a>
+                                                        {% elsif block.settings.show_collection_banner %}
+                                                            {% assign list_stagger_start_3 = 3 %}
+                                                            {% for collection in collections %}
+                                                                {% if collection.url == first_nested_link.url and collection.image %}
+                                                                    <a href="{{ first_nested_link.url }}" class="menu-collection-banner{% if settings.enable_drawer_animations %} stagger__item{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %} inert>
+                                                                            {%- liquid
+                                                                                assign widths = '50, 75, 100, 150, 200, 300, 400, 500, 650, 750, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750, 3000, 3200'
+                                                                            -%}
+                                                                            {%- capture sizes -%}
+                                                                                (max-width: 640px) 100vw, 640px
+                                                                            {%- endcapture -%}
+                                                                            <div class="menu-collection-img lazy-image-container ratio-{{ block.settings.banner_image_ratio }}"{% if settings.disable_right_click %} oncontextmenu="return false"{% endif %}>
+                                                                                {% style %}
+                                                                                    .menu-collection-img {
+                                                                                        --focal-point: {{ block.settings.banner_focal_point }};
+                                                                                        --overlay-background: {{ banner_overlay_background }};
+                                                                                        --banner-overlay-opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};
+                                                                                        --layout-text-color:
+                                                                                            {{ block.settings.content_color.red }},
+                                                                                            {{ block.settings.content_color.green }}, 
+                                                                                            {{ block.settings.content_color.blue }}; 
+                                                                                        color: rgb(var(--layout-text-color));
+                                                                                    }
+                                                                                {% endstyle %}
+                                                                            {% if settings.images_loading != 'disable' %}
+                                                                                <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ collection.image.aspect_ratio }}">
+                                                                            {% endif %}
+                                                                                {{
+                                                                                    collection.image
+                                                                                    | image_url: width: 3200
+                                                                                    | image_tag:
+                                                                                    sizes: sizes,
+                                                                                    widths: widths,
+                                                                                    class: img_class,
+                                                                                    alt: collection.image.alt,
+                                                                                    draggable: false,
+                                                                                    draggable: false,
+                                                                                    loading: 'lazy',
+                                                                                    fetchpriority: 'low',
+                                                                                    onload: onloadScript
+                                                                                }} 
+                                                                            {% if settings.images_loading != 'disable' %}
+                                                                                {% if settings.images_loading != 'fade_scale' %}
+                                                                                <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                                                                                    <img 
+                                                                                    alt="{{ collection.image.alt | escape }}" 
+                                                                                    src="{{ collection.image | image_url: width: 10 }}"
+                                                                                    draggable="false"
+                                                                                    width="10" 
+                                                                                    height="10">
+                                                                                </div>
+                                                                                {% endif %}
+                                                                                </figure>
+                                                                            {% endif %}
+                                                                                <p class="menu-collection-title menu__item--{{ settings.typography_preset }}{% if settings.enable_drawer_animations %} stagger__item{% endif %} {% if menu_settings.title_font_size != 'default' %}{{ menu_settings.title_font_size }}{% else %}{% if uppercase_font_title %} uppercase{% endif %}{% if bolder_font_title %} bolder-font{% endif %}{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %}>{{ first_nested_link.title }}</p>
+                                                                            </div>
+                                                                    </a>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                        <p class="menu-collection-title menu__item--{{ settings.typography_preset }}{% if settings.enable_drawer_animations %} stagger__item{% endif %} {% if menu_settings.title_font_size != 'default' %}{{ menu_settings.title_font_size }}{% else %}{% if uppercase_font_title %} uppercase{% endif %}{% if bolder_font_title %} bolder-font{% endif %}{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %}>{{ first_nested_link.title }}</p>
+                                                        <ul class="second-nested__list flex--column hide-scrollbar block-nested-menu--{{ nested_menu_block_id }}">
+                                                            {% style %}
+                                                            .block-nested-menu--{{ nested_menu_block_id }} {
+                                                                {% if image_radius == 'default' %}
+                                                                    --image-border-radius: var(--images-and-section-radius);;
+                                                                {% else %}
+                                                                    --image-border-radius: {{ image_radius }};
+                                                                {% endif %}
+                                                                --highlight-color: {{ highlight_color.red }},
+                                                                    {{ highlight_color.green }},
+                                                                    {{ highlight_color.blue }};
+                                                            }
+                                                            {% endstyle %}
+                                                            {% assign nested_stagger_index = 3 %}
+                                                            {% if item_img_1 != blank or item_heading_1 != blank and item_link_1 != blank %}
+                                                            {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                                                image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'third', level_link: second_nested_link, item_heading: item_heading_1, item_image: item_img_1, item_link: item_link_1, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested, nested_drawer_stagger_index: nested_stagger_index -%}
+                                                            {% assign nested_stagger_index = nested_stagger_index | plus: 1 %}
+                                                            {% endif %}
+                                                            {% if item_img_2 != blank or item_heading_2 != blank and item_link_2 != blank %}
+                                                                {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                                                    image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'third', level_link: second_nested_link, item_heading: item_heading_2, item_image: item_img_2, item_link: item_link_2, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested, nested_drawer_stagger_index: nested_stagger_index -%}
+                                                            {% assign nested_stagger_index = nested_stagger_index | plus: 1 %}
+                                                            {% endif %}
+                                                            {% if item_img_3 != blank or item_heading_3 != blank and item_link_3 != blank %}
+                                                                {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                                                    image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'third', level_link: second_nested_link, item_heading: item_heading_3, item_image: item_img_3, item_link: item_link_3, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested, nested_drawer_stagger_index: nested_stagger_index -%}
+                                                            {% assign nested_stagger_index = nested_stagger_index | plus: 1 %}
+                                                            {% endif %}
+                                                            {% if item_img_4 != blank or item_heading_4 != blank and item_link_4 != blank %}
+                                                                {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                                                    image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'third', level_link: second_nested_link, item_heading: item_heading_4, item_image: item_img_4, item_link: item_link_4, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested, nested_drawer_stagger_index: nested_stagger_index -%}
+                                                            {% assign nested_stagger_index = nested_stagger_index | plus: 1 %}
+                                                            {% endif %}
+                                                            {% if item_img_5 != blank or item_heading_5 != blank and item_link_5 != blank %}
+                                                                {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                                                    image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'third', level_link: second_nested_link, item_heading: item_heading_5, item_image: item_img_5, item_link: item_link_5, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested, nested_drawer_stagger_index: nested_stagger_index -%}
+                                                            {% assign nested_stagger_index = nested_stagger_index | plus: 1 %}
+                                                            {% endif %}
+                                                            {% if item_img_6 != blank or item_heading_6 != blank and item_link_6 != blank %}
+                                                                {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                                                    image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'third', level_link: second_nested_link, item_heading: item_heading_6, item_image: item_img_6, item_link: item_link_6, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested, nested_drawer_stagger_index: nested_stagger_index -%}
+                                                            {% assign nested_stagger_index = nested_stagger_index | plus: 1 %}
+                                                            {% endif %}
+                                                            {% if item_img_7 != blank or item_heading_7 != blank and item_link_7 != blank %}
+                                                                {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                                                    image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'third', level_link: second_nested_link, item_heading: item_heading_7, item_image: item_img_7, item_link: item_link_7, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested, nested_drawer_stagger_index: nested_stagger_index -%}
+                                                            {% assign nested_stagger_index = nested_stagger_index | plus: 1 %}
+                                                            {% endif %}
+                                                            {% if item_img_8 != blank or item_heading_8 != blank and item_link_8 != blank %}
+                                                                {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                                                    image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'third', level_link: second_nested_link, item_heading: item_heading_8, item_image: item_img_8, item_link: item_link_8, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested, nested_drawer_stagger_index: nested_stagger_index -%}
+                                                            {% assign nested_stagger_index = nested_stagger_index | plus: 1 %}
+                                                            {% endif %}
+                                                            {% if item_img_9 != blank or item_heading_9 != blank and item_link_9 != blank %}
+                                                                {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                                                    image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'third', level_link: second_nested_link, item_heading: item_heading_9, item_image: item_img_9, item_link: item_link_9, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested, nested_drawer_stagger_index: nested_stagger_index -%}
+                                                            {% assign nested_stagger_index = nested_stagger_index | plus: 1 %}
+                                                            {% endif %}
+                                                            {% if item_img_10 != blank or item_heading_10 != blank and item_link_10 != blank %}
+                                                                {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                                                    image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'third', level_link: second_nested_link, item_heading: item_heading_10, item_image: item_img_10, item_link: item_link_10, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested, nested_drawer_stagger_index: nested_stagger_index -%}
+                                                            {% assign nested_stagger_index = nested_stagger_index | plus: 1 %}
+                                                            {% endif %}
+                                                        </ul>
+                                                        {% for collection in collections %}
+                                                            {% if collection.url == first_nested_link.url %}
+                                                                <div class="button-block block__button collection-button{% if settings.enable_drawer_animations %} stagger__item{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: {{ nested_stagger_index }};"{% endif %}>
+                                                                    <a href="{{ first_nested_link.url }}"  inert class="button solid-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}">{{ 'collections.shop_all' | t }}</a>
+                                                                </div>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </div>
+                                                    <span class='animation-item second-level'></span>
+                                                {% endif %}
+                                                {% if first_nested_link.links.size > 0 %}
+                                                    <div class="nested-submenu hide-scrollbar nested-submenu-third-level" tabindex="-1">
+                                                        <div class="menu-drawer__header{% if settings.enable_drawer_animations %} stagger__item{% endif %}"{% if settings.enable_drawer_animations %} style="--item-index: 1;"{% endif %}>
+                                                            <button inert class="body-secondary-text--{{ settings.typography_preset }} {% if section.settings.heading_size != 'default' %}{{ section.settings.heading_size }}{% else %}{% if uppercase_font_heading %} uppercase{% endif %}{% if bolder_font_heading %} bolder-font{% endif %}{% endif %}">
+                                                                <div class="dropdown-icon"> 		
+                                                                {% assign icon_full = 'arrow-left' | append: "-" | append: weight %}
+                                                                {% render 'icon-accordion', icon: icon_full %}
+                                                                </div>
+                                                                {{ link.title }}</button>
+                                                        </div>
+                                                        {%- liquid
+                                                            assign enable_menu_img = false
+                                                            assign link_title_handle = first_nested_link.title | handle
+                                                            assign overlay_gradient = blank
+                                                            for block in blocks
+                                                                assign menu_title_handle = block.settings.dropdown_link | handle
+                                                                if menu_title_handle == link_title_handle
+                                                                    assign enable_menu_img = true
+                                                                    assign menu_img = block.settings.image
+                                                                    assign mega_menu_block_id = block.id
+                                                                    assign overlay_color = block.settings.overlay_color
+                                                                    assign overlay_gradient = block.settings.overlay_gradient
+                                                                    assign overlay_opacity = block.settings.overlay_opacity
+                                                                    assign text_color = block.settings.content_color
+                                                                    assign image_ratio = block.settings.image_ratio
+                                                                endif
+                                                            endfor
+                                                        -%}
+                                                        {%- if enable_menu_img and menu_img -%}
+                                                            <a href="{{ first_nested_link.url }}" inert class="menu-collection-banner menu-collection-banner--{{ mega_menu_block_id }}{% if settings.enable_drawer_animations %} stagger__item{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %}>
+                                                                {%- liquid
+                                                                    assign widths = '50, 75, 100, 150, 200, 300, 400, 500, 650, 750, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750, 3000, 3200'
+                                                                -%}
+                                                                {%- capture sizes -%}
+                                                                    (max-width: 640px) 100vw, 640px
+                                                                {%- endcapture -%}
+                                                                <div class="menu-collection-img lazy-image-container ratio-{{ image_ratio }}"{% if settings.disable_right_click %} oncontextmenu="return false"{% endif %}>
+                                                                    {%- liquid
+                                                                        assign image_banner_overlay_background = overlay_color
+                                                                        if overlay_gradient != blank
+                                                                            assign image_banner_overlay_background = overlay_gradient
+                                                                        endif
+                                                                    -%}
+                                                                    {% style %}
+                                                                        .menu-collection-banner--{{ mega_menu_block_id }} .menu-collection-img {
+                                                                            --overlay-background: {{ image_banner_overlay_background }};
+                                                                            --banner-overlay-opacity: {{ overlay_opacity | divided_by: 100.0 }};
+                                                                            --layout-text-color:
+                                                                                {{ text_color.red }},
+                                                                                {{ text_color.green }}, 
+                                                                                {{ text_color.blue }};
+                                                                            color: rgb(var(--layout-text-color));
+                                                                        }
+                                                                    {% endstyle %}
+                                                                {% if settings.images_loading != 'disable' %}
+                                                                    <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ menu_img.aspect_ratio }}">
+                                                                {% endif %}
+                                                                    {{
+                                                                        menu_img
+                                                                        | image_url: width: 3200
+                                                                        | image_tag:
+                                                                        sizes: sizes,
+                                                                        widths: widths,
+                                                                        class: img_class,
+                                                                        alt: collection.image.alt,
+                                                                        draggable: false,
+                                                                        loading: 'lazy',
+                                                                        fetchpriority: 'low',
+                                                                        onload: onloadScript
+                                                                    }}
+                                                                {% if settings.images_loading != 'disable' %}
+                                                                    {% if settings.images_loading != 'fade_scale' %}
+                                                                    <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                                                                        <img 
+                                                                        alt="{{ menu_img.alt | escape }}" 
+                                                                        src="{{ menu_img | image_url: width: 10 }}"
+                                                                        draggable="false"
+                                                                        width="10" 
+                                                                        height="10">
+                                                                    </div>
+                                                                    {% endif %}
+                                                                    </figure>
+                                                                {% endif %}
+                                                                    <p class="menu-collection-title menu__item--{{ settings.typography_preset }}{% if settings.enable_drawer_animations %} stagger__item{% endif %} {% if menu_settings.title_font_size != 'default' %}{{ menu_settings.title_font_size }}{% else %}{% if uppercase_font_title %} uppercase{% endif %}{% if bolder_font_title %} bolder-font{% endif %}{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %}>{{ first_nested_link.title }}</p>
+                                                                </div>
+                                                            </a>
+                                                        {% elsif block.settings.show_collection_banner %}
+                                                            {% assign list_stagger_start_3 = 3 %}
+                                                            {% for collection in collections %}
+                                                                {% if collection.url == first_nested_link.url and collection.image %}
+                                                                    <a href="{{ first_nested_link.url }}" inert class="menu-collection-banner{% if settings.enable_drawer_animations %} stagger__item{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %}>
+                                                                        {%- liquid
+                                                                            assign widths = '50, 75, 100, 150, 200, 300, 400, 500, 650, 750, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750, 3000, 3200'
+                                                                        -%}
+                                                                        {%- capture sizes -%}
+                                                                            (max-width: 640px) 100vw, 640px
+                                                                        {%- endcapture -%}
+                                                                        <div class="menu-collection-img lazy-image-container ratio-{{ block.settings.banner_image_ratio }}"{% if settings.disable_right_click %} oncontextmenu="return false"{% endif %}>
+                                                                            {% style %}
+                                                                                .menu-collection-img {
+                                                                                    --focal-point: {{ block.settings.banner_focal_point }};
+                                                                                    --overlay-background: {{ banner_overlay_background }};
+                                                                                    --banner-overlay-opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};
+                                                                                    --layout-text-color:
+                                                                                        {{ block.settings.content_color.red }},
+                                                                                        {{ block.settings.content_color.green }}, 
+                                                                                        {{ block.settings.content_color.blue }};
+                                                                                    color: rgb(var(--layout-text-color));
+                                                                                }
+                                                                            {% endstyle %}
+                                                                        {% if settings.images_loading != 'disable' %}
+                                                                            <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ collection.image.aspect_ratio }}">
+                                                                        {% endif %}
+                                                                            {{
+                                                                                collection.image
+                                                                                | image_url: width: 3200
+                                                                                | image_tag:
+                                                                                sizes: sizes,
+                                                                                widths: widths,
+                                                                                class: img_class,
+                                                                                alt: collection.image.alt,
+                                                                                draggable: false,
+                                                                                loading: 'lazy',
+                                                                                fetchpriority: 'low',
+                                                                                onload: onloadScript
+                                                                            }}
+                                                                        {% if settings.images_loading != 'disable' %}
+                                                                            {% if settings.images_loading != 'fade_scale' %}
+                                                                            <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                                                                                <img 
+                                                                                alt="{{ collection.image.alt | escape }}" 
+                                                                                src="{{ collection.image | image_url: width: 10 }}"
+                                                                                draggable="false"
+                                                                                width="10" 
+                                                                                height="10">
+                                                                            </div>
+                                                                            {% endif %}
+                                                                            </figure>
+                                                                        {% endif %}
+                                                                            <p class="menu-collection-title menu__item--{{ settings.typography_preset }}{% if settings.enable_drawer_animations %} stagger__item{% endif %} {% if menu_settings.title_font_size != 'default' %}{{ menu_settings.title_font_size }}{% else %}{% if uppercase_font_title %} uppercase{% endif %}{% if bolder_font_title %} bolder-font{% endif %}{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %}>{{ first_nested_link.title }}</p>
+                                                                        </div>
+                                                                    </a>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                        <p class="menu-collection-title menu__item--{{ settings.typography_preset }}{% if settings.enable_drawer_animations %} stagger__item{% endif %} {% if menu_settings.title_font_size != 'default' %}{{ menu_settings.title_font_size }}{% else %}{% if uppercase_font_title %} uppercase{% endif %}{% if bolder_font_title %} bolder-font{% endif %}{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %}>{{ first_nested_link.title }}</p>
+                                                        <ul class="second-nested__list flex--column hide-scrollbar">
+                                                            {% for second_nested_link in first_nested_link.links %}
+                                                                <li>
+                                                                <drawer-menu trigger="click" level="child">
+                                                                <summary class="third-level-item {% if settings.enable_drawer_animations %} stagger__item {% endif %}" 
+                                                                    {% if settings.enable_drawer_animations %} style="--item-index: {{ list_stagger_start_3 | default: 2 | plus: forloop.index0 }};"{% endif %}
+                                                                    open="false"
+                                                                >
+                                                                <div class="menu__item-title menu__item--{{ settings.typography_preset }} {% if menu_settings.nested_menu_size != 'default' %}{{ menu_settings.nested_menu_size }}{% else %}{% if settings.navigation_item_size != 'default' %} {{ settings.navigation_item_size }}{% endif %}{% if uppercase_font_nested %} uppercase{% endif %}{% if bolder_font_nested %} bolder-font{% endif %}{% endif %}">
+                                                                    {%- liquid
+                                                                        assign enable_nested_menu = false
+                                                                        assign link_title_handle = second_nested_link.title | handle
+                                                                        assign downcased_link_title = second_nested_link.title | downcase
+                                                                        for block in blocks
+                                                                            assign menu_item_handle = block.settings.menu_dropdown_link | handle
+                                                                            if menu_item_handle == link_title_handle
+                                                                                assign enable_nested_menu = true
+                                                                                assign downcased_nested_highlighted_items = block.settings.nested_highlight_menu_item | downcase | split: ", "
+                                                                                assign nested_menu_block_id = block.id
+                                                                                assign highlight_color = block.settings.nested_highlight_menu_item_color
+                                                                                assign image_ratio = block.settings.image_ratio
+                                                                                assign image_radius = block.settings.image_radius
+                                                                                assign item_style = block.settings.item_style
+                                                                                assign item_heading_1 = block.settings.heading_1
+                                                                                assign item_img_1 = block.settings.image_1
+                                                                                assign item_link_1 = block.settings.link_1
+                                                                                assign item_heading_2 = block.settings.heading_2
+                                                                                assign item_img_2 = block.settings.image_2
+                                                                                assign item_link_2 = block.settings.link_2
+                                                                                assign item_heading_3 = block.settings.heading_3
+                                                                                assign item_img_3 = block.settings.image_3
+                                                                                assign item_link_3 = block.settings.link_3
+                                                                                assign item_heading_4 = block.settings.heading_4
+                                                                                assign item_img_4 = block.settings.image_4
+                                                                                assign item_link_4 = block.settings.link_4
+                                                                                assign item_heading_5 = block.settings.heading_5
+                                                                                assign item_img_5 = block.settings.image_5
+                                                                                assign item_link_5 = block.settings.link_5
+                                                                                assign item_heading_6 = block.settings.heading_6
+                                                                                assign item_img_6 = block.settings.image_6
+                                                                                assign item_link_6 = block.settings.link_6
+                                                                                assign item_heading_7 = block.settings.heading_7
+                                                                                assign item_img_7 = block.settings.image_7
+                                                                                assign item_link_7 = block.settings.link_7
+                                                                                assign item_heading_8 = block.settings.heading_8
+                                                                                assign item_img_8 = block.settings.image_8
+                                                                                assign item_link_8 = block.settings.link_8
+                                                                                assign item_heading_9 = block.settings.heading_9
+                                                                                assign item_img_9 = block.settings.image_9
+                                                                                assign item_link_9 = block.settings.link_9
+                                                                                assign item_heading_10 = block.settings.heading_10
+                                                                                assign item_img_10 = block.settings.image_10
+                                                                                assign item_link_10 = block.settings.link_10
+                                                                            endif
+                                                                        endfor
+                                                                    -%}
+                                                                    {% liquid 
+                                                                        assign downcased_link_title = second_nested_link.title | downcase
+                                                                        assign downcased_highlighted_items = block.settings.highlight_menu_item | downcase | split: ", "
+                                                                        assign highlight_item = false
+                                                                        for highlighted_item in downcased_highlighted_items
+                                                                            if highlighted_item == downcased_link_title
+                                                                                assign highlight_item = true
+                                                                            endif
+                                                                        endfor
+                                                                    %}
+                                                                    {% if block.settings.show_collection_image %}
+                                                                        {% for collection in collections %}
+                                                                        {% if collection.url == second_nested_link.url and collection.image %}
+                                                                            <div class="menu__item-image lazy-image-container ratio-{{ block.settings.image_ratio }}" {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}>
+                                                                            {% if settings.images_loading != 'disable' %}
+                                                                                <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ collection.image.aspect_ratio }}">
+                                                                            {% endif %}
+                                                                                <img srcset="{%- if collection.image.width >= 165 -%}{{ collection.image | image_url: width: 165 }} 165w,{%- endif -%}
+                                                                                {%- if collection.image.width >= 375 -%}{{ collection.image | image_url: width: 375 }} 375w,{%- endif -%}
+                                                                                {%- if collection.image.width >= 550 -%}{{ collection.image | image_url: width: 550 }} 550w,{%- endif -%}
+                                                                                    {{ collection.image | image_url: height: collection.image.height }}"
+                                                                                    src="{{ collection.image | image_url: height: collection.image.height }}"
+                                                                                    loading="lazy"
+                                                                                    {% if settings.images_loading != 'disable' %}
+                                                                                        onload="this.parentNode.classList.add('lazyloaded');"
+                                                                                    {% endif %}
+                                                                                    draggable="false"
+                                                                                    sizes="calc(40px * 1)"
+                                                                                    width="{{ collection.image.width }}"
+                                                                                    height="{{ collection.image.height }}"
+                                                                                    alt="{{ collection.image.alt | default: collection.title | escape }}"
+                                                                                    style="object-position: {{ block.settings.focal_point }}"
+                                                                                />
+                                                                            {% if settings.images_loading != 'disable' %}
+                                                                                {% if settings.images_loading != 'fade_scale' %}
+                                                                                <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                                                                                    <img 
+                                                                                    alt="{{ collection.image.alt | escape }}" 
+                                                                                    src="{{ collection.image | image_url: width: 10 }}"
+                                                                                    draggable="false"
+                                                                                    width="10" 
+                                                                                    height="10">
+                                                                                </div>
+                                                                                {% endif %}
+                                                                                </figure>
+                                                                            {% endif %}
+                                                                            </div> 
+                                                                        {% elsif collection.url == second_nested_link.url and collection.products.first.featured_image %}
+                                                                            <div class="menu__item-image lazy-image-container ratio-{{ block.settings.image_ratio }}" {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}>
+                                                                            {% if settings.images_loading != 'disable' %}
+                                                                                <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ collection.products.first.featured_image.aspect_ratio }}">
+                                                                            {% endif %}  
+                                                                                <img srcset="{%- if collection.products.first.featured_image.width >= 165 -%}{{ collection.products.first.featured_image | image_url: width: 165 }} 165w,{%- endif -%}
+                                                                                {%- if collection.products.first.featured_image.width >= 375 -%}{{ collection.products.first.featured_image | image_url: width: 375 }} 375w,{%- endif -%}
+                                                                                {%- if collection.products.first.featured_image.width >= 550 -%}{{ collection.products.first.featured_image | image_url: width: 550 }} 550w,{%- endif -%}
+                                                                                    {{ collection.products.first.featured_image | image_url: height: collection.products.first.featured_image.height }}"
+                                                                                    src="{{ collection.products.first.featured_image | image_url: height: collection.products.first.featured_image.height }}"
+                                                                                    loading="lazy"
+                                                                                    {% if settings.images_loading != 'disable' %}
+                                                                                        onload="this.parentNode.classList.add('lazyloaded');"
+                                                                                    {% endif %}
+                                                                                    draggable="false"
+                                                                                    sizes="calc(40px * 1)"
+                                                                                    width="{{ collection.products.first.featured_image.width }}"
+                                                                                    height="{{ collection.products.first.featured_image.height }}"
+                                                                                    alt="{{ collection.products.first.featured_image.alt | default: collection.title | escape }}"
+                                                                                    style="object-position: {{ block.settings.focal_point }}"
+                                                                                />
+                                                                            {% if settings.images_loading != 'disable' %}
+                                                                                {% if settings.images_loading != 'fade_scale' %}
+                                                                                <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                                                                                    <img 
+                                                                                    alt="{{ collection.products.first.featured_image.alt | escape }}" 
+                                                                                    src="{{ collection.products.first.featured_image | image_url: width: 10 }}"
+                                                                                    draggable="false"
+                                                                                    width="10" 
+                                                                                    height="10">
+                                                                                </div>
+                                                                                {% endif %}
+                                                                                </figure>
+                                                                            {% endif %}
+                                                                            </div> 
+                                                                        {% endif %}
+                                                                        {% endfor %}
+                                                                    {% endif %}
+                                                                    <a href="{{ second_nested_link.url }}"  inert class="link-{{ downcased_link_title }} menu__link menu__item-link hover-link{% if highlight_item %} link--highlighted{% endif %} link--single" {% if second_nested_link.url contains 'http://' or second_nested_link.url contains 'https://' %}target="_blank"{% endif %}>
+                                                                        <div class="menu__item-link-title {% if second_nested_link.current and settings.underline_active_link == true %}underline-active{% endif %} {% if settings.enable_animated_underline and settings.enable_rolling_hover == false %}link-animation--underline{% elsif settings.enable_rolling_hover %}link-animation--slide{% else %}link-animation{% endif %}">
+                                                                            <span data-hover="{{ second_nested_link.title | split: '<' | first | strip }}">{{ second_nested_link.title }}</span>
+                                                                        </div>
+                                                                    </a>
+                                                                    {% if enable_nested_menu %}
+                                                                        <button class="button-dropdown-icon" inert>
+                                                                            <div class="dropdown-icon dropdown-icon--chevron" inert>
+                                                                                {% assign icon_full = 'close-chevron' | append: "-" | append: weight %}
+                                                                                {% render 'icon', icon: icon_full %}  
+                                                                            </div>		
+                                                                        </button>  
+                                                                    {% endif %}
+                                                                </div>
+                                                                </summary>
+                                                                {% if enable_nested_menu %}
+                                                                    <div class="nested-submenu scroll-area hide-scrollbar nested-submenu-fourth-level" tabindex="-1">
+                                                                        <div class="menu-drawer__header">
+                                                                            <button class="body-secondary-text--{{ settings.typography_preset }} {% if section.settings.heading_size != 'default' %}{{ section.settings.heading_size }}{% else %}{% if uppercase_font_heading %} uppercase{% endif %}{% if bolder_font_heading %} bolder-font{% endif %}{% endif %}" inert>
+                                                                                <div class="dropdown-icon"> 		
+                                                                                {% assign icon_full = 'arrow-left' | append: "-" | append: weight %}
+                                                                                {% render 'icon-accordion', icon: icon_full %}
+                                                                                </div>
+                                                                                {{ first_nested_link.title }}</button>
+                                                                        </div>
+                                                                        {%- liquid
+                                                                            assign enable_menu_img = false
+                                                                            assign link_title_handle = second_nested_link.title | handle
+                                                                            assign overlay_gradient = blank
+                                                                            for block in blocks
+                                                                                assign menu_title_handle = block.settings.dropdown_link | handle
+                                                                                if menu_title_handle == link_title_handle
+                                                                                    assign enable_menu_img = true
+                                                                                    assign menu_img = block.settings.image
+                                                                                    assign mega_menu_block_id = block.id
+                                                                                    assign overlay_color = block.settings.overlay_color
+                                                                                    assign overlay_gradient = block.settings.overlay_gradient
+                                                                                    assign overlay_opacity = block.settings.overlay_opacity
+                                                                                    assign text_color = block.settings.content_color
+                                                                                    assign image_ratio = block.settings.image_ratio
+                                                                                endif
+                                                                            endfor
+                                                                        -%}
+                                                                        {%- if enable_menu_img and menu_img -%}
+                                                                            <a href="{{ second_nested_link.url }}" class="menu-collection-banner menu-collection-banner--{{ mega_menu_block_id }}{% if settings.enable_drawer_animations %} stagger__item{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %} inert>
+                                                                                {%- liquid
+                                                                                    assign widths = '50, 75, 100, 150, 200, 300, 400, 500, 650, 750, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750, 3000, 3200'
+                                                                                -%}
+                                                                                {%- capture sizes -%}
+                                                                                    (max-width: 640px) 100vw, 640px
+                                                                                {%- endcapture -%}
+                                                                                <div class="menu-collection-img lazy-image-container ratio-{{ image_ratio }}"{% if settings.disable_right_click %} oncontextmenu="return false"{% endif %}>
+                                                                                    {%- liquid
+                                                                                        assign image_banner_overlay_background = overlay_color
+                                                                                        if overlay_gradient != blank
+                                                                                            assign image_banner_overlay_background = overlay_gradient
+                                                                                        endif
+                                                                                    -%}
+                                                                                    {% style %}
+                                                                                        .menu-collection-banner--{{ mega_menu_block_id }} .menu-collection-img {
+                                                                                            --overlay-background: {{ image_banner_overlay_background }};
+                                                                                            --banner-overlay-opacity: {{ overlay_opacity | divided_by: 100.0 }};
+                                                                                            --layout-text-color:
+                                                                                                {{ text_color.red }},
+                                                                                                {{ text_color.green }}, 
+                                                                                                {{ text_color.blue }}; 
+                                                                                            color: rgb(var(--layout-text-color));
+                                                                                        }
+                                                                                    {% endstyle %}
+                                                                                {% if settings.images_loading != 'disable' %}
+                                                                                    <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ menu_img.aspect_ratio }}">
+                                                                                {% endif %}
+                                                                                    {{
+                                                                                        menu_img
+                                                                                        | image_url: width: 3200
+                                                                                        | image_tag:
+                                                                                        sizes: sizes,
+                                                                                        widths: widths,
+                                                                                        class: img_class,
+                                                                                        alt: collection.image.alt,
+                                                                                        draggable: false,
+                                                                                        loading: 'lazy',
+                                                                                        fetchpriority: 'low',
+                                                                                        onload: onloadScript
+                                                                                    }} 
+                                                                                {% if settings.images_loading != 'disable' %}
+                                                                                    {% if settings.images_loading != 'fade_scale' %}
+                                                                                    <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                                                                                        <img 
+                                                                                        alt="{{ menu_img.alt | escape }}" 
+                                                                                        src="{{ menu_img | image_url: width: 10 }}"
+                                                                                        draggable="false"
+                                                                                        width="10" 
+                                                                                        height="10">
+                                                                                    </div>
+                                                                                    {% endif %}
+                                                                                    </figure>
+                                                                                {% endif %}
+                                                                                    <p class="menu-collection-title menu__item--{{ settings.typography_preset }}{% if settings.enable_drawer_animations %} stagger__item{% endif %} {% if menu_settings.title_font_size != 'default' %}{{ menu_settings.title_font_size }}{% else %}{% if uppercase_font_title %} uppercase{% endif %}{% if bolder_font_title %} bolder-font{% endif %}{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %}>{{ second_nested_link.title }}</p>
+                                                                                </div>
+                                                                            </a>
+                                                                        {% elsif block.settings.show_collection_banner %}
+                                                                            {% for collection in collections %}
+                                                                                {% if collection.url == second_nested_link.url and collection.image %}
+                                                                                    <a href="{{ second_nested_link.url }}" class="menu-collection-banner{% if settings.enable_drawer_animations %} stagger__item{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %} inert>
+                                                                                            {%- liquid
+                                                                                                assign widths = '50, 75, 100, 150, 200, 300, 400, 500, 650, 750, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750, 3000, 3200'
+                                                                                            -%}
+                                                                                            {%- capture sizes -%}
+                                                                                                (max-width: 640px) 100vw, 640px
+                                                                                            {%- endcapture -%}
+                                                                                            <div class="menu-collection-img lazy-image-container ratio-{{ block.settings.banner_image_ratio }}"{% if settings.disable_right_click %} oncontextmenu="return false"{% endif %}>
+                                                                                                {% style %}
+                                                                                                    .menu-collection-img {
+                                                                                                        --focal-point: {{ block.settings.banner_focal_point }};
+                                                                                                        --overlay-background: {{ banner_overlay_background }};
+                                                                                                        --banner-overlay-opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};
+                                                                                                        --layout-text-color:
+                                                                                                            {{ block.settings.content_color.red }},
+                                                                                                            {{ block.settings.content_color.green }}, 
+                                                                                                            {{ block.settings.content_color.blue }}; 
+                                                                                                        color: rgb(var(--layout-text-color));
+                                                                                                    }
+                                                                                                {% endstyle %}
+                                                                                            {% if settings.images_loading != 'disable' %}
+                                                                                                <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ collection.image.aspect_ratio }}">
+                                                                                            {% endif %}
+                                                                                                {{
+                                                                                                    collection.image
+                                                                                                    | image_url: width: 3200
+                                                                                                    | image_tag:
+                                                                                                    sizes: sizes,
+                                                                                                    widths: widths,
+                                                                                                    class: img_class,
+                                                                                                    alt: collection.image.alt,
+                                                                                                    draggable: false,
+                                                                                                    draggable: false,
+                                                                                                    loading: 'lazy',
+                                                                                                    fetchpriority: 'low',
+                                                                                                    onload: onloadScript
+                                                                                                }} 
+                                                                                            {% if settings.images_loading != 'disable' %}
+                                                                                                {% if settings.images_loading != 'fade_scale' %}
+                                                                                                <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                                                                                                    <img 
+                                                                                                    alt="{{ collection.image.alt | escape }}" 
+                                                                                                    src="{{ collection.image | image_url: width: 10 }}"
+                                                                                                    draggable="false"
+                                                                                                    width="10" 
+                                                                                                    height="10">
+                                                                                                </div>
+                                                                                                {% endif %}
+                                                                                                </figure>
+                                                                                            {% endif %}
+                                                                                                <p class="menu-collection-title menu__item--{{ settings.typography_preset }}{% if settings.enable_drawer_animations %} stagger__item{% endif %} {% if menu_settings.title_font_size != 'default' %}{{ menu_settings.title_font_size }}{% else %}{% if uppercase_font_title %} uppercase{% endif %}{% if bolder_font_title %} bolder-font{% endif %}{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %}>{{ second_nested_link.title }}</p>
+                                                                                            </div>
+                                                                                    </a>
+                                                                                {% endif %}
+                                                                            {% endfor %}
+                                                                        {% endif %}
+                                                                        <p class="menu-collection-title menu__item--{{ settings.typography_preset }}{% if settings.enable_drawer_animations %} stagger__item{% endif %} {% if menu_settings.title_font_size != 'default' %}{{ menu_settings.title_font_size }}{% else %}{% if uppercase_font_title %} uppercase{% endif %}{% if bolder_font_title %} bolder-font{% endif %}{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: 2;"{% endif %}>{{ second_nested_link.title }}</p>
+                                                                        <ul class="second-nested__list flex--column hide-scrollbar block-nested-menu--{{ nested_menu_block_id }}">
+                                                                            {% style %}
+                                                                            .block-nested-menu--{{ nested_menu_block_id }} {
+                                                                                {% if image_radius == 'default' %}
+                                                                                    --image-border-radius: var(--images-and-section-radius);;
+                                                                                {% else %}
+                                                                                    --image-border-radius: {{ image_radius }};
+                                                                                {% endif %}
+                                                                                --highlight-color: {{ highlight_color.red }},
+                                                                                    {{ highlight_color.green }},
+                                                                                    {{ highlight_color.blue }};
+                                                                            }
+                                                                            {% endstyle %}
+                                                                            {% if item_img_1 != blank or item_heading_1 != blank and item_link_1 != blank %}
+                                                                            {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                                                                image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'fourth', level_link: second_nested_link, item_heading: item_heading_1, item_image: item_img_1, item_link: item_link_1, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested -%}
+                                                                            {% endif %}
+                                                                            {% if item_img_2 != blank or item_heading_2 != blank and item_link_2 != blank %}
+                                                                                {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                                                                    image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'fourth', level_link: second_nested_link, item_heading: item_heading_2, item_image: item_img_2, item_link: item_link_2, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested -%}
+                                                                            {% endif %}
+                                                                            {% if item_img_3 != blank or item_heading_3 != blank and item_link_3 != blank %}
+                                                                                {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                                                                    image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'fourth', level_link: second_nested_link, item_heading: item_heading_3, item_image: item_img_3, item_link: item_link_3, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested -%}
+                                                                            {% endif %}
+                                                                            {% if item_img_4 != blank or item_heading_4 != blank and item_link_4 != blank %}
+                                                                                {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                                                                    image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'fourth', level_link: second_nested_link, item_heading: item_heading_4, item_image: item_img_4, item_link: item_link_4, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested -%}
+                                                                            {% endif %}
+                                                                            {% if item_img_5 != blank or item_heading_5 != blank and item_link_5 != blank %}
+                                                                                {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                                                                    image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'fourth', level_link: second_nested_link, item_heading: item_heading_5, item_image: item_img_5, item_link: item_link_5, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested -%}
+                                                                            {% endif %}
+                                                                            {% if item_img_6 != blank or item_heading_6 != blank and item_link_6 != blank %}
+                                                                                {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                                                                    image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'fourth', level_link: second_nested_link, item_heading: item_heading_6, item_image: item_img_6, item_link: item_link_6, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested -%}
+                                                                            {% endif %}
+                                                                            {% if item_img_7 != blank or item_heading_7 != blank and item_link_7 != blank %}
+                                                                                {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                                                                    image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'fourth', level_link: second_nested_link, item_heading: item_heading_7, item_image: item_img_7, item_link: item_link_7, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested -%}
+                                                                            {% endif %}
+                                                                            {% if item_img_8 != blank or item_heading_8 != blank and item_link_8 != blank %}
+                                                                                {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                                                                    image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'fourth', level_link: second_nested_link, item_heading: item_heading_8, item_image: item_img_8, item_link: item_link_8, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested -%}
+                                                                            {% endif %}
+                                                                            {% if item_img_9 != blank or item_heading_9 != blank and item_link_9 != blank %}
+                                                                                {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                                                                    image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'fourth', level_link: second_nested_link, item_heading: item_heading_9, item_image: item_img_9, item_link: item_link_9, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested -%}
+                                                                            {% endif %}
+                                                                            {% if item_img_10 != blank or item_heading_10 != blank and item_link_10 != blank %}
+                                                                                {%- render 'nested-item', menu: block.settings.menu, horizontal_alignment: block.settings.menu_horizontal_alignment, child_menu: true, show_nested: true, event_type: 'click', menu_settings: block.settings, block: block, blocks: blocks, onloadScript: onloadScript,
+                                                                                    image_ratio: image_ratio, downcased_nested_highlighted_items: downcased_nested_highlighted_items, item_style: item_style, level: 'fourth', level_link: second_nested_link, item_heading: item_heading_10, item_image: item_img_10, item_link: item_link_10, uppercase_font_nested: uppercase_font_nested, bolder_font_nested: bolder_font_nested -%}
+                                                                            {% endif %}
+                                                                        </ul>
+                                                                        {% for collection in collections %}
+                                                                            {% if collection.url == second_nested_link.url %}
+                                                                                <div class="button-block block__button collection-button{% if settings.enable_drawer_animations %} stagger__item{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: {{ nested_stagger_index | default: 2 }};"{% endif %}>
+                                                                                    <a href="{{ second_nested_link.url }}"  inert class="button solid-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}">{{ 'collections.shop_all' | t }}</a>
+                                                                                </div>
+                                                                            {% endif %}
+                                                                        {% endfor %}
+                                                                    </div>
+                                                                    <span class='animation-item fourth-level'></span>
+                                                                {% endif %}
+                                                                </drawer-menu>
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                        {% for collection in collections %}
+                                                            {% if collection.url == first_nested_link.url %}
+                                                                <div class="button-block block__button collection-button{% if settings.enable_drawer_animations %} stagger__item{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: {{ list_stagger_start_3 | default: 2 | plus: first_nested_link.links.size }};"{% endif %}>
+                                                                    <a href="{{ first_nested_link.url }}"  inert class="button solid-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}">{{ 'collections.shop_all' | t }}</a>
+                                                                </div>
+                                                            {% endif %}
+                                                        {% endfor %}                                               
+                                                    </div>
+                                                    <span class='animation-item third-level'></span>
+                                                {% endif %}
+                                            </drawer-menu>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                                {% for collection in collections %}
+                                    {% if collection.url == link.url %}
+                                        <div class="button-block block__button collection-button{% if settings.enable_drawer_animations %} stagger__item{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: {{ list_stagger_start | default: 2 | plus: link.links.size }};"{% endif %}>
+                                            <a href="{{ link.url }}"  inert class="button solid-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}">{{ 'collections.shop_all' | t }}</a>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <span class='animation-item second-level'></span>
+                        {% endif %}
+                    </drawer-menu>
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+</div>

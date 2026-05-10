@@ -1,0 +1,142 @@
+.heading--minimal_uppercase, .heading--minimal_basic, .heading--avant_garde, .subheading--minimal_heavy {
+    font: var(--base-heading-xs-font);
+}
+.heading--minimal_heavy {
+    font: var(--base-heading-s-font);
+}
+.heading--classic {
+    font: var(--accent-heading-s-font);
+}
+.heading--brutalist {
+    font: var(--base-heading-m-font);
+}
+.heading--contrast {
+    font: var(--accent-heading-m-font);
+}
+.subheading--brutalist {
+    font: var(--base-body-l-font);
+}
+.heading--duet, .subheading--classic, .subheading--contrast {
+    font: var(--accent-body-l-font);
+}
+.subheading--minimal_uppercase {
+    font: var(--base-body-s-font);
+}
+.subheading--minimal_basic, .subheading--avant_garde {
+    font: var(--base-body-m-font);
+}
+.subheading--duet {
+    font: var(--accent-body-m-font);
+}
+.heading--custom {
+    font: var(--heading-xs-font);
+    letter-spacing: var(--heading-xs-letter-spacing);
+}
+.subheading--custom {
+    font: var(--body-s-font);
+    letter-spacing: var(--body-s-letter-spacing);
+}
+
+.heading--minimal_uppercase, .heading--avant_garde, .heading--brutalist,
+.subheading--minimal_uppercase, .subheading--avant_garde, .subheading--brutalist {
+    text-transform: uppercase; 
+} 
+.heading--contrast, .heading--brutalist {
+    letter-spacing: -0.01em;
+}
+.subheading--minimal_uppercase, .subheading--avant_garde, .subheading--brutalist {
+    letter-spacing: 0.02em;
+}
+
+body.gift-card {
+    display: block;
+    padding: 128px 24px;
+    color: rgb(var(--layout-text-color));
+}
+.gift-card .gift-card__header, .gift-card .gift-card__main {
+    max-width: 480px;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+.gift-card__main {
+    margin-top: 53px;
+}
+.gift-card__image-wrapper, .gift-card__qr-code, .gift-card__print,
+.gift_card__apple-wallet {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.gift-card__image {
+    max-width: 100%;
+    height: auto;
+}
+.gift-card__shop-name {
+    margin-top: 43px;
+}
+.gift-card__label, .gift-card__info, .gift-card__value {
+    margin-top: 16px;
+}
+.gift-card__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.gift-card__shopping {
+    min-height: 64px;
+    margin-top: 32px;
+    min-width: 200px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.gift-card__qr-code, .gift_card__apple-wallet {
+    margin-top: 32px;
+}
+.gift-card__print {
+    margin-top: 16px;
+    min-height: 44px;
+    width: 100%;
+    color: rgb(var(--layout-text-color));
+    transition: opacity var(--animation-duration) var(--transition-timing-function);
+}
+@media (hover: hover) {
+    .gift-card__print:hover {
+        opacity: 0.7;
+    }
+}
+@media screen and (max-width: 1440px) {
+    body.gift-card {
+        padding: 96px 24px;
+    }
+}
+@media screen and (max-width: 1024px) {
+    body.gift-card {
+        padding: 64px 24px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    body.gift-card {
+        padding: 64px 16px;
+    }
+    .heading--brutalist {
+        font: var(--base-heading-s-font);
+        letter-spacing: normal;
+    }
+    .heading--contrast {
+        font: var(--accent-heading-s-font);
+        letter-spacing: normal;
+    }
+}
+@media screen and (max-width: 500px) {
+    body.gift-card {
+        padding: 48px 16px;
+    }
+}
+
+

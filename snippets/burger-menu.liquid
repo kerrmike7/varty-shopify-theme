@@ -1,0 +1,55 @@
+{% style %}
+{% unless miscellaneous %}
+#shopify-section-{{ section.id }} {
+    --burger-vertical-alignment: {{ burger-menu_settings.burger_vertical_alignment }};
+    --burger-horizontal-alignment: {{ burger-menu_settings.burger_horizontal_alignment }};
+}
+{% endunless %}
+{% endstyle %}          
+
+{%- liquid 
+	if settings.typography_preset == 'avant_garde'
+			assign weight = settings.accent_icon_weight
+			if settings.swap_fonts
+					assign weight = settings.base_icon_weight
+			endif
+	else 
+			assign weight =  settings.base_icon_weight
+			if settings.swap_fonts
+					assign weight = settings.accent_icon_weight
+			endif
+	endif
+    if settings.typography_preset == 'custom'
+        assign weight = settings.custom_icon_weight
+    endif
+-%}
+
+<div class="burger-menu-block{% if section_navigation_block %} section-navigation-block{% if settings.enable_drawer_animations %} stagger__item{% endif %}{% endif %} {% if main-sidebar__block %} main-sidebar__block{% endif %} {% if section.id contains 'footer' %}burger-menu-block--footer{% else %}burger-menu-block--{{ section.id }}{% endif %} burger-menu-block--{{ burger-menu_settings.burger_menu_alignment }}" {{ block_item.shopify_attributes }}>
+    <div class="burger-menu-container 
+                burger-menu-container--{{ settings.typography_preset }}
+                {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %}
+                {% if settings.fill_burger_button == false and settings.burger_button_shadow == 0 %}burger-menu-container--packed{% endif %}">
+        <burger-menu>
+        <button class="burger-menu {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %} {% if section.settings.color_type == 'custom' %}color-custom{% elsif section.settings.color_type == 'invert' %}color-invert{% endif %} {% if settings.fill_burger_button %}burger-menu--fill{% endif %} {% if settings.fill_burger_button == false and settings.burger_button_shadow == 0 %}burger-menu--packed{% endif %}" tabindex="0" aria-label="{{ 'general.burger_menu' | t }}">  
+            <span class="burger-menu__icon">
+                {% if settings.burger_menu_icon == 'burger' %}
+                    {% assign icon_full = 'burger' | append: "-" | append: weight %}
+                    {% render 'icon', icon: icon_full %}
+                {% elsif settings.burger_menu_icon == 'burger_wide' %} 
+                    {% assign icon_full = 'burger-wide' | append: "-" | append: weight %}
+                    {% render 'icon-accordion-2', icon: icon_full %}
+                {% elsif settings.burger_menu_icon == 'two_stripes' %}
+                    {% assign icon_full = 'two-stripes' | append: "-" | append: weight %}
+                    {% render 'icon-accordion-2', icon: icon_full %}
+                {% elsif settings.burger_menu_icon == 'two_stripes_wide' %}
+                    {% assign icon_full = 'two-stripes-wide' | append: "-" | append: weight %}
+                    {% render 'icon-accordion-2', icon: icon_full %}
+                {% elsif settings.burger_menu_icon == 'alternate' %}
+                    {% assign icon_full = 'alternative' | append: "-" | append: weight %}
+                    {% render 'icon-accordion-2', icon: icon_full %}
+                {% endif %}
+            </span>
+        </button>
+        </burger-menu>
+    </div>
+</div>

@@ -1,0 +1,391 @@
+{% liquid
+    if linked_page != blank and linked_page.metafields.custom.gallery.value
+      assign metafield_files = linked_page.metafields.custom.gallery.value
+    else
+      if template.name == 'product'
+          assign metafield_files = product.metafields.custom.gallery.value
+      elsif template.name == 'blog'
+          assign metafield_files = blog.metafields.custom.gallery.value
+      elsif template.name == 'article'
+          assign metafield_files = article.metafields.custom.gallery.value
+      elsif template.name == 'page'
+          assign metafield_files = page.metafields.custom.gallery.value
+      elsif template.name == 'collection'
+          assign metafield_files = collection.metafields.custom.gallery.value
+      endif
+    endif
+
+    assign image_grid_settings = section.settings
+    if block
+        assign image_grid_settings = block.settings
+    endif
+%}
+
+{% liquid
+    assign mobile_layout = mobile_layout | times: 1
+    
+    if metafield_files.count == 1
+    assign mobile_layout = 1
+    endif
+%}
+
+{%- liquid 
+    if settings.typography_preset == 'avant_garde'
+        assign weight_close = settings.accent_icon_weight
+        if settings.swap_fonts
+            assign weight_close = settings.base_icon_weight
+        endif
+    else 
+        assign weight_close =  settings.base_icon_weight
+        if settings.swap_fonts
+            assign weight_close = settings.accent_icon_weight
+        endif
+    endif
+    if settings.typography_preset == 'custom'
+        assign weight_close = settings.custom_icon_weight
+    endif
+-%}
+
+{%- liquid
+  assign _irx = image_radius
+  if _irx == 'default'
+    assign _irx = settings.images_and_sections_radius
+  endif
+-%}
+{% style %}
+  .id-{{ snippet_id }} {
+    --focal-point: {{ focal_point }};
+    --desktop-grid-type: {{ items_in_a_row }};
+    --grid-gap: {{ grid_gap }}px;
+    --image-radius: {%- render 'radius-xxl-then-var', v: _irx -%};
+  }
+
+  @media screen and (max-width: 500px) {
+    .id-{{ snippet_id }} {
+      --grid-gap: {{ mobile_grid_gap }}px;
+      --desktop-grid-type: {{ mobile_layout }};
+    }
+  }
+{% endstyle %}
+
+{% if image_grid_settings.enable_image_zoom and image_grid_settings.image_zoom_style == 'zoom-in' or image_grid_settings.enable_slideshow_zoom_in %}
+    <script id="EnableZoomOnHover-main" src="{{ 'magnify.js' | asset_url }}" defer="defer"></script>
+{% endif %}
+
+<div class="id-{{ snippet_id }}" {{ block.shopify_attributes }}>
+    <cascading-grid container-selector=".grid" item-selector=".grid-item">
+        <ul class="image-grid__grid image-grid__grid--{{ items_in_a_row }} image-grid__grid-mobile--{{ mobile_layout }} {% if section_width == 'narrow' %}image-grid__grid--narrow{% endif %} {% if image_ratio == 'original' %}grid{% endif %}" >
+            {% if metafield_files != blank %}
+                {% for media in metafield_files %}
+                    {% liquid
+                        if section.index == 1 and forloop.index == 1
+                            assign should_high_priority = true
+                        else
+                            assign should_high_priority = false
+                        endif
+                    
+                        if should_high_priority == false and settings.images_loading != 'disable' or section.index > 2
+                            assign should_lazy_load = true
+                        else
+                            assign should_lazy_load = false
+                        endif
+                    %}
+                    {% if media.media_type == 'image' %}
+                        <li class="image-grid__item ratio-{{ image_ratio }} {% if image_ratio == 'original' %}grid-item grid-item-desktop--{{ items_in_a_row }} grid-item-mobile--{{ mobile_layout }}{% endif %}" data-media-id="{{ media.id }}">
+                            <modal-opener class="product__modal-opener" data-modal="#ProductModal-{{ section.id }}">
+                                <div class="image-grid__image">
+                                    <div class="image-grid__image-wrapper {% if enable_image_zoom %}hoverable{% endif %}" {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}>
+                                        {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
+                                        {% if settings.images_loading != 'disable' %}
+                                            <figure class="lazy-image lazy-image--{{ settings.images_loading }} {% if image_grid_settings.enable_image_zoom and image_grid_settings.image_zoom_style == 'zoom-in' %}figure-magnify-hover{% endif %}" style="--desktop-asp-rat: {{ media.aspect_ratio }}">
+                                        {% endif %}
+                                        <img draggable="false"
+                                            srcset="
+                                            {%- if media.width >= 165 -%}{{ media | image_url: width: 165 }} 165w,{%- endif -%}
+                                            {%- if media.width >= 375 -%}{{ media | image_url: width: 375 }} 375w,{%- endif -%}
+                                            {%- if media.width >= 550 -%}{{ media | image_url: width: 550 }} 550w,{%- endif -%}
+                                            {%- if media.width >= 750 -%}{{ media | image_url: width: 750 }} 750w,{%- endif -%}
+                                            {%- if media.width >= 1100 -%}{{ media | image_url: width: 1100 }} 1100w,{%- endif -%}
+                                            {%- if media.width >= 1500 -%}{{ media | image_url: width: 1500 }} 1500w,{%- endif -%}
+                                            {%- if media.width >= 2200 -%}{{ media | image_url: width: 2200 }} 2200w,{%- endif -%}
+                                            {{ media | image_url }} {{ media.width }}w"
+                                            src="{{ media | image_url: width: 1445 }}"
+                                            sizes="
+                                            (min-width: {{ settings_page_width }}) calc(({{ settings_page_width }} - 200px) / 2),
+                                            (min-width: 750px) calc((100vw - 2rem) / 2),
+                                            calc((100vw - 3rem)/2)"
+                                            {% if should_high_priority %}
+                                                fetchpriority="high"
+                                            {% endif %}
+                                            {% if should_lazy_load %}
+                                                loading="lazy"
+                                            {% endif %}
+                                            {% if settings.images_loading != 'disable' %}
+                                                onload="this.parentNode.classList.add('lazyloaded');"
+                                            {% endif %}
+                                            width="{{ media.width }}"
+                                            height="{{ media.height }}"
+                                            class="{% if image_ratio != 'original' %}ratio-{{ image_ratio }}{% endif %} {% if image_grid_settings.enable_image_zoom and image_grid_settings.image_zoom_style == 'zoom-in' %}image-magnify-hover{% endif %}"
+                                            alt="{{ media.alt }}"
+                                        >
+                                        {% if settings.images_loading != 'disable' %}
+                                            {% if settings.images_loading != 'fade_scale' %}
+                                            <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                                                <img 
+                                                alt="{{ media.alt | escape }}" 
+                                                src="{{ media | image_url: width: 10 }}"
+                                                draggable="false"
+                                                width="10" 
+                                                height="10">
+                                            </div>
+                                            {% endif %}
+                                        </figure>
+                                        {% endif %}
+                                        {% comment %}theme-check-enable ImgLazyLoading{% endcomment %}
+                                        {% if image_grid_settings.enable_image_zoom and image_grid_settings.image_zoom_style == 'zoom-in' %}
+                                            <div class="image-zoom-icon zoom">
+                                                {%- liquid 
+                                                if settings.typography_preset == 'avant_garde'
+                                                    assign weight = settings.accent_icon_weight
+                                                    if settings.swap_fonts
+                                                        assign weight = settings.base_icon_weight
+                                                    endif
+                                                else 
+                                                    assign weight =  settings.base_icon_weight
+                                                    if settings.swap_fonts
+                                                        assign weight = settings.accent_icon_weight
+                                                    endif
+                                                endif
+                                                -%}
+                                                {% assign icon_full = 'zoom-out' | append: "-" | append: weight %}
+                                                {% render 'icon-accordion-2', icon: icon_full %}
+                                            </div>
+                                        {% endif %}
+                                        {% comment %}theme-check-enable ImgLazyLoading{% endcomment %}
+                                        {% if enable_image_zoom and image_grid_settings.image_zoom_style != 'zoom-in' %}
+                                            {%- liquid 
+                                                if settings.typography_preset == 'avant_garde'
+                                                    assign weight = settings.accent_icon_weight
+                                                    if settings.swap_fonts
+                                                        assign weight = settings.base_icon_weight
+                                                    endif
+                                                else 
+                                                    assign weight =  settings.base_icon_weight
+                                                    if settings.swap_fonts
+                                                        assign weight = settings.accent_icon_weight
+                                                    endif
+                                                endif
+                                            -%}
+                                            <div class="zoom_icon">
+                                                {% assign icon_full = 'zoom-in' | append: "-" | append: weight %}
+                                                {% render 'icon-accordion-2', icon: icon_full %}
+                                            </div>
+                                            <button class="product__media-toggle quick-add-hidden {% if enable_image_zoom %}zoom-cursor{% endif %}" type="button" aria-label="{{ 'products.product.media.zoom_in' | t }}" aria-haspopup="dialog" data-media-id="{{ media.id }}" tabindex="-1"></button>
+                                        {% endif %}
+                                    </div>                              
+                                </div>
+                            </modal-opener>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                {% assign placeholders = 'product-1,product-2,product-3,product-4,product-5,product-6,product-1,product-2' | split: ',' %}
+
+                {% for placeholder in placeholders %}
+                    <li class="image-grid__item ratio-{{ image_ratio }} {% if image_ratio == 'original' %}grid-item grid-item-desktop--{{ items_in_a_row }} grid-item-mobile--{{ mobile_layout }}{% endif %}" data-media-id="{{ forloop.index }}">
+                        <modal-opener data-modal="#ProductModal-{{ section.id }}">
+                            <div class="image-grid__image">
+                                <div class="image-grid__image-wrapper {% if enable_image_zoom %}hoverable{% endif %}">
+                                    {{ placeholder | placeholder_svg_tag: 'placeholder-svg ' }}
+                                    
+                                    {% if enable_image_zoom %}
+                                        {%- liquid 
+                                        if settings.typography_preset == 'avant_garde'
+                                            assign weight = settings.accent_icon_weight
+                                            if settings.swap_fonts
+                                                assign weight = settings.base_icon_weight
+                                            endif
+                                        else 
+                                            assign weight =  settings.base_icon_weight
+                                            if settings.swap_fonts
+                                                assign weight = settings.accent_icon_weight
+                                            endif
+                                        endif
+                                        -%}
+                                        <div class="zoom_icon">
+                                                {% assign icon_full = 'zoom-in' | append: "-" | append: weight %}
+                                                {% render 'icon-accordion-2', icon: icon_full %}
+                                        </div>
+                                        <button class="product__media-toggle quick-add-hidden {% if enable_image_zoom %}zoom-cursor{% endif %}" type="button" aria-label="{{ 'products.product.media.zoom_in' | t }}" aria-haspopup="dialog" data-media-id="{{ forloop.index }}" tabindex="-1"></button>
+                                    {% endif %}
+                                </div>                      
+                            </div>
+                        </modal-opener>
+                    </li>
+                {% endfor %}
+            {% endif %}
+        </ul>  
+
+        {% if enable_image_zoom and image_grid_settings.image_zoom_style != 'zoom-in' %}
+            {% style %}
+                #ProductModal-{{ section.id }} {
+                    --desktop-grid-type: 1;
+                    --item-width: {{ image_grid_settings.desktop_width }}%;
+                    --focal-point: {{ image_grid_settings.zoom_focal_point }};
+                    --slider-gap: 8px;
+                    {% if image_grid_settings.overlay_type == 'custom' %}
+                    --drawers-popups-overlay-color: {{ image_grid_settings.overlay_color.red }}, {{ image_grid_settings.overlay_color.green }}, {{ image_grid_settings.overlay_color.blue }};
+                    --drawers-popups-overlay-opacity: {{ image_grid_settings.overlay_opacity | divided_by: 100.0 }};
+                    --drawers-popups-overlay-blur: {% if image_grid_settings.overlay_opacity >= 90 %}0{% else %}{{ image_grid_settings.overlay_background_blur }}{% endif %}px;
+                    {% endif %}
+                }
+
+                @media screen and (max-width: 920px) {
+                    #ProductModal-{{ section.id }} {
+                        --item-width: {{ image_grid_settings.mobile_width }}%;
+                    }
+                }
+            {% endstyle %}
+
+            <product-modal id="ProductModal-{{ section.id }}" class="product-media-modal">
+                <div class="product-media-modal__dialog {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %}" role="dialog" aria-label="{{ 'products.modal.label' | t }}" aria-modal="true" tabindex="-1">
+                    <button id="ModalClose-{{ section.id }}" type="button" class="product-media-modal__toggle button-close" aria-label="{{ 'accessibility.close' | t }}">
+                        {% assign icon_full = 'cross' | append: "-" | append: weight %}
+                        {% render 'icon', icon: icon_full %}  
+                    </button>
+            
+                    <div class="product-media-modal__content gradient" role="document" aria-label="{{ 'products.modal.label' | t }}" tabindex="0">
+                        <div class="product-media-modal__wrapper product-media-modal__wrapper--{{ image_grid_settings.image_zoom_style}} {% if image_grid_settings.image_zoom_style == 'slideshow' %} slider-container-js{% endif %}">
+                            {% if image_grid_settings.image_zoom_style == 'slideshow' %}
+                                <slider-component id="GalleryViewer-{{ section.id }}-zoom" class="slider">
+                                  <div class="slider__viewport">
+                                    <ul id="Slider-Gallery-{{ section.id }}-zoom" class="slider__grid slider__grid-mobile-1" role="list" 
+                                      data-count="1"
+                                      data-count-mobile="1">
+                            {% endif %}
+                                {% if metafield_files != blank %}
+                                    {%- for media in metafield_files -%}
+                                        {% if media.media_type == 'image' %}
+                                            {% if image_grid_settings.image_zoom_style == 'slideshow' %}
+                                                <li id="Slide-{{ section.id }}-zoom" class="slider__grid-item snap-align card-js{% if image_grid_settings.image_zoom_style == 'slideshow' and image_grid_settings.enable_slideshow_zoom_in %} container-magnify-hover{% endif %}
+                                                    {% if forloop.first or first %}is-active{% endif %} 
+                                                    {% if forloop.last and settings.show_lines and forloop.length >= 1 %}last-desktop{% endif %} 
+                                                    {% if forloop.last and settings.show_lines and forloop.length >= 1 %}last-mobile{% endif %}"
+                                                    {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}
+                                                >
+                                            {% endif %}
+                                            {% if settings.images_loading != 'disable' %}
+                                                <figure class="lazy-image {% if zoom_image_ratio == 'original' %}ratio-original{% endif %} lazy-image--{{ settings.images_loading }} {% if image_grid_settings.image_zoom_style == 'slideshow' and image_grid_settings.enable_slideshow_zoom_in %} figure-magnify-hover{% endif %}" style="--desktop-asp-rat: {{ media.aspect_ratio }}">
+                                            {% endif %}
+                                                <img draggable="false"
+                                                    srcset="{%- if media.width >= 550 -%}{{ media | image_url: width: 550 }} 550w,{%- endif -%}
+                                                    {%- if media.width >= 1445 -%}{{ media | image_url: width: 1445 }} 1445w,{%- endif -%}
+                                                    {%- if media.width >= 1680 -%}{{ media | image_url: width: 1680 }} 1680w,{%- endif -%}
+                                                    {%- if media.width >= 1100 -%}{{ media | image_url: width: 1100 }} 1100w,{%- endif -%}
+                                                    {%- if media.width >= 2048 -%}{{ media | image_url: width: 2048 }} 2048w,{%- endif -%}
+                                                    {%- if media.width >= 2200 -%}{{ media | image_url: width: 2200 }} 2200w,{%- endif -%}
+                                                    {%- if media.width >= 2890 -%}{{ media | image_url: width: 2890 }} 2890w,{%- endif -%}
+                                                    {%- if media.width >= 4096 -%}{{ media | image_url: width: 4096 }} 4096w,{%- endif -%}
+                                                    {{ media | image_url }} {{ media.width }}w"                                          
+                                                    sizes="(max-width: 920px) {{ image_grid_settings.mobile_width }}vw, {{ image_grid_settings.desktop_width }}vw"
+                                                    src="{{ media | image_url: width: 1445 }}"
+                                                    loading="lazy"
+                                                    {% if settings.images_loading != 'disable' %}
+                                                        onload="this.parentNode.classList.add('lazyloaded');"
+                                                    {% endif %}
+                                                    width="{{ media.width }}"
+                                                    height="{{ media.height }}"
+                                                    alt="{{ media.alt }}"
+                                                    data-media-id="{{ media.id }}"
+                                                    {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}
+                                                    class="global-media-settings product-modal-image product__media-item--show {% if zoom_image_ratio != 'original' %}ratio-{{ zoom_image_ratio }}{% endif %} {% if image_grid_settings.image_zoom_style == 'slideshow' and image_grid_settings.enable_slideshow_zoom_in %} image-magnify-hover{% endif %}"
+                                                >
+                                                {% if settings.images_loading != 'disable' %}
+                                                    {% if settings.images_loading != 'fade_scale' %}
+                                                    <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                                                        <img 
+                                                        alt="{{ media.alt | escape }}" 
+                                                        src="{{ media | image_url: width: 10 }}"
+                                                        draggable="false"
+                                                        width="10" 
+                                                        height="10">
+                                                    </div>
+                                                    {% endif %}
+                                                </figure>
+                                                {% endif %}
+                                                {% if image_grid_settings.image_zoom_style == 'slideshow' and image_grid_settings.enable_slideshow_zoom_in %}
+                                                    <div class="image-zoom-icon zoom">
+                                                        {%- liquid 
+                                                        if settings.typography_preset == 'avant_garde'
+                                                            assign weight = settings.accent_icon_weight
+                                                            if settings.swap_fonts
+                                                                assign weight = settings.base_icon_weight
+                                                            endif
+                                                        else 
+                                                            assign weight =  settings.base_icon_weight
+                                                            if settings.swap_fonts
+                                                                assign weight = settings.accent_icon_weight
+                                                            endif
+                                                        endif
+                                                        -%}
+                                                        <div class="icon-zoom-in">
+                                                            {% assign icon_full = 'zoom-in' | append: "-" | append: weight %}
+                                                            {% render 'icon-accordion-2', icon: icon_full %}
+                                                        </div>
+                                                        <div class="icon-zoom-out">
+                                                            {% assign icon_full = 'zoom-out' | append: "-" | append: weight %}
+                                                            {% render 'icon-accordion-2', icon: icon_full %}
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% if image_grid_settings.image_zoom_style == 'slideshow' %}
+                                                </li>
+                                            {% endif %}
+                                        {% endif %}
+                                    {%- endfor -%}
+                                {% else %}
+                                    {% assign placeholders = 'product-1,product-2,product-3,product-4,product-5,product-6,product-1,product-2' | split: ',' %}
+                                    
+                                    {% for placeholder in placeholders %}
+                                        {% if image_grid_settings.image_zoom_style == 'slideshow' %}
+                                            <li id="Slide-{{ section.id }}-zoom" class="slider__grid-item snap-align card-js
+                                                {% if forloop.first or first %}is-active{% endif %} 
+                                                {% if forloop.last and settings.show_lines and forloop.length >= 1 %}last-desktop{% endif %} 
+                                                {% if forloop.last and settings.show_lines and forloop.length >= 1 %}last-mobile{% endif %}"
+                                                {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}
+                                            >
+                                        {% endif %}
+                                            <div data-media-id="{{ forloop.index }}" class="{% if zoom_image_ratio != 'original' %}ratio-{{ zoom_image_ratio }}{% endif %}">
+                                                {{ placeholder | placeholder_svg_tag: 'placeholder-svg' }}
+                                            </div>
+                                        {% if image_grid_settings.image_zoom_style == 'slideshow' %}
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% if image_grid_settings.image_zoom_style == 'slideshow' %}
+                                        </ul>
+                                        <div class="zoom-slider-buttons-items {% unless image_grid_settings.show_arrow_in_mobile %} hidden-on-mobile{% endunless %}">
+                                            <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="{{ 'general.slider.previous_slide' | t }}">
+                                                <div class="slider-button--wrapper">
+                                                    {% assign icon_full = 'arrow-left' | append: "-" | append: weight_close %}
+                                                    {% render 'icon-accordion', icon: icon_full %}
+                                                </div>
+                                            </button>
+                                            <button type="button" class="slider-button slider-button--next" name="next" aria-label="{{ 'general.slider.next_slide' | t }}">
+                                                <div class="slider-button--wrapper">
+                                                    {% assign icon_full = 'arrow-right' | append: "-" | append: weight_close %}
+                                                    {% render 'icon-accordion', icon: icon_full %}
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </slider-component>
+                            {% endif %}
+                         </div>
+                    </div>
+                </div>
+            </product-modal>
+        {% endif %} 
+    </cascading-grid>
+</div>

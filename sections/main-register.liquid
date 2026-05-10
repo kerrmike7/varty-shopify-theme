@@ -1,0 +1,107 @@
+{% liquid
+  assign uppercase_font = false
+  assign bolder_font = false
+  if settings.typography_preset == 'custom'
+      if settings.uppercase_body_s
+          assign uppercase_font = true
+      endif
+      if settings.bolder_font_body_s
+          assign bolder_font = true
+      endif
+  endif
+%} 
+
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+
+<div class="customer-account login-page section-padding--{{ settings.white_space }} {% if settings.max_page_width == '1400' or settings.max_page_width == '1200' %}page-width {% endif %} page-width--{{ settings.max_page_width }}"> 
+    <div class="account-wrapper {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %}">
+        <h1 class="heading heading--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_heading_xs %} uppercase{% endif %}{% if settings.bolder_font_heading_xs %} bolder-font{% endif %}{% endif %} {% if settings.center_text %}center{% endif %} {% if settings.accent_color_for_headings %}heading--accent{% endif %}">
+            {{ 'customer.register.title' | t }}
+        </h1>
+        <form-state>
+          {%- form 'create_customer' -%}
+          {%- if form.errors contains 'form' -%}
+              <h2 class="subheading subheading--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} error-color {% if settings.center_text %}center{% endif %}" tabindex="-1" autofocus>
+                {{ form.errors.messages['form'] }}
+              </h2>
+          {%- endif -%}
+              <div class="fields-wrapper">
+                <div class="field">
+                    <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="RegisterForm-FirstName">
+                      {{ 'customer.register.first_name' | t }}
+                    </label>      
+                    <input
+                      class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}"
+                      type="text"
+                      name="customer[first_name]"
+                      id="RegisterForm-FirstName"
+                      {% if form.first_name %}value="{{ form.first_name }}"{% endif %}
+                      autocomplete="given-name">
+                </div>
+                <div class="field">
+                    <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="RegisterForm-LastName">
+                      {{ 'customer.register.last_name' | t }}
+                    </label>
+                    <input
+                      class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}"
+                      type="text"
+                      name="customer[last_name]"
+                      id="RegisterForm-LastName"
+                      {% if form.last_name %}value="{{ form.last_name }}"{% endif %}
+                      autocomplete="family-name">
+                </div>
+                <div class="field">
+                    <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="RegisterForm-email">
+                      {{ 'customer.register.email' | t | append: '*' }}
+                    </label>      
+                    <input
+                      class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} required {% if form.errors contains 'email' %}invalid{% endif %}"
+                      type="email"
+                      dir="ltr"
+                      name="customer[email]"
+                      required="required"
+                      id="RegisterForm-email"
+                      {% if form.email %} value="{{ form.email }}"{% endif %}
+                      spellcheck="false"
+                      autocapitalize="off"
+                      aria-required="true"
+                      {% if form.errors contains 'email' %}
+                        aria-invalid="true"
+                        aria-describedby="RegisterForm-email-error"
+                      {% endif %}>
+                </div>
+                <div class="field">
+                    <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="RegisterForm-password">
+                      {{ 'customer.register.password' | t | append: '*' }}
+                    </label>     
+                    <input
+                      class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} required {% if form.errors contains 'password' %}invalid{% endif %}"
+                      type="password"
+                      required="required"
+                      name="customer[password]"
+                      id="RegisterForm-password"
+                      aria-required="true"
+                      autocomplete="new-password"
+                      {% if form.errors contains 'password' %}
+                        aria-invalid="true"
+                        aria-describedby="RegisterForm-password-error"
+                      {% endif %}>
+                </div>
+              </div>
+              <button class="big-button big-button--{{ settings.typography_preset }} button--submit {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}">
+                  {{ 'customer.register.submit' | t }}
+              </button>
+          {%- endform -%}
+        </form-state>
+        <div class="have-account have-account--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.center_text %}center{% endif %}">
+            <p class="have-account__text {% if settings.dim_text %}dim{% endif %}">{{ 'customer.register.have_account' | t }}</p>
+            {{ 'customer.register.login' | t | customer_login_link }}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-register.name"
+}
+{% endschema %}

@@ -1,0 +1,185 @@
+<div class="price price--{{ settings.typography_preset }} {% if in_card_product and settings.typography_preset == 'custom' and settings.product_price_size == 'default' %}{% if uppercase_price %} uppercase{% endif %}{% if bolder_price_font %} bolder-font{% endif %}{% endif %}
+  {% if price_settings.text_size and price_settings.text_size != 'default' %} {{ price_settings.text_size }}{% endif %}{% if price_settings.text_size and price_settings.text_size == 'default' and settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %}">
+{%- liquid
+  if use_variant
+    assign target = product.selected_or_first_available_variant
+  else
+    assign target = product
+  endif
+  if settings.show_first_image == false and settings.show_selected_variant_value == true
+    assign target = product.selected_or_first_available_variant
+  endif
+
+  assign compare_at_price = target.compare_at_price
+  assign price = target.price | default: 2504
+  assign available = target.available | default: false
+  assign money_price = price | money
+  if settings.currency_code_enabled
+    assign money_price = price | money_with_currency
+  endif
+  assign price_from = true
+  if settings.show_first_image == false and settings.show_selected_variant_value == true
+    assign price_from = false
+  endif
+  if price_from and target == product and product.price_varies
+    assign money_price = 'products.product.price.from_price_html' | t: price: money_price
+  endif
+-%}
+  <div class="price__wrapper">
+    {%- if target.compare_at_price and compare_at_price > price %}
+      {% comment %}On sale - Sale price{% endcomment %}
+      <div class="price__on-sale">
+        <span class="visually-hidden">
+          {{ 'products.product.price.sale_price' | t }}
+        </span>
+        <span class="sale-price">
+          {{ money_price }}
+        </span>
+      </div>
+      {%- if product.compare_at_price_varies or product.compare_at_price_max > product.price %}
+        {% comment %}On sale - Regular price{% endcomment %}
+        <div class="price__regular">
+          <span class="visually-hidden">
+            {{ 'products.product.price.regular_price' | t }}
+          </span>
+          <s class="regular-price {% if settings.dim_text %} dim{% endif %}">
+            {% if settings.currency_code_enabled %}
+              {{ compare_at_price | money_with_currency }}
+            {% else %}
+              {{ compare_at_price | money }}
+            {% endif %}
+          </s>
+          {% unless product.selected_or_first_available_variant.unit_price_measurement == nil %}
+            {% comment %}Unit price{% endcomment %}
+              <span class="visually-hidden">
+                {{ 'products.product.price.unit_price' | t }}
+              </span>
+              <span class="unit-price dim">
+                &#40;{{- product.selected_or_first_available_variant.unit_price | money -}}/
+                  {%- if product.selected_or_first_available_variant.unit_price_measurement.reference_value != 1 -%}
+                    {{- product.selected_or_first_available_variant.unit_price_measurement.reference_value -}}
+                  {%- endif -%}
+                  {{ product.selected_or_first_available_variant.unit_price_measurement.reference_unit }}&#41;
+              </span>
+          {%- endunless -%}
+          <div class="card__badges card__badges--product price-badges--{{ settings.typography_preset }} {% unless show_badges %}visually-hidden{% endunless %} {% if price_settings.badge_size != 'default' %}{{ price_settings.badge_size }}{% else %}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_label %} uppercase{% else %} none-uppercase{% endif %}{% if settings.bolder_font_label %} bolder-font{% else %} none-bolder-font{% endif %}{% endif %}{% endif %}">
+            {%- liquid
+              assign badge_name_1 = settings.badge_name_1 | downcase
+              assign badge_name_2 = settings.badge_name_2 | downcase
+              assign badge_name_3 = settings.badge_name_3 | downcase
+              assign badge_name_4 = settings.badge_name_4 | downcase
+            -%}
+            {%- if product.available and product.selected_or_first_available_variant.metafields.custom.badge != blank -%}
+              {% for badge in product.selected_or_first_available_variant.metafields.custom.badge.value %}
+                {% assign badge_name = badge | downcase %}
+                <span class="card__badges-item card__badges-item--metafield" 
+                  {% if badge_name == badge_name_1 %}style="background-color: var(--badge-background-1); color: var(--badge-text-1);"
+                  {% elsif badge_name == badge_name_2 %}style="background-color: var(--badge-background-2); color: var(--badge-text-2);"
+                  {% elsif badge_name == badge_name_3 %}style="background-color: var(--badge-background-3); color: var(--badge-text-3);"
+                  {% elsif badge_name == badge_name_4 %}style="background-color: var(--badge-background-4); color: var(--badge-text-4);"
+                  {% elsif badge_name != badge_name_1 and badge_name != badge_name_2 and badge_name != badge_name_3 and badge_name != badge_name_4 %}style="background-color: rgb(var(--layout-text-color));"{% endif %}>
+                  {{ badge }}
+                </span>
+              {% endfor %}
+            {%- endif -%}
+            {%- if product.available and product.metafields.custom.badge != blank -%}
+              {% for badge in product.metafields.custom.badge.value %}
+                {% assign badge_name = badge | downcase %}
+                <span class="card__badges-item card__badges-item--metafield" 
+                  {% if badge_name == badge_name_1 %}style="background-color: var(--badge-background-1); color: var(--badge-text-1);"
+                  {% elsif badge_name == badge_name_2 %}style="background-color: var(--badge-background-2); color: var(--badge-text-2);"
+                  {% elsif badge_name == badge_name_3 %}style="background-color: var(--badge-background-3); color: var(--badge-text-3);"
+                  {% elsif badge_name == badge_name_4 %}style="background-color: var(--badge-background-4); color: var(--badge-text-4);"
+                  {% elsif badge_name != badge_name_1 and badge_name != badge_name_2 and badge_name != badge_name_3 and badge_name != badge_name_4 %}style="background-color: rgb(var(--layout-text-color));"{% endif %}>
+                  {{ badge }}
+                </span>
+              {% endfor %}
+            {%- endif -%}
+            {%- if product.available and target.compare_at_price > target.price -%}
+              <span class="card__badges-item card__badges-item--sale">{{ 'products.product.on_sale' | t }}
+              </span>
+            {%- endif -%}
+            {%- if product.available == false and product.selected_or_first_available_variant != 'continue' -%}
+              <span class="card__badges-item card__badges-item--sold">{{ 'products.product.sold_out' | t }}
+              </span>
+            {%- endif -%}
+            {%  if settings.show_pre_order_badge and product.template_suffix == 'preorder' %}
+                <span class="card__badges-item card__badges-item--preorder">{{ 'products.product.pre_order' | t }}
+                </span>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+    {%- else -%}
+      {% comment %}Regular price{% endcomment %}
+      <div class="price__regular">
+        <span class="visually-hidden">
+          {{ 'products.product.price.regular_price' | t }}
+        </span>
+        <span class="regular-price">
+          {{ money_price }}
+        </span>
+        {% unless product.selected_or_first_available_variant.unit_price_measurement == nil %}
+          {% comment %}Unit price{% endcomment %}
+            <span class="visually-hidden">
+              {{ 'products.product.price.unit_price' | t }}
+            </span>
+            <span class="unit-price dim">
+              &#40;{{- product.selected_or_first_available_variant.unit_price | money -}}/
+                {%- if product.selected_or_first_available_variant.unit_price_measurement.reference_value != 1 -%}
+                  {{- product.selected_or_first_available_variant.unit_price_measurement.reference_value -}}
+                {%- endif -%}
+                {{ product.selected_or_first_available_variant.unit_price_measurement.reference_unit }}&#41;
+            </span>
+        {%- endunless -%}
+        <div class="card__badges card__badges--product price-badges--{{ settings.typography_preset }} {% unless show_badges %}visually-hidden{% endunless %}  {% if price_settings.badge_size != 'default' %}{{ price_settings.badge_size }}{% else %}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_label %} uppercase{% else %} none-uppercase{% endif %}{% if settings.bolder_font_label %} bolder-font{% else %} none-bolder-font{% endif %}{% endif %}{% endif %}">
+          {%- liquid
+            assign badge_name_1 = settings.badge_name_1 | downcase
+            assign badge_name_2 = settings.badge_name_2 | downcase
+            assign badge_name_3 = settings.badge_name_3 | downcase
+            assign badge_name_4 = settings.badge_name_4 | downcase
+          -%}
+          {%- if product.available and product.selected_or_first_available_variant.metafields.custom.badge != blank -%}
+            {% for badge in product.selected_or_first_available_variant.metafields.custom.badge.value %}
+              {% assign badge_name = badge | downcase %}
+              <span class="card__badges-item card__badges-item--metafield" 
+                {% if badge_name == badge_name_1 %}style="background-color: var(--badge-background-1); color: var(--badge-text-1);"
+                {% elsif badge_name == badge_name_2 %}style="background-color: var(--badge-background-2); color: var(--badge-text-2);"
+                {% elsif badge_name == badge_name_3 %}style="background-color: var(--badge-background-3); color: var(--badge-text-3);"
+                {% elsif badge_name == badge_name_4 %}style="background-color: var(--badge-background-4); color: var(--badge-text-4);"
+                {% elsif badge_name != badge_name_1 and badge_name != badge_name_2 and badge_name != badge_name_3 and badge_name != badge_name_4 %}style="background-color: rgb(var(--layout-text-color));"{% endif %}>
+                {{ badge }}
+              </span>
+            {% endfor %}
+          {%- endif -%}
+          {%- if product.available and product.metafields.custom.badge != blank -%}
+            {% for badge in product.metafields.custom.badge.value %}
+              {% assign badge_name = badge | downcase %}
+              <span class="card__badges-item card__badges-item--metafield" 
+                {% if badge_name == badge_name_1 %}style="background-color: var(--badge-background-1); color: var(--badge-text-1);"
+                {% elsif badge_name == badge_name_2 %}style="background-color: var(--badge-background-2); color: var(--badge-text-2);"
+                {% elsif badge_name == badge_name_3 %}style="background-color: var(--badge-background-3); color: var(--badge-text-3);"
+                {% elsif badge_name == badge_name_4 %}style="background-color: var(--badge-background-4); color: var(--badge-text-4);"
+                {% elsif badge_name != badge_name_1 and badge_name != badge_name_2 and badge_name != badge_name_3 and badge_name != badge_name_4 %}style="background-color: rgb(var(--layout-text-color));"{% endif %}>
+                {{ badge }}
+              </span>
+            {% endfor %}
+          {%- endif -%}
+          {%- if product.available and target.compare_at_price > target.price -%}
+            <span class="card__badges-item card__badges-item--sale">{{ 'products.product.on_sale' | t }}
+            </span>
+          {%- endif -%}
+          {%- if product.available == false and product.selected_or_first_available_variant != 'continue' -%}
+            <span class="card__badges-item card__badges-item--sold">{{ 'products.product.sold_out' | t }}
+            </span>
+          {%- endif -%}
+          {%-  if settings.show_pre_order_badge and product.template_suffix == 'preorder' -%}
+              <span class="card__badges-item card__badges-item--preorder">{{ 'products.product.pre_order' | t }}
+              </span>
+            {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>

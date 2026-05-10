@@ -1,0 +1,333 @@
+<div class="{% if product_block %}section-block{% endif %} related-collections related-collections--{{ settings.white_space }} {% if settings.show_lines %}related-collections--lines{% endif %}" {% if product_block %}style="--spacing: {{ related_collections_settings.top_spacing }}; --mobile-spacing: {{ related_collections_settings.mobile_top_spacing }};"{% endif %} {{ block_item.shopify_attributes }}>
+  {% style %}
+    {% if settings.typography_preset != 'custom' %}
+    .related-collections__icon svg {
+      height: max(20px, var(--fluid-preset-body-s-lh));
+      width: max(20px, var(--fluid-preset-body-s-lh));
+    }
+    .heading_s .related-collections__icon svg,
+    .heading_s_uppercase .related-collections__icon svg {
+      height: min(128px, max(20px, var(--fluid-preset-s-lh)));
+      width: min(128px, max(20px, var(--fluid-preset-s-lh)));
+    }
+    .heading_xs .related-collections__icon svg,
+    .heading_xs_uppercase .related-collections__icon svg {
+      height: min(128px, max(20px, var(--fluid-preset-xs-lh)));
+      width: min(128px, max(20px, var(--fluid-preset-xs-lh)));
+    }
+    .body_l .related-collections__icon svg,
+    .body_l_uppercase .related-collections__icon svg {
+      height: max(20px, var(--fluid-preset-body-l-lh));
+      width: max(20px, var(--fluid-preset-body-l-lh));
+    }
+    .body_m .related-collections__icon svg,
+    .body_m_uppercase .related-collections__icon svg {
+      height: max(20px, var(--fluid-preset-body-m-lh));
+      width: max(20px, var(--fluid-preset-body-m-lh));
+    }
+    .body_s .related-collections__icon svg,
+    .body_s_uppercase .related-collections__icon svg {
+      height: max(24px, var(--fluid-preset-body-s-lh));
+      width: max(24px, var(--fluid-preset-body-s-lh));
+    }
+    {% else %}
+    .related-collections__icon svg {
+      height: max(20px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+      width: max(20px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+    }
+    .heading_s .related-collections__icon svg,
+    .heading_s_uppercase .related-collections__icon svg {
+      height: min(128px, max(20px, calc(var(--heading-s-font-size) * var(--heading-s-line-height))));
+      width: min(128px, max(20px, calc(var(--heading-s-font-size) * var(--heading-s-line-height))));
+    }
+    .heading_xs .related-collections__icon svg,
+    .heading_xs_uppercase .related-collections__icon svg {
+      height: min(128px, max(20px, calc(var(--heading-xs-font-size) * var(--heading-xs-line-height))));
+      width: min(128px, max(20px, calc(var(--heading-xs-font-size) * var(--heading-xs-line-height))));
+    }
+    .body_l .related-collections__icon svg,
+    .body_l_uppercase .related-collections__icon svg {
+      height: max(20px, calc(var(--body-l-font-size) * var(--body-l-line-height)));
+      width: max(20px, calc(var(--body-l-font-size) * var(--body-l-line-height)));
+    }
+    .body_m .related-collections__icon svg,
+    .body_m_uppercase .related-collections__icon svg {
+      height: max(20px, calc(var(--body-m-font-size) * var(--body-m-line-height)));
+      width: max(20px, calc(var(--body-m-font-size) * var(--body-m-line-height)));
+    }
+    .body_s .related-collections__icon svg,
+    .body_s_uppercase .related-collections__icon svg {
+      height: max(24px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+      width: max(24px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+    }
+    .label_font .related-collections__icon svg,
+    .label_font_uppercase .related-collections__icon svg {
+      height: max(20px, calc(var(--label-font-size) * var(--label-line-height)));
+      width: max(20px, calc(var(--label-font-size) * var(--label-line-height)));
+    }
+    {% endif %}
+  {% endstyle %}
+
+  {%- liquid 
+    assign main_collection = product.metafields.custom.main_collection.value | default: product.collections.first
+
+    if settings.typography_preset == 'avant_garde'
+      assign weight = settings.accent_icon_weight
+      if settings.swap_fonts
+        assign weight = settings.base_icon_weight
+      endif
+    else 
+      assign weight =  settings.base_icon_weight
+      if settings.swap_fonts
+        assign weight = settings.accent_icon_weight
+      endif
+    endif
+    if settings.typography_preset == 'custom'
+      assign weight = settings.custom_icon_weight
+    endif
+
+    assign show_collection_by_brand = false
+    if related_collections_settings.collection_by_brand and main_collection != blank
+      assign show_collection_by_brand = true
+    endif
+    assign show_shop_by_brand = false
+    if related_collections_settings.shop_by_brand
+      assign show_shop_by_brand = true
+    endif
+    assign show_shop_the_collection = false
+    if related_collections_settings.shop_the_collection and main_collection != blank
+      assign show_shop_the_collection = true
+    endif
+
+    assign num_collection_by_brand = 0 | times: 1
+    assign num_by_brand = 0 | times: 1
+    assign num_by_collection = 0 | times: 1
+    if show_collection_by_brand
+      assign num_collection_by_brand = 1 | times: 1
+    endif
+    if show_shop_by_brand
+      assign num_by_brand = 1 | times: 1
+    endif
+    if show_shop_the_collection
+      assign num_by_collection = 1 | times: 1 
+    endif
+
+    assign block_in_container = num_collection_by_brand | plus: num_by_brand | plus: num_by_collection
+  -%}
+
+  {% if related_collections_settings.heading != blank %}
+    {% liquid
+      assign heading_text = related_collections_settings.heading
+      assign final_text = ''
+      assign split_text_curly = heading_text | split: '{'
+      for part in split_text_curly
+        if part contains '}'
+          assign split_curly = part | split: '}'
+          assign styled_text = split_curly[0]
+          assign after_curly = split_curly[1]
+          assign final_text = final_text | append: '<span class="styled">' | append: styled_text | append: '</span>' | append: after_curly
+        else
+          assign final_text = final_text | append: part
+        endif
+      endfor
+    %}
+
+    <{% if section_content %}{{ related_collections_settings.heading_tag }}{% else %}h2{% endif %} class="related-collections__heading custom-heading {% if section_content %}{% if settings.accent_color_for_headings %}related-collections__heading--accent{% endif %}{% endif %} 
+      {% if section_content == false %}block-heading--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %}{% else %}related-collections__heading--{{ settings.typography_preset }}{% endif %}{% if related_collections_settings.heading_size != 'default' %} {{ related_collections_settings.heading_size }}{% else %}{% if settings.uppercase_heading_xs %} uppercase{% endif %}{% if settings.bolder_font_heading_xs %} bolder-font{% endif %}{% endif %}
+      {% if settings.center_text %}center-elements{% endif %}">
+      {% if related_collections_settings.heading_color == 'gradient' and related_collections_settings.heading_gradient != blank %}<span class="gradient-heading-text gradient-heading-text--{{ section.id }}">{% endif %}
+      {{ final_text }}
+      {% if related_collections_settings.heading_color == 'gradient' and related_collections_settings.heading_gradient != blank %}</span>{% endif %}
+    </{% if section_content %}{{ related_collections_settings.heading_tag }}{% else %}h2{% endif %}>
+  {% endif %}
+
+  {% if show_collection_by_brand or show_shop_by_brand or show_shop_the_collection %}
+    {% capture image_placeholder %}
+      <div class="related-collections__image-alternative">
+        <span class="related-collections__image-icon">
+          {% if weight == 'regular' %}
+            {% render 'icon-accordion-2', icon: 'price-tag-alternative-regular' %}
+          {% elsif weight == 'medium' %}
+            {% render 'icon-accordion-2', icon: 'price-tag-alternative-medium' %}
+          {% elsif weight == 'bold' %}
+            {% render 'icon-accordion-2', icon: 'price-tag-alternative-bold' %}
+          {% endif %}
+        </span>
+      </div>
+    {% endcapture %}
+
+    {% capture related_collections_icon %}
+      <span class="related-collections__icon">
+        {% if weight == 'regular' %}
+          {% render 'icon-accordion-2', icon: 'arrow-right-up-regular' %}
+        {% elsif weight == 'medium' %}
+          {% render 'icon-accordion-2', icon: 'arrow-right-up-medium' %}
+        {% elsif weight == 'bold' %}
+          {% render 'icon-accordion-2', icon: 'arrow-right-up-bold' %}
+        {% endif %}
+      </span>
+    {% endcapture %}
+
+    <div class="related-collections__container related-collections__container--{{ block_in_container }} {% if settings.center_text %}center-elements{% endif %}" style="--related-collections-items: {{ block_in_container }}">
+      {% if show_collection_by_brand %}
+        {% assign collection_by_brand_image = related_collections_settings.image_collection_by_brand | default: main_collection.image %}
+
+        <a class="related-collections__item" href="{{ main_collection.url }}?filter.p.vendor={{ product.vendor }}">
+          <div class="related-collections__image" {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}>
+            {% if collection_by_brand_image %}
+              {% if settings.images_loading != 'disable' %}
+                <figure class="lazy-image lazy-image--{{ settings.images_loading }}">
+              {% endif %}
+                <img src="{{ collection_by_brand_image | image_url: width: 96 }}"
+                  sizes="48px"
+                  {% if settings.images_loading != 'disable' %}
+                    onload="this.parentNode.classList.add('lazyloaded');"
+                  {% endif %}
+                  alt="{{ main_collection.title | escape }}"
+                  draggable="false"
+                  loading="lazy"
+                  width="48"
+                  height="48"
+                  class="card__image"
+                >
+              {% if settings.images_loading != 'disable' %}
+                {% if settings.images_loading != 'fade_scale' %}
+                  <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                    <img 
+                    alt="{{ collection_by_brand_image.alt | escape }}" 
+                    src="{{ collection_by_brand_image | image_url: width: 10 }}"
+                    draggable="false"
+                    width="10" 
+                    height="10">
+                  </div>
+                {% endif %}
+                </figure>
+              {% endif %}
+            {% else %}
+              {{ image_placeholder }}
+            {% endif %}
+          </div>
+          <div class="related-collections__content">
+            <p class="related-collections__route related-collections__route--{{ settings.typography_preset }} {% if related_collections_settings.title_size != 'default' %}{{ related_collections_settings.title_size }}{% else %}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %}{% endif %}">{{ "products.product.all" | t }}
+              {{ product.vendor }}
+              {{ main_collection.title }}
+            </p>
+            <p class="related-collections__link related-collections__link--{{ settings.typography_preset }} {% if related_collections_settings.text_size != 'default' %}{{ related_collections_settings.text_size }}{% else %}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %}{% endif %} {% if settings.dim_text %}dim{% endif %}">{{ "products.product.collection_by_brand" | t }} 
+              {{ related_collections_icon }}
+            </p>
+          </div>
+        </a>
+      {% endif %}
+
+      {% if show_shop_by_brand %}
+        {% liquid
+          capture brand_file_name
+            render 'filename-normalize', value: product.vendor, keep_case: true
+          endcapture
+          assign brand_file_name = brand_file_name | strip | append: '.png'
+      
+          assign brand_image = nil
+          if images[brand_file_name] != blank
+            assign brand_image = images[brand_file_name]
+          endif
+
+          assign shop_by_brand_image = related_collections_settings.image_shop_by_brand | default: brand_image
+         %}
+
+        <a class="related-collections__item" href="{{ product.vendor | url_for_vendor }}">
+          <div class="related-collections__image" {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}>
+            {% if shop_by_brand_image %}
+              {% if settings.images_loading != 'disable' %}
+                <figure class="lazy-image lazy-image--{{ settings.images_loading }}">
+              {% endif %}
+                <img src="{{ shop_by_brand_image | image_url: width: 96 }}"
+                  sizes="48px"
+                  {% if settings.images_loading != 'disable' %}
+                    onload="this.parentNode.classList.add('lazyloaded');"
+                  {% endif %}
+                  alt="{{ product.vendor | escape }}"
+                  draggable="false"
+                  loading="lazy"
+                  width="48"
+                  height="48"
+                  class="card__image"
+                >
+              {% if settings.images_loading != 'disable' %}
+                {% if settings.images_loading != 'fade_scale' %}
+                  <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                    <img 
+                    alt="{{ shop_by_brand_image.alt | escape }}" 
+                    src="{{ shop_by_brand_image | image_url: width: 10 }}"
+                    draggable="false"
+                    width="10" 
+                    height="10">
+                  </div>
+                {% endif %}
+                </figure>
+              {% endif %}
+            {% else %}
+              {{ image_placeholder }}
+            {% endif %}
+          </div>
+          <div class="related-collections__content">
+            <p class="related-collections__route related-collections__route--{{ settings.typography_preset }} {% if related_collections_settings.title_size != 'default' %}{{ related_collections_settings.title_size }}{% else %}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %}{% endif %}">{{ "products.product.all" | t }}
+              {{ product.vendor }}
+            </p>
+            <p class="related-collections__link related-collections__link--{{ settings.typography_preset }} {% if related_collections_settings.text_size != 'default' %}{{ related_collections_settings.text_size }}{% else %}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %}{% endif %} {% if settings.dim_text %}dim{% endif %}">{{ "products.product.brand" | t }} 
+              {{ related_collections_icon }}
+            </p>
+          </div>
+        </a>
+      {% endif %}
+
+      {% if show_shop_the_collection %}
+        {% assign shop_the_collection_image = related_collections_settings.image_shop_the_collection | default: main_collection.image %}
+
+        <a class="related-collections__item" href="{{ main_collection.url }}">
+          <div class="related-collections__image" {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}>
+            {% if shop_the_collection_image %}
+              {% if settings.images_loading != 'disable' %}
+                <figure class="lazy-image lazy-image--{{ settings.images_loading }}">
+              {% endif %}
+                <img src="{{ shop_the_collection_image | image_url: width: 96 }}"
+                  sizes="48px"
+                  {% if settings.images_loading != 'disable' %}
+                    onload="this.parentNode.classList.add('lazyloaded');"
+                  {% endif %}
+                  alt="{{ main_collection.title | escape }}"
+                  draggable="false"
+                  loading="lazy"
+                  width="48"
+                  height="48"
+                  class="card__image"
+                >
+              {% if settings.images_loading != 'disable' %}
+                {% if settings.images_loading != 'fade_scale' %}
+                  <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                    <img 
+                    alt="{{ shop_the_collection_image.alt | escape }}" 
+                    src="{{ shop_the_collection_image | image_url: width: 10 }}"
+                    draggable="false"
+                    width="10" 
+                    height="10">
+                  </div>
+                {% endif %}
+                </figure>
+              {% endif %}
+            {% else %}
+              {{ image_placeholder }}
+            {% endif %}
+          </div>
+          <div class="related-collections__content">
+            <p class="related-collections__route related-collections__route--{{ settings.typography_preset }} {% if related_collections_settings.title_size != 'default' %}{{ related_collections_settings.title_size }}{% else %}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %}{% endif %}">{{ "products.product.all" | t }}
+              {{ main_collection.title }}
+            </p>
+            <p class="related-collections__link related-collections__link--{{ settings.typography_preset }} {% if related_collections_settings.text_size != 'default' %}{{ related_collections_settings.text_size }}{% else %}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %}{% endif %} {% if settings.dim_text %}dim{% endif %}">{{ "products.product.related_collection" | t }} 
+              {{ related_collections_icon }}
+            </p>
+          </div>
+        </a>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>

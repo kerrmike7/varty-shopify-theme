@@ -1,0 +1,55 @@
+{% style %}
+  .free-shipping-bar {
+    --progress-color: {{ settings.free_shipping_progress_color }};
+    --complete-color: {{ settings.free_shipping_complete_color }};
+  }
+{% endstyle %}
+
+{%- liquid
+  assign free_shipping_min_amount = 'cart.free_shipping_minimum' | t 
+
+  assign free_shipping_contains_numbers = false
+  if free_shipping_min_amount contains '0' or free_shipping_min_amount contains '1' or free_shipping_min_amount contains '2' or free_shipping_min_amount contains '3' or free_shipping_min_amount contains '4' or free_shipping_min_amount contains '5' or free_shipping_min_amount contains '6' or free_shipping_min_amount contains '7' or free_shipping_min_amount contains '8' or free_shipping_min_amount contains '9'
+    assign free_shipping_contains_numbers = true
+  endif
+
+  unless free_shipping_contains_numbers
+    assign free_shipping_min_amount = settings.free_shipping_min_amount 
+  endunless
+  
+  assign free_shipping_min_amount = free_shipping_min_amount | times: 100 
+  assign total_price = cart.total_price
+
+  if linklists.gift-wrapping.links != blank and linklists.gift-wrapping.links.first.type == 'product_link'
+    assign gift_wrapping = linklists.gift-wrapping.links.first
+    
+    assign gift_wrap_id = gift_wrapping.object.variants.first.id
+    assign gift_wraps_in_cart = 0
+    for item in cart.items
+      if item.id == gift_wrap_id
+        assign gift_wraps_in_cart = item.price
+        break
+      endif
+    endfor
+    assign total_price = total_price | minus: gift_wraps_in_cart
+  endif
+  assign rest_to_free_shipping = free_shipping_min_amount | minus: total_price
+  if settings.currency_code_enabled
+    assign rest_to_free_shipping_money = rest_to_free_shipping | money_with_currency 
+  else 
+    assign rest_to_free_shipping_money = rest_to_free_shipping | money
+  endif
+-%}
+
+{% if free_shipping_min_amount != blank %}
+<div class="free-shipping-bar">
+  {%- if rest_to_free_shipping <= 0 -%}
+  {%- assign progress_bar_status_class = 'complete' -%}
+  <p class="body-secondary-text--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}">{{ 'free_shipping_bar.complete_text' | t }}</p>
+  {% else %}
+  {%- assign progress_bar_status_class = 'in-progress' -%}
+  <p class="body-secondary-text--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}">{{ 'free_shipping_bar.progress_text' | t: rest_amount: rest_to_free_shipping_money }}</p>
+  {%- endif -%}
+  <progress-bar class="free-shipping-bar__progress-bar progress-bar progress-bar--{{ progress_bar_status_class }}" data-quantity="{{ total_price }}" data-total="{{ free_shipping_min_amount }}"></progress-bar>
+</div>
+{%- endif -%}

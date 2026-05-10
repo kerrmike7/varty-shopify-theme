@@ -1,0 +1,63 @@
+{% if request.design_mode %}
+    {% style %}
+        #shopify-section-{{ section.id }} {
+            background-color: rgba(var(--layout-text-color), 0.05);
+            color: rgb(var(--layout-text-color));
+            --padding-top: 0px;
+            --padding-bottom: 0px;
+        }
+    {% endstyle %}
+{% endif %}
+<div {% if section.settings.anchor_link != blank %}id="{{section.settings.anchor_link}}"{% endif %} class="anchor-link {% if request.design_mode %}anchor-link-visible{% endif %} ordinal-section ordinal-section--{{ settings.white_space }} section-padding--{{ settings.white_space }} {% if settings.max_page_width == '1400' or settings.max_page_width == '1200' %}page-width {% endif %} page-width--{{ settings.max_page_width }}">
+    {% if request.design_mode %}
+        <div class="anchor-link__wrapper">
+            <div class="anchor-link__svg">
+                <svg aria-hidden="true" focusable="false" width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 5.89844L26 27.8984"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M19.3625 20.5992C18.4449 21.4398 17.2444 21.9039 16 21.8992C14.9908 21.8991 14.0053 21.5936 13.173 21.0229C12.3407 20.4522 11.7006 19.6431 11.3367 18.7017C10.9729 17.7604 10.9025 16.7311 11.1346 15.749C11.3668 14.7669 11.8907 13.878 12.6375 13.1992"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9.25 9.47266C4.15 12.0477 2 16.8977 2 16.8977C2 16.8977 6 25.8977 16 25.8977C18.3432 25.9168 20.6572 25.3768 22.75 24.3227"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M26.075 22.036C28.8 19.5985 30 16.8985 30 16.8985C30 16.8985 26 7.89847 16 7.89847C15.1331 7.89676 14.2675 7.96784 13.4125 8.11097"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16.9375 11.9863C18.0008 12.1878 18.9697 12.7297 19.6981 13.5301C20.4264 14.3306 20.8746 15.3463 20.975 16.4238"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <p class="anchor-link__title {% if settings.typography_preset == 'custom' %}{% if settings.uppercase_heading_xs %} uppercase{% endif %}{% if settings.bolder_font_heading_xs %} bolder-font{% endif %}{% endif %}">{{ 'general.anchor_link.title' | t }}: #{{ section.settings.anchor_link }}</p>
+            <p class="anchor-link__text {% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_m %} uppercase{% endif %}{% if settings.bolder_font_body_m %} bolder-font{% endif %}{% endif %}">{{ 'general.anchor_link.text' | t }}</p>
+        </div>
+    {% endif %} 
+</div>
+
+{% schema %}
+{
+    "name": "t:sections.anchor-link.name",
+    "tag": "section",
+    "settings": [
+        {
+            "type": "paragraph",
+            "content": "t:sections.anchor-link.settings.paragraph__1.content" 
+        },
+        {
+            "type": "paragraph",
+            "content": "t:sections.anchor-link.settings.paragraph__2.content" 
+        },
+        {
+            "type": "paragraph",
+            "content": "t:sections.anchor-link.settings.paragraph__3.content" 
+        },
+        {
+            "type": "text",
+            "id": "anchor_link",
+            "label": "t:sections.anchor-link.settings.anchor_link.label",
+            "default": "anchor-link"
+        }
+    ],
+    "presets": [
+        {
+          "name": "t:sections.anchor-link.name",
+          "category": "t:categories.layout"
+        }
+    ],
+    "disabled_on": {
+        "groups": ["*"]
+    }
+}
+{% endschema %}

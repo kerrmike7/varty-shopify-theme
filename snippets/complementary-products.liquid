@@ -1,0 +1,191 @@
+{%- liquid 
+  if settings.typography_preset == 'avant_garde'
+			assign weight_close = settings.accent_icon_weight
+			if settings.swap_fonts
+					assign weight_close = settings.base_icon_weight
+			endif
+	else 
+			assign weight_close =  settings.base_icon_weight
+			if settings.swap_fonts
+					assign weight_close = settings.accent_icon_weight
+			endif
+	endif
+  if settings.typography_preset == 'custom'
+    assign weight_close = settings.custom_icon_weight
+  endif
+
+  assign hover_behavior = 'nothing'
+  if complementary_products_settings.show_second_image
+      assign hover_behavior = 'second_image'
+  endif
+-%}
+
+<product-recommendations class="slider-section block-content complementary-block slider-container-js slider-section--{{ settings.white_space }}{% if product_block %} section-block{% endif %}" 
+  data-url="{{ url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=10&intent=complementary" {% if product_block %}style="--spacing: {{ complementary_products_settings.top_spacing }}; --mobile-spacing: {{ complementary_products_settings.mobile_top_spacing }};"{% endif %} {{ block_item.shopify_attributes }}>
+  {% if recommendations.performed and recommendations.products_count > 0 %}
+    <complementary-products id="GalleryViewer-{{ section.id }}" class="slider">
+        <div class="slider__header">
+            {% if complementary_products_settings.heading != blank %}
+              {% liquid
+                assign heading_text = complementary_products_settings.heading
+                assign final_text = ''
+                assign split_text_curly = heading_text | split: '{'
+                for part in split_text_curly
+                    if part contains '}'
+                        assign split_curly = part | split: '}'
+                        assign styled_text = split_curly[0]
+                        assign after_curly = split_curly[1]
+                        assign final_text = final_text | append: '<span class="styled">' | append: styled_text | append: '</span>' | append: after_curly
+                    else
+                        assign final_text = final_text | append: part
+                    endif
+                endfor
+              %}
+              <h2 class="slider__heading custom-heading block-heading--{{ settings.typography_preset }} {% if complementary_products_settings.heading_size != 'default' %}{{ complementary_products_settings.heading_size }}{% else %}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %}{% endif %}">{{ final_text }}</h2>
+            {% endif %}
+            {% liquid 
+              assign grid_items_desktop = complementary_products_settings.desktop_grid_type | times: 1
+              assign grid_items_mobile = complementary_products_settings.mobile_layout | times: 1
+            %}
+        </div>
+      <div class="slider__viewport">
+          <ul id="Slider-Gallery-{{ section.id }}" class="slider__grid complementary__grid slider__grid--{{ settings.white_space }}" role="list" >
+          <li id="Slide-{{ section.id }}" class="complementary__grid-item is-active">
+            <ul>
+              {% for recommendation in recommendations.products %}
+                {% if forloop.index <= 3 %}
+                  {% assign mobileItems = section.settings.mobile_layout | times: 1 %}
+                  <li class="slider__grid-item snap-align">
+                    {% render 'card-product',
+                        card_product: recommendation,
+                        image_ratio: complementary_products_settings.image_ratio,
+                        show_vendor: complementary_products_settings.show_vendor,
+                        hover_behavior: hover_behavior,
+                        enable_quick_view: complementary_products_settings.enable_quick_view,
+                        enable_add_to_cart: complementary_products_settings.enable_add_to_cart,
+                        price_position: complementary_products_settings.price_position,
+                        max_product_name_characters: complementary_products_settings.max_product_name_characters,
+                        show_short_description: complementary_products_settings.show_short_description,
+                        enable_color_pills: complementary_products_settings.enable_color_pills,
+                        show_rating: complementary_products_settings.show_rating,
+                        show_pickup_availability: complementary_products_settings.show_pickup_availability,
+                        center_text: settings.center_text,
+                        desktop_media_width: '90px',
+                        mobile_media_width: '90px'
+                    %}
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </li>
+          {% if recommendations.products_count > 3 %}
+            <li id="Slide-{{ section.id }}" class="complementary__grid-item">
+              <ul>
+                {% for recommendation in recommendations.products %}
+                  {% if forloop.index > 3 and forloop.index <= 6 %}
+                    {% assign mobileItems = section.settings.mobile_layout | times: 1 %}
+                    <li class="slider__grid-item snap-align">
+                      {% render 'card-product',
+                          card_product: recommendation,
+                          image_ratio: complementary_products_settings.image_ratio,
+                          show_vendor: complementary_products_settings.show_vendor,
+                          hover_behavior: hover_behavior,
+                          enable_quick_view: complementary_products_settings.enable_quick_view,
+                          enable_add_to_cart: complementary_products_settings.enable_add_to_cart,
+                          price_position: complementary_products_settings.price_position,
+                          max_product_name_characters: complementary_products_settings.max_product_name_characters,
+                          show_short_description: complementary_products_settings.show_short_description,
+                          enable_color_pills: complementary_products_settings.enable_color_pills,
+                          show_rating: complementary_products_settings.show_rating,
+                          show_pickup_availability: complementary_products_settings.show_pickup_availability,
+                          center_text: settings.center_text,
+                          desktop_media_width: '90px',
+                          mobile_media_width: '90px'
+                      %}
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </li>
+            {% if recommendations.products_count > 6 %}
+              <li id="Slide-{{ section.id }}" class="complementary__grid-item">
+                <ul>
+                  {% for recommendation in recommendations.products %}
+                    {% if forloop.index > 6 and forloop.index <= 9 %}
+                      {% assign mobileItems = section.settings.mobile_layout | times: 1 %}
+                      <li class="slider__grid-item snap-align">
+                        {% render 'card-product',
+                            card_product: recommendation,
+                            image_ratio: complementary_products_settings.image_ratio,
+                            show_vendor: complementary_products_settings.show_vendor,
+                            hover_behavior: hover_behavior,
+                            enable_quick_view: complementary_products_settings.enable_quick_view,
+                            enable_add_to_cart: complementary_products_settings.enable_add_to_cart,
+                            price_position: complementary_products_settings.price_position,
+                            max_product_name_characters: complementary_products_settings.max_product_name_characters,
+                            show_short_description: complementary_products_settings.show_short_description,
+                            enable_color_pills: complementary_products_settings.enable_color_pills,
+                            show_rating: complementary_products_settings.show_rating,
+                            show_pickup_availability: complementary_products_settings.show_pickup_availability,
+                            center_text: settings.center_text,
+                            desktop_media_width: '90px',
+                            mobile_media_width: '90px'
+                        %}
+                      </li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </li>
+              {% if recommendations.products_count > 9 %}
+                <li id="Slide-{{ section.id }}" class="complementary__grid-item">
+                  <ul>
+                    {% for recommendation in recommendations.products %}
+                      {% if forloop.index > 9 %}
+                        {% assign mobileItems = section.settings.mobile_layout | times: 1 %}
+                        <li class="slider__grid-item snap-align">
+                          {% render 'card-product',
+                              card_product: recommendation,
+                              image_ratio: complementary_products_settings.image_ratio,
+                              show_vendor: complementary_products_settings.show_vendor,
+                              hover_behavior: hover_behavior,
+                              enable_quick_view: complementary_products_settings.enable_quick_view,
+                              enable_add_to_cart: complementary_products_settings.enable_add_to_cart,
+                              price_position: complementary_products_settings.price_position,
+                              max_product_name_characters: complementary_products_settings.max_product_name_characters,
+                              show_short_description: complementary_products_settings.show_short_description,
+                              enable_color_pills: complementary_products_settings.enable_color_pills,
+                              show_rating: complementary_products_settings.show_rating,
+                              show_pickup_availability: complementary_products_settings.show_pickup_availability,
+                              center_text: settings.center_text,
+                              desktop_media_width: '90px',
+                              mobile_media_width: '90px'
+                          %}
+                        </li>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                </li>
+              {% endif %}
+            {% endif %}
+          {% endif %}
+          </ul>
+           {% liquid 
+            assign grid_items_desktop = section.settings.desktop_grid_type | times: 1
+            assign grid_items_mobile = section.settings.mobile_layout | times: 1
+          %}
+          {% if recommendations.products_count > 3 %}
+            <div class="slider-buttons-items slider-buttons-items--bottom slider-buttons-items--{{ settings.white_space }} {% if settings.show_lines %}slider-buttons-items--lines{% endif %}">
+              <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="{{ 'general.slider.previous_slide' | t }}">
+                {% assign icon_full = 'arrow-long-left' | append: "-" | append: weight_close %}
+                {% render 'icon-accordion-2', icon: icon_full %}
+              </button>
+              <button type="button" class="slider-button slider-button--next" name="next" aria-label="{{ 'general.slider.next_slide' | t }}">
+                {% assign icon_full = 'arrow-long-right' | append: "-" | append: weight_close %}
+                {% render 'icon-accordion-2', icon: icon_full %}
+              </button>
+            </div> 
+          {% endif %}
+      </div>
+    </complementary-products>
+  {% endif %}
+</product-recommendations>

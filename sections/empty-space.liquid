@@ -1,0 +1,144 @@
+{% style %}
+    #shopify-section-{{ section.id }} {
+        --desktop-height: {{ section.settings.desktop_height }}px;
+        --mobile-height: {{ section.settings.mobile_height }}px;
+
+        {% if section.settings.color_type == 'invert' %}
+            --layout-text-color:
+            {{ settings.layout_background_color.red }},
+            {{ settings.layout_background_color.green }},
+            {{ settings.layout_background_color.blue }};
+            --layout-background-color:
+            {{ settings.layout_text_color.red }},
+            {{ settings.layout_text_color.green }}, 
+            {{ settings.layout_text_color.blue }};
+        {% endif %}
+        {% if section.settings.color_type == 'custom' %}
+            --layout-text-color:
+            {{ section.settings.text_color.red }},
+            {{ section.settings.text_color.green }}, 
+            {{ section.settings.text_color.blue }};
+            --layout-background-color:
+            {{ section.settings.background_color.red }},
+            {{ section.settings.background_color.green }}, 
+            {{ section.settings.background_color.blue }};
+        {% endif %}  
+        {%- if section.settings.color_type == 'custom' and section.settings.background_color_type == 'gradient' and section.settings.background_gradient != blank %}
+        background: {{ section.settings.background_gradient }};
+        {%- else %}
+        background-color: rgb(var(--layout-background-color));
+        {%- endif %}
+        color: rgb(var(--layout-text-color));
+    }
+    #shopify-section-{{ section.id }} .spacer {
+        height: var(--desktop-height);
+    }
+    @media screen and (max-width: 920px) {
+        #shopify-section-{{ section.id }} .spacer {
+            height: var(--mobile-height);
+        }
+    }
+{% endstyle %}
+
+<div class="spacer"></div>
+
+{% schema %}
+{
+    "name": "t:blocks.empty_space.name",
+    "tag": "section",
+    "class": "spacer-section",
+    "settings": [
+        {
+            "type": "range",
+            "id": "desktop_height",
+            "min": 0,
+            "max": 320,
+            "step": 8,
+            "unit": "px",
+            "label": "t:sections.all.desktop_height.label",
+            "default": 64
+          },
+          {
+            "type": "range",
+            "id": "mobile_height",
+            "min": 0,
+            "max": 80,
+            "step": 8,
+            "unit": "px",
+            "label": "t:sections.all.mobile_height.label",
+            "default": 24
+          },
+          {
+            "type": "header",
+            "content": "t:sections.all.colors.content"
+        },
+        {
+            "type": "select",
+            "id": "color_type",
+            "label": "t:sections.all.colors.color_type.label",
+            "options": [
+                {
+                "value": "default",
+                "label": "t:sections.all.colors.color_type.options__1.label"
+                },
+                {
+                "value": "invert",
+                "label": "t:sections.all.colors.color_type.options__2.label"
+                },
+                {
+                "value": "custom",
+                "label": "t:sections.all.colors.color_type.options__3.label"
+                }
+            ],
+            "default": "default"
+        },       
+        {
+          "type": "select",
+          "id": "background_color_type",
+          "label": "t:sections.all.colors.background_color_type.label",
+          "options": [
+            {
+              "value": "solid",
+              "label": "t:sections.all.colors.background_color_type.options__1.label"
+            },
+            {
+              "value": "gradient",
+              "label": "t:sections.all.colors.background_color_type.options__2.label"
+            }
+          ],
+          "visible_if": "{{ section.settings.color_type == 'custom' }}",
+          "default": "solid"
+        },
+        {
+          "type": "color_background",
+          "id": "background_gradient",
+          "label": "t:sections.all.colors.background_gradient_type.label",
+          "visible_if": "{{ section.settings.color_type == 'custom' and section.settings.background_color_type == 'gradient' }}"
+        },
+        {
+            "type": "color",
+            "id": "background_color",
+            "label": "t:sections.all.colors.background_solid_type.label",
+          "info": "t:sections.all.colors.background_solid_type.info",
+            "visible_if": "{{ section.settings.color_type == 'custom' }}",
+            "default": "#FFFFFF"
+        },
+        {
+            "type": "color",
+            "id": "text_color",
+            "label": "t:sections.all.colors.text_color.label",
+            "visible_if": "{{ section.settings.color_type == 'custom' }}",
+            "default": "#000000"
+        }
+    ],
+    "presets": [
+      {
+        "name": "t:blocks.empty_space.name",
+        "category": "t:categories.layout"
+      }
+    ],
+    "disabled_on": {
+        "groups": ["*"]
+    }
+}
+{% endschema %}

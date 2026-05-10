@@ -1,0 +1,79 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-cart": {
+      "type": "main-cart",
+      "blocks": {
+        "9d4e3ee5-cefb-4109-b1cf-38cb7e7414df": {
+          "type": "price",
+          "settings": {
+            "show_cart_total": true,
+            "show_saved": true,
+            "subtotal_size": "heading_s"
+          }
+        },
+        "5b1a083e-eff7-4728-afd3-b568d5255087": {
+          "type": "checkout_button",
+          "settings": {}
+        },
+        "discount_code_YRxBwj": {
+          "type": "discount_code",
+          "settings": {
+            "show_collapsible": false,
+            "show_lines": true,
+            "heading": "Discount",
+            "heading_size": "label_font_uppercase",
+            "label": ""
+          }
+        },
+        "449b6b84-cb19-4ba7-9d2e-343564694f99": {
+          "type": "shipping_calculator",
+          "settings": {
+            "show_lines": true,
+            "shipping_heading": "Estimate",
+            "shipping_heading_size": "label_font_uppercase",
+            "shipping_country": "United States"
+          }
+        },
+        "f7fba67b-f53b-4852-837c-e36331b14a6f": {
+          "type": "order_note",
+          "settings": {
+            "show_collapsible": true,
+            "show_lines": true,
+            "order_heading": "Order note",
+            "order_heading_size": "label_font_uppercase",
+            "order_label": "Add a note to your order",
+            "order_placeholder": "Write your comment for seller here"
+          }
+        }
+      },
+      "block_order": [
+        "9d4e3ee5-cefb-4109-b1cf-38cb7e7414df",
+        "5b1a083e-eff7-4728-afd3-b568d5255087",
+        "discount_code_YRxBwj",
+        "449b6b84-cb19-4ba7-9d2e-343564694f99",
+        "f7fba67b-f53b-4852-837c-e36331b14a6f"
+      ],
+      "settings": {
+        "heading_size": "heading_l",
+        "heading_tag": "h1",
+        "show_vendor": false,
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main-cart"
+  ]
+}

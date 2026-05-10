@@ -1,0 +1,108 @@
+{%- liquid 
+    if settings.typography_preset == 'avant_garde'
+      assign weight = settings.accent_icon_weight
+      if settings.swap_fonts
+          assign weight = settings.base_icon_weight
+      endif
+  else 
+      assign weight =  settings.base_icon_weight
+      if settings.swap_fonts
+          assign weight = settings.accent_icon_weight
+      endif
+  endif
+  if settings.typography_preset == 'custom'
+        assign weight = settings.custom_icon_weight
+    endif
+-%}
+
+{% style %}
+.navigation-buttons--{{ block.id }},
+.navigation-buttons--{{ block.id }} .navigation-buttons__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: {{ button_settings.buttons_horizontal_alignment }};
+    align-items: {{ button_settings.buttons_vertical_alignment }};
+}
+.navigation-buttons--{{ block.id }} .navigation-buttons__wrapper {
+    align-items: center;
+}
+.mega-menu-drawer .navigation-buttons--{{ block.id }} {
+    flex-direction: column;
+    {% if mega_drawer %}
+        gap: 16px;
+    {% else %}
+        gap: 24px;
+    {% endif %}
+    align-items: {{ button_settings.buttons_horizontal_alignment }};
+}
+.navigation-buttons__wrapper {
+    width: 100%;
+}
+.navigation-buttons .icon-button {
+    gap: 7px;
+}
+.navigation-buttons .solid-button,
+.navigation-buttons .outlined-button {
+    gap: 7px;
+    min-width: 120px;
+    min-height: 36px;
+    padding: 6px 12px;
+}
+.navigation-buttons .icon-button,
+.navigation-buttons .solid-button,
+.navigation-buttons .outlined-button,
+.navigation-buttons .block__button,
+.icon-button span {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.navigation-buttons--{{ block.id }}.navigation-buttons--2.navigation-buttons--medium,
+.navigation-buttons--{{ block.id }}.navigation-buttons--2.navigation-buttons--wide,
+.navigation-buttons--{{ block.id }}.navigation-buttons--3.navigation-buttons--medium {
+    grid-column: span 2;
+}
+
+.navigation-buttons--{{ block.id }}.navigation-buttons--3.navigation-buttons--wide {
+    grid-column: span 3;
+}
+.shopify-section:not(.main-sidebar-section) .scroll-color.section-color a:hover,
+.shopify-section:not(.main-sidebar-section) .block__button.scroll-color.footer-color a:hover {
+    opacity: 0.7;
+    --hover-button-color: var(--accent-button-color);
+}
+.shopify-section.main-sidebar-section .main-sidebar:not(.overlap-slide-out-menu-opened) .block__button.scroll-color.footer-color a:hover {
+    opacity: 0.7;
+    --hover-button-color: var(--accent-button-color);
+}
+{% endstyle %}
+
+{%- if button_label != blank -%}
+    <div class="block__button {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} {% unless button_link != blank %}disabled{% endunless %} {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' %}{% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %}{% endif %}">
+{%- if button_link != blank -%}<a href="{{ button_link }}" {% if target_blank %}target="_blank"{% endif %}  class="{{ button_style }}-button icon-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.navigation_button_size == 'default' %}button-font--default{% else %}{{ settings.navigation_button_size }}{% endif %}{% endif %} {% if button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{%- else -%}
+<span disabled class="{{ button_style }}-button icon-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.navigation_button_size == 'default' %}button-font--default{% else %}{{ settings.navigation_button_size }}{% endif %}{% endif %} {% if button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{%- endif -%}
+    {% if icon != 'none' %}
+        <span>
+            {% assign icon_name = icon | replace: "_", "-" %}
+            {% assign icon_full = icon_name | append: "-" | append: weight %}
+            {% case icon_name %}
+            {% when 'search' or 'eye' or 'user' or 'settings' or 'shopping-cart' %}
+                {% render 'icon', icon: icon_full %}
+            {% when 'scissors' or 'security-badge' or 'share' or 'stiletto' or 'stop-watch'
+                or 'sunflower' or 't-shirt' or 'trash' or 'truck' or 'washing-symbol'
+                or 'water-bottle' or 'zoom-in' or 'zoom-out' %}
+                {% render 'icon-accordion-2', icon: icon_full %}
+            {% when 'house' or 'store-front' or 'map' or 'compass' or 'road-sign'
+                or 'map-pin' or 'exclamation-mark' or 'warning-sign' or 'customer-support' or 'lightbulb'
+                or 'lightbulb-lighting-up' or 'trending-item' or 'kids-friendly' or 'soft' or 'water-proof' or 'multi-language' or 'star' or 'satisfied' or 'flag' or 'freehand' or 'bubble' or 'connector' or 'battery' or 'camera' or 'beach' or 'terrain' or 'food' or 'fitness' or 'hotel' or 'subscription' or 'folder' or 'note'%}
+                {% render 'icons-3', icon: icon_full %}
+            {% else %}
+                {% render 'icon-accordion', icon: icon_full %}
+            {% endcase %}
+        </span>
+    {% endif %}
+    <span class="icon-button__title">{{ button_label }}</span>
+{%- unless button_link != blank -%}</span>{%- endunless -%}{%- if button_link != blank -%}</a>{%- endif -%}
+</div>
+{%- endif -%}

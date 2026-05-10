@@ -1,0 +1,57 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-search": {
+      "type": "main-search",
+      "settings": {
+        "heading_size": "heading_l",
+        "enable_filtering": true,
+        "enable_availability_toggle": true,
+        "desktop_filter_style": "drawer",
+        "filtering_style": "solid",
+        "total_products_heading_size": "default",
+        "filter_and_operator_subtitle": "Match all",
+        "open_collapsible_label": "",
+        "results_per_page": 48,
+        "infinite_scroll": "disable",
+        "grid_type": "three_columns",
+        "mobile_layout": "2",
+        "image_ratio": "square",
+        "focal_point": "center center",
+        "hover_behavior": "second_image",
+        "show_bullets": true,
+        "enable_add_to_cart": true,
+        "enable_quick_view": true,
+        "price_position": "with_title",
+        "show_vendor": true,
+        "max_product_name_characters": 100,
+        "show_rating": true,
+        "show_short_description": true,
+        "enable_color_pills": true,
+        "show_pickup_availability": false,
+        "show_blog_post_image": false,
+        "blog_image_ratio": "square",
+        "blog_focal_point": "center center",
+        "show_date": true,
+        "show_author": false,
+        "show_number_of_comments": true,
+        "layout_margins": "enable",
+        "desktop_padding_top": 60,
+        "desktop_padding_bottom": -40,
+        "mobile_padding_top": 32,
+        "mobile_padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main-search"
+  ]
+}

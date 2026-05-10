@@ -1,0 +1,89 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-article": {
+      "type": "main-article",
+      "blocks": {
+        "9e479d96-2707-4e65-9045-306472182f0e": {
+          "type": "title",
+          "settings": {
+            "title_size": "heading_l",
+            "show_date": true,
+            "show_author": false,
+            "show_number_of_comments": true,
+            "subheading_size": "default"
+          }
+        },
+        "3e3d911f-c467-4d0d-8d78-a69ee3a924f7": {
+          "type": "excerpt",
+          "settings": {
+            "text_size": "heading_xs"
+          }
+        },
+        "97c5c763-1544-460b-9fab-8a293f75edc5": {
+          "type": "featured_image",
+          "settings": {
+            "image_width": "narrow",
+            "image_ratio": "wide",
+            "focal_point": "top center",
+            "context_image_radius": "default"
+          }
+        },
+        "b8485a0f-b536-4e1d-8d46-1de091e22f5c": {
+          "type": "content",
+          "settings": {
+            "text_size": "body_m",
+            "use_accent_color": true
+          }
+        },
+        "74046771-9dfb-41c4-b84b-358092ebef8a": {
+          "type": "tags",
+          "settings": {
+            "text_size": "default"
+          }
+        },
+        "cc320052-fb8b-4811-8674-414c2927eec1": {
+          "type": "share",
+          "settings": {
+            "text_size": "default",
+            "display_collapsible_link": false,
+            "show_only_icons": false
+          }
+        },
+        "b5408d87-fff5-4181-9a01-cafcb30c0c36": {
+          "type": "prev_and_next",
+          "settings": {
+            "button_label": "Go to journal"
+          }
+        }
+      },
+      "block_order": [
+        "9e479d96-2707-4e65-9045-306472182f0e",
+        "3e3d911f-c467-4d0d-8d78-a69ee3a924f7",
+        "97c5c763-1544-460b-9fab-8a293f75edc5",
+        "b8485a0f-b536-4e1d-8d46-1de091e22f5c",
+        "74046771-9dfb-41c4-b84b-358092ebef8a",
+        "cc320052-fb8b-4811-8674-414c2927eec1",
+        "b5408d87-fff5-4181-9a01-cafcb30c0c36"
+      ],
+      "settings": {
+        "section_width": "narrow",
+        "desktop_padding_top": 64,
+        "desktop_padding_bottom": -40,
+        "mobile_padding_top": 32,
+        "mobile_padding_bottom": 4
+      }
+    }
+  },
+  "order": [
+    "main-article"
+  ]
+}

@@ -1,0 +1,73 @@
+{%- liquid 
+  if settings.typography_preset == 'avant_garde'
+    assign weight = settings.accent_icon_weight
+    if settings.swap_fonts
+        assign weight = settings.base_icon_weight
+    endif
+else 
+    assign weight =  settings.base_icon_weight
+    if settings.swap_fonts
+        assign weight = settings.accent_icon_weight
+    endif
+endif
+-%}
+
+{%- if paginate.parts.size > 0 -%}
+  <div class="pagination-wrapper pagination-wrapper--{{ settings.white_space }} {% if settings.show_lines %} lines{% endif %} {% if disable_layout_margins %} section-padding--{{ settings.white_space }} {% endif %}">
+    {%- if infinite_scroll == 'button' or infinite_scroll == 'auto' -%}
+      {%- if paginate.next -%}
+          <infinite-scroll class="infinite-scroll {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %}" data-url="{{ paginate.next.url }}" data-trigger="{{ infinite_scroll }}">
+            {%- if infinite_scroll == 'button' -%}
+              <button class="solid-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}" aria-label="{{ 'general.pagination.load_more' | t }}">
+                {{ 'general.pagination.load_more' | t }}
+              </button>
+            {% elsif infinite_scroll == 'auto'%}
+              <button aria-hidden="true"></button>
+            {% endif %}
+            <div class="loading-overlay__spinner hidden">
+              <svg aria-hidden="true" focusable="false" class="spinner" width="24px" height="24px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                <circle class="path" fill="none" stroke-width="5" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+              </svg>
+            </div> 
+          </infinite-scroll>
+      {%- endif -%}
+    {%- else -%}
+      {%- unless disable_pagination -%}
+        <nav class="pagination {% if disable_layout_margins %} {% if settings.max_page_width == '1400' or settings.max_page_width == '1200' %}page-width {% endif %} page-width--{{ settings.max_page_width }}{% endif %}" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
+          <ul class="pagination__list list-unstyled">
+            <li>
+                <a href="{% if paginate.previous.url != blank %}{{ paginate.previous.url }}{{ anchor }}{% else %}/{% endif %}" class="pagination__item pagination__item--prev {% unless paginate.previous %}pagination__item--disable{% endunless %} pagination__item-arrow link motion-reduce" aria-label="{{ 'general.pagination.previous' | t }}">
+                    {% assign icon_full = 'arrow-long-left' | append: "-" | append: weight %}
+                    {% render 'icon-accordion-2', icon: icon_full %}
+                </a>
+            </li>
+          <li class="pagination__pages">
+            {%- for part in paginate.parts -%}
+              {%- liquid 
+                assign prev_activ_index = paginate.current_page | minus: 1
+              -%}
+            <div class="pagination__li {% if part.title == paginate.current_page %}pagination__li--current{% endif %} {% if part.title == prev_activ_index %}pagination__li--previous{% endif %}">
+              {%- if part.is_link -%}
+                <a href="{{ part.url }}{{ anchor }}" class="pagination__item link" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">{{ part.title }}</a>
+              {%- else -%}
+                {%- if part.title == paginate.current_page -%}
+                  <span class="pagination__item pagination__item--current" aria-current="page" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">{{ part.title }}</span>
+                {%- else -%}
+                  <span class="pagination__item pagination__item--dots">{{ part.title }}</span>
+                {%- endif -%}
+              {%- endif -%}
+            </div>
+            {%- endfor -%}
+          </li>
+          <li>
+              <a href="{{ paginate.next.url }}{{ anchor }}" class="pagination__item pagination__item--next {% unless paginate.next %}pagination__item--disable{% endunless %} pagination__item-arrow link motion-reduce" aria-label="{{ 'general.pagination.next' | t }}" >
+                  {% assign icon_full = 'arrow-long-right' | append: "-" | append: weight %}
+                  {% render 'icon-accordion-2', icon: icon_full %}
+              </a>
+          </li> 
+          </ul>
+        </nav>
+      {%- endunless -%}
+    {%- endif -%}
+  </div>
+{%- endif -%}

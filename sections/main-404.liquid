@@ -1,0 +1,15 @@
+{{ 'main-404.css' | asset_url | stylesheet_tag }}
+
+  <div class="page-404 section-padding--{{ settings.white_space }} {% if settings.max_page_width == '1400' or settings.max_page_width == '1200' %}page-width {% endif %} page-width--{{ settings.max_page_width }}">
+    <div class="template-404 {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %}">
+      <h1 class="heading heading--{{ settings.typography_preset }} {% if settings.accent_color_for_headings %}heading--accent{% endif %}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_heading_xs %} uppercase{% endif %}{% if settings.bolder_font_heading_xs %} bolder-font{% endif %}{% endif %}">
+          {{ 'templates.404.title' | t }}
+      </h1>
+      <p class="subheading subheading--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %}">
+          {{ 'templates.404.subtext' | t }}
+      </p>
+      <a href="{{ routes.root_url }}" class="solid-button big-button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}">
+          {{ 'templates.404.return_home' | t }}
+      </a>
+    </div>
+  </div>

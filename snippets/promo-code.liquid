@@ -1,0 +1,19 @@
+<script src="{{ 'promo-code.js' | asset_url }}" defer="defer"></script>
+{% style %}
+    .promo-code {
+        {% if settings.button_radius == '2000px' %}
+            --prome-code-radius: 24px;
+        {% else %}
+            --prome-code-radius: var(--button-radius);
+        {% endif %}
+    }
+{% endstyle %}
+<promo-code class="{% if content_wrapper_block %}{% unless forloop_first %}content-wrapper--block{% endunless %}{% endif %}">
+    <div class="promo-code {% if center_text %}center{% endif %}" {{ block.shopify_attributes }}>
+        <div class="promo-code__field big-button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}"><span>{{ promo_code }}</span></div>
+        <button class="copy-button big-button big-button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}">
+        <span class="copy-label show">{{ 'products.product.copy_code' | t }}</span>
+        <span class="copy-success hide">{{ 'products.product.copied_message' | t }}</span>
+        </button>
+    </div>
+</promo-code>

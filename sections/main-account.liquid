@@ -1,0 +1,127 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+{% style %}
+  {% if settings.typography_preset != 'custom' %}
+  .addresses-count.label--minimal_heavy,
+  .addresses-count.label--brutalist {
+    height: max(16px, var(--fluid-preset-body-l-lh));
+    min-width: max(16px, var(--fluid-preset-body-l-lh));
+  }
+  .addresses-count.label--minimal_uppercase {
+    height: max(16px, var(--fluid-preset-body-s-lh));
+    min-width: max(16px, var(--fluid-preset-body-s-lh));
+  }
+  .addresses-count.label--duet {
+    height: max(16px, var(--fluid-preset-body-m-lh));
+    min-width: max(16px, var(--fluid-preset-body-m-lh));
+  }
+  .addresses-count.label--minimal_basic,
+  .addresses-count.label--classic,
+  .addresses-count.label--avant_garde,
+  .addresses-count.label--contrast {
+    height: max(16px, var(--fluid-preset-label-lh));
+    min-width: max(16px, var(--fluid-preset-label-lh));
+  }
+  {% else %}
+  .addresses-count.label--custom {
+    height: max(16px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+    min-width: max(16px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+  }
+  {% endif %}
+{% endstyle %}
+{% liquid
+    assign uppercase_font = false
+    assign bolder_font = false
+    if settings.typography_preset == 'custom'
+        if settings.uppercase_body_s
+            assign uppercase_font = true
+        endif
+        if settings.bolder_font_body_s
+            assign bolder_font = true
+        endif
+    endif
+%} 
+
+<div class="account-page customer-page section-padding--{{ settings.white_space }} {% if settings.max_page_width == '1400' or settings.max_page_width == '1200' %}page-width {% endif %} page-width--{{ settings.max_page_width }}">
+    <div class="account-top {% if settings.center_text %} center{% endif %}">
+        <h1 class="heading heading--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_heading_xs %} uppercase{% endif %}{% if settings.bolder_font_heading_xs %} bolder-font{% endif %}{% endif %} {% if settings.accent_color_for_headings %}heading--accent{% endif %}">
+            {{ 'customer.account.title' | t }}
+        </h1>
+        <a class="subheading body-secondary-text--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} account-link hover-opacity" href="{{ routes.account_logout_url }}">
+            {{ 'customer.log_out' | t }}
+        </a>
+    </div>
+    <div class="account-info">
+        <div class="account-info__block account-info__block--order">
+            <h2 class="heading heading--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_heading_xs %} uppercase{% endif %}{% if settings.bolder_font_heading_xs %} bolder-font{% endif %}{% endif %} {% if settings.accent_color_for_headings %}heading--accent{% endif %}">
+                {{ 'customer.orders.title' | t }}
+            </h2>
+            {% paginate customer.orders by 20 %}
+            {%- if customer.orders.size > 0 -%}
+                <div class="table-wrapper">
+                    <table role="table" class="order-table body-secondary-text--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}">
+                        <caption class="visually-hidden">{{ 'customer.orders.title' | t }}</caption>
+                        <thead role="rowgroup">
+                        <tr role="row">
+                            <th id="ColumnOrder" scope="col" role="columnheader">{{ 'customer.orders.order_number' | t }}</th>
+                            <th id="ColumnDate" scope="col" role="columnheader">{{ 'customer.orders.date' | t }}</th>
+                            <th id="ColumnPayment" scope="col" role="columnheader">{{ 'customer.orders.payment_status' | t }}</th>
+                            <th id="ColumnFulfillment" scope="col" role="columnheader">{{ 'customer.orders.fulfillment_status' | t }}</th>
+                            <th id="ColumnTotal" scope="col" role="columnheader">{{ 'customer.orders.total' | t }}</th>
+                        </tr>
+                        </thead>
+                        <tbody role="rowgroup">
+                        {%- for order in customer.orders -%}
+                            <tr role="row">
+                            <td
+                                id="RowOrder"
+                                role="cell"
+                                headers="ColumnOrder"
+                                data-label="{{ 'customer.orders.order_number' | t }}">
+                                <a href="{{ order.customer_url }}" aria-label="{{ 'customer.orders.order_number_link' | t: number: order.name }}">
+                                {{ order.name }}
+                                </a>
+                            </td>
+                            <td headers="RowOrder ColumnDate" role="cell" data-label="{{ 'customer.orders.date' | t }}">
+                                {{ order.created_at | time_tag: format: 'date' }}
+                            </td>
+                            <td headers="RowOrder ColumnPayment" role="cell" data-label="{{ 'customer.orders.payment_status' | t }}">
+                                {{ order.financial_status_label }}
+                            </td>
+                            <td headers="RowOrder ColumnFulfillment" role="cell" data-label="{{ 'customer.orders.fulfillment_status' | t }}">
+                                {{ order.fulfillment_status_label }}
+                            </td>
+                            <td headers="RowOrder ColumnTotal" role="cell" data-label="{{ 'customer.orders.total' | t }}">
+                                {{ order.total_price | money_with_currency }}</td>
+                            </tr>
+                        {%- endfor -%}
+                        </tbody>
+                    </table>
+                </div>
+            {%- else -%}
+                <p class="body-secondary-text--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} secondary-text {% if settings.dim_text %}dim{% endif %}">{{ 'customer.orders.none' | t }}</p>
+            {%- endif -%}
+            {%- if paginate.pages > 1 -%}
+            {% render 'pagination', paginate: paginate, anchor: '' %}
+            {%- endif -%}
+            {% endpaginate %}
+        </div>
+        <div class="account-info__block account-info__block--details {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %}">
+            <h2 class="heading heading--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_heading_xs %} uppercase{% endif %}{% if settings.bolder_font_heading_xs %} bolder-font{% endif %}{% endif %} {% if settings.accent_color_for_headings %}heading--accent{% endif %}">
+                {{ 'customer.account.details' | t }}
+            </h2>
+            <div class="body-secondary-text--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}">
+                {{ customer.default_address | format_address }}
+            </div>
+            <a href="{{ routes.account_addresses_url }}" class="button--{{ settings.typography_preset }} outlined-button button--account {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}">
+                {{ 'customer.addresses.view' | t }}
+                <span class="addresses-count label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% else %}none-uppercase{% endif %}{% if bolder_font %} bolder-font{% else %}none-bolder-font{% endif %}">{{ customer.addresses_count }}</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-account.name"
+}
+{% endschema %}

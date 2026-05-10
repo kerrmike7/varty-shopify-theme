@@ -1,0 +1,423 @@
+{% if settings.instagram_link != blank or settings.twitter_link != blank or settings.tiktok_link != blank or settings.snapchat_link != blank or settings.pinterest_link != blank or settings.tumblr_link != blank or settings.facebook_link != blank or settings.linkedin_link != blank or settings.youtube_link != blank or settings.vimeo_link != blank or settings.reddit_link != blank or settings.trustpilot_link != blank or settings.tripadvisor_link != blank or settings.telegram_link != blank or settings.line_link != blank %}
+{% liquid 
+  assign show_heading = false
+  if settings.instagram_link != blank or settings.twitter_link != blank or settings.tiktok_link != blank or settings.snapchat_link != blank or settings.pinterest_link != blank or settings.tumblr_link != blank or settings.facebook_link != blank or settings.linkedin_link != blank or settings.youtube_link != blank or settings.vimeo_link != blank or settings.reddit_link != blank or settings.trustpilot_link != blank or settings.tripadvisor_link != blank or settings.telegram_link != blank or settings.line_link != blank
+    assign show_heading = true
+  endif
+  assign uppercase_font = false
+  assign bolder_font = false
+  assign uppercase_font_heading = false
+  assign bolder_font_heading = false
+  if settings.typography_preset == 'custom'
+        if settings.uppercase_body_s 
+            if settings.navigation_item_size == 'default'
+                assign uppercase_font = true
+            endif
+            if social-media_settings.social_media_heading_size == 'default'
+                assign uppercase_font_heading = true
+            endif
+        endif
+        if settings.bolder_font_body_s
+            if settings.navigation_item_size == 'default'
+                assign bolder_font = true
+            endif
+            if social-media_settings.social_media_heading_size == 'default'
+                assign bolder_font_heading = true
+            endif
+        endif
+    endif
+%}
+
+{% style %}
+    #shopify-section-{{ section.id }} {
+        --social-media-vertical-alignment: {{ social-media_settings.social_media_vertical_alignment }};
+        --social-media-horizontal-alignment: {{ social-media_settings.social_media_horizontal_alignment }};
+    }
+
+    .social-media__icon {
+        aspect-ratio: 1/1;
+    }
+{% if settings.typography_preset != 'custom' %}
+    .social-media__icon {
+        height: max(24px, var(--fluid-preset-body-s-lh));
+    }
+{% else %}
+    .social-media__icon {
+        height: max(24px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+    }
+    .navigations-heading-m .social-media__icon {
+        height: max(24px, calc(var(--heading-m-font-size) * var(--heading-m-line-height)));
+    }
+    .navigations-heading-s .social-media__icon {
+        height: max(24px, calc(var(--heading-s-font-size) * var(--heading-s-line-height)));
+    }
+    .navigations-heading-xs .social-media__icon {
+        height: max(24px, calc(var(--heading-xs-font-size) * var(--heading-xs-line-height)));
+    }
+    .navigations-body-l .social-media__icon {
+        height: max(24px, calc(var(--body-l-font-size) * var(--body-l-line-height)));
+    }
+    .navigations-body-m .social-media__icon {
+        height: max(24px, calc(var(--body-m-font-size) * var(--body-m-line-height)));
+    }
+    .navigations-label .social-media__icon {
+        height: max(24px, calc(var(--label-font-size) * var(--label-line-height)));
+    }
+{% endif %}
+{% endstyle %}
+
+<div class="social-media-block {% if section_navigation_block %} section-navigation-block{% if settings.enable_drawer_animations %} stagger__item{% endif %}{% endif %} {% if main-sidebar__block %} main-sidebar__block{% endif %} {% if content_wrapper_block %}{% unless forloop_first %}content-wrapper--block{% endunless %}{% endif %} {% if social-media_settings.show_bottom_line and mega_drawer %} full-bottom-line{% endif %}
+            {% unless mega_drawer %} social-media-block--{{ section.settings.grid_columns }} 
+            social-media-block--{{ social-media_settings.block_width }}{% endunless %}
+            social-media-block--{{ social-media_settings.social_media_horizontal_alignment }} 
+            {% if section.id contains 'header' %}social-media-block--header{% elsif section.id contains 'footer' %}social-media-block--footer{% else %}social-media-block--{{ section.id }}{% endif %}"
+            style="--social-media-vertical-alignment: {{ social-media_settings.social_media_vertical_alignment }}; --social-media-horizontal-alignment: {{ social-media_settings.social_media_horizontal_alignment }}; --item-index: {{ animated_drawer_item_index | default: for_loop.index }};
+            {% if mega_drawer %} --spacing: {{ social-media_settings.top_spacing }}; --mobile-spacing: {{ social-media_settings.mobile_top_spacing }};{% endif%}" {{ block_item.shopify_attributes }}> 
+    <div class="social-media-container
+                social-media-container--{{ social-media_settings.social_media_style }} 
+                social-media-container--{{ settings.white_space }}
+                {% if section.id contains 'header' %}social-media-container--header{% elsif section.id contains 'footer' %}social-media-container--footer{% else %}social-media-container--{{ section.id }}{% endif %}
+                social-media-container--{{ social-media_settings.social_media_horizontal_alignment }} 
+                social-media-container--{% if social-media_settings.social_media_alignment == 'top-stretched' or social-media_settings.social_media_alignment == 'center-stretched' or social-media_settings.social_media_alignment == 'bottom-stretched' %}stretched{% endif %}">
+        {% if social-media_settings.social_media_heading != blank and show_heading %}
+            {% liquid
+                assign heading_text = social-media_settings.social_media_heading
+                assign final_text = ''
+                assign split_text_curly = heading_text | split: '{'
+                for part in split_text_curly
+                    if part contains '}'
+                        assign split_curly = part | split: '}'
+                        assign styled_text = split_curly[0]
+                        assign after_curly = split_curly[1]
+                        assign final_text = final_text | append: '<span class="styled">' | append: styled_text | append: '</span>' | append: after_curly
+                    else
+                        assign final_text = final_text | append: part
+                    endif
+                endfor
+              %}
+        <p class="social-media__title custom-heading social-media__title--{{ settings.typography_preset }} {% if social-media_settings.social_media_heading_size != 'default' %}{{ social-media_settings.social_media_heading_size }}{% else %}{% if uppercase_font_heading %} uppercase{% endif %}{% if bolder_font_heading %} bolder-font{% endif %}{% endif %} subheading {% if settings.dim_text %}dim{% endif %} {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' %}{% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %}{% endif %}">{{ final_text }}</p>
+        {% endif %}
+        <ul class="social-media social-media--{{ settings.typography_preset }} {% if settings.navigation_item_size != 'default' and settings.typography_preset == 'custom' %}{{ settings.navigation_item_size }}{% else %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}{% endif %} {% if section.settings.color_type == 'custom' %}color-custom{% elsif section.settings.color_type == 'invert' %}color-invert{% endif %} {% if social-media_settings.use_accent_color %}color-accent{% endif %}">        
+        {%- liquid
+            assign file_extension = 'png'
+          -%}
+            {%- if settings.instagram_link != blank -%}
+                <li class="social-media__item{% if social-media_settings.social_media_style == 'logo_in_circle' %} social-media__item--short{% endif %}">
+                    {%- liquid
+                        if social-media_settings.social_media_style == 'logo_in_circle'
+                        assign social_media_name = 'instagram-icon'
+                        assign social_media_file_name = social_media_name | handle | append: '.' | append: file_extension
+                        assign social_image = social_media_file_name | file_img_url | prepend: 'https:' | split: '?' | first
+                        endif
+                    -%}
+                    <a class="social-media__link {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %} {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}use-own-icon{% endif %}" href="{{ settings.instagram_link }}" target="_blank" aria-label="{{ 'general.social_media.text.instagram' | t }}"
+                        {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}style="--social-media-icon: url({{ social_image }})"{% endif %}>
+                        {%- if social-media_settings.social_media_style == 'text' -%}
+                            <span class="social-media__text">{{ 'general.social_media.text.instagram' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'short_text' -%}
+                            <span class="social-media__short-text">{{ 'general.social_media.short_text.instagram' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] == blank -%}
+                            <span class="social-media__icon">{% render 'icon', icon: 'instagram-black-circle' %}</span>
+                        {%- endif -%}
+                    </a>
+                </li>
+            {%- endif -%}
+            {%- if settings.twitter_link != blank -%}
+                <li class="social-media__item{% if social-media_settings.social_media_style == 'logo_in_circle' %} social-media__item--short{% endif %}">
+                    {%- liquid
+                        if social-media_settings.social_media_style == 'logo_in_circle'
+                        assign social_media_name = 'twitter-icon'
+                        assign social_media_file_name = social_media_name | handle | append: '.' | append: file_extension
+                        assign social_image = social_media_file_name | file_img_url | prepend: 'https:' | split: '?' | first
+                        endif
+                    -%}
+                    <a class="social-media__link {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %} {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}use-own-icon{% endif %}" href="{{ settings.twitter_link }}" target="_blank" aria-label="{{ 'general.social_media.text.twitter' | t }}"
+                        {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}style="--social-media-icon: url({{ social_image }})"{% endif %}>
+                        {%- if social-media_settings.social_media_style == 'text' -%}
+                            <span class="social-media__text">{{ 'general.social_media.text.twitter' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'short_text' -%}
+                            <span class="social-media__short-text">{{ 'general.social_media.short_text.twitter' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] == blank -%}
+                            <span class="social-media__icon">{% render 'icon', icon: 'twitter-black-circle' %}</span>
+                        {%- endif -%}
+                    </a>
+                </li>
+            {%- endif -%}
+            {%- if settings.tiktok_link != blank -%}
+                <li class="social-media__item{% if social-media_settings.social_media_style == 'logo_in_circle' %} social-media__item--short{% endif %}">
+                    {%- liquid
+                        if social-media_settings.social_media_style == 'logo_in_circle'
+                        assign social_media_name = 'tiktok-icon'
+                        assign social_media_file_name = social_media_name | handle | append: '.' | append: file_extension
+                        assign social_image = social_media_file_name | file_img_url | prepend: 'https:' | split: '?' | first
+                        endif
+                    -%}
+                    <a class="social-media__link {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %} {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}use-own-icon{% endif %}" href="{{ settings.tiktok_link }}" target="_blank" aria-label="{{ 'general.social_media.text.tiktok' | t }}"
+                        {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}style="--social-media-icon: url({{ social_image }})"{% endif %}>
+                        {%- if social-media_settings.social_media_style == 'text' -%}
+                            <span class="social-media__text">{{ 'general.social_media.text.tiktok' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'short_text' -%}
+                            <span class="social-media__short-text">{{ 'general.social_media.short_text.tiktok' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] == blank -%}
+                             <span class="social-media__icon">{% render 'icon', icon: 'tiktok-black-circle' %}</span>
+                        {%- endif -%}
+                    </a>
+                </li>
+            {%- endif -%}
+            {%- if settings.snapchat_link != blank -%}
+                <li class="social-media__item{% if social-media_settings.social_media_style == 'logo_in_circle' %} social-media__item--short{% endif %}">
+                    {%- liquid
+                        if social-media_settings.social_media_style == 'logo_in_circle'
+                        assign social_media_name = 'snapchat-icon'
+                        assign social_media_file_name = social_media_name | handle | append: '.' | append: file_extension
+                        assign social_image = social_media_file_name | file_img_url | prepend: 'https:' | split: '?' | first
+                        endif
+                    -%}
+                    <a class="social-media__link {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %} {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}use-own-icon{% endif %}" href="{{ settings.snapchat_link }}" target="_blank" aria-label="{{ 'general.social_media.text.snapchat' | t }}"
+                        {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}style="--social-media-icon: url({{ social_image }})"{% endif %}>
+                        {%- if social-media_settings.social_media_style == 'text' -%}
+                            <span class="social-media__text">{{ 'general.social_media.text.snapchat' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'short_text' -%}
+                            <span class="social-media__short-text">{{ 'general.social_media.short_text.snapchat' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] == blank -%}
+                            <span class="social-media__icon">{% render 'icon', icon: 'snapchat-black-circle' %}</span>
+                        {%- endif -%}
+                    </a>
+                </li>
+            {%- endif -%}
+            {%- if settings.pinterest_link != blank -%}
+                <li class="social-media__item{% if social-media_settings.social_media_style == 'logo_in_circle' %} social-media__item--short{% endif %}">
+                    {%- liquid
+                        if social-media_settings.social_media_style == 'logo_in_circle'
+                        assign social_media_name = 'pinterest-icon'
+                        assign social_media_file_name = social_media_name | handle | append: '.' | append: file_extension
+                        assign social_image = social_media_file_name | file_img_url | prepend: 'https:' | split: '?' | first
+                        endif
+                    -%}
+                    <a class="social-media__link {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %} {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}use-own-icon{% endif %}" href="{{ settings.pinterest_link }}" target="_blank" aria-label="{{ 'general.social_media.text.pinterest' | t }}"
+                        {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}style="--social-media-icon: url({{ social_image }})"{% endif %}>
+                        {%- if social-media_settings.social_media_style == 'text' -%}
+                            <span class="social-media__text">{{ 'general.social_media.text.pinterest' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'short_text' -%}
+                            <span class="social-media__short-text">{{ 'general.social_media.short_text.pinterest' | t }}</span>
+                            {% render 'icon', icon: 'pinterest-original' %}  
+                        {%- elsif social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] == blank -%}
+                            <span class="social-media__icon">{% render 'icon', icon: 'pinterest-black-circle' %}</span>
+                        {%- endif -%}
+                    </a>
+                </li>
+            {%- endif -%}
+            {%- if settings.tumblr_link != blank -%}
+                <li class="social-media__item{% if social-media_settings.social_media_style == 'logo_in_circle' %} social-media__item--short{% endif %}">
+                    {%- liquid
+                        if social-media_settings.social_media_style == 'logo_in_circle'
+                        assign social_media_name = 'tumblr-icon'
+                        assign social_media_file_name = social_media_name | handle | append: '.' | append: file_extension
+                        assign social_image = social_media_file_name | file_img_url | prepend: 'https:' | split: '?' | first
+                        endif
+                    -%}
+                    <a class="social-media__link {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %} {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}use-own-icon{% endif %}" href="{{ settings.tumblr_link }}" target="_blank" aria-label="{{ 'general.social_media.text.tumblr' | t }}"
+                        {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}style="--social-media-icon: url({{ social_image }})"{% endif %}>
+                        {%- if social-media_settings.social_media_style == 'text' -%}
+                            <span class="social-media__text">{{ 'general.social_media.text.tumblr' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'short_text' -%}
+                            <span class="social-media__short-text">{{ 'general.social_media.short_text.tumblr' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] == blank -%}
+                            <span class="social-media__icon">{% render 'icon', icon: 'tumblr-black-circle' %}</span>
+                        {%- endif -%}
+                    </a>
+                </li>
+            {%- endif -%}
+            {%- if settings.facebook_link != blank -%}
+                <li class="social-media__item{% if social-media_settings.social_media_style == 'logo_in_circle' %} social-media__item--short{% endif %}">
+                    {%- liquid
+                        if social-media_settings.social_media_style == 'logo_in_circle'
+                        assign social_media_name = 'facebook-icon'
+                        assign social_media_file_name = social_media_name | handle | append: '.' | append: file_extension
+                        assign social_image = social_media_file_name | file_img_url | prepend: 'https:' | split: '?' | first
+                        endif
+                    -%}
+                    <a class="social-media__link {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %} {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}use-own-icon{% endif %}" href="{{ settings.facebook_link }}" target="_blank" aria-label="{{ 'general.social_media.text.facebook' | t }}"
+                        {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}style="--social-media-icon: url({{ social_image }})"{% endif %}>
+                        {%- if social-media_settings.social_media_style == 'text' -%}
+                            <span class="social-media__text">{{ 'general.social_media.text.facebook' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'short_text' -%}
+                            <span class="social-media__short-text">{{ 'general.social_media.short_text.facebook' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] == blank -%}
+                            <span class="social-media__icon">{% render 'icon', icon: 'facebook-black-circle' %}</span>
+                        {%- endif -%}
+                    </a>
+                </li>
+            {%- endif -%}
+            {%- if settings.linkedin_link != blank -%}
+                <li class="social-media__item{% if social-media_settings.social_media_style == 'logo_in_circle' %} social-media__item--short{% endif %}">
+                    {%- liquid
+                        if social-media_settings.social_media_style == 'logo_in_circle'
+                        assign social_media_name = 'linkedin-icon'
+                        assign social_media_file_name = social_media_name | handle | append: '.' | append: file_extension
+                        assign social_image = social_media_file_name | file_img_url | prepend: 'https:' | split: '?' | first
+                        endif
+                    -%}
+                    <a class="social-media__link {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %} {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}use-own-icon{% endif %}" href="{{ settings.linkedin_link }}" target="_blank" aria-label="{{ 'general.social_media.text.linkedin' | t }}"
+                        {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}style="--social-media-icon: url({{ social_image }})"{% endif %}>
+                        {%- if social-media_settings.social_media_style == 'text' -%}
+                            <span class="social-media__text">{{ 'general.social_media.text.linkedin' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'short_text' -%}
+                            <span class="social-media__short-text">{{ 'general.social_media.short_text.linkedin' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] == blank -%}
+                            <span class="social-media__icon">{% render 'icon', icon: 'linkedin-black-circle' %}</span>
+                        {%- endif -%}
+                    </a>
+                </li>
+            {%- endif -%}
+            {%- if settings.youtube_link != blank -%}
+                <li class="social-media__item{% if social-media_settings.social_media_style == 'logo_in_circle' %} social-media__item--short{% endif %}">
+                    {%- liquid
+                        if social-media_settings.social_media_style == 'logo_in_circle'
+                        assign social_media_name = 'youtube-icon'
+                        assign social_media_file_name = social_media_name | handle | append: '.' | append: file_extension
+                        assign social_image = social_media_file_name | file_img_url | prepend: 'https:' | split: '?' | first
+                        endif
+                    -%}
+                    <a class="social-media__link {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %} {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}use-own-icon{% endif %}" href="{{ settings.youtube_link }}" target="_blank" aria-label="{{ 'general.social_media.text.youtube' | t }}"
+                        {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}style="--social-media-icon: url({{ social_image }})"{% endif %}>
+                        {%- if social-media_settings.social_media_style == 'text' -%}
+                            <span class="social-media__text">{{ 'general.social_media.text.youtube' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'short_text' -%}
+                            <span class="social-media__short-text">{{ 'general.social_media.short_text.youtube' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] == blank -%}
+                            <span class="social-media__icon">{% render 'icon', icon: 'youtube-black-circle' %}</span>
+                        {%- endif -%}
+                    </a>
+                </li>
+            {%- endif -%}
+            {%- if settings.vimeo_link != blank -%}
+                <li class="social-media__item{% if social-media_settings.social_media_style == 'logo_in_circle' %} social-media__item--short{% endif %}">
+                    {%- liquid
+                        if social-media_settings.social_media_style == 'logo_in_circle'
+                        assign social_media_name = 'vimeo-icon'
+                        assign social_media_file_name = social_media_name | handle | append: '.' | append: file_extension
+                        assign social_image = social_media_file_name | file_img_url | prepend: 'https:' | split: '?' | first
+                        endif
+                    -%}
+                    <a class="social-media__link {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %} {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}use-own-icon{% endif %}" href="{{ settings.vimeo_link }}" target="_blank" aria-label="{{ 'general.social_media.text.vimeo' | t }}"
+                        {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}style="--social-media-icon: url({{ social_image }})"{% endif %}>
+                        {%- if social-media_settings.social_media_style == 'text' -%}
+                            <span class="social-media__text">{{ 'general.social_media.text.vimeo' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'short_text' -%}
+                            <span class="social-media__short-text">{{ 'general.social_media.short_text.vimeo' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] == blank -%}
+                            <span class="social-media__icon">{% render 'icon', icon: 'vimeo-black-circle' %}</span>
+                        {%- endif -%}
+                    </a>
+                </li>
+            {%- endif -%}
+            {%- if settings.reddit_link != blank -%}
+                <li class="social-media__item{% if social-media_settings.social_media_style == 'logo_in_circle' %} social-media__item--short{% endif %}">
+                    {%- liquid
+                        if social-media_settings.social_media_style == 'logo_in_circle'
+                        assign social_media_name = 'reddit-icon'
+                        assign social_media_file_name = social_media_name | handle | append: '.' | append: file_extension
+                        assign social_image = social_media_file_name | file_img_url | prepend: 'https:' | split: '?' | first
+                        endif
+                    -%}
+                    <a class="social-media__link {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %} {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}use-own-icon{% endif %}" href="{{ settings.reddit_link }}" target="_blank" aria-label="{{ 'general.social_media.text.reddit' | t }}"
+                        {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}style="--social-media-icon: url({{ social_image }})"{% endif %}>
+                        {%- if social-media_settings.social_media_style == 'text' -%}
+                            <span class="social-media__text">{{ 'general.social_media.text.reddit' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'short_text' -%}
+                            <span class="social-media__short-text">{{ 'general.social_media.short_text.reddit' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] == blank -%}
+                            <span class="social-media__icon">{% render 'icon', icon: 'reddit-black-circle' %}</span>
+                        {%- endif -%}
+                    </a>
+                </li>
+            {%- endif -%}
+            {%- if settings.trustpilot_link != blank -%}
+                <li class="social-media__item{% if social-media_settings.social_media_style == 'logo_in_circle' %} social-media__item--short{% endif %}">
+                    {%- liquid
+                        if social-media_settings.social_media_style == 'logo_in_circle'
+                        assign social_media_name = 'trustpilot-icon'
+                        assign social_media_file_name = social_media_name | handle | append: '.' | append: file_extension
+                        assign social_image = social_media_file_name | file_img_url | prepend: 'https:' | split: '?' | first
+                        endif
+                    -%}
+                    <a class="social-media__link {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %} {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}use-own-icon{% endif %}" href="{{ settings.trustpilot_link }}" target="_blank" aria-label="{{ 'general.social_media.text.trustpilot' | t }}"
+                        {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}style="--social-media-icon: url({{ social_image }})"{% endif %}>
+                        {%- if social-media_settings.social_media_style == 'text' -%}
+                            <span class="social-media__text">{{ 'general.social_media.text.trustpilot' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'short_text' -%}
+                            <span class="social-media__short-text">{{ 'general.social_media.short_text.trustpilot' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] == blank -%}
+                            <span class="social-media__icon">{% render 'icon', icon: 'trustpilot-black-circle' %}</span>
+                        {%- endif -%}
+                    </a>
+                </li>
+            {%- endif -%}
+            {%- if settings.tripadvisor_link != blank -%}
+                <li class="social-media__item{% if social-media_settings.social_media_style == 'logo_in_circle' %} social-media__item--short{% endif %}">
+                    {%- liquid
+                        if social-media_settings.social_media_style == 'logo_in_circle'
+                        assign social_media_name = 'tripadvisor-icon'
+                        assign social_media_file_name = social_media_name | handle | append: '.' | append: file_extension
+                        assign social_image = social_media_file_name | file_img_url | prepend: 'https:' | split: '?' | first
+                        endif
+                    -%}
+                    <a class="social-media__link {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %} {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}use-own-icon{% endif %}" href="{{ settings.tripadvisor_link }}" target="_blank" aria-label="{{ 'general.social_media.text.tripadvisor' | t }}"
+                        {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}style="--social-media-icon: url({{ social_image }})"{% endif %}>
+                        {%- if social-media_settings.social_media_style == 'text' -%}
+                            <span class="social-media__text">{{ 'general.social_media.text.tripadvisor' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'short_text' -%}
+                            <span class="social-media__short-text">{{ 'general.social_media.short_text.tripadvisor' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] == blank -%}
+                            <span class="social-media__icon">{% render 'icon', icon: 'tripadvisor-black' %}</span>  
+                        {%- endif -%}
+                    </a>
+                </li>
+            {%- endif -%}
+            {%- if settings.telegram_link != blank -%}
+                <li class="social-media__item{% if social-media_settings.social_media_style == 'logo_in_circle' %} social-media__item--short{% endif %}">
+                    {%- liquid
+                        if social-media_settings.social_media_style == 'logo_in_circle'
+                        assign social_media_name = 'telegram-icon'
+                        assign social_media_file_name = social_media_name | handle | append: '.' | append: file_extension
+                        assign social_image = social_media_file_name | file_img_url | prepend: 'https:' | split: '?' | first
+                        endif
+                    -%}
+                    <a class="social-media__link {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %} {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}use-own-icon{% endif %}" href="{{ settings.telegram_link }}" target="_blank" aria-label="{{ 'general.social_media.text.telegram' | t }}"
+                        {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}style="--social-media-icon: url({{ social_image }})"{% endif %}>
+                        {%- if social-media_settings.social_media_style == 'text' -%}
+                            <span class="social-media__text">{{ 'general.social_media.text.telegram' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'short_text' -%}
+                            <span class="social-media__short-text">{{ 'general.social_media.short_text.telegram' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] == blank -%}
+                            <span class="social-media__icon">{% render 'icon', icon: 'telegram-black-circle' %}</span>
+                        {%- endif -%}
+                    </a>
+                </li>
+            {%- endif -%}
+            {%- if settings.line_link != blank -%}
+                <li class="social-media__item{% if social-media_settings.social_media_style == 'logo_in_circle' %} social-media__item--short{% endif %}">
+                    {%- liquid
+                        if social-media_settings.social_media_style == 'logo_in_circle'
+                        assign social_media_name = 'line-icon'
+                        assign social_media_file_name = social_media_name | handle | append: '.' | append: file_extension
+                        assign social_image = social_media_file_name | file_img_url | prepend: 'https:' | split: '?' | first
+                        endif
+                    -%}
+                    <a class="social-media__link {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %} {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}use-own-icon{% endif %}" href="{{ settings.line_link }}" target="_blank" aria-label="{{ 'general.social_media.text.line' | t }}"
+                        {% if social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] != blank %}style="--social-media-icon: url({{ social_image }})"{% endif %}>
+                        {%- if social-media_settings.social_media_style == 'text' -%}
+                            <span class="social-media__text">{{ 'general.social_media.text.line' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'short_text' -%}
+                            <span class="social-media__short-text">{{ 'general.social_media.short_text.line' | t }}</span>
+                        {%- elsif social-media_settings.social_media_style == 'logo_in_circle' and images[social_media_file_name] == blank -%}
+                            <span class="social-media__icon">{% render 'icon-accordion-2', icon: 'line-black-circle' %}</span>
+                        {%- endif -%}
+                    </a>
+                </li>
+            {%- endif -%}
+        </ul>
+    </div>
+</div>
+{% endif %}

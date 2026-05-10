@@ -1,0 +1,435 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "media_with_text_dc3xWL": {
+      "type": "media-with-text",
+      "blocks": {
+        "heading_r7EG3z": {
+          "type": "heading",
+          "settings": {
+            "heading": "{{ article.title }}",
+            "heading_size": "heading_xl",
+            "heading_tag": "h2",
+            "heading_color": "solid",
+            "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)"
+          }
+        },
+        "text_Tydx9k": {
+          "type": "text",
+          "settings": {
+            "text": "{{ article.excerpt }}",
+            "dim_text": false,
+            "text_size": "default"
+          }
+        },
+        "video_button_CeV8iC": {
+          "type": "video_button",
+          "settings": {
+            "video_url": "",
+            "button_label": "Recipe Video",
+            "video_alt": "",
+            "button_style": "outlined"
+          }
+        },
+        "button_TxeedH": {
+          "type": "button",
+          "settings": {
+            "button_label": "Buy now",
+            "button_link": "#buy",
+            "target_blank": false,
+            "button_style": "solid"
+          }
+        }
+      },
+      "block_order": [
+        "heading_r7EG3z",
+        "text_Tydx9k",
+        "video_button_CeV8iC",
+        "button_TxeedH"
+      ],
+      "name": "t:sections.media-with-text.name",
+      "settings": {
+        "image": "{{ article.image }}",
+        "link": "",
+        "target_blank": false,
+        "video_focal_point": "center center",
+        "section_width": "wide",
+        "swap_media": false,
+        "media_size": "half",
+        "media_ratio": "square",
+        "narrow_content": false,
+        "vertical_text_alignment": "center",
+        "horizontal_text_alignment": "center",
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_gradient": "",
+        "fill_section": false,
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": -160,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": -80
+      }
+    },
+    "main-article": {
+      "type": "main-article",
+      "blocks": {
+        "b8485a0f-b536-4e1d-8d46-1de091e22f5c": {
+          "type": "content",
+          "settings": {
+            "text_size": "body_m",
+            "use_accent_color": true
+          }
+        },
+        "74046771-9dfb-41c4-b84b-358092ebef8a": {
+          "type": "tags",
+          "settings": {
+            "text_size": "default"
+          }
+        },
+        "cc320052-fb8b-4811-8674-414c2927eec1": {
+          "type": "share",
+          "settings": {
+            "text_size": "default",
+            "display_collapsible_link": false,
+            "show_only_icons": false
+          }
+        },
+        "b5408d87-fff5-4181-9a01-cafcb30c0c36": {
+          "type": "prev_and_next",
+          "settings": {
+            "button_label": "All Recipes"
+          }
+        }
+      },
+      "block_order": [
+        "b8485a0f-b536-4e1d-8d46-1de091e22f5c",
+        "74046771-9dfb-41c4-b84b-358092ebef8a",
+        "cc320052-fb8b-4811-8674-414c2927eec1",
+        "b5408d87-fff5-4181-9a01-cafcb30c0c36"
+      ],
+      "settings": {
+        "section_width": "narrow",
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
+    },
+    "anchor_link_hXW7Pr": {
+      "type": "anchor-link",
+      "name": "t:sections.anchor-link.name",
+      "settings": {
+        "anchor_link": "buy"
+      }
+    },
+    "rich_text_iRWHMJ": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_tNVUn7": {
+          "type": "heading",
+          "settings": {
+            "heading": "Used in this recipe",
+            "heading_size": "heading_l",
+            "heading_tag": "h2",
+            "heading_color": "gradient",
+            "heading_gradient": "linear-gradient(90deg, rgba(219, 40, 40, 1) 50%, rgba(255, 166, 73, 1) 100%)"
+          }
+        }
+      },
+      "block_order": [
+        "heading_tNVUn7"
+      ],
+      "name": "t:sections.rich-text.name",
+      "settings": {
+        "section_width": "wide",
+        "center_text": false,
+        "color_type": "default",
+        "background_color_type": "solid",
+        "background_gradient": "",
+        "background_color": "#ffffff",
+        "text_color": "#000000",
+        "desktop_padding_top": -48,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": -36,
+        "mobile_padding_bottom": 0
+      }
+    },
+    "featured_product_wbEDGB": {
+      "type": "featured-product",
+      "blocks": {
+        "title_zc6ViR": {
+          "type": "title",
+          "settings": {
+            "title_size": "heading_m",
+            "heading_tag": "h3",
+            "heading_color": "solid",
+            "heading_gradient": "",
+            "top_spacing": 1,
+            "mobile_top_spacing": 1
+          }
+        },
+        "subtitle_NcV3ej": {
+          "type": "subtitle",
+          "settings": {
+            "subtitle": "A crisp immune-support drink crafted with protective berries and spice. Antioxidant ingredients help reinforce daily wellness while bright flavors make it easy to enjoy regularly. A dependable companion during seasonal shifts or travel.",
+            "dim_text": false,
+            "subtitle_size": "body_s",
+            "subtitle_tag": "h3",
+            "top_spacing": 0.8,
+            "mobile_top_spacing": 1
+          }
+        },
+        "price_JDHqWT": {
+          "type": "price",
+          "settings": {
+            "text_size": "heading_s",
+            "badge_size": "label_font",
+            "show_price": true,
+            "show_badges": true,
+            "hide_shipping_note": false,
+            "top_spacing": 1,
+            "mobile_top_spacing": 1
+          }
+        },
+        "linked_products_PggzMj": {
+          "type": "linked_products",
+          "settings": {
+            "heading": "",
+            "heading_size": "default",
+            "top_spacing": 1,
+            "mobile_top_spacing": 1
+          }
+        },
+        "variant_picker_eTW9mj": {
+          "type": "variant_picker",
+          "settings": {
+            "show_label": true,
+            "label_size": "body_s",
+            "text_size": "label_font_uppercase",
+            "top_spacing": 1,
+            "mobile_top_spacing": 1
+          }
+        },
+        "quantity_selector_YtMM68": {
+          "type": "quantity_selector",
+          "settings": {
+            "show_label": false,
+            "label_size": "default",
+            "top_spacing": 1,
+            "mobile_top_spacing": 1
+          }
+        },
+        "subtitle_rwbDyU": {
+          "type": "subtitle",
+          "settings": {
+            "subtitle": "",
+            "dim_text": true,
+            "subtitle_size": "default",
+            "subtitle_tag": "h4",
+            "top_spacing": 1,
+            "mobile_top_spacing": 1
+          }
+        },
+        "buy_buttons_Jn3qMT": {
+          "type": "buy_buttons",
+          "settings": {
+            "stretch_buy_buttons": true,
+            "display_in_a_row": false,
+            "price_in_button": false,
+            "compare_price_on_mobile": true,
+            "show_dynamic_checkout": true,
+            "hide_pickup_availability": false,
+            "top_spacing": 1,
+            "mobile_top_spacing": 1
+          }
+        },
+        "icons_with_text_E6E4aM": {
+          "type": "icons_with_text",
+          "settings": {
+            "heading": "",
+            "heading_size": "heading_s",
+            "text_size": "body_l",
+            "icon_size": "small",
+            "icon_weight": "regular",
+            "context_icon_radius": "default",
+            "fill_container": false,
+            "icon_1": "truck",
+            "text_1": "<p>Natural Caffeine</p>",
+            "page_1": "",
+            "page_content_in_popup_1": true,
+            "icon_2": "leaf",
+            "text_2": "<p>Trans Fat Free</p>",
+            "page_2": "",
+            "page_content_in_popup_2": true,
+            "icon_3": "package_closed",
+            "text_3": "<p>Prebiotics</p>",
+            "page_3": "",
+            "page_content_in_popup_3": true,
+            "icon_4": "none",
+            "text_4": "",
+            "page_4": "",
+            "page_content_in_popup_4": true,
+            "icon_5": "none",
+            "text_5": "",
+            "page_5": "",
+            "page_content_in_popup_5": true,
+            "icon_6": "none",
+            "text_6": "",
+            "page_6": "",
+            "page_content_in_popup_6": true,
+            "top_spacing": 1,
+            "mobile_top_spacing": 1
+          }
+        },
+        "ask_question_Wrh8hr": {
+          "type": "ask_question",
+          "settings": {
+            "icon": "help",
+            "link_text": "Ask a question",
+            "link_size": "label_font_uppercase",
+            "show_lines": true,
+            "heading": "<p>Ask a question</p>",
+            "heading_size": "default",
+            "show_name": true,
+            "make_name_required": true,
+            "name_placeholder": "",
+            "email_placeholder": "",
+            "show_phone": true,
+            "phone_placeholder": "",
+            "show_message": true,
+            "message_placeholder": "",
+            "enable_checkbox": false,
+            "make_required": true,
+            "checkbox_label": "<p>I have read and agreed to the <a href=\"/policies/privacy-policy\">Terms and Conditions</a>.</p>",
+            "top_spacing": 2,
+            "mobile_top_spacing": 2
+          }
+        },
+        "collapsible_tab_EjK4jk": {
+          "type": "collapsible_tab",
+          "settings": {
+            "always_open": false,
+            "show_lines": true,
+            "heading": "Ingredients",
+            "collapsible_tabs_size": "label_font_uppercase",
+            "text": "<p>A refreshing functional drink crafted with a blend of natural botanical extracts. Elderberry, ginger, and turmeric work together to support your daily balance while delivering a smooth, easy-to-enjoy taste.</p><p>Light, clean, and thoughtfully formulated, it’s designed to fit effortlessly into your routine—whether you need a moment of focus, a gentle boost, or a way to reset.</p><p><strong>Ingredients:</strong> Elderberry Extract, Ginger Extract, Turmeric Extract</p><p><strong>Volume:</strong> 500 ml</p><p><strong>Calories:</strong> approx. 80–120 kcal</p>",
+            "text_size": "body_s",
+            "icon": "leaf",
+            "page": "",
+            "top_spacing": 0.5,
+            "mobile_top_spacing": 0.5
+          }
+        },
+        "popup_Pg8yeQ": {
+          "type": "popup",
+          "settings": {
+            "icon": "package_closed",
+            "link_text": "Payment & Shipping",
+            "link_size": "label_font_uppercase",
+            "show_lines": true,
+            "text": "<h2>Payment Methods</h2><p>We accept all major credit and debit cards, including Visa, Mastercard, and American Express. You can also use convenient digital payment options such as Apple Pay, Shop Pay, and PayPal.<br/></p><h2>Shipping Destinations</h2><p>We currently ship to the United States, Canada, the United Kingdom, and selected European countries.<br/>Delivery times may vary depending on your location.<br/><br/>For security reasons, we are unable to deliver to P.O. boxes or freight forwarding addresses.<br/></p><h2>Shipping Notes</h2><p>Orders are processed within 1–2 business days.<br/>Delivery times depend on your location and selected shipping method.<br/><br/>Please note that shipping times may be slightly longer during peak periods.<br/></p><h2>Delivery Partners</h2><p>We work with trusted global carriers such as DHL, FedEx, and local delivery services to ensure your order arrives safely and on time</p>",
+            "text_size": "default",
+            "page": "",
+            "top_spacing": 0.5,
+            "mobile_top_spacing": 0.5
+          }
+        },
+        "complementary_products_iWN8f9": {
+          "type": "complementary_products",
+          "settings": {
+            "heading": "Better Together",
+            "heading_size": "body_l",
+            "image_ratio": "portrait",
+            "focal_point": "center center",
+            "show_second_image": false,
+            "price_position": "bottom",
+            "show_vendor": false,
+            "max_product_name_characters": 100,
+            "show_rating": false,
+            "show_short_description": true,
+            "enable_color_pills": false,
+            "show_pickup_availability": false,
+            "top_spacing": 2,
+            "mobile_top_spacing": 2
+          }
+        },
+        "more_details_jExMfh": {
+          "type": "more_details",
+          "settings": {
+            "button_label": "More details",
+            "link_size": "label_font_uppercase",
+            "top_spacing": 1,
+            "mobile_top_spacing": 1
+          }
+        }
+      },
+      "block_order": [
+        "title_zc6ViR",
+        "subtitle_NcV3ej",
+        "price_JDHqWT",
+        "linked_products_PggzMj",
+        "variant_picker_eTW9mj",
+        "quantity_selector_YtMM68",
+        "subtitle_rwbDyU",
+        "buy_buttons_Jn3qMT",
+        "icons_with_text_E6E4aM",
+        "ask_question_Wrh8hr",
+        "collapsible_tab_EjK4jk",
+        "popup_Pg8yeQ",
+        "complementary_products_iWN8f9",
+        "more_details_jExMfh"
+      ],
+      "settings": {
+        "enable_sticky_content": true,
+        "sticky_offset": 100,
+        "desktop_gallery_style": "two_columns_grid",
+        "thumbnails_image_ratio": "square",
+        "desktop_gallery_size": "large",
+        "swap_position": false,
+        "image_ratio": "square",
+        "focal_point": "top center",
+        "context_image_radius": "default",
+        "organize_images": false,
+        "first_image_instead_of_variant": false,
+        "show_media_attached_to_variant": false,
+        "show_extra_images": false,
+        "enable_video_looping": true,
+        "enable_autoplay": true,
+        "disable_video_controls": true,
+        "mobile_navigation": "arrows",
+        "enable_image_zoom": true,
+        "image_zoom_style": "slideshow",
+        "desktop_width": 50,
+        "mobile_width": 95,
+        "overlay_type": "default",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30,
+        "overlay_background_blur": 12,
+        "zoom_image_ratio": "original",
+        "zoom_focal_point": "center center",
+        "show_arrow_in_mobile": false,
+        "enable_slideshow_zoom_in": true,
+        "layout_margins": "default",
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 20,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "media_with_text_dc3xWL",
+    "main-article",
+    "anchor_link_hXW7Pr",
+    "rich_text_iRWHMJ",
+    "featured_product_wbEDGB"
+  ]
+}

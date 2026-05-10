@@ -1,0 +1,1433 @@
+{% liquid
+  assign showEverywhere = false
+  assign showOnHomepage = false
+  assign showOnInnerPages = false
+  if section.blocks.size > 0 and section.settings.announcement_bar == 'show'
+    assign showEverywhere = true
+  endif
+  if section.settings.announcement_bar == 'show_on_homepage' and template.name == 'index'
+    assign showOnHomepage = true
+  endif
+  if section.settings.announcement_bar == 'show_on_inner_pages' and template.name != 'index'
+    assign showOnInnerPages = true
+  endif
+
+  assign uppercase_font = false
+  assign bolder_font = false
+  if settings.typography_preset == 'custom'
+      if settings.uppercase_body_s and section.settings.text_size == 'default'
+          assign uppercase_font = true
+      endif
+      if settings.bolder_font_body_s and section.settings.text_size == 'default'
+          assign bolder_font = true
+      endif
+  endif
+%}
+
+{% if showEverywhere or showOnHomepage or showOnInnerPages %}  
+  {% style %}
+    #shopify-section-{{ section.id }} {
+      --top-and-bottom-paddings: {{ section.settings.section_paddings }}px;
+      --image-ratio: {{ section.settings.image_ratio }};
+      --image-width: {{ section.settings.image_width }}px;
+      position: relative;
+      z-index: 1;
+      {% if section.settings.color_type == 'invert' %}
+      --layout-text-color:
+        {{ settings.layout_background_color.red }},
+        {{ settings.layout_background_color.green }},
+        {{ settings.layout_background_color.blue }};
+      --layout-background-color:
+        {{ settings.layout_text_color.red }},
+        {{ settings.layout_text_color.green }},
+        {{ settings.layout_text_color.blue }};
+      {% endif %}
+      {% if section.settings.color_type == 'custom' %}
+      --layout-text-color:
+        {{ section.settings.text_color.red }},
+        {{ section.settings.text_color.green }},
+        {{ section.settings.text_color.blue }};
+        --layout-background-color:
+        {{ section.settings.background_color.red }},
+        {{ section.settings.background_color.green }}, 
+        {{ section.settings.background_color.blue }};
+      {% endif %}
+      {%- if section.settings.color_type == 'custom' and section.settings.background_color_type == 'gradient' and section.settings.background_gradient != blank %}
+      background: {{ section.settings.background_gradient }};
+      {%- else %}
+      background-color: rgb(var(--layout-background-color));
+      {%- endif %}
+    }
+    {%- if section.settings.color_type == 'custom' and section.settings.background_color_type == 'gradient' and section.settings.background_gradient != blank %}
+      #shopify-section-{{ section.id }} .slideshow__slide.text-block {
+        background-color: transparent;
+      }
+    {%- endif %}
+  {% endstyle %}
+
+  {%- liquid
+    assign animationDuration = 0
+    if settings.animation_duration == '0.3'
+      assign animationDuration = 'basic'
+    elsif settings.animation_duration == '0.5'
+      assign animationDuration = 'sophisticated'
+    endif
+  -%}
+
+  <slideshow-component
+    id="GalleryViewer-{{ section.id }}"
+    class="slider announcement-bar slider-container-js announcement-bar--{{ settings.white_space }} {% if section.settings.show_bottom_line %}announcement-bar--line{% endif %} color-{{ section.settings.color_type }} {% if section.settings.color_type != 'default' %}no-default-color{% endif %}"
+  >
+    <div class="slider__viewport announcement-bar__slider {% if section.blocks.size == 1 %}one-item{% endif %}">
+      <div
+        class="text-blocks slideshow__slider animation-fade {{ animationDuration }} {% if settings.include_header_footer %}{% if settings.max_page_width == '1400' or settings.max_page_width == '1200' %}page-width {% endif %} page-width--{{ settings.max_page_width }}{% endif %}"
+        id="Slider-Gallery-{{ section.id }}"
+        data-count="1"
+        data-count-mobile="1"
+        {% if section.settings.enable_autoplay %}
+          data-autoplay="{{ section.settings.autoplay_speed | times: 1000.00 }}"
+        {% endif %}
+      >
+        {%- for block in section.blocks -%}
+          {% if block.settings.desktop_text != blank
+            or block.settings.mobile_text != blank
+            or block.settings.image != blank
+            or block.settings.icon != 'none'
+            or block.settings.countdown_enable
+          %}
+            <div
+              class="slideshow__slide text-block slider__grid-item {% if forloop.first %}current{% endif %} card-js"
+              id="{{ block.id }}"
+              {{ block.shopify_attributes }}
+            >
+              {%- case block.type -%}
+                {%- when 'text', 'countdown_timer' -%}
+                  
+                    {% if block.settings.image != blank or block.settings.icon != 'none' %}
+                      {% if block.settings.image != blank %}
+                        <div
+                          class="text-block__image text-block__image--{{ block.id }} ratio-{{ section.settings.image_ratio }}"
+                          {% if settings.disable_right_click %}
+                            oncontextmenu="return false"
+                          {% endif %}
+                        >
+                          {% style %}
+                            .text-block__image--{{ block.id }} {
+                                {% if section.settings.context_image_radius == 'default' %}
+                                    --context-image-radius: var(--images-and-section-radius);
+                                {% else %}
+                                    --context-image-radius: {{ section.settings.context_image_radius }};
+                                {% endif %}
+                            }
+                          {% endstyle %}
+                          <img
+                            srcset="
+                              {%- if block.settings.image.width >= 165 -%}{{ block.settings.image | image_url: width: 165 }} 165w,{%- endif -%}
+                              {%- if block.settings.image.width >= 375 -%}{{ block.settings.image | image_url: width: 375 }} 375w,{%- endif -%}
+                              {%- if block.settings.image.width >= 550 -%}{{ block.settings.image | image_url: width: 550 }} 550w,{%- endif -%}
+                              {%- if block.settings.image.width >= 750 -%}{{ block.settings.image | image_url: width: 750 }} 750w,{%- endif -%}
+                              {%- if block.settings.image.width >= 1100 -%}{{ block.settings.image | image_url: width: 1100 }} 1100w,{%- endif -%}
+                              {%- if block.settings.image.width >= 1500 -%}{{ block.settings.image | image_url: width: 1500 }} 1500w,{%- endif -%}
+                              {{ block.settings.image | image_url }} {{ block.settings.image.width }}w
+                            "
+                            src="{{ block.settings.image | image_url: width: block.settings.image.width }}"
+                            loading="eager"
+                            draggable="false"
+                            sizes="calc({{ section.settings.image_width }}px / 1)"
+                            width="{{ block.settings.image.width }}"
+                            height="{{ block.settings.image.width | divided_by: block.settings.image.aspect_ratio | ceil }}"
+                            alt="{{ block.settings.image.alt | default: shop.name | escape }}"
+                            class="image__item"
+                            style="object-position: {{ block.settings.image.presentation.focal_point }}"
+                          >
+                        </div>
+                      {% else %}
+                        <div class="text-block__icon">
+                          {% unless block.settings.icon == 'none' %}
+                            {% assign icon_name = block.settings.icon | replace: "_", "-" %}
+                            {% assign icon_full = icon_name | append: "-" | append: section.settings.icon_weight %}
+                            {% case icon_name %}
+                            {% when 'search' or 'eye' or 'user' or 'settings' or 'shopping-cart' %}
+                                {% render 'icon', icon: icon_full %}
+                            {% when 'scissors' or 'security-badge' or 'share' or 'stiletto' or 'stop-watch'
+                                or 'sunflower' or 't-shirt' or 'trash' or 'truck' or 'washing-symbol'
+                                or 'water-bottle' or 'zoom-in' or 'zoom-out' %}
+                                {% render 'icon-accordion-2', icon: icon_full %}
+                            {% when 'house' or 'store-front' or 'map' or 'compass' or 'road-sign'
+                                or 'map-pin' or 'exclamation-mark' or 'warning-sign' or 'customer-support' or 'lightbulb'
+                                or 'lightbulb-lighting-up' or 'trending-item' or 'kids-friendly' or 'soft' or 'water-proof' or 'multi-language' or 'star' or 'satisfied' or 'flag' or 'freehand' or 'bubble' or 'connector' or 'battery' or 'camera' or 'beach' or 'terrain' or 'food' or 'fitness' or 'hotel' or 'subscription' or 'folder' or 'note'%}
+                                {% render 'icons-3', icon: icon_full %}
+                            {% else %}
+                                {% render 'icon-accordion', icon: icon_full %}
+                            {% endcase %}
+                          {% endunless %}
+                        </div>
+                      {% endif %}
+                    {% endif %}
+                    <div class="announcement-bar__text-wrapper {% if section.settings.center_text %}announcement-bar__text-wrapper--center{% endif %}">
+                      {% if block.settings.desktop_text != blank or block.settings.mobile_text != blank %}
+                        <div class="text-block__content slideshow__content-js text-block__content--{{ settings.typography_preset }} {% if section.settings.text_size != 'default' %}{{ section.settings.text_size }}{% else %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}{% endif %} {% if section.settings.center_text %}text-block__content--center{% endif %}">
+                          {% if block.settings.desktop_text != blank %}
+                            <div class="richtext text-block__item {% if settings.enable_animated_underline %}richtext-link--underline{% endif %} text-block__item--desktop {% if block.settings.mobile_text == blank %}text-block__item--desktop-visible{% endif %}">
+                                {{ block.settings.desktop_text }}
+                            </div>
+                          {% endif %}
+                          {% if block.settings.mobile_text != blank %}
+                            <div class="richtext text-block__item {% if block.settings.desktop_text != blank %}text-block__item--mobile{% endif %}">
+                              {{ block.settings.mobile_text }}
+                            </div>
+                          {% endif %}
+                        </div>
+                      {% endif %}
+
+                      {% if block.settings.countdown_enable %}   
+                        <div class="text-block__content slideshow__content-js text-block__content--{{ settings.typography_preset }} {% if section.settings.text_size != 'default' %}{{ section.settings.text_size }}{% else %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}{% endif %}">                     
+                            {%- render 'countdown-timer', block: block, section_id: section.id, section_blocks_count: section.blocks.size, minimized: true -%}    
+                        </div>       
+                      {% endif %} 
+                  </div>
+
+              {%- endcase -%}
+            </div>
+          {% endif %}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {% if section.blocks.size > 1 %}
+      <div class="slideshow__controls slideshow__controls--wide">
+        {%- liquid
+          if settings.typography_preset == 'avant_garde'
+            assign weight = settings.accent_icon_weight
+            if settings.swap_fonts
+              assign weight = settings.base_icon_weight
+            endif
+          else
+            assign weight = settings.base_icon_weight
+            if settings.swap_fonts
+              assign weight = settings.accent_icon_weight
+            endif
+          endif
+          if settings.typography_preset == 'custom'
+            assign weight = settings.custom_icon_weight
+          endif
+        -%}
+        <button
+          class="slideshow__controls--prev slideshow__controls-button {% if section.settings.fill_controls == false %}slideshow__controls-button--long{% endif %} {% if section.settings.controls == 'classic_arrows' and section.settings.fill_controls %}slideshow__controls-button--filled{% endif %}"
+          aria-label="{{ 'general.slider.previous_slide' | t }}"
+        >
+          <span class="slideshow__controls-icon slideshow__controls-icon--short">
+            {% assign icon_full = 'dropdown-chevron-left' | append: "-" | append: weight %}
+            {% render 'icon', icon: icon_full %}
+          </span>
+        </button>
+        <button
+          class="slideshow__controls--next slideshow__controls-button {% if section.settings.fill_controls == false %}slideshow__controls-button--long{% endif %} {% if section.settings.controls == 'classic_arrows' and section.settings.fill_controls %}slideshow__controls-button--filled{% endif %}"
+          aria-label="{{ 'general.slider.previous_slide' | t }}"
+        >
+          <span class="slideshow__controls-icon slideshow__controls-icon--short">
+            {% assign icon_full = 'dropdown-chevron' | append: "-" | append: weight %}
+            {% render 'icon', icon: icon_full %}
+          </span>
+        </button>
+      </div>
+    {% endif %}
+  </slideshow-component>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:sections.announcement_bar.name",
+  "tag": "section",
+  "class": "announcement-bar-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "announcement_bar",
+      "options": [
+        {
+          "value": "disable",
+          "label": "t:sections.announcement_bar.settings.announcement_bar.options__1.label"
+        },
+        {
+          "value": "show",
+          "label": "t:sections.announcement_bar.settings.announcement_bar.options__2.label"
+        },
+        {
+          "value": "show_on_homepage",
+          "label": "t:sections.announcement_bar.settings.announcement_bar.options__3.label"
+        },
+        {
+          "value": "show_on_inner_pages",
+          "label": "t:sections.announcement_bar.settings.announcement_bar.options__4.label"
+        }
+      ],
+      "default": "show",
+      "label": "t:sections.announcement_bar.settings.announcement_bar.label"
+    },
+    {
+      "type": "select",
+      "id": "text_size",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:sections.all.size.options__1.label"
+        },
+        {
+          "value": "body_l",
+          "label": "t:sections.all.size.options__12.label"
+        },
+        {
+          "value": "body_l_uppercase",
+          "label": "t:sections.all.size.options__13.label"
+        },
+        {
+          "value": "body_m",
+          "label": "t:sections.all.size.options__14.label"
+        },
+        {
+          "value": "body_m_uppercase",
+          "label": "t:sections.all.size.options__15.label"
+        },
+        {
+          "value": "body_s",
+          "label": "t:sections.all.size.options__16.label"
+        },
+        {
+          "value": "body_s_uppercase",
+          "label": "t:sections.all.size.options__17.label"
+        },
+        {
+          "value": "label_font",
+          "label": "t:sections.all.size.options__18.label"
+        },
+        {
+          "value": "label_font_uppercase",
+          "label": "t:sections.all.size.options__19.label"
+        }
+      ],
+      "default": "default",
+      "label": "t:sections.all.size.text_size.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bottom_line",
+      "default": false,
+      "label": "t:sections.navigation_sections.general.show_bottom_line.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "center_text",
+      "default": true,
+      "label": "t:sections.all.alignment.center_text.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "default": true,
+      "label": "t:sections.slideshow-with-media.settings.enable_autoplay.label"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "t:sections.slideshow-with-media.settings.autoplay_speed.label",
+      "default": 7
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.image.header__1.content"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "original",
+          "label": "t:sections.all.image.image_ratio.options__1.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.all.image.image_ratio.options__2.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.all.image.image_ratio.options__3.label"
+        },
+        {
+          "value": "narrow_portrait",
+          "label": "t:sections.all.image.image_ratio.options__8.label"
+        },
+        {
+          "value": "traditional",
+          "label": "t:sections.all.image.image_ratio.options__9.label"
+        },
+        {
+          "value": "landscape",
+          "label": "t:sections.all.image.image_ratio.options__4.label"
+        },
+        {
+          "value": "wide",
+          "label": "t:sections.all.image.image_ratio.options__5.label"
+        }
+      ],
+      "default": "square",
+      "label": "t:sections.all.image.image_ratio.label"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "min": 16,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 24,
+      "label": "t:sections.all.image.context_image_width.label"
+    },
+    {
+      "type": "select",
+      "id": "context_image_radius",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:sections.all.corner_radius.options__1.label"
+        },
+        {
+          "value": "0px",
+          "label": "t:sections.all.corner_radius.options__2.label"
+        },
+        {
+          "value": "3px",
+          "label": "t:sections.all.corner_radius.options__3.label"
+        },
+        {
+          "value": "5px",
+          "label": "t:sections.all.corner_radius.options__4.label"
+        },
+        {
+          "value": "12px",
+          "label": "t:sections.all.corner_radius.options__5.label"
+        },
+        {
+          "value": "24px",
+          "label": "t:sections.all.corner_radius.options__8.label"
+        },
+        {
+          "value": "48px",
+          "label": "t:sections.all.corner_radius.options__9.label"
+        },
+        {
+          "value": "2000px",
+          "label": "t:sections.all.corner_radius.options__6.label"
+        },
+        {
+          "value": "2000px 2000px 0 0",
+          "label": "t:sections.all.corner_radius.options__7.label"
+        }
+      ],
+      "default": "default",
+      "label": "t:sections.all.corner_radius.label"
+    },
+    {
+      "type": "select",
+      "id": "icon_weight",
+      "options": [
+        {
+          "value": "light",
+          "label": "t:sections.all.icons.icon_weight.options__1.label"
+        },
+        {
+          "value": "regular",
+          "label": "t:sections.all.icons.icon_weight.options__2.label"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.icons.icon_weight.options__3.label"
+        },
+        {
+          "value": "bold",
+          "label": "t:sections.all.icons.icon_weight.options__4.label"
+        }
+      ],
+      "default": "regular",
+      "label": "t:sections.all.icons.icon_weight.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.colors.name"
+    },
+    {
+      "type": "select",
+      "id": "color_type",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:sections.all.colors.color_type.options__1.label"
+        },
+        {
+          "value": "invert",
+          "label": "t:sections.all.colors.color_type.options__2.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:sections.all.colors.color_type.options__3.label"
+        }
+      ],
+      "default": "default",
+      "label": "t:sections.all.colors.color_type.label"
+    },    {
+      "type": "select",
+      "id": "background_color_type",
+      "label": "t:sections.all.colors.background_color_type.label",
+      "options": [
+        {
+          "value": "solid",
+          "label": "t:sections.all.colors.background_color_type.options__1.label"
+        },
+        {
+          "value": "gradient",
+          "label": "t:sections.all.colors.background_color_type.options__2.label"
+        }
+      ],
+      "visible_if": "{{ section.settings.color_type == 'custom' }}",
+      "default": "solid"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "t:sections.all.colors.background_gradient_type.label",
+      "visible_if": "{{ section.settings.color_type == 'custom' and section.settings.background_color_type == 'gradient' }}"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:sections.all.colors.background_solid_type.label",
+      "info": "t:sections.all.colors.background_solid_type.info",
+      "visible_if": "{{ section.settings.color_type == 'custom' }}",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:sections.all.colors.text_color.label",
+      "visible_if": "{{ section.settings.color_type == 'custom' }}",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.paddings.section_paddings.content"
+    },
+    {
+      "type": "range",
+      "id": "section_paddings",
+      "min": 0,
+      "max": 16,
+      "step": 2,
+      "unit": "px",
+      "default": 8,
+      "label": "t:sections.all.paddings.top_and_bottom_paddings.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "t:sections.announcement_bar.blocks.text.name",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "desktop_text",
+          "default": "<p>Announce something</p>",
+          "label": "t:sections.all.labels.text.label"
+        },
+        {
+          "type": "richtext",
+          "id": "mobile_text",
+          "default": "<p>Announce</p>",
+          "label": "t:sections.all.labels.mobile_text.label"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:sections.all.icons.icon.options__1.label"
+            },
+            {
+              "value": "arrow_down",
+              "label": "t:sections.all.icons.icon.options__2.label"
+            },
+            {
+              "value": "arrow_left",
+              "label": "t:sections.all.icons.icon.options__3.label"
+            },
+            {
+              "value": "arrow_right",
+              "label": "t:sections.all.icons.icon.options__4.label"
+            },
+            {
+              "value": "arrow_up",
+              "label": "t:sections.all.icons.icon.options__5.label"
+            },
+            {
+              "value": "bank",
+              "label": "t:sections.all.icons.icon.options__6.label"
+            },
+            {
+              "value": "bank_card",
+              "label": "t:sections.all.icons.icon.options__7.label"
+            },
+            {
+              "value": "battery",
+              "label": "t:sections.all.icons.icon.options__66.label"
+            },
+            {
+              "value": "beach",
+              "label": "t:sections.all.icons.icon.options__67.label"
+            },
+            {
+              "value": "bill",
+              "label": "t:sections.all.icons.icon.options__8.label"
+            },
+            {
+              "value": "bottle",
+              "label": "t:sections.all.icons.icon.options__9.label"
+            },
+            {
+              "value": "bubble",
+              "label": "t:sections.all.icons.icon.options__68.label"
+            },
+            {
+              "value": "camera",
+              "label": "t:sections.all.icons.icon.options__69.label"
+            },
+            {
+              "value": "chat",
+              "label": "t:sections.all.icons.icon.options__10.label"
+            },
+            {
+              "value": "chat_empty",
+              "label": "t:sections.all.icons.icon.options__11.label"
+            },
+            {
+              "value": "checked_box",
+              "label": "t:sections.all.icons.icon.options__12.label"
+            },
+            {
+              "value": "checkmark",
+              "label": "t:sections.all.icons.icon.options__13.label"
+            },
+            {
+              "value": "close",
+              "label": "t:sections.all.icons.icon.options__14.label"
+            },
+            {
+              "value": "clothes",
+              "label": "t:sections.all.icons.icon.options__15.label"
+            },
+            {
+              "value": "clothes_hanger",
+              "label": "t:sections.all.icons.icon.options__16.label"
+            },
+            {
+              "value": "compass",
+              "label": "t:sections.all.icons.icon.options__70.label"
+            },
+            {
+              "value": "connector",
+              "label": "t:sections.all.icons.icon.options__71.label"
+            },
+            {
+              "value": "copy",
+              "label": "t:sections.all.icons.icon.options__17.label"
+            },
+            {
+              "value": "cotton",
+              "label": "t:sections.all.icons.icon.options__18.label"
+            },
+            {
+              "value": "customer_support",
+              "label": "t:sections.all.icons.icon.options__72.label"
+            },
+            {
+              "value": "envelope",
+              "label": "t:sections.all.icons.icon.options__19.label"
+            },
+            {
+              "value": "exclamation_mark",
+              "label": "t:sections.all.icons.icon.options__73.label"
+            },
+            {
+              "value": "eye",
+              "label": "t:sections.all.icons.icon.options__20.label"
+            },
+            {
+              "value": "fitness",
+              "label": "t:sections.all.icons.icon.options__74.label"
+            },
+            {
+              "value": "flag",
+              "label": "t:sections.all.icons.icon.options__75.label"
+            },
+            {
+              "value": "folder",
+              "label": "t:sections.all.icons.icon.options__76.label"
+            },
+            {
+              "value": "food",
+              "label": "t:sections.all.icons.icon.options__77.label"
+            },
+            {
+              "value": "freehand",
+              "label": "t:sections.all.icons.icon.options__78.label"
+            },
+            {
+              "value": "globe",
+              "label": "t:sections.all.icons.icon.options__21.label"
+            },
+            {
+              "value": "hand_washing",
+              "label": "t:sections.all.icons.icon.options__22.label"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.all.icons.icon.options__23.label"
+            },
+            {
+              "value": "help",
+              "label": "t:sections.all.icons.icon.options__24.label"
+            },
+            {
+              "value": "hotel",
+              "label": "t:sections.all.icons.icon.options__79.label"
+            },
+            {
+              "value": "house",
+              "label": "t:sections.all.icons.icon.options__80.label"
+            },
+            {
+              "value": "kids_friendly",
+              "label": "t:sections.all.icons.icon.options__81.label"
+            },
+            {
+              "value": "laundry_dryer",
+              "label": "t:sections.all.icons.icon.options__25.label"
+            },
+            {
+              "value": "laundry_washer",
+              "label": "t:sections.all.icons.icon.options__26.label"
+            },
+            {
+              "value": "layers",
+              "label": "t:sections.all.icons.icon.options__27.label"
+            },
+            {
+              "value": "leaf",
+              "label": "t:sections.all.icons.icon.options__28.label"
+            },
+            {
+              "value": "lightbulb",
+              "label": "t:sections.all.icons.icon.options__82.label"
+            },
+            {
+              "value": "lightbulb_lighting_up",
+              "label": "t:sections.all.icons.icon.options__83.label"
+            },
+            {
+              "value": "link",
+              "label": "t:sections.all.icons.icon.options__29.label"
+            },
+            {
+              "value": "lipstick",
+              "label": "t:sections.all.icons.icon.options__30.label"
+            },
+            {
+              "value": "loop",
+              "label": "t:sections.all.icons.icon.options__31.label"
+            },
+            {
+              "value": "map",
+              "label": "t:sections.all.icons.icon.options__84.label"
+            },
+            {
+              "value": "map_pin",
+              "label": "t:sections.all.icons.icon.options__85.label"
+            },
+            {
+              "value": "measuring_tape",
+              "label": "t:sections.all.icons.icon.options__32.label"
+            },
+            {
+              "value": "model_silhouette",
+              "label": "t:sections.all.icons.icon.options__33.label"
+            },
+            {
+              "value": "money_bills",
+              "label": "t:sections.all.icons.icon.options__34.label"
+            },
+            {
+              "value": "moving_truck",
+              "label": "t:sections.all.icons.icon.options__35.label"
+            },
+            {
+              "value": "note",
+              "label": "t:sections.all.icons.icon.options__86.label"
+            },
+            {
+              "value": "package_closed",
+              "label": "t:sections.all.icons.icon.options__36.label"
+            },
+            {
+              "value": "package_open",
+              "label": "t:sections.all.icons.icon.options__37.label"
+            },
+            {
+              "value": "padlock",
+              "label": "t:sections.all.icons.icon.options__38.label"
+            },
+            {
+              "value": "paper_airplane",
+              "label": "t:sections.all.icons.icon.options__39.label"
+            },
+            {
+              "value": "paw_print",
+              "label": "t:sections.all.icons.icon.options__40.label"
+            },
+            {
+              "value": "pencil",
+              "label": "t:sections.all.icons.icon.options__41.label"
+            },
+            {
+              "value": "planet",
+              "label": "t:sections.all.icons.icon.options__42.label"
+            },
+            {
+              "value": "plant",
+              "label": "t:sections.all.icons.icon.options__43.label"
+            },
+            {
+              "value": "play",
+              "label": "t:sections.all.icons.icon.options__44.label"
+            },
+            {
+              "value": "price_tag",
+              "label": "t:sections.all.icons.icon.options__45.label"
+            },
+            {
+              "value": "question_mark",
+              "label": "t:sections.all.icons.icon.options__46.label"
+            },
+            {
+              "value": "recycled_symbol",
+              "label": "t:sections.all.icons.icon.options__47.label"
+            },
+            {
+              "value": "road_sign",
+              "label": "t:sections.all.icons.icon.options__87.label"
+            },
+            {
+              "value": "ruler",
+              "label": "t:sections.all.icons.icon.options__48.label"
+            },
+            {
+              "value": "satisfied",
+              "label": "t:sections.all.icons.icon.options__88.label"
+            },
+            {
+              "value": "scissors",
+              "label": "t:sections.all.icons.icon.options__49.label"
+            },
+            {
+              "value": "search",
+              "label": "t:sections.all.icons.icon.options__50.label"
+            },
+            {
+              "value": "security_badge",
+              "label": "t:sections.all.icons.icon.options__51.label"
+            },
+            {
+              "value": "settings",
+              "label": "t:sections.all.icons.icon.options__52.label"
+            },
+            {
+              "value": "share",
+              "label": "t:sections.all.icons.icon.options__53.label"
+            },
+            {
+              "value": "shopping_cart",
+              "label": "t:sections.all.icons.icon.options__54.label"
+            },
+            {
+              "value": "soft",
+              "label": "t:sections.all.icons.icon.options__89.label"
+            },
+            {
+              "value": "star",
+              "label": "t:sections.all.icons.icon.options__90.label"
+            },
+            {
+              "value": "stiletto",
+              "label": "t:sections.all.icons.icon.options__55.label"
+            },
+            {
+              "value": "store_front",
+              "label": "t:sections.all.icons.icon.options__96.label"
+            },
+            {
+              "value": "stop_watch",
+              "label": "t:sections.all.icons.icon.options__56.label"
+            },
+            {
+              "value": "subscription",
+              "label": "t:sections.all.icons.icon.options__91.label"
+            },
+            {
+              "value": "sunflower",
+              "label": "t:sections.all.icons.icon.options__57.label"
+            },
+            {
+              "value": "t_shirt",
+              "label": "t:sections.all.icons.icon.options__58.label"
+            },
+            {
+              "value": "terrain",
+              "label": "t:sections.all.icons.icon.options__92.label"
+            },
+            {
+              "value": "trash",
+              "label": "t:sections.all.icons.icon.options__59.label"
+            },
+            {
+              "value": "trending-item",
+              "label": "t:sections.all.icons.icon.options__93.label"
+            },
+            {
+              "value": "truck",
+              "label": "t:sections.all.icons.icon.options__60.label"
+            },
+            {
+              "value": "user",
+              "label": "t:sections.all.icons.icon.options__61.label"
+            },
+            {
+              "value": "warning-sign",
+              "label": "t:sections.all.icons.icon.options__94.label"
+            },
+            {
+              "value": "washing_symbol",
+              "label": "t:sections.all.icons.icon.options__62.label"
+            },
+            {
+              "value": "water_proof",
+              "label": "t:sections.all.icons.icon.options__95.label"
+            },
+            {
+              "value": "water_bottle",
+              "label": "t:sections.all.icons.icon.options__63.label"
+            },
+            {
+              "value": "zoom_in",
+              "label": "t:sections.all.icons.icon.options__64.label"
+            },
+            {
+              "value": "zoom_out",
+              "label": "t:sections.all.icons.icon.options__65.label"
+            }
+          ],
+          "default": "truck",
+          "label": "t:sections.all.icons.icon.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.all.labels.image.label"
+        }
+      ]
+    },
+    {
+      "type": "countdown_timer",
+      "name": "t:blocks.countdown_timer.name",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "countdown_enable",
+          "label": "t:blocks.countdown_timer.settings.enable.label",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "countdown_end_date",
+          "label": "t:blocks.countdown_timer.settings.end_date.label",
+          "info": "t:blocks.countdown_timer.settings.end_date.info"
+        },
+        {
+          "type": "text",
+          "id": "countdown_end_time",
+          "label": "t:blocks.countdown_timer.settings.end_time.label",
+          "info": "t:blocks.countdown_timer.settings.end_time.info"
+        },
+        {
+          "type": "select",
+          "id": "countdown_expiration_action",
+          "label": "t:blocks.countdown_timer.settings.expiration_action.label",
+          "options": [
+            {
+              "value": "hide_timer",
+              "label": "t:blocks.countdown_timer.settings.expiration_action.hide_timer.label"
+            },
+            {
+              "value": "show_zeros",
+              "label": "t:blocks.countdown_timer.settings.expiration_action.show_zeros.label"
+            }
+          ],
+          "default": "show_zeros"
+        },
+        {
+          "type": "header",
+          "content": "t:blocks.design.name"
+        },
+        {
+          "type": "color",
+          "id": "countdown_text_color",
+          "label": "t:blocks.countdown_timer.settings.text_color.label",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "countdown_show_labels",
+          "label": "t:blocks.countdown_timer.settings.show_labels.label",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "countdown_labels_color",
+          "label": "t:sections.all.colors.labels_color.label",
+          "default": "#585858"
+        },
+        {
+          "type": "checkbox",
+          "id": "countdown_enable_animation",
+          "label": "t:sections.all.enable_animation.label",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "t:blocks.text.name"
+        },
+        {
+          "type": "richtext",
+          "id": "desktop_text",
+          "default": "<p>Countdown timer message</p>",
+          "label": "t:sections.all.labels.text.label"
+        },
+        {
+          "type": "richtext",
+          "id": "mobile_text",
+          "default": "<p>Message</p>",
+          "label": "t:sections.all.labels.mobile_text.label"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:sections.all.icons.icon.options__1.label"
+            },
+            {
+              "value": "arrow_down",
+              "label": "t:sections.all.icons.icon.options__2.label"
+            },
+            {
+              "value": "arrow_left",
+              "label": "t:sections.all.icons.icon.options__3.label"
+            },
+            {
+              "value": "arrow_right",
+              "label": "t:sections.all.icons.icon.options__4.label"
+            },
+            {
+              "value": "arrow_up",
+              "label": "t:sections.all.icons.icon.options__5.label"
+            },
+            {
+              "value": "bank",
+              "label": "t:sections.all.icons.icon.options__6.label"
+            },
+            {
+              "value": "bank_card",
+              "label": "t:sections.all.icons.icon.options__7.label"
+            },
+            {
+              "value": "battery",
+              "label": "t:sections.all.icons.icon.options__66.label"
+            },
+            {
+              "value": "beach",
+              "label": "t:sections.all.icons.icon.options__67.label"
+            },
+            {
+              "value": "bill",
+              "label": "t:sections.all.icons.icon.options__8.label"
+            },
+            {
+              "value": "bottle",
+              "label": "t:sections.all.icons.icon.options__9.label"
+            },
+            {
+              "value": "bubble",
+              "label": "t:sections.all.icons.icon.options__68.label"
+            },
+            {
+              "value": "camera",
+              "label": "t:sections.all.icons.icon.options__69.label"
+            },
+            {
+              "value": "chat",
+              "label": "t:sections.all.icons.icon.options__10.label"
+            },
+            {
+              "value": "chat_empty",
+              "label": "t:sections.all.icons.icon.options__11.label"
+            },
+            {
+              "value": "checked_box",
+              "label": "t:sections.all.icons.icon.options__12.label"
+            },
+            {
+              "value": "checkmark",
+              "label": "t:sections.all.icons.icon.options__13.label"
+            },
+            {
+              "value": "close",
+              "label": "t:sections.all.icons.icon.options__14.label"
+            },
+            {
+              "value": "clothes",
+              "label": "t:sections.all.icons.icon.options__15.label"
+            },
+            {
+              "value": "clothes_hanger",
+              "label": "t:sections.all.icons.icon.options__16.label"
+            },
+            {
+              "value": "compass",
+              "label": "t:sections.all.icons.icon.options__70.label"
+            },
+            {
+              "value": "connector",
+              "label": "t:sections.all.icons.icon.options__71.label"
+            },
+            {
+              "value": "copy",
+              "label": "t:sections.all.icons.icon.options__17.label"
+            },
+            {
+              "value": "cotton",
+              "label": "t:sections.all.icons.icon.options__18.label"
+            },
+            {
+              "value": "customer_support",
+              "label": "t:sections.all.icons.icon.options__72.label"
+            },
+            {
+              "value": "envelope",
+              "label": "t:sections.all.icons.icon.options__19.label"
+            },
+            {
+              "value": "exclamation_mark",
+              "label": "t:sections.all.icons.icon.options__73.label"
+            },
+            {
+              "value": "eye",
+              "label": "t:sections.all.icons.icon.options__20.label"
+            },
+            {
+              "value": "fitness",
+              "label": "t:sections.all.icons.icon.options__74.label"
+            },
+            {
+              "value": "flag",
+              "label": "t:sections.all.icons.icon.options__75.label"
+            },
+            {
+              "value": "folder",
+              "label": "t:sections.all.icons.icon.options__76.label"
+            },
+            {
+              "value": "food",
+              "label": "t:sections.all.icons.icon.options__77.label"
+            },
+            {
+              "value": "freehand",
+              "label": "t:sections.all.icons.icon.options__78.label"
+            },
+            {
+              "value": "globe",
+              "label": "t:sections.all.icons.icon.options__21.label"
+            },
+            {
+              "value": "hand_washing",
+              "label": "t:sections.all.icons.icon.options__22.label"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.all.icons.icon.options__23.label"
+            },
+            {
+              "value": "help",
+              "label": "t:sections.all.icons.icon.options__24.label"
+            },
+            {
+              "value": "hotel",
+              "label": "t:sections.all.icons.icon.options__79.label"
+            },
+            {
+              "value": "house",
+              "label": "t:sections.all.icons.icon.options__80.label"
+            },
+            {
+              "value": "kids_friendly",
+              "label": "t:sections.all.icons.icon.options__81.label"
+            },
+            {
+              "value": "laundry_dryer",
+              "label": "t:sections.all.icons.icon.options__25.label"
+            },
+            {
+              "value": "laundry_washer",
+              "label": "t:sections.all.icons.icon.options__26.label"
+            },
+            {
+              "value": "layers",
+              "label": "t:sections.all.icons.icon.options__27.label"
+            },
+            {
+              "value": "leaf",
+              "label": "t:sections.all.icons.icon.options__28.label"
+            },
+            {
+              "value": "lightbulb",
+              "label": "t:sections.all.icons.icon.options__82.label"
+            },
+            {
+              "value": "lightbulb_lighting_up",
+              "label": "t:sections.all.icons.icon.options__83.label"
+            },
+            {
+              "value": "link",
+              "label": "t:sections.all.icons.icon.options__29.label"
+            },
+            {
+              "value": "lipstick",
+              "label": "t:sections.all.icons.icon.options__30.label"
+            },
+            {
+              "value": "loop",
+              "label": "t:sections.all.icons.icon.options__31.label"
+            },
+            {
+              "value": "map",
+              "label": "t:sections.all.icons.icon.options__84.label"
+            },
+            {
+              "value": "map_pin",
+              "label": "t:sections.all.icons.icon.options__85.label"
+            },
+            {
+              "value": "measuring_tape",
+              "label": "t:sections.all.icons.icon.options__32.label"
+            },
+            {
+              "value": "model_silhouette",
+              "label": "t:sections.all.icons.icon.options__33.label"
+            },
+            {
+              "value": "money_bills",
+              "label": "t:sections.all.icons.icon.options__34.label"
+            },
+            {
+              "value": "moving_truck",
+              "label": "t:sections.all.icons.icon.options__35.label"
+            },
+            {
+              "value": "note",
+              "label": "t:sections.all.icons.icon.options__86.label"
+            },
+            {
+              "value": "package_closed",
+              "label": "t:sections.all.icons.icon.options__36.label"
+            },
+            {
+              "value": "package_open",
+              "label": "t:sections.all.icons.icon.options__37.label"
+            },
+            {
+              "value": "padlock",
+              "label": "t:sections.all.icons.icon.options__38.label"
+            },
+            {
+              "value": "paper_airplane",
+              "label": "t:sections.all.icons.icon.options__39.label"
+            },
+            {
+              "value": "paw_print",
+              "label": "t:sections.all.icons.icon.options__40.label"
+            },
+            {
+              "value": "pencil",
+              "label": "t:sections.all.icons.icon.options__41.label"
+            },
+            {
+              "value": "planet",
+              "label": "t:sections.all.icons.icon.options__42.label"
+            },
+            {
+              "value": "plant",
+              "label": "t:sections.all.icons.icon.options__43.label"
+            },
+            {
+              "value": "play",
+              "label": "t:sections.all.icons.icon.options__44.label"
+            },
+            {
+              "value": "price_tag",
+              "label": "t:sections.all.icons.icon.options__45.label"
+            },
+            {
+              "value": "question_mark",
+              "label": "t:sections.all.icons.icon.options__46.label"
+            },
+            {
+              "value": "recycled_symbol",
+              "label": "t:sections.all.icons.icon.options__47.label"
+            },
+            {
+              "value": "road_sign",
+              "label": "t:sections.all.icons.icon.options__87.label"
+            },
+            {
+              "value": "ruler",
+              "label": "t:sections.all.icons.icon.options__48.label"
+            },
+            {
+              "value": "satisfied",
+              "label": "t:sections.all.icons.icon.options__88.label"
+            },
+            {
+              "value": "scissors",
+              "label": "t:sections.all.icons.icon.options__49.label"
+            },
+            {
+              "value": "search",
+              "label": "t:sections.all.icons.icon.options__50.label"
+            },
+            {
+              "value": "security_badge",
+              "label": "t:sections.all.icons.icon.options__51.label"
+            },
+            {
+              "value": "settings",
+              "label": "t:sections.all.icons.icon.options__52.label"
+            },
+            {
+              "value": "share",
+              "label": "t:sections.all.icons.icon.options__53.label"
+            },
+            {
+              "value": "shopping_cart",
+              "label": "t:sections.all.icons.icon.options__54.label"
+            },
+            {
+              "value": "soft",
+              "label": "t:sections.all.icons.icon.options__89.label"
+            },
+            {
+              "value": "star",
+              "label": "t:sections.all.icons.icon.options__90.label"
+            },
+            {
+              "value": "stiletto",
+              "label": "t:sections.all.icons.icon.options__55.label"
+            },
+            {
+              "value": "store_front",
+              "label": "t:sections.all.icons.icon.options__96.label"
+            },
+            {
+              "value": "stop_watch",
+              "label": "t:sections.all.icons.icon.options__56.label"
+            },
+            {
+              "value": "subscription",
+              "label": "t:sections.all.icons.icon.options__91.label"
+            },
+            {
+              "value": "sunflower",
+              "label": "t:sections.all.icons.icon.options__57.label"
+            },
+            {
+              "value": "t_shirt",
+              "label": "t:sections.all.icons.icon.options__58.label"
+            },
+            {
+              "value": "terrain",
+              "label": "t:sections.all.icons.icon.options__92.label"
+            },
+            {
+              "value": "trash",
+              "label": "t:sections.all.icons.icon.options__59.label"
+            },
+            {
+              "value": "trending-item",
+              "label": "t:sections.all.icons.icon.options__93.label"
+            },
+            {
+              "value": "truck",
+              "label": "t:sections.all.icons.icon.options__60.label"
+            },
+            {
+              "value": "user",
+              "label": "t:sections.all.icons.icon.options__61.label"
+            },
+            {
+              "value": "warning-sign",
+              "label": "t:sections.all.icons.icon.options__94.label"
+            },
+            {
+              "value": "washing_symbol",
+              "label": "t:sections.all.icons.icon.options__62.label"
+            },
+            {
+              "value": "water_proof",
+              "label": "t:sections.all.icons.icon.options__95.label"
+            },
+            {
+              "value": "water_bottle",
+              "label": "t:sections.all.icons.icon.options__63.label"
+            },
+            {
+              "value": "zoom_in",
+              "label": "t:sections.all.icons.icon.options__64.label"
+            },
+            {
+              "value": "zoom_out",
+              "label": "t:sections.all.icons.icon.options__65.label"
+            }
+          ],
+          "default": "stop_watch",
+          "label": "t:sections.all.icons.icon.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.all.labels.image.label"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

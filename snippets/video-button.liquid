@@ -1,0 +1,108 @@
+{% if block_settings.button_label != blank %}
+    <div {{ block.shopify_attributes }} class="video-button-block {% if content_wrapper_block %}{% unless forloop_first %}content-wrapper--block{% endunless %}{% endif %} {% unless block_settings.video_url != blank %}disabled elem-hover{% endunless %} {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} {% if block_settings.button_style == 'link' %}video-button-link{% endif %}" {{ block.shopify_attributes }}>
+      <modal-dialog>
+        {% style %}
+        .overlay {
+          --layout-text-color:
+              {{ settings.layout_text_color.red }},
+              {{ settings.layout_text_color.green }}, 
+              {{ settings.layout_text_color.blue }};
+          --layout-background-color:
+              {{ settings.layout_background_color.red }},
+              {{ settings.layout_background_color.green }},
+              {{ settings.layout_background_color.blue }};
+        }
+        {% endstyle %}
+        {%- liquid 
+            if settings.typography_preset == 'avant_garde'
+              assign close_weight = settings.accent_icon_weight
+              if settings.swap_fonts
+                      assign close_weight = settings.base_icon_weight
+              endif
+            else 
+              assign close_weight =  settings.base_icon_weight
+              if settings.swap_fonts
+                  assign close_weight = settings.accent_icon_weight
+              endif
+            endif
+        -%}
+        <deferred-media class="video-section__media deferred-media no-js-hidden" data-media-id="{{ block_settings.video_url.id }}">
+        <button type="button" class="video-button icon-button {{ block_settings.button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if block_settings.button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %} open-popup  {% if block_settings.video_url != blank %}elem-hover{% endif %}" {% unless block_settings.video_url != blank %}disabled{% endunless %} id="Deferred-Poster-{{ block_settings.video_url.id }}">
+          <span class="video-button__play-wrapper">
+          <span class="video-button__play">
+            <svg aria-hidden="true" focusable="false" width="84" height="84" viewBox="0 0 84 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g filter="url(#filter0_dd_14370_355636)">
+              <g clip-path="url(#clip0_14370_355636)">
+              <path class="svg-circle" fill-rule="evenodd" clip-rule="evenodd" d="M74 8H10V72H74V8ZM33 29.482C33 27.9385 34.6744 26.9767 36.0077 27.7545L54.0385 38.2721C55.3615 39.0439 55.3615 40.9555 54.0385 41.7272L36.0078 52.2454C34.6744 53.0232 33 52.0615 33 50.5179V29.482Z"/>
+              <path class="svg-play" d="M36.0077 27.7545C34.6744 26.9767 33 27.9385 33 29.482V50.5179C33 52.0615 34.6744 53.0232 36.0078 52.2454L54.0385 41.7272C55.3615 40.9555 55.3615 39.0439 54.0385 38.2721L36.0077 27.7545Z"/>
+              </g>
+              </g>
+              <defs>
+              <filter id="filter0_dd_14370_355636" x="0" y="0" width="84" height="84" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+              <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+              <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+              <feOffset dy="2"/>
+              <feGaussianBlur stdDeviation="5"/>
+              <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+              <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_14370_355636"/>
+              <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+              <feOffset/>
+              <feGaussianBlur stdDeviation="1"/>
+              <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+              <feBlend mode="normal" in2="effect1_dropShadow_14370_355636" result="effect2_dropShadow_14370_355636"/>
+              <feBlend mode="normal" in="SourceGraphic" in2="effect2_dropShadow_14370_355636" result="shape"/>
+              </filter>
+              <clipPath id="clip0_14370_355636">
+              <rect x="10" y="8" width="64" height="64" rx="32"/>
+              </clipPath>
+              </defs>
+            </svg>                    
+          </span>
+          </span>
+          <span class="video-button__text icon-button__title">{{ block_settings.button_label }}</span>
+          </button>
+        <div class="popup-wrapper video-popup popup--height popup--{{ settings.white_space }} none-autoplay" style="aspect-ratio: 16 / 9;">
+          <div class="scroll-area hide-scrollbar">
+            <div class="button-wrapper {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %}">
+                    {% style %}
+                        #shopify-section-{{ section.id }} .button-close {
+                            --layout-text-color:
+                                {{ settings.layout_text_color.red }},
+                                {{ settings.layout_text_color.green }}, 
+                                {{ settings.layout_text_color.blue }};
+                            --layout-background-color:
+                                {{ settings.layout_background_color.red }},
+                                {{ settings.layout_background_color.green }},
+                                {{ settings.layout_background_color.blue }};
+                        }
+                    {% endstyle %}
+                <button type="button" class="button-close close-popup">
+                    {% assign icon_full = 'cross' | append: "-" | append: close_weight %}
+                    {% render 'icon', icon: icon_full %}  
+                </button>
+            </div>
+            <div class="popup-video" style="aspect-ratio: 16 / 9;">
+                <template>
+                  {%- if block_settings.video_url.type == 'youtube' -%}
+                    <video-section
+                      data-init-mode="template"
+                      data-parent="deferred-media"
+                      data-type="youtube"
+                      alt="{{ block_settings.video_button_alt | escape }}"
+                      data-video-id="{{ block_settings.video_url.id }}"></video-section>
+                  {%- else -%}
+                    <video-section
+                      data-init-mode="template"
+                      data-parent="deferred-media"
+                      data-type="vimeo"
+                      alt="{{ block_settings.video_button_alt | escape }}"
+                      data-video-id="{{ block_settings.video_url.id }}"></video-section>
+                  {%- endif -%}
+                </template>
+            </div>
+          </div>
+        </div>
+      </deferred-media>
+      </modal-dialog>
+    </div>
+  {% endif %}

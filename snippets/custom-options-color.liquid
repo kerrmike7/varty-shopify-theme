@@ -1,0 +1,55 @@
+<custom-options class="section-block custom-options custom-options--{{ block.id }} product-form__input" style="--spacing: {{ block.settings.top_spacing }}; --mobile-spacing: {{ block.settings.mobile_top_spacing }};" data-type="color-picker" {{ block.shopify_attributes }}>
+    {% style %}
+        .custom-options--{{ block.id }} {
+            --swatches-radius: 2000px;
+            --custom-swatch-width: 36px;
+        }
+        {% if settings.typography_preset != 'custom' %}
+        .tooltip__icon svg {
+            width: max(16px, var(--fluid-preset-body-s-lh));
+            height: max(16px, var(--fluid-preset-body-s-lh));
+        }
+        {% else %}
+        .tooltip__icon svg {
+            width: max(16px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+            height: max(16px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+        }
+        {% endif %}
+    {% endstyle %}
+    {% liquid 
+      assign product_form_id = 'product-form-' | append: section.id
+      assign default_color = 'black'
+    %}
+    {% if block.settings.option_label != blank %}
+        <label class="form__label label--{{ settings.typography_preset }}" for="{{ block.id }}-{{ block.settings.option_name }}">
+            <tooltip-component class="tooltip form__label-name">
+                <span class="{% if block.settings.label_size != 'default' %}{{ block.settings.label_size }}{% else %}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %}{% endif %} {% if settings.dim_text %}dim{% endif %}">{{ block.settings.option_label }}</span>
+                {% if block.settings.info_tooltip != blank %}
+                    <span class="tooltip__icon{% if settings.dim_text %} tooltip__icon--dim{% endif %}">
+                        {% assign icon_full = 'help' | append: "-" | append: weight_accordion_title %}
+                        {% render 'icon-accordion', icon: icon_full %}
+                        <span class="tooltip__text color__swatch-tooltip--{{ settings.typography_preset }}">{{ block.settings.info_tooltip }}</span>
+                    </span>                  
+                {% endif %}
+            </tooltip-component>
+        </label>
+    {% endif %}
+    <div class="form__variants">
+        <div class="field field--color">
+            <input 
+                type="color"
+                id="{{ block.id }}-{{ block.settings.option_name }}"
+                name="properties[{{ block.settings.option_name }}]"
+                form="{{ product_form_id }}"
+                value="#000000"
+                class="input input--{{ settings.typography_preset }} {% if block.settings.text_size != 'default' %}{{ block.settings.text_size }}{% else %}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %}{% endif %} input--color"
+            >
+            <div class="field-color-wrapper">
+                <div class="color__swatch color__swatch--color" style="--swatch-background: {{ default_color }}; --swatch-background-color: {{ default_color }};">
+                    <span class="color__swatch-dot color__swatch-dot--color"></span>
+                </div>
+                <span class="selected-color-label input--{{ settings.typography_preset }} {% if block.settings.text_size != 'default' %}{{ block.settings.text_size }}{% else %}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %}{% endif %}" data-color-value>#000000</span>
+            </div>
+        </div>
+    </div>
+</custom-options>

@@ -1,0 +1,212 @@
+{% style %}
+    #shopify-section-{{ section.id }} {
+        --padding-top: {{ section.settings.desktop_padding_top }}px;
+        --padding-bottom: {{ section.settings.desktop_padding_bottom }}px;
+        {% if section.settings.color_type == 'invert' %}
+            --layout-text-color:
+            {{ settings.layout_background_color.red }},
+            {{ settings.layout_background_color.green }},
+            {{ settings.layout_background_color.blue }};
+            --layout-background-color:
+            {{ settings.layout_text_color.red }},
+            {{ settings.layout_text_color.green }}, 
+            {{ settings.layout_text_color.blue }};
+        {% endif %}
+        {% if section.settings.color_type == 'custom' %}
+            --layout-text-color:
+            {{ section.settings.text_color.red }},
+            {{ section.settings.text_color.green }}, 
+            {{ section.settings.text_color.blue }};
+            --layout-background-color:
+            {{ section.settings.background_color.red }},
+            {{ section.settings.background_color.green }}, 
+            {{ section.settings.background_color.blue }};
+        {% endif %}  
+        {%- if section.settings.color_type == 'custom' and section.settings.background_color_type == 'gradient' and section.settings.background_gradient != blank %}
+        background: {{ section.settings.background_gradient }};
+        {%- else %}
+        background-color: rgb(var(--layout-background-color));
+        {%- endif %}
+        color: rgb(var(--layout-text-color));
+    }
+    #shopify-section-{{ section.id }} .line-container {
+        padding: var(--padding-top) 0 var(--padding-bottom);
+    }
+    #shopify-section-{{ section.id }} .line {
+        width: 100%;
+        height: var(--line-width);
+        background-color: rgba(var(--layout-text-color),var(--line-opacity));
+        display: block;
+    }
+    @media screen and (max-width: 920px) {
+        #shopify-section-{{ section.id }} {
+            --padding-top: {{ section.settings.mobile_padding_top }}px;
+            --padding-bottom: {{ section.settings.mobile_padding_bottom }}px; 
+        }
+    }
+{% endstyle %}
+
+{% liquid
+    assign disable_layout_margins = false
+    if section.settings.layout_margins == 'disable'
+      assign disable_layout_margins = true
+    elsif section.settings.layout_margins == 'default' and settings.disable_margins
+      assign disable_layout_margins = true
+    endif
+%}
+
+<div class="{% unless disable_layout_margins %}section-padding--{{ settings.white_space }}{% endunless %} {% if disable_layout_margins %}disable-layout-margins{% endif %} {% if settings.max_page_width == '1400' or settings.max_page_width == '1200' %}page-width {% endif %} page-width--{{ settings.max_page_width }}">
+    <div class="line-container">
+        <span class="line"></span>
+    </div>
+</div>
+{% schema %}
+{
+    "name": "t:blocks.line.name",
+    "tag": "section",
+    "class": "line-section",
+    "settings": [
+        {
+            "type": "header",
+            "content": "t:sections.all.colors.content"
+        },
+        {
+            "type": "select",
+            "id": "color_type",
+            "label": "t:sections.all.colors.color_type.label",
+            "options": [
+                {
+                "value": "default",
+                "label": "t:sections.all.colors.color_type.options__1.label"
+                },
+                {
+                "value": "invert",
+                "label": "t:sections.all.colors.color_type.options__2.label"
+                },
+                {
+                "value": "custom",
+                "label": "t:sections.all.colors.color_type.options__3.label"
+                }
+            ],
+            "default": "default"
+        },        
+        {
+          "type": "select",
+          "id": "background_color_type",
+          "label": "t:sections.all.colors.background_color_type.label",
+          "options": [
+            {
+              "value": "solid",
+              "label": "t:sections.all.colors.background_color_type.options__1.label"
+            },
+            {
+              "value": "gradient",
+              "label": "t:sections.all.colors.background_color_type.options__2.label"
+            }
+          ],
+          "visible_if": "{{ section.settings.color_type == 'custom' }}",
+          "default": "solid"
+        },
+        {
+          "type": "color_background",
+          "id": "background_gradient",
+          "label": "t:sections.all.colors.background_gradient_type.label",
+          "visible_if": "{{ section.settings.color_type == 'custom' and section.settings.background_color_type == 'gradient' }}"
+        },
+        {
+            "type": "color",
+            "id": "background_color",
+            "label": "t:sections.all.colors.background_solid_type.label",
+          "info": "t:sections.all.colors.background_solid_type.info",
+            "visible_if": "{{ section.settings.color_type == 'custom' }}",
+            "default": "#FFFFFF"
+        },
+        {
+            "type": "color",
+            "id": "text_color",
+            "label": "t:sections.all.colors.text_color.label",
+            "visible_if": "{{ section.settings.color_type == 'custom' }}",
+            "default": "#000000"
+        },
+        {
+            "type": "header",
+            "content": "t:sections.all.paddings.desktop_section_paddings.content"
+          },
+          {
+            "type": "select",
+            "id": "layout_margins",
+            "options": [
+              {
+                "value": "default",
+                "label": "t:sections.all.layout_margins.options__1.label"
+              },
+              {
+                "value": "disable",
+                "label": "t:sections.all.layout_margins.options__2.label"
+              },
+              {
+                "value": "enable",
+                "label": "t:sections.all.layout_margins.options__3.label"
+              }
+            ],
+            "default": "default",
+            "label": "t:sections.all.layout_margins.label",
+            "info": "t:sections.all.layout_margins.info"
+        },
+          {
+            "type": "range",
+            "id": "desktop_padding_top",
+            "min": 0,
+            "max": 320,
+            "step": 8,
+            "unit": "px",
+            "label": "t:sections.all.paddings.padding_top.label",
+            "default": 64
+          },
+          {
+            "type": "range",
+            "id": "desktop_padding_bottom",
+            "min": 0,
+            "max": 320,
+            "step": 8,
+            "unit": "px",
+            "label": "t:sections.all.paddings.padding_bottom.label",
+            "default": 64
+          },
+          {
+            "type": "header",
+            "content": "t:sections.all.paddings.mobile_section_paddings.content"
+          },
+          {
+            "type": "range",
+            "id": "mobile_padding_top",
+            "min": 0,
+            "max": 80,
+            "step": 8,
+            "unit": "px",
+            "label": "t:sections.all.paddings.padding_top.label",
+            "default": 24
+          },
+          {
+            "type": "range",
+            "id": "mobile_padding_bottom",
+            "min": 0,
+            "max": 80,
+            "step": 8,
+            "unit": "px",
+            "label": "t:sections.all.paddings.padding_bottom.label",
+            "default": 24
+          }
+    ],
+    "presets": [
+      {
+        "name": "t:blocks.line.name",
+        "category": "t:categories.layout"
+      }
+    ],
+    "enabled_on": {
+        "templates": ["*"],
+        "groups": ["*"]
+    }
+}
+{% endschema %}

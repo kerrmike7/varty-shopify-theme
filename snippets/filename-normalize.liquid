@@ -1,0 +1,113 @@
+{%- comment -%}
+  Shopify-like filename sanitizer (approximation).
+
+  Usage:
+    {% capture file_key %}{% render 'filename-normalize', value: product.vendor %}{% endcapture %}
+
+  Options:
+    - value: string (required)
+    - replacement: string (default "_")
+    - keep_case: boolean-ish ("true"/"false") (default false -> downcase)
+    - extra_replace: comma-separated list of extra chars to replace (optional)
+{%- endcomment -%}
+
+{%- assign string = value | default: '' | strip -%}
+{%- assign replacement = replacement | default: '_' -%}
+{%- assign keep_case = keep_case | default: false -%}
+
+{%- unless keep_case == true or keep_case == 'true' -%}
+  {%- assign string = string | downcase -%}
+{%- endunless -%}
+
+{%- comment -%} 
+  Normalize common HTML entities into their characters first 
+{%- endcomment -%}
+{%- assign string = string
+  | replace: '&nbsp;', ' '
+  | replace: '&#39;', "'"
+  | replace: '&apos;', "'"
+  | replace: '&#96;', '`'
+  | replace: '&quot;', '"'
+  | replace: '&#34;', '"'
+  | replace: '&#46;', '.'
+  | replace: '&#33;', '!'
+  | replace: '&#63;', '?'
+  | replace: '&amp;', '&'
+  | replace: '&#38;', '&'
+  | replace: '&#124;', '|'
+  | replace: '&#47;', '/'
+  | replace: '&#92;', '\'
+  | replace: '&#232;', 'è'
+  | replace: '&#233;', 'é'
+  | replace: '&#234;', 'ê'
+  | replace: '&#235;', 'ë'
+  | replace: '&#242;', 'ò'
+  | replace: '&#243;', 'ó'
+  | replace: '&#244;', 'ô'
+  | replace: '&#245;', 'õ'
+  | replace: '&#246;', 'ö'
+  | replace: '&#224;', 'à'
+  | replace: '&#225;', 'á'
+  | replace: '&#226;', 'â'
+  | replace: '&#227;', 'ã'
+  | replace: '&#228;', 'ä'
+  | replace: '&#229;', 'å'
+  | replace: '&#252;', 'ü'
+-%}
+
+{%- comment -%}
+  Replace these characters with replacement char.
+  This list targets what usually breaks matching with Shopify-admin-uploaded filenames.
+{%- endcomment -%}
+{%- assign string = string
+  | replace: ' ', replacement
+  | replace: "'", replacement
+  | replace: "`", replacement
+  | replace: '"', replacement
+  | replace: '.', replacement
+  | replace: '!', replacement 
+  | replace: '?', replacement 
+  | replace: '&', replacement
+  | replace: '/', replacement
+  | replace: '\', replacement
+  | replace: '|', replacement
+  | replace: 'è', replacement
+  | replace: 'é', replacement
+  | replace: 'ê', replacement
+  | replace: 'ë', replacement
+  | replace: 'ò', replacement
+  | replace: 'ó', replacement
+  | replace: 'ô', replacement
+  | replace: 'õ', replacement
+  | replace: 'ö', replacement
+  | replace: 'à', replacement
+  | replace: 'á', replacement
+  | replace: 'â', replacement
+  | replace: 'ã', replacement
+  | replace: 'ä', replacement
+  | replace: 'å', replacement
+  | replace: 'ü', replacement
+-%}
+
+{%- comment -%} 
+  Allow caller to pass extra characters to replace 
+{%- endcomment -%}
+{%- if extra_replace and extra_replace != blank -%}
+  {%- assign extra_list = extra_replace | split: ',' -%}
+  {%- for ex in extra_list -%}
+    {%- assign ex = ex | strip -%}
+    {%- if ex != blank -%}
+      {%- assign string = string | replace: ex, replacement -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- comment -%} Collapse multiple replacements {%- endcomment -%}
+{%- assign double_replacement = replacement | append: replacement -%}
+{%- assign string = string 
+  | replace: double_replacement, replacement 
+  | replace: double_replacement, replacement 
+  | replace: double_replacement, replacement 
+-%}
+
+{{- string -}}

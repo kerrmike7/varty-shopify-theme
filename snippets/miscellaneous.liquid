@@ -1,0 +1,54 @@
+<div class="miscellaneous-container {% if section_navigation_block %} section-navigation-block{% if settings.enable_drawer_animations %} stagger__item{% endif %}{% endif %} {% if main-sidebar__block %} main-sidebar__block{% endif %} {% if content_wrapper_block %}{% unless forloop_first %}content-wrapper--block{% endunless %}{% endif %} {% unless mega_drawer %}miscellaneous-container--{{ section.settings.grid_columns }} miscellaneous-container--{{ miscellaneous_settings.block_width }}{% endunless %}{% if miscellaneous_settings.show_bottom_line and mega_drawer %} full-bottom-line{% endif %} {% if mega_drawer %}miscellaneous-container--menu-drawer {% if section.settings.pinned_block == 'miscellaneous' and for_loop.index0 == last_pinned_block_index %} pinned-block{% endif %}{% endif %} {% if section.id contains 'header' %}miscellaneous-container--header{% elsif section.id contains 'footer' %}miscellaneous-container--footer{% else %}miscellaneous-container--{{ section.id }}{% endif %} miscellaneous-container--{{ miscellaneous_settings.miscellaneous_horizontal_alignment }}" 
+    style="--miscellaneous-vertical-alignment: {{ miscellaneous_settings.miscellaneous_vertical_alignment }}; {% if mega_drawer %} --spacing: {{ miscellaneous_settings.top_spacing }}; --mobile-spacing: {{ miscellaneous_settings.mobile_top_spacing }};{% endif %}
+--miscellaneous-horizontal-alignment: {{ miscellaneous_settings.miscellaneous_horizontal_alignment }};
+--miscellaneous-view: {{ miscellaneous_settings.miscellaneous_style }}; --item-index: {{ animated_drawer_item_index | default: for_loop.index }}" {{ block.shopify_attributes }}>
+    <div class="miscellaneous__items {% if mega_drawer %}miscellaneous__items--row{% else %}miscellaneous__items--{{ miscellaneous_settings.miscellaneous_style }}{% endif %}  miscellaneous__items--{% if miscellaneous_settings.miscellaneous_vertical_alignment == 'space-between' or miscellaneous_settings.miscellaneous_horizontal_alignment == 'space-between' %}stretched{% endif %} {%- if miscellaneous_settings.miscellaneous_reverse_order -%}miscellaneous__items--reverse{%- endif -%}">
+        {% if miscellaneous_settings.menu != blank %}
+            {%- render 'menu', menu_settings: miscellaneous_settings, menu_settings_id: miscellaneous_settings.menu, block: block, blocks: section.blocks, menu_id: menu_id, menu_in_header: menu_in_header -%}
+        {% endif %}
+        {% if miscellaneous_settings.enable_store_selector and section.id == 'header' or section.id == 'secondary-header' or section.id == 'main-sidebar' %}
+            {%- render 'store-selector', store_selector_settings: miscellaneous_settings -%}
+        {% endif %}
+        {% unless parent == 'mobile_header' %}
+            {% if miscellaneous_settings.enable_country or miscellaneous_settings.enable_language %}
+                {%- render 'country-and-language', country-and-language_settings: miscellaneous_settings -%}
+            {% endif %}
+        {% endunless %}
+        {% if miscellaneous_settings.social_media_style != 'disable' and section.id == 'header' or miscellaneous_settings.social_media_style != 'disable' and section.id == 'secondary-header' %}
+            {%- render 'social-media', social-media_settings: miscellaneous_settings, section_settings: section.settings -%}
+        {% endif %}
+        {% assign IsNoFooter = true %}
+        {% if section.id contains 'footer' %}
+            {% assign IsNoFooter = false %}
+        {% endif %}
+        {% if miscellaneous_settings.news_style != 'disable' or miscellaneous_settings.show_burger_menu or miscellaneous_settings.search_style != 'disable' or miscellaneous_settings.account_style != 'disable' or miscellaneous_settings.cart_style != 'disable' and IsNoFooter %}
+            <div class="miscellaneous__subblock miscellaneous__subblock--{% if miscellaneous_settings.miscellaneous_reverse_order %}reverse{% endif %} miscellaneous__subblock--horizontal-{{ miscellaneous_settings.miscellaneous_horizontal_alignment }} miscellaneous__subblock--vertical-{{ miscellaneous_settings.miscellaneous_vertical_alignment }}">
+                {% if parent == 'mobile_header' %}
+                    {% if miscellaneous_settings.enable_country or miscellaneous_settings.enable_language %}
+                        {%- render 'country-and-language', country-and-language_settings: miscellaneous_settings -%}
+                    {% endif %}
+                {% endif %}
+                {% if miscellaneous_settings.enable_store_selector and section.id == 'menu-drawer' or section.id == 'mega-menu-drawer'  %}
+                    {%- render 'store-selector', store_selector_settings: miscellaneous_settings -%}
+                {% endif %}
+                {% if miscellaneous_settings.search_style != 'disable' %}
+                    {%- render 'search', search_settings: miscellaneous_settings -%}
+                {% endif %}
+                {% if miscellaneous_settings.news_style != 'disable' and section.id contains 'header' %}
+                    {%- render 'news', news_settings: miscellaneous_settings -%}
+                {% endif %}
+                {% if miscellaneous_settings.account_style != 'disable' %}
+                    {%- render 'account', account_settings: miscellaneous_settings -%}
+                {% endif %}
+                {% if miscellaneous_settings.cart_style != 'disable' and IsNoFooter and settings.disable_shopping_functionality == false %}
+                    {%- render 'cart', cart_settings: miscellaneous_settings -%}
+                {% endif %}
+                {% unless section.id contains 'footer' %}
+                    {% if miscellaneous_settings.show_burger_menu %}
+                        {%- render 'burger-menu', burger-menu_settings: miscellaneous_settings, miscellaneous: true -%}
+                    {% endif %}
+                {% endunless %}
+            </div>
+        {% endif %}
+    </div>
+</div>

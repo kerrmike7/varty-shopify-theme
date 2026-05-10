@@ -1,0 +1,366 @@
+{% if accordion_settings.text != blank or accordion_settings.page != blank %}
+
+  <div class="product__accordion accordion{% if product_block %} section-block{% if accordion_settings.show_lines %} with-lines{% endif %}{% endif %} {% if product_details_wrapper_block %}{% unless forloop_first %} product-details__wrapper--block{% endunless %}{% endif %}" {% if product_block %}style="--spacing: {{ accordion_settings.top_spacing }}; --mobile-spacing: {{ accordion_settings.mobile_top_spacing }};"{% endif %} {{ block_item.shopify_attributes }}>
+    {% style %}
+      {% if settings.typography_preset != 'custom' %}
+      .icon-accordion {
+        width: auto;
+        height: max(24px, var(--fluid-preset-body-s-lh));
+      }
+      .heading_m .icon-accordion,
+      .heading_m_uppercase .icon-accordion,
+      .heading_m.icon-accordion,
+      .heading_m_uppercase.icon-accordion {
+        height: max(16px, var(--fluid-preset-m-lh));
+      }
+      .heading_s .icon-accordion,
+      .heading_s_uppercase .icon-accordion,
+      .heading_s.icon-accordion,
+      .heading_s_uppercase.icon-accordion {
+        height: max(16px, var(--fluid-preset-s-lh));
+      }
+      .heading_xs .icon-accordion,
+      .heading_xs_uppercase .icon-accordion,
+      .heading_xs.icon-accordion,
+      .heading_xs_uppercase.icon-accordion {
+        height: max(16px, var(--fluid-preset-xs-lh));
+      }
+      .body_l .icon-accordion,
+      .body_l_uppercase .icon-accordion,
+      .body_l.icon-accordion,
+      .body_l_uppercase.icon-accordion {
+        height: max(16px, var(--fluid-preset-body-l-lh));
+      }
+      .body_m .icon-accordion,
+      .body_m_uppercase .icon-accordion,
+      .body_m.icon-accordion,
+      .body_m_uppercase.icon-accordion {
+        height: max(16px, var(--fluid-preset-body-m-lh));
+      }
+      .label_font .icon-accordion,
+      .label_font_uppercase .icon-accordion,
+      .label_font.icon-accordion,
+      .label_font_uppercase.icon-accordion {
+        height: max(16px, var(--fluid-preset-label-lh));
+      }
+      .section-product-details .icon-accordion--minimal_uppercase,
+      .section-collapsible-tabs .icon-accordion--minimal_uppercase,
+      .section-product-details .icon-accordion--minimal_basic,
+      .section-collapsible-tabs .icon-accordion--minimal_basic,
+      .section-product-details .icon-accordion--classic,
+      .section-collapsible-tabs .icon-accordion--classic,
+      .section-product-details .icon-accordion--avant_garde,
+      .section-collapsible-tabs .icon-accordion--avant_garde,
+      .section-product-details .icon-accordion--duet,
+      .section-collapsible-tabs .icon-accordion--duet {
+        height: max(24px, var(--fluid-preset-body-l-lh));
+      }
+      .section-product-details .icon-accordion--minimal_heavy,
+      .section-collapsible-tabs .icon-accordion--minimal_heavy {
+        height: max(24px, var(--fluid-preset-xs-lh));
+      }
+      .section-product-details .icon-accordion--contrast,
+      .section-collapsible-tabs .icon-accordion--contrast {
+        height: max(24px, var(--fluid-preset-s-lh));
+      }
+      .section-product-details .icon-accordion--brutalist,
+      .section-collapsible-tabs .icon-accordion--brutalist {
+        height: max(24px, var(--fluid-preset-xl-lh));
+      }
+      .section-product-details .icon-accordion.heading_s,
+      .section-product-details .icon-accordion.heading_s_uppercase,
+      .section-collapsible-tabs .icon-accordion.heading_s,
+      .section-collapsible-tabs .icon-accordion.heading_s_uppercase {
+        height: max(24px, var(--fluid-preset-s-lh));
+      }
+      .section-product-details .icon-accordion.heading_xs,
+      .section-product-details .icon-accordion.heading_xs_uppercase,
+      .section-collapsible-tabs .icon-accordion.heading_xs,
+      .section-collapsible-tabs .icon-accordion.heading_xs_uppercase {
+        height: max(24px, var(--fluid-preset-xs-lh));
+      }
+      .section-product-details .icon-accordion.body_l,
+      .section-product-details .icon-accordion.body_l_uppercase,
+      .section-collapsible-tabs .icon-accordion.body_l,
+      .section-collapsible-tabs .icon-accordion.body_l_uppercase {
+        height: max(24px, var(--fluid-preset-body-l-lh));
+      }
+      .section-product-details .icon-accordion.body_m,
+      .section-product-details .icon-accordion.body_m_uppercase,
+      .section-collapsible-tabs .icon-accordion.body_m,
+      .section-collapsible-tabs .icon-accordion.body_m_uppercase {
+        height: max(24px, var(--fluid-preset-body-m-lh));
+      }
+      .section-product-details .icon-accordion.body_s,
+      .section-product-details .icon-accordion.body_s_uppercase,
+      .section-collapsible-tabs .icon-accordion.body_s,
+      .section-collapsible-tabs .icon-accordion.body_s_uppercase {
+        height: max(24px, var(--fluid-preset-body-s-lh));
+      }
+      .section-product-details .icon-accordion.label_font,
+      .section-product-details .icon-accordion.label_font_uppercase,
+      .section-collapsible-tabs .icon-accordion.label_font,
+      .section-collapsible-tabs .icon-accordion.label_font_uppercase {
+        height: max(24px, var(--fluid-preset-body-s-lh));
+      }
+      {% else %}
+      .icon-accordion {
+        width: auto;
+        height: max(24px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+      }
+      .heading_m .icon-accordion,
+      .heading_m_uppercase .icon-accordion,
+      .heading_m.icon-accordion,
+      .heading_m_uppercase.icon-accordion {
+        height: max(16px, calc(var(--heading-m-font-size) * var(--heading-m-line-height)));
+      }
+      .heading_s .icon-accordion,
+      .heading_s_uppercase .icon-accordion,
+      .heading_s.icon-accordion,
+      .heading_s_uppercase.icon-accordion {
+        height: max(16px, calc(var(--heading-s-font-size) * var(--heading-s-line-height)));
+      }
+      .heading_xs .icon-accordion,
+      .heading_xs_uppercase .icon-accordion,
+      .heading_xs.icon-accordion,
+      .heading_xs_uppercase.icon-accordion {
+        height: max(16px, calc(var(--heading-xs-font-size) * var(--heading-xs-line-height)));
+      }
+      .body_l .icon-accordion,
+      .body_l_uppercase .icon-accordion,
+      .body_l.icon-accordion,
+      .body_l_uppercase.icon-accordion {
+        height: max(16px, calc(var(--body-l-font-size) * var(--body-l-line-height)));
+      }
+      .body_m .icon-accordion,
+      .body_m_uppercase .icon-accordion,
+      .body_m.icon-accordion,
+      .body_m_uppercase.icon-accordion {
+        height: max(16px, calc(var(--body-m-font-size) * var(--body-m-line-height)));
+      }
+      .label_font .icon-accordion,
+      .label_font_uppercase .icon-accordion,
+      .label_font.icon-accordion,
+      .label_font_uppercase.icon-accordion {
+        height: max(16px, calc(var(--label-font-size) * var(--label-line-height)));
+      }
+      .section-product-details .icon-accordion--custom,
+      .section-collapsible-tabs .icon-accordion--custom {
+        height: max(24px, calc(var(--body-l-font-size) * var(--body-l-line-height)));
+      }
+      .section-product-details .icon-accordion.heading_s,
+      .section-product-details .icon-accordion.heading_s_uppercase,
+      .section-collapsible-tabs .icon-accordion.heading_s,
+      .section-collapsible-tabs .icon-accordion.heading_s_uppercase {
+        height: max(24px, calc(var(--heading-s-font-size) * var(--heading-s-line-height)));
+      }
+      .section-product-details .icon-accordion.heading_xs,
+      .section-product-details .icon-accordion.heading_xs_uppercase,
+      .section-collapsible-tabs .icon-accordion.heading_xs,
+      .section-collapsible-tabs .icon-accordion.heading_xs_uppercase {
+        height: max(24px, calc(var(--heading-xs-font-size) * var(--heading-xs-line-height)));
+      }
+      .section-product-details .icon-accordion.body_l,
+      .section-product-details .icon-accordion.body_l_uppercase,
+      .section-collapsible-tabs .icon-accordion.body_l,
+      .section-collapsible-tabs .icon-accordion.body_l_uppercase {
+        height: max(24px, calc(var(--body-l-font-size) * var(--body-l-line-height)));
+      }
+      .section-product-details .icon-accordion.body_m,
+      .section-product-details .icon-accordion.body_m_uppercase,
+      .section-collapsible-tabs .icon-accordion.body_m,
+      .section-collapsible-tabs .icon-accordion.body_m_uppercase {
+        height: max(24px, calc(var(--body-m-font-size) * var(--body-m-line-height)));
+      }
+      .section-product-details .icon-accordion.body_s,
+      .section-product-details .icon-accordion.body_s_uppercase,
+      .section-collapsible-tabs .icon-accordion.body_s,
+      .section-collapsible-tabs .icon-accordion.body_s_uppercase {
+        height: max(24px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+      }
+      .section-product-details .icon-accordion.label_font,
+      .section-product-details .icon-accordion.label_font_uppercase,
+      .section-collapsible-tabs .icon-accordion.label_font,
+      .section-collapsible-tabs .icon-accordion.label_font_uppercase {
+        height: max(24px, calc(var(--label-font-size) * var(--label-line-height)));
+      }
+      {% endif %}
+      .section-product-details .summary__title-name--minimal_uppercase,
+      .section-collapsible-tabs .summary__title-name--minimal_uppercase,
+      .section-product-details .summary__title-name--minimal_basic,
+      .section-collapsible-tabs .summary__title-name--minimal_basic,
+      .section-product-details .summary__title-name--classic,
+      .section-collapsible-tabs .summary__title-name--classic,
+      .section-product-details .summary__title-name--avant_garde,
+      .section-collapsible-tabs .summary__title-name--avant_garde,
+      .section-product-details .summary__title-name--duet,
+      .section-collapsible-tabs .summary__title-name--duet,
+      .section-product-details .summary__title-name--custom,
+      .section-collapsible-tabs .summary__title-name--custom {
+        gap: {{ 8 | times: settings.desktop_font_scale | divided_by: 100.0 | round | at_least: 8 | divided_by: 16.0 | round: 4 }}rem;
+      }
+      .section-product-details .summary__title-name--minimal_heavy,
+      .section-collapsible-tabs .summary__title-name--minimal_heavy {
+        gap: {{ 12 | times: settings.desktop_font_scale | divided_by: 100.0 | round | at_least: 8 | divided_by: 16.0 | round: 4 }}rem;
+      }
+      .section-product-details .summary__title-name--contrast,
+      .section-collapsible-tabs .summary__title-name--contrast {
+        gap: {{ 16 | times: settings.desktop_font_scale | divided_by: 100.0 | round | at_least: 8 | divided_by: 16.0 | round: 4 }}rem;
+      }
+      .section-product-details .summary__title-name--brutalist,
+      .section-collapsible-tabs .summary__title-name--brutalist {
+        gap: {{ 24 | times: settings.desktop_font_scale | divided_by: 100.0 | round | at_least: 8 | divided_by: 16.0 | round: 4 }}rem;
+      }
+      .section-product-details .summary__title-name.heading_s,
+      .section-product-details .summary__title-name.heading_s_uppercase,
+      .section-collapsible-tabs .summary__title-name.heading_s,
+      .section-collapsible-tabs .summary__title-name.heading_s_uppercase {
+        gap: {{ 24 | times: settings.desktop_font_scale | divided_by: 100.0 | round | at_least: 8 | divided_by: 16.0 | round: 4 }}rem;
+      }
+      .section-product-details .summary__title-name.heading_xs,
+      .section-product-details .summary__title-name.heading_xs_uppercase,
+      .section-collapsible-tabs .summary__title-name.heading_xs,
+      .section-collapsible-tabs .summary__title-name.heading_xs_uppercase {
+        gap: {{ 24 | times: settings.desktop_font_scale | divided_by: 100.0 | round | at_least: 8 | divided_by: 16.0 | round: 4 }}rem;
+      }
+      .section-product-details .summary__title-name.body_l,
+      .section-product-details .summary__title-name.body_l_uppercase,
+      .section-collapsible-tabs .summary__title-name.body_l,
+      .section-collapsible-tabs .summary__title-name.body_l_uppercase {
+        gap: {{ 16 | times: settings.desktop_font_scale | divided_by: 100.0 | round | at_least: 8 | divided_by: 16.0 | round: 4 }}rem;
+      }
+      .section-product-details .summary__title-name.body_m,
+      .section-product-details .summary__title-name.body_m_uppercase,
+      .section-collapsible-tabs .summary__title-name.body_m,
+      .section-collapsible-tabs .summary__title-name.body_m_uppercase {
+        gap: {{ 16 | times: settings.desktop_font_scale | divided_by: 100.0 | round | at_least: 8 | divided_by: 16.0 | round: 4 }}rem;
+      }
+      .section-product-details .summary__title-name.body_s,
+      .section-product-details .summary__title-name.body_s_uppercase,
+      .section-collapsible-tabs .summary__title-name.body_s,
+      .section-collapsible-tabs .summary__title-name.body_s_uppercase {
+        gap: {{ 12 | times: settings.desktop_font_scale | divided_by: 100.0 | round | at_least: 8 | divided_by: 16.0 | round: 4 }}rem;
+      }
+      .section-product-details .summary__title-name.label_font,
+      .section-product-details .summary__title-name.label_font_uppercase,
+      .section-collapsible-tabs .summary__title-name.label_font,
+      .section-collapsible-tabs .summary__title-name.label_font_uppercase {
+        gap: {{ 8 | times: settings.desktop_font_scale | divided_by: 100.0 | round | at_least: 8 | divided_by: 16.0 | round: 4 }}rem;
+      }
+      /* Styles for full-width page without sidebars */
+      /* Mobile */
+      @media screen and (max-width: 768px) {
+        .section-product-details .icon-accordion--brutalist,
+        .section-collapsible-tabs .icon-accordion--brutalist {
+          {% if settings.typography_preset != 'custom' %}
+          height: max(24px, var(--fluid-preset-s-lh));
+          {% else %}
+          height: max(24px, calc(var(--heading-s-font-size) * var(--heading-s-line-height)));
+          {% endif %}
+        }
+      }
+      @media screen and (min-width: 921px) {
+        /* Mobile */
+        @container inside-content (max-width: 768px) {
+          .section-product-details .icon-accordion--brutalist,
+          .section-collapsible-tabs .icon-accordion--brutalist {
+            {% if settings.typography_preset != 'custom' %}
+            height: max(24px, var(--fluid-preset-s-lh));
+            {% else %}
+            height: max(24px, calc(var(--heading-s-font-size) * var(--heading-s-line-height)));
+            {% endif %}
+          }
+        }
+      }
+      {% endstyle %}
+
+      {%- liquid
+        if settings.typography_preset == 'classic' or settings.typography_preset == 'duet'
+                assign weight = settings.accent_icon_weight
+                if settings.swap_fonts
+                        assign weight = settings.base_icon_weight
+                endif
+        else 
+                assign weight =  settings.base_icon_weight
+                if settings.swap_fonts
+                        assign weight = settings.accent_icon_weight
+                endif
+        endif
+        if settings.typography_preset == 'custom'
+            assign weight = settings.custom_icon_weight
+        endif
+    -%}
+    <accordion-block>
+    <div class="accordion-toggle no-js-hidden accordion-toggle--{{ settings.white_space }}{% if product_block and accordion_settings.always_open %} open_collapsible is-open{% endif %}">
+      <div tabindex="0" class="accordion__summary {% if section.settings.color_type != 'invert' and section.settings.color_type != 'custom' %}{% if product_block %}hover-opacity{% else %}hover-accent{% endif %}{% else %}hover-opacity{% endif %}">
+        <div class="summary__title">
+          <div class="summary__title-name summary__title-name--{{ settings.typography_preset }} {% if title_size != 'default' %}{{ title_size }}{% endif %}{% if uppercase_title %} uppercase{% endif %}{% if bolder_title %} bolder-font{% endif %}">
+            {% unless accordion_settings.icon == 'none' %}
+              <span class="icon-accordion icon-accordion--{{ settings.typography_preset }}">
+                {% assign icon_name = accordion_settings.icon | replace: "_", "-" %}
+                {% assign icon_full = icon_name | append: "-" | append: weight %}
+                {% case icon_name %}
+                {% when 'search' or 'eye' or 'user' or 'settings' or 'shopping-cart' %}
+                    {% render 'icon', icon: icon_full %}
+                {% when 'scissors' or 'security-badge' or 'share' or 'stiletto' or 'stop-watch'
+                    or 'sunflower' or 't-shirt' or 'trash' or 'truck' or 'washing-symbol'
+                    or 'water-bottle' or 'zoom-in' or 'zoom-out' %}
+                    {% render 'icon-accordion-2', icon: icon_full %}
+                {% when 'house' or 'store-front' or 'map' or 'compass' or 'road-sign'
+                    or 'map-pin' or 'exclamation-mark' or 'warning-sign' or 'customer-support' or 'lightbulb'
+                    or 'lightbulb-lighting-up' or 'trending-item' or 'kids-friendly' or 'soft' or 'water-proof' or 'multi-language' or 'star' or 'satisfied' or 'flag' or 'freehand' or 'bubble' or 'connector' or 'battery' or 'camera' or 'beach' or 'terrain' or 'food' or 'fitness' or 'hotel' or 'subscription' or 'folder' or 'note'%}
+                    {% render 'icons-3', icon: icon_full %}
+                {% else %}
+                    {% render 'icon-accordion', icon: icon_full %}
+                {% endcase %}
+              </span>
+            {% endunless %}
+            {% liquid
+              assign heading_text = accordion_settings.heading | default: page.title
+              assign final_text = ''
+              assign split_text_curly = heading_text | split: '{'
+              for part in split_text_curly
+                  if part contains '}'
+                      assign split_curly = part | split: '}'
+                      assign styled_text = split_curly[0]
+                      assign after_curly = split_curly[1]
+                      assign final_text = final_text | append: '<span class="styled">' | append: styled_text | append: '</span>' | append: after_curly
+                  else
+                      assign final_text = final_text | append: part
+                  endif
+              endfor
+            %}
+            <h2 class="h4 accordion__title custom-heading accordion__title--{{ settings.typography_preset }} {% if title_size != 'default' %}{{ title_size }}{% endif %}{% if uppercase_title %} uppercase{% endif %}{% if bolder_title %} bolder-font{% endif %}">
+              {% if collapsible_tabs_heading_color == 'gradient' and collapsible_tabs_heading_gradient != blank %}
+                <span class="gradient-heading-text gradient-collapsible-tabs-heading-text--{{ collapsible_tabs_heading_id }}">{{ final_text }}</span>
+              {% else %}
+                {{ final_text }}
+              {% endif %}
+            </h2>
+          </div>
+          <span class="icon-accordion icon-accordion--{{ settings.typography_preset }} {% if title_size != 'default' %}{{ title_size }}{% endif %}">
+            <span class="icon-accordion__close">
+                {% assign icon_full = 'plus' | append: "-" | append: weight %}
+                {% render 'icon', icon: icon_full %}
+            </span>
+            <span class="icon-accordion__open">
+                {% assign icon_full = 'minus' | append: "-" | append: weight %}
+                {% render 'icon', icon: icon_full %}
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="accordion__panel">
+        <div class="accordion__content accordion__content--{{ settings.white_space }}">
+          {% if accordion_settings.text != blank %}<div class="accordion__text richtext {% if text_size != 'default' %}{{ text_size }}{% endif %}{% if uppercase_text %} uppercase{% endif %}{% if bolder_text %} bolder-font{% endif %} {% if settings.enable_animated_underline %}richtext-link--underline{% endif %} {% if section.id contains 'main-product' or section.id contains 'featured-product' %}body-secondary-text--{{ settings.typography_preset }}{% else %}body-text--{{ settings.typography_preset }}{% endif %}">{{ accordion_settings.text }}</div>{% endif %}
+          {% if accordion_settings.page != blank %}
+            <div class="page__content body-text--{{ settings.typography_preset }} rte">
+              {{ page.content }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    </accordion-block>
+  </div>
+{% endif %}

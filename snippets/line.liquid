@@ -1,0 +1,22 @@
+<div class="line-container line-container--{{ block.id }}" id="{{ block.id }}" {{ block.shopify_attributes }}>
+    {% style %}
+      .line-container--{{ block.id }} {
+          --margin-top: {{ block.settings.desktop_padding_top }}px;
+          --margin-bottom: {{ block.settings.desktop_padding_bottom }}px; 
+      }
+      .line-container--{{ block.id }} .line {
+        width: 100%;
+        height: var(--line-width);
+        background-color: rgba(var(--layout-text-color),var(--line-opacity));
+        display: block;
+        margin: var(--margin-top) 0 var(--margin-bottom);
+      }
+      @media screen and (max-width: 920px) {
+        .line-container--{{ block.id }} {
+          --margin-top: {{ block.settings.mobile_padding_top }}px;
+          --margin-bottom: {{ block.settings.mobile_padding_bottom }}px;
+        }
+      }
+{% endstyle %} 
+      <span class="line"></span>
+</div>

@@ -1,0 +1,199 @@
+{% if collection != blank %}
+  <div
+    class="product-labels__item-wrapper card-js snap-align {% if is_first %}is-active{% endif %}"
+    id="Slide-{{ section.id }}"
+    class="snap-align"
+    {% if block != nil %} {{ block.shopify_attributes }} {% endif %}
+  >
+    <a
+      class="card-collection product-labels__item card-collection--media-on-side{% if section.settings.show_frame %} with-border{% endif %} card-collection--{{ id }}"
+      href="{{ collection.url }}"
+      draggable="false"
+    >
+      {% style %}
+        {% if block != nil %}
+          .card-collection--{{ id }} {
+              --image-focal-point: {{ block.settings.custom_image.presentation.focal_point }};
+          }
+        {% endif %}
+      {% endstyle %}
+
+      <div class="card-collection__wrapper">
+        {% liquid
+          if section.index == 1 and index == 1
+            assign should_high_priority = true
+          else
+            assign should_high_priority = false
+          endif
+      
+          if should_high_priority == false and settings.images_loading != 'disable' or index > 4 or section.index > 2
+            assign should_lazy_load = true
+          else
+            assign should_lazy_load = false
+          endif
+        %}
+
+        <div
+          class="card__media lazy-image-container ratio-{{ section.settings.image_ratio }} {% if block != nil and block.settings.custom_image != blank %}card__media--custom{% endif %}"
+          {% if settings.disable_right_click %}
+            oncontextmenu="return false"
+          {% endif %}
+        >
+          {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
+          {%- if block != nil and block.settings.custom_image != blank -%}
+            {% if settings.images_loading != 'disable' %}
+              <figure
+                class="lazy-image lazy-image--{{ settings.images_loading }}"
+                style="--desktop-asp-rat: {{ block.settings.custom_image.aspect_ratio }}"
+              >
+            {% endif %}
+            <img
+              srcset="
+                {%- if block.settings.custom_image.width >= 165 -%}{{ block.settings.custom_image | image_url: width: 165 }} 165w,{%- endif -%}
+                {%- if block.settings.custom_image.width >= 375 -%}{{ block.settings.custom_image | image_url: width: 375 }} 375w,{%- endif -%}
+                {%- if block.settings.custom_image.width >= 550 -%}{{ block.settings.custom_image | image_url: width: 550 }} 550w,{%- endif -%}
+                {%- if block.settings.custom_image.width >= 600 -%}{{ block.settings.custom_image | image_url: width: 600 }} 600w,{%- endif -%}
+                {%- if block.settings.custom_image.width >= 750 -%}{{ block.settings.custom_image | image_url: width: 750 }} 750w,{%- endif -%}
+                {%- if block.settings.custom_image.width >= 900 -%}{{ block.settings.custom_image | image_url: width: 900 }} 900w,{%- endif -%}
+                {%- if block.settings.custom_image.width >= 1100 -%}{{ block.settings.custom_image | image_url: width: 1100 }} 1100w,{%- endif -%}
+                {%- if block.settings.custom_image.width >= 1500 -%}{{ block.settings.custom_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+                {%- if block.settings.custom_image.width > 1500 -%}{{ block.settings.custom_image | image_url: width: 1800 }} {{ block.settings.custom_image.width | at_most: 1800 }}w{%- else -%}{{ block.settings.custom_image | image_url }} {{ block.settings.custom_image.width }}w{%- endif -%}
+              "
+              src="{{ block.settings.custom_image | image_url: width: 1200 }}"
+              {% if settings.max_page_width == 'full_width' %}
+              sizes="(max-width: 768px) {{ mobile_block_width }}, calc(100vw / {{ columns }} / 2)"
+              {% else %}
+              sizes="(max-width: 768px) {{ mobile_block_width }}, (min-width: {{ settings_page_width }}) calc({{ settings_page_width }} / {{ columns }} / 2), calc(100vw / {{ columns }} / 2)"
+              {% endif %}
+              alt="{{ block.settings.custom_image.alt | escape }}"
+              {% if should_high_priority %}
+                fetchpriority="high"
+              {% endif %}                  
+              {% if should_lazy_load %}
+                loading="lazy"
+              {% endif %}
+              {% if settings.images_loading != 'disable' %}
+                onload="this.parentNode.classList.add('lazyloaded');"
+              {% endif %}
+              draggable="false"
+              width="{{ block.settings.custom_image.width }}"
+              height="{{ block.settings.custom_image.height }}"
+              class="card__image"
+            >
+            {% if settings.images_loading != 'disable' %}
+              {% if settings.images_loading != 'fade_scale' %}
+                <div
+                  class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}"
+                  aria-hidden="true"
+                >
+                  <img
+                    alt="{{ block.settings.custom_image.alt | escape }}"
+                    src="{{ block.settings.custom_image | image_url: width: 10 }}"
+                    draggable="false"
+                    width="10"
+                    height="10"
+                  >
+                </div>
+              {% endif %}
+              </figure>
+            {% endif %}
+          {%- else -%}
+            {%- if collection.featured_image -%}
+              {% if settings.images_loading != 'disable' %}
+                <figure
+                  class="lazy-image lazy-image--{{ settings.images_loading }}"
+                  style="--desktop-asp-rat: {{ collection.featured_image.aspect_ratio }}"
+                >
+              {% endif %}
+              <img
+                srcset="
+                  {%- if collection.featured_image.width >= 165 -%}{{ collection.featured_image | image_url: width: 165 }} 165w,{%- endif -%}
+                  {%- if collection.featured_image.width >= 375 -%}{{ collection.featured_image | image_url: width: 375 }} 375w,{%- endif -%}
+                  {%- if collection.featured_image.width >= 550 -%}{{ collection.featured_image | image_url: width: 550 }} 550w,{%- endif -%}
+                  {%- if collection.featured_image.width >= 600 -%}{{ collection.featured_image | image_url: width: 600 }} 600w,{%- endif -%}
+                  {%- if collection.featured_image.width >= 750 -%}{{ collection.featured_image | image_url: width: 750 }} 750w,{%- endif -%}
+                  {%- if collection.featured_image.width >= 900 -%}{{ collection.featured_image | image_url: width: 900 }} 900w,{%- endif -%}
+                  {%- if collection.featured_image.width >= 1100 -%}{{ collection.featured_image | image_url: width: 1100 }} 1100w,{%- endif -%}
+                  {%- if collection.featured_image.width >= 1500 -%}{{ collection.featured_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+                  {%- if collection.featured_image.width > 1500 -%}{{ collection.featured_image | image_url: width: 1800 }} {{ collection.featured_image.width | at_most: 1800 }}w{%- else -%}{{ collection.featured_image | image_url }} {{ collection.featured_image.width }}w{%- endif -%}
+                "
+                src="{{ collection.featured_image | image_url: width: 1200 }}"
+                {% if settings.max_page_width == 'full_width' %}
+                  sizes="(max-width: 768px) {{ mobile_block_width }}, calc(100vw / {{ columns }} / 2)"
+                {% else %}
+                  sizes="(max-width: 768px) {{ mobile_block_width }}, (min-width: {{ settings_page_width }}) calc({{ settings_page_width }} / {{ columns }} / 2), calc(100vw / {{ columns }} / 2)"
+                {% endif %}                
+                alt="{{ collection.image.alt | escape }}"
+                {% if should_high_priority %}
+                  fetchpriority="high"
+                {% endif %}                  
+                {% if should_lazy_load %}
+                  loading="lazy"
+                {% endif %}
+                {% if settings.images_loading != 'disable' %}
+                  onload="this.parentNode.classList.add('lazyloaded');"
+                {% endif %}
+                draggable="false"
+                width="{{ collection.featured_image.width }}"
+                height="{{ collection.featured_image.height }}"
+                class="card__image"
+              >
+              {% if settings.images_loading != 'disable' %}
+                {% if settings.images_loading != 'fade_scale' %}
+                  <div
+                    class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}"
+                    aria-hidden="true"
+                  >
+                    <img
+                      alt="{{ collection.featured_image.alt | escape }}"
+                      src="{{ collection.featured_image | image_url: width: 10 }}"
+                      draggable="false"
+                      width="10"
+                      height="10"
+                    >
+                  </div>
+                {% endif %}
+                </figure>
+              {% endif %}
+            {%- else -%}
+              {{ 'collection-3' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          {%- endif -%}
+          {% comment %}theme-check-enable ImgLazyLoading{% endcomment %}
+        </div>
+        <h2 class="card__title card__title--{{ settings.typography_preset }} {% if section.settings.title_size != 'default' %}{{ section.settings.title_size }}{% else %}{% if settings.typography_preset == 'custom' %}{% if settings.collection_title_size != 'default' %}{{ settings.collection_title_size }}{% else %}{% if uppercase_title %} uppercase{% endif %}{% if bolder_title_font %} bolder-font{% endif %}{% endif %}{% endif %}{% endif %} {% if settings.center_text %} center{% endif %}">
+          {{ collection.title | escape }}
+          {%- if section.settings.show_quantity == true -%}
+            <span class="heading__details">({{ collection.all_products_count }})</span>
+          {%- endif -%}
+        </h2>
+      </div>
+    </a>
+  </div>
+{% elsif request.design_mode %}
+  <div
+    class="product-labels__item-wrapper card-js snap-align {% if is_first %}is-active{% endif %}"
+    id="Slide-{{ section.id }}"
+    class="snap-align"
+    {% if block != nil %} {{ block.shopify_attributes }} {% endif %}
+  >
+    <div
+      class="card-collection product-labels__item card-collection--media-on-side{% if section.settings.show_frame %} with-border{% endif %} card-collection--{{ id }}"
+      {% if block != nil %} {{ block.shopify_attributes }} {% endif %}
+    >
+      <div class="card-collection__wrapper">
+        <div
+          class="card__media ratio-{{ section.settings.image_ratio }} {% if block and block.settings.custom_image != blank %}card__media--custom{% endif %}"
+          {% if settings.disable_right_click %}
+            oncontextmenu="return false"
+          {% endif %}
+        >
+          {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+        <h2 class="card__title card__title--{{ settings.typography_preset }} {% if section.settings.title_size != 'default' %}{{ section.settings.title_size }}{% else %}{% if settings.typography_preset == 'custom' %}{% if settings.collection_title_size != 'default' %}{{ settings.collection_title_size }}{% else %}{% if uppercase_title %} uppercase{% endif %}{% if bolder_title_font %} bolder-font{% endif %}{% endif %}{% endif %}{% endif %} {% if settings.center_text %} center{% endif %}">
+          {{ 'sections.featured_collection.collection' | t }}
+        </h2>
+      </div>
+    </div>
+  </div>
+{% endif %}
