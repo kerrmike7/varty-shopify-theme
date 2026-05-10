@@ -1,0 +1,308 @@
+/* ==========================================================================
+   Varty All Natural — custom-styles.css
+   Bloop theme overrides for Varty brand tokens
+   Brand spec: 01_brand_tokens.md
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS custom properties (brand tokens)
+   -------------------------------------------------------------------------- */
+:root {
+  /* Primary palette */
+  --varty-indigo:        #5463B3;
+  --varty-cream:         #F0E8C8;
+  --varty-white:         #FFFFFF;
+
+  /* Extended palette */
+  --varty-yellow:        #F5D76E;
+  --varty-peach:         #F5C6A0;
+  --varty-sage:          #A4C78A;
+  --varty-forest:        #4A7C59;
+  --varty-lilac:         #C5C9E8;
+  --varty-dark-indigo:   #2D2D5E;
+  --varty-off-white:     #FAF6E8;
+
+  /* Typography fallback stacks (used when Google Fonts fail) */
+  --varty-font-display:  'Bebas Neue', 'Oswald', 'Impact', sans-serif;
+  --varty-font-body:     'DM Sans', 'Inter', 'Helvetica Neue', sans-serif;
+  --varty-font-accent:   'Oswald', 'Franklin Gothic Medium', sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   2. Global base overrides
+   -------------------------------------------------------------------------- */
+
+/* Ensure page background is always cream (supplements Bloop preset) */
+body {
+  background-color: var(--varty-cream);
+  color: var(--varty-dark-indigo);
+}
+
+/* --------------------------------------------------------------------------
+   3. Button overrides — sharp corners, Varty indigo
+   -------------------------------------------------------------------------- */
+.button,
+.btn,
+[class*="button--"],
+.shopify-payment-button__button,
+input[type="submit"] {
+  border-radius: 0 !important;
+  background-color: var(--varty-indigo);
+  color: var(--varty-white);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.button:hover,
+.btn:hover,
+[class*="button--"]:hover {
+  background-color: var(--varty-dark-indigo);
+  color: var(--varty-white);
+}
+
+/* Outlined variant */
+.button--outlined,
+.btn--outlined {
+  border-radius: 0 !important;
+  background-color: transparent;
+  border: 2px solid var(--varty-indigo);
+  color: var(--varty-indigo);
+}
+
+.button--outlined:hover,
+.btn--outlined:hover {
+  background-color: var(--varty-indigo);
+  color: var(--varty-white);
+}
+
+/* --------------------------------------------------------------------------
+   4. Header logo sizing
+   -------------------------------------------------------------------------- */
+.header__logo img,
+.header .logo img,
+[class*="logo"] img {
+  max-width: 170px;
+  width: 170px;
+  height: auto;
+}
+
+/* --------------------------------------------------------------------------
+   5. Section colour helpers
+      These supplement Bloop's native per-section colour controls.
+      Used when assigning colour schemes via theme editor.
+   -------------------------------------------------------------------------- */
+
+/* Indigo section (stats bar, brand highlight, comparison table, wholesale CTA) */
+.section--indigo {
+  background-color: var(--varty-indigo);
+  color: var(--varty-white);
+}
+
+/* Sage section (store finder) */
+.section--sage {
+  background-color: var(--varty-sage);
+  color: var(--varty-dark-indigo);
+}
+
+/* Dark indigo section (footer) */
+.section--dark-indigo {
+  background-color: var(--varty-dark-indigo);
+  color: var(--varty-white);
+}
+
+/* --------------------------------------------------------------------------
+   6. Wave / curve divider utility
+      Applied via class on empty-space sections or section wrappers.
+      SVG wave background points downward.
+   -------------------------------------------------------------------------- */
+.section-divider--wave-down {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-divider--wave-down::after {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'%3E%3Cpath fill='%23F0E8C8' d='M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   7. Comparison table section (custom-comparison-table.liquid)
+   -------------------------------------------------------------------------- */
+.varty-comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--varty-font-body);
+}
+
+.varty-comparison-table th,
+.varty-comparison-table td {
+  padding: 14px 20px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.varty-comparison-table th:first-child,
+.varty-comparison-table td:first-child {
+  text-align: left;
+}
+
+.varty-comparison-table thead th {
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 2px solid rgba(255,255,255,0.3);
+}
+
+.varty-comparison-table .check--yes {
+  color: var(--varty-yellow);
+  font-size: 18px;
+}
+
+.varty-comparison-table .check--no {
+  color: rgba(255,255,255,0.35);
+  font-size: 18px;
+}
+
+/* Mobile: stacked card layout */
+@media screen and (max-width: 749px) {
+  .varty-comparison-table--stacked thead { display: none; }
+
+  .varty-comparison-table--stacked tr {
+    display: block;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .varty-comparison-table--stacked td {
+    display: flex;
+    justify-content: space-between;
+    text-align: right;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .varty-comparison-table--stacked td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    text-align: left;
+    flex-shrink: 0;
+    margin-right: 12px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   8. Store finder section (custom-store-finder.liquid)
+   -------------------------------------------------------------------------- */
+.varty-store-finder__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.varty-store-finder__card {
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 8px;
+  padding: 20px 24px;
+  border: 1px solid rgba(255,255,255,0.7);
+}
+
+.varty-store-finder__card-name {
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 4px;
+  color: var(--varty-dark-indigo);
+}
+
+.varty-store-finder__card-address,
+.varty-store-finder__card-city {
+  font-size: 14px;
+  color: var(--varty-forest);
+}
+
+.varty-store-finder__filter {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.varty-store-finder__filter-btn {
+  padding: 8px 20px;
+  border: 2px solid var(--varty-dark-indigo);
+  background: transparent;
+  border-radius: 0;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  color: var(--varty-dark-indigo);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.varty-store-finder__filter-btn:hover,
+.varty-store-finder__filter-btn--active {
+  background-color: var(--varty-dark-indigo);
+  color: var(--varty-white);
+}
+
+.varty-store-finder__search {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 16px;
+  border: 2px solid var(--varty-dark-indigo);
+  border-radius: 0;
+  font-size: 15px;
+  background: rgba(255,255,255,0.6);
+  color: var(--varty-dark-indigo);
+  margin-bottom: 24px;
+}
+
+/* --------------------------------------------------------------------------
+   9. Announcement bar
+   -------------------------------------------------------------------------- */
+.announcement-bar {
+  background-color: var(--varty-indigo);
+  color: var(--varty-white);
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 10px 20px;
+}
+
+/* --------------------------------------------------------------------------
+   10. Footer overrides
+   -------------------------------------------------------------------------- */
+.footer {
+  background-color: var(--varty-dark-indigo);
+  color: var(--varty-white);
+}
+
+.footer a {
+  color: rgba(255,255,255,0.75);
+}
+
+.footer a:hover {
+  color: var(--varty-white);
+}
+
+/* --------------------------------------------------------------------------
+   11. No autoplay video on mobile (performance + accessibility)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 749px) {
+  video[autoplay] {
+    display: none;
+  }
+}
