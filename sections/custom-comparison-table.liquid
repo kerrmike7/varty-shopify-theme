@@ -35,7 +35,7 @@
           <th scope="col">{{ 'sections.comparison_table.feature_col' | t }}</th>
           <th scope="col">{{ varty_label }}</th>
           <th scope="col">{{ c1_label }}</th>
-          <th scope="col">{{ c2_label }}</th>
+          {% unless c2_label == blank %}<th scope="col">{{ c2_label }}</th>{% endunless %}
         </tr>
       </thead>
       <tbody>
@@ -86,13 +86,13 @@
                   <span class="{{ c1_class }}" aria-label="{{ c1_display }}">{{ c1_display }}</span>
                 {% endif %}
               </td>
-              <td data-label="{{ c2_label }}">
+              {% unless c2_label == blank %}<td data-label="{{ c2_label }}">
                 {% if c2_val != blank %}
                   {{ c2_val | escape }}
                 {% else %}
                   <span class="{{ c2_class }}" aria-label="{{ c2_display }}">{{ c2_display }}</span>
                 {% endif %}
-              </td>
+              </td>{% endunless %}
             </tr>
           {% endif %}
         {% endfor %}
