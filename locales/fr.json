@@ -126,6 +126,23 @@
     }
   },
   "sections": {
+    "homepage": {
+      "lineup_heading": "Découvrez la gamme",
+      "lineup_subheading": "Trois produits. Une promesse. Moins de 5 ingrédients.",
+      "pantry_subheading": "Nos boissons d'avoine naturelles",
+      "pantry_heading": "ENTREZ DANS NOTRE GARDE-MANGER...",
+      "pantry_cta": "Acheter Varty",
+      "store_teaser_subheading": "Disponible dans 23 points de vente au Québec",
+      "store_teaser_heading": "Bientôt près de chez vous",
+      "store_teaser_cta": "Trouver un point de vente",
+      "comparison_heading": "POURQUOI LES CANADIENS TOMBENT AMOUREUX DE VARTY",
+      "features_heading": "POURQUOI CHOISIR VARTY ?",
+      "awards_subheading": "Prix & Reconnaissance · 2024",
+      "awards_heading": "Prix Emerging Entrepreneur",
+      "awards_cta": "Lire le communiqué de presse",
+      "wholesale_heading": "Mettons quelque chose de mieux sur vos tablettes",
+      "wholesale_cta": "Soumettre une demande"
+    },
     "cart": {
       "title_cart": "Votre panier",
       "title_basket": "Votre corbeille",

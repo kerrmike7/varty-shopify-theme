@@ -126,6 +126,23 @@
     }
   },
   "sections": {
+    "homepage": {
+      "lineup_heading": "Meet the Lineup",
+      "lineup_subheading": "Three SKUs. One promise. All under 5 ingredients.",
+      "pantry_subheading": "Our Natural Oat Beverages",
+      "pantry_heading": "STEP INSIDE OUR PANTRY...",
+      "pantry_cta": "Shop Varty",
+      "store_teaser_subheading": "Available at 23 locations across Québec",
+      "store_teaser_heading": "Coming to a Store Near You",
+      "store_teaser_cta": "Find Near Me",
+      "comparison_heading": "WHY CANADIANS ARE FALLING IN LOVE WITH VARTY",
+      "features_heading": "WHY CHOOSE VARTY?",
+      "awards_subheading": "Awards & Recognition · 2024",
+      "awards_heading": "Emerging Entrepreneur Award",
+      "awards_cta": "Read the Press Release",
+      "wholesale_heading": "Let's Put Something Better on Your Shelf",
+      "wholesale_cta": "Apply Now"
+    },
     "cart": {
       "title_cart": "Your cart",
       "title_basket": "Your basket",
