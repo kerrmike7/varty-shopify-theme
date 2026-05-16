@@ -328,28 +328,36 @@
           "type": "text",
           "settings": {
             "heading": "3–4 Real Ingredients",
-            "text": "<p>Organic oats, filtered water, sea salt, and sometimes vanilla. The label reads like a pantry shelf, not a lab note.</p>"
+            "text": "<p>Organic oats, filtered water, sea salt, and sometimes vanilla. The label reads like a pantry shelf, not a lab note.</p>",
+            "button_label": "",
+            "button_link": ""
           }
         },
         "no_fillers": {
           "type": "text",
           "settings": {
             "heading": "No Gums. No Fillers.",
-            "text": "<p>No sunflower oil, carrageenan, stabilizers, or natural-flavour fog. Just the texture and taste the oats can earn on their own.</p>"
+            "text": "<p>No sunflower oil, carrageenan, stabilizers, or natural-flavour fog. Just the texture and taste the oats can earn on their own.</p>",
+            "button_label": "",
+            "button_link": ""
           }
         },
         "organic": {
           "type": "text",
           "settings": {
             "heading": "Certified Organic",
-            "text": "<p>Certified by Ecocert Canada, made for people who want the everyday carton to meet a higher standard.</p>"
+            "text": "<p>Certified by Ecocert Canada, made for people who want the everyday carton to meet a higher standard.</p>",
+            "button_label": "",
+            "button_link": ""
           }
         },
         "canada": {
           "type": "text",
           "settings": {
             "heading": "Made in Canada",
-            "text": "<p>Built for Canadian shelves, cafes, and kitchens, with a short ingredient list that travels well from morning coffee to weeknight cooking.</p>"
+            "text": "<p>Built for Canadian shelves, cafes, and kitchens, with a short ingredient list that travels well from morning coffee to weeknight cooking.</p>",
+            "button_label": "",
+            "button_link": ""
           }
         }
       },
@@ -438,14 +446,18 @@
           "type": "text",
           "settings": {
             "heading": "Futurpreneur Canada",
-            "text": "<p>National support for founders building ambitious Canadian businesses.</p>"
+            "text": "<p>National support for founders building ambitious Canadian businesses.</p>",
+            "button_label": "",
+            "button_link": ""
           }
         },
         "rbc": {
           "type": "text",
           "settings": {
             "heading": "RBC Future Launch",
-            "text": "<p>Recognition tied to the next generation of entrepreneurs and community builders.</p>"
+            "text": "<p>Recognition tied to the next generation of entrepreneurs and community builders.</p>",
+            "button_label": "",
+            "button_link": ""
           }
         }
       },
