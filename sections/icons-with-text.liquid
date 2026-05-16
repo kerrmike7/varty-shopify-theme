@@ -6,7 +6,9 @@
     --padding-top: {{ section.settings.desktop_padding_top }}px;
     --padding-bottom: {{ section.settings.desktop_padding_bottom }}px;
     --media-size: {{ section.settings.icon_or_image_size }}px;
-    {% if section.settings.color_type == 'invert' %}
+    {% if section.settings.varty_color_scheme != blank and section.settings.varty_color_scheme != 'none' %}
+      {% render 'varty-color-vars', scheme: section.settings.varty_color_scheme %}
+    {% elsif section.settings.color_type == 'invert' %}
       --layout-text-color:
         {{ settings.layout_background_color.red }},
         {{ settings.layout_background_color.green }},
@@ -733,6 +735,21 @@
         {
           "type": "header",
           "content": "t:sections.all.colors.color_type.label"
+      },
+      {
+        "type": "select",
+        "id": "varty_color_scheme",
+        "label": "Varty colour scheme",
+        "options": [
+          { "value": "none", "label": "None" },
+          { "value": "scheme_brand_purple", "label": "Brand purple" },
+          { "value": "scheme_brand_beige", "label": "Brand beige" },
+          { "value": "scheme_dark", "label": "Dark" },
+          { "value": "scheme_sku_original", "label": "SKU original" },
+          { "value": "scheme_sku_vanilla", "label": "SKU vanilla" },
+          { "value": "scheme_sku_barista", "label": "SKU barista" }
+        ],
+        "default": "none"
       },
       {
         "type": "select",

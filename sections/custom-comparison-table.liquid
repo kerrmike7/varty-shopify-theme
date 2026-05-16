@@ -5,6 +5,27 @@
   assign c2_label       = section.settings.competitor_2_label | default: 'Brand B'
   assign bg_color       = section.settings.background_color | default: '#5463B3'
   assign text_color     = section.settings.text_color | default: '#ffffff'
+
+  case section.settings.varty_color_scheme
+    when 'scheme_brand_purple'
+      assign bg_color = '#5463B3'
+      assign text_color = '#fcf2d3'
+    when 'scheme_brand_beige'
+      assign bg_color = '#fcf2d3'
+      assign text_color = '#1c1d1d'
+    when 'scheme_dark'
+      assign bg_color = '#1c1d1d'
+      assign text_color = '#fcf2d3'
+    when 'scheme_sku_original'
+      assign bg_color = '#fcf2d3'
+      assign text_color = '#2d6fb1'
+    when 'scheme_sku_vanilla'
+      assign bg_color = '#fcf2d3'
+      assign text_color = '#1c1d1d'
+    when 'scheme_sku_barista'
+      assign bg_color = '#fcf2d3'
+      assign text_color = '#1c1d1d'
+  endcase
 %}
 
 <style>
@@ -184,6 +205,21 @@
     {
       "type": "header",
       "content": "Colours"
+    },
+    {
+      "type": "select",
+      "id": "varty_color_scheme",
+      "label": "Varty colour scheme",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "scheme_brand_purple", "label": "Brand purple" },
+        { "value": "scheme_brand_beige", "label": "Brand beige" },
+        { "value": "scheme_dark", "label": "Dark" },
+        { "value": "scheme_sku_original", "label": "SKU original" },
+        { "value": "scheme_sku_vanilla", "label": "SKU vanilla" },
+        { "value": "scheme_sku_barista", "label": "SKU barista" }
+      ],
+      "default": "none"
     },
     {
       "type": "color",

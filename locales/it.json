@@ -618,6 +618,21 @@
       "subtext": "Subscribe and save 5% - free shipping in QC & ON, every time.",
       "cta": "Shop subscriptions"
     },
-    "__tbd": "<<TBD: FR strings pending Lina sign-off"
+    "__tbd": "<<TBD: FR strings pending Lina sign-off",
+    "awards": {
+      "heading": "Awards & Recognition · 2024",
+      "cta": "Press Release"
+    },
+    "faq": {
+      "heading": "Frequently Asked Questions"
+    },
+    "stockists": {
+      "heading": "Find Varty Near You",
+      "cta": "See stockists →"
+    },
+    "wholesale": {
+      "heading": "Wholesalers",
+      "cta": "Apply to Wholesale →"
+    }
   }
 }

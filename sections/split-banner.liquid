@@ -99,7 +99,9 @@
                         --banner-split-overlay-background: {{ banner_split_overlay_background }};
                         --banner-overlay-opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};
 
-                        {% if block.settings.color_type == 'default' %}
+                        {% if block.settings.varty_color_scheme != blank and block.settings.varty_color_scheme != 'none' %}
+                            {% render 'varty-color-vars', scheme: block.settings.varty_color_scheme %}
+                        {% elsif block.settings.color_type == 'default' %}
                             --layout-text-color:
                             {{ settings.layout_text_color.red }},
                             {{ settings.layout_text_color.green }}, 
@@ -258,6 +260,14 @@
                             <span disabled class="{{ block.settings.button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if block.settings.button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{%- endif -%}
                             {{ block.settings.button_label }}
                             {%- unless block.settings.link != blank -%}</span>{%- endunless -%}{%- if block.settings.link != blank -%}</a></object>{%- endif -%}
+                            </div>
+                        {%- endif -%}
+                        {%- if block.settings.secondary_button_label != blank -%}
+                            <div class="banner__button {% if block.settings.context_image != blank or block.settings.subheading != blank or block.settings.heading != blank or block.settings.text != blank or block.settings.button_label != blank %}content-wrapper--block{% endif %} {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} elem-hover elem-hover--{{ block.settings.secondary_button_style }} {% unless block.settings.secondary_button_link != blank %}disabled{% endunless %}">
+                            {%- if block.settings.secondary_button_link != blank -%}<object><a href="{{ block.settings.secondary_button_link }}" {% if block.settings.target_blank %}target="_blank"{% endif %} class="{{ block.settings.secondary_button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if block.settings.secondary_button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{%- else -%}
+                            <span disabled class="{{ block.settings.secondary_button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if block.settings.secondary_button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{%- endif -%}
+                            {{ block.settings.secondary_button_label }}
+                            {%- unless block.settings.secondary_button_link != blank -%}</span>{%- endunless -%}{%- if block.settings.secondary_button_link != blank -%}</a></object>{%- endif -%}
                             </div>
                         {%- endif -%}
                     </div>
@@ -1017,8 +1027,53 @@
                     "label": "t:sections.all.buttons.button_styles.button_style.label"
                 },
                 {
+                    "type": "text",
+                    "id": "secondary_button_label",
+                    "label": "Secondary button label"
+                },
+                {
+                    "type": "url",
+                    "id": "secondary_button_link",
+                    "label": "Secondary button link"
+                },
+                {
+                    "type": "select",
+                    "id": "secondary_button_style",
+                    "options": [
+                      {
+                        "value": "solid",
+                        "label": "t:sections.all.buttons.button_styles.options__1.label"
+                      },
+                      {
+                        "value": "outlined",
+                        "label": "t:sections.all.buttons.button_styles.options__2.label"
+                      },
+                      {
+                        "value": "link",
+                        "label": "t:sections.all.buttons.button_styles.options__3.label"
+                      }
+                    ],
+                    "default": "outlined",
+                    "label": "Secondary button style"
+                },
+                {
                     "type": "header",
                     "content": "t:sections.all.colors.content"
+                },
+                {
+                    "type": "select",
+                    "id": "varty_color_scheme",
+                    "label": "Varty colour scheme",
+                    "options": [
+                      { "value": "none", "label": "None" },
+                      { "value": "scheme_brand_purple", "label": "Brand purple" },
+                      { "value": "scheme_brand_beige", "label": "Brand beige" },
+                      { "value": "scheme_dark", "label": "Dark" },
+                      { "value": "scheme_sku_original", "label": "SKU original" },
+                      { "value": "scheme_sku_vanilla", "label": "SKU vanilla" },
+                      { "value": "scheme_sku_barista", "label": "SKU barista" }
+                    ],
+                    "default": "none"
                 },
               {
                   "type": "select",

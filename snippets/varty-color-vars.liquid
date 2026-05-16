@@ -1,0 +1,29 @@
+{%- liquid
+  assign varty_background = ''
+  assign varty_text = ''
+
+  case scheme
+    when 'scheme_brand_purple'
+      assign varty_background = '84, 99, 179'
+      assign varty_text = '252, 242, 211'
+    when 'scheme_brand_beige'
+      assign varty_background = '252, 242, 211'
+      assign varty_text = '28, 29, 29'
+    when 'scheme_dark'
+      assign varty_background = '28, 29, 29'
+      assign varty_text = '252, 242, 211'
+    when 'scheme_sku_original'
+      assign varty_background = '252, 242, 211'
+      assign varty_text = '45, 111, 177'
+    when 'scheme_sku_vanilla'
+      assign varty_background = '252, 242, 211'
+      assign varty_text = '28, 29, 29'
+    when 'scheme_sku_barista'
+      assign varty_background = '252, 242, 211'
+      assign varty_text = '28, 29, 29'
+  endcase
+-%}
+{%- if varty_background != blank -%}
+--layout-text-color: {{ varty_text }};
+--layout-background-color: {{ varty_background }};
+{%- endif -%}

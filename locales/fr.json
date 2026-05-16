@@ -600,24 +600,39 @@
       "heading": "La boisson à l'avoine qui tient vraiment ses promesses",
       "subtext": "Certifiée biologique. Trois ingrédients. Sans compromis.",
       "cta": "Découvrez nos saveurs",
-      "wholesale_link": "Grossistes - postulez ici ->"
+      "wholesale_link": "Grossistes — postulez ici →"
     },
     "trial": {
       "title": "Nouveau chez Varty ?",
-      "body": "Coffret d'essai - un de chaque. Une fois par client. Compte requis.",
-      "cta": "Essayer Varty ->",
-      "gate_no_account": "Créez un compte pour réclamer votre coffret d'essai - limité à un par client.",
-      "gate_redeemed": "Vous avez déjà essayé Varty. Composez une caisse ->"
+      "body": "Coffret d'essai — un de chaque. Une fois par client. Compte requis.",
+      "cta": "Essayer Varty →",
+      "gate_no_account": "Créez un compte pour réclamer votre coffret d'essai — limité à un par client.",
+      "gate_redeemed": "Vous avez déjà essayé Varty. Composez une caisse →"
     },
     "mix": {
       "title": "Vous hésitez ?",
-      "body": "Caisse mixte - six cartons à votre choix. Abonnez-vous et économisez 5 %, livraison gratuite.",
-      "cta": "Composez votre mélange ->"
+      "body": "Caisse mixte — six cartons à votre choix. Abonnez-vous et économisez 5 %, livraison gratuite.",
+      "cta": "Composez votre mélange →"
     },
     "subscribe": {
       "headline": "N'en manquez jamais.",
-      "subtext": "Abonnez-vous et économisez 5 % - livraison gratuite au QC et en ON, à chaque commande.",
+      "subtext": "Abonnez-vous et économisez 5 % — livraison gratuite au QC et en ON, à chaque commande.",
       "cta": "Voir les abonnements"
+    },
+    "awards": {
+      "heading": "Prix et reconnaissance · 2024",
+      "cta": "Communiqué de presse"
+    },
+    "faq": {
+      "heading": "Questions fréquentes"
+    },
+    "stockists": {
+      "heading": "Trouvez Varty près de chez vous",
+      "cta": "Voir les points de vente →"
+    },
+    "wholesale": {
+      "heading": "Grossistes",
+      "cta": "Demander un compte grossiste →"
     }
   }
 }

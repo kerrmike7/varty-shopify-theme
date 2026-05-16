@@ -21,9 +21,8 @@
         "text_size": "body_s",
         "color_type": "custom",
         "background_color_type": "solid",
-        "background_color": "#5463B3",
-        "text_color": "#fcf2d3",
-        "section_paddings": 10
+        "section_paddings": 10,
+        "varty_color_scheme": "scheme_brand_purple"
       }
     },
     "hero": {
@@ -35,17 +34,19 @@
             "center_text": true,
             "vertical_content_position": "center",
             "horizontal_content_position": "center",
-            "subheading": "Meet your new everyday oat beverage",
-            "heading": "The Oat Beverage That Actually Lives Up to the Label",
-            "text": "<p>Certified organic. Three ingredients. No compromise.</p><p><a href=\"/pages/wholesale\">Wholesalers - apply here -></a></p>",
-            "button_label": "Explore Flavours",
+            "subheading": "t:varty.hero.subheading",
+            "heading": "t:varty.hero.heading",
+            "text": "<p>Certified organic. Three ingredients. No compromise.</p>",
+            "button_label": "t:varty.hero.cta",
             "link": "#flavours",
             "button_style": "solid",
             "image": "shopify://shop_images/varty-stopmotion-01.gif",
             "overlay_opacity": 15,
             "color_type": "custom",
-            "background_color": "#fcf2d3",
-            "text_color": "#1c1d1d"
+            "varty_color_scheme": "scheme_brand_beige",
+            "secondary_button_label": "t:varty.hero.wholesale_link",
+            "secondary_button_link": "/pages/wholesale",
+            "secondary_button_style": "outlined"
           }
         }
       },
@@ -70,7 +71,7 @@
         "s1": {
           "type": "text",
           "settings": {
-            "heading": "3-4",
+            "heading": "3–4",
             "text": "<p>Ingredients per product</p>"
           }
         },
@@ -102,12 +103,11 @@
         "title_size": "heading_l",
         "color_type": "custom",
         "background_color_type": "solid",
-        "background_color": "#5463B3",
-        "text_color": "#fcf2d3",
         "desktop_padding_top": 24,
         "desktop_padding_bottom": 24,
         "mobile_padding_top": 16,
-        "mobile_padding_bottom": 16
+        "mobile_padding_bottom": 16,
+        "varty_color_scheme": "scheme_brand_purple"
       }
     },
     "product_trio": {
@@ -129,12 +129,11 @@
         "card_image_ratio": "square",
         "color_type": "custom",
         "background_color_type": "solid",
-        "background_color": "#fcf2d3",
-        "text_color": "#1c1d1d",
         "desktop_padding_top": 64,
         "desktop_padding_bottom": 64,
         "mobile_padding_top": 40,
-        "mobile_padding_bottom": 40
+        "mobile_padding_bottom": 40,
+        "varty_color_scheme": "scheme_brand_beige"
       }
     },
     "trial_mix_cards": {
@@ -143,18 +142,18 @@
         "trial": {
           "type": "text",
           "settings": {
-            "heading": "New to Varty?",
+            "heading": "t:varty.trial.title",
             "text": "<p>Trial Pack - one of each. Once per customer. Account required.</p>",
-            "button_label": "Try Varty ->",
+            "button_label": "t:varty.trial.cta",
             "button_link": "/products/trial-pack"
           }
         },
         "mix": {
           "type": "text",
           "settings": {
-            "heading": "Can't decide?",
+            "heading": "t:varty.mix.title",
             "text": "<p>Mix Case - any 6 you want. Subscribe and save 5%, free shipping.</p>",
-            "button_label": "Build your mix ->",
+            "button_label": "t:varty.mix.cta",
             "button_link": "/products/mix-case"
           }
         }
@@ -169,12 +168,11 @@
         "center_text": true,
         "color_type": "custom",
         "background_color_type": "solid",
-        "background_color": "#fcf2d3",
-        "text_color": "#1c1d1d",
         "desktop_padding_top": 64,
         "desktop_padding_bottom": 64,
         "mobile_padding_top": 40,
-        "mobile_padding_bottom": 40
+        "mobile_padding_bottom": 40,
+        "varty_color_scheme": "scheme_brand_beige"
       }
     },
     "pantry_truth": {
@@ -183,21 +181,21 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "The Oat Beverage That (Actually) Lives Up to the Label",
+            "heading": "Step Inside Our Pantry",
             "heading_size": "heading_l"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>We said oats, water, and a little salt. That is what is in the carton. No sunflower oil. No gums. No filler. Just certified organic oats, filtered water, and a pinch of sea salt - because a short ingredient list should not be a marketing claim. It should be the standard.</p><p><strong>Step inside our pantry:</strong></p><ul><li>Filtered Water</li><li>Canadian Organic Oats</li><li>Sea Salt</li><li>Sometimes Vanilla</li></ul><p>That is it.</p>"
+            "text": "<p>We said oats, water, and a little salt. That's what's in the carton. No sunflower oil. No gums. No filler. Just certified organic oats, filtered water, and a pinch of sea salt — because a short ingredient list shouldn't be a marketing claim. It should be the standard.</p><p><strong>Step inside our pantry:</strong></p><ul><li>✓ Filtered Water</li><li>✓ Canadian Organic Oats</li><li>✓ Sea Salt</li><li>✓ Sometimes Vanilla</li></ul><p>…That's it.</p>"
           }
         },
         "button": {
           "type": "button",
           "settings": {
             "button_label": "Shop Varty",
-            "button_link": "#flavours",
+            "button_link": "/collections/flavours",
             "button_style": "solid"
           }
         }
@@ -216,12 +214,11 @@
         "horizontal_text_alignment": "flex-start",
         "color_type": "custom",
         "background_color_type": "solid",
-        "background_color": "#fcf2d3",
-        "text_color": "#1c1d1d",
         "desktop_padding_top": 64,
         "desktop_padding_bottom": 64,
         "mobile_padding_top": 40,
-        "mobile_padding_bottom": 40
+        "mobile_padding_bottom": 40,
+        "varty_color_scheme": "scheme_brand_beige"
       }
     },
     "certifications": {
@@ -311,12 +308,11 @@
         "icon_or_image_size": 64,
         "color_type": "custom",
         "background_color_type": "solid",
-        "background_color": "#fcf2d3",
-        "text_color": "#1c1d1d",
         "desktop_padding_top": 24,
         "desktop_padding_bottom": 24,
         "mobile_padding_top": 16,
-        "mobile_padding_bottom": 16
+        "mobile_padding_bottom": 16,
+        "varty_color_scheme": "scheme_brand_beige"
       }
     },
     "comparison_table": {
@@ -327,7 +323,7 @@
           "settings": {
             "feature_label": "Ingredients",
             "varty_check": true,
-            "varty_value": "3-4 real organic ingredients",
+            "varty_value": "3–4 real organic ingredients",
             "c1_check": false,
             "competitor_1_value": "10+ ingredients",
             "c2_check": false,
@@ -397,12 +393,11 @@
         "competitor_1_label": "Other Oat Beverages",
         "competitor_2_label": "",
         "mobile_layout": "stacked",
-        "background_color": "#5463B3",
-        "text_color": "#fcf2d3",
         "desktop_padding_top": 64,
         "desktop_padding_bottom": 64,
         "mobile_padding_top": 40,
-        "mobile_padding_bottom": 40
+        "mobile_padding_bottom": 40,
+        "varty_color_scheme": "scheme_brand_purple"
       }
     },
     "why_varty": {
@@ -440,7 +435,7 @@
           "type": "text",
           "settings": {
             "heading": "Filler-Free",
-            "text": "<p>At Varty, you will not find any what-even-is-that ingredients here. Just 3-4 you will recognize.</p>"
+            "text": "<p>At Varty, you will not find any what-even-is-that ingredients here. Just 3–4 you will recognize.</p>"
           }
         },
         "w6": {
@@ -467,12 +462,11 @@
         "center_text": true,
         "color_type": "custom",
         "background_color_type": "solid",
-        "background_color": "#fcf2d3",
-        "text_color": "#1c1d1d",
         "desktop_padding_top": 64,
         "desktop_padding_bottom": 64,
         "mobile_padding_top": 40,
-        "mobile_padding_bottom": 40
+        "mobile_padding_bottom": 40,
+        "varty_color_scheme": "scheme_brand_beige"
       }
     },
     "subscribe_save": {
@@ -481,7 +475,7 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Never run out.",
+            "heading": "t:varty.subscribe.headline",
             "heading_size": "heading_l"
           }
         },
@@ -494,7 +488,7 @@
         "button": {
           "type": "button",
           "settings": {
-            "button_label": "Shop subscriptions",
+            "button_label": "t:varty.subscribe.cta",
             "button_link": "/collections/subscription",
             "button_style": "solid"
           }
@@ -516,12 +510,11 @@
         "horizontal_content_position": "center",
         "color_type": "custom",
         "background_color_type": "solid",
-        "background_color": "#5463B3",
-        "text_color": "#fcf2d3",
         "desktop_padding_top": 64,
         "desktop_padding_bottom": 64,
         "mobile_padding_top": 40,
-        "mobile_padding_bottom": 40
+        "mobile_padding_bottom": 40,
+        "varty_color_scheme": "scheme_brand_purple"
       }
     },
     "awards_strip": {
@@ -530,11 +523,10 @@
         "a1": {
           "type": "text",
           "settings": {
-            "heading": "2024",
-            "text": "<p>Recognised by Futurpreneur / RBC Future Launch as an emerging entrepreneur building a cleaner food system in Canada.</p>",
-            "button_label": "Press Release",
-            "button_link": "/pages/awards",
-            "tbd_note": "<<TBD: futurpreneur logo image"
+            "heading": "t:varty.awards.heading",
+            "text": "<p>Recognised by Futurpreneur / RBC Future Launch in 2024 as an emerging entrepreneur building a cleaner food system in Canada.</p>",
+            "button_label": "t:varty.awards.cta",
+            "button_link": "/pages/awards"
           }
         }
       },
@@ -547,12 +539,11 @@
         "center_text": true,
         "color_type": "custom",
         "background_color_type": "solid",
-        "background_color": "#fcf2d3",
-        "text_color": "#1c1d1d",
         "desktop_padding_top": 24,
         "desktop_padding_bottom": 24,
         "mobile_padding_top": 16,
-        "mobile_padding_bottom": 16
+        "mobile_padding_bottom": 16,
+        "varty_color_scheme": "scheme_brand_beige"
       }
     },
     "faq": {
@@ -576,7 +567,7 @@
           "type": "tab",
           "settings": {
             "heading": "Where can I buy Varty?",
-            "text": "<p>Varty is available at 22 stockist locations across Quebec and online here. Use the store finder below to locate your nearest retailer.</p>"
+            "text": "<p>Varty is available across Quebec and online here. Use the store finder below to locate your nearest retailer.</p>"
           }
         },
         "q4": {
@@ -594,16 +585,15 @@
         "q4"
       ],
       "settings": {
-        "heading": "Frequently Asked Questions",
+        "heading": "t:varty.faq.heading",
         "section_width": "wide",
         "color_type": "custom",
         "background_color_type": "solid",
-        "background_color": "#fcf2d3",
-        "text_color": "#1c1d1d",
         "desktop_padding_top": 64,
         "desktop_padding_bottom": 64,
         "mobile_padding_top": 40,
-        "mobile_padding_bottom": 40
+        "mobile_padding_bottom": 40,
+        "varty_color_scheme": "scheme_brand_beige"
       }
     },
     "wholesale_stockists_strip": {
@@ -612,18 +602,18 @@
         "stockists": {
           "type": "text",
           "settings": {
-            "heading": "Find Varty Near You",
-            "text": "<p>Available at 22 locations across Quebec.</p>",
-            "button_label": "See stockists ->",
+            "heading": "t:varty.stockists.heading",
+            "text": "<p>Available across Quebec.</p>",
+            "button_label": "t:varty.stockists.cta",
             "button_link": "/pages/where-to-find-us"
           }
         },
         "wholesale": {
           "type": "text",
           "settings": {
-            "heading": "Wholesalers",
+            "heading": "t:varty.wholesale.heading",
             "text": "<p>Bring Varty to your shelves. We partner with grocers and food service across Canada.</p>",
-            "button_label": "Apply to Wholesale ->",
+            "button_label": "t:varty.wholesale.cta",
             "button_link": "/pages/wholesale"
           }
         }
@@ -638,12 +628,11 @@
         "center_text": true,
         "color_type": "custom",
         "background_color_type": "solid",
-        "background_color": "#5463B3",
-        "text_color": "#fcf2d3",
         "desktop_padding_top": 64,
         "desktop_padding_bottom": 64,
         "mobile_padding_top": 40,
-        "mobile_padding_bottom": 40
+        "mobile_padding_bottom": 40,
+        "varty_color_scheme": "scheme_brand_purple"
       }
     }
   },
