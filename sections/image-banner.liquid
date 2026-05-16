@@ -488,6 +488,7 @@
                 {%- for block in section.blocks -%}
                     {%- case block.type -%}
                         {%- when 'subheading' -%}
+                          {%- capture subheading_text -%}{%- render 'varty-translate-setting', value: block.settings.subheading -%}{%- endcapture -%}
                           {% liquid
                             assign uppercase_font = false
                             assign bolder_font = false
@@ -499,7 +500,6 @@
                                 assign bolder_font = true
                               endif
                             endif
-                            assign subheading_text = block.settings.subheading
                             assign final_text = ''
                             assign split_text_curly = subheading_text | split: '{'
                             for part in split_text_curly
@@ -515,6 +515,7 @@
                           %} 
                             <{{ block.settings.subheading_tag }} {{ block.shopify_attributes }} class="content-subheading custom-heading {% unless forloop.first %}content-wrapper--block{% endunless %} content-subheading--{{ settings.typography_preset }} {% if block.settings.subheading_size != 'default' %}{{ block.settings.subheading_size }}{% endif %} {% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}">{{ final_text }}</{{ block.settings.subheading_tag }}>
                         {%- when 'heading' -%}   
+                          {%- capture heading_text -%}{%- render 'varty-translate-setting', value: block.settings.heading -%}{%- endcapture -%}
                           {% liquid
                             assign uppercase_font = false
                             assign bolder_font = false
@@ -526,7 +527,6 @@
                                 assign bolder_font = true
                               endif
                             endif
-                            assign heading_text = block.settings.heading
                             assign final_text = ''
                             assign split_text_curly = heading_text | split: '{'
                             for part in split_text_curly
@@ -569,6 +569,7 @@
                           {%- render 'block-image', block: block, content_wrapper_block: true, forloop_first: forloop.first -%}
                         {%- when 'button' -%}
                           {%- if block.settings.button_label != blank -%}
+                            {%- capture button_label -%}{%- render 'varty-translate-setting', value: block.settings.button_label -%}{%- endcapture -%}
                             <div {{ block.shopify_attributes }} class="block__button {% unless forloop.first %}content-wrapper--block{% endunless %} block__button--{{ block.settings.button_style }} {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} {% unless block.settings.button_link != blank %}disabled{% endunless %}">
                               {% style %}
                                 .block__button {
@@ -578,7 +579,7 @@
                               {% endstyle %}
                           {%- if block.settings.button_link != blank -%}{% if section.settings.section_link != blank %}<object>{% endif %}<a href="{{ block.settings.button_link }}" {% if block.settings.target_blank %}target="_blank"{% endif %}  class="{{ block.settings.button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if block.settings.button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{%- else -%}
                           <span disabled class="{{ block.settings.button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if block.settings.button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{%- endif -%}
-                            {{ block.settings.button_label }}
+                            {{ button_label }}
                             {%- unless block.settings.button_link != blank -%}</span>{%- endunless -%}{%- if block.settings.button_link != blank -%}</a>{% if section.settings.section_link != blank %}</object>{% endif %}{%- endif -%}
                           </div>
                         {%- endif -%}

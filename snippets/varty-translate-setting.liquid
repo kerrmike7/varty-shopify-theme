@@ -1,0 +1,8 @@
+{%- assign source = value | default: '' -%}
+{%- assign prefix = source | slice: 0, 2 -%}
+{%- if prefix == 't:' -%}
+  {%- assign translation_key = source | remove_first: 't:' -%}
+  {{- translation_key | t -}}
+{%- else -%}
+  {{- source -}}
+{%- endif -%}

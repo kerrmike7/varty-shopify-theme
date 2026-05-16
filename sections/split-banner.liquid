@@ -208,8 +208,8 @@
                             {%- render 'context-image', block_or_section: block, double_hover: true, content_wrapper_block: true, forloop_first: forloop.first -%}
                         {%- endif -%}
                         {%- if block.settings.subheading != blank -%}
+                            {%- capture subheading_text -%}{%- render 'varty-translate-setting', value: block.settings.subheading -%}{%- endcapture -%}
                             {% liquid
-                                assign subheading_text = block.settings.subheading
                                 assign final_text = ''
                                 assign split_text_curly = subheading_text | split: '{'
                                 for part in split_text_curly
@@ -226,8 +226,8 @@
                             <{{ section.settings.subheading_tag }} class="content-subheading custom-heading {% if block.settings.context_image != blank %}content-wrapper--block{% endif %} content-subheading--{{ settings.typography_preset }} {% if section.settings.subheading_size != 'default' %}{{ section.settings.subheading_size }}{% else %}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_label %} uppercase{% endif %}{% if settings.bolder_font_label %} bolder-font{% endif %}{% endif %}{% endif %} {% if settings.dim_text %}dim{% endif %}">{{ final_text }}</{{ section.settings.subheading_tag }}>
                         {%- endif -%}
                         {%- if block.settings.heading != blank -%}
+                            {%- capture heading_text -%}{%- render 'varty-translate-setting', value: block.settings.heading -%}{%- endcapture -%}
                             {% liquid
-                                assign heading_text = block.settings.heading
                                 assign final_text = ''
                                 assign split_text_curly = heading_text | split: '{'
                                 for part in split_text_curly
@@ -255,18 +255,20 @@
                             </div>
                         {%- endif -%}
                         {%- if block.settings.button_label != blank -%}
+                            {%- capture button_label -%}{%- render 'varty-translate-setting', value: block.settings.button_label -%}{%- endcapture -%}
                             <div class="banner__button {% if block.settings.context_image != blank or block.settings.subheading != blank or block.settings.heading != blank or block.settings.text != blank %}content-wrapper--block{% endif %} {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} elem-hover elem-hover--{{ block.settings.button_style }} {% unless block.settings.link != blank %}disabled{% endunless %}">
                             {%- if block.settings.link != blank -%}<object><a href="{{ block.settings.link }}" {% if block.settings.target_blank %}target="_blank"{% endif %} class="{{ block.settings.button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if block.settings.button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{%- else -%}
                             <span disabled class="{{ block.settings.button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if block.settings.button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{%- endif -%}
-                            {{ block.settings.button_label }}
+                            {{ button_label }}
                             {%- unless block.settings.link != blank -%}</span>{%- endunless -%}{%- if block.settings.link != blank -%}</a></object>{%- endif -%}
                             </div>
                         {%- endif -%}
                         {%- if block.settings.secondary_button_label != blank -%}
+                            {%- capture secondary_button_label -%}{%- render 'varty-translate-setting', value: block.settings.secondary_button_label -%}{%- endcapture -%}
                             <div class="banner__button {% if block.settings.context_image != blank or block.settings.subheading != blank or block.settings.heading != blank or block.settings.text != blank or block.settings.button_label != blank %}content-wrapper--block{% endif %} {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} elem-hover elem-hover--{{ block.settings.secondary_button_style }} {% unless block.settings.secondary_button_link != blank %}disabled{% endunless %}">
                             {%- if block.settings.secondary_button_link != blank -%}<object><a href="{{ block.settings.secondary_button_link }}" {% if block.settings.target_blank %}target="_blank"{% endif %} class="{{ block.settings.secondary_button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if block.settings.secondary_button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{%- else -%}
                             <span disabled class="{{ block.settings.secondary_button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if block.settings.secondary_button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{%- endif -%}
-                            {{ block.settings.secondary_button_label }}
+                            {{ secondary_button_label }}
                             {%- unless block.settings.secondary_button_link != blank -%}</span>{%- endunless -%}{%- if block.settings.secondary_button_link != blank -%}</a></object>{%- endif -%}
                             </div>
                         {%- endif -%}

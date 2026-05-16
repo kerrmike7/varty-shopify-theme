@@ -94,8 +94,8 @@
     {% if section.settings.subheading != blank or section.settings.heading != blank or section.settings.text != blank %}
       <div class="collapsible-tabs__header">
         {% if section.settings.subheading != blank %}
+          {%- capture subheading_text -%}{%- render 'varty-translate-setting', value: section.settings.subheading -%}{%- endcapture -%}
           {% liquid
-            assign subheading_text = section.settings.subheading
             assign final_text = ''
             assign split_text_curly = subheading_text | split: '{'
             for part in split_text_curly
@@ -112,8 +112,8 @@
           <{{ section.settings.subheading_tag }} class="collapsible-tabs__subheading custom-heading collapsible-tabs__subheading--{{ settings.typography_preset }} {% if section.settings.subheading_size != 'default' %}{{ section.settings.subheading_size }}{% else %}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_label %} uppercase{% endif %}{% if settings.bolder_font_label %} bolder-font{% endif %}{% endif %}{% endif %}">{{ final_text }}</{{ section.settings.subheading_tag }}>
         {% endif %}
         {% if section.settings.heading != blank %}
+          {%- capture heading_text -%}{%- render 'varty-translate-setting', value: section.settings.heading -%}{%- endcapture -%}
           {% liquid
-            assign heading_text = section.settings.heading
             assign final_text = ''
             assign split_text_curly = heading_text | split: '{'
             for part in split_text_curly
@@ -188,7 +188,7 @@
         {%- endfor -%}
       </div>
     {% endif %}
-    {% if section.settings.button_label != blank %}<{% if section.settings.button_link != blank %}a href="{{ section.settings.button_link }}" {% if section.settings.target_blank %}target="_blank"{% endif %} {% else %}span disabled{% endif %} class="collapsible-tabs__button {{ section.settings.button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if section.settings.button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{{ section.settings.button_label }}</{% if section.settings.button_link != blank %}a{% else %}span{% endif %}>{% endif %}
+        {% if section.settings.button_label != blank %}{%- capture button_label -%}{%- render 'varty-translate-setting', value: section.settings.button_label -%}{%- endcapture -%}<{% if section.settings.button_link != blank %}a href="{{ section.settings.button_link }}" {% if section.settings.target_blank %}target="_blank"{% endif %} {% else %}span disabled{% endif %} class="collapsible-tabs__button {{ section.settings.button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if section.settings.button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{{ button_label }}</{% if section.settings.button_link != blank %}a{% else %}span{% endif %}>{% endif %}
   </div>
 </div>
 {% endif %}

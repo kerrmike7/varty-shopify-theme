@@ -156,8 +156,8 @@
     {% if section.settings.heading != blank or section.settings.subheading != blank %}  
         <div class="multicolumn__header product-labels__header {% if section.settings.center_text %}center-elements{% endif %} {% if disable_layout_margins %} section-padding--{{ settings.white_space }}{% endif %}">
             {% if section.settings.subheading != blank %}
+                {%- capture subheading_text -%}{%- render 'varty-translate-setting', value: section.settings.subheading -%}{%- endcapture -%}
                 {% liquid
-                    assign subheading_text = section.settings.subheading
                     assign final_text = ''
                     assign split_text_curly = subheading_text | split: '{'
                     for part in split_text_curly
@@ -175,8 +175,8 @@
                 {% if disable_layout_margins %} {% if settings.max_page_width == '1400' or settings.max_page_width == '1200' %}page-width {% endif %} page-width--{{ settings.max_page_width }}{% endif %}">{{ final_text }}</{{ section.settings.subheading_tag }}>
             {% endif %}
             {% if section.settings.heading != blank %}
+                {%- capture heading_text -%}{%- render 'varty-translate-setting', value: section.settings.heading -%}{%- endcapture -%}
                 {% liquid
-                    assign heading_text = section.settings.heading
                     assign final_text = ''
                     assign split_text_curly = heading_text | split: '{'
                     for part in split_text_curly
@@ -281,8 +281,8 @@
                                 {% if block.settings.heading != blank or block.settings.text != blank or block.settings.button_label != blank %}
                                 <div class="multicolumn__info" style="text-align: {% if section.settings.center_text %}center{% else %}start{% endif %};">
                                     {% if block.settings.heading != blank %}
+                                        {%- capture heading_text -%}{%- render 'varty-translate-setting', value: block.settings.heading -%}{%- endcapture -%}
                                         {% liquid
-                                            assign heading_text = block.settings.heading
                                             assign final_text = ''
                                             assign split_text_curly = heading_text | split: '{'
                                             for part in split_text_curly
@@ -312,10 +312,11 @@
                                         </div>
                                     {% endif %}
                                     {% if block.settings.button_label != blank %}
+                                        {%- capture button_label -%}{%- render 'varty-translate-setting', value: block.settings.button_label -%}{%- endcapture -%}
                                         <div class="multicolumn__card-button {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} elem-hover elem-hover--{{ section.settings.button_style }} {% unless block.settings.button_link != blank %}disabled{% endunless %}">
                                             {% if block.settings.button_link != blank %}{% if block.settings.full_block_clickable %}<object>{% endif %}<a href="{{ block.settings.button_link }}" {% if block.settings.target_blank %}target="_blank"{% endif %} class="{{ section.settings.button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if section.settings.button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{% else %}
                                             <span disabled class="{{ section.settings.button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if section.settings.button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{% endif %}
-                                            {{ block.settings.button_label }}
+                                            {{ button_label }}
                                             {% if block.settings.button_link == blank %}</span>{% else %}</a>{% if block.settings.full_block_clickable %}</object>{% endif %}{% endif %}
                                         </div>
                                     {% endif %}
@@ -356,8 +357,8 @@
                                 {% if block.settings.heading != blank or block.settings.text != blank or block.settings.button_label != blank %}
                                 <div class="multicolumn__info" style="text-align: {% if section.settings.center_text %}center{% else %}start{% endif %};">
                                     {% if block.settings.heading != blank %}
+                                        {%- capture heading_text -%}{%- render 'varty-translate-setting', value: block.settings.heading -%}{%- endcapture -%}
                                         {% liquid
-                                            assign heading_text = block.settings.heading
                                             assign final_text = ''
                                             assign split_text_curly = heading_text | split: '{'
                                             for part in split_text_curly
@@ -387,10 +388,11 @@
                                         </div>
                                     {% endif %}
                                     {% if block.settings.button_label != blank %}
+                                        {%- capture button_label -%}{%- render 'varty-translate-setting', value: block.settings.button_label -%}{%- endcapture -%}
                                         <div class="multicolumn__card-button {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} elem-hover elem-hover--{{ section.settings.button_style }} {% unless block.settings.button_link != blank %}disabled{% endunless %}">
                                             {% if block.settings.button_link != blank %}{% if block.settings.full_block_clickable %}<object>{% endif %}<a href="{{ block.settings.button_link }}" {% if block.settings.target_blank %}target="_blank"{% endif %} class="{{ section.settings.button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if section.settings.button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{% else %}
                                             <span disabled class="{{ section.settings.button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if section.settings.button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{% endif %}
-                                            {{ block.settings.button_label }}
+                                            {{ button_label }}
                                             {% if block.settings.button_link == blank %}</span>{% else %}</a>{% if block.settings.full_block_clickable %}</object>{% endif %}{% endif %}
                                         </div>
                                     {% endif %}
@@ -408,8 +410,8 @@
                             {% if block.settings.full_block_clickable and block.settings.button_link != blank %}<double-hover><a href="{{ block.settings.button_link }}" {% if block.settings.target_blank %}target="_blank"{% endif %} class="multicolumn__item-link double-hover">{% endif %}
                                 <div class="multicolumn__info" style="text-align: {% if section.settings.center_text %}center{% else %}start{% endif %};">
                                     {% if block.settings.heading != blank %}
+                                        {%- capture heading_text -%}{%- render 'varty-translate-setting', value: block.settings.heading -%}{%- endcapture -%}
                                         {% liquid
-                                            assign heading_text = block.settings.heading
                                             assign final_text = ''
                                             assign split_text_curly = heading_text | split: '{'
                                             for part in split_text_curly
@@ -439,10 +441,11 @@
                                         </div>
                                     {% endif %}
                                     {% if block.settings.button_label != blank %}
+                                        {%- capture button_label -%}{%- render 'varty-translate-setting', value: block.settings.button_label -%}{%- endcapture -%}
                                         <div class="multicolumn__card-button {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} elem-hover elem-hover--{{ section.settings.button_style }} {% unless block.settings.button_link != blank %}disabled{% endunless %}">
                                             {% if block.settings.button_link != blank %}{% if block.settings.full_block_clickable %}<object>{% endif %}<a href="{{ block.settings.button_link }}" {% if block.settings.target_blank %}target="_blank"{% endif %} class="{{ section.settings.button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if section.settings.button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{% else %}
                                             <span disabled class="{{ section.settings.button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if section.settings.button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{% endif %}
-                                            {{ block.settings.button_label }}
+                                            {{ button_label }}
                                             {% if block.settings.button_link == blank %}</span>{% else %}</a>{% if block.settings.full_block_clickable %}</object>{% endif %}{% endif %}
                                         </div>
                                     {% endif %}
