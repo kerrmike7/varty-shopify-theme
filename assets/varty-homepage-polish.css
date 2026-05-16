@@ -93,20 +93,23 @@
 }
 
 [id$="__stats_bar"] {
-  border-top: 2px solid #1c1d1d;
-  border-bottom: 2px solid #1c1d1d;
+  background: #5463b3 !important;
+  background-color: #5463b3 !important;
+  border-top: 2px solid #fcf2d3;
+  border-bottom: 2px solid #fcf2d3;
+  color: #fcf2d3 !important;
 }
 
 [id$="__stats_bar"] .product-labels__container {
-  border-left: 1px solid rgba(28, 29, 29, 0.28);
+  border-left: 1px solid rgba(252, 242, 211, 0.34);
 }
 
 [id$="__stats_bar"] .product-labels__item-wrapper {
-  border-right: 1px solid rgba(28, 29, 29, 0.28);
+  border-right: 1px solid rgba(252, 242, 211, 0.34);
 }
 
 [id$="__stats_bar"] .multicolumn__item {
-  min-height: 210px;
+  min-height: 220px;
   justify-content: center;
   padding: 32px 24px;
 }
@@ -115,12 +118,14 @@
   font-size: 72px;
   line-height: 0.95;
   letter-spacing: 0;
-  color: #1c1d1d;
+  color: #fcf2d3;
 }
 
 [id$="__stats_bar"] .multicolumn__card-text {
   margin-top: 14px;
   font-size: 18px;
+  color: #fcf2d3;
+  font-weight: 700;
 }
 
 [id$="__why_varty"] {
@@ -268,6 +273,6 @@
   }
 
   [id$="__stats_bar"] .product-labels__item-wrapper + .product-labels__item-wrapper {
-    border-top: 1px solid rgba(28, 29, 29, 0.28);
+    border-top: 1px solid rgba(252, 242, 211, 0.34);
   }
 }
