@@ -1,0 +1,173 @@
+{% style %}
+.search-modal,
+.search-modal + .overlay {
+  --layout-background-color: 
+    {{ settings.layout_background_color.red }},
+    {{ settings.layout_background_color.green }},
+    {{ settings.layout_background_color.blue }};
+  --layout-text-color: 
+    {{ settings.layout_text_color.red }},
+    {{ settings.layout_text_color.green }}, 
+    {{ settings.layout_text_color.blue }};
+}
+{% endstyle %}
+{%- liquid
+    assign uniqueId = "now" | date: "%N" | modulo: 1000
+    assign sectionId = "Search-In-Modal-" | append: uniqueId
+    assign hasRecommendation = false
+  
+    if settings.search_recommendation != blank and settings.search_recommendation.links != blank
+      assign hasRecommendation = true
+    endif
+  -%}
+  <div class="search-modal modal__content" role="dialog" aria-modal="true" aria-label="{{ 'templates.search.search_title' | t }}">
+    {%- liquid 
+      if settings.typography_preset == 'avant_garde'
+        assign weight = settings.accent_icon_weight
+        if settings.swap_fonts
+            assign weight = settings.base_icon_weight
+        endif
+      else 
+          assign weight =  settings.base_icon_weight
+          if settings.swap_fonts
+              assign weight = settings.accent_icon_weight
+          endif
+      endif
+      if settings.typography_preset == 'custom'
+        assign weight = settings.custom_icon_weight
+      endif
+    -%}
+    {% style %}
+      .search-modal.modal__content {
+        --layout-text-color:
+          {{ settings.layout_text_color.red }},
+          {{ settings.layout_text_color.green }}, 
+          {{ settings.layout_text_color.blue }};
+        --layout-background-color:
+          {{ settings.layout_background_color.red }},
+          {{ settings.layout_background_color.green }},
+          {{ settings.layout_background_color.blue }};
+        }
+      {% endstyle %}
+    <div class="scroll-area hide-scrollbar">
+      <div class="button-wrapper {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %}">
+        <button type="button" class="button-close close-popup">
+            {% assign icon_full = 'cross' | append: "-" | append: weight %}
+            {% render 'icon', icon: icon_full %}  
+        </button>
+      </div>
+      <div class="search-modal__container">
+        <div class="search-modal__content section-padding--{{ settings.white_space }}" tabindex="-1">
+          {%- if settings.enable_quick_search -%}
+            <predictive-search class="predictive-search-container" data-loading-text="{{ 'accessibility.loading' | t }}">
+          {%- endif -%}
+            <form action="{{ routes.search_url }}" method="get" role="search" class="search-modal__form">
+              <div class="search-field__wrapper">
+                <div class="field search-field">
+                  <input
+                    id="{{ sectionId }}"
+                    class="search__input search__input--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.uppercase_heading_xs %} uppercase{% endif %}{% if settings.bolder_font_heading_xs %} bolder-font{% endif %}{% endif %} field__input search-field__text"
+                    type="search"
+                    name="q"
+                    value="{{ search.terms | escape }}"
+                    placeholder="{{ 'templates.search.placeholder' | t }}"
+                    autocomplete="off"
+                    {%- if settings.enable_quick_search %}
+                      role="combobox"
+                      aria-haspopup="listbox"
+                      aria-autocomplete="list"
+                      autocorrect="off"
+                      autocomplete="off"
+                      autocapitalize="off"
+                      spellcheck="false" 
+                    {% endif -%}
+                  />
+                  <label class="visually-hidden" for="{{ sectionId }}">{{ 'templates.search.search_title' | t }}</label>
+                  <input type="hidden" name="options[prefix]" value="last"/>
+                  {%- if settings.enable_quick_search -%}
+                    <div class="predictive-search__loading-state">
+                      
+                    </div>
+                  {%- endif -%}     
+      
+                  {%- if settings.enable_quick_search -%}
+                    <button type="reset" class="search__button search__button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %} focus-inset">
+                      <div class="loading-overlay__spinner hidden">
+                        <svg aria-hidden="true" focusable="false" class="spinner" width="24px" height="24px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                          <circle class="path" fill="none" stroke-width="5" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                        </svg>
+                      </div> 
+                      <span class="search__button-text hidden">{{ 'templates.search.clear' | t }}</span>
+                    </button>
+                  {%- endif -%}
+                  <button type="submit" class="search-field__icon" aria-label="{{ 'templates.search.search_for' | t }}" tabindex="0">
+                    <span class="search__icon">
+                      {% assign icon_full = 'search' | append: "-" | append: weight %}
+                      {% render 'icon', icon: icon_full %}  
+                    </span>
+                  </button>
+                </div>
+              </div>
+              {% if settings.menu != blank %}
+              {% liquid
+                assign uppercase_link = false
+                assign bolder_link = false
+                if settings.typography_preset == 'custom' and settings.search_link_size == 'default' and settings.navigation_item_size == 'default'
+                  if settings.uppercase_body_s
+                    assign uppercase_link = true
+                  endif
+                  if settings.bolder_font_body_s
+                    assign bolder_link= true
+                  endif
+                endif
+                assign uppercase_title = false
+                assign bolder_title = false
+                if settings.typography_preset == 'custom' and settings.search_title_size == 'default'
+                  if settings.uppercase_body_s
+                    assign uppercase_title = true
+                  endif
+                  if settings.bolder_font_body_s
+                    assign bolder_title = true
+                  endif
+                endif
+
+                assign animationDuration = 0
+                if settings.animation_duration == '0.3'
+                    assign animationDuration = 'basic'
+                elsif settings.animation_duration == '0.5'
+                    assign animationDuration = 'sophisticated'
+                endif
+                assign animated_drawer_item_index = 0
+              %}
+                <div class="search__menu">
+                  {% if settings.show_menu_title %}<h4 class="search__menu-title menu__item--{{ settings.typography_preset }} {% if settings.search_title_size != 'default' %}{{ settings.search_title_size }}{% endif %}{% if uppercase_title %} uppercase{% endif %}{% if bolder_title %} bolder-font{% endif %}">{{ 'templates.search.menu_title' | t }}</h4>{% endif %}
+                  <ul class="search__menu-list {% if settings.enable_drawer_animations %} stagger stagger--{{ animationDuration }}{% endif %}">
+                    {%- for link in settings.menu.links limit: 5 -%}
+                      {% liquid
+                        if settings.enable_drawer_animations
+                          assign animated_drawer_item_index = animated_drawer_item_index | plus: 1
+                        endif
+                      %}
+                      <li class="search-modal__menu-item menu__item menu__item--{{ settings.typography_preset }} {% if settings.search_link_size != 'default' %}{{ settings.search_link_size }}{% else %}{% if settings.navigation_item_size != 'default' %} {{ settings.navigation_item_size }}{% endif %}{% endif %}{% if uppercase_link %} uppercase{% endif %}{% if bolder_link %} bolder-font{% endif %} {% if settings.enable_drawer_animations %} stagger__item{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: {{ animated_drawer_item_index }};"{% endif %}>
+                        <a href="{{ link.url }}">
+                          {{ link.title }}
+                        </a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              {% endif %}
+              
+              {%- if settings.enable_quick_search -%}
+                <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search></div>
+                <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+              {%- endif -%}
+            </form>
+          {%- if settings.enable_quick_search -%}
+            </predictive-search>
+          {%- endif -%} 
+        </div>
+      </div>
+    </div>
+  </div> 
+  

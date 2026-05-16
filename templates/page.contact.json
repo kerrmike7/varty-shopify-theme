@@ -1,0 +1,162 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_banner_R3pUgK": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_gAm3fV": {
+          "type": "heading",
+          "settings": {
+            "heading": "Contact us",
+            "heading_size": "heading_xl",
+            "heading_tag": "h2",
+            "heading_color": "solid",
+            "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)"
+          }
+        }
+      },
+      "block_order": [
+        "heading_gAm3fV"
+      ],
+      "settings": {
+        "content_on_hover": false,
+        "height_mode": "percents",
+        "desktop_height": 100,
+        "desktop_pixels_height": 600,
+        "section_link": "",
+        "target_blank": false,
+        "section_width": "overlap",
+        "center_text": true,
+        "vertical_content_position": "end",
+        "horizontal_content_position": "flex-start",
+        "narrow_content": true,
+        "fill_content": false,
+        "overlay_color": "#000000",
+        "overlay_gradient": "linear-gradient(358deg, rgba(85, 95, 18, 0.8), rgba(211, 210, 137, 0.1) 100%)",
+        "overlay_opacity": 10,
+        "mobile_height": 35,
+        "mobile_pixels_height": 400,
+        "content_under_image": false,
+        "only_first_image": false,
+        "color_type": "invert",
+        "background_color_type": "solid",
+        "background_gradient": "",
+        "background_color": "#ffffff",
+        "text_color": "#000000",
+        "desktop_padding_top": -160,
+        "desktop_padding_bottom": -160,
+        "mobile_padding_top": -80,
+        "mobile_padding_bottom": -80
+      }
+    },
+    "83462665-e357-4caf-9a75-170b1ba75762": {
+      "type": "contact-form",
+      "blocks": {
+        "template--15091190628467__83462665-e357-4caf-9a75-170b1ba75762-168362428402bf1696-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "Our store",
+            "heading_size": "heading_l",
+            "heading_tag": "h3",
+            "heading_color": "gradient",
+            "heading_gradient": "linear-gradient(90deg, rgba(219, 40, 40, 1) 50%, rgba(255, 166, 73, 1) 100%)"
+          }
+        },
+        "template--15091190628467__83462665-e357-4caf-9a75-170b1ba75762-168362428402bf1696-0": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "Subheading",
+            "subheading_size": "default",
+            "subheading_tag": "h4"
+          }
+        },
+        "template--15091190628467__83462665-e357-4caf-9a75-170b1ba75762-168362428402bf1696-2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share your address and payment methods. Describe how to find your local store or how long it might take you to respond to an email. Attach a photo of the entrance.</p>",
+            "dim_text": true,
+            "text_size": "default"
+          }
+        },
+        "template--15091190628467__83462665-e357-4caf-9a75-170b1ba75762-168362428402bf1696-3": {
+          "type": "contacts",
+          "settings": {
+            "contacts_subheading": "Contact",
+            "subheading_size": "heading_xs",
+            "contacts_1": "hello@shopifystore.com",
+            "contacts_1_type": "email",
+            "contacts_2": "123-456-7890",
+            "contacts_2_type": "phone_number",
+            "use_accent_color": false,
+            "contacts_description": "Mon–Fri, 10AM–9PM",
+            "text_size": "body_m"
+          }
+        },
+        "70c6565c-0451-426e-8eda-fe6422f41c8d": {
+          "type": "social_media",
+          "settings": {
+            "social_media_heading": "",
+            "social_media_heading_size": "default",
+            "social_media_style": "logo_in_circle",
+            "use_accent_color": false
+          }
+        },
+        "2cca0ed0-35ae-4827-8f70-c85b75943ebe": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5445.531852302012!2d-122.40733128805128!3d37.78928521248307!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858089ce1b5ea9%3A0xd114369f1c32541e!2sShopify%20San%20Francisco%20Office!5e0!3m2!1sen!2spl!4v1686302012498!5m2!1sen!2spl\" width=\"100%\" height=\"400\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
+          }
+        }
+      },
+      "block_order": [
+        "template--15091190628467__83462665-e357-4caf-9a75-170b1ba75762-168362428402bf1696-1",
+        "template--15091190628467__83462665-e357-4caf-9a75-170b1ba75762-168362428402bf1696-0",
+        "template--15091190628467__83462665-e357-4caf-9a75-170b1ba75762-168362428402bf1696-2",
+        "template--15091190628467__83462665-e357-4caf-9a75-170b1ba75762-168362428402bf1696-3",
+        "70c6565c-0451-426e-8eda-fe6422f41c8d",
+        "2cca0ed0-35ae-4827-8f70-c85b75943ebe"
+      ],
+      "settings": {
+        "swap_position": false,
+        "narrow_content": false,
+        "heading": "Get in touch",
+        "heading_size": "heading_m",
+        "heading_tag": "h2",
+        "heading_color": "solid",
+        "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
+        "show_container": true,
+        "name_placeholder": "",
+        "email_placeholder": "",
+        "show_phone": true,
+        "phone_placeholder": "",
+        "show_message": true,
+        "message_placeholder": "",
+        "enable_checkbox": true,
+        "make_required": true,
+        "checkbox_label": "<p>I have read and agreed to the <a href=\"/policies/privacy-policy\">Terms and Conditions</a>.</p>",
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_gradient": "",
+        "background_color": "#fffdf3",
+        "text_color": "#db2828",
+        "desktop_padding_top": 12,
+        "desktop_padding_bottom": -40,
+        "mobile_padding_top": -40,
+        "mobile_padding_bottom": -32
+      }
+    }
+  },
+  "order": [
+    "image_banner_R3pUgK",
+    "83462665-e357-4caf-9a75-170b1ba75762"
+  ]
+}

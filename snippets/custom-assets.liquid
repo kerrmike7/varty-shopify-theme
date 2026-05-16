@@ -1,0 +1,9 @@
+{% assign useCustomScript = false %}
+{% if useCustomScript %}
+    <script src="{{ 'custom-script.js' | asset_url }}" defer="defer"></script>
+{% endif %}
+
+{% assign useCustomStyles = false %}
+{% if useCustomStyles %}
+    {{ 'custom-styles.css' | asset_url | stylesheet_tag }}
+{% endif %}

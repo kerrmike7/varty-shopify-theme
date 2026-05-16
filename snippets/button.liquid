@@ -1,0 +1,14 @@
+{%- if block.settings.button_label != blank -%}
+    <div {{ block.shopify_attributes }} class="block__button {% if content_wrapper_block %}{% unless forloop_first %}content-wrapper--block{% endunless %}{% endif %} block__button--{{ block.settings.button_style }} {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} {% unless block.settings.button_link != blank %}disabled{% endunless %}">
+      {% style %}
+        .block__button {
+            width: fit-content;
+            display: inline-block;
+        }
+      {% endstyle %}
+  {%- if block.settings.button_link != blank -%}<a href="{{ block.settings.button_link }}" {% if block.settings.target_blank %}target="_blank"{% endif %}  class="{{ block.settings.button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if block.settings.button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{%- else -%}
+  <span disabled class="{{ block.settings.button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if block.settings.button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{%- endif -%}
+    {{ block.settings.button_label }}
+    {%- unless block.settings.button_link != blank -%}</span>{%- endunless -%}{%- if block.settings.button_link != blank -%}</a>{%- endif -%}
+  </div>
+{%- endif -%}

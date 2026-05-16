@@ -1,0 +1,481 @@
+{%- liquid
+    assign sort_by = results.sort_by | default: results.default_sort_by
+    assign total_active_values = 0
+    assign price_range_active = false
+    if results.url
+      assign results_url = results.url
+    else 
+      assign terms = results.terms | escape
+      assign results_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by=' | append: sort_by
+    endif
+
+    if enable_filtering
+      assign price_range_active = false
+      for filter in results.filters
+          if filter.type == "price_range"
+            if filter.min_value.value != nil or filter.max_value.value != nil
+              assign price_range_active = true
+            endif
+          endif
+          assign total_active_values = total_active_values | plus: filter.active_values.size
+      endfor
+    endif
+    assign default_presentation = 'text'
+
+  if settings.typography_preset == 'classic' or settings.typography_preset == 'duet'
+    assign weight_accordion_title = settings.accent_icon_weight
+    if settings.swap_fonts
+        assign weight_accordion_title = settings.base_icon_weight
+    endif
+  else 
+    assign weight_accordion_title =  settings.base_icon_weight
+    if settings.swap_fonts
+        assign weight_accordion_title = settings.accent_icon_weight
+    endif
+  endif
+
+  if settings.typography_preset == 'brutalist' or settings.typography_preset == 'duet' or settings.typography_preset == 'avant_garde' or settings.typography_preset == 'contrast'
+    assign secondary_weight = settings.accent_icon_weight
+    if settings.swap_fonts
+        assign secondary_weight = settings.base_icon_weight
+    endif
+  else 
+    assign secondary_weight =  settings.base_icon_weight
+    if settings.swap_fonts
+        assign secondary_weight = settings.accent_icon_weight
+    endif
+  endif
+  if settings.typography_preset == 'custom'
+    assign close_weight = settings.custom_icon_weight
+    assign weight_accordion_title = settings.custom_icon_weight
+    assign secondary_weight = settings.custom_icon_weight
+    assign select_weight = settings.custom_icon_weight
+  endif
+
+  assign uppercase_body_s = false
+  assign bolder_body_s = false
+  if settings.typography_preset == 'custom'
+      if settings.uppercase_body_s 
+          assign uppercase_body_s = true
+      endif
+      if settings.bolder_font_body_s 
+          assign bolder_body_s = true
+      endif
+  endif
+-%}
+
+
+{% if settings.navigation_layout == 'header_based' and section.settings.desktop_filter_style == 'vertical' %}
+  <modal-dialog class="snippet-facets only-desktop snippet-facets--vertical">
+    <div class="facets-container-drawer facets-container-drawer--{{ settings.white_space }} {% if settings.show_lines %}lines{% endif %}">
+      <facet-drawer class="mobile-facets__wrapper {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} {% if settings.center_text %}mobile-facets__wrapper--center{% endif %}">
+          <div class="filter-form">
+            <facet-filters-form>
+                <form id="FacetFiltersForm" class="mobile-facets">
+                    <div class="active-facets active-facets-desktop">
+                      <div class="product-count label--{{ settings.typography_preset }} {% if total_products_heading_size != 'default' %}{{ total_products_heading_size }}{% endif %}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}" role="status">
+                        <p class="product-count__text">
+                          {%- liquid
+                            if results.results_count
+                              if results.results_count == 1
+                                echo 'templates.search.results_with_count.one' | t: terms: results.terms, count: results.results_count
+                              else
+                                echo 'templates.search.results_with_count.other' | t: terms: results.terms, count: results.results_count
+                              endif
+                            elsif results.products_count == results.all_products_count
+                              if results.products_count == 1
+                                echo 'products.facets.product_count_simple.one' | t: count: results.products_count
+                              else
+                                echo 'products.facets.product_count_simple.other' | t: count: results.products_count
+                              endif
+                            else
+                              if results.products_count == 1
+                              echo 'products.facets.product_count.one' | t: product_count: results.products_count, count: results.all_products_count
+                              else
+                              echo 'products.facets.product_count.other' | t: product_count: results.products_count, count: results.all_products_count
+                              endif
+                            endif
+                          -%}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="mobile-facets__inner">
+                      <div class="mobile-facets__main">
+                        {%- if enable_filtering -%}
+                          {%- for filter in results.filters -%}
+                            {% liquid 
+                              assign presentation = filter.presentation | default: default_presentation
+                            %}
+                            {% case filter.type %}
+                            {% when 'boolean' or 'list' %}
+                                {% liquid 
+                                  assign color_swatches_label_1 = settings.color_swatches_label_1 | downcase 
+                                  assign color_swatches_label_2 = settings.color_swatches_label_2 | downcase 
+                                  assign color_swatches_label_3 = settings.color_swatches_label_3 | downcase 
+                                  assign thumbnail_swatches_label_1 = settings.thumbnail_swatches_label_1 | downcase
+                                  assign thumbnail_swatches_label_2 = settings.thumbnail_swatches_label_2 | downcase
+                                  assign thumbnail_swatches_label_3 = settings.thumbnail_swatches_label_3 | downcase
+                                 
+                                  assign filter_label = filter.label | downcase
+                                  assign swatch = false
+                                  assign thumbnail = false
+
+                                  if presentation == 'image'
+                                      assign thumbnail = true
+                                  endif
+                                  if presentation == 'swatch'
+                                      assign swatch = true
+                                  endif
+
+                                  if presentation == 'text'
+                                    if filter_label == color_swatches_label_1 or filter_label == color_swatches_label_2 or filter_label == color_swatches_label_3
+                                      assign swatch = true
+                                    endif
+                                    if filter_label == thumbnail_swatches_label_1 or filter_label == thumbnail_swatches_label_2 or filter_label == thumbnail_swatches_label_3
+                                      assign thumbnail = true
+                                    endif
+                                    if swatch and thumbnail
+                                      assign swatch = false
+                                      assign thumbnail = true
+                                    endif
+                                  endif
+                                  
+                                  assign tooltip = false
+                                  if swatch and settings.color_swatches_layout == 'grid'
+                                    assign tooltip = true
+                                  elsif thumbnail and settings.show_thumbnail_name == false
+                                    assign tooltip = true
+                                  endif
+
+                                  assign open_collapsible_labels = section.settings.open_collapsible_label | downcase | strip | split: ','
+                                  assign open_collapsible = false
+                                  for label in open_collapsible_labels
+                                      assign label_strip = label | strip
+                                      if filter_label == label_strip
+                                          assign open_collapsible = true
+                                          break
+                                      endif
+                                  endfor
+                                %}
+                                {% if section.settings.enable_availability_toggle and filter.label == 'Availability' %}
+                                  <div class="filter-toggle accordion-toggle no-js-hidden filter-group mobile-facets__details js-filter js-filter--availability" id="Details-vertical-mobile-{{ filter.param_name | escape }}-{{ section.id }}" data-index="mobile-{{ forloop.index }}" tabindex="0">
+                                    <div class="mobile-facets__summary accordion__summary" role="button" tabindex="0">
+                                      <span class="summary__title">
+                                        <span class="summary__title-name filter-group-label filter-group-label--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}{% if filter_tab_size != 'default' %} {{ filter_tab_size }}{% endif %}">
+                                          <div class="facet-toggle">
+                                              <label class="toggle-switch">
+                                                <span class="toggle-switch__control">
+                                                  <input
+                                                    type="checkbox"
+                                                    id="inStockToggle-vertical"
+                                                    name="{{ filter.param_name }}"
+                                                    value="1"
+                                                    {% if filter.active_values.size > 0 %}
+                                                      checked
+                                                    {% endif %}
+                                                  >
+                                                  <span class="toggle-slider"></span>
+                                                </span>
+                                                <span class="toggle-label">
+                                                  {{ 'products.facets.in_stock_only' | t }}
+                                                  <span class="toggle-count">
+                                                    ({{ filter.values.first.count }})
+                                                  </span>
+                                                </span>
+                                              </label>
+                                        </div> 
+                                        </span>
+                                      </span>
+                                    </div>
+                                  </div>
+                            {% else %}
+                                <accordion-block data-index="mobile-{{ forloop.index }}">
+                                  <div class="accordion-toggle no-js-hidden filter-group mobile-facets__details js-filter{% if open_collapsible %} open_collapsible is-open{% endif %}" id="Details-vertical-mobile-{{ filter.param_name | escape }}-{{ section.id }}" data-index="mobile-{{ forloop.index }}" tabindex="0">
+                                    <div class="mobile-facets__summary accordion__summary" role="button" tabindex="0">
+                                      <span class="summary__title">
+                                        <span class="summary__title-name filter-group-label filter-group-label--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}{% if filter_tab_size != 'default' %} {{ filter_tab_size }}{% endif %}">
+                                        <span class="mobile-facets__title">
+                                          {{ filter.label | escape }}
+                                        </span>
+                                          <div class="filter-group-icon filter-group-icon--plus">
+                                            {% assign icon_full = 'plus' | append: "-" | append: weight_accordion_title %}
+                                            {% render 'icon', icon: icon_full %}  
+                                          </div>
+                                          <div class="filter-group-icon filter-group-icon--minus">
+                                            {% assign icon_full = 'minus' | append: "-" | append: weight_accordion_title %}
+                                            {% render 'icon', icon: icon_full %}  
+                                          </div>
+                                        </span>
+                                      </span>
+                                    </div>
+                                    <div class="accordion__panel mobile-facets__submenu filter-group-display">
+                                    {%- if filter.operator == 'AND' and section.settings.filter_and_operator_subtitle != blank -%}
+                                      <span class="facets__and-helptext {% if settings.dim_text %}dim{% endif %} filter-group-label--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}{% if filter_text_size != 'default' %} {{ filter_text_size }}{% endif %}">
+                                        {{ section.settings.filter_and_operator_subtitle }}
+                                      </span>
+                                    {%- endif -%}
+                                      {% liquid 
+                                        assign grid_view = false
+                                        if swatch and settings.color_swatches_layout == 'grid'
+                                          assign grid_view = true
+                                        elsif thumbnail
+                                          assign grid_view = true
+                                        endif
+                                      %}
+                                      <ul class="accordion__content mobile-facets__list list-unstyled {% if grid_view %}filter-group-display__grid{% else %}filter-group-display__list{% endif %}" role="list">
+                                        {%- for value in filter.values -%}
+                                          {%- liquid
+                                            assign is_color = false
+                                            if swatch or thumbnail
+                                              assign swatch_file_extension = 'png'
+                                              assign swatch_trigger = 'products.product.color_swatch_tag' | t | downcase
+                                            endif
+                                           
+                                            if presentation == 'text'
+                                              capture color_value
+                                                render 'filename-normalize', value: value.value
+                                              endcapture
+                                              
+                                              capture color_file_name
+                                                  render 'filename-normalize', value: value.value, keep_case: true
+                                              endcapture
+                                              assign color_file_name = color_file_name | append: '.' | append: swatch_file_extension
+
+                                              assign color_swatch_fallback = value.value | downcase | split: ' ' | last
+                                              assign img_file = images[color_file_name] | downcase
+                                              assign color_image = images[color_file_name] | split: '/' | last | file_img_url: '100x100' | prepend: 'https:' | split: '?' | first
+                                            endif
+                                            assign swatch_value = null
+                                            if presentation == 'swatch'
+                                              if value.swatch.image
+                                                assign image_url = value.swatch.image | image_url: width: 50
+                                                assign swatch_value = 'url(' | append: image_url | append: ')'
+                                                assign swatch_focal_point = value.swatch.image.presentation.focal_point
+                                              elsif value.swatch.color
+                                                assign swatch_value = 'rgb(' | append: value.swatch.color.rgb | append: ')'
+                                              endif
+                                            endif
+                                            if presentation == 'image'
+                                              assign image_url = value.image | image_url: width: 300
+                                              assign swatch_value = 'url(' | append: image_url | append: ')'
+                                            endif
+                                          -%}
+                                          <li class="mobile-facets__item list-menu__item filter-group-display__list-item {% if forloop.index > 10 %}show-more-item hidden{% endif %}{% if thumbnail %} mobile-facets__item--thumbnail{% endif %}">
+                                            <label for="Filter-{{ filter.label | escape }}-vertical-mobile-{{ forloop.index }}" class="mobile-facets__label{% if value.count == 0 and value.active == false %} mobile-facets__label--disabled{% endif %} filter-group-option input--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}{% if filter_text_size != 'default' %}{% if tooltip %} {{ filter_text_size }}{% endif %}{% endif %} {% if thumbnail %}filter-group-option--thumbnail{% endif %}" {% if tooltip %}title="{{ value.label | escape }}"{% endif %}>
+                                              <input class="mobile-facets__checkbox {% if swatch %} mobile-facets__swatch{% elsif thumbnail %}{% if settings.thumbnail_image_ratio == 'original' %} ratio-square{% else %} ratio-{{ settings.thumbnail_image_ratio }}{% endif %} mobile-facets__thumbnail{% if settings.enable_shadow %} mobile-facets__thumbnail--shadow{% endif %}{% unless settings.show_thumbnail_name %} no-label{% endunless %}{% endif %}{% if thumbnail and filter.presentation != 'swatch' %} mobile-facets__thumbnail--options{% unless settings.show_thumbnail_name %} no-label{% endunless %}{% endif %} 
+                                                {% if presentation == 'swatch' or presentation == 'image' %} filter-from-app{% endif %}"
+                                                type="checkbox"
+                                                name="{{ value.param_name }}"
+                                                value="{{ value.value }}"
+                                                id="Filter-{{ filter.label | escape }}-vertical-mobile-{{ forloop.index }}"
+                                                {% if value.active %}checked="checked"{% endif %}
+                                                {% if value.count == 0 and value.active == false %}disabled="disabled"{% endif %}
+                                                {%  if presentation == 'swatch' or presentation == 'image' and value.image %}style="--swatch--background: {{ swatch_value }};{{ value.swatch.color.first }};--swatch-focal-point: {% if swatch_focal_point %}{{ swatch_focal_point }}{% else %}center{% endif %};"{% else %}
+                                                {% if swatch or grid_view %}style="{% if images[color_file_name] != blank and img_file contains color_value %}--swatch-background-image: url({{ color_image }});{% else %} --swatch-background-color: {{ color_swatch_fallback | default: 'white' }};{% endif %}"{% endif %}{% endif %}
+                                              />
+                                                {% if swatch and settings.color_swatches_layout == 'list' %}
+                                                  <span class="mobile-facets__swatch--svg mobile-facets__swatch--svg-list">{% render 'icon-accordion-2', icon: 'short-checkmark' %}</span>
+                                                {% elsif swatch and settings.color_swatches_layout == 'grid' %}
+                                                  <span class="mobile-facets__swatch--svg mobile-facets__swatch--svg-grid">{% render 'icon-accordion-2', icon: 'swatch-checkmark' %}</span>
+                                                {% endif %}
+                                                {% unless tooltip %}<span class="swatch__label{% if filter_text_size != 'default' %} {{ filter_text_size }}{% endif %}">{{ value.label | escape }} ({{ value.count }})</span>{% endunless %}
+                                            </label>
+                                          </li>
+                                        {%- endfor -%}
+                                      </ul>
+                                      {% if filter.values.size > 10 %}
+                                        <show-more-button>
+                                          <button
+                                            class="button-show-more no-js-hidden{% if filter_text_size != 'default' %} {{ filter_text_size }}{% endif %}"
+                                            id="Show-More-vertical-{{ forloop.index }}-{{ section.id }}"
+                                            type="button">
+                                            <span class="label-show label-show--more label--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}{% if filter_text_size != 'default' %} {{ filter_text_size }}{% endif %} dim">{{ 'products.facets.show_more' | t -}}</span>
+                                            <span class="label-show label-show--less hidden label--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}{% if filter_text_size != 'default' %} {{ filter_text_size }}{% endif %} dim">{{ 'products.facets.show_less' | t -}}</span>
+                                          </button>
+                                        </show-more-button>
+                                      {% endif %}
+                                    </div>
+                                  </div>
+                                </accordion-block>
+                            {% endif %}
+                            {% when 'price_range' %}
+                              <accordion-block data-index="mobile-{{ forloop.index }}">
+                                {% liquid
+                                  assign zero_decimal_currencies = 'BIF,CLP,DJF,GNF,JPY,KMF,KRW,MGA,PYG,RWF,UGX,VND,VUV,XAF,XOF,XPF' | split: ','
+                                  assign three_decimal_currencies = 'BHD,IQD,JOD,KWD,LYD,OMR,TND' | split: ','
+                                  assign currency_code = cart.currency.iso_code
+                                  assign subunit_divisor = 100.0
+                                  assign price_step = '0.01'
+                                  if zero_decimal_currencies contains currency_code
+                                    assign subunit_divisor = 1.0
+                                    assign price_step = '1'
+                                  elsif three_decimal_currencies contains currency_code
+                                    assign subunit_divisor = 1000.0
+                                    assign price_step = '0.001'
+                                  endif
+
+                                  assign open_collapsible_labels = section.settings.open_collapsible_label | downcase | strip | split: ','
+                                  assign open_collapsible = false
+                                  assign filter_label = filter.label | downcase
+                                  for label in open_collapsible_labels
+                                      assign label_strip = label | strip
+                                      if filter_label == label_strip
+                                          assign open_collapsible = true
+                                          break
+                                      endif
+                                  endfor
+                                %}
+                                <div class="accordion-toggle no-js-hidden filter-group mobile-facets__details js-filter{% if open_collapsible %} open_collapsible is-open{% endif %}" id="Details-vertical-mobile-{{ filter.param_name | escape }}-{{ section.id }}" data-index="mobile-{{ forloop.index }}" tabindex="0">
+                                  <div class="mobile-facets__summary accordion__summary" role="button">
+                                    <span class="summary__title">
+                                      <span class="summary__title-name filter-group-label filter-group-label--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}{% if filter_tab_size != 'default' %} {{ filter_tab_size }}{% endif %}">{{ filter.label | escape }}
+                                      <div class="filter-group-icon filter-group-icon--plus">
+                                        {% assign icon_full = 'plus' | append: "-" | append: weight_accordion_title %}
+                                        {% render 'icon', icon: icon_full %}  
+                                      </div>
+                                      <div class="filter-group-icon filter-group-icon--minus">
+                                        {% assign icon_full = 'minus' | append: "-" | append: weight_accordion_title %}
+                                        {% render 'icon', icon: icon_full %}  
+                                      </div>
+                                      </span>
+                                    </span>
+                                  </div>
+                                  <div class="accordion__panel mobile-facets__submenu">
+                                    <div class="facets__price">
+                                      <div class="fields">
+                                        <div class="field">
+                                          <label class="field__label filter-group-option label--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}{% if filter_text_size != 'default' %} {{ filter_text_size }}{% endif %}" for="Mobile-Vertical-Filter-{{ filter.label | escape }}-GTE">{{ 'products.facets.from' | t }}</label>
+                                          <div class="field__item" dir="ltr">
+                                            <span class="field__currency input--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}{% if filter_text_size != 'default' %} {{ filter_text_size }}{% endif %}">{{ cart.currency.symbol }}</span>
+                                            <input class="field__input input--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}{% if filter_text_size != 'default' %} {{ filter_text_size }}{% endif %}"
+                                              name="{{ filter.min_value.param_name }}"
+                                              id="Mobile-Vertical-Filter-{{ filter.label | escape }}-GTE"
+                                              type="number"
+                                              dir="ltr"
+                                              placeholder="0"
+                                              inputmode="decimal"
+                                              min="0"
+                                              step="{{ price_step }}"
+                                              max="{{ filter.range_max | divided_by: subunit_divisor }}"
+                                              {%- if filter.min_value.value -%}
+                                                value="{{ filter.min_value.value | divided_by: subunit_divisor }}"
+                                              {%- endif -%}
+                                            />
+                                          </div>
+                                        </div>
+                                        <div class="field">
+                                          <label class="field__label filter-group-option label--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}{% if filter_text_size != 'default' %} {{ filter_text_size }}{% endif %}" for="Mobile-Vertical-Filter-{{ filter.label | escape }}-LTE">{{ 'products.facets.to' | t }}</label>
+                                            <div class="field__item" dir="ltr">
+                                              <span class="field__currency input--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}{% if filter_text_size != 'default' %} {{ filter_text_size }}{% endif %}">{{ cart.currency.symbol }}</span>
+                                              <input class="field__input input--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}{% if filter_text_size != 'default' %} {{ filter_text_size }}{% endif %}"
+                                                name="{{ filter.max_value.param_name }}"
+                                                id="Mobile-Vertical-Filter-{{ filter.label | escape }}-LTE"
+                                                type="number"
+                                                dir="ltr"
+                                                inputmode="decimal"
+                                                placeholder="{{ filter.range_max | divided_by: subunit_divisor | ceil }}"
+                                                min="0"
+                                                step="{{ price_step }}"
+                                                max="{{ filter.range_max | divided_by: subunit_divisor }}"
+                                                {%- if filter.max_value.value -%}
+                                                  value="{{ filter.max_value.value | divided_by: subunit_divisor }}"
+                                                {%- endif -%}
+                                              />
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </accordion-block>
+                            {% endcase %}
+                          {%- endfor -%}
+                        {%- endif -%}
+                        {%- if enable_sorting -%}
+                          <div class="mobile-facets__details js-filter{% if filter_type == 'drawer' %} medium-hide large-up-hide{% endif %}" id="Details-vertical-mobile-{{ filter.param_name | escape }}-{{ section.id }}" data-index="mobile-{{ forloop.index }}">
+                            <div class="mobile-facets__summary">
+                              <div class="mobile-facets__sort">
+                                <label class="filter-group-label--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}{% if filter_text_size != 'default' %} {{ filter_text_size }}{% endif %}" for="SortBy-vertical-mobile">{{ 'products.facets.sort_by_label' | t }}</label>
+                                <div class="select">
+                                  <select name="sort_by" class="select__select input--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}{% if filter_text_size != 'default' %} {{ filter_text_size }}{% endif %}" id="SortBy-vertical-mobile" aria-describedby="a11y-refresh-page-message">
+                                    {%- for option in results.sort_options -%}
+                                      <option value="{{ option.value | escape }}"{% if option.value == sort_by %} selected="selected"{% endif %}>{{ option.name | escape }}</option>
+                                    {%- endfor -%}
+                                  </select>
+                                  <div class="select-icon">
+                                    {% assign icon_full = 'close-chevron' | append: "-" | append: select_weight %}
+                                    {% render 'icon', icon: icon_full %}  
+                                </div>  
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        {%- endif -%}
+                      </div>
+                      {%- if search.performed -%}<input type="hidden" name="q" value="{{ search.terms | escape }}"/>{%- endif -%}
+                      {%- if collection.current_vendor or collection.current_type -%}<input type="hidden" name="q" value="{{ collection.current_vendor | escape }}{{ collection.current_type | escape }}"/>{%- endif -%}
+                    </div>
+                  {%- if results.terms -%}
+                    <input type="hidden" name="q" value="{{ results.terms | escape }}"/>
+                    <input name="options[prefix]" type="hidden" value="last"/>
+                  {%- endif -%}
+                  {%- if results.current_vendor or results.current_type -%}
+                    <input type="hidden" name="q" value="{{ results.current_vendor | escape }}{{ results.current_type | escape }}"/>
+                  {%- endif -%}
+                  <div class="facet-filters-form-line">
+                    <div class="active-facets active-facets--result">
+                      {%- for filter in results.filters -%}
+                        {%- for value in filter.active_values -%}
+                          <facet-remove>
+                            <a class="active-facets__button hover-opacity button--{{ settings.typography_preset }} {% if filter_text_size != 'default' %} {{ filter_text_size }}{% else %}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}{% endif %}" href="{{ value.url_to_remove }}">
+                              {{ filter.label | escape }}: {{ value.label | escape }}
+                              {% assign icon_full = 'cross' | append: "-" | append: secondary_weight %}
+                              {% render 'icon', icon: icon_full %}  
+                            </a>
+                          </facet-remove>
+                        {%- endfor -%}
+                        {% if filter.type == "price_range" %}
+                          {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
+                            <facet-remove>
+                              <a class="active-facets__button hover-opacity button--{{ settings.typography_preset }} {% if filter_text_size != 'default' %} {{ filter_text_size }}{% else %}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}{% endif %}" href="{{ filter.url_to_remove }}">
+                                {{ filter.label | escape }}: <span class="ltr-text">{% if filter.min_value.value != nil %}{{ filter.min_value.value | money_without_trailing_zeros }}{% else %}{{ 0 | money_without_trailing_zeros }}{% endif %}—{% if filter.max_value.value != nil %}{{ filter.max_value.value | money_without_trailing_zeros }}{% else %}{{ filter.range_max | money_without_trailing_zeros }}{% endif %}</span>
+                                {% assign icon_full = 'cross' | append: "-" | append: secondary_weight %}
+                                {% render 'icon', icon: icon_full %}  
+                              </a>
+                            </facet-remove>
+                          {%- endif -%}
+                        {% endif %}
+                      {%- endfor -%}
+                      <facet-remove class="facets__clear-all">
+                        <a href="{{ results_url }}" class="active-facets__button hover-opacity active-facets__button--clear dim button--{{ settings.typography_preset }} {% if filter_text_size != 'default' %} {{ filter_text_size }}{% else %}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}{% endif %}">
+                          {{ 'products.facets.clear_all' | t }}
+                        </a>
+                      </facet-remove>
+                    </div>
+                    <div class="facets__wrapper">
+                      <div class="sorting">
+                        <div class="facet-filters__field">
+                          <label class="filter-group-label filter-group-label--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}{% if filter_text_size != 'default' %} {{ filter_text_size }}{% endif %}" for="SortBy-vertical">{{ 'products.facets.sort_by_label' | t }}</label>
+                          <div class="select">
+                            {%- assign sort_by = results.sort_by | default: results.default_sort_by -%}
+                            <select name="sort_by" class="facet-filters__sort select__select caption-large sorting__select input--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}{% if filter_text_size != 'default' %} {{ filter_text_size }}{% endif %}" id="SortBy-vertical" aria-describedby="a11y-refresh-page-message">
+                              {%- for option in results.sort_options -%}
+                                <option value="{{ option.value | escape }}"{% if option.value == sort_by %} selected="selected"{% endif %}>{{ option.name | escape }}</option>
+                              {%- endfor -%}
+                            </select>
+                            <div class="select-icon">
+                              {% assign icon_full = 'close-chevron' | append: "-" | append: select_weight %}
+                              {% render 'icon', icon: icon_full %}  
+                          </div>  
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+            </facet-filters-form>
+          </div>
+      </facet-drawer>
+    </div>
+  </modal-dialog>
+{% endif %}

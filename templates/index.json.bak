@@ -1,0 +1,769 @@
+{
+  "sections": {
+    "announcement_bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_shipping": {
+          "type": "text",
+          "settings": {
+            "desktop_text": "<p>Orders ship every Tuesday. Place yours by midnight Sunday ET to make this week's run.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "announcement_shipping"
+      ],
+      "settings": {
+        "enable_autoplay": false,
+        "autoplay_speed": 5,
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_color": "#5463B3",
+        "text_color": "#ffffff"
+      }
+    },
+    "hero_split": {
+      "type": "split-banner",
+      "blocks": {
+        "banner_wholesaler": {
+          "type": "banner",
+          "settings": {
+            "target_blank": false,
+            "center_text": true,
+            "vertical_content_position": "center",
+            "horizontal_content_position": "center",
+            "overlay_color": "#5463B3",
+            "overlay_opacity": 20,
+            "subheading": "For retailers",
+            "heading": "I'm a Wholesaler",
+            "heading_color": "solid",
+            "heading_gradient": "linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(101,101,101,1) 100%)",
+            "text": "",
+            "button_label": "Apply to Wholesale",
+            "button_link": "/pages/wholesale",
+            "button_style": "solid",
+            "color_type": "custom",
+            "background_color": "#F0E8C8",
+            "text_color": "#2D2D5E"
+          }
+        },
+        "banner_customer": {
+          "type": "banner",
+          "settings": {
+            "target_blank": false,
+            "center_text": true,
+            "vertical_content_position": "center",
+            "horizontal_content_position": "center",
+            "overlay_color": "#F0E8C8",
+            "overlay_opacity": 10,
+            "subheading": "For customers",
+            "heading": "I'm a Customer",
+            "heading_color": "solid",
+            "heading_gradient": "linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(101,101,101,1) 100%)",
+            "text": "",
+            "button_label": "Find Near Me",
+            "button_link": "/pages/where-to-find-us",
+            "button_style": "outlined",
+            "color_type": "custom",
+            "background_color": "#5463B3",
+            "text_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "banner_wholesaler",
+        "banner_customer"
+      ],
+      "settings": {
+        "content_on_hover": false,
+        "height_mode": "percents",
+        "desktop_height": 80,
+        "mobile_height": 60,
+        "section_width": "full-width",
+        "narrow_content": true,
+        "heading_size": "heading_l",
+        "heading_tag": "h1",
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
+    },
+    "stats_bar": {
+      "type": "multicolumn",
+      "blocks": {
+        "stat_ingredients": {
+          "type": "image",
+          "settings": {
+            "title": "3–4",
+            "text": "<p>Ingredients per product</p>"
+          }
+        },
+        "stat_additives": {
+          "type": "image",
+          "settings": {
+            "title": "0%",
+            "text": "<p>Gums, fillers, or additives</p>"
+          }
+        },
+        "stat_canadian": {
+          "type": "image",
+          "settings": {
+            "title": "100%",
+            "text": "<p>Canadian Made</p>"
+          }
+        }
+      },
+      "block_order": [
+        "stat_ingredients",
+        "stat_additives",
+        "stat_canadian"
+      ],
+      "settings": {
+        "heading": "",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_color": "#5463B3",
+        "text_color": "#ffffff",
+        "desktop_padding_top": 48,
+        "desktop_padding_bottom": 48,
+        "mobile_padding_top": 32,
+        "mobile_padding_bottom": 32
+      }
+    },
+    "certifications_strip": {
+      "type": "icons-with-text",
+      "blocks": {
+        "cert_organic": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "heading": "Certified Organic",
+            "text": ""
+          }
+        },
+        "cert_no_flavours": {
+          "type": "item",
+          "settings": {
+            "icon": "plant",
+            "heading": "No Artificial Flavours",
+            "text": ""
+          }
+        },
+        "cert_carrageenan": {
+          "type": "item",
+          "settings": {
+            "icon": "nut-free",
+            "heading": "Carrageenan Free",
+            "text": ""
+          }
+        },
+        "cert_gluten": {
+          "type": "item",
+          "settings": {
+            "icon": "gluten-free",
+            "heading": "Gluten Free",
+            "text": ""
+          }
+        },
+        "cert_dairy": {
+          "type": "item",
+          "settings": {
+            "icon": "dairy-free",
+            "heading": "Dairy Free",
+            "text": ""
+          }
+        },
+        "cert_nongmo": {
+          "type": "item",
+          "settings": {
+            "icon": "checkmark",
+            "heading": "Non GMO",
+            "text": ""
+          }
+        },
+        "cert_kosher": {
+          "type": "item",
+          "settings": {
+            "icon": "star",
+            "heading": "Kosher",
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "cert_organic",
+        "cert_no_flavours",
+        "cert_carrageenan",
+        "cert_gluten",
+        "cert_dairy",
+        "cert_nongmo",
+        "cert_kosher"
+      ],
+      "settings": {
+        "heading": "",
+        "desktop_grid_type": "7",
+        "mobile_layout": "2",
+        "mobile_navigation": "arrows",
+        "center_text": true,
+        "icon_or_image_size": 60,
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_color": "#ffffff",
+        "text_color": "#5463B3",
+        "desktop_padding_top": 48,
+        "desktop_padding_bottom": 48,
+        "mobile_padding_top": 32,
+        "mobile_padding_bottom": 32
+      }
+    },
+    "split_content_1": {
+      "type": "media-with-text",
+      "blocks": {
+        "subheading_s1": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Clean ingredients",
+            "subheading_size": "default",
+            "subheading_tag": "h3"
+          }
+        },
+        "heading_s1": {
+          "type": "heading",
+          "settings": {
+            "heading": "We Said Oats, Water, and a Little Salt. That's What's in the Carton.",
+            "heading_size": "heading_m",
+            "heading_tag": "h2",
+            "heading_color": "solid",
+            "heading_gradient": "linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(101,101,101,1) 100%)"
+          }
+        },
+        "text_s1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Three clean ingredients. Nothing else. No sunflower oil, no gums, no filler. Just certified organic oats, filtered water, and a pinch of sea salt. Because a short ingredient list shouldn't be a marketing claim — it should be the standard.</p>",
+            "dim_text": false,
+            "text_size": "default"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_s1",
+        "heading_s1",
+        "text_s1"
+      ],
+      "settings": {
+        "section_width": "wide",
+        "swap_media": false,
+        "media_size": "half",
+        "media_ratio": "portrait",
+        "narrow_content": true,
+        "vertical_text_alignment": "center",
+        "horizontal_text_alignment": "flex-start",
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_color": "#F0E8C8",
+        "text_color": "#2D2D5E",
+        "fill_section": false,
+        "desktop_padding_top": 80,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48
+      }
+    },
+    "features_grid": {
+      "type": "multicolumn",
+      "blocks": {
+        "feat_organic": {
+          "type": "image",
+          "settings": {
+            "title": "Certified Organic",
+            "text": "<p>Ecocert-certified from field to carton.</p>"
+          }
+        },
+        "feat_ingredients": {
+          "type": "image",
+          "settings": {
+            "title": "Three Ingredients",
+            "text": "<p>Oats, water, sea salt. Full stop.</p>"
+          }
+        },
+        "feat_canadian": {
+          "type": "image",
+          "settings": {
+            "title": "Canadian Made",
+            "text": "<p>Produced in Montréal, QC.</p>"
+          }
+        },
+        "feat_barista": {
+          "type": "image",
+          "settings": {
+            "title": "Barista Ready",
+            "text": "<p>Froths perfectly. Made for serious coffee.</p>"
+          }
+        },
+        "feat_stable": {
+          "type": "image",
+          "settings": {
+            "title": "Shelf-Stable",
+            "text": "<p>1L Tetra Pak. No fridge needed until opened.</p>"
+          }
+        },
+        "feat_nofillers": {
+          "type": "image",
+          "settings": {
+            "title": "No Fillers",
+            "text": "<p>No sunflower oil. No gums. No asterisks.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feat_organic",
+        "feat_ingredients",
+        "feat_canadian",
+        "feat_barista",
+        "feat_stable",
+        "feat_nofillers"
+      ],
+      "settings": {
+        "heading": "Why Choose Varty?",
+        "columns_desktop": 3,
+        "image_ratio": "adapt",
+        "column_alignment": "center",
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_color": "#F0E8C8",
+        "text_color": "#2D2D5E",
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 48
+      }
+    },
+    "split_content_2": {
+      "type": "media-with-text",
+      "blocks": {
+        "subheading_s2": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Step inside our pantry",
+            "subheading_size": "default",
+            "subheading_tag": "h3"
+          }
+        },
+        "heading_s2": {
+          "type": "heading",
+          "settings": {
+            "heading": "Clean ingredients. Certified standards. Full transparency.",
+            "heading_size": "heading_m",
+            "heading_tag": "h2",
+            "heading_color": "solid",
+            "heading_gradient": "linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(101,101,101,1) 100%)"
+          }
+        },
+        "text_s2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Every carton of Varty is made with oats we can trace and certifications we can back up. Certified organic by Ecocert. No hidden ingredients, no asterisks. Just clean oat beverage, made right in Canada.</p>",
+            "dim_text": false,
+            "text_size": "default"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_s2",
+        "heading_s2",
+        "text_s2"
+      ],
+      "settings": {
+        "section_width": "wide",
+        "swap_media": true,
+        "media_size": "half",
+        "media_ratio": "portrait",
+        "narrow_content": true,
+        "vertical_text_alignment": "center",
+        "horizontal_text_alignment": "flex-start",
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_color": "#ffffff",
+        "text_color": "#2D2D5E",
+        "fill_section": false,
+        "desktop_padding_top": 80,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48
+      }
+    },
+    "brand_highlight": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_highlight": {
+          "type": "heading",
+          "settings": {
+            "heading": "Delicious, creamy, clean — the oat beverage you've been waiting for.",
+            "heading_size": "heading_l",
+            "heading_tag": "h2",
+            "heading_color": "solid",
+            "heading_gradient": "linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(101,101,101,1) 100%)"
+          }
+        },
+        "button_shop": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop Varty",
+            "button_link": "/collections/all",
+            "target_blank": false,
+            "button_style": "solid"
+          }
+        }
+      },
+      "block_order": [
+        "heading_highlight",
+        "button_shop"
+      ],
+      "settings": {
+        "section_width": "narrow",
+        "center_text": true,
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_color": "#5463B3",
+        "text_color": "#ffffff",
+        "desktop_padding_top": 100,
+        "desktop_padding_bottom": 100,
+        "mobile_padding_top": 64,
+        "mobile_padding_bottom": 64
+      }
+    },
+    "awards_section": {
+      "type": "image-banner",
+      "blocks": {
+        "subheading_award": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Awards & Recognition",
+            "subheading_size": "default",
+            "subheading_tag": "h3"
+          }
+        },
+        "heading_award": {
+          "type": "heading",
+          "settings": {
+            "heading": "2024 Emerging Entrepreneur Award",
+            "heading_size": "heading_m",
+            "heading_tag": "h2",
+            "heading_color": "solid",
+            "heading_gradient": "linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(101,101,101,1) 100%)"
+          }
+        },
+        "button_award": {
+          "type": "button",
+          "settings": {
+            "button_label": "Learn more",
+            "button_link": "/pages/awards",
+            "target_blank": false,
+            "button_style": "outlined"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_award",
+        "heading_award",
+        "button_award"
+      ],
+      "settings": {
+        "height_mode": "percents",
+        "desktop_height": 50,
+        "mobile_height": 40,
+        "section_width": "wide",
+        "center_text": true,
+        "vertical_content_position": "center",
+        "overlay_color": "#F0E8C8",
+        "overlay_opacity": 70,
+        "color_type": "custom",
+        "background_color": "#F0E8C8",
+        "text_color": "#2D2D5E",
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
+    },
+    "comparison_table": {
+      "type": "custom-comparison-table",
+      "blocks": {
+        "row_organic": {
+          "type": "row",
+          "settings": {
+            "feature_label": "Certified Organic",
+            "varty_check": true,
+            "c1_check": false,
+            "c2_check": false
+          }
+        },
+        "row_ingredients": {
+          "type": "row",
+          "settings": {
+            "feature_label": "3 ingredients or fewer",
+            "varty_check": true,
+            "c1_check": false,
+            "c2_check": false
+          }
+        },
+        "row_sunflower": {
+          "type": "row",
+          "settings": {
+            "feature_label": "No sunflower oil",
+            "varty_check": true,
+            "c1_check": false,
+            "c2_check": true
+          }
+        },
+        "row_gums": {
+          "type": "row",
+          "settings": {
+            "feature_label": "No gums or stabilisers",
+            "varty_check": true,
+            "c1_check": false,
+            "c2_check": false
+          }
+        },
+        "row_canadian": {
+          "type": "row",
+          "settings": {
+            "feature_label": "Canadian made",
+            "varty_check": true,
+            "c1_check": false,
+            "c2_check": false
+          }
+        },
+        "row_carrageenan": {
+          "type": "row",
+          "settings": {
+            "feature_label": "Carrageenan free",
+            "varty_check": true,
+            "c1_check": true,
+            "c2_check": false
+          }
+        }
+      },
+      "block_order": [
+        "row_organic",
+        "row_ingredients",
+        "row_sunflower",
+        "row_gums",
+        "row_canadian",
+        "row_carrageenan"
+      ],
+      "settings": {
+        "heading": "The Clean Advantage",
+        "subheading": "<p>See how Varty stacks up against other oat beverages. Confirm competitor names with client before publishing.</p>",
+        "varty_label": "Varty",
+        "competitor_1_label": "Brand A",
+        "competitor_2_label": "Brand B",
+        "mobile_layout": "stacked",
+        "background_color": "#5463B3",
+        "text_color": "#ffffff",
+        "desktop_padding_top": 80,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48
+      }
+    },
+    "faq_accordion": {
+      "type": "collapsible-tabs",
+      "blocks": {
+        "faq_q1": {
+          "type": "tab",
+          "settings": {
+            "heading": "Is Varty really only 3 ingredients?",
+            "content": "<p>Yes. Varty Original contains certified organic oats, filtered water, and sea salt. That's it. Our Vanilla and Barista versions add one more ingredient each — nothing you can't pronounce.</p>"
+          }
+        },
+        "faq_q2": {
+          "type": "tab",
+          "settings": {
+            "heading": "Is Varty certified organic?",
+            "content": "<p>Yes. Varty is certified organic by Ecocert Canada. Every batch meets certified organic standards from ingredient sourcing to production.</p>"
+          }
+        },
+        "faq_q3": {
+          "type": "tab",
+          "settings": {
+            "heading": "Where can I buy Varty?",
+            "content": "<p>Varty is available at 23 stockist locations across Québec and online at vartyallnatural.ca. Use our <a href=\"/pages/where-to-find-us\">store finder</a> to locate your nearest retailer.</p>"
+          }
+        },
+        "faq_q4": {
+          "type": "tab",
+          "settings": {
+            "heading": "Do you ship outside Québec and Ontario?",
+            "content": "<p>We currently offer flat-rate shipping ($8.99) in QC and ON. For other provinces, shipping is calculated at checkout via Canada Post. Subscription orders ship free in our delivery zone.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_q1",
+        "faq_q2",
+        "faq_q3",
+        "faq_q4"
+      ],
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_color": "#F0E8C8",
+        "text_color": "#2D2D5E",
+        "desktop_padding_top": 80,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48
+      }
+    },
+    "wholesale_cta": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_wholesale": {
+          "type": "heading",
+          "settings": {
+            "heading": "Bring Varty to Your Shelves",
+            "heading_size": "heading_m",
+            "heading_tag": "h2",
+            "heading_color": "solid",
+            "heading_gradient": "linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(101,101,101,1) 100%)"
+          }
+        },
+        "button_wholesale": {
+          "type": "button",
+          "settings": {
+            "button_label": "Apply to Wholesale",
+            "button_link": "/pages/wholesale",
+            "target_blank": false,
+            "button_style": "solid"
+          }
+        }
+      },
+      "block_order": [
+        "heading_wholesale",
+        "button_wholesale"
+      ],
+      "settings": {
+        "height_mode": "percents",
+        "desktop_height": 50,
+        "mobile_height": 40,
+        "section_width": "wide",
+        "center_text": true,
+        "vertical_content_position": "center",
+        "overlay_color": "#5463B3",
+        "overlay_opacity": 85,
+        "color_type": "custom",
+        "background_color": "#5463B3",
+        "text_color": "#ffffff",
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
+    },
+    "scrolling_promo": {
+      "type": "scrolling-promotion",
+      "blocks": {
+        "promo_organic": {
+          "type": "text",
+          "settings": {
+            "desktop_text": "100% Organic",
+            "mobile_text": "100% Organic",
+            "text_link": "",
+            "target_blank": false
+          }
+        },
+        "promo_3ing": {
+          "type": "text",
+          "settings": {
+            "desktop_text": "3 Ingredients",
+            "mobile_text": "3 Ingredients",
+            "text_link": "",
+            "target_blank": false
+          }
+        },
+        "promo_ca": {
+          "type": "text",
+          "settings": {
+            "desktop_text": "Canadian Made",
+            "mobile_text": "Canadian Made",
+            "text_link": "",
+            "target_blank": false
+          }
+        },
+        "promo_nf": {
+          "type": "text",
+          "settings": {
+            "desktop_text": "No Fillers",
+            "mobile_text": "No Fillers",
+            "text_link": "",
+            "target_blank": false
+          }
+        },
+        "promo_gf": {
+          "type": "text",
+          "settings": {
+            "desktop_text": "Gluten Free",
+            "mobile_text": "Gluten Free",
+            "text_link": "",
+            "target_blank": false
+          }
+        },
+        "promo_df": {
+          "type": "text",
+          "settings": {
+            "desktop_text": "Dairy Free",
+            "mobile_text": "Dairy Free",
+            "text_link": "",
+            "target_blank": false
+          }
+        }
+      },
+      "block_order": [
+        "promo_organic",
+        "promo_3ing",
+        "promo_ca",
+        "promo_nf",
+        "promo_gf",
+        "promo_df"
+      ],
+      "settings": {
+        "text_size": "heading_s",
+        "heading_color": "solid",
+        "line_show": "separator",
+        "gap_items": 48,
+        "scroll_direction": "left",
+        "speed": 1.2,
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_color": "#F5D76E",
+        "text_color": "#2D2D5E",
+        "layout_margins": "default",
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "announcement_bar",
+    "hero_split",
+    "stats_bar",
+    "certifications_strip",
+    "split_content_1",
+    "features_grid",
+    "split_content_2",
+    "brand_highlight",
+    "awards_section",
+    "comparison_table",
+    "faq_accordion",
+    "wholesale_cta",
+    "scrolling_promo"
+  ]
+}

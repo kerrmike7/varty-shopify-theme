@@ -1,0 +1,142 @@
+{% style %}
+#shopify-section-{{ section.id }} {
+    --back-to-top-vertical-alignment: {{ back-to-top_settings.back_to_top_vertical_alignment }};
+    --back-to-top-horizontal-alignment: {{ back-to-top_settings.back_to_top_horizontal_alignment }};
+}
+
+{% if settings.typography_preset != 'custom' %}
+.back-to-top-container--minimal_uppercase .back-to-top__icon {
+    height: max(16px, var(--fluid-preset-body-s-lh));
+}
+.back-to-top-container--minimal_basic .back-to-top__icon,
+.back-to-top-container--classic .back-to-top__icon,
+.back-to-top-container--avant_garde .back-to-top__icon,
+.back-to-top-container--contrast .back-to-top__icon {
+    height: max(16px, var(--fluid-preset-label-lh));
+}
+.back-to-top-container--minimal_heavy .back-to-top__icon,
+.back-to-top-container--brutalist .back-to-top__icon {
+    height: max(16px, var(--fluid-preset-body-l-lh));
+}
+.back-to-top-container--duet .back-to-top__icon {
+    height: max(16px, var(--fluid-preset-body-m-lh));
+}
+
+.footer .heading_s .back-to-top__icon,
+.footer .heading_s_uppercase .back-to-top__icon {
+    height: min(128px, max(16px, var(--fluid-preset-s-lh)));
+}
+.footer .heading_xs .back-to-top__icon,
+.footer .heading_xs_uppercase .back-to-top__icon {
+    height: max(20px, var(--fluid-preset-xs-lh));
+}
+.footer .body_l .back-to-top__icon,
+.footer .body_l_uppercase .back-to-top__icon {
+    height: max(20px, var(--fluid-preset-body-l-lh));
+}
+.footer .body_s .back-to-top__icon,
+.footer .body_s_uppercase .back-to-top__icon {
+    height: max(20px, var(--fluid-preset-body-s-lh));
+}
+.footer .label_font .back-to-top__icon,
+.footer .label_font_uppercase .back-to-top__icon {
+    height: max(20px, var(--fluid-preset-label-lh));
+}
+{% else %}
+.back-to-top-container--custom .back-to-top__icon {
+    height: max(16px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+}
+.navigations-heading-m .back-to-top__icon {
+    height: max(16px, calc(var(--heading-m-font-size) * var(--heading-m-line-height)));
+}
+.navigations-heading-s .back-to-top__icon {
+    height: max(16px, calc(var(--heading-s-font-size) * var(--heading-s-line-height)));
+}
+.navigations-heading-xs .back-to-top__icon {
+    height: max(16px, calc(var(--heading-xs-font-size) * var(--heading-xs-line-height)));
+}
+.navigations-body-l .back-to-top__icon {
+    height: max(16px, calc(var(--body-l-font-size) * var(--body-l-line-height)));
+}
+.navigations-body-m .back-to-top__icon {
+    height: max(16px, calc(var(--body-m-font-size) * var(--body-m-line-height)));
+}
+.navigations-label .back-to-top__icon {
+    height: max(16px, calc(var(--label-font-size) * var(--label-line-height)));
+}
+
+.footer .heading_s .back-to-top__icon,
+.footer .heading_s_uppercase .back-to-top__icon {
+    height: max(20px, calc(var(--heading-s-font-size) * var(--heading-s-line-height)));
+}
+.footer .heading_xs .back-to-top__icon,
+.footer .heading_xs_uppercase .back-to-top__icon {
+    height: max(20px, calc(var(--heading-xs-font-size) * var(--heading-xs-line-height)));
+}
+.footer .body_l .back-to-top__icon,
+.footer .body_l_uppercase .back-to-top__icon {
+    height: max(20px, calc(var(--body-l-font-size) * var(--body-l-line-height)));
+}
+.footer .body_s .back-to-top__icon,
+.footer .body_s_uppercase .back-to-top__icon {
+    height: max(20px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+}
+.footer .label_font .back-to-top__icon,
+.footer .label_font_uppercase .back-to-top__icon {
+    height: max(20px, calc(var(--label-font-size) * var(--label-line-height)));
+}
+{% endif %}
+{% endstyle %}
+
+{%- liquid 
+    assign weight =  settings.base_icon_weight
+    if settings.swap_fonts
+        assign weight = settings.accent_icon_weight
+    endif
+    assign uppercase_font = false
+    assign bolder_font = false
+    if section.id contains 'footer'
+        if settings.typography_preset == 'custom'
+            assign weight = settings.custom_icon_weight
+            if settings.uppercase_body_s and back-to-top_settings.label_size == 'default'
+                assign uppercase_font = true
+            endif
+            if settings.bolder_font_body_s and back-to-top_settings.label_size == 'default'
+                assign bolder_font = true
+            endif
+        endif
+    else
+        if settings.typography_preset == 'custom'
+            assign weight = settings.custom_icon_weight
+            if settings.uppercase_body_s and settings.navigation_item_size == 'default'
+                assign uppercase_font = true
+            endif
+            if settings.bolder_font_body_s and settings.navigation_item_size == 'default'
+                assign bolder_font = true
+            endif
+        endif
+    endif
+-%}
+
+<div class="back-to-top-block {% if section_navigation_block %} section-navigation-block{% if settings.enable_drawer_animations %} stagger__item{% endif %}{% endif %} {% if main-sidebar__block %} main-sidebar__block{% endif %} {% if section.id contains 'footer' %}back-to-top-block--footer{% else %}back-to-top-block--{{ section.id }}{% endif %} back-to-top-block--{% if section.id contains 'secondary-sidebar' %}vertical{% endif %} back-to-top-block--{{ back-to-top_settings.back_to_top_alignment }}" {{ block_item.shopify_attributes }}>
+    <div class="back-to-top-container back-to-top-container--{{ settings.typography_preset }} {% if section.id contains 'footer' %}{% if sback-to-top_settings.label_size != 'default' %}{{ back-to-top_settings.label_size }}{% else %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}{% endif %}{% else %}{% if settings.navigation_item_size != 'default' and settings.typography_preset == 'custom' %}{{ settings.navigation_item_size }}{% else %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}{% endif %}{% endif %}">
+        <a class="back-to-top {% if back-to-top_settings.back_to_top_style == 'icon' %}back-to-top--style-icon{% endif %} hover-opacity {% if section.settings.color_type == 'custom' %}color-custom{% elsif section.settings.color_type == 'invert' %}color-invert{% endif %}" href="#body" aria-label="{{ back-to-top_settings.back_to_top_label }}" tabindex="0">
+            {%- if back-to-top_settings.back_to_top_style == 'text' -%}
+                <span class="back-to-top__title {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %}">{% if back-to-top_settings.back_to_top_label != blank %}{{ back-to-top_settings.back_to_top_label }}{% else %}{{ back-to-top_settings.back_to_top_label }}{% endif %}</span> 
+            {%- elsif back-to-top_settings.back_to_top_style == 'icon' -%}
+                <div class="back-to-top__item">
+                    <span class="back-to-top__icon {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %}">
+                        {% assign icon_full = 'chevron-in-circle' | append: "-" | append: weight %}
+                        {% render 'icon', icon: icon_full %}  
+                    </span>
+                </div>
+            {%- elsif back-to-top_settings.back_to_top_style == 'text_with_icon' -%}
+                <span class="back-to-top__title {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %}">{{ back-to-top_settings.back_to_top_label }}</span>
+                <span class="back-to-top__icon {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %}">
+                    {% assign icon_full = 'chevron-in-circle' | append: "-" | append: weight %}
+                    {% render 'icon', icon: icon_full %}  
+                </span>
+            {%- endif -%}
+        </a>
+    </div>
+</div>

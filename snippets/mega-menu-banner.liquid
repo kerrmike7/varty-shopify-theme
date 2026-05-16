@@ -1,0 +1,233 @@
+{% liquid
+  if banner_index != blank
+    assign banner_link_key = 'banner_link_' | append: banner_index
+    assign banner_image_key = 'banner_image_' | append: banner_index
+    assign subheading_key = 'subheading_' | append: banner_index
+    assign heading_key = 'heading_' | append: banner_index
+    assign button_label_key = 'button_label_' | append: banner_index
+    assign subheading_size_key = 'subheading_size_' | append: banner_index
+    assign heading_size_key = 'heading_size_' | append: banner_index
+    assign vertical_text_alignment_key = 'vertical_text_alignment_' | append: banner_index
+    assign horizontal_text_alignment_key = 'horizontal_text_alignment_' | append: banner_index
+    assign overlay_color_key = 'overlay_color_' | append: banner_index
+    assign overlay_gradient_key = 'overlay_gradient_' | append: banner_index
+    assign overlay_opacity_key = 'overlay_opacity_' | append: banner_index
+    assign banner_content_color_key = 'banner_content_color_' | append: banner_index
+  else
+    assign banner_link_key = 'banner_link'
+    assign banner_image_key = 'banner_image'
+    assign subheading_key = 'subheading'
+    assign heading_key = 'heading'
+    assign button_label_key = 'button_label'
+    assign subheading_size_key = 'subheading_size'
+    assign heading_size_key = 'heading_size'
+    assign vertical_text_alignment_key = 'vertical_text_alignment'
+    assign horizontal_text_alignment_key = 'horizontal_text_alignment'
+    assign overlay_color_key = 'overlay_color'
+    assign overlay_gradient_key = 'overlay_gradient'
+    assign overlay_opacity_key = 'overlay_opacity'
+    assign banner_content_color_key = 'banner_content_color'
+  endif
+
+  assign banner_link = banner_settings[banner_link_key]
+  assign banner_image = banner_settings[banner_image_key]
+  assign subheading = banner_settings[subheading_key]
+  assign heading = banner_settings[heading_key]
+  assign button_label = banner_settings[button_label_key]
+  assign subheading_size = banner_settings[subheading_size_key]
+  assign heading_size = banner_settings[heading_size_key]
+  assign vertical_text_alignment = banner_settings[vertical_text_alignment_key]
+  assign horizontal_text_alignment = banner_settings[horizontal_text_alignment_key]
+  assign overlay_color = banner_settings[overlay_color_key]
+  assign overlay_gradient = banner_settings[overlay_gradient_key]
+  assign overlay_opacity = banner_settings[overlay_opacity_key]
+  assign banner_content_color = banner_settings[banner_content_color_key]
+%}
+
+{% liquid
+  assign settings_page_width = settings.max_page_width | append: 'px'
+  if settings.max_page_width == 'full_width'
+    assign settings_page_width = '100vw'
+  endif
+
+  assign uppercase_font_subheading = false
+  assign bolder_font_subheading = false
+  if settings.typography_preset == 'custom'
+    if subheading_size == 'default'
+      if settings.uppercase_label
+        assign uppercase_font_subheading = true
+      endif
+      if settings.bolder_font_label
+        assign bolder_font_subheading = true
+      endif
+    endif
+  endif
+
+  assign uppercase_font_heading = false
+  assign bolder_font_heading = false
+  if settings.typography_preset == 'custom'
+    if heading_size == 'default'
+      if settings.uppercase_label
+        assign uppercase_font_heading = true
+      endif
+      if settings.bolder_font_label
+        assign bolder_font_heading = true
+      endif
+    endif
+  endif
+
+  assign overlay_background = overlay_color
+  if overlay_gradient != blank
+    assign overlay_background = overlay_gradient
+  endif
+
+  assign tag = 'div'
+  if banner_link != blank
+    assign tag = 'a'
+  endif
+
+  assign mega_menu_banners_count = mega_menu_banners_count | default: 1
+%}
+
+{% style %}
+  {% if banner_index == blank %}
+    .mega-menu-banner--{{ banner_block_id }}
+  {% else %} 
+    .mega-menu-banner--{{ banner_block_id }}-{{ banner_index }}
+  {% endif %}
+  {
+    --vertical-aligment: {{ vertical_text_alignment }};
+    --horizontal-aligment: {{ horizontal_text_alignment }};
+    --overlay-background: {{ overlay_background }};
+    --overlay-opacity: {{ overlay_opacity | divided_by: 100.0 }};
+    --content-color: {{ banner_content_color }};
+  }
+{% endstyle %}
+
+{% if tag == 'a' %}<double-hover class="mega-menu-banner-container">{% endif %}
+<{{ tag }} 
+  class="mega-menu-banner mega-menu__banner-link double-hover {% if settings.enable_drawer_animations %} stagger__item{% endif %}
+    {% if tag != 'a' %} mega-menu-banner-container {% endif %}
+    {% if banner_index == blank %} 
+      mega-menu-banner--{{ banner_block_id }} 
+    {% else %} 
+      mega-menu-banner--{{ banner_block_id }}-{{ banner_index }} 
+    {% endif %}
+  "
+  {% if settings.enable_drawer_animations %} style="--item-index: {{ animated_drawer_item_index }};"{% endif %}
+  {% if tag == 'a' %}
+    href="{{ banner_link }}"
+  {% else %}
+    role="link" 
+    aria-disabled="true"
+  {% endif %}
+>
+  <div
+    class="mega-menu__banner-image"
+    {% if settings.disable_right_click %}
+      oncontextmenu="return false"
+    {% endif %}
+  >
+    {%- if banner_image != blank -%}
+      {% if settings.images_loading != 'disable' %}
+        <figure class="lazy-image lazy-image--absolute lazy-image--{{ settings.images_loading }}">
+      {% endif %}
+      <img
+        srcset="
+          {%- if banner_image.image.width >= 165 -%}{{ banner_image.image | image_url: width: 165 }} 165w,{%- endif -%}
+          {%- if banner_image.image.width >= 375 -%}{{ banner_image.image | image_url: width: 375 }} 375w,{%- endif -%}
+          {%- if banner_image.image.width >= 550 -%}{{ banner_image.image | image_url: width: 550 }} 550w,{%- endif -%}
+          {%- if banner_image.image.width >= 750 -%}{{ banner_image.image | image_url: width: 750 }} 750w,{%- endif -%}
+          {%- if banner_image.image.width >= 950 -%}{{ banner_image.image | image_url: width: 950 }} 950w,{%- endif -%}
+          {%- if banner_image.image.width >= 1150 -%}{{ banner_image.image | image_url: width: 1150 }} 1150w,{%- endif -%}
+          {%- if banner_image.image.width >= 1500 -%}{{ banner_image.image | image_url: width: 1500 }} 1500w,{%- endif -%}
+          {{ banner_image.image | image_url }} {{ banner_image.image.width }}w
+        "
+        src="{{ banner_image.image | image_url: height: banner_image.image.width }}"
+        loading="lazy"
+        {% if settings.images_loading != 'disable' %}
+          onload="this.parentNode.classList.add('lazyloaded');"
+        {% endif %}
+        draggable="false"
+        width="{{ banner_image.image.width }}"
+        height="{{ banner_image.image.height }}"
+        {% if mega_menu_settings.width == 'narrow' %}
+          sizes="calc(960px / 2 / {{ mega_menu_banners_count }})"
+        {% else %}
+          sizes="calc({{ settings_page_width }} / 2 / {{ mega_menu_banners_count }})"
+        {% endif %}
+        alt="{{ banner_image.image.alt | default: shop.name | escape }}"
+        class="image__item"
+        style="object-position: {{ banner_image.image.presentation.focal_point }}"
+      >
+      {% if settings.images_loading != 'disable' %}
+        {% if settings.images_loading != 'fade_scale' %}
+          <div
+            class="lazy-image__preloader lazy-image__preloader-{{ settings.images_loading }}"
+            aria-hidden="true"
+          >
+            <img
+              alt="{{ banner_image.image.alt | escape }}"
+              src="{{ banner_image.image | image_url: width: 10 }}"
+              draggable="false"
+              width="10"
+              height="10"
+            >
+          </div>
+        {% endif %}
+        </figure>
+      {% endif %}
+    {% else %}
+      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+
+  {%- if subheading != blank or heading != blank or button_label != blank -%}
+    <div class="mega-menu__banner-content">
+      <div class="mega-menu__banner-content-container">
+        {% if subheading != blank %}
+          <h6 class="mega-menu__banner-subheading mega-menu__banner-subheading--{{ settings.typography_preset }} 
+            {% if subheading_size != 'default' %}
+             {{ subheading_size }}
+            {% else %}
+              {% if uppercase_font_subheading %} uppercase {% endif %}
+              {% if bolder_font_subheading %} bolder-font {% endif %}
+            {% endif %}"
+          >
+            {{ subheading }}
+          </h6>
+        {% endif %}
+
+        {% if heading != blank %}
+          {% liquid
+            assign heading_text = heading
+            assign final_text = ''
+            assign split_text_curly = heading_text | split: '{'
+            for part in split_text_curly
+              if part contains '}'
+                assign split_curly = part | split: '}'
+                assign styled_text = split_curly[0]
+                assign after_curly = split_curly[1]
+                assign final_text = final_text | append: '<span class="styled">' | append: styled_text | append: '</span>' | append: after_curly
+              else
+                assign final_text = final_text | append: part
+              endif
+            endfor
+          %}
+
+          <h5 class="mega-menu__banner-heading custom-heading mega-menu__banner-heading--{{ settings.typography_preset }} 
+            {% if heading_size != 'default' %}
+              {{ heading_size }}
+            {% else %}
+              {% if uppercase_font_heading %} uppercase {% endif %}
+              {% if bolder_font_heading %} bolder-font {% endif %}
+            {% endif %}"
+          >
+            {{ final_text }}
+          </h5>
+        {% endif %}
+      </div>
+    </div>
+  {%- endif -%}
+</{{ tag }}>
+{% if banner_link != blank %}</double-hover>{% endif %}

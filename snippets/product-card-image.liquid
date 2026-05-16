@@ -1,0 +1,245 @@
+{%- liquid
+  assign should_lazy_load = false
+  if settings.images_loading != 'disable' or is_first_image == false or section.index > 1 or parent == 'stories'
+    assign should_lazy_load = true
+  endif
+-%}
+
+{%- capture sizes -%}
+  {%- render 'product-card-sizes',
+    desktop_media_width: desktop_media_width,
+    mobile_media_width: mobile_media_width,
+    modal_container_width: modal_container_width,
+    alternative_grid: alternative_grid,
+    big_card: big_card
+  -%}
+{%- endcapture -%}
+{%- assign sizes = sizes | strip_newlines | strip -%}
+
+<product-card-image class="card__picture" show-second-media="{{ show_second_image }}">
+  <div class="card__product-image{% if settings.enable_blending %} enable-blending{% endif %} ratio-{{ image_ratio }} {% if settings.fit_product_media %}card__product-image--fit{% endif %} card__product-image--hover-effect {% if show_second_image %}card__product-image--show-second{% endif %} {%- if second_media != nil and show_second_image -%}have-second-media{%- endif -%}" {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %} {% if image_ratio == 'original' %}style="aspect-ratio: {{ aspect_ratio }}"{% endif %}>
+    {%- if media_source -%}
+
+      {%- capture media_source_image_tag -%}
+        {% if settings.images_loading != 'disable' %}
+          <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ media_source.aspect_ratio }}">
+        {% endif %}
+        <img src="{{ media_source | image_url: width: 1700 }}"
+          draggable="false"
+          srcset="{%- if media_source.width >= 110 -%}{{ media_source | image_url: width: 110 }} 110w,{%- endif -%}
+            {%- if media_source.width >= 165 -%}{{ media_source | image_url: width: 165 }} 165w,{%- endif -%}
+            {%- if media_source.width >= 375 -%}{{ media_source | image_url: width: 375 }} 375w,{%- endif -%}
+            {%- if media_source.width >= 550 -%}{{ media_source | image_url: width: 550 }} 550w,{%- endif -%}
+            {%- if media_source.width >= 750 -%}{{ media_source | image_url: width: 750 }} 750w,{%- endif -%}
+            {%- if media_source.width >= 900 -%}{{ media_source | image_url: width: 900 }} 900w,{%- endif -%}
+            {%- if media_source.width >= 1200 -%}{{ media_source | image_url: width: 1200 }} 1200w,{%- endif -%}
+            {%- if media_source.width >= 1500 -%}{{ media_source | image_url: width: 1500 }} 1500w,{%- endif -%}
+            {{ media_source | image_url }} {{ media_source.width }}w"
+          sizes="{{ sizes | strip_newlines | strip }}"
+          alt="{{ media_source.alt | escape }}"               
+          {% if should_lazy_load %}
+            loading="lazy"
+          {% endif %}
+          {% if settings.images_loading != 'disable' %}
+            onload="this.parentNode.classList.add('lazyloaded');"
+          {% endif %}
+          width="{{ media_source.width }}"
+          height="{{ media_source.height }}"
+          class="card__image"
+        >
+          {% if settings.images_loading != 'disable' %}
+            {% if settings.images_loading != 'fade_scale' %}
+            <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+              <img 
+              alt="{{ media_source.alt | escape }}" 
+              src="{{ media_source | image_url: width: 10 }}"
+              draggable="false"
+              width="10" 
+              height="10">
+            </div>
+            {% endif %}
+        </figure>
+        {% endif %}
+      {%- endcapture -%}
+
+      {%- if settings.enable_autoplay_on_product_card -%}
+        {%- case media_source.media_type -%}
+          {%- when 'image' -%}
+            {{ media_source_image_tag }}
+          {%- when 'video' -%}
+            {% if settings.images_loading == 'disable' %}
+              {% if parent == 'stories' %}
+                {{ media_source | video_tag: autoplay: false, preload: 'none', loop: true, muted: true, controls: false, alt: media_source.alt, class: 'card__image card__image--video none-autoplay' }}
+              {% else %}
+                {{ media_source | video_tag: autoplay: true, preload: 'none', loop: true, muted: true, controls: false, alt: media_source.alt, class: 'card__image card__image--video' }}
+              {% endif %}
+            {% else %}
+              <figure class="lazy-video lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ media_source.aspect_ratio }}">
+                {% if parent == 'stories' %}
+                  {{ media_source | video_tag: autoplay: false, preload: 'none', loop: true, muted: true, controls: false, alt: media_source.alt, oncanplay: 'this.parentNode.classList.add("lazyloaded");', class: 'card__image card__image--video none-autoplay' }}
+                {% else %}
+                  {{ media_source | video_tag: autoplay: true, preload: 'none', loop: true, muted: true, controls: false, alt: media_source.alt, oncanplay: 'this.parentNode.classList.add("lazyloaded");', class: 'card__image card__image--video' }}
+                {% endif %}
+                {% if settings.images_loading != 'fade_scale' %}
+                  <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true" >
+                    <img 
+                      alt="{{ media_source.alt | escape }}" 
+                      src="{{ media_source.preview_image | image_url: width: 10 }}"
+                      draggable="false"
+                      width="10" 
+                      height="10"
+                    >
+                  </div>
+                {% endif %}
+              </figure>
+            {% endif %}
+          {%- when 'external_video' -%}
+            {%- if media_source.host == 'youtube' -%}
+              {% if parent == 'stories' %}
+                {{ media_source | external_video_url: loop: true, muted: true, controls: false | external_video_tag: class: 'card__image card__image--video js-youtube none-autoplay', loading: "lazy" }}
+              {% else %}
+                {{ media_source | external_video_url: loop: true, controls: false | external_video_tag: class: 'card__image card__image--video js-youtube', loading: "lazy" }}
+              {% endif %}
+            {%- endif -%}
+            {%- if media_source.host == 'vimeo' -%}
+              {% if parent == 'stories' %}
+                {{ media_source | external_video_url: loop: true, muted: true, controls: false | external_video_tag: class: 'card__image card__image--video js-vimeo none-autoplay', loading: "lazy" }}
+              {% else %}
+                {{ media_source | external_video_url: autoplay: true, loop: true, muted: true, controls: false | external_video_tag: class: 'card__image card__image--video js-vimeo', loading: "lazy" }}
+              {% endif %}
+            {%- endif -%}
+          {%- when 'model' -%}
+            {{ media_source | model_viewer_tag: class: 'card__image', interaction-prompt: 'none' }}
+        {%- endcase -%}
+      {%- else -%}
+        {{ media_source_image_tag }}
+      {%- endif -%}
+
+      {%- if second_media != nil and show_second_image -%}
+        {%- capture second_media_image_tag -%}
+          {% if settings.images_loading != 'disable' %}
+            <figure class="lazy-image lazy-image--{{ settings.images_loading }} lazyloaded" style="--desktop-asp-rat: {{ second_media.aspect_ratio }}">
+          {% endif %}
+          <img src="{{ second_media | image_url: width: 533 }}"
+            draggable="false"
+            srcset="{%- if second_media.width >= 110 -%}{{ second_media | image_url: width: 110 }} 110w,{%- endif -%}
+              {%- if second_media.width >= 165 -%}{{ second_media | image_url: width: 165 }} 165w,{%- endif -%}
+              {%- if second_media.width >= 375 -%}{{ second_media | image_url: width: 375 }} 375w,{%- endif -%}
+              {%- if second_media.width >= 550 -%}{{ second_media | image_url: width: 550 }} 550w,{%- endif -%}
+              {%- if second_media.width >= 750 -%}{{ second_media | image_url: width: 750 }} 750w,{%- endif -%}
+              {%- if second_media.width >= 900 -%}{{ second_media | image_url: width: 900 }} 900w,{%- endif -%}
+              {%- if second_media.width >= 1200 -%}{{ second_media | image_url: width: 1200 }} 1200w,{%- endif -%}
+              {%- if second_media.width >= 1500 -%}{{ second_media | image_url: width: 1500 }} 1500w,{%- endif -%}
+              {{ second_media | image_url }} {{ second_media.width }}w"
+            sizes="{{ sizes | strip_newlines | strip }}"
+            class="card__image card__image--second"
+            loading="lazy"
+            width="{{ second_media.width }}"
+            height="{{ second_media.height }}"
+            alt="{{ second_media.alt | escape }}"
+          >
+            {% if settings.images_loading != 'disable' %}
+              {% if settings.images_loading != 'fade_scale' %}
+              <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                <img 
+                alt="{{ second_media.alt | escape }}" 
+                src="{{ second_media | image_url: width: 10 }}"
+                draggable="false"
+                width="10" 
+                height="10">
+              </div>
+              {% endif %}
+          </figure>
+        {% endif %}
+        {%- endcapture -%}
+        
+        {%- if settings.enable_autoplay_on_product_card -%}
+          {%- case second_media.media_type -%}
+            {%- when 'image' -%}
+              {{ second_media_image_tag }}
+            {%- when 'video' -%}
+              {% if settings.images_loading == 'disable' %}
+                {{ second_media | video_tag: preload: 'none', loop: true, muted: true, controls: false, class: 'card__image card__image--second card__image--video none-autoplay' }}
+              {% else %}
+                <figure class="lazy-video lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ second_media.aspect_ratio }}">
+                  {% if parent == 'stories' %}
+                    {{ second_media | video_tag: preload: 'none', loop: true, muted: true, controls: false, alt: second_media.alt, oncanplay: 'this.parentNode.classList.add("lazyloaded");', class: 'card__image card__image--second card__image--video none-autoplay' }}
+                  {% else %}
+                    {{ second_media | video_tag: preload: 'metadata', loop: true, muted: true, controls: false, alt: second_media.alt, oncanplay: 'this.parentNode.classList.add("lazyloaded");', class: 'card__image card__image--second card__image--video none-autoplay' }}
+                  {% endif %}
+                  {% if settings.images_loading != 'fade_scale' %}
+                    <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true" >
+                      <img 
+                        alt="{{ second_media.alt | escape }}" 
+                        src="{{ second_media.preview_image | image_url: width: 10 }}"
+                        draggable="false"
+                        width="10" 
+                        height="10"
+                      >
+                    </div>
+                  {% endif %}
+                </figure>
+              {% endif %}
+            {%- when 'external_video' -%}
+              {%- if second_media.host == 'youtube' -%}
+                {{ second_media | external_video_url: loop: true, muted: true, controls: false, playlist: second_media.external_id | external_video_tag: class: 'card__image card__image--second card__image--video js-youtube none-autoplay', loading: "lazy" }}
+              {%- endif -%}
+              {%- if second_media.host == 'vimeo' -%}
+                {{ second_media | external_video_url: loop: true, muted: true, controls: false | external_video_tag: class: 'card__image card__image--second card__image--video js-vimeo none-autoplay', loading: "lazy" }}
+              {%- endif -%}
+            {%- when 'model' -%}
+              {{ second_media | model_viewer_tag: class: 'card__image card__image--second', interaction-prompt: 'none' }}
+          {%- endcase -%}
+        {%- else -%}
+          {{ second_media_image_tag }}
+        {%- endif -%}
+
+      {%- endif -%}
+    {%- else -%}
+      {%- if settings.product_placeholder -%}
+        <div class="product__placeholder" {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}>
+          {% if settings.images_loading != 'disable' %}
+            <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ settings.product_placeholder.aspect_ratio }}">
+          {% endif %}
+          <img src="{{ settings.product_placeholder | image_url: width: 1700 }}"
+            srcset="{%- if settings.product_placeholder.width >= 110 -%}{{ settings.product_placeholder | image_url: width: 110 }} 110w,{%- endif -%}
+            {%- if settings.product_placeholder.width >= 165 -%}{{ settings.product_placeholder | image_url: width: 165 }} 165w,{%- endif -%}
+            {%- if settings.product_placeholder.width >= 375 -%}{{ settings.product_placeholder | image_url: width: 375 }} 375w,{%- endif -%}
+            {%- if settings.product_placeholder.width >= 550 -%}{{ settings.product_placeholder | image_url: width: 550 }} 550w,{%- endif -%}
+            {%- if settings.product_placeholder.width >= 750 -%}{{ settings.product_placeholder | image_url: width: 750 }} 750w,{%- endif -%}
+            {%- if settings.product_placeholder.width >= 900 -%}{{ settings.product_placeholder | image_url: width: 900 }} 900w,{%- endif -%}
+            {%- if settings.product_placeholder.width >= 1200 -%}{{ settings.product_placeholder | image_url: width: 1200 }} 1200w,{%- endif -%}
+            {%- if settings.product_placeholder.width >= 1500 -%}{{ settings.product_placeholder | image_url: width: 1500 }} 1500w,{%- endif -%}
+            {{ settings.product_placeholder | image_url }} {{ settings.product_placeholder.width }}w"
+            sizes="{{ sizes | strip_newlines | strip }}"
+            class="card__image card__image-placeholder"
+            src="{{ settings.product_placeholder | image_url: width: 1946 }}"                
+            {% if should_lazy_load %}
+              loading="lazy"
+            {% endif %}
+            {% if settings.images_loading != 'disable' %}
+              onload="this.parentNode.classList.add('lazyloaded');"
+            {% endif %}
+            draggable="false"
+            alt="{{ settings.product_placeholder.alt | escape }}"
+            width="{{ settings.product_placeholder.width }}"
+            height="{{ settings.product_placeholder.height }}"
+          >
+            {% if settings.images_loading != 'disable' %}
+              {% if settings.images_loading != 'fade_scale' %}
+              <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                <img 
+                alt="{{ settings.product_placeholder.alt | escape }}" 
+                src="{{ settings.product_placeholder | image_url: width: 10 }}"
+                draggable="false"
+                width="10" 
+                height="10">
+              </div>
+              {% endif %}
+          </figure>
+          {% endif %}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</product-card-image>

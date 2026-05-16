@@ -1,0 +1,33 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-page": {
+      "type": "main-page",
+      "settings": {
+        "heading": "",
+        "hide_heading": true,
+        "heading_size": "heading_l",
+        "heading_tag": "h2",
+        "heading_color": "solid",
+        "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
+        "text_size": "body_m",
+        "section_width": "narrow",
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main-page"
+  ]
+}

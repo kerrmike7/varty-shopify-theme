@@ -1,0 +1,110 @@
+<ul class="share-list share-list--{{ settings.typography_preset }}{% if uppercase_font_text %} uppercase{% endif %}{% if bolder_font_text %} bolder-font{% endif %}{% if share_settings.text_size != 'default' %} {{ share_settings.text_size }}{% endif %}" {{ block.shopify_attributes }}>
+    {%- if settings.share_on_facebook -%}
+      <li class="share-list__item hover-opacity">
+        <a
+          class="share-list__link"
+          href="//www.facebook.com/sharer.php?u={{ share_variant_url | default: share_link | prepend: request.origin }}"
+          target="_blank"
+          rel="noopener">
+          <span class="share-list__icon share--icon">
+            {% render 'icon', icon: 'facebook-black-circle' %}
+          </span>
+          {% unless share_settings.show_only_icons %}
+          <span class="share-list__title" aria-hidden="true">{{ 'products.product.share_on_facebook' | t }}</span>
+          {% endunless %}
+          <span class="visually-hidden visually-hidden--inline">{{ 'accessibility.link_messages.new_window' | t }}</span>
+        </a>
+      </li>
+    {%- endif -%}
+  
+    {%- if settings.share_on_twitter -%}
+      <li class="share-list__item hover-opacity">
+        <a
+          class="share-list__link"
+          href="//twitter.com/share?text={{ share_title | url_param_escape }}&amp;url={{ share_variant_url | default: share_link | prepend: request.origin }}"
+          target="_blank"
+          rel="noopener">
+          <span class="share-list__icon share--icon">
+            {% render 'icon', icon: 'twitter-black-circle' %}
+          </span>
+          {% unless share_settings.show_only_icons %}
+          <span class="share-list__title" aria-hidden="true">{{ 'products.product.share_on_twitter' | t }}</span>
+          {% endunless %}
+          <span class="visually-hidden visually-hidden--inline">{{ 'accessibility.link_messages.new_window' | t }}</span>
+        </a>
+      </li>
+    {%- endif -%}
+  
+    {%- if settings.share_on_pinterest -%}
+      <li class="share-list__item hover-opacity">
+        <a
+          class="share-list__link"
+          href="//pinterest.com/pin/create/button/?url={{ share_variant_url | default: share_link | prepend: request.origin }}&amp;media={{ share_image | image_url }}&amp;description={{ share_title | url_param_escape }}"
+          target="_blank"
+          rel="noopener">
+          <span class="share-list__icon share--icon">
+            {% render 'icon', icon: 'pinterest-black-circle' %}
+          </span>
+          {% unless share_settings.show_only_icons %}
+          <span class="social-sharing__title" aria-hidden="true">{{ 'products.product.share_on_pinterest' | t }}</span>
+          {% endunless %}
+          <span class="visually-hidden visually-hidden--inline">{{ 'accessibility.link_messages.new_window' | t }}</span>
+        </a>
+      </li>
+    {%- endif -%}
+
+    {%- if settings.share_on_line -%}
+      <li class="share-list__item hover-opacity">
+        <a
+          class="share-list__link"
+          href="https://social-plugins.line.me/lineit/share?url={{ share_variant_url | default: share_link | prepend: request.origin }}"
+          target="_blank"
+          rel="noopener">
+          <span class="share-list__icon share--icon">
+            {% render 'icon-accordion-2', icon: 'line-black-circle' %}
+          </span>
+          {% unless share_settings.show_only_icons %}
+          <span class="social-sharing__title" aria-hidden="true">{{ 'products.product.share_on_line' | t }}</span>
+          {% endunless %}
+          <span class="visually-hidden visually-hidden--inline">{{ 'accessibility.link_messages.new_window' | t }}</span>
+        </a>
+      </li>
+    {%- endif -%}
+  
+    {%- if settings.copy_link -%}
+      <li class="share-list__item hover-opacity">
+          <div id="Share-{{ section.id }}" class="share-list__link copy-link">
+            <span class="share-list__icon share--icon">
+              <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_7075_275478)">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M20 0H0V20H20V0ZM14.0029 4.41782C14.3568 4.5644 14.6783 4.77924 14.9491 5.05008C15.2199 5.32092 15.4348 5.64246 15.5814 5.99632C15.7279 6.35019 15.8034 6.72946 15.8034 7.11248C15.8034 7.49551 15.7279 7.87478 15.5814 8.22865C15.4348 8.58252 15.2199 8.90404 14.9491 9.17488L12.4742 11.6497C12.1683 11.9555 11.7983 12.1894 11.3909 12.3345C10.9835 12.4796 10.5489 12.5324 10.1187 12.4889C9.68841 12.4455 9.27313 12.3069 8.903 12.0832C8.53286 11.8596 8.21707 11.5564 7.9785 11.1957L8.8379 10.3363C8.92115 10.5173 9.03496 10.6826 9.17437 10.8248C9.50285 11.1525 9.94787 11.3365 10.4118 11.3365C10.8758 11.3365 11.3208 11.1525 11.6492 10.8248L14.1241 8.34994C14.2866 8.18743 14.4155 7.99451 14.5035 7.78219C14.5914 7.56986 14.6367 7.34229 14.6367 7.11248C14.6367 6.88266 14.5914 6.65509 14.5035 6.44277C14.4156 6.23044 14.2866 6.03751 14.1241 5.875C13.9616 5.7125 13.7687 5.58359 13.5564 5.49564C13.344 5.40769 13.1165 5.36241 12.8866 5.36241C12.4225 5.36241 11.9774 5.54678 11.6492 5.87497L10.955 6.56914C10.5022 6.40736 10.0242 6.32675 9.54333 6.33102L10.8243 5.05008C11.0951 4.77924 11.4166 4.5644 11.7706 4.41782C12.1244 4.27124 12.5037 4.1958 12.8867 4.1958C13.2697 4.1958 13.649 4.27124 14.0029 4.41782ZM7.11361 14.6317C7.57641 14.6328 8.02077 14.4504 8.34945 14.1246L9.04365 13.4305C9.49655 13.5924 9.97441 13.6729 10.4553 13.6686L9.17437 14.9496C8.62741 15.4966 7.88554 15.8039 7.11199 15.8039C6.33844 15.8039 5.59657 15.4966 5.04959 14.9496C4.50261 14.4026 4.19531 13.6608 4.19531 12.8872C4.19531 12.1137 4.50261 11.3718 5.04959 10.8248L7.5245 8.35C7.83038 8.04429 8.20041 7.81041 8.6078 7.66527C9.01518 7.52014 9.44976 7.4674 9.88003 7.51085C10.3103 7.5543 10.7255 7.69287 11.0956 7.91652C11.4658 8.14017 11.7816 8.44331 12.0202 8.80401L11.1607 9.66337C11.0776 9.48236 10.9637 9.3171 10.8243 9.17488C10.4959 8.84717 10.0508 8.66314 9.58685 8.66314C9.12292 8.66314 8.67789 8.84717 8.34945 9.17488L5.87459 11.6497C5.54879 11.9784 5.36643 12.4228 5.36744 12.8856C5.36846 13.3484 5.55275 13.7919 5.88 14.1192C6.20725 14.4464 6.65081 14.6307 7.11361 14.6317Z"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_7075_275478">
+                <rect width="20" height="20" rx="10" fill="white"/>
+                </clipPath>
+                </defs>
+                </svg>            
+            </span>
+            {% unless share_settings.show_only_icons %}
+              <span class="social-sharing__title copy-label" aria-hidden="true">{{ 'products.product.copy_link' | t }}</span>
+            {% endunless %}
+              <span class="copy-success">{{ 'products.product.copied_message' | t }}</span>
+          </div>
+        <script>
+          document.querySelector('.copy-link').addEventListener('click', (event) => {
+            event.preventDefault()
+            navigator.clipboard.writeText(window.location.href).then(function () {
+              if (document.querySelector('.copy-label')) document.querySelector('.copy-label').style.display = 'none'
+              document.querySelector('.copy-success').style.display = 'block'
+            })
+            setTimeout(() => {
+              if (document.querySelector('.copy-label')) document.querySelector('.copy-label').style.display = 'block'
+              document.querySelector('.copy-success').style.display = 'none'
+            }, 1600)
+          })
+        </script>
+      </li>
+    {%- endif -%}
+  </ul>
+  

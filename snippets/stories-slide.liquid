@@ -1,0 +1,102 @@
+<div class="swiper-slide">
+    {%  liquid 
+    if settings.typography_preset == 'avant_garde' or settings.typography_preset == 'duet'
+        assign weight_accordion_title = settings.accent_icon_weight
+        if settings.swap_fonts
+            assign weight_accordion_title = settings.base_icon_weight
+        endif
+    else 
+        assign weight_accordion_title =  settings.base_icon_weight
+        if settings.swap_fonts
+            assign weight_accordion_title = settings.accent_icon_weight
+        endif
+    endif
+    if settings.typography_preset == 'custom'
+        assign weight = settings.custom_icon_weight
+        assign weight_accordion_title = settings.custom_icon_weight
+    endif
+    %}
+    <div class="stories-slide__swiper-slide-wrapper swiper-slide__wrapper">
+        <div class="stories-slider-content none-autoplay"{% if settings.disable_right_click %} oncontextmenu="return false"{% endif %}>
+            {% if image != blank %}
+                {%- liquid
+                    assign widths = '200, 300, 400, 500, 750, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750, 3000'
+                -%}
+                {%- capture sizes -%}
+                    (max-width: 768px) calc(100vh - 80px), (max-width: 1200px) 40vw, 30vw
+                {%- endcapture -%}
+                {{
+                    image
+                    | image_url: width: 1500
+                    | image_tag:
+                    sizes: sizes,
+                    widths: widths,
+                    alt: image.alt,
+                    draggable: false,
+                    loading: 'lazy'
+                  }}
+            {% endif %}
+        </div>
+        {% if label != blank %}
+            <div class="{% if settings.enable_buttons_zoom %}buttons-zoom{% endif %}">
+                <{% if link != blank %}a href="{{ link }}"{% if target_blank %} target="_blank"{% endif %}{% else %}span{% endif %} class="stories-slider-content__button button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {{ button_style }}-button {% if button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">
+                    {{ label }}
+                </{% if link != blank %}a{% else %}span{% endif %}>
+            </div>
+        {% endif %}
+        <div class="stories-slider-button stories-slider-button-prev"></div>
+        <div class="stories-slider-button stories-slider-button-next"></div>
+    </div>
+    {% if products.count > 0 %}
+        {% liquid
+            assign selector_container = '#stories__products-' | append: block.id | append: '-{{ index }}'
+            assign max_width = '700'
+         %}        
+        <div class="stories__products" id="stories__products-{{ block.id }}-{{ index }}">
+            <div class="stories__products-wrapper">
+                <div class="stories__products-title center content-subheading{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} content-subheading--{{ settings.typography_preset }} {% if section.settings.products_label_size != 'default' %}{{ section.settings.products_label_size }}{% else %}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_label %} uppercase{% endif %}{% if settings.bolder_font_label %} bolder-font{% endif %}{% endif %}{% endif %}">
+                    <p class="subheading-font ">{{ section.settings.products_label }}</p>
+                    <div class="icon align-center">
+                        {% assign icon_full = 'dropdown-chevron' | append: "-" | append: weight_accordion_title %}
+                        {% render 'icon', icon: icon_full %}  
+                    </div>
+                </div>
+                <div class="stories__products-scroll scroll-area hide-scrollbar">
+                    <ul class="stories__products-container grid">
+                        {% for product in products %}
+                            <li class="grid-item">
+                                {% render 'card-product',
+                                card_product: product,
+                                image_ratio: section.settings.image_ratio,
+                                show_vendor: section.settings.show_vendor,
+                                hover_behavior: section.settings.hover_behavior,
+                                show_bullets: section.settings.show_bullets,
+                                enable_quick_view: section.settings.enable_quick_view,
+                                enable_add_to_cart: section.settings.enable_add_to_cart,
+                                price_position: section.settings.price_position,
+                                max_product_name_characters: section.settings.max_product_name_characters,
+                                show_short_description: section.settings.show_short_description,
+                                enable_color_pills: false,
+                                show_rating: section.settings.show_rating,
+                                alternative_grid: alternative_grid,
+                                big_card: big_card,
+                                position_in_pattern: position_in_pattern,
+                                forloop_index: forloop_index,
+                                large_positions: large_positions,
+                                repeat_interval: repeat_interval,
+                                grid_style: section.settings.grid_type,
+                                show_pickup_availability: section.settings.show_pickup_availability,
+                                center_text: settings.center_text,
+                                parent: 'stories',
+                                desktop_media_width: 2,
+                                mobile_media_width: 2,
+                                modal_container_width: '470px'
+                                %}
+                                </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {%endif %}
+</div>

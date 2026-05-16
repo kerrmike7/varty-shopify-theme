@@ -1,0 +1,103 @@
+<li class="menu__dropdown-grandchild-item {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' and slide_out_style == false %}scroll-color{% endif %}{% if nested_menu_font_size != '' %} {{ nested_menu_font_size }}{% endif %} overlap-slide-out-item with-nested">
+    <div class="menu__item-title {% if item_image != blank and item_style == 'banner' %} menu__item-overlap-title--banner{% endif %}">
+            {% liquid 
+                    assign downcased_link_title = item_heading | downcase
+                    assign downcased_highlighted_items = menu_settings.highlight_menu_item | downcase | split: ','
+                    assign highlight_item = false
+                    for highlighted_item in downcased_highlighted_items
+                            assign highlighted_item_strip = highlighted_item | strip
+                            if highlighted_item_strip == downcased_link_title
+                            assign highlight_item = true
+                            endif
+                    endfor
+                    assign highlight_nested_item = false
+                    for nested_highlighted_item in downcased_nested_highlighted_items
+                        if nested_highlighted_item == downcased_link_title
+                            assign highlight_nested_item = true
+                        endif
+                    endfor
+            %}
+            {% if item_image != blank and item_style == 'thumbnail' %}
+                <div class="menu__item-overlap-image lazy-image-container ratio-{{ image_ratio }}" {% if settings.disable_right_click %} oncontextmenu="return false"{% endif %}>
+                {% if settings.images_loading != 'disable' %}
+                    <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ item_image.aspect_ratio }}">
+                {% endif %}   
+                    <img srcset="{%- if item_image.width >= 165 -%}{{ item_image | image_url: width: 165 }} 165w,{%- endif -%}
+                    {%- if item_image.width >= 375 -%}{{ item_image | image_url: width: 375 }} 375w,{%- endif -%}
+                    {%- if item_image.width >= 550 -%}{{ item_image | image_url: width: 550 }} 550w,{%- endif -%}
+                        {{ item_image | image_url: height: item_image.height }}"
+                        src="{{ item_image | image_url: height: item_image.height }}"
+                        loading="lazy"
+                        {% if settings.images_loading != 'disable' %}
+                            onload="this.parentNode.classList.add('lazyloaded');"
+                        {% endif %}
+                        draggable="false"
+                        sizes="calc(40px * 1)"
+                        width="{{ item_image.width }}"
+                        height="{{ item_image.height }}"
+                        alt="{{ item_image.alt | default: item_heading | escape }}"
+                        style="object-position: {{ block.settings.focal_point }}"
+                    />
+                {% if settings.images_loading != 'disable' %}
+                    {% if settings.images_loading != 'fade_scale' %}
+                    <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                        <img 
+                        alt="{{ item_image.alt | escape }}" 
+                        src="{{ item_image | image_url: width: 10 }}"
+                        draggable="false"
+                        width="10" 
+                        height="10">
+                    </div>
+                    {% endif %}
+                    </figure>
+                {% endif %}
+                </div>
+            {% endif %}
+            {% if item_image != blank and item_style == 'banner' %}
+                <a href="{{ item_link.url }}" class="menu__item-overlap-image lazy-image-container menu__item-overlap-image-banner" {% if settings.disable_right_click %} oncontextmenu="return false"{% endif %}>
+                    <div class="menu__item-overlap-image-wrapper ratio-{{ image_ratio }}">
+                    {%- liquid
+                        assign widths = '50, 75, 100, 150, 200, 300, 400, 500, 650, 750, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750, 3000, 3200'
+                    -%}
+                    {%- capture sizes -%}
+                        (max-width: 640px) 100vw, 640px
+                    {%- endcapture -%}
+                {% if settings.images_loading != 'disable' %}
+                    <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ item_image.aspect_ratio }}">
+                {% endif %}
+                    {{
+                        item_image
+                        | image_url: width: 3200
+                        | image_tag:
+                        sizes: sizes,
+                        widths: widths,
+                        class: img_class,
+                        alt: item_image.alt,
+                        draggable: false,
+                        loading: 'lazy',
+                        fetchpriority: 'low',
+                        onload: onloadScript
+                    }} 
+                {% if settings.images_loading != 'disable' %}
+                    {% if settings.images_loading != 'fade_scale' %}
+                    <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                        <img 
+                        alt="{{ item_image.alt | escape }}" 
+                        src="{{ item_image | image_url: width: 10 }}"
+                        draggable="false"
+                        width="10" 
+                        height="10">
+                    </div>
+                    {% endif %}
+                    </figure>
+                {% endif %}
+                </div>
+                </a>
+            {% endif %}
+            <a class="menu__dropdown-grandchild-link menu__link hover-link{% if highlight_item or highlight_nested_item %} link--highlighted{% endif %}" href="{{ item_link.url }}" {% if item_link.url contains 'http://' or item_link.url contains 'https://' %}target="_blank"{% endif %} {% if menu_settings.menu_style == 'expanded' %}tabindex="0"{% else %}tabindex="-1"{% endif %}>
+                    <div class="menu__item-link-title {% if settings.enable_animated_underline and settings.enable_rolling_hover == false %}link-animation--underline{% elsif settings.enable_rolling_hover %}link-animation--slide{% else %}link-animation{% endif %} {% if child_link.current and settings.underline_active_link == true %}underline-active{% endif %} {% if settings.enable_animated_underline and settings.enable_rolling_hover == false %}link-animation--underline{% elsif settings.enable_rolling_hover %}link-animation--slide{% else %}link-animation{% endif %}">
+                            <span data-hover="{{ item_heading }}">{{ item_heading }}</span>
+                    </div>
+            </a>
+    </div>
+</li>

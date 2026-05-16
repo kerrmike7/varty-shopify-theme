@@ -1,0 +1,4 @@
+{%- assign rtl_languages = "ar,he,fa,ur,ps,ks" | split: "," -%}
+{%- assign locale_code = request.locale.iso_code -%}
+{%- assign locale_lang = locale_code | split: "-" | first -%}
+{%- if rtl_languages contains locale_code or rtl_languages contains locale_lang -%}true{%- else -%}false{%- endif -%}

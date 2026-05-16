@@ -1,0 +1,1011 @@
+{%- liquid 
+  capture is_rtl 
+    render 'rtl-check'
+  endcapture
+
+  if settings.typography_preset == 'avant_garde'
+    assign weight = settings.accent_icon_weight
+    if settings.swap_fonts
+        assign weight = settings.base_icon_weight
+    endif
+  elsif settings.typography_preset != 'custom'
+      assign weight =  settings.base_icon_weight
+      if settings.swap_fonts
+          assign weight = settings.accent_icon_weight
+      endif
+  else 
+    assign weight = settings.custom_icon_weight
+  endif
+  assign settings_page_width = settings.max_page_width | append: 'px'
+  if settings.max_page_width == 'full_width'
+  assign settings_page_width = '100vw'
+  endif
+  if disable_layout_margins
+    assign settings_page_width = '100vw'
+  endif
+
+  assign show_quick_buy_2nd = true
+
+  if settings.show_first_image
+    assign enable_check_swatch = false
+    assign first_media = card_product.featured_media
+    assign second_media = card_product.media[1]
+  else
+    assign enable_check_swatch = true
+    assign first_media = card_product.featured_media
+    assign second_media = card_product.media[1]
+    if card_product.selected_or_first_available_variant.featured_media
+      assign first_media = card_product.selected_or_first_available_variant.featured_media
+    endif
+  endif
+
+  if enable_check_swatch
+    assign available_variants = card_product.variants | where: 'available', true 
+    assign first_variant = available_variants[0]
+    assign first_variant_image_alt = first_variant.featured_media.alt
+
+    if first_variant_image_alt contains '(' or first_variant_image_alt contains ')' 
+      assign first_variant_color_alt = first_variant_image_alt | downcase | split: '(' | last | split: ')' | first | prepend: '(' | append: ')'
+    endif
+
+    assign first_variant_media_count = 0 
+    for product_image in card_product.media
+      assign product_image_alt = product_image.alt | downcase
+      if product_image_alt contains first_variant_color_alt 
+        assign first_variant_media_count = first_variant_media_count | plus: 1 
+      endif
+    endfor
+
+    if first_variant_media_count == 0
+      assign init_slides_count = card_product.media.size
+    else
+      assign init_slides_count = first_variant_media_count
+    endif
+  else
+    assign init_slides_count = card_product.media.size
+  endif
+
+  if settings.show_selected_variant_value
+    assign init_slides_count = card_product.media.size
+  endif
+
+  assign aspect_ratio = first_media.aspect_ratio
+  if card_product.featured_media.media_type != 'image'
+    assign aspect_ratio = card_product.featured_media.preview_image.aspect_ratio
+  endif
+
+  unless hover_behavior
+    assign hover_behavior = 'nothing'
+  endunless
+
+  if hover_behavior == 'second_image'
+    assign enable_controls = false
+    assign show_second_image = true
+  else
+    assign enable_controls = true
+    assign show_second_image = false
+  endif
+
+  if alternative_grid
+    assign position_in_pattern_d = position_in_pattern | downcase
+    if grid_style == 'alternative_1'
+      if large_positions contains position_in_pattern_d
+        assign big_card = true
+      endif
+    else
+      if forloop_index == 3
+        assign big_card = true
+      elsif forloop_index > 3
+        if large_positions contains position_in_pattern_d
+          assign big_card = true
+        endif
+      endif
+    endif
+  endif
+
+  assign uppercase_price = false
+  assign bolder_price_font = false
+  if settings.typography_preset == 'custom' and settings.product_price_size == 'default'
+    if settings.uppercase_body_s
+      assign uppercase_price = true
+    endif
+    if settings.bolder_font_body_s
+      assign bolder_price_font = true
+    endif
+  endif
+  assign uppercase_title = false
+  assign bolder_title_font = false
+  if settings.typography_preset == 'custom' and settings.product_title_size == 'default'
+    if settings.uppercase_body_s
+      assign uppercase_title = true
+    endif
+    if settings.bolder_font_body_s
+      assign bolder_title_font = true
+    endif
+  endif
+  assign uppercase_text = false
+  assign bolder_text_font = false
+  if settings.typography_preset == 'custom' and settings.product_text_size == 'default'
+    if settings.uppercase_body_s
+      assign uppercase_text = true
+    endif
+    if settings.bolder_font_body_s
+      assign bolder_text_font = true
+    endif
+  endif
+-%}
+
+{%- liquid 
+  if settings.typography_preset == 'avant_garde'
+      assign weight_close = settings.accent_icon_weight
+      if settings.swap_fonts
+          assign weight_close = settings.base_icon_weight
+      endif
+  elsif settings.typography_preset != 'custom' 
+      assign weight_close =  settings.base_icon_weight
+      if settings.swap_fonts
+          assign weight_close = settings.accent_icon_weight
+      endif
+  else 
+    assign weight_close = settings.custom_icon_weight
+  endif
+-%}
+
+<div class="card-container">
+  <a class="card card-js {% if enable_quick_view or enable_add_to_cart %}card-quick-view{% endif %}" 
+    href="
+    {% if card_product.has_only_default_variant %}
+     {% if settings.enable_breadcrumbs %}{{ card_product.url | within: collection }}{% else %}{{ card_product.url }}{% endif %}
+    {% else %}
+      {% if card_product.selected_or_first_available_variant.url != blank %}
+        {% if settings.enable_breadcrumbs %}{{ card_product.selected_or_first_available_variant.url | within: collection }}{% else %}{{ card_product.selected_or_first_available_variant.url }}{% endif %}
+      {% else %}
+        {% if settings.enable_breadcrumbs %}{{ card_product.first_available_variant.url | within: collection }}{% else %}{{ card_product.first_available_variant.url }}{% endif %}
+      {% endif %}
+    {% endif %}" 
+    draggable="false"
+  >
+    <div class="card__picture-wrapper" style="--total-slides: {{ init_slides_count }}; --speed: {{ autoplay_speed }}s;">
+      {% case hover_behavior  %}
+        {% when 'slider', 'hover_gallery' %}
+          <swiper-gallery
+            class="swiper ratio-{{ image_ratio }} swiper-product-card
+              {% if card_product.media.size > 1 %} swiper-gallery{% endif %}
+              {% if hover_behavior == 'slider' %} swiper-product-card--slider{% endif %}
+              {% if hover_behavior == 'hover_gallery' %} swiper-product-card--hover-gallery{% endif %}
+              {% if switch_images_on_scroll %} swiper-product-card--scroll-gallery{% endif %}" 
+            data-total-slides="{{ card_product.media.size }}" 
+            data-loop="{% if card_product.media.size > 1 %}true{% else %}false{% endif %}" 
+            data-enable-autoplay-media="{{ settings.enable_autoplay_on_product_card }}"
+            data-hover-autoplay="true" 
+            data-autoplay-speed="{{ autoplay_speed | times: 1000.00 }}" 
+            data-enable-navigation="true" 
+            data-pagination-type="bullets"
+            data-show-only-variants-media="{{ enable_check_swatch }}"
+            {% if is_rtl == 'true' %}dir="rtl"{% endif %}
+            {% if switch_images_on_scroll %} data-scroll-images-speed="{{ scroll_images_speed }}"{% endif %}>
+            <ul class="swiper-wrapper{% if settings.show_media_attached_to_variant %} swiper-wrapper-only-variant{% endif %}">               
+              <li id="card__product-image--1" data-id="{{ first_media.id }}" data-swiper-slide-alt="{{ card_product.media.first.preview_image.alt | split: '(' | last | split: ')' | first | prepend: '(' | append: ')' | downcase | replace: ' ', '_' }}" class="card__product-image swiper-slide aspect-ratio{% if settings.fit_product_media %} card__product-media--fit{% endif %}">
+                {% render 'product-card-image', 
+                  media_source: first_media, 
+                  second_media: false, 
+                  show_second_image: false, 
+                  image_ratio: image_ratio, 
+                  aspect_ratio: aspect_ratio,
+                  desktop_media_width: desktop_media_width,
+                  mobile_media_width: mobile_media_width,
+                  modal_container_width: modal_container_width,
+                  is_first_image: true,
+                  parent: parent
+                %}       
+              </li>
+
+              <template class="all-product-card-images-template">
+                {% for media in card_product.media %}                  
+                  <li class="card__product-image swiper-slide aspect-ratio{% if settings.fit_product_media %} card__product-media--fit{% endif %}" data-id="{{ media.id }}" data-swiper-slide-alt="{{ media.alt | split: '(' | last | split: ')' | first | prepend: '(' | append: ')' | downcase | replace: ' ', '_' }}" {% if media.alt contains '(' and media.alt contains ')' %}data-show-slide="false"{% else %}{% if settings.show_general_images %}data-show-slide="true"{% endif %}{% endif %}>
+                    {% liquid
+                      assign is_first = false
+                      if forloop.index == 1
+                        assign is_first = true
+                      endif
+                    %}
+                    {% render 'product-card-image', 
+                      media_source: media, 
+                      second_media: false, 
+                      show_second_image: false, 
+                      image_ratio: image_ratio, 
+                      aspect_ratio: aspect_ratio,
+                      desktop_media_width: desktop_media_width,
+                      mobile_media_width: mobile_media_width,
+                      modal_container_width: modal_container_width,
+                      is_first_image: is_first,
+                      parent: parent
+                    %}
+                  </li>                   
+                {% endfor %}
+              </template>
+            </ul>
+            {% if card_product.media.size > 1 %}
+              <div class="swiper-pagination{% if hover_behavior == 'slider' and show_bullets == false %} swiper-pagination--hidden{% endif %}" data-desktop-type="bullets" data-mobile-type="bullets"></div>
+              {% if hover_behavior == 'slider' %}            
+                <div class="swiper-button-prev swiper-button swiper-button-prev-{{ section.id }} ">
+                  <span class="icon icon--small">
+                    {% assign icon_full = 'arrow-left' | append: "-" | append: weight_close %}
+                    {% render 'icon-accordion', icon: icon_full %}
+                  </span>
+                </div>
+                <div class="swiper-button-next swiper-button swiper-button-next-{{ section.id }} ">
+                  <span class="icon icon--small">
+                    {% assign icon_full = 'arrow-right' | append: "-" | append: weight_close %}
+                    {% render 'icon-accordion', icon: icon_full %}
+                  </span>
+                </div>
+              {% endif %}
+            {% endif %}
+          </swiper-gallery>
+        {% when 'second_image', 'nothing' %}
+          {% render 'product-card-image', 
+            media_source: first_media, 
+            second_media: second_media, 
+            show_second_image: show_second_image, 
+            image_ratio: image_ratio, 
+            aspect_ratio: aspect_ratio,
+            desktop_media_width: desktop_media_width,
+            mobile_media_width: mobile_media_width,
+            modal_container_width: modal_container_width,
+            is_first_image: true,
+            parent: parent
+          %}
+      {% endcase %}
+      {% liquid
+        assign uppercase_font = false
+        assign bolder_font = false
+        if settings.typography_preset == 'custom'
+          if settings.uppercase_label
+            assign uppercase_font = true
+          endif
+          if settings.bolder_font_label
+            assign bolder_font = true
+          endif
+        endif
+      %}
+      <div class="card__badges card__badges--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}">
+        {%- liquid
+          assign badge_name_1 = settings.badge_name_1 | downcase
+          assign badge_name_2 = settings.badge_name_2 | downcase
+          assign badge_name_3 = settings.badge_name_3 | downcase
+          assign badge_name_4 = settings.badge_name_4 | downcase
+        -%}
+        {% if card_product.available and card_product.selected_or_first_available_variant.metafields.custom.badge != blank %}
+          {% for badge in card_product.selected_or_first_available_variant.metafields.custom.badge.value %}
+            {% assign badge_name = badge | downcase %}
+            <span class="card__badges-item card__badges-item--metafield"
+            {% if badge_name == badge_name_1 %}style="background-color: var(--badge-background-1); color: var(--badge-text-1);"
+            {% elsif badge_name == badge_name_2 %}style="background-color: var(--badge-background-2); color: var(--badge-text-2);"
+            {% elsif badge_name == badge_name_3 %}style="background-color: var(--badge-background-3); color: var(--badge-text-3);"
+            {% elsif badge_name == badge_name_4 %}style="background-color: var(--badge-background-4); color: var(--badge-text-4);"
+            {% elsif badge_name != badge_name_1 and badge_name != badge_name_2 and badge_name != badge_name_3 and badge_name != badge_name_4 %}style="background-color: rgb(var(--layout-text-color));"{% endif %}>
+              {{ badge }}
+            </span>
+          {% endfor %}
+        {% endif %}
+        {% if card_product.available and card_product.metafields.custom.badge != blank %}
+          {% for badge in card_product.metafields.custom.badge.value %}
+            {% assign badge_name = badge | downcase %}
+            <span class="card__badges-item card__badges-item--metafield"
+            {% if badge_name == badge_name_1 %}style="background-color: var(--badge-background-1); color: var(--badge-text-1);"
+            {% elsif badge_name == badge_name_2 %}style="background-color: var(--badge-background-2); color: var(--badge-text-2);"
+            {% elsif badge_name == badge_name_3 %}style="background-color: var(--badge-background-3); color: var(--badge-text-3);"
+            {% elsif badge_name == badge_name_4 %}style="background-color: var(--badge-background-4); color: var(--badge-text-4);"
+            {% elsif badge_name != badge_name_1 and badge_name != badge_name_2 and badge_name != badge_name_3 and badge_name != badge_name_4 %}style="background-color: rgb(var(--layout-text-color));"{% endif %}>
+              {{ badge }}
+            </span>
+          {% endfor %}
+        {% endif %}
+        {% if card_product.available and card_product.selected_or_first_available_variant.compare_at_price > card_product.selected_or_first_available_variant.price %}
+          <span class="card__badges-item card__badges-item--sale">{{ 'products.product.on_sale' | t }}</span>
+        {% endif %}
+        {% unless card_product.available %}
+          <span class="card__badges-item card__badges-item--sold">{{ 'products.product.sold_out' | t }}</span>
+        {% endunless %}
+        {% if card_product.template_suffix == 'preorder' and settings.show_pre_order_badge %}
+          <span class="card__badges-item card__badges-item--preorder">{{ 'products.product.pre_order' | t }}</span>
+        {% endif %}
+      </div>
+
+      {% if enable_quick_view or enable_add_to_cart %}
+        <div class="card__extras {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %}">
+          {% if enable_quick_view %}
+            <quick-view-button class="button button--small" data-product-url="{{ card_product.url | within: card_product.collection }}" data-product-variant-url="{{ card_product.selected_or_first_available_variant.url | within: card_collection }}">
+              <button class="card__quick-view open-popup quick card__extras--button" aria-label="{{ 'sections.qiuck_view.open_quick_view' | t }}">
+                {% assign icon_full = 'eye' | append: "-" | append: weight %}
+                {% render 'icon', icon: icon_full %}  
+                <div class="loading-overlay__spinner loading-overlay__spinner--static">
+                  <svg aria-hidden="true" focusable="false" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="path" fill="none" stroke-width="5" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                  </svg> 
+                </div>
+              </button>
+            </quick-view-button>
+          {% endif %}
+          {% if enable_add_to_cart %}
+            {% if card_product.variants.size < 2 %}
+              {%- liquid
+                assign product_form_id = 'quick-add-' | append: section.id | append: card_product.id
+              -%}
+              {% if settings.disable_shopping_functionality == false %}
+              <add-to-cart data-variant-id="{{ card_product.selected_or_first_available_variant.id }}" class="{% if settings.action_after_adding == 'cart_drawer' %}cart-drawer{% elsif settings.action_after_adding == 'success' %}cart-notification{% endif %}">
+                <button id="{{ product_form_id }}-submit" type="submit" name="add" class="card__add-to-cart quick card__extras--button" {% unless card_product.available %}disabled{% endunless %} aria-label="{% if settings.cart_name == 'cart' %}{{ 'sections.cart.quick_add_to_cart' | t }}{% elsif settings.cart_name == 'bag' %}{{ 'sections.cart.quick_add_to_bag' | t }}{% else %}{{ 'sections.cart.quick_add_to_basket' | t }}{% endif %}">
+                  {% if settings.cart_name == 'basket' %}
+                    {% assign icon_full = 'basket' | append: "-" | append: weight %}
+                    {% render 'icon', icon: icon_full %}
+                  {% elsif settings.cart_name == 'cart' %}
+                    {% assign icon_full = 'shopping-cart' | append: "-" | append: weight %}
+                    {% render 'icon', icon: icon_full %}
+                  {% elsif settings.cart_name == 'bag' %}
+                    {% assign icon_full = 'bag' | append: "-" | append: weight %}
+                    {% render 'icon-accordion-2', icon: icon_full %}
+                  {% endif %}
+                  <div class="loading-overlay__spinner loading-overlay__spinner--static">
+                    <svg aria-hidden="true" focusable="false" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                      <circle class="path" fill="none" stroke-width="5" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                    </svg> 
+                  </div>
+                </button>
+              </add-to-cart>
+              {% endif %}
+            {% else%}
+              {% if settings.disable_shopping_functionality == false %}
+              <quick-view-button class="button button--small" data-product-url="{{ card_product.url | within: card_product.collection }}" data-product-variant-url="{{ card_product.selected_or_first_available_variant.url | within: card_collection }}">
+                <button type="submit" name="add" class="card__add-to-cart quick card__extras--button" {% unless card_product.available %}disabled{% endunless %} aria-label="{% if settings.cart_name == 'cart' %}{{ 'sections.cart.quick_add_to_cart' | t }}{% elsif settings.cart_name == 'bag' %}{{ 'sections.cart.quick_add_to_bag' | t }}{% else %}{{ 'sections.cart.quick_add_to_basket' | t }}{% endif %}">
+                  {% if settings.cart_name == 'basket' %}
+                    {% assign icon_full = 'basket' | append: "-" | append: weight %}
+                    {% render 'icon', icon: icon_full %}
+                  {% elsif settings.cart_name == 'cart' %}
+                    {% assign icon_full = 'shopping-cart' | append: "-" | append: weight %}
+                    {% render 'icon', icon: icon_full %}
+                  {% elsif settings.cart_name == 'bag' %}
+                    {% assign icon_full = 'bag' | append: "-" | append: weight %}
+                    {% render 'icon-accordion-2', icon: icon_full %}
+                  {% endif %}
+                  <div class="loading-overlay__spinner loading-overlay__spinner--static">
+                    <svg aria-hidden="true" focusable="false" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                      <circle class="path" fill="none" stroke-width="5" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                    </svg> 
+                  </div>
+                </button>
+              </quick-view-button>
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="card__content {% if center_text %}card__content--center{% endif %}{% if disable_layout_margins %} card__content--with-margins{% endif %}{% if desktop_content_margin %} card__content--desktop-content-margin{% endif %}{% if mobile_content_margin %} card__content--mobile-content-margin{% endif %}">
+      {% if price_position == 'top' %}
+        <div class="card__price card__price--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.product_price_size != 'default' %}{{ settings.product_price_size }}{% else %}{% if uppercase_price %} uppercase{% endif %}{% if bolder_price_font %} bolder-font{% endif %}{% endif %}{% endif %}">
+          {% render 'price', product: card_product, in_card_product: true, uppercase_price: uppercase_price, bolder_price_font: bolder_price_font %}
+        </div>
+      {% endif %}
+      <div class="card__info">
+        <div class="card__product-info">
+          {% if show_vendor %}
+            <p class="card__vendor card__vendor--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.product_text_size != 'default' %}{{ settings.product_text_size }}{% else %}{% if uppercase_text %} uppercase{% endif %}{% if bolder_text_font %} bolder-font{% endif %}{% endif %}{% endif %}{% if settings.dim_text %} dim{% endif %}">{{ 'products.product.by_vendor' | t }}{{ card_product.vendor }}</p>
+          {% endif %}
+          {% liquid 
+            assign truncatedCharacters = max_product_name_characters | plus: 3 
+          %}
+            <div class="card__title card__title--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.product_title_size != 'default' %}{{ settings.product_title_size }}{% else %}{% if uppercase_title %} uppercase{% endif %}{% if bolder_title_font %} bolder-font{% endif %}{% endif %}{% endif %}" 
+              {% if max_product_name_characters > 0 %}data-name-characters="{{ max_product_name_characters }}"{% endif %}>
+              {% if max_product_name_characters != blank and max_product_name_characters > 0 %}
+                  <p class="card__title-text card__title-js">{{ card_product.title | truncate: max_product_name_characters, '' }}{% if max_product_name_characters < card_product.title.size %}...{% endif %}</p>
+              {% elsif max_product_name_characters == nil %}
+                  {% unless section.id contains 'predictive-search' %}<p class="card__title-text card__title-js">{{ card_product.title }}</p>{% endunless %}
+              {% endif %}   
+              {% if section.id contains 'predictive-search' %} 
+                <p class="card__title-text card__title-js">{{ card_product.title }}</p>
+              {% endif %}     
+              {% if price_position == 'with_title' %}
+                <div class="card__price card__price--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.product_price_size != 'default' %}{{ settings.product_price_size }}{% else %}{% if uppercase_price %} uppercase{% endif %}{% if bolder_price_font %} bolder-font{% endif %}{% endif %}{% endif %}">
+                  {% render 'price', product: card_product, in_card_product: true, uppercase_price: uppercase_price, bolder_price_font: bolder_price_font %}
+                </div>
+              {% endif %}
+            </div>
+        </div>
+        {%- if show_rating and card_product.metafields.reviews.rating.value != blank -%}
+          <div class="card__reviews{% if settings.typography_preset != 'custom' %} rating-container--classic{% else %} rating-container--custom{% endif %} {% if settings.typography_preset == 'custom' %}{% if settings.product_text_size != 'default' %}{{ settings.product_text_size }}{% else %}{% if uppercase_text %} uppercase{% endif %}{% if bolder_text_font %} bolder-font{% endif %}{% endif %}{% endif %}">
+            {% liquid
+              assign rating_decimal = 0 
+              assign decimal = card_product.metafields.reviews.rating.value.rating | modulo: 1 
+              assign rating_decimal = decimal
+            %}
+            <div class="rating" role="img" aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: card_product.metafields.reviews.rating.value, rating_max: card_product.metafields.reviews.rating.value.scale_max }}">
+              <span aria-hidden="true" class="rating-star" style="--rating: {{ card_product.metafields.reviews.rating.value.rating | floor }}; --rating-max: {{ card_product.metafields.reviews.rating.value.scale_max }}; --rating-decimal: {{ rating_decimal }};"></span>
+            </div>
+            <p class="rating-text caption {% if settings.dim_text %} dim{% endif %}">
+              <span class="card-rating-span" aria-hidden="true">{{ card_product.metafields.reviews.rating.value | slice: 0, 3 }} / {{ card_product.metafields.reviews.rating.value.scale_max }}</span>
+            </p>
+            <p class="rating-count caption {% if settings.dim_text %} dim{% endif %}">
+              <span class="card-rating-span" aria-hidden="true">{{ card_product.metafields.reviews.rating_count }} {% if card_product.metafields.reviews.rating_count > 1 %}{{ "accessibility.reviews" | t }}{% else %}{{ "accessibility.review" | t }}{% endif %}</span>
+              <span class="visually-hidden card-rating-span">{{ card_product.metafields.reviews.rating_count }} {{ "accessibility.total_reviews" | t }}</span>
+            </p>
+          </div>
+        {%- endif -%}
+      </div>
+
+      {% if show_short_description and card_product.metafields.descriptors.subtitle != blank %}
+        <div class="card__short-description card__short-description--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.product_text_size != 'default' %}{{ settings.product_text_size }}{% else %}{% if uppercase_text %} uppercase{% endif %}{% if bolder_text_font %} bolder-font{% endif %}{% endif %}{% endif %}">
+          <p>{{ card_product.metafields.descriptors.subtitle }}</p>
+        </div>
+      {% endif %}
+
+      {% if show_pickup_availability %}
+        {% liquid
+            assign current_store = nil
+            assign availability = nil
+
+            if cart.attributes['store'] != blank
+              assign current_store = cart.attributes['store']
+              assign pick_up_availabilities = card_product.selected_or_first_available_variant.store_availabilities 
+
+              assign current_store_availability = nil
+              for availability in pick_up_availabilities 
+                if availability.location.name == current_store 
+                  assign current_store_availability = availability 
+                  break
+                endif 
+              endfor
+
+              if current_store_availability.available and current_store_availability.pick_up_enabled
+                assign availability = 'available'
+              else
+                assign availability = 'unavailable'
+              endif
+            endif   
+          %}
+
+        {% unless settings.hide_store_selection_text and current_store == nil %}
+            {% render 'pickup-availability', availability: availability %}
+        {% endunless %}
+      {% endif %}
+
+      {% if price_position == 'bottom' or show_price_in_quick_search %}
+        <div class="card__price card__price--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.product_price_size != 'default' %}{{ settings.product_price_size }}{% else %}{% if uppercase_price %} uppercase{% endif %}{% if bolder_price_font %} bolder-font{% endif %}{% endif %}{% endif %}">
+          {% render 'price', product: card_product, product: card_product, in_card_product: true, uppercase_price: uppercase_price, bolder_price_font: bolder_price_font %}
+        </div>
+      {% endif %}
+
+      {% if enable_color_pills %}
+        {%- assign size_variant_label = settings.size_variant_label | downcase -%}
+        
+        <swatches-wrapper class="swatches-containers-wrapper">
+          {%- if settings.pills_on_product_card == 'both' or settings.pills_on_product_card == 'variants' -%}
+            <div class="swatches_container">
+              {%- liquid
+                assign swatch_trigger = 'products.product.color_swatch_tag' | t | downcase
+                assign swatch_file_extension = 'png'
+                assign color_count = 0
+                assign has_color_option = false
+                assign image_swatch_variant_label = settings.image_swatch_variant_label | downcase
+                assign show_variant_image = false
+              -%}
+          
+              {%- for option in card_product.options_with_values -%}
+                {%- liquid
+                  assign option_name = option.name | downcase
+                  assign is_color = false
+                  if option_name contains swatch_trigger
+                    assign is_color = true
+                  elsif swatch_trigger == 'color' and option_name contains 'colour'
+                    assign is_color = true
+                  endif
+
+                  if image_swatch_variant_label != blank and image_swatch_variant_label contains option_name
+                    assign show_variant_image = true
+                  endif
+                -%}
+                  {%- if is_color -%}
+                    {%- liquid
+                      assign option_index = forloop.index0
+                      assign values = ''
+                      assign max_count = 4
+                      assign has_color_option = true
+                    -%}
+                    <div class="card__colors card__colors--{{ settings.color_swatches_size }} card__colors--{{ card_product.id }}">
+                      {% assign available_variants = card_product.variants | where: 'available', true %}
+                      {%- for variant in available_variants -%}
+                        {%- assign value = variant.options[option_index] %}
+                        {%- unless values contains value -%}
+                          {%- liquid
+                            assign values = values | join: ',' | append: ',' | append: value | split: ','
+                            assign color_count = color_count | plus: 1
+                            assign color_swatch_fallback = value | downcase | split: ' ' | last
+
+                            assign value_downcase = value | downcase | lstrip | replace: ' ', '_'
+                            assign swatch_config = settings.swatch_config | newline_to_br | split: '<br />'
+
+                        if value.swatch.image
+                          if settings.pills_style == "swatch"
+                            assign image_url = value.swatch.image | image_url: width: 50
+                          else
+                            assign image_url = value.swatch.image | image_url: width: 100
+                          endif
+                            assign swatch_value = 'url(' | append: image_url | append: ')'
+                            assign color_swatch_fallback = swatch_value
+                            assign swatch_focal_point = value.swatch.image.presentation.focal_point
+                        elsif value.swatch.color
+                            assign color_swatch_fallback = 'rgb(' | append: value.swatch.color.rgb | append: ')'
+                        endif 
+                        for swatch in swatch_config
+                            assign swatch_parts = swatch | strip | split: ':'
+                            assign swatch_name = swatch_parts.first | downcase | lstrip | replace: ' ', '_'
+                            if swatch_name == value_downcase
+                                assign swatch_value = swatch_parts.last | strip
+                                if swatch_value contains '#'
+                                    assign color_swatch_fallback = swatch_value
+                                else
+                                    assign color_swatch_fallback = value | downcase | split: ' ' | last | handle
+                                    if value.swatch.image
+                                      if settings.pills_style == "swatch"
+                                        assign image_url = value.swatch.image | image_url: width: 50
+                                      else
+                                        assign image_url = value.swatch.image | image_url: width: 100
+                                      endif
+                                        assign swatch_value = 'url(' | append: image_url | append: ')'
+                                        assign color_swatch_fallback = swatch_value
+                                        assign swatch_focal_point = value.swatch.image.presentation.focal_point
+                                    elsif value.swatch.color
+                                        assign color_swatch_fallback = 'rgb(' | append: value.swatch.color.rgb | append: ')'
+                                    endif
+                                endif
+                                break
+                            endif
+                          endfor
+
+                            capture color_file_name
+                              render 'filename-normalize', value: value, keep_case: true
+                            endcapture
+                            assign color_file_name = color_file_name | append: '.' | append: swatch_file_extension
+
+                            capture color_value
+                              render 'filename-normalize', value: value
+                            endcapture
+                            
+                            assign img_file = images[color_file_name] | downcase
+                            assign color_image = images[color_file_name] | split: '/' | last | file_img_url: '100x100' | prepend: 'https:' | split: '?' | first
+                          -%}
+                          {%- if color_count <= max_count -%}
+                            {%- liquid
+                              assign enable_quick_buy_2nd = false
+                              if show_quick_buy_2nd and has_color_option and options_count <= 2
+                                assign enable_quick_buy_2nd = true
+                              endif
+
+                              assign variant_image = variant.image
+                              assign product_handle = card_product.handle | escape
+                              assign value_product_url = value.product_url | split: '/' | last
+                              if value_product_url and product_handle != value_product_url
+                                assign variant_image = variant.product.featured_media
+                              endif
+                              
+                              assign second_swatch_image = false
+                              if variant_image  and variant_image.alt != blank
+                                if variant_image.alt contains '(' or variant_image.alt contains ')' 
+                                  assign alt_value = variant_image.alt | downcase | split: '(' | last | split: ')' | first | prepend: '(' | append: ')'
+                                else 
+                                  assign alt_value = variant_image.alt | downcase
+                                endif
+
+                                if alt_value != blank
+                                  for product_image in card_product.images
+                                    assign product_image_alt = product_image.alt | downcase
+                                    if product_image_alt contains alt_value and product_image.id != variant_image.id
+                                      assign second_swatch_image = product_image
+                                      break
+                                    endif
+                                  endfor
+                                endif
+                              endif
+                              
+                              if second_swatch_image == false
+                                assign second_swatch_image = card_product.media[1]
+                                if value_product_url and product_handle != value_product_url
+                                  assign second_swatch_image = variant.product.media[1]
+                                endif
+                              endif
+
+                              if variant.image.alt contains '(' or variant.image.alt contains ')' 
+                                assign variant_image_alt = variant.image.alt | split: '(' | last | split: ')' | first | prepend: '(' | append: ')' | downcase | replace: ' ', '_'
+                              endif
+                            -%}
+                          
+                          {%- capture card_sizes -%}
+                            {%- render 'product-card-sizes',
+                              desktop_media_width: desktop_media_width,
+                              mobile_media_width: mobile_media_width,
+                              modal_container_width: modal_container_width,
+                              alternative_grid: alternative_grid,
+                              big_card: big_card
+                            -%}
+                          {%- endcapture -%}
+                          {%- assign card_sizes = card_sizes | strip_newlines | strip -%}
+
+                          {%- capture first_media_node_image_tag -%}
+                            {% if settings.images_loading != 'disable' %}
+                              <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ card_product.featured_media.aspect_ratio }}">
+                            {% endif %}
+                            <img draggable="false"
+                              srcset="{%- if card_product.featured_media.width >= 165 -%}{{ card_product.featured_media | image_url: width: 165 }} 165w{%- endif -%}
+                                {%- if card_product.featured_media.width >= 360 -%},{{ card_product.featured_media | image_url: width: 360 }} 360w{%- endif -%}
+                                {%- if card_product.featured_media.width >= 533 -%},{{ card_product.featured_media | image_url: width: 533 }} 533w{%- endif -%}
+                                {%- if card_product.featured_media.width >= 720 -%},{{ card_product.featured_media | image_url: width: 720 }} 720w{%- endif -%}
+                                {%- if card_product.featured_media.width >= 940 -%},{{ card_product.featured_media | image_url: width: 940 }} 940w{%- endif -%}
+                                {%- if card_product.featured_media.width >= 1066 -%},{{ card_product.featured_media | image_url: width: 1066 }} 1066w{%- endif -%},
+                                {{- card_product.featured_media | image_url }} {{ card_product.featured_media.width }}w"
+                              src="{{ card_product.featured_media | image_url: width: 533 }}"
+                              sizes="{{ card_sizes }}"
+                              class="card__image"
+                              loading="lazy"
+                              {% if settings.images_loading != 'disable' %}
+                                onload="this.parentNode.classList.add('lazyloaded');"
+                              {% endif %}
+                              width="{{ card_product.featured_media.width }}"
+                              height="{{ card_product.featured_media.height }}"
+                              alt="{{ card_product.featured_media.alt }}"
+                            > 
+                            {% if settings.images_loading != 'disable' %}
+                              {% if settings.images_loading != 'fade_scale' %}
+                              <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                                <img 
+                                alt="{{ card_product.featured_media.alt | escape }}" 
+                                src="{{ card_product.featured_mediae | image_url: width: 10 }}"
+                                draggable="false"
+                                width="10" 
+                                height="10">
+                              </div>
+                              {% endif %}
+                          </figure>
+                          {% endif %}                   
+                          {%- endcapture -%}
+
+                          {%- capture first_media_node -%}
+                            {%- if variant_image  %}
+                              {% if settings.images_loading != 'disable' %}
+                                <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ variant_image.aspect_ratio }}">
+                              {% endif %}
+                                <img draggable="false"
+                                  srcset="{%- if variant_image.width >= 165 -%}{{ variant_image | image_url: width: 165 }} 165w{%- endif -%}
+                                  {%- if variant_image.width >= 360 -%},{{ variant_image | image_url: width: 360 }} 360w{%- endif -%}
+                                  {%- if variant_image.width >= 533 -%},{{ variant_image | image_url: width: 533 }} 533w{%- endif -%}
+                                  {%- if variant_image.width >= 720 -%},{{ variant_image | image_url: width: 720 }} 720w{%- endif -%}
+                                  {%- if variant_image.width >= 940 -%},{{ variant_image | image_url: width: 940 }} 940w{%- endif -%}
+                                  {%- if variant_image.width >= 1066 -%},{{ variant_image | image_url: width: 1066 }} 1066w{%- endif -%},
+                                  {{- variant_image | image_url }} {{ variant_image.width }}w"
+                                  src="{{ variant_image | image_url: width: 533 }}"
+                                  sizes="{{ card_sizes }}"
+                                  alt="{{ variant_image.alt | escape }}"
+                                  loading="lazy"
+                                  {% if settings.images_loading != 'disable' %}
+                                    onload="this.parentNode.classList.add('lazyloaded');"
+                                  {% endif %}
+                                  width="{{ variant_image.width }}"
+                                  height="{{ variant_image.height }}"
+                                  class="card__image"
+                                  data-id="{{ variant.featured_media.id }}"
+                                >                                             
+                            {% if settings.images_loading != 'disable' %}
+                                {% if settings.images_loading != 'fade_scale' %}
+                                <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                                  <img 
+                                  alt="{{ variant_image.alt | escape }}" 
+                                  src="{{ variant_image | image_url: width: 10 }}"
+                                  draggable="false"
+                                  width="10" 
+                                  height="10">
+                                </div>
+                                {% endif %}
+                            </figure>
+                            {% endif %}
+                            
+                              {%- elsif card_product.featured_media  %}
+                                {%- if settings.enable_autoplay_on_product_card -%}
+                                  {%- case card_product.featured_media.media_type -%}
+                                    {%- when 'image' -%}
+                                      {{ first_media_node_image_tag }}
+                                    {%- when 'video' -%}
+                                      {% if settings.images_loading == 'disable' %}
+                                      {{ card_product.featured_media | video_tag: preload: 'none', loop: true, muted: true, controls: false, class: 'card__image card__image--second card__image--video none-autoplay' }}
+                                    {% else %}
+                                        <figure class="lazy-video lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ card_product.featured_media.aspect_ratio }}">
+                                            {{ card_product.featured_media | video_tag:  preload: 'none', loop: true, muted: true, controls: false, class: 'card__image card__image--second card__image--video none-autoplay', oncanplay: 'this.parentNode.classList.add("lazyloaded");' }}
+                                            {% if settings.images_loading != 'fade_scale' %}
+                                            <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true" >
+                                                <img 
+                                                    alt="{{ card_product.featured_media.alt | escape }}" 
+                                                    src="{{ card_product.featured_media.preview_image | image_url: width: 10 }}"
+                                                    draggable="false"
+                                                    width="10" 
+                                                    height="10">
+                                            </div>
+                                            {% endif %}
+                                        </figure>
+                                    {% endif %}
+                                    {%- when 'external_video' -%}
+                                      {%- if card_product.featured_media.host == 'youtube' -%}
+                                        {{ card_product.featured_media | external_video_url: autoplay: true, loop: true, muted: true, controls: false, playlist: card_product.featured_media.external_id | external_video_tag: class: 'card__image card__image--second card__image--video js-youtube none-autoplay', loading: "lazy" }}
+                                      {%- endif -%}
+                                      {%- if card_product.featured_media.host == 'vimeo' -%}
+                                        {{ card_product.featured_media | external_video_url: autoplay: true, loop: true, muted: true, controls: false | external_video_tag: class: 'card__image card__image--second card__image--video js-vimeo none-autoplay', loading: "lazy" }}
+                                      {%- endif -%}
+                                    {%- when 'model' -%}
+                                      {{ card_product.featured_media | model_viewer_tag: class: 'card__image card__image--second', interaction-prompt: 'none' }}
+                                    {%- endcase -%}
+                                {%- else -%}
+                                  {{ first_media_node_image_tag }}
+                                {%- endif -%}
+                              {%- endif  %}
+                          {%- endcapture -%}
+                        
+                            {%- capture second_media_node_image_tag -%}
+                              {% if settings.images_loading != 'disable' %}
+                                <figure class="lazy-image lazy-image--{{ settings.images_loading }} lazyloaded" style="--desktop-asp-rat: {{ second_swatch_image.aspect_ratio }}">
+                              {% endif %}
+                                <img draggable="false"
+                                  srcset="{%- if second_swatch_image.width >= 100 -%}{{ second_swatch_image | image_url: width: 100 }} 100w,{%- endif -%}
+                                    {%- if second_swatch_image.width >= 165 -%}{{ second_swatch_image | image_url: width: 165 }} 165w,{%- endif -%}
+                                    {%- if second_swatch_image.width >= 375 -%}{{ second_swatch_image | image_url: width: 375 }} 375w,{%- endif -%}
+                                    {%- if second_swatch_image.width >= 550 -%}{{ second_swatch_image | image_url: width: 550 }} 550w,{%- endif -%}
+                                    {%- if second_swatch_image.width >= 750 -%}{{ second_swatch_image | image_url: width: 750 }} 750w,{%- endif -%}
+                                    {%- if second_swatch_image.width >= 1100 -%}{{ second_swatch_image | image_url: width: 1100 }} 1100w,{%- endif -%}
+                                    {%- if second_swatch_image.width >= 1500 -%}{{ second_swatch_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+                                    {{ second_swatch_image | image_url }} {{ second_swatch_image.width }}w
+                                  "
+                                  src="{{ second_swatch_image | image_url: width: 533 }}"
+                                  sizes="{{ card_sizes }}"
+                                  class="card__image card__image--second"
+                                  loading="lazy"
+                                  width="{{ second_swatch_image.width }}"
+                                  height="{{ second_swatch_image.height }}"
+                                  alt="{{ second_swatch_image.alt }}"
+                                > 
+                              {% if settings.images_loading != 'disable' %}
+                                {% if settings.images_loading != 'fade_scale' %}
+                                <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                                  <img 
+                                  alt="{{ second_swatch_image.alt | escape }}" 
+                                  src="{{ second_swatch_image | image_url: width: 10 }}"
+                                  draggable="false"
+                                  width="10" 
+                                  height="10">
+                                </div>
+                                {% endif %}
+                                </figure>
+                              {% endif %}   
+                            {%- endcapture -%}
+
+                            {% liquid
+                              assign second_image_media_type = ''
+                              assign target_media_url = second_swatch_image | image_url: width: 1
+                            
+                              for media in card_product.media
+                                assign media_url = media.preview_image | image_url: width: 1
+                                if media_url == target_media_url
+                                  assign second_image_media_type = media.media_type
+                                  break
+                                endif
+                              endfor
+                            %}
+
+                            {%- capture second_media_node -%}
+                              {%- if settings.enable_autoplay_on_product_card -%}
+                                {%- case second_image_media_type -%}
+                                  {%- when 'image' -%}
+                                    {{ second_media_node_image_tag }}
+                                  {%- when 'video' -%}
+                                    {{ second_swatch_image | video_tag: preload: 'none', loop: true, muted: true, controls: false, class: 'card__image card__image--second card__image--video none-autoplay' }}
+                                  {%- when 'external_video' -%}
+                                    {%- if second_swatch_image.host == 'youtube' -%}
+                                      {{ second_swatch_image | external_video_url: loop: true, muted: true, controls: false, playlist: second_swatch_image.external_id | external_video_tag: class: 'card__image card__image--second card__image--video js-youtube none-autoplay', loading: "lazy" }}
+                                    {%- endif -%}
+                                    {%- if second_swatch_image.host == 'vimeo' -%}
+                                      {{ second_swatch_image | external_video_url: loop: true, muted: true, controls: false | external_video_tag: class: 'card__image card__image--second card__image--video js-vimeo none-autoplay', loading: "lazy" }}
+                                    {%- endif -%}
+                                  {%- when 'model' -%}
+                                    {{ second_swatch_image | model_viewer_tag: class: 'card__image card__image--second', interaction-prompt: 'none' }}
+                                {%- endcase -%}
+                              {%- else -%}
+                                {{ second_media_node_image_tag }}
+                              {%- endif -%}
+                            {%- endcapture -%} 
+                            {% if option.values.size >= 2 %}
+                              {% liquid
+                                assign show_title_image = false
+                                assign show_title_pills = false
+                                if show_variant_image == true and show_variant_image and settings.show_image_name 
+                                  assign show_title_image = true
+                                endif
+                                if show_variant_image == false and settings.pills_style == 'image' and settings.show_image_pills_name
+                                  assign show_title_pills = true
+                                endif
+                                if show_variant_image == false and settings.pills_style == 'swatch'
+                                  assign show_title_pills = true
+                                endif
+                              %}
+                              <color-swatch 
+                                class="color-swatch 
+                                  {%- if variant.id == card_product.selected_or_first_available_variant.id and enable_check_swatch %} active-swatch{% endif -%} 
+                                  {%- if show_variant_image %} {{ color_swatch_fallback }} color-swatch-image{% if settings.enable_shadow %} color-swatch-image--shadow{% endif %}{% endif -%} 
+                                  {%- if show_variant_image == false and settings.pills_style == 'image' %} color-swatch-image--pills color-swatch-image{% if settings.enable_shadow_pills %} color-swatch-image--shadow{% endif %}{% endif -%} 
+                                  {%- if settings.show_first_image %} show-first-image{% endif -%}
+                                  {%- if settings.show_selected_variant_value %} show-selected-value{% endif -%}
+                                  {%- if show_title_image or show_title_pills %} color-swatch--with-title{% endif -%}"
+                                style="{% if show_variant_image %}
+                                        {%- if variant_image != null  -%}
+                                          --swatch-background: none;
+                                        {%- else -%}
+                                          --swatch-background: {% if images[color_file_name] != blank and img_file contains color_value %}url({{ color_image }}){% else %}{{ color_swatch_fallback }}{% endif %};
+                                        {%- endif -%}
+                                      {% else %}
+                                        --swatch-background: {% if images[color_file_name] != blank and img_file contains color_value %}url({{ color_image }}){% else %}{{ color_swatch_fallback }}{% endif %};
+                                      {% endif %}"
+                                title="{{ value | escape }}"
+                                {%- if variant_image  %}
+                                  data-first-media-node="{{ first_media_node | escape }}"
+                                  {%- if show_second_image  -%}
+                                    data-second-media-node="{{ second_media_node | escape }}"
+                                  {%- endif -%}
+                                {% elsif card_product.featured_media %}
+                                  data-first-media-node="{{ first_media_node | escape }}"
+                                {% endif -%}
+                                data-hover-behavior="{{ hover_behavior }}"
+                                {%- if card_product.available  %}
+                                  data-color-name="{{ color_value }}"
+                                  data-variant-img-alt="{{ variant_image_alt }}"
+                                  data-variant-id="{{ variant.id }}"
+                                  data-product-handle="{{ card_product.handle | escape }}"
+                                  data-product-url="{{ value.product_url }}"
+                                  data-collection-handle="{{ collection.handle | escape }}"
+                                {% endif -%}
+                              >
+                                <object class="color-swatch__dot 
+                                  {% if show_variant_image %}
+                                    color-swatch__dot--image ratio-{{ settings.image_swatch_ratio }} 
+                                    {% if settings.enable_blending and settings.apply_to_swatches %}enable-blending{% endif %} 
+                                    {% if settings.image_swatch_radius == '2000px 2000px 0 0' %}color-swatch__dot--image-arc{% endif %} 
+                                    {% unless variant_image  %}color__swatch-dot--color{% endunless %}
+                                  {% endif %} 
+                                  {% if show_variant_image == false and settings.pills_style == 'image' %}color-swatch__dot--image ratio-{{ settings.image_pills_ratio }} {% if settings.image_pills_radius == '2000px 2000px 0 0' %}color-swatch__dot--image-arc{% endif %}{% endif %}" 
+                                  aria-label="{{ value | escape }}"
+                                >
+                                  {% if show_variant_image and variant_image %}{{ variant_image  | image_url: width: 100 | image_tag }}{% endif %}
+                                  <a class="color-swatch__link" href="{{ variant.url }}" tabindex="-1">
+                                    <span class="visually-hidden">{{ value }}</span>
+                                  </a>
+                                </object>
+                                {% if show_title_image or show_title_pills %}
+                                <span class="color-swatch__title">{{ value | escape }}</span>
+                                {% endif %}
+                              </color-swatch>
+                            {% endif %}
+                          {%- endif -%}
+                        {%- endunless -%}
+                      {%- endfor -%}
+                      {%- if color_count > max_count -%}
+                        <object class="color-swatch--more-items"  aria-label="{{ value | escape }}">
+                          <a class="color-swatch--more-items-link {% if settings.typography_preset == 'custom' %}color-swatch--more-items-link--custom {% if settings.product_text_size != 'default' %}{{ settings.product_text_size }}{% else %}{% if uppercase_text %} uppercase{% endif %}{% if bolder_text_font %} bolder-font{% endif %}{% endif %}{% endif %}" href="{{ card_product.url | within: card_collection }}" tabindex="-1">
+                            +{{ color_count | minus: max_count }}
+                          </a>
+                        </object>
+                      {%- endif -%}
+                    </div>
+                    {% break %}
+                  {%- endif -%}
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+          {%- if size_variant_label != blank -%}
+            <div class="swatches_container size-label {% if settings.pills_on_product_card != 'both' %} order-last {% endif %}">
+              {%- for option in card_product.options_with_values -%}
+                {%- assign option_name = option.name | downcase -%}
+                {%- if size_variant_label contains option_name -%}
+                  {%- liquid
+                    assign variants_available_arr = card_product.variants | map: 'available'
+                    assign variants_option1_arr = card_product.variants | map: 'option1'
+                    assign variants_option2_arr = card_product.variants | map: 'option2'
+                    assign variants_option3_arr = card_product.variants | map: 'option3'
+                  -%}
+                  <div class="card__sizes card__vendor--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.product_text_size != 'default' %}{{ settings.product_text_size }}{% else %}{% if uppercase_text %} uppercase{% endif %}{% if bolder_text_font %} bolder-font{% endif %}{% endif %}{% endif %} {% if settings.dim_text %} dim{% endif %}">
+                    {%- for value in option.values -%}
+                      {%- liquid
+                        assign option_disabled = true
+                    
+                        for option1_name in variants_option1_arr
+                          case option.position
+                            when 1
+                              if variants_option1_arr[forloop.index0] == value and variants_available_arr[forloop.index0]
+                                assign option_disabled = false
+                              endif
+                            when 2
+                              if option1_name == card_product.selected_or_first_available_variant.option1 and variants_option2_arr[forloop.index0] == value and variants_available_arr[forloop.index0]
+                                assign option_disabled = false
+                              endif
+                            when 3
+                              if option1_name == card_product.selected_or_first_available_variant.option1 and variants_option2_arr[forloop.index0] == card_product.selected_or_first_available_variant.option2 and variants_option3_arr[forloop.index0] == value and variants_available_arr[forloop.index0]
+                                assign option_disabled = false
+                              endif
+                          endcase
+                        endfor
+                      -%}
+                      <span class="card__size{% if option_disabled %} card__size--disabled{% endif %}">{{- value -}}</span>
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+          {%- if settings.pills_on_product_card == 'both' or settings.pills_on_product_card == 'linked_product' -%}
+            {%- liquid 
+              assign linked_products = card_product.metafields.custom.linked_products
+            -%}
+            {%- if linked_products != blank -%}
+            <linked-products class="swatches_container card__linked-products">
+              {% style %}
+                  .card__linked-products {
+                      --focal-point: {{ settings.linked_products_focal_point }};
+                      --border-radius: {{ settings.linked_products_image_radius }};
+                  }
+              {% endstyle %}
+              {%- liquid
+                assign linked_count = 0
+                assign linked_max_count = 4
+              -%}
+              {% for item in linked_products.value  %}
+                {% liquid 
+                    assign linked_count = linked_count | plus: 1
+                    assign linked_img = item.metafields.custom.linked_image
+                    assign linked_color = item.metafields.custom.linked_color
+                    assign img_url = linked_img.value | split: '/' | last | escape
+                    assign img = linked_img.value | split: '/' | last | escape | file_img_url: '200x200' | prepend: 'https:' | split: '?' | first
+                %}
+                {%- if linked_count <= linked_max_count -%}
+                  <div
+                    class="linked-products__row{% if settings.show_linked_products_name %} linked-products__row--with-title{% endif %}{% if item.url == card_product.url %} linked-products__row--active{% endif %}"
+                  >
+                    <object>
+                      <a
+                        class="linked-products__swatch{% if settings.enable_blending %} enable-blending{% endif %}{% if item.url == card_product.url %} linked-products__swatch--active{% endif %}{% if settings.enable_shadow %} linked-products__swatch--shadow{% endif %} ratio-{{ settings.linked_products_image_ratio }}{% if settings.linked_products_image_radius == '2000px 2000px 0 0' %} linked-products__swatch-arc{% endif %}"
+                        href="{{ item.url }}"
+                      >
+                        {% if linked_img != blank %}
+                          <span class="linked-products__swatch-span">{{ images[img_url] | image_url: width: 200 | image_tag }}</span>
+                        {% elsif linked_img == blank and linked_color != blank %}
+                          <span class="linked-products__swatch-span {% if settings.linked_products_image_ratio == 'original' %}ratio-square{% endif %}" style="background-color: {{ linked_color.value }}"></span>
+                        {% elsif linked_img == blank and linked_color == blank %}
+                          <span class="linked-products__swatch-span">{{ item.featured_image | image_url: width: 200 | image_tag: alt: item.featured_image.alt, draggable: false }}</span>
+                        {% endif %}
+                      </a>
+                    </object>
+                    {%- if settings.show_linked_products_name -%}
+                      <span class="color-swatch__title linked-products__title">{{ item.title | escape }}</span>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+            {% endfor %}
+            {%- if linked_count > linked_max_count -%}
+              <object class="color-swatch--more-items"  aria-label="{{ value | escape }}">
+                <a class="color-swatch--more-items-link {% if settings.typography_preset == 'custom' %}color-swatch--more-items-link--custom {% if settings.product_text_size != 'default' %}{{ settings.product_text_size }}{% else %}{% if uppercase_text %} uppercase{% endif %}{% if bolder_text_font %} bolder-font{% endif %}{% endif %}{% endif %}" href="{{ card_product.url | within: card_collection }}" tabindex="-1">
+                  +{{ linked_count | minus: linked_max_count }}
+                </a>
+              </object>
+            {%- endif -%}
+            </linked-products>
+            {%- endif -%}
+          {%- endif -%}
+        </swatches-wrapper>
+      {% endif %}
+    </div>
+  </a>
+</div>

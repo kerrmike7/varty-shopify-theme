@@ -1,0 +1,109 @@
+{% if settings.enable_breadcrumbs %}
+  <breadcrumbs-component class="breadcrumbs-component {{ section.settings.section_width }}{% if product_block %} section-block{% endif %}" data-current-template="{{ template.name }}"
+    {% if product_block %}style="--spacing: {{ object.settings.top_spacing }}; --mobile-spacing: {{ object.settings.mobile_top_spacing }};"{% endif %}
+    {% if object == block %}{{- object.shopify_attributes -}}{% endif %}>
+    {%- assign t = template | split: '.' | first -%}
+    
+    <nav class="breadcrumbs breadcrumbs--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_label %} uppercase{% endif %}{% if settings.bolder_font_label %} bolder-font{% endif %}{% endif %} flex--row" role="navigation" aria-label="breadcrumbs">
+      <ol class="breadcrumbs__list
+        {%- if settings.breadcrumbs_text_style != 'default' %} {{ settings.breadcrumbs_text_style }} {% endif -%}
+        {%- if object.settings.breadcrumbs_center_content %} breadcrumbs--center {% endif -%}
+        {%- if settings.breadcrumbs_dim_path %} breadcrumbs__list--dim {% endif -%}"
+      >
+        <li class="breadcrumbs__item flex--row">
+          <a class="breadcrumbs__link" href="{{ routes.root_url }}">{{- 'general.breadcrumbs.home' | t }}</a>
+        </li>
+        {% if settings.path_style == 'show_top_level_category' %}
+          {% if template.name == 'product' %}
+            {% if product.metafields.custom.top_level_category.value != blank or product.tags.size > 0 %}
+              <li class="breadcrumbs__item flex--row breadcrumbs__item--metafield" {% if product.metafields.custom.top_level_category.value == blank %}data-tags="{{ product.tags | join: ',' | downcase }}"{% endif %}>
+                <a class="breadcrumbs__link" href="{{ product.url }}" aria-current="page">{{ product.metafields.custom.top_level_category.value | capitalize }}</a>
+              </li>
+            {% else %}
+              <li class="breadcrumbs__item flex--row breadcrumbs__item--storage">
+                <a class="breadcrumbs__link" href="{{ product.url }}" aria-current="page"></a>
+              </li>
+            {% endif %}
+          {% elsif template.name == 'collection' %}
+            {% if collection.metafields.custom.top_level_category.value != blank %}
+              <li class="breadcrumbs__item flex--row breadcrumbs__item--metafield">
+                <a class="breadcrumbs__link" href="{{ collection.url }}" aria-current="page">{{ collection.metafields.custom.top_level_category.value | capitalize }}</a>
+              </li>
+            {% else %}
+              <li class="breadcrumbs__item flex--row breadcrumbs__item--storage">
+                <a class="breadcrumbs__link" href="{{ collection.url }}" aria-current="page"></a>
+              </li>
+            {% endif %}
+          {% endif %}
+        {% elsif settings.path_style == 'show_collections_page' %}
+          {% if template.name == 'product' or template.name == 'collection' %}
+            <li class="breadcrumbs__item flex--row">
+              <a class="breadcrumbs__link" href="{{ routes.collections_url }}">{{ 'general.breadcrumbs.collections' | t }}</a>
+            </li>
+          {% endif %}
+        {% endif %}
+        {%- case t -%}
+          {%- when 'product' -%}
+            {%- if collection.url -%}
+              <li class="breadcrumbs__item flex--row breadcrumbs__item--collection">
+                {{ collection.title | link_to: collection.url }}
+              </li>
+            {%- endif -%}
+            {% if settings.show_current_item %}
+              {% assign product_url = product.url | within: collection %}
+              <li class="breadcrumbs__item flex--row{% if request.path == product_url %} breadcrumbs__item--current{% endif %}">
+                <a class="breadcrumbs__link" href="{{ product.url }}" aria-current="page">{{ product.title }}</a>
+              </li>
+            {% endif %}
+          {%- when 'collection' -%}
+            {% if collection.handle %}
+              {%- if current_tags -%}
+                <li class="breadcrumbs__item flex--row">
+                  {{ collection.title | link_to: collection.url }}
+                </li>
+                <li class="breadcrumbs__item flex--row">
+                  {%- capture tag_url -%}{{ collection.url }}/{{ current_tags | join: "+"}}{%- endcapture -%}
+                  <a class="breadcrumbs__link" href="{{ tag_url }}" aria-current="page">{{ current_tags | join: " + "}}</a>
+                </li>
+              {%- else -%}
+                {% if settings.show_current_item %}
+                  <li class="breadcrumbs__item flex--row{% if request.path == collection.url %} breadcrumbs__item--current{% endif %}">
+                    <a class="breadcrumbs__link" href="{{ collection.url }}" aria-current="page">{{ collection.title }}</a>
+                  </li>
+                {% endif %}
+              {%- endif -%}
+            {% endif %}
+          {%- when 'blog' -%}
+            {%- if current_tags -%}
+              <li class="breadcrumbs__item flex--row">
+                {{ blog.title | link_to: blog.url }}
+              </li>
+              <li class="breadcrumbs__item flex--row">
+                {%- capture tag_url -%}{{blog.url}}/tagged/{{ current_tags | join: "+" }}{%- endcapture -%}
+                <a class="breadcrumbs__link" href="{{ tag_url }}" aria-current="page">{{ current_tags | join: " + " }}</a>
+              </li>
+            {%- else -%}
+              {% if settings.show_current_item %}
+                <li class="breadcrumbs__item flex--row{% if request.path == blog.url %} breadcrumbs__item--current{% endif %}">
+                  <a class="breadcrumbs__link" href="{{ blog.url }}" aria-current="page">{{ blog.title }}</a>
+                </li>
+              {% endif %}
+            {%- endif -%}
+          {%- when 'article' -%}
+            <li class="breadcrumbs__item flex--row">
+              {{ blog.title | link_to: blog.url }}
+            </li>
+            {% if settings.show_current_item %}
+              <li class="breadcrumbs__item flex--row{% if request.path == article.url %} breadcrumbs__item--current{% endif %}">
+                <a class="breadcrumbs__link" href="{{ article.url }}" aria-current="page">{{ article.title }}</a>
+              </li>
+            {% endif %}
+          {%- else -%}
+            <li class="breadcrumbs__item flex--row{% if request.path == request.path %} breadcrumbs__item--current{% endif %}">
+              <a class="breadcrumbs__link" href="{{ request.path }}" aria-current="page">{{ page_title }}</a>
+            </li>
+        {%- endcase -%}
+      </ol>
+    </nav>
+  </breadcrumbs-component>
+{% endif %}

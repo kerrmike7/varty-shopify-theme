@@ -1,0 +1,463 @@
+<!doctype html>
+
+{% capture is_rtl %}{% render 'rtl-check' %}{% endcapture %}
+<html class="no-js html-{% if is_rtl == 'true' %}rtl{% else %}ltr{% endif %} {% if settings.enable_page_fade_in %} html-fade-in{% endif %}" 
+  lang="{{ request.locale.iso_code }}" 
+  data-anchor-scroll="{{ settings.anchor_link_scroll }}"
+  dir="{% if is_rtl == 'true' %}rtl{% else %}ltr{% endif %}"
+  {% if settings.enable_page_fade_in %} data-fade-in-duration="{{ settings.page_fade_in_duration }}s"{% endif %}
+>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="theme-color" content="">
+    <link rel="canonical" href="{{ canonical_url }}">
+    {% comment %} <link rel="preconnect" href="https://cdn.shopify.com" crossorigin> {% endcomment %}
+    {% comment %} <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> {% endcomment %}
+
+    {% comment %} {%- unless settings.base_font.system? and settings.accent_font.system? -%}
+      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    {%- endunless -%} {% endcomment %}
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %}
+        &ndash; tagged "{{ current_tags | join: ', ' }}
+        "{% endif -%}
+      {%- if current_page != 1 %}
+        &ndash; Page
+        {{ current_page }}
+      {% endif -%}
+      {%- unless page_title contains shop.name %}
+        &ndash;
+        {{ shop.name }}
+      {% endunless -%}
+    </title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    {% render 'meta-tags' %}
+    <script>
+      window.themeAssets = window.themeAssets || {};
+      window.themeAssets.tweenMaxSrc = "{{ 'TweenMax.min.js' | asset_url }}";
+    </script>
+    <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'masonry.pkgd.min.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'fitty.min.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'rellax.min.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'menu-drawer.js' | asset_url }}" defer="defer"></script>
+  
+    {%- if request.page_type != 'cart' and settings.enable_cart_drawer and settings.disable_shopping_functionality == false -%}
+    <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
+    {%- if settings.disable_shopping_functionality == false and request.page_type == 'cart' or settings.enable_cart_drawer -%}
+      <script src="{{ 'cart-discount.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
+    {%- if settings.action_after_adding == 'success' and settings.disable_shopping_functionality == false -%}
+    <script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
+    {%- if request.design_mode -%}
+      <script src="{{ 'theme-editor.js' | asset_url }}" defer data-contact="{{ shop.email | escape }}" data-version="14.0.0"></script>
+    {%- endif -%}
+
+    {{ content_for_header }}
+
+    {%- liquid
+      assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
+      assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
+      assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+    %}
+
+    {% style %}
+      {{ settings.base_font | font_face: font_display: 'swap' }}
+      {{ body_font_bold | font_face: font_display: 'swap' }}
+      {{ body_font_italic | font_face: font_display: 'swap' }}
+      {{ body_font_bold_italic | font_face: font_display: 'swap' }}
+      {{ settings.accent_font | font_face: font_display: 'swap' }}
+      {{ settings.custom_font | font_face: font_display: 'swap' }}
+
+      :root {
+        --layout-background-color: 
+        {{ settings.layout_background_color.red }},
+        {{ settings.layout_background_color.green }},
+        {{ settings.layout_background_color.blue }};
+        --layout-text-color: 
+        {{ settings.layout_text_color.red }},
+        {{ settings.layout_text_color.green }}, 
+        {{ settings.layout_text_color.blue }};
+        --base-button-color: 
+        {{ settings.base_button_color.red }},
+        {{ settings.base_button_color.green }},
+        {{ settings.base_button_color.blue }};
+        --accent-button-color: 
+        {{ settings.accent_button_color.red }},
+        {{ settings.accent_button_color.green }},
+        {{ settings.accent_button_color.blue }};
+        --hover-button-color: 
+        {{ settings.hover_button_color.red }},
+        {{ settings.hover_button_color.green }},
+        {{ settings.hover_button_color.blue }};
+        --popup-background-color: 
+        {{ settings.popup_background_color.red }},
+        {{ settings.popup_background_color.green }},
+        {{ settings.popup_background_color.blue }};
+        --rating-color: 
+        {{ settings.rating_color.red }},
+        {{ settings.rating_color.green }},
+        {{ settings.rating_color.blue }};
+        --error-color: 
+        {{ settings.error_color.red }},
+        {{ settings.error_color.green }},
+        {{ settings.error_color.blue }};
+        --success-color:
+         {{ settings.success_color.red }},
+         {{ settings.success_color.green }},
+         {{ settings.success_color.blue }};
+        --pickup-available-text: 
+        {{ settings.pickup_available_text.red }}, 
+        {{ settings.pickup_available_text.green }}, 
+        {{ settings.pickup_available_text.blue }};
+        --pickup-available-icon: 
+        {{ settings.pickup_available_icon.red }}, 
+        {{ settings.pickup_available_icon.green }}, 
+        {{ settings.pickup_available_icon.blue }};
+        --pickup-out-of-stock-text: 
+        {{ settings.pickup_out_of_stock_text.red }}, 
+        {{ settings.pickup_out_of_stock_text.green }}, 
+        {{ settings.pickup_out_of_stock_text.blue }};
+        --pickup-out-of-stock-icon: 
+        {{ settings.pickup_out_of_stock_icon.red }}, 
+        {{ settings.pickup_out_of_stock_icon.green }}, 
+        {{ settings.pickup_out_of_stock_icon.blue }};
+        {% if settings.blend_gradient != blank %}
+          --blending-color: {{ settings.blend_gradient }};
+        {% else %}
+          --blending-color: {{ settings.blend_color }};
+        {% endif %}
+
+        --page-width: {{ settings.desktop_max_width }}px;
+        --drawers-popups-overlay-color: {{ settings.drawers_overlay_color.red }}, {{ settings.drawers_overlay_color.green }}, {{ settings.drawers_overlay_color.blue }};
+        --drawers-popups-overlay-opacity: {{ settings.drawers_overlay_opacity | divided_by: 100.0 }};
+        --drawers-popups-overlay-blur: {% if settings.drawers_overlay_opacity >= 90 %}0{% else %}{{ settings.drawers_overlay_background_blur }}{% endif %}px;
+        --line-width: {{ settings.line_width }}px;
+        --line-opacity: {{ settings.line_opacity | divided_by: 100.0 }};
+        --outline-thickness: {{ settings.border_thickness }}px;
+        --button-radius: {%- render 'radius-xxl-then-var', v: settings.button_radius -%};
+        --field-radius: {%- render 'radius-xxl-then-var', v: settings.field_radius -%};
+        {% if settings.field_radius == '2000px' %}
+          --textarea-radius: 24px;
+        {% else %}
+          --textarea-radius: {%- render 'radius-xxl-then-var', v: settings.field_radius -%};
+        {% endif %}
+        --images-and-section-radius: {%- render 'radius-xxl-then-var', v: settings.images_and_sections_radius -%};
+        --product-card-radius: {%- render 'radius-xxl-then-var', v: settings.product_card_radius -%};
+        --other-buttons-radius: {%- render 'radius-xxl-then-var', v: settings.other_buttons_radius -%};
+        --burger-button-shadow: {{ settings.burger_button_shadow | divided_by: 100.0 }};
+        --close-button-shadow: {{ settings.close_button_shadow | divided_by: 100.0 }};
+        --animation-duration: {{ settings.animation_duration }}s;
+        --transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1.0);
+        {% if settings.typography_preset == 'custom' %}
+          --desktop-font-scale: 1;
+          --mobile-font-scale: 1;
+        {% else %}
+          --desktop-font-scale: {{ settings.desktop_font_scale | divided_by: 100.0 }};
+          --mobile-font-scale: {{ settings.mobile_font_scale | divided_by: 100.0 }};
+        {% endif %}
+        --images-duration: {{ settings.images_duration }}s;
+        --images-delay: {{ settings.images_delay }}s;
+
+        --cart-focal-point: {{ settings.cart_focal_point }};
+        --card-product-spacing: {{ settings.product_card_inner_spacing }}%;
+
+        --image-pills-focal-point: {{ settings.image_pills_focal_point }};
+        --image-pills-radius: {%- render 'radius-xxl-then-var', v: settings.image_pills_radius -%};
+        --image-swatch-focal-point: {{ settings.image_swatch_focal_point }};
+        --image-swatch-radius: {%- render 'radius-xxl-then-var', v: settings.image_swatch_radius -%};
+
+        --sale-text-color: {{ settings.sale_text_color }};
+        --sale-background: {{ settings.sale_background }};
+        --sold-text-color: {{ settings.sold_text_color }};
+        --sold-background: {{ settings.sold_background }};
+        --preorder-text-color: {{ settings.preorder_text_color }};
+        --preorder-background: {{ settings.preorder_background }};
+        --badge-text-1: {{ settings.badge_text_color_1 }};
+        --badge-background-1: {{ settings.badge_background_1 }};
+        --badge-text-2: {{ settings.badge_text_color_2 }};
+        --badge-background-2: {{ settings.badge_background_2 }};
+        --badge-text-3: {{ settings.badge_text_color_3 }};
+        --badge-background-3: {{ settings.badge_background_3 }};
+        --badge-text-4: {{ settings.badge_text_color_4 }};
+        --badge-background-4: {{ settings.badge_background_4 }};
+
+        {% if settings.compare_at_price_color_source == 'sale_badge_text' %}
+          --compare-at-price-color: {{ settings.sale_text_color }};
+        {% elsif settings.compare_at_price_color_source == 'sale_badge_background' %}
+          --compare-at-price-color: {{ settings.sale_background }};
+        {% else %}
+          --compare-at-price-color: {{ settings.compare_at_price_color_custom }};
+        {% endif %}
+
+        {% if settings.enable_page_fade_in %} 
+        --fade-in-duration: {{ settings.page_fade_in_duration }}s;
+        {% endif %}
+
+        {% if settings.enable_custom_product_grid_gap %}
+          --custom-column-gap-desktop: {{ settings.custom_product_column_gap_desktop }}px;
+          --custom-column-gap-mobile: {{ settings.custom_product_column_gap_mobile }}px;
+          --custom-row-gap-desktop: {{ settings.custom_product_row_gap_desktop }}px;
+          --custom-row-gap-mobile: {{ settings.custom_product_row_gap_mobile }}px;
+        {% endif %}
+      } 
+      {% unless request.design_mode %}
+        body::after {
+          content: "";
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          z-index: 0;
+          background-color: rgb(var(--layout-background-color));
+      }
+      {% endunless %}
+      {% if settings.select_text_accent_color and settings.disable_text_selection == false %}
+        ::selection {
+          background-color: rgba(var(--accent-button-color), .4);
+        }
+      {% endif %} 
+    {% endstyle %}
+
+    {% render 'font-variables' %}
+
+    {{ 'base.css' | asset_url | stylesheet_tag: preload: true }}
+
+    {% if is_rtl == 'true' %}
+      {{ 'rtl.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+
+    {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag: preload: true }}
+
+    {% if request.page_type == 'policy' %}
+      {{ 'policy-pages.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+
+    {% render 'custom-assets' %}
+    
+    <script>
+      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+      if (Shopify.designMode) {
+        document.documentElement.classList.add('shopify-design-mode');
+      }
+    </script>
+  </head>
+  {% liquid
+    assign uppercase_buttons = false
+    assign bolder_font_buttons = false
+    if settings.typography_preset == 'custom' and settings.regular_button_size == 'default'
+      if settings.uppercase_body_s
+        assign uppercase_buttons = true
+      endif
+      if settings.bolder_font_body_s
+        assign bolder_font_buttons = true
+      endif
+    endif
+    assign navigations_type = ''
+    if settings.typography_preset == 'custom' and settings.navigation_item_size != 'default'
+      if settings.navigation_item_size contains 'body_l'
+        assign navigations_type = 'navigations-body-l'
+      elsif settings.navigation_item_size contains 'body_m'
+        assign navigations_type = 'navigations-body-m'
+      elsif settings.navigation_item_size contains 'body_s'
+        assign navigations_type = 'navigations-body-s'
+      elsif settings.navigation_item_size contains 'label'
+        assign navigations_type = 'navigations-label'
+      elsif settings.navigation_item_size contains 'heading_m'
+        assign navigations_type = 'navigations-heading-m'
+      elsif settings.navigation_item_size contains 'heading_s'
+        assign navigations_type = 'navigations-heading-s'
+      elsif settings.navigation_item_size contains 'heading_xs'
+        assign navigations_type = 'navigations-heading-xs'
+      endif
+    endif
+  %} 
+  <body 
+    id="body" 
+    class="body {{ settings.typography_preset }} 
+      {%- if settings.disable_text_selection %}disable-selection {% endif -%} 
+      {%- if settings.enable_page_fade_in and settings.page_fade_in_area == 'page' %} fade-in {% endif -%} 
+      {%- if template.name == 'index' or template.name == 'collection' %} body--contain {% endif -%}
+      {% if settings.prevent_fields_scale %} prevent-fields-scale{% endif %}
+      {%- if settings.typography_preset == 'custom' %} custom-type-preset {{ navigations_type }}{% if uppercase_buttons %} buttons-uppercase{% endif %}{% if bolder_font_buttons %} buttons-font-bolder{% endif %} {% endif -%}
+    "
+  >
+    {% if settings.allow_transparent_navigation %}<overlap-navigation>{% endif %}
+    {% section 'announcement-bar' %}
+    
+    <div class="theme-content {% if settings.navigation_layout == 'sidebar_based' %}with-sidebars {{ settings.sidebar_template }} {{ settings.sidebar_template }}--{{ settings.white_space }}{% else %}header-based{% endif %}">
+      
+      {% if settings.navigation_layout == 'sidebar_based' %}
+        {% section 'main-sidebar' %}
+      {% endif %}
+      {% if settings.navigation_layout == 'sidebar_based' and settings.sidebar_template contains 'with_secondary' %}
+        {% section 'secondary-sidebar' %}
+      {% endif %}
+      <div class="inside-content {% if settings.enable_page_fade_in and settings.page_fade_in_area == 'content' %} fade-in fade-in--content {% endif %}">
+            {% if settings.navigation_layout == 'header_based' %}
+              {% section 'header' %}
+            {% elsif settings.navigation_layout == 'sidebar_based' and settings.show_header %}
+              {% section 'secondary-header' %}
+            {% endif %}
+            {% section 'mobile-header' %}
+            <div class="header-group {% if settings.allow_transparent_navigation and settings.allow_mobile_transparent_navigation %} header-group--mobile-overlap-enabled{% endif %}">
+              <div class="header-group__sections">
+                {% sections 'more-header-sections' %}
+              </div>
+            </div>
+        <main class="main--{{ settings.white_space }} {{ settings.typography_preset }}
+          {% if request.page_type == 'policy' %} body-text--{{ settings.typography_preset }}
+          {% if settings.typography_preset == 'custom' %}{% if settings.uppercase_heading_xs %} uppercase-heading{% else %} none-uppercase-heading{% endif %}{% if settings.bolder_font_heading_xs %} bolder-font-heading{% else %} none-bolder-font-heading{% endif %}{% if settings.uppercase_body_m %} uppercase{% endif %}{% if settings.bolder_font_body_m %} bolder-font{% endif %}{% endif %}{% if settings.center_text %} main--center{% endif %}{% endif %}">
+          {{ content_for_layout }}
+        </main>
+
+        <footer>
+          {% sections 'footer-group' %}
+        </footer>
+      </div>
+    </div>
+
+    {% if settings.menu_drawer_style == 'default' %}
+      {% section 'menu-drawer' %}
+    {% else %}
+      {% section 'mega-menu-drawer' %}
+    {% endif %}
+    {%- if settings.disable_shopping_functionality == false -%}
+      {%- section 'cart-drawer' -%}
+    {%- endif -%} 
+
+    {% if settings.allow_transparent_navigation %}</overlap-navigation>{% endif %}
+    <div class="overlay"></div>
+    <quick-view-drawer>
+      {% style %}
+        quick-view-drawer {  
+          --layout-text-color:
+            {{ settings.layout_text_color.red }},
+            {{ settings.layout_text_color.green }}, 
+            {{ settings.layout_text_color.blue }}; 
+          --layout-background-color:
+            {{ settings.layout_background_color.red }},
+            {{ settings.layout_background_color.green }},
+            {{ settings.layout_background_color.blue }};     
+        }
+      {% endstyle %}
+      <details>
+        <summary class="quick-view__summary" tabindex="-1">
+        </summary>
+        <quick-view class="quick-view">
+          <div role="dialog" aria-modal="true" class="quick-view__content" tabindex="-1"></div>
+        </quick-view>
+      </details>
+    </quick-view-drawer>
+    <script>
+      window.shopUrl = '{{ request.origin }}';
+      window.routes = {
+        cart_add_url: '{{ routes.cart_add_url }}',
+        cart_change_url: '{{ routes.cart_change_url }}',
+        cart_update_url: '{{ routes.cart_update_url }}',
+        cart_url: '{{ routes.cart_url }}',
+        search_url: '{{ routes.search_url }}',
+        predictive_search_url: '{{ routes.predictive_search_url }}',
+        root_url: '{{ routes.root_url }}'
+      };
+
+      window.cartStrings = {
+        {% if settings.cart_name == 'cart' %}
+          error: `{{ 'sections.cart.cart_error' | t }}`,
+          quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`
+        {% elsif settings.cart_name == 'bag' %}
+          error: `{{ 'sections.cart.bag_error' | t }}`,
+          quantityError: `{{ 'sections.cart.bag_quantity_error_html' | t: quantity: '[quantity]' }}`
+        {% else %}
+          error: `{{ 'sections.cart.basket_error' | t }}`,
+          quantityError: `{{ 'sections.cart.basket_quantity_error_html' | t: quantity: '[quantity]' }}`
+        {% endif %}
+      }
+
+      window.variantStrings = {
+        {% if settings.cart_name == 'cart' %}
+          addToCart: `{{ 'products.product.add_to_cart' | t }}`,
+        {% elsif settings.cart_name == 'bag' %}
+          addToCart: `{{ 'products.product.add_to_bag' | t }}`,
+        {% else %}
+          addToCart: `{{ 'products.product.add_to_basket' | t }}`,
+        {% endif %}
+        preOrder: `{{ 'products.product.pre_order' | t }}`,
+        soldOut: `{{ 'products.product.sold_out' | t }}`,
+        unavailable: `{{ 'products.product.unavailable' | t }}`,
+        unavailable_with_option: `{{ 'products.product.value_unavailable' | t: option_value: '[value]'}}`,
+        customPropertyError: `{{ 'products.product.custom_error' | t }}`,
+        fileSizeError: `{{ 'products.product.file_size_error' | t }}`,
+        fileRequiredError: `{{ 'products.product.error_message_required' | t }}`
+      }
+
+      window.accessibilityStrings = {
+        imageAvailable: `{{ 'products.product.media.image_available' | t: index: '[index]' }}`,
+        pauseSlideshow: `{{ 'sections.slideshow.pause_slideshow' | t }}`,
+        playSlideshow: `{{ 'sections.slideshow.play_slideshow' | t }}`,
+        play: `{{ 'accessibility.play' | t }}`,
+        pause: `{{ 'accessibility.pause' | t }}`,
+        mute: `{{ 'accessibility.mute' | t }}`,
+        unmute: `{{ 'accessibility.unmute' | t }}`
+      }
+    </script>
+    <script src="{{ 'quick-view.js' | asset_url }}" defer="defer"></script>
+    {% if settings.enable_quick_search %}
+      <script src="{{ 'search-modal.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
+    {% endif %}
+    {% if settings.allow_transparent_navigation %}
+      <script src="{{ 'overlap-navigation.js' | asset_url }}" defer="defer"></script>
+    {% endif %}
+    {% if settings.preload_links and request.design_mode == false %}
+      <script src="{{ 'quicklink.umd.js' | asset_url }}" defer="defer"></script>
+      <script>
+        window.addEventListener('load', () => {
+          const waitForQuicklink = () => {
+            if (typeof quicklink !== 'undefined') {
+              quicklink.listen({
+                el: document.body,
+                ignores: [
+                  uri => {
+                    const sameOrigin = new URL(uri, location.href).origin === location.origin;
+                    return !sameOrigin;
+                  },
+                  uri => uri.includes('#'),
+                  uri => {
+                    const path = new URL(uri, location.href).pathname;
+                    const blocked = /^\/([a-zA-Z]{2}(?:-[a-zA-Z]{2})?\/)?(account|cart|checkout)(\/|$)/.test(path) ||
+                                    /^\/([a-zA-Z]{2}(?:-[a-zA-Z]{2})?\/)?login(\/|$)/.test(path); 
+
+                    return blocked;
+                  }
+                ]
+              });
+            } else {
+              setTimeout(waitForQuicklink, 50);
+            }
+          };
+          waitForQuicklink();
+        });
+      </script>
+    {% endif %}
+  </body>
+</html>

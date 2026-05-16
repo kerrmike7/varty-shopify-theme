@@ -1,0 +1,35 @@
+{% if type == 'colors' or type == 'image' %}
+    <div class="{{ presentation }} {% if thumbnail %}swatch--thumbnails{% elsif swatch %}swatch--swatches{% endif %}">
+        {%- case type -%}
+            {%- when 'colors' -%}
+                {% liquid
+                    assign size_limit = value.size | at_most: 4
+                    assign rotation = '0deg'
+                    if size_limit == 2
+                    assign rotation = '45deg'
+                    endif
+                    if thumbnail
+                     assign rotation = 0
+                    endif
+
+                    assign angle_increment = 360 | divided_by: size_limit
+                    assign angle = 0
+                %}
+                {%- capture conic_gradient -%}
+                    {%- for color in value limit: size_limit -%}
+                    {{ color }} {{ angle }}deg{%- assign angle = angle | plus: angle_increment %} {{ angle }}deg{%- unless forloop.last %}, {%- endunless -%}
+                    {%- endfor -%}
+                {%- endcapture -%}
+                <span style="--swatch-bg: conic-gradient({{ conic_gradient }}); transform: rotateZ({{ rotation }});" class="swatch__swatch {%  if settings.enable_shadow %}swatch__swatch--shadow{% endif %} {% if thumbnail %}{% if settings.thumbnail_image_ratio == 'original' %}ratio-square{% else %}ratio-{{ settings.thumbnail_image_ratio }}{% endif %}{% endif %}"></span>
+            {%- when 'image' -%}
+                <span class="swatch__image{%  if settings.enable_shadow %} swatch__image--shadow{% endif %} {% if thumbnail %}ratio-{{ settings.thumbnail_image_ratio }}{% else %}ratio-square{% endif %}">{{
+                    value
+                    | image_url: width: 80
+                    | image_tag: alt: value.alt
+                }}</span>
+            {%- else -%}
+            <span class="visual-display__child"></span>
+        {%- endcase -%}
+        {% unless tooltip %}<span class="swatch__label">{{ value_title.label | escape }} ({{ value_title.count }})</span>{% endunless %}
+    </div>
+{% endif %}

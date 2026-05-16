@@ -1,0 +1,53 @@
+{% style %}
+    .linked-products--{{ block.id }} {
+        --focal-point: {{ settings.linked_products_focal_point }};
+        --border-radius: {{ settings.linked_products_image_radius }};
+    }
+{% endstyle %}
+{% liquid 
+     assign linked_products = product.metafields.custom.linked_products
+%}
+{% if linked_products != blank %}
+    <div class="section-block linked-products-block" style="--spacing: {{ block.settings.top_spacing }}; --mobile-spacing: {{ block.settings.mobile_top_spacing }};" {{ block.shopify_attributes }}>
+        {% if block.settings.heading != blank %}
+            {% liquid
+                assign heading_text = block.settings.heading
+                assign final_text = ''
+                assign split_text_curly = heading_text | split: '{'
+                for part in split_text_curly
+                    if part contains '}'
+                        assign split_curly = part | split: '}'
+                        assign styled_text = split_curly[0]
+                        assign after_curly = split_curly[1]
+                        assign final_text = final_text | append: '<span class="styled">' | append: styled_text | append: '</span>' | append: after_curly
+                    else
+                        assign final_text = final_text | append: part
+                    endif
+                endfor
+              %}
+            <h3 class="form__label custom-heading label--{{ settings.typography_preset }} {% if block.settings.heading_size != 'default' %}{{ block.settings.heading_size }}{% else %}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %}{% endif %} {% if settings.dim_text %}dim{% endif %}">{{ final_text }}</h3>
+        {% endif %}
+        <linked-products class="linked-products linked-products--{{ block.id }}">
+            {% for item in linked_products.value  %}
+                {% liquid 
+                    assign linked_img = item.metafields.custom.linked_image
+                    assign linked_color = item.metafields.custom.linked_color
+                    assign img_url = linked_img.value | split: '/' | last | escape
+                    assign img = linked_img.value | split: '/' | last | escape | file_img_url: '200x200' | prepend: 'https:' | split: '?' | first
+                %}
+                <a class="linked-products__swatch{% if settings.enable_blending and settings.apply_to_swatches %} enable-blending{% endif %}{% if item.url == product.url %} linked-products__swatch--active{% endif %}{% if settings.enable_shadow %} linked-products__swatch--shadow{% endif %} ratio-{{ settings.linked_products_image_ratio }}{% if settings.linked_products_image_radius == '2000px 2000px 0 0' %} linked-products__swatch-arc{% endif %}" href="{{ item.url }}">
+                    {% if linked_img != blank %}
+                        <span class="linked-products__swatch-span">{{ images[img_url] | image_url: width: 200 | image_tag }}</span>
+                    {% elsif linked_img == blank and linked_color != blank %}
+                        <span class="linked-products__swatch-span {% if settings.linked_products_image_ratio == 'original' %}ratio-square{% endif %}" style="background-color: {{ linked_color.value }}"></span>
+                    {% elsif linked_img == blank and linked_color == blank %}
+                        <span class="linked-products__swatch-span">{{ item.featured_image | image_url: width: 200 | image_tag: alt: item.featured_image.alt, draggable: false }}</span>
+                    {% endif %}
+                    {% if settings.show_linked_products_name %}
+                        <span class="color__swatch-tooltip color__swatch-tooltip--{{ settings.typography_preset }}">{{ item.title }}</span>
+                    {% endif %}
+                </a>
+            {% endfor %}
+        </linked-products>
+    </div>
+{% endif %}

@@ -1,0 +1,2019 @@
+{% if section.blocks.size > 0 %}
+  {%- liquid
+    assign mobile_layout = section.settings.mobile_layout | times: 1
+    if section.settings.mobile_layout == '2' and section.blocks.size == 1
+      assign mobile_layout = 1
+    endif
+
+    assign settings_page_width = settings.max_page_width | append: 'px'
+    if settings.max_page_width == 'full_width'
+      assign settings_page_width = '100vw'
+    endif
+
+    assign mobile_block_width = '100vw'
+    if section.settings.mobile_layout == '2'
+      assign mobile_block_width = 'calc(100vw / 2)'
+    endif
+    if settings.typography_preset == 'avant_garde'
+      assign weight = settings.accent_icon_weight
+      if settings.swap_fonts
+        assign weight = settings.base_icon_weight
+      endif
+    else
+      assign weight = settings.base_icon_weight
+      if settings.swap_fonts
+        assign weight = settings.accent_icon_weight
+      endif
+    endif
+    assign columns = section.settings.max_columns | times: 1
+    if section.settings.max_columns == '3' and section.blocks.size == 2
+      assign columns = 2
+    elsif section.settings.max_columns == '3' and section.blocks.size == 1
+      assign columns = 1
+    elsif section.settings.max_columns == '2' and section.blocks.size == 1
+      assign columns = 1
+    endif
+
+    assign uppercase_body_s = false
+    assign bolder_body_s = false
+    if settings.typography_preset == 'custom'
+      assign weight = settings.custom_icon_weight
+      if settings.uppercase_body_s
+            assign uppercase_body_s = true
+      endif
+      if settings.bolder_font_body_s
+          assign bolder_body_s = true
+      endif
+    endif
+  -%}
+  {% style %}
+    #shopify-section-{{ section.id }} {
+        --padding-top: {{ section.settings.desktop_padding_top }}px;
+        --padding-bottom: {{ section.settings.desktop_padding_bottom }}px;
+        --columns: {{ section.settings.max_columns }};
+        {% if section.settings.max_columns == '3' and section.blocks.size == 2 %}
+            --columns: 2;
+        {% elsif section.settings.max_columns == '3' and section.blocks.size == 1 %}
+            --columns: 1;
+        {% elsif section.settings.max_columns == '2' and section.blocks.size == 1 %}
+            --columns: 1;
+        {% endif %}
+        {% if section.settings.color_type == 'invert' %}
+            --layout-text-color:
+            {{ settings.layout_background_color.red }},
+            {{ settings.layout_background_color.green }},
+            {{ settings.layout_background_color.blue }};
+            --layout-background-color:
+            {{ settings.layout_text_color.red }},
+            {{ settings.layout_text_color.green }},
+            {{ settings.layout_text_color.blue }};
+        {% endif %}
+        {% if section.settings.color_type == 'custom' %}
+            --layout-text-color:
+            {{ section.settings.text_color.red }},
+            {{ section.settings.text_color.green }},
+            {{ section.settings.text_color.blue }};
+            --layout-background-color:
+            {{ section.settings.background_color.red }},
+            {{ section.settings.background_color.green }}, 
+            {{ section.settings.background_color.blue }};
+        {% endif %}
+        {%- if section.settings.color_type == 'custom' and section.settings.background_color_type == 'gradient' and section.settings.background_gradient != blank %}
+        background: {{ section.settings.background_gradient }};
+        {%- else %}
+        background-color: rgb(var(--layout-background-color));
+        {%- endif %}
+        color: rgb(var(--layout-text-color));
+        --date-text-color: {{ section.settings.date_text_color }};
+        --date-bg-color: {% if section.settings.show_background %}{% if section.settings.date_background_gradient != blank %}{{ section.settings.date_background_gradient }}{% else %}{{ section.settings.date_background_color }}{% endif %}{% else %}transparent{% endif %};
+        --date-outline-color: {{ section.settings.date_outline_color }};
+    }
+
+    {% if section.settings.heading_color == 'gradient' and section.settings.heading_gradient != blank %}
+    .gradient-heading-text--{{ section.id }} {
+      background: {{ section.settings.heading_gradient }};
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+    {% endif %}
+    {% if section.settings.event_heading_color == 'gradient' and section.settings.event_heading_gradient != blank %}
+    .gradient-event-heading-text--{{ section.id }} {
+      background: {{ section.settings.event_heading_gradient }};
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+    {% endif %}
+
+    {% if settings.typography_preset != 'custom' %}
+    .date--minimal_uppercase .event__location-icon {
+      height: max(16px, var(--fluid-preset-body-s-lh));
+    }
+    .date--contrast .event__location-icon,
+    .date--classic .event__location-icon,
+    .date--duet .event__location-icon,
+    .date--avant_garde .event__location-icon {
+      height: max(16px, var(--fluid-preset-body-l-lh));
+    }
+    .date--brutalist .event__location-icon,
+    .date--minimal_heavy .event__location-icon {
+      height: max(16px, var(--fluid-preset-xs-lh));
+    }
+    .date--minimal_basic .event__location-icon {
+      height: max(16px, var(--fluid-preset-body-m-lh));
+    }
+    {% else %}
+    .date--custom .event__location-icon {
+      height: max(16px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+    }
+    {% endif %}
+    @media screen and (max-width: 920px) {
+        #shopify-section-{{ section.id }} {
+            --padding-top: {{ section.settings.mobile_padding_top }}px;
+            --padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
+            --columns: {{ mobile_layout }};
+        }
+    }
+  {% endstyle %}
+  
+  <div class="events events--{{ settings.white_space }} color-{{ section.settings.color_type }} {% if section.settings.color_type != 'default' %}no-default-color{% endif %} ordinal-section ordinal-section--{{ settings.white_space }} {% if settings.show_lines %}ordinal-section--lines{% endif %} section-padding--{{ settings.white_space }} {% if settings.max_page_width == '1400' or settings.max_page_width == '1200' %}page-width {% endif %} page-width--{{ settings.max_page_width }}">
+    {% if section.settings.heading != blank %}
+      <div class="events-header{% if section.settings.center_text %} center-elements{% endif %}">
+        {% if section.settings.heading != blank %}
+          {% liquid
+            assign heading_text = section.settings.heading
+            assign final_text = ''
+            assign split_text_curly = heading_text | split: '{'
+            for part in split_text_curly
+              if part contains '}'
+                  assign split_curly = part | split: '}'
+                  assign styled_text = split_curly[0]
+                  assign after_curly = split_curly[1]
+                  assign final_text = final_text | append: '<span class="styled">' | append: styled_text | append: '</span>' | append: after_curly
+              else
+                  assign final_text = final_text | append: part
+              endif
+            endfor
+          %}
+          <{{ section.settings.heading_tag }} class="content-heading custom-heading {% if section.settings.color_type == 'default' and settings.accent_color_for_headings %}content-heading--accent{% endif %} content-heading--{{ settings.typography_preset }} {% if section.settings.heading_size != 'default' %}{{ section.settings.heading_size }}{% else %}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_heading_xs %} uppercase{% endif %}{% if settings.bolder_font_heading_xs %} bolder-font{% endif %}{% endif %}{% endif %}">
+            {% if section.settings.heading_color == 'gradient' and section.settings.heading_gradient != blank %}
+              <span class="gradient-heading-text gradient-heading-text--{{ section.id }}">{{ final_text }}</span>
+            {% else %}
+              {{ final_text }}
+            {% endif %}
+          </{{ section.settings.heading_tag }}>
+        {% endif %}
+      </div>
+    {% endif %}
+    <ul class="events__list events__list--{{ columns }}">
+      {%- for block in section.blocks -%}
+        {% liquid
+          if section.index == 1 and forloop.index == 1
+            assign should_high_priority = true
+          else
+            assign should_high_priority = false
+          endif
+      
+          if should_high_priority == false and settings.images_loading != 'disable' or section.index > 2
+            assign should_lazy_load = true
+          else
+            assign should_lazy_load = false
+          endif
+        %}
+
+        {%- case block.type -%}
+          {%- when 'event' -%}
+            {% liquid
+              assign start_date = block.settings.start_date | split: '-'
+              assign end_date = block.settings.end_date | split: '-'
+              assign start_time = block.settings.start_time | default: '00:00' | split: ':'
+              assign end_time = block.settings.end_time | default: '00:00' | split: ':'
+              if start_date.size == 3
+                if start_date[0].size == 4
+                  assign is_year_valid = true
+                endif
+
+                if start_date[1].size == 2
+                  assign month = start_date[1] | times: 1
+
+                  if month >= 1 and month <= 12
+                    assign is_month_valid = true
+                  endif
+                endif
+
+                if start_date[2].size == 2
+                  assign day = start_date[2] | times: 1
+
+                  if day >= 1 and day <= 31
+                    assign is_day_valid = true
+                  endif
+                endif
+                assign valid_start_date = false
+                if is_year_valid and is_month_valid and is_day_valid
+                  assign valid_start_date = true
+                endif
+              endif
+              if end_date.size == 3
+                if end_date[0].size == 4
+                  assign is_year_valid = true
+                endif
+
+                if end_date[1].size == 2
+                  assign month = end_date[1] | times: 1
+
+                  if month >= 1 and month <= 12
+                    assign is_month_valid = true
+                  endif
+                endif
+
+                if end_date[2].size == 2
+                  assign day = end_date[2] | times: 1
+
+                  if day >= 1 and day <= 31
+                    assign is_day_valid = true
+                  endif
+                endif
+                assign valid_end_date = false
+                if is_year_valid and is_month_valid and is_day_valid
+                  assign valid_end_date = true
+                endif
+              endif
+              if start_time.size == 2
+                if start_time[0].size == 2
+                  assign hours = start_time[0] | times: 1
+
+                  if hours >= 0 and hours <= 23
+                    assign is_hours_valid = true
+                  endif
+                endif
+
+                if start_time[1].size == 2
+                  assign minutes = start_time[1] | times: 1
+
+                  if minutes >= 0 and minutes <= 59
+                    assign is_minutes_valid = true
+                  endif
+                endif
+                assign valid_start_time = false
+                if is_hours_valid and is_minutes_valid
+                  assign valid_start_time = true
+                endif
+              endif
+              if end_time.size == 2
+                if end_time[0].size == 2
+                  assign hours = end_time[0] | times: 1
+
+                  if hours >= 0 and hours <= 23
+                    assign is_hours_valid = true
+                  endif
+                endif
+
+                if end_time[1].size == 2
+                  assign minutes = end_time[1] | times: 1
+
+                  if minutes >= 0 and minutes <= 59
+                    assign is_minutes_valid = true
+                  endif
+                endif
+                assign valid_end_time = false
+                if is_hours_valid and is_minutes_valid
+                  assign valid_end_time = true
+                endif
+              endif
+            %}
+            <li class="events__item" {{ block.shopify_attributes }}>
+              {% if block.settings.start_date != blank and valid_start_date %}
+                <div class="event__date date--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}">
+                  <p>
+                    {{ block.settings.start_date | date: '%B %d, %Y' -}}{% if block.settings.start_time != blank and valid_start_time %} {{ block.settings.start_time }}{% endif %}
+                    {%- if block.settings.end_date != blank or block.settings.end_time != blank %}
+                      {% if block.settings.start_date != block.settings.end_date or block.settings.end_time != blank %}—{% endif %}{% if valid_end_date and block.settings.start_date != block.settings.end_date %} {{ block.settings.end_date | date: '%B %d, %Y' }}{% endif -%}{% if valid_end_time %} {{ block.settings.end_time }}{% endif %}
+                    {%- endif %}
+                  </p>
+                </div>
+              {% endif %}
+              <div class="event__img-wrapper">
+                {%- if block.settings.image != blank -%}
+                  <div class="event__img lazy-image-container {% if section.settings.hide_img_on_mobile %}event__img-mobile-hidden{% endif %} {% if block.settings.start_date == blank and block.settings.image == blank %}ratio-original{% elsif block.settings.image != blank %}ratio-{{ section.settings.media_ratio }}{% endif %}" {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}>
+                    {% comment %} theme-check-disable ImgLazyLoading {% endcomment %}
+                    {% if settings.images_loading != 'disable' %}
+                      <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ block.settings.image.aspect_ratio }}">
+                    {% endif %}
+                    <img
+                      srcset="
+                        {%- if block.settings.image.width >= 165 -%}{{ block.settings.image | image_url: width: 165 }} 165w,{%- endif -%}
+                        {%- if block.settings.image.width >= 375 -%}{{ block.settings.image | image_url: width: 375 }} 375w,{%- endif -%}
+                        {%- if block.settings.image.width >= 550 -%}{{ block.settings.image | image_url: width: 550 }} 550w,{%- endif -%}
+                        {%- if block.settings.image.width >= 750 -%}{{ block.settings.image | image_url: width: 750 }} 750w,{%- endif -%}
+                        {%- if block.settings.image.width >= 1100 -%}{{ block.settings.image | image_url: width: 1100 }} 1100w,{%- endif -%}
+                        {%- if block.settings.image.width >= 1500 -%}{{ block.settings.image | image_url: width: 1500 }} 1500w,{%- endif -%}
+                        {{ block.settings.image | image_url }} {{ block.settings.image.width }}w
+                      "
+                      src="{{ block.settings.image | image_url: width: 1700 }}"
+                      {% if section.blocks.size == 3 %}
+                        sizes="(max-width: 768px) {{ mobile_block_width }},(min-width: {{ settings_page_width }}) calc({{ settings_page_width }} / 3), calc(100vw / 3)"
+                      {% else %}
+                        sizes="(max-width: 768px) {{ mobile_block_width }} , (min-width: {{ settings_page_width }}) calc({{ settings_page_width }} / 2), calc(100vw / 2)"
+                      {% endif %}
+                      alt="{{ block.settings.image.alt | escape }}"
+                      src="{{ block.settings.image | image_url: width: 1500 }}"
+                      {% if should_high_priority %}
+                        fetchpriority="high"
+                      {% endif %}
+                      {% if should_lazy_load %}
+                        loading="lazy"
+                      {% endif %}
+                      {% if settings.images_loading != 'disable' %}
+                        onload="this.parentNode.classList.add('lazyloaded');"
+                      {% endif %}
+                      draggable="false"
+                      width="{{ block.settings.image.width }}"
+                      height="{{ block.settings.image.height }}"
+                      style="object-position: {{ block.settings.image.presentation.focal_point }};"
+                    >
+                    {% if settings.images_loading != 'disable' %}
+                      {% if settings.images_loading != 'fade_scale' %}
+                      <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+                        <img 
+                        alt="{{ block.settings.image.alt | escape }}" 
+                        src="{{ block.settings.image | image_url: width: 10 }}"
+                        draggable="false"
+                        width="10" 
+                        height="10">
+                      </div>
+                      {% endif %}
+                  </figure>
+                  {% endif %}
+                    {% comment %} theme-check-enable ImgLazyLoading {% endcomment %}
+                  </div>
+                {%- endif -%}
+                {% if block.settings.start_date != blank and section.settings.show_date and valid_start_date %}
+                  <div class="event__short-date event__short-date--{{ section.settings.date_text_size }} event__short-date--{{ section.settings.date_text_style }}{% if section.settings.date_show_outline %} event__short-date--outline{% endif %}">
+                    <span class="event__short-date--date {{ section.settings.date_text_size }}">
+                      {{- block.settings.start_date | date: '%d' -}}
+                    </span>
+                    <span class="event__short-date--month">{{ block.settings.start_date | date: '%b' }}</span>
+                  </div>
+                {% endif %}
+              </div>
+              <div class="event__info">
+                {% if block.settings.start_date != blank and valid_start_date and columns == 1 %}
+                  <div class="event__date date--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}">
+                    <p>
+                      {{ block.settings.start_date | date: '%B %d, %Y' }}{% if block.settings.start_time != blank and valid_start_time %} {{ block.settings.start_time }}{% endif %}
+                      {%- if block.settings.end_date != blank or block.settings.end_time != blank %}
+                        {% if block.settings.start_date != block.settings.end_date or block.settings.end_time != blank %}—{% endif %}{% if valid_end_date and block.settings.start_date != block.settings.end_date %} {{ block.settings.end_date | date: '%B %d, %Y' }}{% endif %}{% if valid_end_time %} {{ block.settings.end_time }}{% endif %}
+                      {%- endif %}
+                    </p>
+                  </div>
+                {% endif %}
+                {% if block.settings.heading != blank %}
+                  <div class="{% if block.settings.center_text %}center-elements{% endif %}">
+                    {% if block.settings.heading != blank %}
+                      {% liquid
+                        assign heading_text = block.settings.heading
+                        assign final_text = ''
+                        assign split_text_curly = heading_text | split: '{'
+                        for part in split_text_curly
+                          if part contains '}'
+                              assign split_curly = part | split: '}'
+                              assign styled_text = split_curly[0]
+                              assign after_curly = split_curly[1]
+                              assign final_text = final_text | append: '<span class="styled">' | append: styled_text | append: '</span>' | append: after_curly
+                          else
+                              assign final_text = final_text | append: part
+                          endif
+                        endfor
+                      %}
+                      <h3 class="card__title--{{ settings.typography_preset }} custom-heading {% if section.settings.event_heading_size != 'default' %}{{ section.settings.event_heading_size }}{% else %}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}{% endif %}">
+                        {% if section.settings.event_heading_color == 'gradient' and section.settings.event_heading_gradient != blank %}
+                          <span class="gradient-heading-text gradient-event-heading-text--{{ section.id }}">{{ final_text }}</span>
+                        {% else %}
+                          {{ final_text }}
+                        {% endif %}
+                      </h3>
+                    {% endif %}
+                  </div>
+                {% endif %}
+                {% if block.settings.location != blank %}
+                  <div class="event__location date--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}">
+                    <span class="event__location-icon">
+                      {% assign icon_full = 'pin' | append: "-" | append: weight %}
+                      {% render 'icon-accordion-2', icon: icon_full %}
+                    </span>
+                    <p>{{ block.settings.location }}</p>
+                  </div>
+                {% endif %}
+                {% if block.settings.description != blank %}
+                  <div class="card__short-description--{{ settings.typography_preset }} richtext {% if settings.enable_animated_underline %}richtext-link--underline{% endif %} {% if section.settings.description_size != 'default' %}{{ section.settings.description_size }}{% else %}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_m %} uppercase{% endif %}{% if settings.bolder_font_body_m %} bolder-font{% endif %}{% endif %}{% endif %}{% if section.settings.dim_text %} dim{% endif %}">
+                      {{ block.settings.description }}
+                  </div>
+                {% endif %}
+                {% if block.settings.details_button_label != blank
+                  or block.settings.enable_add_to_calendar
+                  or block.settings.enable_tickets
+                  and block.settings.buy_tickets_button_label != blank
+                %}
+                  <div class="event__buttons">
+                    {% if block.settings.details_button_label != blank %}
+                      {% if block.settings.page_content_in_popup %}<modal-dialog>{% endif %}
+                      <div class="event__buttons-button {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} open-popup elem-hover elem-hover--{{ section.settings.details_button_style }} {% unless block.settings.page != blank %}disabled{% endunless %}">
+                        {% if block.settings.page_content_in_popup == false %}
+                          {% if block.settings.page != blank -%}
+                            <a
+                              href="{{ block.settings.page.url }}"
+                              {% if block.settings.target_blank %}
+                                target="_blank"
+                              {% endif %}
+                              class="{{ section.settings.details_button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if section.settings.details_button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}"
+                            >
+                          {%- else %}
+                            <span
+                              disabled
+                              class="{{ section.settings.details_button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if section.settings.details_button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}"
+                            >
+                          {%- endif %}
+                          {{ block.settings.details_button_label }}
+                          {% if block.settings.page == blank %}</span>{% else %}</a>{% endif %}
+                        {%- else -%}
+                          <div
+                            class="{{ section.settings.details_button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if section.settings.details_button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}  {% if block.settings.page != blank %}pointer{% endif %}"
+                            {% if block.settings.page == blank %}
+                              disabled
+                            {% endif %}
+                          >
+                            {{ block.settings.details_button_label }}
+                          </div>
+                        {%- endif -%}
+                      </div>
+                      {% if block.settings.page != blank and block.settings.page_content_in_popup == true %}
+                        {% style %}
+                          #shopify-section-{{ section.id }} .overlay,
+                          #shopify-section-{{ section.id }} .popup-wrapper,
+                          #shopify-section-{{ section.id }} .button-close {
+                              --layout-text-color:
+                                  {{ settings.layout_text_color.red }},
+                                  {{ settings.layout_text_color.green }},
+                                  {{ settings.layout_text_color.blue }};
+                              --layout-background-color:
+                                  {{ settings.layout_background_color.red }},
+                                  {{ settings.layout_background_color.green }},
+                                  {{ settings.layout_background_color.blue }};
+                          }
+                        {% endstyle %}
+                        <div class="popup-wrapper popup-wrapper--page">
+                          <div class="scroll-area hide-scrollbar">
+                            <div class="button-wrapper {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %}">
+                              <button type="button" class="button-close close-popup">
+                                {% assign icon_full = 'cross' | append: "-" | append: weight %}
+                                {% render 'icon', icon: icon_full %}
+                              </button>
+                            </div>
+                            <div class="popup-content product-labels__page page__content body-text--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_m %} uppercase{% endif %}{% if settings.bolder_font_body_m %} bolder-font{% endif %}{% endif %} rte">
+                              {{ block.settings.page.content }}
+                            </div>
+                          </div>
+                        </div>
+                      {% endif %}
+                      {% if block.settings.page_content_in_popup %}</modal-dialog>{% endif %}
+                    {% endif %}
+                    {% if block.settings.buy_tickets_button_label != blank %}
+                      <div class="event__buttons-button {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} elem-hover elem-hover--{{ section.settings.buy_tickets_button_style }} {% unless block.settings.buy_tickets_button_link != blank %}disabled{% endunless %}">
+                        {% if block.settings.buy_tickets_button_link != blank -%}
+                          <a
+                            href="{{ block.settings.buy_tickets_button_link }}"
+                            {% if block.settings.target_blank %}
+                              target="_blank"
+                            {% endif %}
+                            class="{{ section.settings.buy_tickets_button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if section.settings.buy_tickets_button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}"
+                          >
+                        {%- else %}
+                          <span
+                            disabled
+                            class="{{ section.settings.buy_tickets_button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if section.settings.buy_tickets_button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}"
+                          >
+                        {%- endif %}
+                        {{ block.settings.buy_tickets_button_label }}
+                        {% if block.settings.buy_tickets_button_link == blank %}</span>{% else %}</a>{% endif %}
+                      </div>
+                    {% endif %}
+                    {% if block.settings.enable_add_to_calendar %}
+                      <div class="event__buttons-button {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} elem-hover elem-hover--{{ section.settings.add_to_calendar_button_style }}">
+                        <button
+                          id="download-btn-{{ block.id }}"
+                          data-timezone="{{ block.settings.timezone }}"
+                          data-title="{{ block.settings.heading }}"
+                          data-description="{{ block.settings.description | strip_html }}"
+                          data-location="{{ block.settings.location }}"
+                          data-start="{{ block.settings.start_date | remove: "-" }}{% if block.settings.start_time != blank %}{{ block.settings.start_time | remove: ":" | prepend: "T" | append: "00Z" }}{% endif %}"
+                          data-end="{% if block.settings.end_date != blank %}{{ block.settings.end_date | remove: "-" }}{% if block.settings.end_time != blank %}{{ block.settings.end_time | remove: ":" | prepend: "T" | append: "00Z" }}{% endif %}{% else %}{{ block.settings.start_date | remove: "-" }}{% if block.settings.end_time != blank %}{{ block.settings.end_time | remove: ":" | prepend: "T" | append: "00Z" }}{% elsif block.settings.end_time == blank and block.settings.start_time != blank %}T235900Z{% endif %}{% endif %}"
+                          class="ical-btn button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {{ section.settings.add_to_calendar_button_style }}-button {% if section.settings.add_to_calendar_button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}"
+                        >
+                          {{ section.settings.add_to_calendar_label }}
+                        </button>
+                      </div>
+                    {% endif %}
+                  </div>
+                {% endif %}
+              </div>
+            </li>
+        {%- endcase -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+{% endif %}
+
+<script>
+ function downloadICSInNewTab(event) {
+  let button = event.target;
+  
+  const eventTitle = button.dataset.title || "";
+  const eventDescription = button.dataset.description || "";
+  const eventLocation = button.dataset.location || "";
+  const startDateUTC = button.dataset.start;  
+  const endDateUTC = button.dataset.end;
+  const timeZone = button.dataset.timezone || "UTC";
+
+  function formatICSDateWithZone(dateStr, tzid) {
+    if (!dateStr || dateStr.length !== 16 || !dateStr.endsWith('Z') || !dateStr.includes('T')) {
+      return null;
+    }
+    const year = dateStr.substring(0, 4);
+    const month = dateStr.substring(4, 6);
+    const day = dateStr.substring(6, 8);
+    const hours = dateStr.substring(9, 11);
+    const minutes = dateStr.substring(11, 13);
+    const seconds = dateStr.substring(13, 15);
+    return `TZID=${tzid}:${year}${month}${day}T${hours}${minutes}${seconds}`;
+  }
+
+  const startIsAllDay = startDateUTC && !startDateUTC.includes('T');
+  const endIsAllDay = endDateUTC && !endDateUTC.includes('T');
+
+  let allDayEvent = false;
+  if (startIsAllDay || endIsAllDay) {
+    allDayEvent = true;
+  }
+
+  const uid = `${Date.now()}-${Math.floor(Math.random() * 10000)}@mycompany.com`;
+
+  const vtimezoneBlock = `BEGIN:VTIMEZONE
+TZID:${timeZone}
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0000
+TZOFFSETTO:+0000
+TZNAME:${timeZone}
+END:STANDARD
+END:VTIMEZONE`;
+
+  let dtstart = "";
+  let dtend = "";
+
+  if (allDayEvent) {
+    function getNextDay(dateStr) {
+      const y = parseInt(dateStr.substring(0, 4));
+      const m = parseInt(dateStr.substring(4, 6));
+      const d = parseInt(dateStr.substring(6, 8));
+      const tempDate = new Date(y, m - 1, d);
+      tempDate.setDate(tempDate.getDate() + 1);
+      const yyyy = tempDate.getFullYear().toString().padStart(4, '0');
+      const mm = (tempDate.getMonth() + 1).toString().padStart(2, '0');
+      const dd = tempDate.getDate().toString().padStart(2, '0');
+      return `${yyyy}${mm}${dd}`;
+    }
+
+    let startDateVal = startDateUTC;
+    let endDateVal = endDateUTC;
+
+    if (!startDateVal || startDateVal.length < 8) {
+      startDateVal = "20250101"; 
+    }
+    if (!endDateVal || endDateVal.length < 8) {
+      endDateVal = getNextDay(startDateVal);
+    } 
+
+    dtstart = `DTSTART;VALUE=DATE:${startDateVal}`;
+    dtend = `DTEND;VALUE=DATE:${endDateVal}`;
+  } else {
+    const startFormatted = formatICSDateWithZone(startDateUTC, timeZone);
+    const endFormatted = formatICSDateWithZone(endDateUTC, timeZone);
+
+    if (!startFormatted || !endFormatted) {
+      console.error("Incorrect dates, unable to create ICS event");
+      return;
+    }
+
+    dtstart = `DTSTART;TZID=${timeZone}:${startFormatted.split(':')[1]}`;
+    dtend = `DTEND;TZID=${timeZone}:${endFormatted.split(':')[1]}`;
+  }
+
+  const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+PRODID:-//MyCompany//NONSGML v1.0//EN
+${allDayEvent ? '' : vtimezoneBlock}
+BEGIN:VEVENT
+UID:${uid}
+DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z
+${dtstart}
+${dtend}
+SUMMARY:${eventTitle}
+DESCRIPTION:${eventDescription}
+LOCATION:${eventLocation}
+STATUS:CONFIRMED
+SEQUENCE:0
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:REMINDER
+END:VALARM
+END:VEVENT
+END:VCALENDAR`;
+
+  const blob = new Blob([icsContent], { type: 'text/calendar' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'event.ics';
+  link.target = '_blank';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+document.querySelectorAll('[id^="download-btn-"]').forEach(button => {
+  button.addEventListener('click', downloadICSInNewTab);
+}); 
+
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.events.name",
+  "tag": "section",
+  "class": "events",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.all.labels.heading.label",
+      "info": "t:sections.all.labels.heading.info",
+      "default": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "max_columns",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:sections.all.desktop_layout.options__10.label"
+        },
+        {
+          "value": "2",
+          "label": "t:sections.all.desktop_layout.options__11.label"
+        },
+        {
+          "value": "3",
+          "label": "t:sections.all.desktop_layout.options__12.label"
+        }
+      ],
+      "default": "1",
+      "label": "t:sections.all.desktop_layout.max_columns.label"
+    },
+    {
+      "type": "radio",
+      "id": "mobile_layout",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:sections.all.mobile_layout.options__1.label"
+        },
+        {
+          "value": "2",
+          "label": "t:sections.all.mobile_layout.options__2.label"
+        }
+      ],
+      "default": "2",
+      "label": "t:sections.all.mobile_layout.label"
+    }, 
+    {
+      "type": "checkbox",
+      "id": "hide_img_on_mobile",
+      "default": false,
+      "label": "t:sections.events.settings.hide_img_on_mobile.label"
+    },
+    {
+      "type": "select",
+      "id": "details_button_style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "t:sections.all.buttons.button_styles.options__1.label"
+        },
+        {
+          "value": "outlined",
+          "label": "t:sections.all.buttons.button_styles.options__2.label"
+        },
+        {
+          "value": "link",
+          "label": "t:sections.all.buttons.button_styles.options__3.label"
+        }
+      ],
+      "default": "outlined",
+      "label": "t:sections.events.settings.details_button_style.label"
+    },
+    {
+      "type": "select",
+      "id": "buy_tickets_button_style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "t:sections.all.buttons.button_styles.options__1.label"
+        },
+        {
+          "value": "outlined",
+          "label": "t:sections.all.buttons.button_styles.options__2.label"
+        },
+        {
+          "value": "link",
+          "label": "t:sections.all.buttons.button_styles.options__3.label"
+        }
+      ],
+      "default": "solid",
+      "label": "t:sections.events.settings.buy_tickets_button_style.label"
+    },
+    {
+      "type": "text",
+      "id": "add_to_calendar_label",
+      "label": "t:sections.events.settings.add_to_calendar_label.label",
+      "default": "Add to calendar"
+    },
+    {
+      "type": "select",
+      "id": "add_to_calendar_button_style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "t:sections.all.buttons.button_styles.options__1.label"
+        },
+        {
+          "value": "outlined",
+          "label": "t:sections.all.buttons.button_styles.options__2.label"
+        },
+        {
+          "value": "link",
+          "label": "t:sections.all.buttons.button_styles.options__3.label"
+        }
+      ],
+      "default": "link",
+      "label": "t:sections.events.settings.add_to_calendar_button_style.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.events.settings.header_1.content"
+    },
+    {
+      "type": "select",
+      "id": "event_heading_size",
+      "label": "t:sections.all.size.size.label",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:sections.all.size.options__1.label"
+        },
+        {
+          "value": "heading_xl",
+          "label": "t:sections.all.size.options__2.label"
+        },
+        {
+          "value": "heading_xl_uppercase",
+          "label": "t:sections.all.size.options__3.label"
+        },
+        {
+          "value": "heading_l",
+          "label": "t:sections.all.size.options__4.label"
+        },
+        {
+          "value": "heading_l_uppercase",
+          "label": "t:sections.all.size.options__5.label"
+        },
+        {
+          "value": "heading_m",
+          "label": "t:sections.all.size.options__6.label"
+        },
+        {
+          "value": "heading_m_uppercase",
+          "label": "t:sections.all.size.options__7.label"
+        },
+        {
+          "value": "heading_s",
+          "label": "t:sections.all.size.options__8.label"
+        },
+        {
+          "value": "heading_s_uppercase",
+          "label": "t:sections.all.size.options__9.label"
+        },
+        {
+          "value": "heading_xs",
+          "label": "t:sections.all.size.options__10.label"
+        },
+        {
+          "value": "heading_xs_uppercase",
+          "label": "t:sections.all.size.options__11.label"
+        },
+        {
+          "value": "body_l",
+          "label": "t:sections.all.size.options__12.label"
+        },
+        {
+          "value": "body_l_uppercase",
+          "label": "t:sections.all.size.options__13.label"
+        },
+        {
+          "value": "body_m",
+          "label": "t:sections.all.size.options__14.label"
+        },
+        {
+          "value": "body_m_uppercase",
+          "label": "t:sections.all.size.options__15.label"
+        },
+        {
+          "value": "body_s",
+          "label": "t:sections.all.size.options__16.label"
+        },
+        {
+          "value": "body_s_uppercase",
+          "label": "t:sections.all.size.options__17.label"
+        },
+        {
+          "value": "label_font",
+          "label": "t:sections.all.size.options__18.label"
+        },
+        {
+          "value": "label_font_uppercase",
+          "label": "t:sections.all.size.options__19.label"
+        }
+      ],
+      "default": "heading_s"
+    },
+    {
+      "type": "select",
+      "id": "event_heading_color",
+      "label": "t:sections.all.heading_color.label",
+      "options": [
+        {
+          "value": "solid",
+          "label": "t:sections.all.heading_color.options__1.label"
+        },
+        {
+          "value": "gradient",
+          "label": "t:sections.all.heading_color.options__2.label"
+        }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "color_background",
+      "id": "event_heading_gradient",
+      "label": "t:sections.all.heading_gradient.label",
+      "default": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
+      "visible_if": "{{ section.settings.event_heading_color == 'gradient' }}"
+    },
+    {
+      "type": "select",
+      "id": "description_size",
+      "label": "t:sections.all.size.description_size.label",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:sections.all.size.options__1.label"
+        },
+        {
+          "value": "heading_xl",
+          "label": "t:sections.all.size.options__2.label"
+        },
+        {
+          "value": "heading_xl_uppercase",
+          "label": "t:sections.all.size.options__3.label"
+        },
+        {
+          "value": "heading_l",
+          "label": "t:sections.all.size.options__4.label"
+        },
+        {
+          "value": "heading_l_uppercase",
+          "label": "t:sections.all.size.options__5.label"
+        },
+        {
+          "value": "heading_m",
+          "label": "t:sections.all.size.options__6.label"
+        },
+        {
+          "value": "heading_m_uppercase",
+          "label": "t:sections.all.size.options__7.label"
+        },
+        {
+          "value": "heading_s",
+          "label": "t:sections.all.size.options__8.label"
+        },
+        {
+          "value": "heading_s_uppercase",
+          "label": "t:sections.all.size.options__9.label"
+        },
+        {
+          "value": "heading_xs",
+          "label": "t:sections.all.size.options__10.label"
+        },
+        {
+          "value": "heading_xs_uppercase",
+          "label": "t:sections.all.size.options__11.label"
+        },
+        {
+          "value": "body_l",
+          "label": "t:sections.all.size.options__12.label"
+        },
+        {
+          "value": "body_l_uppercase",
+          "label": "t:sections.all.size.options__13.label"
+        },
+        {
+          "value": "body_m",
+          "label": "t:sections.all.size.options__14.label"
+        },
+        {
+          "value": "body_m_uppercase",
+          "label": "t:sections.all.size.options__15.label"
+        },
+        {
+          "value": "body_s",
+          "label": "t:sections.all.size.options__16.label"
+        },
+        {
+          "value": "body_s_uppercase",
+          "label": "t:sections.all.size.options__17.label"
+        },
+        {
+          "value": "label_font",
+          "label": "t:sections.all.size.options__18.label"
+        },
+        {
+          "value": "label_font_uppercase",
+          "label": "t:sections.all.size.options__19.label"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "checkbox",
+      "id": "dim_text",
+      "default": false,
+      "label": "t:sections.all.labels.dim_text.label"
+    },
+    {
+      "type": "select",
+      "id": "media_ratio",
+      "options": [
+        {
+          "value": "original",
+          "label": "t:sections.all.image.image_ratio.options__1.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.all.image.image_ratio.options__2.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.all.image.image_ratio.options__3.label"
+        },
+        {
+          "value": "narrow_portrait",
+          "label": "t:sections.all.image.image_ratio.options__8.label"
+        },
+        {
+          "value": "traditional",
+          "label": "t:sections.all.image.image_ratio.options__9.label"
+        },
+        {
+          "value": "landscape",
+          "label": "t:sections.all.image.image_ratio.options__4.label"
+        },
+        {
+          "value": "wide",
+          "label": "t:sections.all.image.image_ratio.options__5.label"
+        }
+      ],
+      "default": "original",
+      "label": "t:sections.all.image.media_ratio.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.events.settings.header_3.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "t:sections.events.settings.show_date.label",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "date_text_style",
+      "options": [
+        {
+          "value": "base",
+          "label": "t:sections.all.base.content"
+        },
+        {
+          "value": "accent",
+          "label": "t:sections.all.accent.content"
+        }
+      ],
+      "label": "t:sections.all.labels.text.label",
+      "default": "base",
+      "visible_if": "{{ section.settings.show_date == true }}"
+    },
+    {
+      "type": "select",
+      "id": "date_text_size",
+      "options": [
+        {
+          "value": "heading_s",
+          "label": "t:blocks.countdown_timer.settings.text_size.small.label"
+        },
+        {
+          "value": "heading_m",
+          "label": "t:blocks.countdown_timer.settings.text_size.large.label"
+        }
+      ],
+      "label": "t:sections.all.size.text_size.label",
+      "default": "heading_m",
+      "visible_if": "{{ section.settings.show_date == true }}"
+    },
+    {
+      "type": "color",
+      "id": "date_text_color",
+      "label": "t:blocks.countdown_timer.settings.text_color.label",
+      "default": "#000000",
+      "visible_if": "{{ section.settings.show_date == true }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_background",
+      "label": "t:blocks.countdown_timer.settings.show_background.label",
+      "default": true,
+      "visible_if": "{{ section.settings.show_date == true }}"
+    },
+    {
+      "type": "color",
+      "id": "date_background_color",
+      "label": "t:sections.all.colors.background.content",
+      "default": "#ffffff",
+      "visible_if": "{{ section.settings.show_date == true }}"
+    },
+    {
+      "type": "color_background",
+      "id": "date_background_gradient",
+      "label": "t:sections.all.colors.background_gradient.label",
+      "visible_if": "{{ section.settings.show_date == true }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "date_show_outline",
+      "label": "t:blocks.countdown_timer.settings.show_outline.label",
+      "default": true,
+      "visible_if": "{{ section.settings.show_date == true }}"
+    },
+    {
+      "type": "color",
+      "id": "date_outline_color",
+      "label": "t:sections.all.colors.outline_color.label",
+      "default": "#000000",
+      "visible_if": "{{ section.settings.show_date == true }}"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.events.settings.header_2.content"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "t:sections.all.size.heading_size.label",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:sections.all.size.options__1.label"
+        },
+        {
+          "value": "heading_xl",
+          "label": "t:sections.all.size.options__2.label"
+        },
+        {
+          "value": "heading_xl_uppercase",
+          "label": "t:sections.all.size.options__3.label"
+        },
+        {
+          "value": "heading_l",
+          "label": "t:sections.all.size.options__4.label"
+        },
+        {
+          "value": "heading_l_uppercase",
+          "label": "t:sections.all.size.options__5.label"
+        },
+        {
+          "value": "heading_m",
+          "label": "t:sections.all.size.options__6.label"
+        },
+        {
+          "value": "heading_m_uppercase",
+          "label": "t:sections.all.size.options__7.label"
+        },
+        {
+          "value": "heading_s",
+          "label": "t:sections.all.size.options__8.label"
+        },
+        {
+          "value": "heading_s_uppercase",
+          "label": "t:sections.all.size.options__9.label"
+        },
+        {
+          "value": "heading_xs",
+          "label": "t:sections.all.size.options__10.label"
+        },
+        {
+          "value": "heading_xs_uppercase",
+          "label": "t:sections.all.size.options__11.label"
+        },
+        {
+          "value": "body_l",
+          "label": "t:sections.all.size.options__12.label"
+        },
+        {
+          "value": "body_l_uppercase",
+          "label": "t:sections.all.size.options__13.label"
+        },
+        {
+          "value": "body_m",
+          "label": "t:sections.all.size.options__14.label"
+        },
+        {
+          "value": "body_m_uppercase",
+          "label": "t:sections.all.size.options__15.label"
+        },
+        {
+          "value": "body_s",
+          "label": "t:sections.all.size.options__16.label"
+        },
+        {
+          "value": "body_s_uppercase",
+          "label": "t:sections.all.size.options__17.label"
+        },
+        {
+          "value": "label_font",
+          "label": "t:sections.all.size.options__18.label"
+        },
+        {
+          "value": "label_font_uppercase",
+          "label": "t:sections.all.size.options__19.label"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.all.tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.all.tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.all.tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.all.tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.all.tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.all.tag.options__7.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.all.tag.options__8.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.all.tag.options__9.label"
+        }
+      ],
+      "default": "h2",
+      "label": "t:sections.all.tag.tag_label"
+    },
+    {
+      "type": "select",
+      "id": "heading_color",
+      "label": "t:sections.all.heading_color.label",
+      "options": [
+        {
+          "value": "solid",
+          "label": "t:sections.all.heading_color.options__1.label"
+        },
+        {
+          "value": "gradient",
+          "label": "t:sections.all.heading_color.options__2.label"
+        }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "color_background",
+      "id": "heading_gradient",
+      "label": "t:sections.all.heading_gradient.label",
+      "default": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
+      "visible_if": "{{ section.settings.heading_color == 'gradient' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.colors.content"
+    },
+    {
+      "type": "select",
+      "id": "color_type",
+      "label": "t:sections.all.colors.color_type.label",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:sections.all.colors.color_type.options__1.label"
+        },
+        {
+          "value": "invert",
+          "label": "t:sections.all.colors.color_type.options__2.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:sections.all.colors.color_type.options__3.label"
+        }
+      ],
+      "default": "default"
+    },    {
+      "type": "select",
+      "id": "background_color_type",
+      "label": "t:sections.all.colors.background_color_type.label",
+      "options": [
+        {
+          "value": "solid",
+          "label": "t:sections.all.colors.background_color_type.options__1.label"
+        },
+        {
+          "value": "gradient",
+          "label": "t:sections.all.colors.background_color_type.options__2.label"
+        }
+      ],
+      "visible_if": "{{ section.settings.color_type == 'custom' }}",
+      "default": "solid"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "t:sections.all.colors.background_gradient_type.label",
+      "visible_if": "{{ section.settings.color_type == 'custom' and section.settings.background_color_type == 'gradient' }}"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:sections.all.colors.background_solid_type.label",
+      "info": "t:sections.all.colors.background_solid_type.info",
+      "visible_if": "{{ section.settings.color_type == 'custom' }}",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:sections.all.colors.text_color.label",
+      "visible_if": "{{ section.settings.color_type == 'custom' }}",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.paddings.desktop_section_paddings.content"
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_top",
+      "min": -160,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 0,
+      "label": "t:sections.all.paddings.padding_top.label"
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_bottom",
+      "min": -160,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 0,
+      "label": "t:sections.all.paddings.padding_bottom.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.paddings.mobile_section_paddings.content"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "min": -80,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 0,
+      "label": "t:sections.all.paddings.padding_top.label"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "min": -80,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 0,
+      "label": "t:sections.all.paddings.padding_bottom.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "event",
+      "name": "t:sections.events.blocks.event.name",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.all.image.desktop_image.label"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.all.labels.heading.label",
+          "info": "t:sections.all.labels.heading.info",
+          "default": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "default": "<p>Add an optional description to your event.</p>",
+          "label": "t:sections.all.labels.description.label"
+        },
+        {
+          "type": "page",
+          "id": "page",
+          "label": "t:sections.all.labels.page.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "page_content_in_popup",
+          "default": true,
+          "label": "t:sections.icons_with_text.blocks.item.settings.page_content_in_popup.label"
+        },
+        {
+          "type": "text",
+          "id": "details_button_label",
+          "label": "t:sections.events.blocks.event.settings.details_button_label.label",
+          "default": "Discover"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "default": "CA 94063 Redwood City 541 Jefferson Ave",
+          "label": "t:sections.events.blocks.event.settings.location.label",
+          "info": "t:sections.events.blocks.event.settings.location.info"
+        },
+        {
+          "type": "select",
+          "id": "timezone",
+          "label": "t:sections.events.blocks.event.settings.timezone.label",
+          "options": [
+            {
+              "value": "Pacific/Wallis",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_1.label"
+            },
+            {
+              "value": "Pacific/Pago_Pago",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_2.label"
+            },
+            {
+              "value": "Pacific/Midway",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_3.label"
+            },
+            {
+              "value": "Pacific/Honolulu",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_4.label"
+            },
+            {
+              "value": "America/Anchorage",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_5.label"
+            },
+            {
+              "value": "America/Los_Angeles",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_6.label"
+            },
+            {
+              "value": "America/Tijuana",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_7.label"
+            },
+            {
+              "value": "America/Phoenix",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_8.label"
+            },
+            {
+              "value": "America/Mazatlan",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_9.label"
+            },
+            {
+              "value": "America/Denver",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_10.label"
+            },
+            {
+              "value": "America/Guatemala",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_11.label"
+            },
+            {
+              "value": "America/Chicago",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_12.label"
+            },
+            {
+              "value": "America/Chihuahua",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_13.label"
+            },
+            {
+              "value": "America/Mexico_City",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_14.label"
+            },
+            {
+              "value": "America/Monterrey",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_15.label"
+            },
+            {
+              "value": "America/Regina",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_16.label"
+            },
+            {
+              "value": "America/Bogota",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_17.label"
+            },
+            {
+              "value": "America/New_York",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_18.label"
+            },
+            {
+              "value": "America/Indiana/Indianapolis",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_19.label"
+            },
+            {
+              "value": "America/Lima",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_20.label"
+            },
+            {
+              "value": "America/Halifax",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_21.label"
+            },
+            {
+              "value": "America/Caracas",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_22.label"
+            },
+            {
+              "value": "America/Guyana",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_23.label"
+            },
+            {
+              "value": "America/La_Paz",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_24.label"
+            },
+            {
+              "value": "America/Puerto_Rico",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_25.label"
+            },
+            {
+              "value": "America/Santiago",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_26.label"
+            },
+            {
+              "value": "America/St_Johns",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_27.label"
+            },
+            {
+              "value": "America/Sao_Paulo",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_28.label"
+            },
+            {
+              "value": "America/Argentina/Buenos_Aires",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_29.label"
+            },
+            {
+              "value": "America/Montevideo",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_30.label"
+            },
+            {
+              "value": "Atlantic/South_Georgia",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_31.label"
+            },
+            {
+              "value": "Atlantic/Azores",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_32.label"
+            },
+            {
+              "value": "Atlantic/Cape_Verde",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_33.label"
+            },
+            {
+              "value": "Europe/London",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_34.label"
+            },
+            {
+              "value": "Europe/Lisbon",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_35.label"
+            },
+            {
+              "value": "Africa/Monrovia",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_36.label"
+            },
+            {
+              "value": "UTC",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_37.label"
+            },
+            {
+              "value": "Europe/Amsterdam",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_38.label"
+            },
+            {
+              "value": "Europe/Belgrade",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_39.label"
+            },
+            {
+              "value": "Europe/Berlin",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_40.label"
+            },
+            {
+              "value": "Europe/Zurich",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_41.label"
+            },
+            {
+              "value": "Europe/Bratislava",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_42.label"
+            },
+            {
+              "value": "Europe/Brussels",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_43.label"
+            },
+            {
+              "value": "Europe/Budapest",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_44.label"
+            },
+            {
+              "value": "Africa/Casablanca",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_45.label"
+            },
+            {
+              "value": "Europe/Copenhagen",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_46.label"
+            },
+            {
+              "value": "Europe/Dublin",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_47.label"
+            },
+            {
+              "value": "Europe/Ljubljana",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_48.label"
+            },
+            {
+              "value": "Europe/Madrid",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_49.label"
+            },
+            {
+              "value": "Europe/Paris",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_50.label"
+            },
+            {
+              "value": "Europe/Prague",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_51.label"
+            },
+            {
+              "value": "Europe/Rome",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_52.label"
+            },
+            {
+              "value": "Europe/Sarajevo",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_53.label"
+            },
+            {
+              "value": "Europe/Skopje",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_54.label"
+            },
+            {
+              "value": "Europe/Stockholm",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_55.label"
+            },
+            {
+              "value": "Europe/Vienna",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_56.label"
+            },
+            {
+              "value": "Europe/Warsaw",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_57.label"
+            },
+            {
+              "value": "Africa/Lagos",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_58.label"
+            },
+            {
+              "value": "Europe/Zagreb",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_59.label"
+            },
+            {
+              "value": "Europe/Athens",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_60.label"
+            },
+            {
+              "value": "Europe/Bucharest",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_61.label"
+            },
+            {
+              "value": "Africa/Cairo",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_62.label"
+            },
+            {
+              "value": "Africa/Harare",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_63.label"
+            },
+            {
+              "value": "Europe/Helsinki",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_64.label"
+            },
+            {
+              "value": "Asia/Jerusalem",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_65.label"
+            },
+            {
+              "value": "Europe/Kaliningrad",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_66.label"
+            },
+            {
+              "value": "Africa/Johannesburg",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_67.label"
+            },
+            {
+              "value": "Europe/Riga",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_68.label"
+            },
+            {
+              "value": "Europe/Sofia",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_69.label"
+            },
+            {
+              "value": "Europe/Tallinn",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_70.label"
+            },
+            {
+              "value": "Europe/Vilnius",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_71.label"
+            },
+            {
+              "value": "Asia/Baghdad",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_72.label"
+            },
+            {
+              "value": "Europe/Istanbul",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_73.label"
+            },
+            {
+              "value": "Asia/Kuwait",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_74.label"
+            },
+            {
+              "value": "Europe/Minsk",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_75.label"
+            },
+            {
+              "value": "Europe/Moscow",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_76.label"
+            },
+            {
+              "value": "Africa/Nairobi",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_77.label"
+            },
+            {
+              "value": "Asia/Riyadh",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_78.label"
+            },
+            {
+              "value": "Europe/Volgograd",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_79.label"
+            },
+            {
+              "value": "Asia/Tehran",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_80.label"
+            },
+            {
+              "value": "Asia/Dubai",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_81.label"
+            },
+            {
+              "value": "Asia/Baku",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_82.label"
+            },
+            {
+              "value": "Europe/Samara",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_83.label"
+            },
+            {
+              "value": "Asia/Tbilisi",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_84.label"
+            },
+            {
+              "value": "Asia/Yerevan",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_85.label"
+            },
+            {
+              "value": "Asia/Kabul",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_86.label"
+            },
+            {
+              "value": "Asia/Almaty",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_87.label"
+            },
+            {
+              "value": "Asia/Yekaterinburg",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_88.label"
+            },
+            {
+              "value": "Asia/Karachi",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_89.label"
+            },
+            {
+              "value": "Asia/Tashkent",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_90.label"
+            },
+            {
+              "value": "Asia/Kolkata",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_91.label"
+            },
+            {
+              "value": "Asia/Colombo",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_92.label"
+            },
+            {
+              "value": "Asia/Kathmandu",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_93.label"
+            },
+            {
+              "value": "Asia/Dhaka",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_94.label"
+            },
+            {
+              "value": "Asia/Urumqi",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_95.label"
+            },
+            {
+              "value": "Asia/Bangkok",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_96.label"
+            },
+            {
+              "value": "Asia/Jakarta",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_97.label"
+            },
+            {
+              "value": "Asia/Krasnoyarsk",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_98.label"
+            },
+            {
+              "value": "Asia/Novosibirsk",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_99.label"
+            },
+            {
+              "value": "Asia/Shanghai",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_100.label"
+            },
+            {
+              "value": "Asia/Chongqing",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_101.label"
+            },
+            {
+              "value": "Asia/Hong_Kong",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_102.label"
+            },
+            {
+              "value": "Asia/Irkutsk",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_103.label"
+            },
+            {
+              "value": "Asia/Kuala_Lumpur",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_104.label"
+            },
+            {
+              "value": "Australia/Perth",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_105.label"
+            },
+            {
+              "value": "Asia/Singapore",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_106.label"
+            },
+            {
+              "value": "Asia/Taipei",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_107.label"
+            },
+            {
+              "value": "Asia/Ulaanbaatar",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_108.label"
+            },
+            {
+              "value": "Asia/Tokyo",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_109.label"
+            },
+            {
+              "value": "Asia/Seoul",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_110.label"
+            },
+            {
+              "value": "Asia/Yakutsk",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_111.label"
+            },
+            {
+              "value": "Australia/Adelaide",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_112.label"
+            },
+            {
+              "value": "Australia/Darwin",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_113.label"
+            },
+            {
+              "value": "Australia/Brisbane",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_114.label"
+            },
+            {
+              "value": "Australia/Melbourne",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_115.label"
+            },
+            {
+              "value": "Pacific/Guam",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_116.label"
+            },
+            {
+              "value": "Australia/Hobart",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_117.label"
+            },
+            {
+              "value": "Pacific/Port_Moresby",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_118.label"
+            },
+            {
+              "value": "Australia/Sydney",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_119.label"
+            },
+            {
+              "value": "Asia/Vladivostok",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_120.label"
+            },
+            {
+              "value": "Asia/Magadan",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_121.label"
+            },
+            {
+              "value": "Pacific/Noumea",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_122.label"
+            },
+            {
+              "value": "Pacific/Guadalcanal",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_123.label"
+            },
+            {
+              "value": "Asia/Srednekolymsk",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_124.label"
+            },
+            {
+              "value": "Pacific/Auckland",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_125.label"
+            },
+            {
+              "value": "Pacific/Fiji",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_126.label"
+            },
+            {
+              "value": "Asia/Kamchatka",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_127.label"
+            },
+            {
+              "value": "Pacific/Majuro",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_128.label"
+            },
+            {
+              "value": "Pacific/Chatham",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_129.label"
+            },
+            {
+              "value": "Pacific/Tongatapu",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_130.label"
+            },
+            {
+              "value": "Pacific/Apia",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_131.label"
+            },
+            {
+              "value": "Pacific/Fakaofo",
+              "label": "t:sections.events.blocks.event.settings.timezone.options_132.label"
+            }
+          ],
+          "default": "America/New_York"
+        },
+        {
+          "type": "text",
+          "id": "start_date",
+          "default": "2030-01-01",
+          "label": "t:sections.events.blocks.event.settings.start_date.label",
+          "info": "t:sections.events.blocks.event.settings.start_date.info"
+        },
+        {
+          "type": "text",
+          "id": "start_time",
+          "label": "t:sections.events.blocks.event.settings.start_time.label",
+          "info": "t:sections.events.blocks.event.settings.start_time.info"
+        },
+        {
+          "type": "text",
+          "id": "end_date",
+          "label": "t:sections.events.blocks.event.settings.end_date.label",
+          "info": "t:sections.events.blocks.event.settings.end_date.info"
+        },
+        {
+          "type": "text",
+          "id": "end_time",
+          "label": "t:sections.events.blocks.event.settings.end_time.label",
+          "info": "t:sections.events.blocks.event.settings.end_time.info"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_add_to_calendar",
+          "label": "t:sections.events.blocks.event.settings.enable_add_to_calendar.label",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "t:sections.events.blocks.event.settings.header_1.content"
+        },
+        {
+          "type": "url",
+          "id": "buy_tickets_button_link",
+          "label": "t:sections.all.links.link.label",
+          "info": "t:sections.events.blocks.event.settings.buy_tickets_button_link.info"
+        },
+        {
+          "type": "text",
+          "id": "buy_tickets_button_label",
+          "label": "t:sections.all.labels.label.label",
+          "info": "t:sections.all.buttons.button_label.info",
+          "default": "Buy tickets"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.events.name",
+      "category": "t:categories.content",
+      "blocks": [
+        {
+          "type": "event"
+        },
+        {
+          "type": "event"
+        },
+        {
+          "type": "event"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  }
+}
+{% endschema %}

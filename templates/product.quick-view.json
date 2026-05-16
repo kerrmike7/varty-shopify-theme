@@ -1,0 +1,140 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "quick-view": {
+      "type": "quick-view",
+      "blocks": {
+        "5e8c9327-e699-4289-b5d4-b055fc4f0862": {
+          "type": "title",
+          "settings": {
+            "title_size": "heading_m",
+            "heading_tag": "h1",
+            "heading_color": "solid",
+            "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
+            "top_spacing": 1,
+            "mobile_top_spacing": 1
+          }
+        },
+        "description_gYWUzr": {
+          "type": "description",
+          "settings": {
+            "text_size": "default",
+            "top_spacing": 1,
+            "mobile_top_spacing": 1
+          }
+        },
+        "e8d14fca-ff07-4108-a172-9ef5277aecf6": {
+          "type": "rating",
+          "disabled": true,
+          "settings": {
+            "text_size": "default",
+            "top_spacing": 1,
+            "mobile_top_spacing": 1
+          }
+        },
+        "e4bc293e-9414-405c-86a5-eda53856380b": {
+          "type": "subtitle",
+          "disabled": true,
+          "settings": {
+            "subtitle": "",
+            "dim_text": true,
+            "subtitle_size": "default",
+            "subtitle_tag": "h3",
+            "top_spacing": 1,
+            "mobile_top_spacing": 1
+          }
+        },
+        "63f93c87-7976-4d84-9caa-ec20c29b2cd6": {
+          "type": "price",
+          "settings": {
+            "text_size": "heading_s",
+            "badge_size": "default",
+            "show_price": true,
+            "show_badges": true,
+            "hide_shipping_note": false,
+            "top_spacing": 1,
+            "mobile_top_spacing": 1
+          }
+        },
+        "67d18980-87f7-4387-855c-ca214f4f8fe8": {
+          "type": "variant_picker",
+          "settings": {
+            "show_label": true,
+            "label_size": "default",
+            "text_size": "default",
+            "top_spacing": 1,
+            "mobile_top_spacing": 1
+          }
+        },
+        "10bbe7f0-7c40-4f4c-8110-74a22653bbef": {
+          "type": "quantity_selector",
+          "settings": {
+            "show_label": false,
+            "label_size": "default",
+            "top_spacing": 1,
+            "mobile_top_spacing": 1
+          }
+        },
+        "45ccea7b-527e-4a1c-b894-60ce2ec7f8f4": {
+          "type": "buy_buttons",
+          "settings": {
+            "stretch_buy_buttons": true,
+            "display_in_a_row": false,
+            "price_in_button": false,
+            "compare_price_on_mobile": false,
+            "show_dynamic_checkout": true,
+            "hide_pickup_availability": false,
+            "top_spacing": 1,
+            "mobile_top_spacing": 1
+          }
+        },
+        "c4c583df-841b-4c6f-8386-c43496f7ca63": {
+          "type": "more_details",
+          "settings": {
+            "button_label": "More details",
+            "link_size": "body_l",
+            "top_spacing": 1,
+            "mobile_top_spacing": 1
+          }
+        }
+      },
+      "block_order": [
+        "5e8c9327-e699-4289-b5d4-b055fc4f0862",
+        "description_gYWUzr",
+        "e8d14fca-ff07-4108-a172-9ef5277aecf6",
+        "e4bc293e-9414-405c-86a5-eda53856380b",
+        "63f93c87-7976-4d84-9caa-ec20c29b2cd6",
+        "67d18980-87f7-4387-855c-ca214f4f8fe8",
+        "10bbe7f0-7c40-4f4c-8110-74a22653bbef",
+        "45ccea7b-527e-4a1c-b894-60ce2ec7f8f4",
+        "c4c583df-841b-4c6f-8386-c43496f7ca63"
+      ],
+      "settings": {
+        "desktop_gallery_style": "arrows",
+        "thumbnails_image_ratio": "square",
+        "swap_position": false,
+        "image_ratio": "square",
+        "focal_point": "center center",
+        "context_image_radius": "default",
+        "organize_images": false,
+        "first_image_instead_of_variant": false,
+        "show_media_attached_to_variant": false,
+        "show_extra_images": false,
+        "enable_video_looping": false,
+        "disable_video_controls": false,
+        "mobile_navigation": "arrows"
+      }
+    }
+  },
+  "order": [
+    "quick-view"
+  ]
+}

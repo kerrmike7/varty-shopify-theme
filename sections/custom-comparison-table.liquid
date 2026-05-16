@@ -1,0 +1,372 @@
+{% liquid
+  assign mobile_layout = section.settings.mobile_layout
+  assign varty_label    = section.settings.varty_label | default: 'Varty'
+  assign c1_label       = section.settings.competitor_1_label | default: 'Brand A'
+  assign c2_label       = section.settings.competitor_2_label | default: 'Brand B'
+  assign bg_color       = section.settings.background_color | default: '#5463B3'
+  assign text_color     = section.settings.text_color | default: '#ffffff'
+%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    background-color: {{ bg_color }};
+    color: {{ text_color }};
+  }
+</style>
+
+<div class="custom-comparison-table page-width" id="shopify-section-inner-{{ section.id }}">
+  {% if section.settings.heading != blank %}
+    <div class="custom-comparison-table__header">
+      <h2 class="custom-comparison-table__heading">{{ section.settings.heading | escape }}</h2>
+      {% if section.settings.subheading != blank %}
+        <div class="custom-comparison-table__subheading rte">{{ section.settings.subheading }}</div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="custom-comparison-table__wrapper">
+    <table
+      class="varty-comparison-table{% if mobile_layout == 'stacked' %} varty-comparison-table--stacked{% endif %}"
+      role="table"
+      aria-label="{{ 'sections.comparison_table.aria_label' | t }}"
+    >
+      <thead>
+        <tr>
+          <th scope="col">{{ 'sections.comparison_table.feature_col' | t }}</th>
+          <th scope="col">{{ varty_label }}</th>
+          <th scope="col">{{ c1_label }}</th>
+          {% unless c2_label == blank %}<th scope="col">{{ c2_label }}</th>{% endunless %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for block in section.blocks %}
+          {% if block.type == 'row' %}
+            {% liquid
+              assign varty_val = block.settings.varty_value
+              assign c1_val    = block.settings.competitor_1_value
+              assign c2_val    = block.settings.competitor_2_value
+              if block.settings.varty_check
+                assign varty_display = '✓'
+                assign varty_class   = 'check--yes'
+              else
+                assign varty_display = '✗'
+                assign varty_class   = 'check--no'
+              endif
+              if block.settings.c1_check
+                assign c1_display = '✓'
+                assign c1_class   = 'check--yes'
+              else
+                assign c1_display = '✗'
+                assign c1_class   = 'check--no'
+              endif
+              if block.settings.c2_check
+                assign c2_display = '✓'
+                assign c2_class   = 'check--yes'
+              else
+                assign c2_display = '✗'
+                assign c2_class   = 'check--no'
+              endif
+            %}
+            <tr {{ block.shopify_attributes }}>
+              <td
+                scope="row"
+                data-label="{{ 'sections.comparison_table.feature_col' | t }}"
+              >{{ block.settings.feature_label | escape }}</td>
+              <td data-label="{{ varty_label }}">
+                {% if varty_val != blank %}
+                  {{ varty_val | escape }}
+                {% else %}
+                  <span class="{{ varty_class }}" aria-label="{{ varty_display }}">{{ varty_display }}</span>
+                {% endif %}
+              </td>
+              <td data-label="{{ c1_label }}">
+                {% if c1_val != blank %}
+                  {{ c1_val | escape }}
+                {% else %}
+                  <span class="{{ c1_class }}" aria-label="{{ c1_display }}">{{ c1_display }}</span>
+                {% endif %}
+              </td>
+              {% unless c2_label == blank %}<td data-label="{{ c2_label }}">
+                {% if c2_val != blank %}
+                  {{ c2_val | escape }}
+                {% else %}
+                  <span class="{{ c2_class }}" aria-label="{{ c2_display }}">{{ c2_display }}</span>
+                {% endif %}
+              </td>{% endunless %}
+            </tr>
+          {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  #shopify-section-{{ section.id }} .custom-comparison-table {
+    padding-top: {{ section.settings.desktop_padding_top }}px;
+    padding-bottom: {{ section.settings.desktop_padding_bottom }}px;
+  }
+  #shopify-section-{{ section.id }} .custom-comparison-table__header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  #shopify-section-{{ section.id }} .custom-comparison-table__heading {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    color: {{ text_color }};
+  }
+  #shopify-section-{{ section.id }} .custom-comparison-table__subheading {
+    font-size: 1rem;
+    opacity: 0.85;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  #shopify-section-{{ section.id }} .custom-comparison-table__wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .custom-comparison-table {
+      padding-top: {{ section.settings.mobile_padding_top }}px;
+      padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Comparison Table",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Clean Advantage"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>See how Varty stacks up</p>"
+    },
+    {
+      "type": "text",
+      "id": "varty_label",
+      "label": "Varty column label",
+      "default": "Varty"
+    },
+    {
+      "type": "text",
+      "id": "competitor_1_label",
+      "label": "Competitor 1 label",
+      "default": "Brand A"
+    },
+    {
+      "type": "text",
+      "id": "competitor_2_label",
+      "label": "Competitor 2 label",
+      "default": "Brand B"
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "Mobile layout",
+      "options": [
+        { "value": "stacked", "label": "Stacked cards" },
+        { "value": "scroll", "label": "Horizontal scroll" }
+      ],
+      "default": "stacked"
+    },
+    {
+      "type": "header",
+      "content": "Colours"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background colour",
+      "default": "#5463B3"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text colour",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop padding top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop padding bottom",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile padding top",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile padding bottom",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Table row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_label",
+          "label": "Feature",
+          "default": "Feature"
+        },
+        {
+          "type": "header",
+          "content": "Varty"
+        },
+        {
+          "type": "checkbox",
+          "id": "varty_check",
+          "label": "Varty: checkmark (✓)",
+          "default": true,
+          "info": "Enable for ✓, disable for ✗. Override with text below."
+        },
+        {
+          "type": "text",
+          "id": "varty_value",
+          "label": "Varty: text override (optional)",
+          "info": "If set, shows this text instead of ✓/✗"
+        },
+        {
+          "type": "header",
+          "content": "Competitor 1"
+        },
+        {
+          "type": "checkbox",
+          "id": "c1_check",
+          "label": "Competitor 1: checkmark (✓)",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "competitor_1_value",
+          "label": "Competitor 1: text override (optional)"
+        },
+        {
+          "type": "header",
+          "content": "Competitor 2"
+        },
+        {
+          "type": "checkbox",
+          "id": "c2_check",
+          "label": "Competitor 2: checkmark (✓)",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "competitor_2_value",
+          "label": "Competitor 2: text override (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison Table",
+      "blocks": [
+        {
+          "type": "row",
+          "settings": {
+            "feature_label": "Certified Organic",
+            "varty_check": true,
+            "c1_check": false,
+            "c2_check": false
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "feature_label": "3 ingredients or fewer",
+            "varty_check": true,
+            "c1_check": false,
+            "c2_check": false
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "feature_label": "No sunflower oil",
+            "varty_check": true,
+            "c1_check": false,
+            "c2_check": true
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "feature_label": "No gums or stabilisers",
+            "varty_check": true,
+            "c1_check": false,
+            "c2_check": false
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "feature_label": "Canadian made",
+            "varty_check": true,
+            "c1_check": false,
+            "c2_check": false
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "feature_label": "Carrageenan free",
+            "varty_check": true,
+            "c1_check": true,
+            "c2_check": false
+          }
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "enabled_on": {
+    "templates": ["*"]
+  }
+}
+{% endschema %}

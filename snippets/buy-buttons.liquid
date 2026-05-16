@@ -1,0 +1,279 @@
+<div class="section-block buy-buttons" style="--spacing: {{ block.settings.top_spacing }}; --mobile-spacing: {{ block.settings.mobile_top_spacing }};" {{ block.shopify_attributes }}>
+    {%- liquid
+      assign gift_card_recipient_feature_active = false
+      if block.settings.show_gift_card_recipient and product.gift_card?
+        assign gift_card_recipient_feature_active = true
+      endif
+
+      assign show_dynamic_checkout = false
+      if block.settings.show_dynamic_checkout and gift_card_recipient_feature_active == false
+        assign show_dynamic_checkout = true
+      endif
+      if product.template_suffix == 'preorder'
+        assign show_dynamic_checkout = false
+      endif
+
+      if settings.typography_preset == 'avant_garde'
+        assign weight = settings.accent_icon_weight
+        if settings.swap_fonts
+          assign weight = settings.base_icon_weight
+        endif
+      else 
+        assign weight =  settings.base_icon_weight
+        if settings.swap_fonts
+          assign weight = settings.accent_icon_weight
+        endif
+      endif
+      if settings.typography_preset == 'custom'
+        assign weight = settings.custom_icon_weight
+      endif
+      assign uppercase_body_s = false
+      assign bolder_body_s = false
+      if settings.typography_preset == 'custom'
+          if settings.uppercase_body_s
+              assign uppercase_body_s = true
+          endif
+          if settings.bolder_font_body_s
+              assign bolder_body_s = true
+          endif
+      endif
+    -%}
+    <product-form class="product-form" data-hide-errors="{{ gift_card_recipient_feature_active }}">
+      <div class="product-form__error-message-wrapper label--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}" role="alert" hidden>
+        <span class="product-form__error-message"></span>
+      </div>
+
+      {%- form 'product', product, data-productid: product.id, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+        <input type="hidden" name="id" data-productid="{{ product.id }}" value="{{ product.selected_or_first_available_variant.id }}" disabled>
+        
+        {%- if gift_card_recipient_feature_active -%}
+            <accordion-block>
+                <div class="accordion-toggle customer fields-wrapper">
+                    {%- assign gift_card_recipient_control_flag = 'properties[__shopify_send_gift_card_to_recipient]' -%}
+                    <script src="{{ 'recipient-form.js' | asset_url }}" defer="defer"></script>
+                    <recipient-form
+                    class="recipient-form"
+                    data-section-id="{{ section.id }}"
+                    data-product-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                    >
+                    <label class="accordion__summary recipient-checkbox field field--checkbox" for="Recipient-Checkbox-{{ section.id }}">
+                        <input
+                            id="Recipient-Checkbox-{{ section.id }}"
+                            type="checkbox"
+                            name="{{ gift_card_recipient_control_flag }}"
+                            unchecked
+                        >
+                    
+                        <span class="label label--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}">{{ 'recipient.form.checkbox' | t }}</span>
+                    </label>
+                    <div
+                        class="product-form__recipient-error-message-wrapper"
+                        role="alert"
+                        {% unless form.errors %}
+                        hidden
+                        {% endunless %}
+                    >
+                        <h2 class="form__message" tabindex="-1" autofocus>
+                        <span class="error-message">{{ 'templates.contact.form.error_heading' | t }}</span>
+                        </h2>
+                
+                        <ul>
+                        {%- if form.errors -%}
+                            {%- for field in form.errors -%}
+                            <li>
+                                {%- if field == 'form' -%}
+                                {{ form.errors.messages[field] }}
+                                {%- else -%}
+                                <a href="#Recipient-{{ field }}-{{ section.id }}">
+                                    {{ form.errors.translated_fields[field] | capitalize }}
+                                    {{ form.errors.messages[field] }}
+                                </a>
+                                {%- endif -%}
+                            </li>
+                            {%- endfor -%}
+                        {%- endif -%}
+                        </ul>
+                    </div>
+                    <div class="accordion__panel recipient-fields">
+                        <div class="recipient-fields__field field">
+                        <div class="field">
+                            <label class="field__label" for="Recipient-email-{{ section.id }}">
+                                <span class="recipient-email-label required label label--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}">{{ 'recipient.form.email_label' | t }}</span>
+                            </label>
+                            <input
+                            class="field__input input input--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}"
+                            id="Recipient-email-{{ section.id }}"
+                            type="email"
+                            dir="ltr"
+                            name="properties[Recipient email]"
+                            value="{{ form.email }}"
+                            {% if form.errors contains 'email' %}
+                                aria-invalid="true"
+                                aria-describedby="RecipientForm-email-error-{{ section.id }}"
+                            {% endif %}
+                            >
+                        </div>
+                
+                        <div
+                            id="RecipientForm-email-error-{{ section.id }}"
+                            class="form__message{% unless form.errors contains 'email' %} hidden{% endunless %}"
+                        >
+                            <span class="error-message">
+                            {%- if form.errors contains 'email' -%}
+                                {{ form.errors.translated_fields.email | capitalize }}
+                                {{ form.errors.messages.email }}.
+                            {%- endif -%}
+                            </span>
+                        </div>
+                        </div>
+                
+                        <div class="recipient-fields__field field">
+                        <div class="field">
+                            <label class="field__label label label--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}" for="Recipient-name-{{ section.id }}">
+                                {{- 'recipient.form.name_label' | t -}}
+                            </label>
+                            <input
+                            class="field__input input input--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}"
+                            autocomplete="name"
+                            type="text"
+                            id="Recipient-name-{{ section.id }}"
+                            name="properties[Recipient name]"
+                            value="{{ form.name }}"
+                            {% if form.errors contains 'name' %}
+                                aria-invalid="true"
+                                aria-describedby="RecipientForm-name-error-{{ section.id }}"
+                            {% endif %}
+                            >
+                        </div>
+                
+                        <div
+                            id="RecipientForm-name-error-{{ section.id }}"
+                            class="form__message{% unless form.errors contains 'name' %} hidden{% endunless %}"
+                        >
+                            <span class="error-message">
+                            {%- if form.errors contains 'name' -%}
+                                {{ form.errors.translated_fields.name | capitalize }}
+                                {{ form.errors.messages.name }}.
+                            {%- endif -%}
+                            </span>
+                        </div>
+                        </div>
+                
+                        <div class="recipient-fields__field field">
+                        {%- assign max_chars_message = 200 -%}
+                        {%- assign max_chars_message_rendered = 'recipient.form.max_characters' | t: max_chars: max_chars_message -%}
+                        {%- assign message_label_rendered = 'recipient.form.message_label' | t -%}
+                        <div class="field">
+                            <label class="form__label field__label label label--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}" for="Recipient-message-{{ section.id }}">
+                                {{ message_label_rendered }}
+                            </label>
+                            <textarea
+                            rows="10"
+                            id="Recipient-message-{{ section.id }}"
+                            class="text-area input--{{ settings.typography_preset }}{% if uppercase_body_s %} uppercase{% endif %}{% if bolder_body_s %} bolder-font{% endif %}"
+                            name="properties[Message]"
+                            maxlength="{{ max_chars_message }}"
+                            aria-label="{{ message_label_rendered }} {{ max_chars_message_rendered }}"
+                            {% if form.errors contains 'message' %}
+                                aria-invalid="true"
+                                aria-describedby="RecipientForm-message-error-{{ section.id }}"
+                            {% endif %}
+                            >{{ form.message }}</textarea>
+                        </div>
+                
+                        <div
+                            id="RecipientForm-message-error-{{ section.id }}"
+                            class="form__message{% unless form.errors contains 'message' %} hidden{% endunless %}"
+                        >
+                            <span class="error-message">
+                            {%- if form.errors contains 'message' -%}
+                                {{ form.errors.translated_fields.message | capitalize }}
+                                {{ form.errors.messages.message }}.
+                            {%- endif -%}
+                            </span>
+                        </div>
+                        </div>
+                    </div>
+                    <input
+                        type="hidden"
+                        name="{{ gift_card_recipient_control_flag }}"
+                        value="if_present"
+                        id="Recipient-Control-{{ section.id }}"
+                    >
+                    </recipient-form>
+                </div>
+            </accordion-block>
+        {%- endif -%}
+        
+        <div class="product-form__buttons {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} product-form__buttons--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if block.settings.display_in_a_row and show_dynamic_checkout %}product-form__buttons--row{% endif %} {% if block.settings.stretch_buy_buttons %}product-form__buttons--stretched{% endif %}">
+          <button
+            type="submit"
+            name="add"
+            id="ProductSubmitButton-{{ section_id }}"
+            class="product-form__submit {% if block.settings.stretch_buy_buttons and block.settings.display_in_a_row and show_dynamic_checkout == false %}product-form__submit--full-width{% endif %} {% if block.settings.display_in_a_row and show_dynamic_checkout %}solid-button button--{{ settings.typography_preset }}{% else %}big-button big-button--{{ settings.typography_preset }}{% endif %} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} button button--full-width {% if show_dynamic_checkout and product.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %} 
+            {% if block.settings.price_in_button and block.settings.compare_price_on_mobile %} show-compare-price-on-mobile{% endif %}{% if block.settings.price_in_button and block.settings.display_in_a_row == false %} product-form__submit--with-price{% endif %}"
+          {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %} {% if product.selected_or_first_available_variant.available == false and product.selected_or_first_available_variant.inventory_management != null %}data-sold-out{% endif %} {%- if product.template_suffix == 'preorder' %} data-pre-order="true"{% endif -%}
+          >
+            {%- if block.settings.price_in_button and block.settings.display_in_a_row == false and section.settings.desktop_gallery_size != 'full_width'-%}
+              <span class="price-inside-button">{%- render 'price', product: product, use_variant: true, show_badges: false, type: block.type, price_settings: block.settings -%}</span>
+            {%- endif -%}
+            <span class="button-title">
+              {%- if product.selected_or_first_available_variant.available -%}
+                {%- if product.template_suffix == 'preorder' -%}
+                  {{ 'products.product.pre_order' | t }}
+                {%- else -%}
+                  {%- if settings.cart_name == 'cart' -%}{{ 'products.product.add_to_cart' | t }}{%- elsif settings.cart_name == 'bag' -%}{{ 'products.product.add_to_bag' | t }}{%- else -%}{{ 'products.product.add_to_basket' | t }}{%- endif -%}
+                {%- endif -%}
+              {%- else -%}
+                {{ 'products.product.sold_out' | t }}
+              {%- endif -%}
+            </span>
+            {% if section.settings.enable_sticky_add_to_cart %}
+              <span class="product-form__buttons-icon">
+                {% if settings.cart_name == 'basket' %}
+                  {% assign icon_full = 'basket' | append: "-" | append: weight %}
+                  {% render 'icon', icon: icon_full %}  
+                {% elsif settings.cart_name == 'cart' %}
+                  {% assign icon_full = 'shopping-cart' | append: "-" | append: weight %}
+                  {% render 'icon', icon: icon_full %}  
+                {% elsif settings.cart_name == 'bag' %}
+                  {% assign icon_full = 'bag' | append: "-" | append: weight %}
+                  {% render 'icon-accordion-2', icon: icon_full %}
+                {% endif %}
+              </span>
+            {% endif %}
+            <div class="loading-overlay__spinner hidden">
+              <svg aria-hidden="true" focusable="false" class="spinner" width="24px" height="24px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                <circle class="path" fill="none" stroke-width="5" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+            </svg>
+            </div>
+          </button>
+            {%- if show_dynamic_checkout -%}
+              {{ form | payment_button }}
+            {%- endif -%}
+        </div>
+      {%- endform -%}
+    </product-form>
+    {%- unless block.settings.hide_pickup_availability -%}
+      {%- assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities | where: 'pick_up_enabled', true -%}
+      {%- if pick_up_availabilities -%}
+        <pickup-availability class="product__pickup-availabilities no-js-hidden quick-add-hidden"
+          {% if product.selected_or_first_available_variant.available and product.selected_or_first_available_variant.store_availabilities.size > 0 %} available {% endif %}
+          data-root-url="{{ routes.root_url }}"
+          data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+          data-has-only-default-variant="{{ product.has_only_default_variant }}"
+        >
+          <template>
+            <pickup-availability-preview class="pickup-availability-preview">
+              
+              <div class="pickup-availability-info">
+                <p class="caption-large">{{ 'products.product.pickup_availability.unavailable' | t }}</p>
+                <button class="pickup-availability-button link link--text underlined-link">{{ 'products.product.pickup_availability.refresh' | t }}</button>
+              </div>
+            </pickup-availability-preview>
+          </template>
+        </pickup-availability>
+        <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+    {%- endunless -%}
+  </div>

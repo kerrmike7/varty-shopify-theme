@@ -1,0 +1,320 @@
+{% liquid
+  assign bg_color    = section.settings.background_color | default: '#A4C78A'
+  assign text_color  = section.settings.text_color       | default: '#2D2D5E'
+
+  comment
+    Primary data source: metaobject type "retailer"
+    Fallback: section blocks (used until metaobjects are populated)
+  endcomment
+  assign retailer_entries = shop.metaobjects.retailer.values
+  assign use_metaobjects  = false
+  if retailer_entries.size > 0
+    assign use_metaobjects = true
+  endif
+%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    background-color: {{ bg_color }};
+    color: {{ text_color }};
+    padding-top: {{ section.settings.desktop_padding_top }}px;
+    padding-bottom: {{ section.settings.desktop_padding_bottom }}px;
+  }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} {
+      padding-top: {{ section.settings.mobile_padding_top }}px;
+      padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
+    }
+  }
+</style>
+
+<div class="custom-store-finder page-width" id="varty-store-finder-{{ section.id }}">
+
+  {% if section.settings.heading != blank %}
+    <div class="custom-store-finder__header">
+      <h2 class="custom-store-finder__heading">{{ section.settings.heading | escape }}</h2>
+      {% if section.settings.intro_richtext != blank %}
+        <div class="custom-store-finder__intro rte">{{ section.settings.intro_richtext }}</div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% if section.settings.enable_search or section.settings.enable_region_filter %}
+    <div class="custom-store-finder__controls">
+      {% if section.settings.enable_search %}
+        <input
+          class="varty-store-finder__search"
+          type="search"
+          placeholder="{{ 'sections.store_finder.search_placeholder' | t }}"
+          aria-label="{{ 'sections.store_finder.search_placeholder' | t }}"
+          id="varty-sf-search-{{ section.id }}"
+        />
+      {% endif %}
+      {% if section.settings.enable_region_filter %}
+        <div class="varty-store-finder__filter" id="varty-sf-filter-{{ section.id }}" role="group" aria-label="Filter by region">
+          <button class="varty-store-finder__filter-btn varty-store-finder__filter-btn--active" data-region="all">
+            {{ 'sections.store_finder.all_regions' | t }}
+          </button>
+          {% comment %} Region buttons injected by JS after DOM parse {% endcomment %}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="varty-store-finder__grid" id="varty-sf-grid-{{ section.id }}">
+
+    {% if use_metaobjects %}
+      {% comment %} --- Metaobject source --- {% endcomment %}
+      {% for retailer in retailer_entries %}
+        <div
+          class="varty-store-finder__card"
+          data-name="{{ retailer.name.value | downcase }}"
+          data-city="{{ retailer.city.value | downcase }}"
+          data-region="{{ retailer.region.value | downcase }}"
+        >
+          <div class="varty-store-finder__card-name">{{ retailer.name.value | escape }}</div>
+          <div class="varty-store-finder__card-address">{{ retailer.address.value | escape }}</div>
+          <div class="varty-store-finder__card-city">{{ retailer.city.value | escape }}, {{ retailer.region.value | escape }} {{ retailer.postal_code.value | escape }}</div>
+          {% if retailer.url.value != blank %}
+            <a
+              class="varty-store-finder__card-link"
+              href="{{ retailer.url.value }}"
+              target="_blank"
+              rel="noopener"
+            >{{ 'sections.store_finder.directions_label' | t }}</a>
+          {% endif %}
+        </div>
+      {% endfor %}
+
+    {% else %}
+      {% comment %} --- Block fallback source --- {% endcomment %}
+      {% for block in section.blocks %}
+        {% if block.type == 'retailer' %}
+          <div
+            class="varty-store-finder__card"
+            data-name="{{ block.settings.name | downcase }}"
+            data-city="{{ block.settings.city | downcase }}"
+            data-region="{{ block.settings.region | downcase }}"
+            {{ block.shopify_attributes }}
+          >
+            <div class="varty-store-finder__card-name">{{ block.settings.name | escape }}</div>
+            <div class="varty-store-finder__card-address">{{ block.settings.address | escape }}</div>
+            <div class="varty-store-finder__card-city">{{ block.settings.city | escape }}{% if block.settings.region != blank %}, {{ block.settings.region | escape }}{% endif %} {{ block.settings.postal_code | escape }}</div>
+            {% if block.settings.url != blank %}
+              <a
+                class="varty-store-finder__card-link"
+                href="{{ block.settings.url }}"
+                target="_blank"
+                rel="noopener"
+              >{{ 'sections.store_finder.directions_label' | t }}</a>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+  </div><!-- /.varty-store-finder__grid -->
+
+  <p class="varty-store-finder__no-results" id="varty-sf-empty-{{ section.id }}" style="display:none;text-align:center;padding:24px 0;opacity:0.7;">
+    {{ 'sections.store_finder.no_results' | t }}
+  </p>
+
+  {% if section.settings.cta_label != blank and section.settings.cta_url != blank %}
+    <div class="custom-store-finder__cta">
+      <a class="button" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label | escape }}</a>
+    </div>
+  {% endif %}
+
+</div>
+
+<script>
+(function(){
+  var sid = '{{ section.id }}';
+  var grid    = document.getElementById('varty-sf-grid-' + sid);
+  var search  = document.getElementById('varty-sf-search-' + sid);
+  var filter  = document.getElementById('varty-sf-filter-' + sid);
+  var empty   = document.getElementById('varty-sf-empty-' + sid);
+  if (!grid) return;
+
+  var cards = Array.from(grid.querySelectorAll('.varty-store-finder__card'));
+  var activeRegion = 'all';
+  var searchVal    = '';
+
+  // Build region buttons from card data
+  if (filter) {
+    var regions = ['all'];
+    cards.forEach(function(c){ var r = c.dataset.region; if(r && regions.indexOf(r)===-1) regions.push(r); });
+    regions.slice(1).forEach(function(r){
+      var btn = document.createElement('button');
+      btn.className = 'varty-store-finder__filter-btn';
+      btn.dataset.region = r;
+      btn.textContent = r.charAt(0).toUpperCase() + r.slice(1);
+      filter.appendChild(btn);
+    });
+    filter.addEventListener('click', function(e){
+      var btn = e.target.closest('.varty-store-finder__filter-btn');
+      if(!btn) return;
+      activeRegion = btn.dataset.region;
+      filter.querySelectorAll('.varty-store-finder__filter-btn').forEach(function(b){ b.classList.remove('varty-store-finder__filter-btn--active'); });
+      btn.classList.add('varty-store-finder__filter-btn--active');
+      applyFilters();
+    });
+  }
+
+  if (search) {
+    search.addEventListener('input', function(){ searchVal = this.value.toLowerCase().trim(); applyFilters(); });
+  }
+
+  function applyFilters(){
+    var visible = 0;
+    cards.forEach(function(c){
+      var matchRegion = (activeRegion === 'all') || (c.dataset.region === activeRegion);
+      var matchSearch = !searchVal || c.dataset.name.indexOf(searchVal) > -1 || c.dataset.city.indexOf(searchVal) > -1;
+      var show = matchRegion && matchSearch;
+      c.style.display = show ? '' : 'none';
+      if(show) visible++;
+    });
+    if(empty) empty.style.display = visible === 0 ? '' : 'none';
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Store Finder",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Find Varty Near You"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_richtext",
+      "label": "Intro text",
+      "default": "<p>Available at 23 locations across Québec.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_search",
+      "label": "Enable search bar",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_region_filter",
+      "label": "Enable region filter buttons",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA button label",
+      "default": "See All Stockists"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA button URL"
+    },
+    {
+      "type": "header",
+      "content": "Colours"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background colour",
+      "default": "#A4C78A"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text colour",
+      "default": "#2D2D5E"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_top",
+      "min": 0, "max": 120, "step": 4, "unit": "px",
+      "label": "Desktop padding top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_bottom",
+      "min": 0, "max": 120, "step": 4, "unit": "px",
+      "label": "Desktop padding bottom",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "min": 0, "max": 80, "step": 4, "unit": "px",
+      "label": "Mobile padding top",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "min": 0, "max": 80, "step": 4, "unit": "px",
+      "label": "Mobile padding bottom",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "retailer",
+      "name": "Retailer",
+      "settings": [
+        { "type": "text", "id": "name",        "label": "Store name"    },
+        { "type": "text", "id": "address",     "label": "Address"       },
+        { "type": "text", "id": "city",        "label": "City"          },
+        { "type": "text", "id": "region",      "label": "Region / Province", "default": "QC" },
+        { "type": "text", "id": "postal_code", "label": "Postal code"   },
+        { "type": "url",  "id": "url",         "label": "Website / map link (optional)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Store Finder",
+      "blocks": [
+        { "type": "retailer", "settings": { "name": "IGA Extra Duchemin",                   "address": "5600 Bd Henri Bourassa O",              "city": "Saint-Laurent",          "region": "QC", "postal_code": "H4R 0M6" } },
+        { "type": "retailer", "settings": { "name": "SmoothiesGo",                           "address": "5785 Rue Sherbrooke O",                 "city": "Montréal",               "region": "QC", "postal_code": "H4A 1X2" } },
+        { "type": "retailer", "settings": { "name": "Marché Oda – Villeray",                 "address": "7654 Rue St-Hubert",                    "city": "Montréal",               "region": "QC", "postal_code": "H2R 2N6" } },
+        { "type": "retailer", "settings": { "name": "Marché Oda – Outremont",                "address": "1290 Ave. Thérèse-Lavoie-Roux",         "city": "Outremont",              "region": "QC", "postal_code": "H2V 0C2" } },
+        { "type": "retailer", "settings": { "name": "Marché Bio NDG",                        "address": "5785 Rue Sherbrooke O",                 "city": "Montréal",               "region": "QC", "postal_code": "H4A 1X2" } },
+        { "type": "retailer", "settings": { "name": "Ave Greene (Marché Atwater)",           "address": "155 Ave Greene 2e étage",               "city": "Montréal",               "region": "QC", "postal_code": "H4C 2H6" } },
+        { "type": "retailer", "settings": { "name": "IGA Extra Marchés Emily et Philip",     "address": "141 Bd de Mortagne",                    "city": "Boucherville",           "region": "QC", "postal_code": "J4B 6G4" } },
+        { "type": "retailer", "settings": { "name": "Marché TAU – Brossard",                 "address": "6845 Bd Taschereau Bureau 425",          "city": "Brossard",               "region": "QC", "postal_code": "J4Z 1A7" } },
+        { "type": "retailer", "settings": { "name": "Marché TAU – Blainville",               "address": "1325 Bd Michèle-Bohec",                 "city": "Blainville",             "region": "QC", "postal_code": "J7C 5L4" } },
+        { "type": "retailer", "settings": { "name": "Marché TAU – Pointe-Claire",            "address": "2345 Route Transcanadienne",            "city": "Pointe-Claire",          "region": "QC", "postal_code": "H9R 5Z5" } },
+        { "type": "retailer", "settings": { "name": "Marché TAU – St-Denis",                 "address": "4238 R. Saint-Denis",                   "city": "Montréal",               "region": "QC", "postal_code": "H2J 2K8" } },
+        { "type": "retailer", "settings": { "name": "Marché TAU – Laval",                    "address": "3216 Blvd. Saint-Martin O",             "city": "Laval",                  "region": "QC", "postal_code": "H7T 1A1" } },
+        { "type": "retailer", "settings": { "name": "Marché TAU – Saint-Léonard",            "address": "7373 Boul Langelier",                   "city": "Saint-Léonard",          "region": "QC", "postal_code": "H1S 1V6" } },
+        { "type": "retailer", "settings": { "name": "Gaïa Épicerie Santé",                   "address": "99 Rue St Germain O",                   "city": "Rimouski",               "region": "QC", "postal_code": "G5L 4B6" } },
+        { "type": "retailer", "settings": { "name": "Fromagerie Atwater",                    "address": "134 Av. Atwater",                       "city": "Montréal",               "region": "QC", "postal_code": "H3J 2J4" } },
+        { "type": "retailer", "settings": { "name": "Ecollegey",                             "address": "6131 Av de Monkland",                   "city": "Montréal",               "region": "QC", "postal_code": "H4A 1H5" } },
+        { "type": "retailer", "settings": { "name": "Ottawa Organics & Natural Foods",       "address": "94 Rue Adrien-Robert",                  "city": "Gatineau",               "region": "QC", "postal_code": "J8Y 3S2" } },
+        { "type": "retailer", "settings": { "name": "Ici Santé",                             "address": "2536 Rue Laval",                        "city": "Nantes",                 "region": "QC", "postal_code": "G6B 1A1" } },
+        { "type": "retailer", "settings": { "name": "L'Eau Vive Aliments Naturels",          "address": "248 Rue St Georges Bureau 208-B",       "city": "Mont-Saint-Hilaire",     "region": "QC", "postal_code": "J3H 2Y1" } },
+        { "type": "retailer", "settings": { "name": "Provigo Le Marché Lacoursiere",         "address": "1150 Rue Antoinette-Robidoux",           "city": "Longueuil",              "region": "QC", "postal_code": "J4N 1P3" } },
+        { "type": "retailer", "settings": { "name": "Aliments Naturels Pleine Lune",         "address": "495 Bd du Séminaire N",                 "city": "Saint-Jean-sur-Richelieu","region": "QC", "postal_code": "J3B 5L5" } },
+        { "type": "retailer", "settings": { "name": "Verveine & Cie",                        "address": "101 Rue Albert",                        "city": "Cowansville",            "region": "QC", "postal_code": "J2K 2W4" } }
+      ]
+    }
+  ],
+  "max_blocks": 50,
+  "enabled_on": {
+    "templates": ["*"]
+  }
+}
+{% endschema %}

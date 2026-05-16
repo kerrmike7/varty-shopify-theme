@@ -1,0 +1,154 @@
+{% liquid
+    assign uppercase_font = false
+    assign bolder_font = false
+    if settings.typography_preset == 'custom'
+        if settings.uppercase_body_s
+            assign uppercase_font = true
+        endif
+        if settings.bolder_font_body_s
+            assign bolder_font = true
+        endif
+    endif
+%} 
+
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+
+<div class="customer-account login-page section-padding--{{ settings.white_space }} {% if settings.max_page_width == '1400' or settings.max_page_width == '1200' %}page-width {% endif %} page-width--{{ settings.max_page_width }}">
+    <div class="account-wrapper {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %}">
+        <h1 id="recover" tabindex="-1" class="heading heading--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_heading_xs %} uppercase{% endif %}{% if settings.bolder_font_heading_xs %} bolder-font{% endif %}{% endif %} {% if settings.center_text %}center{% endif %} {% if settings.accent_color_for_headings %}heading--accent{% endif %}">
+            {{ 'customer.recover_password.title' | t }}
+        </h1>
+        <div>
+            <p class="subheading subheading--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.center_text %}center{% endif %}">
+                {{ 'customer.recover_password.subtext' | t }}
+            </p>
+            <form-state class="form--{{ settings.typography_preset }} form-font{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}">
+                {%- form 'recover_customer_password' -%}
+                {% assign recover_success = form.posted_successfully? %}
+                {%- if form.errors -%}
+                <div class="subheading subheading--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} error-color {% if settings.center_text %}center{% endif %}">{{ form.errors.messages['form'] }}</div>  
+                {%- endif -%}
+                <div class="fields-wrapper">
+                    <div class="field">
+                        <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="RecoverEmail">
+                            {{ 'customer.login_page.email' | t | append: '*' }}
+                        </label>
+                        <input 
+                        type="email"
+                        dir="ltr"
+                        class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} required {% if form.errors %}invalid{% endif %}"
+                        value=""
+                        required="required"
+                        name="email"
+                        id="RecoverEmail"
+                        autocorrect="off"
+                        autocapitalize="off"
+                        {% if form.errors %}
+                            aria-invalid="true"
+                            aria-describedby="RecoverEmail-email-error"
+                            autofocus
+                        {% endif %}>
+                    </div> 
+                </div>         
+                <button class="big-button big-button--{{ settings.typography_preset }} button--submit {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}">
+                    {{ 'customer.login_page.submit' | t }}
+                </button>
+                <a class="outlined-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}" data-no-smooth href="#login">
+                    {{ 'customer.login_page.cancel' | t }}
+                </a>
+                {%- endform -%}
+            </form-state>
+            <div class="have-account have-account--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.center_text %}center{% endif %}">
+                <p class="have-account__text {% if settings.dim_text %}dim{% endif %}">{{ 'customer.register.have_account' | t }}</p>
+                <span class="have-account__link">{{ 'customer.register.login' | t | customer_login_link }}</span>
+            </div>
+        </div>
+
+        <h1 id="login" tabindex="-1" class="heading heading--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_heading_xs %} uppercase{% endif %}{% if settings.bolder_font_heading_xs %} bolder-font{% endif %}{% endif %} {% if settings.center_text %}center{% endif %} {% if settings.accent_color_for_headings %}heading--accent{% endif %}">
+            {{ 'customer.login_page.title' | t }}
+        </h1>
+        <div>
+            {%- if recover_success == true -%}
+                <h3 class="subheading subheading--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} success-color {% if settings.center_text %}center{% endif %}" tabindex="-1" autofocus>
+                    {{ 'customer.recover_password.success' | t }}
+                </h3>
+            {%- endif -%}
+            <form-state class="form--{{ settings.typography_preset }} form-font{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}">
+                {%- form 'customer_login' -%}
+                    {%- if form.errors -%}
+                        <h2 class="subheading subheading--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} error-color {% if settings.center_text %}center{% endif %}" tabindex="-1" autofocus>
+                        {{ form.errors.messages['form'] }}
+                        </h2>
+                    {%- endif -%}
+                    <div class="fields-wrapper">
+                        <div class="field">   
+                            <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="CustomerEmail">
+                                {{ 'customer.login_page.email' | t | append: '*' }}
+                            </label>     
+                            <input
+                            class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} required {% if form.errors contains 'form' %}invalid{% endif %}"
+                            type="email"
+                            dir="ltr"
+                            name="customer[email]"
+                            required="required"
+                            id="CustomerEmail"
+                            autocorrect="off"
+                            autocapitalize="off"
+                            {% if form.errors contains 'form' %}
+                                aria-invalid="true"
+                            {% endif %}>
+                        </div>
+                        {%- if form.password_needed -%}
+                            <div class="field">   
+                                <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="CustomerPassword">
+                                    {{ 'customer.login_page.password' | t | append: '*' }}
+                                </label>       
+                                <input
+                                    class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} required {% if form.errors contains 'form' %}invalid{% endif %}"
+                                    type="password"
+                                    value=""
+                                    required="required"
+                                    name="customer[password]"
+                                    id="CustomerPassword"
+                                    autocomplete="new-password"
+                                    {% if form.errors contains 'form' %}
+                                    aria-invalid="true"
+                                    {% endif %}>
+                            </div>
+                        {%- endif -%}
+                    </div>
+                    {%- if form.password_needed -%}
+                        <a class="have-account hover-opacity have-account--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} forgot-password" data-no-smooth href="#recover">
+                            {{ 'customer.login_page.forgot_password' | t }}
+                        </a>
+                    {%- endif -%}
+                    <button class="big-button big-button--{{ settings.typography_preset }} button--submit {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}">
+                        {{ 'customer.login_page.sign_in' | t }}
+                    </button>
+                {%- endform -%}
+            </form-state>
+            <div class="have-account have-account--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.center_text %}center{% endif %}">
+                <p class="have-account__text {% if settings.dim_text %}dim{% endif %}">{{ 'customer.login_page.have_account' | t }}</p>
+                <a class="hover-opacity" href="{{ routes.account_register_url }}">
+                    <span class="have-account__link">{{ 'customer.login_page.create_account' | t }}</span>
+                </a>
+            </div>
+            {%- if shop.checkout.guest_login -%}
+                <div>
+                <h2 class="heading heading--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_heading_xs %} uppercase{% endif %}{% if settings.bolder_font_heading_xs %} bolder-font{% endif %}{% endif %} {% if settings.center_text %}center{% endif %} {% if settings.accent_color_for_headings %}heading--accent{% endif %}">{{ 'customer.login_page.guest_title' | t }}</h2>
+                {%- form 'guest_login' -%}
+                    <button class="big-button big-button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}">
+                    {{ 'customer.login_page.guest_continue' | t }}
+                    </button>
+                {%- endform -%}
+                </div>
+            {%- endif -%}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-login.name"
+}
+{% endschema %}

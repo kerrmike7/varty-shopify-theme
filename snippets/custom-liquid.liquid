@@ -1,0 +1,15 @@
+{%- if block.settings.custom_liquid != blank -%}
+    {% liquid
+        assign uppercase_font = false
+        assign bolder_font = false
+        if settings.typography_preset == 'custom'
+            if settings.uppercase_body_m
+                assign uppercase_font = true
+            endif
+            if settings.bolder_font_body_m
+                assign bolder_font = true
+            endif
+        endif
+      %} 
+    <div class="{% if product_block %}section-block{% endif %} {% if section_navigation_block %} section-navigation-block{% if settings.enable_drawer_animations %} stagger__item{% endif %}{% endif %} custom-liquid {% if content_wrapper_block %}{% unless forloop_first %}content-wrapper--block{% endunless %}{% endif %} body-text--{{ settings.typography_preset }} {% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" {% if mega_drawer or product_block or section_navigation_block %}style="{% if section_navigation_block and settings.enable_drawer_animations %} --item-index: {{ animated_drawer_item_index | default: for_loop.index }};{% endif %}{% if mega_drawer or product_block %} --spacing: {{ block.settings.top_spacing }}; --mobile-spacing: {{ block.settings.mobile_top_spacing }};{% endif %}"{% endif %} {{ block.shopify_attributes }}>{{ block.settings.custom_liquid }}</div>
+{%- endif -%}

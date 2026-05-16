@@ -1,0 +1,119 @@
+{
+  "sections": {
+    "finder_hero": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_finder": {
+          "type": "heading",
+          "settings": {
+            "heading": "Find Varty Near You",
+            "heading_size": "heading_l",
+            "heading_tag": "h1",
+            "heading_color": "solid",
+            "heading_gradient": "linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(101,101,101,1) 100%)"
+          }
+        },
+        "text_finder": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Available at 23 locations across Québec.</p>",
+            "dim_text": false,
+            "text_size": "default"
+          }
+        }
+      },
+      "block_order": [
+        "heading_finder",
+        "text_finder"
+      ],
+      "settings": {
+        "section_width": "narrow",
+        "center_text": true,
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_color": "#5463B3",
+        "text_color": "#ffffff",
+        "desktop_padding_top": 80,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48
+      }
+    },
+    "store_finder_main": {
+      "type": "custom-store-finder",
+      "settings": {
+        "heading": "Stockists",
+        "intro_richtext": "<p>23 locations across Québec. Use the search or filter to find the one nearest you.</p>",
+        "enable_search": true,
+        "enable_region_filter": true,
+        "cta_label": "",
+        "cta_url": "",
+        "background_color": "#A4C78A",
+        "text_color": "#2D2D5E",
+        "desktop_padding_top": 80,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48
+      }
+    },
+    "wholesale_nudge": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_wholesale": {
+          "type": "heading",
+          "settings": {
+            "heading": "Want Varty on your shelves?",
+            "heading_size": "heading_m",
+            "heading_tag": "h2",
+            "heading_color": "solid",
+            "heading_gradient": "linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(101,101,101,1) 100%)"
+          }
+        },
+        "button_wholesale": {
+          "type": "button",
+          "settings": {
+            "button_label": "Apply to Wholesale",
+            "button_link": "/pages/wholesale",
+            "target_blank": false,
+            "button_style": "solid"
+          }
+        }
+      },
+      "block_order": [
+        "heading_wholesale",
+        "button_wholesale"
+      ],
+      "settings": {
+        "section_width": "narrow",
+        "center_text": true,
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_color": "#2D2D5E",
+        "text_color": "#ffffff",
+        "desktop_padding_top": 80,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48
+      }
+    },
+    "main-page": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "hide_heading": true,
+        "section_width": "wide",
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "finder_hero",
+    "store_finder_main",
+    "wholesale_nudge",
+    "main-page"
+  ]
+}

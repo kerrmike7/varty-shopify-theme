@@ -1,0 +1,196 @@
+{
+  "sections": {
+    "image_banner_hero": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_about": {
+          "type": "heading",
+          "settings": {
+            "heading": "Clean ingredients. Honest labels. Made in Canada.",
+            "heading_size": "heading_l",
+            "heading_tag": "h1",
+            "heading_color": "solid",
+            "heading_gradient": "linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(101,101,101,1) 100%)"
+          }
+        }
+      },
+      "block_order": ["heading_about"],
+      "settings": {
+        "height_mode": "percents",
+        "desktop_height": 60,
+        "mobile_height": 40,
+        "section_width": "overlap",
+        "center_text": true,
+        "vertical_content_position": "center",
+        "overlay_color": "#5463B3",
+        "overlay_opacity": 30,
+        "color_type": "invert",
+        "background_color": "#F0E8C8",
+        "text_color": "#ffffff",
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
+    },
+    "brand_story": {
+      "type": "media-with-text",
+      "blocks": {
+        "subheading_founders": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Our story",
+            "subheading_size": "default",
+            "subheading_tag": "h3"
+          }
+        },
+        "heading_founders": {
+          "type": "heading",
+          "settings": {
+            "heading": "Founded by Lina and Tony in Montréal",
+            "heading_size": "heading_m",
+            "heading_tag": "h2",
+            "heading_color": "solid",
+            "heading_gradient": "linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(101,101,101,1) 100%)"
+          }
+        },
+        "text_founders": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We started Varty because we read the labels. Every \"clean\" oat beverage we found had 10+ ingredients, gums, stabilisers, or things we couldn't pronounce. So we built the one we actually wanted to drink — 3 to 4 real organic ingredients. Nothing hidden. Nothing masked.</p><p>Made in Saint-Laurent, Québec, and certified organic by Ecocert Canada.</p>",
+            "dim_text": false,
+            "text_size": "default"
+          }
+        }
+      },
+      "block_order": ["subheading_founders", "heading_founders", "text_founders"],
+      "settings": {
+        "section_width": "wide",
+        "swap_media": false,
+        "media_size": "half",
+        "media_ratio": "portrait",
+        "narrow_content": true,
+        "vertical_text_alignment": "center",
+        "horizontal_text_alignment": "flex-start",
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_color": "#F0E8C8",
+        "text_color": "#2D2D5E",
+        "fill_section": false,
+        "desktop_padding_top": 80,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 0
+      }
+    },
+    "values_block": {
+      "type": "icons-with-text",
+      "blocks": {
+        "value_organic": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "heading": "Certified Organic",
+            "text": "<p>Ecocert-certified from field to carton. Every ingredient meets certified organic standards.</p>"
+          }
+        },
+        "value_transparent": {
+          "type": "item",
+          "settings": {
+            "icon": "info",
+            "heading": "Total Transparency",
+            "text": "<p>Short ingredient list isn't a marketing claim — it's a standard. No asterisks. No hidden ingredients.</p>"
+          }
+        },
+        "value_canadian": {
+          "type": "item",
+          "settings": {
+            "icon": "plant",
+            "heading": "Made in Canada",
+            "text": "<p>Produced at our facility in Saint-Laurent, Québec, using the freshest locally-sourced oats.</p>"
+          }
+        }
+      },
+      "block_order": ["value_organic", "value_transparent", "value_canadian"],
+      "settings": {
+        "heading": "What we stand for",
+        "desktop_grid_type": "3",
+        "mobile_layout": "1",
+        "center_text": true,
+        "icon_or_image_size": 80,
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_color": "#ffffff",
+        "text_color": "#2D2D5E",
+        "desktop_padding_top": 80,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48
+      }
+    },
+    "award_callout": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_award": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Recognition",
+            "subheading_size": "default",
+            "subheading_tag": "h3"
+          }
+        },
+        "heading_award": {
+          "type": "heading",
+          "settings": {
+            "heading": "Futurpreneur / RBC Future Launch Emerging Entrepreneur Award — 2024",
+            "heading_size": "heading_m",
+            "heading_tag": "h2",
+            "heading_color": "solid",
+            "heading_gradient": "linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(101,101,101,1) 100%)"
+          }
+        },
+        "text_award": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Recognised as an emerging entrepreneur building a cleaner food system in Canada. Funded in part by Futurpreneur Foundation and RBC Future Launch.</p>",
+            "dim_text": false,
+            "text_size": "default"
+          }
+        }
+      },
+      "block_order": ["subheading_award", "heading_award", "text_award"],
+      "settings": {
+        "section_width": "narrow",
+        "center_text": true,
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_color": "#5463B3",
+        "text_color": "#ffffff",
+        "desktop_padding_top": 80,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48
+      }
+    },
+    "main-page": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "hide_heading": true,
+        "section_width": "wide",
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "image_banner_hero",
+    "brand_story",
+    "values_block",
+    "award_callout",
+    "main-page"
+  ]
+}

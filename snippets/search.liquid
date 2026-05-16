@@ -1,0 +1,124 @@
+{% style %}
+    .search-container .search-field__icon,
+    .search-container .search__icon {
+        aspect-ratio: 1/1;
+    }
+{% if settings.typography_preset != 'custom' %}
+    .search-container .search-field__icon,
+    .search-container .search__icon {
+        height: max(24px, var(--fluid-preset-body-s-lh));
+    }
+{% else %}
+    .search-container .search-field__icon,
+    .search-container .search__icon {
+        height: max(24px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+    }
+    .navigations-heading-m .search-container .search-field__icon,
+    .navigations-heading-m .search-container .search__icon {
+        height: max(24px, calc(var(--heading-m-font-size) * var(--heading-m-line-height)));
+    }
+    .navigations-heading-s .search-container .search-field__icon,
+    .navigations-heading-s .search-container .search__icon {
+        height: max(24px, calc(var(--heading-s-font-size) * var(--heading-s-line-height)));
+    }
+    .navigations-heading-xs .search-container .search-field__icon,
+    .navigations-heading-xs .search-container .search__icon {
+        height: max(24px, calc(var(--heading-xs-font-size) * var(--heading-xs-line-height)));
+    }
+    .navigations-body-l .search-container .search-field__icon,
+    .navigations-body-l .search-container .search__icon {
+        height: max(24px, calc(var(--body-l-font-size) * var(--body-l-line-height)));
+    }
+    .navigations-body-m .search-container .search-field__icon,
+    .navigations-body-m .search-container .search__icon {
+        height: max(24px, calc(var(--body-m-font-size) * var(--body-m-line-height)));
+    }
+    .navigations-label .search-container .search-field__icon,
+    .navigations-label .search-container .search__icon {
+        height: max(24px, calc(var(--label-font-size) * var(--label-line-height)));
+    }
+{% endif %}
+{% endstyle %}
+
+{%- liquid 
+	if settings.typography_preset == 'avant_garde'
+			assign weight = settings.accent_icon_weight
+			if settings.swap_fonts
+					assign weight = settings.base_icon_weight
+			endif
+	else 
+			assign weight =  settings.base_icon_weight
+			if settings.swap_fonts
+					assign weight = settings.accent_icon_weight
+			endif
+	endif
+    assign uppercase_font = false
+    assign bolder_font = false
+    if settings.typography_preset == 'custom'
+        assign weight = settings.custom_icon_weight
+        if settings.uppercase_body_s and settings.navigation_item_size == 'default'
+            assign uppercase_font = true
+        endif
+        if settings.bolder_font_body_s and settings.navigation_item_size == 'default'
+            assign bolder_font = true
+        endif
+    endif
+-%}
+
+<div class="{% if main-sidebar__block %} main-sidebar__block{% endif %} {% if section_navigation_block %} section-navigation-block{% if settings.enable_drawer_animations %} stagger__item{% endif %}{% endif %} {% if content_wrapper_block %}{% unless forloop_first %}content-wrapper--block{% endunless %}{% endif %} search-block search-block--{{ block_item.id }} {% unless mega_drawer %} search-block--{{ section.settings.grid_columns }} search-block--{{ search_settings.block_width }}{% endunless %} search-block--{% if type == 'search' %}search{% endif %} {% if mega_drawer %} search-block--menu-drawer{% endif %} {% if section.id contains 'header' %}search-block--header{% elsif section.id contains 'footer' %}search-block--footer{% else %}search-block--{{ section.id }}{% endif %} search-block--{{ search_settings.search_horizontal_alignment }}{% if search_settings.show_bottom_line and mega_drawer %} full-bottom-line{% endif %}" 
+    {% if type != "miscellaneous" %}style="--search-vertical-alignment: {{ search_settings.search_vertical_alignment }}; 
+    --search-horizontal-alignment: {{ search_settings.search_horizontal_alignment }}; 
+    {% if mega_drawer %} --spacing: {{ search_settings.top_spacing }}; --mobile-spacing: {{ search_settings.mobile_top_spacing }};{% endif %}
+    --item-index: {{ animated_drawer_item_index | default: for_loop.index }};"{% endif %} {{ block_item.shopify_attributes }}>
+    <div class="search-container {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %} search-container--{{ search_settings.search_style }} search-container--{{ settings.typography_preset }} {% if settings.navigation_item_size != 'default' and settings.typography_preset == 'custom' %}{{ settings.navigation_item_size }}{% else %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}{% endif %} {% if section.settings.color_type == 'custom' %}color-custom{% elsif section.settings.color_type == 'invert' %}color-invert{% endif %}">
+        {% if settings.enable_quick_search %}<search-modal>{% endif %}
+            <details>
+                <summary tabindex="-1">
+                    {%- if search_settings.search_style == 'text' -%}
+                        <a class="search hover-opacity" href="{{ routes.search_url }}" aria-label="{{ 'templates.search.go_to_search_page' | t }}">
+                            <span class="search__title search__span">{{ 'templates.search.search_title' | t }}</span>
+                        </a>
+                    {%- elsif search_settings.search_style == 'icon' -%}
+                        <a class="search hover-opacity" href="{{ routes.search_url }}" aria-label="{{ 'templates.search.go_to_search_page' | t }}">
+                            <span class="search__icon search__span">
+                                {% assign icon_full = 'search' | append: "-" | append: weight %}
+                                {% render 'icon', icon: icon_full %}  
+                            </span>
+                        </a> 
+                    {%- elsif search_settings.search_style == 'field' -%}
+                        <form action="{{ routes.search_url }}" method="get" role="search" class="search-modal__form">
+                            <div class="search-field {% if search_settings.search_horizontal_alignment == 'stretched' %}search-field--stretched{% endif %}">
+                                <label class="visually-hidden" for="Search-In-Template" aria-hidden="true">{{ 'templates.search.search_title' | t }}</label>
+                                <input 
+                                    class="search-field__text" 
+                                    type="search" 
+                                    id="Search-In-Template"
+                                    name="q"
+                                    value="{{ search.terms | escape }}"
+                                    placeholder="{{ 'templates.search.placeholder' | t }}"
+                                    autocomplete="off"
+                                    tabindex="0"
+                                    {%- if settings.enable_quick_search %}
+                                        role="combobox"
+                                        aria-haspopup="listbox"
+                                        aria-autocomplete="list" 
+                                        autocorrect="off"
+                                        autocomplete="off"
+                                        autocapitalize="off"
+                                        spellcheck="false"
+                                    {% endif -%}>
+                                <button type="submit" class="search-field__icon hover-opacity" aria-label="{{ 'templates.search.search_for' | t: terms: search.terms }}" tabindex="0">
+                                    <span class="search__icon">
+                                        {% assign icon_full = 'search' | append: "-" | append: weight %}
+                                        {% render 'icon', icon: icon_full %}  
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
+                    {%- endif -%}
+                </summary>
+                {% render 'search-modal' %}
+            </details>
+        {% if settings.enable_quick_search %}</search-modal>{% endif %}
+    </div>
+</div>

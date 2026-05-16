@@ -1,0 +1,433 @@
+{% liquid
+    assign uppercase_font = false
+    assign bolder_font = false
+    if settings.typography_preset == 'custom'
+      if block.link_size == 'default' and settings.navigation_item_size == 'default'
+        if settings.uppercase_body_s
+          assign uppercase_font = true
+        endif
+        if settings.bolder_font_body_s
+          assign bolder_font = true
+        endif
+      endif
+    endif
+  
+    assign block_columns = block.columns
+    if is_hover_mega_menu
+      assign block_columns = 2
+    endif
+  
+    assign has_banner = false
+    if is_hover_mega_menu
+      if block.show_banner_1 or block.show_banner_2
+        assign has_banner = true
+      else
+        for banner_block in hover_mega_menu_banners_blocks 
+          if banner_block.settings.show_banner_1 or banner_block.settings.show_banner_2
+            assign has_banner = true
+            break
+          endif
+        endfor
+      endif
+    else
+      assign has_banner = block.show_banner
+    endif
+  
+    assign tag = 'div'
+    if is_hover_mega_menu
+      assign tag = 'hover-mega-menu'
+    endif
+
+    assign animationDuration = 0
+    if settings.animation_duration == '0.3'
+        assign animationDuration = 'basic'
+    elsif settings.animation_duration == '0.5'
+        assign animationDuration = 'sophisticated'
+    endif
+
+    assign animated_drawer_item_index = 0
+    if block.swap_banner_position 
+      assign animated_drawer_item_index = 1
+    endif
+
+%}
+  
+<{{ tag }} class="mega-menu--container mega-menu-{{ id }} {% if is_hover_mega_menu %} hover-mega-menu {% endif %} {% if settings.enable_drawer_animations %} stagger stagger--{{ animationDuration }}{% endif %}" {{ mega_block.shopify_attributes }}>
+    {% style %}
+      .mega-menu-{{ id }} {
+        --columns: {{ block_columns }};
+        --layout-text-color:
+          {{ settings.layout_text_color.red }},
+          {{ settings.layout_text_color.green }},
+          {{ settings.layout_text_color.blue }};
+        --layout-background-color:
+          {{ settings.layout_background_color.red }},
+          {{ settings.layout_background_color.green }},
+          {{ settings.layout_background_color.blue }};
+        --highlight-color: {{ block.highlight_menu_item_color.red }},
+          {{ block.highlight_menu_item_color.green }},
+          {{ block.highlight_menu_item_color.blue }};
+        --accent-button-color:
+          {{ settings.accent_button_color.red }},
+          {{ settings.accent_button_color.green }},
+          {{ settings.accent_button_color.blue }};
+      }
+    {% endstyle %}
+  
+    <div class="list-menu-dropdown {% if block.swap_banner_position %}list-menu-dropdown--right{% endif %} {% if block.show_lines %}list-menu-dropdown--lines{% endif %} {%- if has_banner -%}list-menu-dropdown--with-banner{%- endif -%}">
+      {% if block.menu_heading != blank %}
+        {% liquid
+          assign uppercase_font_title = false
+          assign bolder_font_title = false
+          if settings.typography_preset == 'custom'
+            if block.menu_heading_size == 'default'
+              if settings.uppercase_heading_xs
+                assign uppercase_font_title = true
+              endif
+              if settings.bolder_font_heading_xs
+                assign bolder_font_title = true
+              endif
+            endif
+          endif
+  
+          assign heading_text = block.menu_heading
+          assign final_text = ''
+          assign split_text_curly = heading_text | split: '{'
+          for part in split_text_curly
+            if part contains '}'
+              assign split_curly = part | split: '}'
+              assign styled_text = split_curly[0]
+              assign after_curly = split_curly[1]
+              assign final_text = final_text | append: '<span class="styled">' | append: styled_text | append: '</span>' | append: after_curly
+            else
+              assign final_text = final_text | append: part
+            endif
+          endfor
+          assign animated_drawer_item_index = animated_drawer_item_index | plus: 1
+        %}
+  
+        <h4 class="mega-menu__title {% if settings.enable_drawer_animations %} stagger__item{% endif %} custom-heading {% if settings.accent_color_for_headings %}mega-menu__title--accent{% endif %} mega-menu__title--{{ settings.typography_preset }} {% if block.menu_heading_size != 'default' %}{{ block.menu_heading_size }}{% else %}{% if uppercase_font_title %} uppercase{% endif %}{% if bolder_font_title %} bolder-font{% endif %}{% endif %} {% if settings.show_lines %}mega-menu__title--lines{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: {{ animated_drawer_item_index }};"{% endif %}>
+          {{ final_text }}
+        </h4>
+      {% endif %}
+  
+      <div
+        class="
+          mega-menu__list-container {%- if block.show_lines %} mega-menu__list-container--lines {% endif -%}
+          {%- if is_hover_mega_menu %}
+            hover-mega-menu__list-container
+          {% endif -%}
+        "
+        data-columns="{{ block_columns }}"
+      >
+        {% if is_hover_mega_menu %}
+        <ul class="menu__dropdown-child">
+          {% for child_link in link.links %}
+            {%- assign animated_drawer_item_index = animated_drawer_item_index | plus: 1 -%}
+            <li class="menu__dropdown-child-item {% if child_link.links.size > 0 %}has-child{% endif %} {% if settings.enable_drawer_animations %} stagger__item{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: {{ animated_drawer_item_index }};"{% endif %}>
+              <div class="menu__item-title menu__item-title--second-level mega-menu__item-title--{{ settings.typography_preset }} {% if block.link_size != 'default' %}{{ block.link_size }}{% else %}{% if settings.navigation_item_size != 'default' %} {{ settings.navigation_item_size }}{% endif %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}{% endif %}">
+                {% liquid
+                  assign downcased_link_title = child_link.title | downcase
+                  assign downcased_highlighted_items = block.highlight_menu_item | downcase | split: ','
+                  assign highlight_item = false
+                  for highlighted_item in downcased_highlighted_items
+                    assign highlighted_item_strip = highlighted_item | strip
+                    if highlighted_item_strip == downcased_link_title
+                      assign highlight_item = true
+                    endif
+                  endfor
+                %}
+  
+                <a
+                  class="menu__dropdown-child-item-link menu__link hover-link {% if highlight_item %} link--highlighted{% endif %}"
+                  href="{{ child_link.url }}"
+                  data-handle="{{ child_link.handle }}"
+                >
+                  <div class="menu__item-link-title {% if settings.enable_animated_underline and settings.enable_rolling_hover == false %}link-animation--underline{% elsif settings.enable_rolling_hover %}link-animation--slide{% else %}link-animation{% endif %} {% if child_link.current and settings.underline_active_link == true %}underline-active{% endif %} {% if settings.enable_animated_underline and settings.enable_rolling_hover == false %}link-animation--underline{% elsif settings.enable_rolling_hover %}link-animation--slide{% else %}link-animation{% endif %}">
+                    <span data-hover="{{ child_link.title | split: '<' | first | strip }}">{{ child_link.title }}</span>
+                  </div>
+                </a>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        {% assign mega_col_count = block_columns | times: 1 %}
+        {% if mega_col_count < 1 %}
+          {% assign mega_col_count = 1 %}
+        {% endif %}
+
+        {% assign mega_total_w = 0 %}
+        {% for child_link in link.links %}
+          {% assign mega_total_w = mega_total_w | plus: 1 | plus: child_link.links.size %}
+        {% endfor %}
+
+        {% assign mega_assign = '' %}
+        {% assign mega_cum = 0 %}
+        {% assign mega_col = 0 %}
+        {% for child_link in link.links %}
+          {% assign mega_assign = mega_assign | append: mega_col %}
+          {% unless forloop.last %}
+            {% assign mega_assign = mega_assign | append: '|' %}
+          {% endunless %}
+
+          {% assign mega_w = 1 | plus: child_link.links.size %}
+          {% assign mega_cum = mega_cum | plus: mega_w %}
+
+          {% if mega_total_w > 0 %}
+            {% for mega_step in (1..mega_col_count) %}
+              {% assign mega_max_c = mega_col_count | minus: 1 %}
+              {% if mega_col < mega_max_c %}
+                {% assign mega_rhs = mega_col | plus: 1 | times: mega_total_w %}
+                {% assign mega_lhs = mega_cum | times: mega_col_count %}
+                {% if mega_lhs >= mega_rhs %}
+                  {% assign mega_col = mega_col | plus: 1 %}
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+
+        {% assign mega_assign_arr = mega_assign | split: '|' %}
+
+        <div class="mega-menu__columns">
+          {% for col_i in (1..mega_col_count) %}
+            {% assign mega_col_idx = col_i | minus: 1 %}
+            {% assign mega_col_n = 0 %}
+            {% for child_link in link.links %}
+              {% assign mega_assigned = mega_assign_arr[forloop.index0] | plus: 0 %}
+              {% if mega_assigned == mega_col_idx %}
+                {% assign mega_col_n = mega_col_n | plus: 1 %}
+              {% endif %}
+            {% endfor %}
+
+            {% if mega_col_n > 0 %}
+              <ul class="menu__dropdown-child menu__dropdown-child--mega-column" role="list">
+                {% for child_link in link.links %}
+                  {% assign mega_assigned = mega_assign_arr[forloop.index0] | plus: 0 %}
+                  {% if mega_assigned == mega_col_idx %}
+                  {%- assign animated_drawer_item_index = animated_drawer_item_index | plus: 1 -%}
+                  <li class="menu__dropdown-child-item {% if child_link.links.size > 0 %}has-child{% endif %} {% if settings.enable_drawer_animations %} stagger__item{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: {{ animated_drawer_item_index }};"{% endif %}>
+                    <div class="menu__item-title menu__item-title--second-level mega-menu__item-title--{{ settings.typography_preset }} {% if block.link_size != 'default' %}{{ block.link_size }}{% else %}{% if settings.navigation_item_size != 'default' %} {{ settings.navigation_item_size }}{% endif %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}{% endif %}">
+                      {% liquid
+                        assign downcased_link_title = child_link.title | downcase
+                        assign downcased_highlighted_items = block.highlight_menu_item | downcase | split: ','
+                        assign highlight_item = false
+                        for highlighted_item in downcased_highlighted_items
+                          assign highlighted_item_strip = highlighted_item | strip
+                          if highlighted_item_strip == downcased_link_title
+                            assign highlight_item = true
+                          endif
+                        endfor
+                      %}
+                      
+                      <a
+                        class="menu__dropdown-child-item-link menu__link hover-link {% if highlight_item %} link--highlighted{% endif %}"
+                        href="{{ child_link.url }}"
+                        data-handle="{{ child_link.handle }}"
+                      >
+                        <div class="menu__item-link-title {% if settings.enable_animated_underline and settings.enable_rolling_hover == false %}link-animation--underline{% elsif settings.enable_rolling_hover %}link-animation--slide{% else %}link-animation{% endif %} {% if child_link.current and settings.underline_active_link == true %}underline-active{% endif %} {% if settings.enable_animated_underline and settings.enable_rolling_hover == false %}link-animation--underline{% elsif settings.enable_rolling_hover %}link-animation--slide{% else %}link-animation{% endif %}">
+                          <span data-hover="{{ child_link.title | split: '<' | first | strip }}">{{ child_link.title }}</span>
+                        </div>
+                      </a>
+                    </div>
+  
+                    {% if child_link.links.size > 0 %}
+                      <div class="menu__dropdown-grandchild-container">
+                        <ul class="menu__dropdown-grandchild">
+                          {% for grandchild_link in child_link.links %}
+                            <li class="menu__dropdown-grandchild-item">
+                              {% liquid
+                                assign downcased_link_title = grandchild_link.title | downcase
+                                assign downcased_highlighted_items = block.highlight_menu_item | downcase | split: ','
+                                assign highlight_item = false
+  
+                                for highlighted_item in downcased_highlighted_items
+                                  assign highlighted_item_strip = highlighted_item | strip
+                                  if highlighted_item_strip == downcased_link_title
+                                    assign highlight_item = true
+                                  endif
+                                endfor
+                              %}
+  
+                              <a
+                                class="menu__dropdown-grandchild-link menu__link hover-link mega-menu__child-item-title--{{ settings.typography_preset }} {% if block.link_size != 'default' %}{{ block.link_size }}{% else %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}{% endif %} {% if highlight_item %} link--highlighted{% endif %}"
+                                href="{{ grandchild_link.url }}"
+                              >
+                                <div class="menu__item-link-title {% if settings.enable_animated_underline and settings.enable_rolling_hover == false %}link-animation--underline{% elsif grandchild_link.current and settings.underline_active_link == true %}underline-active{% endif %} {% if settings.enable_animated_underline and settings.enable_rolling_hover == false %}link-animation--underline{% elsif settings.enable_rolling_hover %}link-animation--slide{% else %}link-animation{% endif %}">
+                                  <span data-hover="{{ grandchild_link.title | split: '<' | first | strip }}">{{ grandchild_link.title }}</span>
+                                </div>
+                              </a>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      </div>
+                    {% endif %}
+                  </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            {% endif %}
+          {% endfor %}
+        </div>
+        {% endif %}
+  
+        {% if is_hover_mega_menu %}
+          <div class="hover-mega-menu__grandchildren-container">
+            {% for child_link in link.links %}
+              {% if child_link.links.size > 0 %}
+                <div
+                  class="menu__dropdown-grandchild-container menu__dropdown-grandchild-container--hover"
+                  data-handle="{{ child_link.handle }}"
+                >
+                  {% assign animated_drawer_grandchild_item_index = 1 %}
+                  <div class="menu__item-title mega-menu__item-title--{{ settings.typography_preset }} {% if block.link_size != 'default' %}{{ block.link_size }}{% else %}{% if settings.navigation_item_size != 'default' %} {{ settings.navigation_item_size }}{% endif %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}{% endif %} {% if settings.enable_drawer_animations %} stagger__item{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: {{ animated_drawer_grandchild_item_index }};"{% endif %}>
+                    {{ child_link.title }}
+                  </div>
+                  <ul class="menu__dropdown-grandchild">
+                    {% for grandchild_link in child_link.links %}
+                      {% assign animated_drawer_grandchild_item_index = animated_drawer_grandchild_item_index | plus: 1 %}
+                      <li class="menu__dropdown-grandchild-item {% if settings.enable_drawer_animations %} stagger__item{% endif %}" {% if settings.enable_drawer_animations %} style="--item-index: {{ animated_drawer_grandchild_item_index }};"{% endif %}>
+                        {% liquid
+                          assign downcased_link_title = grandchild_link.title | downcase
+                          assign downcased_highlighted_items = block.highlight_menu_item | downcase | split: ','
+                          assign highlight_item = false
+  
+                          for highlighted_item in downcased_highlighted_items
+                            assign highlighted_item_strip = highlighted_item | strip
+                            if highlighted_item_strip == downcased_link_title
+                              assign highlight_item = true
+                            endif
+                          endfor
+                        %}
+  
+                        <a
+                          class="menu__dropdown-grandchild-link menu__link hover-link mega-menu__child-item-title--{{ settings.typography_preset }} {% if block.link_size != 'default' %}{{ block.link_size }}{% else %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}{% endif %} {% if highlight_item %} link--highlighted{% endif %}"
+                          href="{{ grandchild_link.url }}"
+                        >
+                          <div class="menu__item-link-title {% if settings.enable_animated_underline and settings.enable_rolling_hover == false %}link-animation--underline{% elsif grandchild_link.current and settings.underline_active_link == true %}underline-active{% endif %} {% if settings.enable_animated_underline and settings.enable_rolling_hover == false %}link-animation--underline{% elsif settings.enable_rolling_hover %}link-animation--slide{% else %}link-animation{% endif %}">
+                            <span data-hover="{{ grandchild_link.title | split: '<' | first | strip }}">{{ grandchild_link.title }}</span>
+                          </div>
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+  
+        {% assign columns = block_columns | times: 1 %}
+        {% if block.show_lines and columns == 2 %}
+          <span class="mega-menu__line" data-index="1"></span>
+        {% elsif block.show_lines and columns == 3 %}
+          <span class="mega-menu__line" data-index="1"></span>
+          <span class="mega-menu__line" data-index="2"></span>
+        {% elsif block.show_lines and columns == 4 %}
+          <span class="mega-menu__line" data-index="1"></span>
+          <span class="mega-menu__line" data-index="2"></span>
+          <span class="mega-menu__line" data-index="3"></span>
+        {% endif %}
+      </div>
+    </div>
+  
+    {% if has_banner %}
+      <div class="mega-menu__banner 
+        {%- if block.swap_banner_position %} mega-menu__banner--left {% endif -%} 
+        {%- if block.show_lines %} mega-menu__banner--lines {% endif -%}"
+      >
+        {% if is_hover_mega_menu %}
+          {% liquid
+            assign banners_count = 0
+            if block.show_banner_1
+              assign banners_count = banners_count | plus: 1
+            endif
+            if block.show_banner_2
+              assign banners_count = banners_count | plus: 1
+            endif
+          %}
+  
+          {%- if block.show_banner_1 -%}
+            {% assign animated_drawer_item_index = animated_drawer_item_index | plus: 1 %}
+            {% render 'mega-menu-banner', 
+              mega_menu_settings: block, 
+              banner_settings: block, 
+              banner_block_id: id,
+              banner_index: 1, 
+              mega_menu_banners_count: banners_count,
+              animated_drawer_item_index: animated_drawer_item_index
+            %}
+          {%- endif -%}
+          {%- if block.show_banner_2 -%}
+            {% assign animated_drawer_item_index = animated_drawer_item_index | plus: 1 %}
+            {% render 'mega-menu-banner', 
+              mega_menu_settings: block, 
+              banner_settings: block, 
+              banner_block_id: id,
+              banner_index: 2, 
+              mega_menu_banners_count: banners_count,
+              animated_drawer_item_index: animated_drawer_item_index
+            %}
+          {%- endif -%}
+  
+          {% for banner_block in hover_mega_menu_banners_blocks %}
+            {% liquid
+              assign banners_count = 0
+              if banner_block.settings.show_banner_1
+                assign banners_count = banners_count | plus: 1
+              endif
+              if banner_block.settings.show_banner_2
+                assign banners_count = banners_count | plus: 1
+              endif
+            %}
+  
+            {%- if banners_count > 0 -%}
+              <div 
+                class="hover-mega-menu__item-banners" 
+                data-hover-menu-item-handle="{{ banner_block.settings.hover_menu_item_link | handle }}" 
+                data-parent-menu-handle="{{ banner_block.settings.dropdown_link | handle }}"
+              >
+                {%- if banner_block.settings.show_banner_1 -%}
+                  {% render 'mega-menu-banner', 
+                    mega_menu_settings: block, 
+                    banner_settings: banner_block.settings, 
+                    banner_block_id: banner_block.id, 
+                    banner_index: 1, 
+                    mega_menu_banners_count: banners_count,
+                    animated_drawer_item_index: 1
+                  %}
+                {%- endif -%}
+                {%- if banner_block.settings.show_banner_2 -%}
+                  {% assign animated_drawer_item_index = animated_drawer_item_index | plus: 1 %}
+                  {% render 'mega-menu-banner', 
+                    mega_menu_settings: block, 
+                    banner_settings: banner_block.settings, 
+                    banner_block_id: banner_block.id, 
+                    banner_index: 2, 
+                    mega_menu_banners_count: banners_count,
+                    animated_drawer_item_index: 1
+                  %}
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {% endfor %}
+        {% else %}
+          {%- if block.show_banner -%}
+            {% liquid
+              assign animated_drawer_item_index = animated_drawer_item_index | plus: 1
+              if block.swap_banner_position 
+                assign animated_drawer_item_index = 0
+              endif
+            %}
+            {% render 'mega-menu-banner', 
+              mega_menu_settings: block, 
+              banner_settings: block, 
+              banner_block_id: id,
+              animated_drawer_item_index: animated_drawer_item_index
+            %}
+          {%- endif -%}
+        {% endif %}
+      </div>
+    {% endif %}
+</{{ tag }}>

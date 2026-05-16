@@ -1,0 +1,37 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-list-collections": {
+      "type": "main-list-collections",
+      "settings": {
+        "selected_collections": [],
+        "heading": "Collections",
+        "heading_size": "heading_l",
+        "heading_color": "solid",
+        "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
+        "show_number": true,
+        "sort_collections_by": "date",
+        "grid_type": "three_columns",
+        "mobile_layout": "2",
+        "image_ratio": "square",
+        "focal_point": "center center",
+        "layout_margins": "enable",
+        "desktop_padding_top": 40,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main-list-collections"
+  ]
+}

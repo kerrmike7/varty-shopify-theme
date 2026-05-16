@@ -1,0 +1,2 @@
+{%- comment -%}Resolves 48px (XXLarge) to `var(--radius-xxl-px)` so it tracks theme CSS. Other values (incl. 2000px) stay as literals.{%- endcomment -%}
+{%- if v == '48px' -%}var(--radius-xxl-px){%- else -%}{{ v }}{%- endif -%}

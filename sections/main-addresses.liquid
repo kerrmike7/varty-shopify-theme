@@ -1,0 +1,376 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+{% style %}
+  {% if settings.typography_preset != 'custom' %}
+  .addresses-count.label--minimal_heavy, .addresses-count.label--brutalist {
+    height: max(16px, var(--fluid-preset-body-l-lh));
+    min-width: max(16px, var(--fluid-preset-body-l-lh));
+  }
+  .addresses-count.label--minimal_uppercase {
+    height: max(16px, var(--fluid-preset-body-s-lh));
+    min-width: max(16px, var(--fluid-preset-body-s-lh));
+  }
+  .addresses-count.label--duet {
+    height: max(16px, var(--fluid-preset-body-m-lh));
+    min-width: max(16px, var(--fluid-preset-body-m-lh));
+  }
+  .addresses-count.label--minimal_basic, .addresses-count.label--classic, .addresses-count.label--avant_garde,
+  .addresses-count.label--contrast {
+    height: max(16px, var(--fluid-preset-label-lh));
+    min-width: max(16px, var(--fluid-preset-label-lh));
+  }
+  {% else %}
+  .addresses-count.label--custom {
+    height: max(16px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+    min-width: max(16px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+  }
+  {% endif %}
+{% endstyle %}
+
+<script src="{{ 'customer.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid 
+    if settings.typography_preset == 'avant_garde' or settings.typography_preset == 'brutalist'
+			assign weight = settings.accent_icon_weight
+			if settings.swap_fonts
+					assign weight = settings.base_icon_weight
+			endif
+    else 
+        assign weight =  settings.base_icon_weight
+        if settings.swap_fonts
+            assign weight = settings.accent_icon_weight
+        endif
+    endif
+
+    if settings.typography_preset == 'avant_garde' or settings.typography_preset == 'duet'
+			assign select_weight = settings.accent_icon_weight
+			if settings.swap_fonts
+					assign select_weight = settings.base_icon_weight
+			endif
+    else 
+        assign select_weight =  settings.base_icon_weight
+        if settings.swap_fonts
+            assign select_weight = settings.accent_icon_weight
+        endif
+    endif
+
+    if settings.typography_preset == 'avant_garde'
+			assign close_weight = settings.accent_icon_weight
+			if settings.swap_fonts
+					assign close_weight = settings.base_icon_weight
+			endif
+    else 
+        assign close_weight =  settings.base_icon_weight
+        if settings.swap_fonts
+            assign close_weight = settings.accent_icon_weight
+        endif
+    endif
+    assign uppercase_font = false
+    assign bolder_font = false
+    assign uppercase_body_l = false
+    assign bolder_body_l = false
+    if settings.typography_preset == 'custom'
+      assign weight = settings.custom_icon_weight
+      assign close_weight = settings.custom_icon_weight
+      assign select_weight = settings.custom_icon_weight
+      if settings.uppercase_body_s
+          assign uppercase_font = true
+      endif
+      if settings.bolder_font_body_s
+          assign bolder_font = true
+      endif
+      if settings.uppercase_body_l
+          assign uppercase_body_l = true
+      endif
+      if settings.bolder_font_body_l
+          assign bolder_body_l = true
+      endif
+    endif
+-%}
+
+<modal-dialog>
+    <div class="account-page customer-page {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} section-padding--{{ settings.white_space }} {% if settings.max_page_width == '1400' or settings.max_page_width == '1200' %}page-width {% endif %} page-width--{{ settings.max_page_width }}" data-customer-addresses>
+        <div class="account-top {% if settings.center_text %} center{% endif %}">
+            <h1 class="heading heading--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_heading_xs %} uppercase{% endif %}{% if settings.bolder_font_heading_xs %} bolder-font{% endif %}{% endif %} {% if settings.accent_color_for_headings %}heading--accent{% endif %}">
+                {{ 'customer.account.title' | t }}
+            </h1>
+            <a class="subheading body-secondary-text--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} return hover-opacity" href="{{ routes.account_url }}">
+              {% assign icon_full = 'arrow-left' | append: "-" | append: weight %}
+              {% render 'icon-accordion', icon: icon_full %}
+                {{ 'customer.account.return' | t }}  
+            </a>
+        </div>
+        <ul role="list" class="account-addresses">
+            {%- for address in customer.addresses -%}
+                <li class="account-address" data-address>
+                  <h2 class="heading title-list--{{ settings.typography_preset }}{% if uppercase_body_l %} uppercase{% endif %}{% if bolder_body_l %} bolder-font{% endif %} {% if address == customer.default_address %}default-heading{% endif %} {% if settings.accent_color_for_headings %}heading--accent{% endif %}">{{ address.first_name }} {{ address.last_name }}{% if address == customer.default_address %}<span class="default-tag label--{{ settings.typography_preset }}">{{ 'customer.addresses.default' | t }}</span>{% endif %}</h2>
+                  <div class="account-address__block body-secondary-text--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}">{{ address | format_address }}</div>
+                  <div class="account-address__actions">
+                    <button
+                    type="button"
+                    id="EditFormButton_{{ address.id }}"
+                    aria-label="{{ 'customer.addresses.edit_address' | t }} {{ forloop.index }}"
+                    aria-controls="EditAddress_{{ address.id }}"
+                    aria-expanded="false"
+                    data-address-id="{{ address.id }}"
+                    class="body-secondary-text--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} account-address__action open-popup">
+                    {% assign icon_full = 'pencil' | append: "-" | append: weight %}
+                    {% render 'icon-accordion', icon: icon_full %}
+                        {{ 'customer.addresses.edit' | t }}
+                    </button>
+                    <button
+                        type="button"
+                        aria-label="{{ 'customer.addresses.delete' | t }} {{ forloop.index }}"
+                        data-target="{{ address.url }}"
+                        data-confirm-message="{{ 'customer.addresses.delete_confirm' | t }}"
+                        class="body-secondary-text--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} account-address__action button-delete {% if settings.dim_text %}dim{% endif %}">
+                    {% assign icon_full = 'remove' | append: "-" | append: weight %}
+                    {% render 'icon-accordion-2', icon: icon_full %}
+                        {{ 'customer.addresses.delete' | t }}
+                    </button>
+                    <div id="EditAddress_{{ address.id }}" class="address-edit-block popup-wrapper">
+                      <div class="scroll-area hide-scrollbar">
+                        <div class="button-wrapper {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %}">
+                          {% style %}
+                          .button-close {
+                              --layout-text-color:
+                                  {{ settings.layout_text_color.red }},
+                                  {{ settings.layout_text_color.green }}, 
+                                  {{ settings.layout_text_color.blue }};
+                              --layout-background-color:
+                                  {{ settings.layout_background_color.red }},
+                                  {{ settings.layout_background_color.green }},
+                                  {{ settings.layout_background_color.blue }};
+                          }
+                          {% endstyle %}
+                          <button type="button" class="button-close close-popup">
+                              {% assign icon_full = 'cross' | append: "-" | append: close_weight %}
+                              {% render 'icon', icon: icon_full %}
+                          </button>
+                        </div>
+                        <div class="address-edit-wrapper">
+                          <h2 class="heading title-list--{{ settings.typography_preset }}{% if uppercase_body_l %} uppercase{% endif %}{% if bolder_body_l %} bolder-font{% endif %} {% if settings.center_text %}center{% endif %} {% if settings.accent_color_for_headings %}heading--accent{% endif %}">{{ 'customer.addresses.edit_address' | t }}</h2>
+                        {%- form 'customer_address', address -%}
+                        <div class="fields-wrapper">
+                          <div class="fields-row">
+                            <div class="field">
+                              <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="AddressFirstName_{{ form.id }}">{{ 'customer.addresses.first_name' | t }}</label>
+                              <input class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" type="text" id="AddressFirstName_{{ form.id }}" name="address[first_name]" value="{{ form.first_name }}" autocomplete="given-name">
+                            </div>
+                            <div class="field">
+                                <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="AddressLastName_{{ form.id }}">{{ 'customer.addresses.last_name' | t }}</label>
+                                <input class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" type="text" id="AddressLastName_{{ form.id }}" name="address[last_name]" value="{{ form.last_name }}" autocomplete="family-name">  
+                            </div>
+                          </div>
+                          <div class="field">
+                              <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="AddressCompany_{{ form.id }}">{{ 'customer.addresses.company' | t }}</label>
+                              <input class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" type="text" id="AddressCompany_{{ form.id }}" name="address[company]" value="{{ form.company }}" autocomplete="organization"> 
+                          </div>
+                          <div class="field">
+                              <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="AddressAddress1_{{ form.id }}">{{ 'customer.addresses.address1' | t }}</label>
+                              <input class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" type="text" id="AddressAddress1_{{ form.id }}" name="address[address1]" value="{{ form.address1 }}" autocomplete="address-line1"> 
+                          </div>
+                          <div class="field">
+                              <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="AddressAddress2_{{ form.id }}">{{ 'customer.addresses.address2' | t }}</label>
+                              <input class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" type="text" id="AddressAddress2_{{ form.id }}" name="address[address2]" value="{{ form.address2 }}" autocomplete="address-line2">
+                          </div>
+                          <div class="field">
+                              <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="AddressCity_{{ form.id }}">{{ 'customer.addresses.city' | t }}</label>
+                              <input class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" type="text" id="AddressCity_{{ form.id }}" name="address[city]" value="{{ form.city }}" autocomplete="address-level2">
+                          </div>
+                          <div class="field">
+                              <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="AddressCountry_{{ form.id }}">
+                              {{ 'customer.addresses.country' | t | append: '*' }}
+                              </label>
+                              <div class="select">
+                                <select
+                                    id="AddressCountry_{{ form.id }}"
+                                    name="address[country]"
+                                    data-address-country-select
+                                    data-default="{{ form.country }}"
+                                    data-form-id="{{ form.id }}"
+                                    required="required"
+                                    autocomplete="country"
+                                    class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}">
+                                    {{ all_country_option_tags }}
+                                </select>
+                                <div class="select-icon">
+                                    {% assign icon_full = 'close-chevron' | append: "-" | append: select_weight %}
+                                    {% render 'icon', icon: icon_full %}
+                                </div>      
+                              </div>
+                          </div>
+                          <div id="AddressProvinceContainer_{{ form.id }}" style="display:none;" class="field">
+                              <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="AddressProvince_{{ form.id }}">
+                              {{ 'customer.addresses.province' | t }}
+                              </label>
+                              <div class="select">
+                                <select
+                                    id="AddressProvince_{{ form.id }}"
+                                    name="address[province]"
+                                    data-default="{{ form.province }}"
+                                    autocomplete="address-level1"
+                                    class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}">
+                                </select>
+                                <div class="select-icon">
+                                    {% assign icon_full = 'close-chevron' | append: "-" | append: select_weight %}
+                                    {% render 'icon', icon: icon_full %}
+                                </div> 
+                              </div>
+                          </div>
+                          <div class="fields-row">
+                            <div class="field">
+                              <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="AddressZip_{{ form.id }}">{{ 'customer.addresses.zip' | t }}</label>
+                              <input class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" type="text" id="AddressZip_{{ form.id }}" name="address[zip]" value="{{ form.zip }}" autocapitalize="characters" autocomplete="postal-code">
+                            </div>
+                            <div class="field">
+                              <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="AddressPhone_{{ form.id }}">{{ 'customer.addresses.phone' | t }}</label>
+                              <input class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" type="tel" dir="ltr" id="AddressPhone_{{ form.id }}"  name="address[phone]" value="{{ form.phone }}" autocomplete="tel">
+                            </div>
+                          </div>
+                        </div>
+                        <label class="field field--checkbox" for="address_default_address_{{ form.id }}">
+                          {{ form.set_as_default_checkbox }}
+                          <span class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}">{{ 'customer.addresses.set_default' | t }}</span>
+                        </label>
+                          <div>
+                              <button type="submit" class="big-button big-button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}">{{ 'customer.addresses.update' | t }}</button>
+                              <button class="close-popup outlined-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}" type="reset">{{ 'customer.addresses.cancel' | t }}</button>
+                          </div>
+                          {%- endform -%}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+            {%- endfor -%}
+        </ul>
+        <div data-address>
+          <button
+            type="button"
+            aria-expanded="false"
+            aria-controls="AddAddress"
+            class="solid-button add-address open-popup button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if settings.center_text %} center{% endif %}">
+            {{ 'customer.addresses.add_new' | t }}
+          </button>
+          <div id="AddAddress" class="address-edit-block popup-wrapper">
+            <div class="scroll-area hide-scrollbar">
+              <div class="button-wrapper {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %}">
+                {% style %}
+                    .button-close {
+                        --layout-text-color:
+                            {{ settings.layout_text_color.red }},
+                            {{ settings.layout_text_color.green }}, 
+                            {{ settings.layout_text_color.blue }};
+                        --layout-background-color:
+                            {{ settings.layout_background_color.red }},
+                            {{ settings.layout_background_color.green }},
+                            {{ settings.layout_background_color.blue }};
+                    }
+                {% endstyle %}
+                <button type="button" class="button-close close-popup">
+                    {% assign icon_full = 'cross' | append: "-" | append: close_weight %}
+                    {% render 'icon', icon: icon_full %}
+                </button>
+              </div>
+              <div class="address-edit-wrapper">
+                <h2 class="heading title-list--{{ settings.typography_preset }}{% if uppercase_body_l %} uppercase{% endif %}{% if bolder_body_l %} bolder-font{% endif %} {% if settings.center_text %}center{% endif %} {% if settings.accent_color_for_headings %}heading--accent{% endif %}" id="AddressNewHeading">{{ 'customer.addresses.add_new' | t }}</h2>
+              {%- form 'customer_address', customer.new_address, aria-labelledBy: 'AddressNewHeading' -%}
+              <div class="fields-wrapper">
+                <div class="fields-row">
+                  <div class="field">
+                    <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="AddressFirstNameNew">{{ 'customer.addresses.first_name' | t }}</label>
+                    <input class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" type="text" id="AddressFirstNameNew" name="address[first_name]" value="{{ form.first_name }}" autocomplete="given-name">
+                  </div>
+                  <div class="field">
+                    <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="AddressLastNameNew">{{ 'customer.addresses.last_name' | t }}</label>
+                    <input class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" type="text" id="AddressLastNameNew" name="address[last_name]" value="{{ form.last_name }}" autocomplete="family-name">
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="AddressCompanyNew">{{ 'customer.addresses.company' | t }}</label>
+                  <input class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" type="text" id="AddressCompanyNew" name="address[company]" value="{{ form.company }}" autocomplete="organization">
+                </div>
+                <div class="field">
+                  <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="AddressAddress1New">{{ 'customer.addresses.address1' | t }}</label>
+                  <input class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" type="text" id="AddressAddress1New" name="address[address1]" value="{{ form.address1 }}" autocomplete="address-line1">
+                </div>
+                <div class="field">
+                  <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="AddressAddress2New">{{ 'customer.addresses.address2' | t }}</label>
+                  <input class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" type="text" id="AddressAddress2New" name="address[address2]" value="{{ form.address2 }}" autocomplete="address-line2">
+                </div>
+                  <div class="field">
+                    <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="AddressCityNew">{{ 'customer.addresses.city' | t }}</label>
+                    <input class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" type="text" id="AddressCityNew" name="address[city]" value="{{ form.city }}" autocomplete="address-level2">
+                  </div>
+                  <div class="field">
+                    <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="AddressCountryNew">{{ 'customer.addresses.country' | t | append: '*' }}</label>
+                    <div class="select">
+                      <select
+                        id="AddressCountryNew"
+                        name="address[country]"
+                        required="required"
+                        data-default="{{ form.country }}"
+                        autocomplete="country"
+                        class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}">
+                        {{ all_country_option_tags }}
+                      </select>
+                      <div class="select-icon">
+                          {% assign icon_full = 'close-chevron' | append: "-" | append: select_weight %}
+                          {% render 'icon', icon: icon_full %}
+                      </div> 
+                    </div>
+                  </div>
+                  <div id="AddressProvinceContainerNew" style="display: none" class="field">
+                    <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="AddressProvinceNew">{{ 'customer.addresses.province' | t }}</label>
+                    <div class="select">
+                        <select
+                          id="AddressProvinceNew"
+                          name="address[province]"
+                          data-default="{{ form.province }}"
+                          autocomplete="address-level1"
+                          class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}">
+                        </select>
+                        <div class="select-icon">
+                            {% assign icon_full = 'close-chevron' | append: "-" | append: select_weight %}
+                            {% render 'icon', icon: icon_full %}  
+                        </div> 
+                      </div>
+                  </div>
+                  <div class="fields-row">
+                    <div class="field">
+                      <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="AddressZipNew">{{ 'customer.addresses.zip' | t }}</label>
+                      <input class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" type="text" id="AddressZipNew" name="address[zip]" value="{{ form.zip }}" autocapitalize="characters" autocomplete="postal-code">
+                    </div>
+                    <div class="field">
+                      <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="AddressPhoneNew">{{ 'customer.addresses.phone' | t }}</label>
+                      <input class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}" type="tel" dir="ltr" id="AddressPhoneNew" name="address[phone]" value="{{ form.phone }}" autocomplete="tel">
+                    </div>
+                  </div>
+                </div>
+                  <label class="field field--checkbox" for="address_default_address_new">
+                    {{ form.set_as_default_checkbox }}
+                    <span class="label label--{{ settings.typography_preset }} {% if settings.dim_text %}dim{% endif %}">{{ 'customer.addresses.set_default' | t }}</span>
+                  </label>
+                  <div>
+                  <button class="open-popup big-button big-button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}">{{ 'customer.addresses.add' | t }}</button>
+                  <button class="close-popup outlined-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}" type="reset">{{ 'customer.addresses.cancel' | t }}</button>
+                </div>
+                {%- endform -%}
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</modal-dialog>
+
+<script>
+  window.onload = () => {
+    typeof CustomerAddresses !== 'undefined' && new CustomerAddresses();
+  }
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.main-addresses.name"
+}
+{% endschema %}

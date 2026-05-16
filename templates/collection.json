@@ -1,0 +1,144 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "featured_collections_xQWhaC": {
+      "type": "featured-collections",
+      "blocks": {
+        "collection_ExH867": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "collection_ccFMx9": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "collection_7hPiwY": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "collection_qRA9xp": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_ExH867",
+        "collection_ccFMx9",
+        "collection_7hPiwY",
+        "collection_qRA9xp"
+      ],
+      "name": "t:sections.featured-collections.name",
+      "settings": {
+        "heading": "",
+        "collection_list": [],
+        "desktop_style": "slider",
+        "max_columns": "3",
+        "center_text": false,
+        "show_frame": true,
+        "image_ratio": "portrait",
+        "image_radius": "24px",
+        "title_size": "heading_xs",
+        "heading_size": "default",
+        "heading_tag": "h2",
+        "heading_color": "solid",
+        "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_gradient": "",
+        "background_color": "#fffdf3",
+        "text_color": "#db2828",
+        "layout_margins": "default",
+        "desktop_padding_top": -80,
+        "desktop_padding_bottom": -80,
+        "mobile_padding_top": -32,
+        "mobile_padding_bottom": -60
+      }
+    },
+    "breadcrumbs_JjGX79": {
+      "type": "breadcrumbs",
+      "name": "t:sections.breadcrumbs.name",
+      "settings": {
+        "breadcrumbs_center_content": true,
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_gradient": "",
+        "background_color": "#fffdf3",
+        "text_color": "#db2828",
+        "section_paddings": 16
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "show_product_quantity": true,
+        "show_description": false,
+        "show_image": false,
+        "show_image_under_heading": false,
+        "banner_image_ratio": "super_wide",
+        "banner_focal_point": "center center",
+        "heading_size": "heading_l",
+        "heading_color": "solid",
+        "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
+        "text_size": "default",
+        "enable_filtering": true,
+        "enable_availability_toggle": true,
+        "desktop_filter_style": "drawer",
+        "filtering_style": "solid",
+        "filter_button_position": "inline_heading",
+        "filter_and_operator_subtitle": "Match all",
+        "open_collapsible_label": "Price, Flavour",
+        "products_per_page": 12,
+        "infinite_scroll": "button",
+        "grid_type": "four_columns",
+        "grid_gap_type": "default",
+        "custom_column_gap_desktop": 8,
+        "custom_row_gap_desktop": 64,
+        "custom_column_gap_mobile": 4,
+        "custom_row_gap_mobile": 16,
+        "mobile_layout": "2",
+        "total_products_heading_size": "label_font_uppercase",
+        "filter_tab_size": "label_font_uppercase",
+        "filter_text_size": "body_l",
+        "image_ratio": "portrait",
+        "focal_point": "center center",
+        "hover_behavior": "second_image",
+        "show_bullets": true,
+        "enable_add_to_cart": true,
+        "enable_quick_view": true,
+        "price_position": "bottom",
+        "show_vendor": false,
+        "max_product_name_characters": 100,
+        "show_rating": false,
+        "show_short_description": true,
+        "enable_color_pills": true,
+        "show_pickup_availability": false,
+        "layout_margins": "default",
+        "desktop_padding_top": -64,
+        "desktop_padding_bottom": -40,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "featured_collections_xQWhaC",
+    "breadcrumbs_JjGX79",
+    "product-grid"
+  ]
+}

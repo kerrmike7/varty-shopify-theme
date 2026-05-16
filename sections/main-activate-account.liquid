@@ -1,0 +1,85 @@
+{% liquid
+    assign uppercase_font = false
+    assign bolder_font = false
+    if settings.typography_preset == 'custom'
+        if settings.uppercase_body_s
+            assign uppercase_font = true
+        endif
+        if settings.bolder_font_body_s
+            assign bolder_font = true
+        endif
+    endif
+%} 
+
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+
+<div class="customer-account login-page section-padding--{{ settings.white_space }} {% if settings.max_page_width == '1400' or settings.max_page_width == '1200' %}page-width {% endif %} page-width--{{ settings.max_page_width }}">
+    <div class="account-wrapper {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %}">
+        <h1 class="heading heading--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_heading_xs %} uppercase{% endif %}{% if settings.bolder_font_heading_xs %} bolder-font{% endif %}{% endif %} {% if settings.center_text %}center{% endif %} {% if settings.accent_color_for_headings %}heading--accent{% endif %}">
+            {{ 'customer.activate_account.title' | t }}
+        </h1>
+        <p class="subheading subheading--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.center_text %}center{% endif %}">
+        {{ 'customer.activate_account.subtext' | t }}
+        </p>
+        <form-state>
+        {%- form 'activate_customer_password' -%}
+            <div class="fields-wrapper">
+                <div class="field">
+                    <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="password">
+                        {{ 'customer.activate_account.password' | t | append: '*' }}
+                    </label>     
+                    <input
+                    class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} required{% if form.errors contains 'password' %} invalid{% endif %}"
+                    type="password"
+                    required="required"
+                    name="customer[password]"
+                    id="password"
+                    autocomplete="new-password"
+                    {% if form.errors contains 'password' %}
+                        aria-invalid="true"
+                        aria-describedby="password-error"
+                    {% endif %}>
+                    {%- if form.errors contains 'password' -%}
+                    <h2 id="password-error" class="subheading subheading--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} error-color" tabindex="-1" autofocus>
+                        {{ form.errors.translated_fields['password'] | capitalize }} {{ form.errors.messages['password'] }}
+                    </h2>
+                    {%- endif -%}
+                </div>
+                <div class="field">
+                    <label class="label label--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% if settings.dim_text %}dim{% endif %}" for="password_confirmation">
+                        {{ 'customer.activate_account.password_confirm' | t | append: '*' }}
+                    </label>
+                    <input
+                    class="input input--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} required{% if form.errors contains 'password_confirmation' %} invalid{% endif %}"
+                    type="password"
+                    required="required"
+                    name="customer[password_confirmation]"
+                    id="password_confirmation"
+                    autocomplete="new-password"
+                    {% if form.errors contains 'password' %}
+                        aria-invalid="true"
+                        aria-describedby="password_confirmation-error"
+                    {% endif %}>
+                    {%- if form.errors contains 'password_confirmation' -%}
+                    <h2 id="password_confirmation-error" class="subheading subheading--{{ settings.typography_preset }}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} error-color" tabindex="-1" autofocus>
+                        {{ form.errors.translated_fields['password_confirmation'] | capitalize }} {{ form.errors.messages['password_confirmation'] }}
+                    </h2>
+                    {%- endif -%}
+                </div>
+            </div>
+            <button class="big-button--{{ settings.typography_preset }} big-button button--submit {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}">
+                {{ 'customer.activate_account.submit' | t }}
+            </button>
+            <button class="button--{{ settings.typography_preset }} outlined-button {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}" name="decline">
+                {{ 'customer.activate_account.cancel' | t }}
+            </button>
+        {%- endform -%}
+        </form-state>
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-activate-account.name"
+}
+{% endschema %}

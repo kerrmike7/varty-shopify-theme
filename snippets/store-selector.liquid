@@ -1,0 +1,105 @@
+{%- liquid
+  assign raw_store = cart.attributes['store'] | strip
+
+  if raw_store != blank
+    assign store_selector_text = raw_store 
+    
+    if raw_store.size > 20
+      assign trimmed_store = raw_store | slice: 0, 20
+      assign store_selector_text = trimmed_store | append: '...'
+    endif
+  else
+    assign store_selector_text = 'store_selector.select_your_store' | t
+  endif
+-%}
+
+{% liquid
+  if settings.typography_preset == 'avant_garde'
+    assign weight = settings.accent_icon_weight
+    if settings.swap_fonts
+      assign weight = settings.base_icon_weight
+    endif
+  else
+    assign weight = settings.base_icon_weight
+    if settings.swap_fonts
+      assign weight = settings.accent_icon_weight
+    endif
+  endif
+
+  assign uppercase_font = false
+  assign bolder_font = false
+  if settings.typography_preset == 'custom'
+    assign weight = settings.custom_icon_weight
+    if settings.uppercase_body_s and settings.navigation_item_size == 'default'
+      assign uppercase_font = true
+    endif
+    if settings.bolder_font_body_s and settings.navigation_item_size == 'default'
+      assign bolder_font = true
+    endif
+  endif
+
+  unless store_selector_settings
+    assign store_selector_settings = block.settings
+  endunless
+%}
+
+{% style %}
+{% if settings.typography_preset != 'custom' %}
+  .disclosure__button--minimal_uppercase .store-selector-icon,
+  .disclosure__button--minimal_basic .store-selector-icon,
+  .disclosure__button--classic .store-selector-icon,
+  .disclosure__button--avant_garde .store-selector-icon {
+      height: var(--fluid-menu-ui-24);
+  }
+  .disclosure__button--minimal_heavy .store-selector-icon,
+  .disclosure__button--brutalist .store-selector-icon {
+      height: var(--fluid-menu-ui-28);
+  }
+  .disclosure__button--contrast .store-selector-icon {
+      height: var(--fluid-menu-ui-16);
+      width: auto;
+  }
+  .disclosure__button--duet .store-selector-icon {
+      height: var(--fluid-menu-ui-26);
+  }
+{% else %}
+  .store-selector-icon {
+      height: max(16px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+  }
+  .navigations-heading-m .store-selector-icon {
+      height: max(16px, calc(var(--heading-m-font-size) * var(--heading-m-line-height)));
+  }
+  .navigations-heading-s .store-selector-icon {
+      height: max(16px, calc(var(--heading-s-font-size) * var(--heading-s-line-height)));
+  }
+  .navigations-heading-xs .store-selector-icon {
+      height: max(16px, calc(var(--heading-xs-font-size) * var(--heading-xs-line-height)));
+  }
+  .navigations-body-l .store-selector-icon {
+      height: max(16px, calc(var(--body-l-font-size) * var(--body-l-line-height)));
+  }
+  .navigations-body-m .store-selector-icon {
+      height: max(16px, calc(var(--body-m-font-size) * var(--body-m-line-height)));
+  }
+  .navigations-label .store-selector-icon {
+      height: max(16px, calc(var(--label-font-size) * var(--label-line-height)));
+  }
+{% endif %}
+{% endstyle %}
+
+<button
+  class="store-selector {% if section_navigation_block %} section-navigation-block{% if settings.enable_drawer_animations %} stagger__item{% endif %}{% endif %} store-selector-drawer-opener hover-opacity disclosure__button disclosure__button--{{ settings.typography_preset }} {% if settings.navigation_item_size != 'default' and settings.typography_preset == 'custom' %}{{ settings.navigation_item_size }}{% else %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}{% endif %} {% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %}scroll-color{% endif %}"
+  {% if block %}{{ block.shopify_attributes }}{% endif %}
+>
+  {% if store_selector_settings.show_icon %}
+    <span class="store-selector__icon store-selector-icon">
+      {% assign icon_full = 'place-favorite' | append: "-" | append: weight %}
+      {% render 'icon', icon: icon_full %}  
+    </span>
+  {% endif %}
+  <span class="store-selector__text" data-placeholder="{{ 'store_selector.select_your_store' | t }}">{{ store_selector_text }}</span>
+  <span class="disclosure__button-icon dropdown-icon store-selector-icon">
+    {% assign icon_full = 'close-chevron' | append: "-" | append: weight %}
+    {% render 'icon', icon: icon_full %}  
+  </span>
+</button>

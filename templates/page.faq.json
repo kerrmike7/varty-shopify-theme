@@ -1,0 +1,215 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-page": {
+      "type": "main-page",
+      "settings": {
+        "heading": "",
+        "hide_heading": false,
+        "heading_size": "heading_l",
+        "heading_tag": "h2",
+        "text_size": "default",
+        "section_width": "wide",
+        "desktop_padding_top": 60,
+        "desktop_padding_bottom": -160,
+        "mobile_padding_top": 20,
+        "mobile_padding_bottom": -60
+      }
+    },
+    "46adb6af-230f-483e-9a2a-640b3354c2f1": {
+      "type": "collapsible-tabs",
+      "blocks": {
+        "template--19235367223602__46adb6af-230f-483e-9a2a-640b3354c2f1-168537123473b0750f-0": {
+          "type": "topic",
+          "settings": {
+            "heading": "Product & Ingredients",
+            "text": "<p>Everything you need to know about what’s inside and how our drinks work.</p>",
+            "dim_text": true,
+            "button_label": "",
+            "button_link": "",
+            "target_blank": false,
+            "button_style": "solid"
+          }
+        },
+        "template--19235367223602__46adb6af-230f-483e-9a2a-640b3354c2f1-168537123473b0750f-1": {
+          "type": "tab",
+          "settings": {
+            "heading": "What are your drinks made of?",
+            "text": "<p>Our drinks are crafted with carefully selected natural ingredients, including botanical extracts, vitamins, natural caffeine, and prebiotics to support your daily needs.</p>",
+            "icon": "none",
+            "page": ""
+          }
+        },
+        "template--19235367223602__46adb6af-230f-483e-9a2a-640b3354c2f1-168537123473b0750f-2": {
+          "type": "tab",
+          "settings": {
+            "heading": "Do your drinks contain caffeine?",
+            "text": "<p>Yes, some of our drinks contain naturally derived caffeine, designed to provide a smooth and balanced boost without sharp spikes or crashes.</p>",
+            "icon": "none",
+            "page": ""
+          }
+        },
+        "template--19235367223602__46adb6af-230f-483e-9a2a-640b3354c2f1-168537123473b0750f-3": {
+          "type": "tab",
+          "settings": {
+            "heading": "What kind of caffeine do you use?",
+            "text": "<p>We use plant-based sources of caffeine, offering a more gentle and sustained effect compared to synthetic alternatives.</p>",
+            "icon": "none",
+            "page": ""
+          }
+        },
+        "tab_LrTx6Y": {
+          "type": "tab",
+          "settings": {
+            "heading": "Do your drinks contain prebiotics?",
+            "text": "<p>Yes, selected drinks include prebiotics to support gut health and overall well-being as part of your daily routine.</p>",
+            "icon": "none",
+            "page": ""
+          }
+        },
+        "tab_rmBdYP": {
+          "type": "tab",
+          "settings": {
+            "heading": "Are your drinks free from trans fats?",
+            "text": "<p>Yes, all of our drinks are completely free from trans fats.</p>",
+            "icon": "none",
+            "page": ""
+          }
+        },
+        "template--19235367223602__46adb6af-230f-483e-9a2a-640b3354c2f1-168537123473b0750f-4": {
+          "type": "topic",
+          "settings": {
+            "heading": "Usage & Routine",
+            "text": "<p>How to choose, use, and enjoy our drinks every day.</p>",
+            "dim_text": true,
+            "button_label": "",
+            "button_link": "",
+            "target_blank": false,
+            "button_style": "solid"
+          }
+        },
+        "template--19235367223602__46adb6af-230f-483e-9a2a-640b3354c2f1-168537123473b0750f-5": {
+          "type": "tab",
+          "settings": {
+            "heading": "How do I choose the right drink for me?",
+            "text": "<p>You can explore our drinks by benefits such as energy, focus, or relaxation. Each product is designed to support a specific need, making it easy to find your perfect match.</p>",
+            "icon": "none",
+            "page": ""
+          }
+        },
+        "template--19235367223602__46adb6af-230f-483e-9a2a-640b3354c2f1-168537123473b0750f-6": {
+          "type": "tab",
+          "settings": {
+            "heading": "Can I drink them every day?",
+            "text": "<p>Yes, our drinks are made for daily use. With clean ingredients, natural caffeine, and added prebiotics, they support a balanced lifestyle.</p>",
+            "icon": "none",
+            "page": ""
+          }
+        },
+        "template--19235367223602__46adb6af-230f-483e-9a2a-640b3354c2f1-168537123473b0750f-7": {
+          "type": "tab",
+          "settings": {
+            "heading": "How should I store the drinks?",
+            "text": "<p>Store in a cool, dry place. For the best experience, we recommend serving them chilled.</p>",
+            "icon": "none",
+            "page": ""
+          }
+        },
+        "topic_ztw4KG": {
+          "type": "topic",
+          "settings": {
+            "heading": "Orders, Shipping & Delivery",
+            "text": "<p>Everything you need to know about orders and delivery.</p>",
+            "dim_text": false,
+            "button_label": "",
+            "button_link": "",
+            "target_blank": false,
+            "button_style": "solid"
+          }
+        },
+        "tab_EVpx7g": {
+          "type": "tab",
+          "settings": {
+            "heading": "Where do you ship?",
+            "text": "<p>We ship to selected countries worldwide. You can find detailed shipping information during checkout or on our shipping page.</p>",
+            "icon": "none",
+            "page": ""
+          }
+        },
+        "tab_anhnba": {
+          "type": "tab",
+          "settings": {
+            "heading": "How long does delivery take?",
+            "text": "<p>Delivery times vary depending on your location, but most orders arrive within a few business days.</p>",
+            "icon": "none",
+            "page": ""
+          }
+        },
+        "tab_pkah4d": {
+          "type": "tab",
+          "settings": {
+            "heading": "What payment methods do you accept?",
+            "text": "<p>We accept major credit and debit cards, as well as popular digital payment options for a smooth checkout experience.</p>",
+            "icon": "none",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--19235367223602__46adb6af-230f-483e-9a2a-640b3354c2f1-168537123473b0750f-0",
+        "template--19235367223602__46adb6af-230f-483e-9a2a-640b3354c2f1-168537123473b0750f-1",
+        "template--19235367223602__46adb6af-230f-483e-9a2a-640b3354c2f1-168537123473b0750f-2",
+        "template--19235367223602__46adb6af-230f-483e-9a2a-640b3354c2f1-168537123473b0750f-3",
+        "tab_LrTx6Y",
+        "tab_rmBdYP",
+        "template--19235367223602__46adb6af-230f-483e-9a2a-640b3354c2f1-168537123473b0750f-4",
+        "template--19235367223602__46adb6af-230f-483e-9a2a-640b3354c2f1-168537123473b0750f-5",
+        "template--19235367223602__46adb6af-230f-483e-9a2a-640b3354c2f1-168537123473b0750f-6",
+        "template--19235367223602__46adb6af-230f-483e-9a2a-640b3354c2f1-168537123473b0750f-7",
+        "topic_ztw4KG",
+        "tab_EVpx7g",
+        "tab_anhnba",
+        "tab_pkah4d"
+      ],
+      "settings": {
+        "subheading": "",
+        "heading": "",
+        "text": "",
+        "dim_text": false,
+        "button_label": "",
+        "button_link": "",
+        "target_blank": false,
+        "button_style": "solid",
+        "section_width": "narrow",
+        "subheading_size": "default",
+        "subheading_tag": "h3",
+        "heading_size": "default",
+        "heading_tag": "h2",
+        "main_text_size": "default",
+        "collapsible_tabs_size": "heading_xs",
+        "text_size": "body_m",
+        "topic_heading_size": "heading_s",
+        "topic_text_size": "default",
+        "color_type": "default",
+        "background_color": "#ffffff",
+        "text_color": "#000000",
+        "desktop_padding_top": -160,
+        "desktop_padding_bottom": -32,
+        "mobile_padding_top": -80,
+        "mobile_padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main-page",
+    "46adb6af-230f-483e-9a2a-640b3354c2f1"
+  ]
+}

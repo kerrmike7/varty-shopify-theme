@@ -1,0 +1,73 @@
+{% liquid
+  assign uppercase_price = false
+  assign bolder_price_font = false
+  if settings.typography_preset == 'custom' and settings.product_price_size == 'default'
+    if settings.uppercase_body_s
+      assign uppercase_price = true
+    endif
+    if settings.bolder_font_body_s
+      assign bolder_price_font = true
+    endif
+  endif
+  assign uppercase_title = false
+  assign bolder_title_font = false
+  if settings.typography_preset == 'custom' and settings.product_title_size == 'default'
+    if settings.uppercase_body_s
+      assign uppercase_title = true
+    endif
+    if settings.bolder_font_body_s
+      assign bolder_title_font = true
+    endif
+  endif
+  assign uppercase_text = false
+  assign bolder_text_font = false
+  if settings.typography_preset == 'custom' and settings.product_text_size == 'default'
+    if settings.uppercase_body_s
+      assign uppercase_text = true
+    endif
+    if settings.bolder_font_body_s
+      assign bolder_text_font = true
+    endif
+  endif
+%}
+<div class="card-container">
+    <div class="card card-js" draggable="false">
+      <div class="card__picture-wrapper">
+        <div class="card__picture">
+          <div class="card__product-image ratio-{{ image_ratio }} card__product-image--hover-effect">
+            <div class="product__placeholder">
+              {%- assign placeholder_name = 'product-' | append: index_placeholder -%}
+                {{ placeholder_name | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card__content {% if center_text %}card__content--center{% endif %}{% if disable_layout_margins %} card__content--with-margins{% endif %}{% if desktop_content_margin %} card__content--desktop-content-margin{% endif %}{% if mobile_content_margin %} card__content--mobile-content-margin{% endif %}">
+        {% if price_position == 'top' %}
+          <div class="card__price card__price--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.product_price_size != 'default' %}{{ settings.product_price_size }}{% else %}{% if uppercase_price %} uppercase{% endif %}{% if bolder_price_font %} bolder-font{% endif %}{% endif %}{% endif %}">
+            {% render 'price', in_card_product: true, uppercase_price: uppercase_price, bolder_price_font: bolder_price_font %}
+          </div>
+        {% endif %}
+        <div class="card__info">
+          <div class="card__product-info">
+            {% if show_vendor %}
+              <p class="card__vendor card__vendor--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.product_text_size != 'default' %}{{ settings.product_text_size }}{% else %}{% if uppercase_text %} uppercase{% endif %}{% if bolder_text_font %} bolder-font{% endif %}{% endif %}{% endif %} {% if settings.dim_text %} dim{% endif %}">{{ 'products.product.vendor_placeholder' | t }}</p>
+            {% endif %}
+              <div class="card__title {{ max_product_name_characters }} card__title--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.product_title_size != 'default' %}{{ settings.product_title_size }}{% else %}{% if uppercase_title %} uppercase{% endif %}{% if bolder_title_font %} bolder-font{% endif %}{% endif %}{% endif %}">
+                <p class="card__title-text">{{ 'products.product.title_placeholder' | t }}</p>   
+                {% if price_position == 'with_title' %}
+                  <div class="card__price card__price--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.product_price_size != 'default' %}{{ settings.product_price_size }}{% else %}{% if uppercase_price %} uppercase{% endif %}{% if bolder_price_font %} bolder-font{% endif %}{% endif %}{% endif %}">
+                    {% render 'price', in_card_product: true, uppercase_price: uppercase_price, bolder_price_font: bolder_price_font %}
+                  </div>
+                {% endif %}
+              </div>
+          </div>
+        </div>
+      {% if price_position == 'bottom' %}
+        <div class="card__price card__price--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.product_price_size != 'default' %}{{ settings.product_price_size }}{% else %}{% if uppercase_price %} uppercase{% endif %}{% if bolder_price_font %} bolder-font{% endif %}{% endif %}{% endif %}">
+          {% render 'price', in_card_product: true, uppercase_price: uppercase_price, bolder_price_font: bolder_price_font %}
+        </div>
+      {% endif %}
+      </div>
+    </div>
+  </div>

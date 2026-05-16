@@ -1,0 +1,233 @@
+{% liquid
+  if lazy_load
+    assign lazy = "lazy"
+  else
+    assign lazy = "eager"
+  endif
+  assign settings_page_width = settings.max_page_width | append: 'px'
+  if settings.max_page_width == 'full_width'
+  assign settings_page_width = '100vw'
+  endif
+%}
+
+{%- if media.media_type == 'image' -%}
+<modal-opener class="card-js product__modal-opener {% unless section.settings.enable_image_zoom %}zoom-disabled{% endunless %} product__modal-opener--{{ media.media_type }} no-js-hidden" data-modal="#ProductModal-{{ modal_id }}">
+  <div class="product__media media {% if settings.enable_blending %}enable-blending{% endif %} media--transparent gradient global-media-settings" style="padding-top: {{ 1 | divided_by: media.preview_image.aspect_ratio | times: 100 }}%;" {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}>
+    {% if settings.images_loading != 'disable' and lazy_load %}
+      <figure class="lazy-image lazy-image--{{ settings.images_loading }} {% if section.settings.enable_image_zoom and section.settings.image_zoom_style == 'zoom-in' %} figure-magnify-hover{% endif %}" style="--desktop-asp-rat: {{ media.preview_image.aspect_ratio }}">
+    {% endif %}
+    <img
+      srcset="{% if media.preview_image.width >= 990 %}{{ media.preview_image | image_url: width: 990 }} 990w,{% endif %}
+        {% if media.preview_image.width >= 1100 %}{{ media.preview_image | image_url: width: 1100 }} 1100w,{% endif %}
+        {% if media.preview_image.width >= 1206 %}{{ media.preview_image | image_url: width: 1206 }} 1206w,{% endif %}
+        {% if media.preview_image.width >= 1346 %}{{ media.preview_image | image_url: width: 1346 }} 1346w,{% endif %}
+        {% if media.preview_image.width >= 1426 %}{{ media.preview_image | image_url: width: 1426 }} 1426w,{% endif %}
+        {% if media.preview_image.width >= 1646 %}{{ media.preview_image | image_url: width: 1646 }} 1646w,{% endif %}
+        {% if media.preview_image.width >= 1946 %}{{ media.preview_image | image_url: width: 1946 }} 1946w,{% endif %}
+        {{ media.preview_image | image_url }} {{ media.preview_image.width }}w"
+      src="{{ media | image_url: width: 1946 }}"
+      {% if section.settings.desktop_gallery_size == 'full_width' %}
+        sizes="(min-width: 750px) calc(100vw - 10rem), (min-width: 750px) calc(100vw - 10rem), 100vw"
+      {% else %}
+        sizes="(min-width: {{ settings_page_width }}) calc(({{ settings_page_width }} - 100px) * {{ media_width }}), (min-width: 990px) calc({{ media_width | times: 100 }}vw - 10rem), (min-width: 750px) calc((100vw - 11.5rem) / 2), 100vw"
+      {% endif %}
+      {% if settings.images_loading != 'disable' and lazy_load %}
+       onload="this.parentNode.classList.add('lazyloaded');"
+       loading="lazy"
+      {% else %}
+        loading="{{ lazy }}"
+      {% endif %}
+      draggable="false"
+      width="973"
+      {% if section.settings.enable_image_zoom and section.settings.image_zoom_style == 'zoom-in' %} class="image-magnify-hover"{% endif %}
+      height="{{ 973 | divided_by: media.preview_image.aspect_ratio | ceil }}"
+      alt="{{ media.preview_image.alt | escape }}"
+    >
+    {% if settings.images_loading != 'disable' and lazy_load %}
+      {% if settings.images_loading != 'fade_scale' %}
+      <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+          <img 
+          alt="{{ media.preview_image.alt | escape }}" 
+          src="{{ media.preview_image | image_url: width: 10 }}"
+          draggable="false"
+          width="10" 
+          height="10">
+      </div>
+      {% endif %}
+      </figure>
+  {% endif %}  
+      {% if section.settings.enable_image_zoom and section.settings.image_zoom_style == 'zoom-in' %}
+        <div class="image-zoom-icon zoom">
+          {%- liquid 
+            if settings.typography_preset == 'avant_garde'
+                assign weight = settings.accent_icon_weight
+                if settings.swap_fonts
+                    assign weight = settings.base_icon_weight
+                endif
+            else 
+                assign weight =  settings.base_icon_weight
+                if settings.swap_fonts
+                    assign weight = settings.accent_icon_weight
+                endif
+            endif
+            if settings.typography_preset == 'custom'
+                assign weight = settings.custom_icon_weight
+            endif
+          -%}
+          {% assign icon_full = 'zoom-out' | append: "-" | append: weight %}
+          {% render 'icon-accordion-2', icon: icon_full %}
+        </div>
+        {% endif %}
+  </div>
+  <button class="product__media-toggle quick-add-hidden {% if section.settings.enable_image_zoom and section.settings.image_zoom_style != 'zoom-in' %}zoom-cursor{% endif %}" type="button" aria-label="{{ 'products.product.media.zoom_in' | t }}" aria-haspopup="dialog" data-media-id="{{ media.id }}" tabindex="-1">
+    <span class="visually-hidden">
+      {{ 'products.product.media.open_media' | t: index: position }}
+    </span>
+  </button>
+</modal-opener>
+{% endif %}
+
+{%- if media.media_type != 'image' -%}
+  {%- if media.media_type == 'model' -%}
+    <product-model class="card-js deferred-media {% if settings.enable_blending %}enable-blending{% endif %} media media--transparent gradient global-media-settings no-js-hidden" data-media-id="{{ media.id }}" style="padding-top: {{ 1 | divided_by: media.preview_image.aspect_ratio | times: 100 }}%;">
+  {%- else -%}
+    <deferred-media class="card-js none-autoplay deferred-media {% if settings.enable_blending %}enable-blending{% endif %} gradient global-media-settings media no-js-hidden" data-media-id="{{ media.id }}" data-enable-autoplay="{{ autoplay }}" style="padding-top: {{ 1 | divided_by: media.preview_image.aspect_ratio | times: 100 }}%;">
+  {%- endif -%}
+  
+    <button id="Deferred-Poster-Modal-{{ media.id }}" class="deferred-media__poster" type="button" aria-label="{{ 'products.product.media.play_media' | t }}">
+      <span class="deferred-media__poster-button motion-reduce">
+        <span class="deferred-media__poster-button-icon">
+        {%- liquid 
+          if settings.typography_preset == 'avant_garde'
+              assign weight = settings.accent_icon_weight
+              if settings.swap_fonts
+                  assign weight = settings.base_icon_weight
+              endif
+          else 
+              assign weight =  settings.base_icon_weight
+              if settings.swap_fonts
+                  assign weight = settings.accent_icon_weight
+              endif
+          endif
+          if settings.typography_preset == 'custom'
+                assign weight = settings.custom_icon_weight
+          endif
+        -%}
+        {%- if media.media_type == 'model' -%}
+            <svg aria-hidden="true" focusable="false" width="26" height="29" viewBox="0 0 26 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0376 28.7532C12.6775 29.1045 13.4579 29.0792 14.0738 28.6873L25.0738 21.6873C25.6506 21.3202 26 20.6838 26 20V7.55469C26 6.83786 25.6164 6.17585 24.9944 5.81944C24.3725 5.46302 23.6074 5.4667 22.9889 5.82909L21.8751 6.48169L11.9889 12.2744C11.3764 12.6333 11 13.2901 11 14V25.8215V27C11 27.73 11.3977 28.4019 12.0376 28.7532Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M2 7.55556V20.5185L11 25.8215L13 27V14.037L24 7.55469L21.8751 6.48169L13 2L2 7.55556ZM15 15.18L24 9.87692L25.0153 9.27868C25.6454 8.90739 26.0226 8.22177 25.999 7.49079C25.9753 6.7598 25.5545 6.10004 24.9016 5.77032L13.9016 0.214767C13.3346 -0.0715889 12.6654 -0.0715889 12.0984 0.214767L1.09837 5.77032C0.424763 6.11053 0 6.80092 0 7.55556V20.5185C0 21.2267 0.374532 21.8821 0.984692 22.2416L11.9847 28.7231C12.603 29.0875 13.3692 29.0926 13.9923 28.7365C14.6154 28.3804 15 27.7177 15 27V25.7273V15.18Z"/>
+            </svg>          
+        {%- else -%}
+          <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10.0077 3.75446C8.67441 2.97671 7 3.93846 7 5.48203V26.5179C7 28.0615 8.67445 29.0232 10.0078 28.2454L28.0385 17.7272C29.3615 16.9555 29.3615 15.0439 28.0385 14.2721L10.0077 3.75446Z"/>
+          </svg>
+        {%- endif -%}
+        </span> 
+      </span>
+      {% if settings.images_loading != 'disable' and lazy_load %}
+        <figure class="lazy-image lazy-image--{{ settings.images_loading }}" style="--desktop-asp-rat: {{ media.preview_image.aspect_ratio }}">
+      {% endif %}
+      <img
+        srcset="{% if media.preview_image.width >= 990 %}{{ media.preview_image | image_url: width: 990 }} 990w,{% endif %}
+          {% if media.preview_image.width >= 1100 %}{{ media.preview_image | image_url: width: 1100 }} 1100w,{% endif %}
+          {% if media.preview_image.width >= 1206 %}{{ media.preview_image | image_url: width: 1206 }} 1206w,{% endif %}
+          {% if media.preview_image.width >= 1346 %}{{ media.preview_image | image_url: width: 1346 }} 1346w,{% endif %}
+          {% if media.preview_image.width >= 1426 %}{{ media.preview_image | image_url: width: 1426 }} 1426w,{% endif %}
+          {% if media.preview_image.width >= 1646 %}{{ media.preview_image | image_url: width: 1646 }} 1646w,{% endif %}
+          {% if media.preview_image.width >= 1946 %}{{ media.preview_image | image_url: width: 1946 }} 1946w,{% endif %}
+          {{ media.preview_image | image_url }} {{ media.preview_image.width }}w"
+        src="{{ media | image_url: width: 1946 }}"
+        {% if section.settings.desktop_gallery_size == 'full_width' %}
+          sizes="(min-width: 750px) calc(100vw - 10rem), (min-width: 750px) calc(100vw - 10rem), 100vw"
+        {% else %}
+          sizes="(min-width: {{ settings_page_width }}) calc(({{ settings_page_width }} - 100px) * {{ media_width }}), (min-width: 990px) calc({{ media_width | times: 100 }}vw - 10rem), (min-width: 750px) calc((100vw - 11.5rem) / 2), 100vw"
+        {% endif %}
+        {% if settings.images_loading != 'disable' and lazy_load %}
+          onload="this.parentNode.classList.add('lazyloaded');"
+          loading="lazy"
+        {% else %}
+           loading="{{ lazy }}"
+        {% endif %}
+        width="973"
+        height="{{ 973 | divided_by: media.preview_image.aspect_ratio | ceil }}"
+        alt="{{ media.preview_image.alt | escape }}"
+        draggable="false"
+        {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}
+      >
+      {% if settings.images_loading != 'disable' and lazy_load %}
+        {% if settings.images_loading != 'fade_scale' %}
+        <div class="lazy-image__preloader lazy-image__preloader--full lazy-image__preloader-{{ settings.images_loading }}" aria-hidden="true">
+            <img 
+            alt="{{ media.preview_image.alt | escape }}" 
+            src="{{ media.preview_image | image_url: width: 10 }}"
+            draggable="false"
+            width="10" 
+            height="10">
+        </div>
+        {% endif %}
+        </figure>
+    {% endif %}  
+    </button>
+  
+  <template>
+    {%- liquid
+      case media.media_type
+      when 'external_video'
+        assign video_class = 'js-' | append: media.host
+        if media.host == 'youtube'
+          echo media | external_video_url: autoplay: true, loop: loop, controls: controls | external_video_tag: class: video_class, loading: "lazy", id: media.external_id
+        else
+          echo media | external_video_url: autoplay: true, loop: loop, muted: autoplay, controls: controls | external_video_tag: class: video_class, loading: "lazy"
+        endif
+      when 'video'
+        echo media | media_tag: image_size: "2048x", autoplay: true, loop: loop, muted: autoplay, controls: controls, preload: "none"
+      when 'model'
+        echo media | media_tag: image_size: "2048x", toggleable: true
+      endcase
+    -%}
+    </template>
+
+  {%- if media.media_type == 'model' -%}
+    </product-model>
+    {%- if xr_button -%}
+      <button
+        class="button button--full-width product__xr-button outlined-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %}"
+        type="button"
+        aria-label="{{ 'products.product.xr_button_label' | t }}"
+        data-shopify-xr
+        data-shopify-model3d-id="{{ media.id }}"
+        data-shopify-title="title"
+        data-shopify-xr-hidden
+        >
+        {{ 'products.product.xr_button' | t }}
+      </button>
+    {%- endif -%}
+  {%- else -%}
+  {%- if media.media_type == 'external_video' -%}
+    {%- liquid 
+      if settings.typography_preset == 'avant_garde'
+        assign close_weight = settings.accent_icon_weight
+        if settings.swap_fonts
+            assign close_weight = settings.base_icon_weight
+        endif
+      else 
+          assign close_weight =  settings.base_icon_weight
+          if settings.swap_fonts
+              assign close_weight = settings.accent_icon_weight
+          endif
+      endif
+      if settings.typography_preset == 'custom'
+          assign close_weight = settings.custom_icon_weight
+      endif
+  -%}
+      <div class="button-wrapper {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %}">
+        <button type="button" class="button-close stop-video">
+            {% assign icon_full = 'cross' | append: "-" | append: close_weight %}
+            {% render 'icon', icon: icon_full %}  
+        </button>
+      </div>
+    {%- endif -%}
+    </deferred-media>
+  {%- endif -%}
+{%- endif -%}

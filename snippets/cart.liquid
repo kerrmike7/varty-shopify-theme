@@ -1,0 +1,148 @@
+{% unless section.id contains 'menu-drawer' %}
+    {% style %}
+		#shopify-section-{{ section.id }} {
+			--cart-vertical-alignment: {{ cart_settings.cart_vertical_alignment }};
+			--cart-horizontal-alignment: {{ cart_settings.cart_horizontal_alignment }};
+		}
+    {% endstyle %}
+{% endunless %}
+
+{% style %}
+{% if settings.typography_preset != 'custom' %}
+.cart-container .cart__icon {
+    height: max(24px, var(--fluid-preset-body-s-lh));
+}
+.cart-container .cart__count--circle {
+    min-width: max(24px, var(--fluid-preset-body-s-lh));
+    height: max(24px, var(--fluid-preset-body-s-lh));
+}
+{% else %}
+.cart-container .cart__icon {
+    height: max(24px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+}
+.cart-container .cart__count--circle {
+    min-width: max(24px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+    height: max(24px, calc(var(--body-s-font-size) * var(--body-s-line-height)));
+}
+.navigations-heading-m .cart-container .cart__icon {
+    height: max(24px, calc(var(--heading-m-font-size) * var(--heading-m-line-height)));
+}
+.navigations-heading-m .cart-container .cart__count--circle {
+    min-width: max(24px, calc(var(--heading-m-font-size) * var(--heading-m-line-height)));
+    height: max(24px, calc(var(--heading-m-font-size) * var(--heading-m-line-height)));
+}
+.navigations-heading-s .cart-container .cart__icon {
+    height: max(24px, calc(var(--heading-s-font-size) * var(--heading-s-line-height)));
+}
+.navigations-heading-s .cart-container .cart__count--circle {
+    min-width: max(24px, calc(var(--heading-s-font-size) * var(--heading-s-line-height)));
+    height: max(24px, calc(var(--heading-s-font-size) * var(--heading-s-line-height)));
+}
+.navigations-heading-xs .cart-container .cart__icon {
+    height: max(24px, calc(var(--heading-xs-font-size) * var(--heading-xs-line-height)));
+}
+.navigations-heading-xs .cart-container .cart__count--circle {
+    min-width: max(24px, calc(var(--heading-xs-font-size) * var(--heading-xs-line-height)));
+    height: max(24px, calc(var(--heading-xs-font-size) * var(--heading-xs-line-height)));
+}
+.navigations-body-l .cart-container .cart__icon {
+    height: max(24px, calc(var(--body-l-font-size) * var(--body-l-line-height)));
+}
+.navigations-body-l .cart-container .cart__count--circle {
+    min-width: max(24px, calc(var(--body-l-font-size) * var(--body-l-line-height)));
+    height: max(24px, calc(var(--body-l-font-size) * var(--body-l-line-height)));
+}
+.navigations-body-m .cart-container .cart__icon {
+    height: max(24px, calc(var(--body-m-font-size) * var(--body-m-line-height)));
+}
+.navigations-body-m .cart-container .cart__count--circle {
+    min-width: max(24px, calc(var(--body-m-font-size) * var(--body-m-line-height)));
+    height: max(24px, calc(var(--body-m-font-size) * var(--body-m-line-height)));
+}
+.navigations-label .cart-container .cart__icon {
+    height: max(24px, calc(var(--label-font-size) * var(--label-line-height)));
+}
+.navigations-label .cart-container .cart__count--circle {
+    min-width: max(24px, calc(var(--label-font-size) * var(--label-line-height)));
+    height: max(24px, calc(var(--label-font-size) * var(--label-line-height)));
+}
+{% endif %}
+{% endstyle %}
+
+{%- liquid 
+	if settings.typography_preset == 'avant_garde'
+			assign weight = settings.accent_icon_weight
+			if settings.swap_fonts
+					assign weight = settings.base_icon_weight
+			endif
+	else 
+			assign weight =  settings.base_icon_weight
+			if settings.swap_fonts
+					assign weight = settings.accent_icon_weight
+			endif
+	endif
+
+	assign uppercase_font = false
+    assign bolder_font = false
+    if settings.typography_preset == 'custom'
+        assign weight = settings.custom_icon_weight
+        if settings.uppercase_body_s and settings.navigation_item_size == 'default'
+            assign uppercase_font = true
+        endif
+        if settings.bolder_font_body_s and settings.navigation_item_size == 'default'
+            assign bolder_font = true
+        endif
+    endif
+-%}
+
+<div class="cart-block{% if section_navigation_block %} section-navigation-block{% if settings.enable_drawer_animations %} stagger__item{% endif %}{% endif %} {% if main-sidebar__block %} main-sidebar__block{% endif %} {% if section.id contains 'footer' %}cart-block--footer{% else %}cart-block--{{ section.id }}{% endif %} cart-block--{{ cart_settings.cart_alignment }}" {{ block.shopify_attributes }}>
+	<div 
+		id="cart-link"
+		class="cart-container cart-container--{{ settings.typography_preset }} 
+			{% if settings.navigation_item_size != 'default' and settings.typography_preset == 'custom' %}
+				{{ settings.navigation_item_size }}
+			{% else %}
+				{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}
+			{% endif %}" 
+	>
+		<a 
+			id="cart-icon-bubble-{{ section.id }}" 
+			class="cart cart--{{ cart_settings.cart_style }} hover-opacity 
+				{% if settings.allow_transparent_navigation and settings.navigation_layout == 'sidebar_based' and section.id contains 'sidebar' and section.settings.color_type == 'default' %} scroll-color {% endif %} 
+				{% if section.settings.color_type == 'custom' %}color-custom{% elsif section.settings.color_type == 'invert' %} color-invert {% endif %}" 
+			href="{{ routes.cart_url }}"
+			aria-label="{% if settings.cart_name == 'cart' %}{{ 'cart_drawer.view_cart' | t }}{% elsif settings.cart_name == 'bag' %}{{ 'cart_drawer.view_bag' | t }}{% else %}{{ 'cart_drawer.view_basket' | t }}{% endif %}" 
+		>
+			{%- if cart_settings.cart_style == 'text' or cart_settings.miscellaneous_cart_style == 'text' -%}
+				<span class="cart__title">{%- if settings.cart_name == 'cart' -%}{{ 'cart.title_cart' | t }}{% elsif settings.cart_name == 'basket' %}{{ 'cart.title_basket' | t }}{%- else -%}{{ 'cart.title_bag' | t }}{%- endif -%}</span>
+				
+				{% if cart.item_count != 0 %}
+					<div class="cart__count"><span class="cart-icon-bubble-count">{{ cart.item_count }}</span></div>
+				{% endif %}
+			{%- elsif cart_settings.cart_style == 'icon' or cart_settings.cart_style == 'icon_with_text' -%}
+				<span class="cart__icon">
+					{% if settings.cart_name == 'basket' %}
+						{% assign icon_full = 'basket' | append: "-" | append: weight %}
+						{% render 'icon', icon: icon_full %}
+					{% elsif settings.cart_name == 'cart' %}
+						{% assign icon_full = 'shopping-cart' | append: "-" | append: weight %}
+						{% render 'icon', icon: icon_full %}
+					{% elsif settings.cart_name == 'bag' %}
+						{% assign icon_full = 'bag' | append: "-" | append: weight %}
+						{% render 'icon-accordion-2', icon: icon_full %}
+					{% endif %}
+				</span>
+
+				{%- if cart_settings.cart_style == 'icon_with_text' -%}
+					<span class="cart__title cart__title--text">{%- if settings.cart_name == 'cart' -%}{{ 'cart.title_cart' | t }}{% elsif settings.cart_name == 'basket' %}{{ 'cart.title_basket' | t }}{%- else -%}{{ 'cart.title_bag' | t }}{%- endif -%}</span>
+				{%- endif -%}
+
+				{% if cart.item_count != 0 %}
+					<div class="cart__count"><span class="cart-icon-bubble-count">{{ cart.item_count }}</span></div>
+				{% endif %}
+			{%- elsif cart_settings.cart_style == 'circle' -%}
+				<div class="cart__count cart__count--circle"><span class="cart-icon-bubble-count">{{ cart.item_count }}</span></div>
+			{%- endif -%}
+		</a>
+	</div>
+</div>
