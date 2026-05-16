@@ -93,7 +93,7 @@
     endif
 %}
 
-<div class="featured-collection-grid {% if mobile_layout == 2 %}mobile-two-column-grid{% endif %} featured-collection-grid--{{ settings.white_space }} ordinal-section ordinal-section--{{ settings.white_space }} {% unless disable_layout_margins %}section-padding--{{ settings.white_space }}{% endunless %} {% if disable_layout_margins %}disable-layout-margins disable-layout-margins--{{ settings.white_space }}{% endif %} {% if settings.show_lines %}ordinal-section--lines lines{% endif %} {% if settings.max_page_width == '1400' or settings.max_page_width == '1200' %}page-width {% endif %} page-width--{{ settings.max_page_width }} color-{{ section.settings.color_type }} {% if section.settings.color_type != 'default' %}no-default-color{% endif %}">
+<div{% if section.settings.anchor_id != blank %} id="{{ section.settings.anchor_id | handleize }}"{% endif %} class="featured-collection-grid {% if mobile_layout == 2 %}mobile-two-column-grid{% endif %} featured-collection-grid--{{ settings.white_space }} ordinal-section ordinal-section--{{ settings.white_space }} {% unless disable_layout_margins %}section-padding--{{ settings.white_space }}{% endunless %} {% if disable_layout_margins %}disable-layout-margins disable-layout-margins--{{ settings.white_space }}{% endif %} {% if settings.show_lines %}ordinal-section--lines lines{% endif %} {% if settings.max_page_width == '1400' or settings.max_page_width == '1200' %}page-width {% endif %} page-width--{{ settings.max_page_width }} color-{{ section.settings.color_type }} {% if section.settings.color_type != 'default' %}no-default-color{% endif %}">
     <div class="featured-collection-grid__wrapper">
         <div class="featured-collection-grid__info">
             <div class="featured-collection-grid__info-wrapper {% if section.settings.enable_sticky_content %}sticky-content{% endif %} {% if settings.center_text %} center{% endif %} {% if settings.enable_buttons_zoom %}buttons-zoom{% endif %} {% if disable_layout_margins %} desktop-padding-left only-mobile-padding section-padding--{{ settings.white_space }}{% endif %}">
@@ -376,6 +376,12 @@
             "id": "show_quantity",
             "default": true,
             "label": "t:sections.main-collection-product-grid.settings.show_product_quantity.label"
+        },
+        {
+            "type": "text",
+            "id": "anchor_id",
+            "label": "Anchor ID",
+            "info": "Optional page anchor without the # symbol."
         },
         {
             "type": "radio",

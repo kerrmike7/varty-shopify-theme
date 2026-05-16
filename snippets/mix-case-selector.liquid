@@ -1,0 +1,18 @@
+{% comment %} Renders 3 quantity inputs for Original / Vanilla / Barista, total enforced = 6. {% endcomment %}
+<fieldset class="varty-mix-selector" data-required-total="6">
+  <legend>Build your 6-pack</legend>
+  {% for flavour in 'Original,Vanilla,Barista' | split: ',' %}
+    <label>
+      {{ flavour }}
+      <input
+        type="number"
+        name="properties[Mix: {{ flavour }}]"
+        value="2"
+        min="0"
+        max="6"
+        data-varty-mix-input
+      >
+    </label>
+  {% endfor %}
+  <p class="varty-mix-total">Total: <span data-varty-mix-total>6</span> / 6</p>
+</fieldset>

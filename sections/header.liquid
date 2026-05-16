@@ -140,6 +140,22 @@
                                 {%- render 'custom-liquid', block: block, section_navigation_block: true -%}
                         {%- endcase -%}
                     {%- endfor -%}
+                    {% if localization.available_languages.size > 1 %}
+                      <form action="{{ routes.root_url }}/localization" method="POST" class="varty-lang-switch section-navigation-block">
+                        <input type="hidden" name="_method" value="PUT">
+                        <input type="hidden" name="return_to" value="{{ request.path }}">
+                        {% for lang in localization.available_languages %}
+                          <button
+                            type="submit"
+                            name="locale_code"
+                            value="{{ lang.iso_code }}"
+                            class="{% if lang.iso_code == localization.language.iso_code %}is-active{% endif %}"
+                          >
+                            {{ lang.endonym_name | upcase }}
+                          </button>
+                        {% endfor %}
+                      </form>
+                    {% endif %}
                 </div>
             {% endif %}
             {%- if section.settings.menu != blank -%}

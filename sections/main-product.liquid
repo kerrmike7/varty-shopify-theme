@@ -159,7 +159,7 @@
   endif
 %}
 
-<section class="section product-overview-section main-product" data-section="{{ section.id }}">
+<section class="section product-overview-section main-product product-main" data-section="{{ section.id }}" data-varty-sku="{{ product.handle }}">
   {%- liquid 
     if section.settings.focal_point == '20% 0'
       assign vertical_aligment = 'vertical_top'

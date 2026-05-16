@@ -1,0 +1,59 @@
+[data-varty-sku="case-original"] {
+  --sku-accent: #2d6fb1;
+  --sku-accent-2: #84d0d4;
+}
+
+[data-varty-sku="case-vanilla"] {
+  --sku-accent: #89cda7;
+  --sku-accent-2: #fcf2d3;
+}
+
+[data-varty-sku="case-barista"] {
+  --sku-accent: #9b723a;
+  --sku-accent-2: #1c1d1d;
+}
+
+.product-main .button[data-primary],
+.product-main .product-form__submit {
+  background: var(--sku-accent, #5463B3);
+}
+
+.varty-lang-switch {
+  align-items: center;
+  display: inline-flex;
+  gap: 8px;
+}
+
+.varty-lang-switch button {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  opacity: 0.62;
+  padding: 0;
+}
+
+.varty-lang-switch button.is-active {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.varty-selling-plans,
+.varty-mix-selector {
+  border: 1px solid currentColor;
+  margin: 1rem 0;
+  padding: 1rem;
+}
+
+.varty-selling-plan,
+.varty-mix-selector label {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.varty-mix-selector.is-invalid {
+  outline: 2px solid #b72e19;
+}

@@ -82,6 +82,11 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "404 page non trouvée",
+      "subtext": "La page demandée n'existe pas",
+      "return_home": "Retourner à la page d'accueil"
+    },
     "search": {
       "no_results": "Aucun résultat trouvé pour “{{ terms }}”. Vérifiez l'orthographe ou utilisez un autre mot ou une autre phrase.",
       "products": "Produits",
@@ -118,11 +123,6 @@
         "product_url": "Produit",
         "send_form": "Envoyer"
       }
-    },
-    "404": {
-      "title": "404 page non trouvée",
-      "subtext": "La page demandée n'existe pas",
-      "return_home": "Retourner à la page d'accueil"
     }
   },
   "sections": {
@@ -592,5 +592,32 @@
   "store_selector": {
     "change_my_store": "Changer mon magasin",
     "select_your_store": "Sélectionnez votre magasin"
+  },
+  "varty": {
+    "__tbd": "<<TBD: FR strings pending Lina sign-off",
+    "hero": {
+      "subheading": "Découvrez votre nouveau rituel à l'avoine",
+      "heading": "La boisson à l'avoine qui tient vraiment ses promesses",
+      "subtext": "Certifiée biologique. Trois ingrédients. Sans compromis.",
+      "cta": "Découvrez nos saveurs",
+      "wholesale_link": "Grossistes - postulez ici ->"
+    },
+    "trial": {
+      "title": "Nouveau chez Varty ?",
+      "body": "Coffret d'essai - un de chaque. Une fois par client. Compte requis.",
+      "cta": "Essayer Varty ->",
+      "gate_no_account": "Créez un compte pour réclamer votre coffret d'essai - limité à un par client.",
+      "gate_redeemed": "Vous avez déjà essayé Varty. Composez une caisse ->"
+    },
+    "mix": {
+      "title": "Vous hésitez ?",
+      "body": "Caisse mixte - six cartons à votre choix. Abonnez-vous et économisez 5 %, livraison gratuite.",
+      "cta": "Composez votre mélange ->"
+    },
+    "subscribe": {
+      "headline": "N'en manquez jamais.",
+      "subtext": "Abonnez-vous et économisez 5 % - livraison gratuite au QC et en ON, à chaque commande.",
+      "cta": "Voir les abonnements"
+    }
   }
 }

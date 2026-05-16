@@ -149,7 +149,7 @@
       endif
     %}
     
-      <div class="featured-collection-with-product-grid {% if custom_grid_gap_enabled %}featured-collection-with-product-grid--custom-gap{% endif %} multicolumn product-labels featured-collection-with-media featured-collection-with-media--{{ section.id }} ordinal-section ordinal-section--{{ settings.white_space }} {% if settings.show_lines %}ordinal-section--lines lines product-labels--lines{% endif %} media-with-text media-with-text--{{ settings.white_space }} {% unless disable_layout_margins %}section-padding--{{ settings.white_space }}{% endunless %} {% if disable_layout_margins %}disable-layout-margins disable-layout-margins--{{ settings.white_space }}{% endif %} {% if settings.max_page_width == '1400' or settings.max_page_width == '1200' %}page-width {% endif %} page-width--{{ settings.max_page_width }} 
+      <div{% if section.settings.anchor_id != blank %} id="{{ section.settings.anchor_id | handleize }}"{% endif %} class="featured-collection-with-product-grid {% if custom_grid_gap_enabled %}featured-collection-with-product-grid--custom-gap{% endif %} multicolumn product-labels featured-collection-with-media featured-collection-with-media--{{ section.id }} ordinal-section ordinal-section--{{ settings.white_space }} {% if settings.show_lines %}ordinal-section--lines lines product-labels--lines{% endif %} media-with-text media-with-text--{{ settings.white_space }} {% unless disable_layout_margins %}section-padding--{{ settings.white_space }}{% endunless %} {% if disable_layout_margins %}disable-layout-margins disable-layout-margins--{{ settings.white_space }}{% endif %} {% if settings.max_page_width == '1400' or settings.max_page_width == '1200' %}page-width {% endif %} page-width--{{ settings.max_page_width }}
         {% if section.settings.swap_image %}image-left{% else %}image-right{% endif %} color-{{ section.settings.color_type }} {% if section.settings.color_type != 'default' %}no-default-color{% endif %} include-lines product-labels--{{ settings.white_space }} product-labels--grid">
           <div class="media-with-text__wrapper section-featured-collection section-featured-collection--{{ settings.white_space }}">
             <div class="media-with-text__card {{ section.settings.image_size }}{% unless section.settings.media_style == 'hide' %}{% if section.settings.media_style == 'show_on_desktop' %} has-media-show-on-desktop{% endif %}{% endunless %}{% if section.settings.subheading != blank or section.settings.heading != blank or section.settings.text != blank or section.settings.button_label != blank %} has-content{% endif %}">
@@ -547,6 +547,12 @@
               "label": "t:sections.all.buttons.button_label.label",
               "info": "t:sections.featured-collection-with-media.settings.button_label.info",
               "default": "Discover"
+            },
+            {
+              "type": "text",
+              "id": "anchor_id",
+              "label": "Anchor ID",
+              "info": "Optional page anchor without the # symbol."
             },
             {
               "type": "select",

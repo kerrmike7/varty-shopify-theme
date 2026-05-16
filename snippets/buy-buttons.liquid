@@ -27,6 +27,13 @@
       if settings.typography_preset == 'custom'
         assign weight = settings.custom_icon_weight
       endif
+      assign varty_trial_blocked = false
+      assign varty_trial_redeemed = false
+      if product.handle == 'trial-pack' and customer == blank
+        assign varty_trial_blocked = true
+      elsif product.handle == 'trial-pack' and customer.metafields.varty.trial_redeemed == true
+        assign varty_trial_redeemed = true
+      endif
       assign uppercase_body_s = false
       assign bolder_body_s = false
       if settings.typography_preset == 'custom'
@@ -43,8 +50,41 @@
         <span class="product-form__error-message"></span>
       </div>
 
+      {% if varty_trial_blocked %}
+        <div class="varty-trial-gate">
+          <p>{{ 'varty.trial.gate_no_account' | t }}</p>
+          <a href="/account/register?return_to={{ request.path }}" class="button">Create account</a>
+        </div>
+      {% elsif varty_trial_redeemed %}
+        <div class="varty-trial-redeemed">
+          <p>{{ 'varty.trial.gate_redeemed' | t }}</p>
+          <a href="/products/mix-case" class="button">Build your mix</a>
+        </div>
+      {% else %}
       {%- form 'product', product, data-productid: product.id, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
         <input type="hidden" name="id" data-productid="{{ product.id }}" value="{{ product.selected_or_first_available_variant.id }}" disabled>
+
+        {% if product.selling_plan_groups.size > 0 %}
+          {% assign default_selling_plan = product.selling_plan_groups.first.selling_plans[1] | default: product.selling_plan_groups.first.selling_plans.first %}
+          <fieldset class="varty-selling-plans">
+            <legend>{{ 'varty.subscribe.headline' | t }}</legend>
+            {% for selling_plan in product.selling_plan_groups.first.selling_plans %}
+              <label class="varty-selling-plan">
+                <input
+                  type="radio"
+                  name="selling_plan"
+                  value="{{ selling_plan.id }}"
+                  {% if selling_plan.id == default_selling_plan.id %}checked{% endif %}
+                >
+                <span>{{ selling_plan.name }}</span>
+              </label>
+            {% endfor %}
+          </fieldset>
+        {% endif %}
+
+        {% if product.handle == 'mix-case' %}
+          {% render 'mix-case-selector' %}
+        {% endif %}
         
         {%- if gift_card_recipient_feature_active -%}
             <accordion-block>
@@ -253,6 +293,7 @@
             {%- endif -%}
         </div>
       {%- endform -%}
+      {% endif %}
     </product-form>
     {%- unless block.settings.hide_pickup_availability -%}
       {%- assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities | where: 'pick_up_enabled', true -%}

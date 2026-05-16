@@ -82,6 +82,11 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "404 page not found",
+      "subtext": "The page you requested does not exist",
+      "return_home": "Return home"
+    },
     "search": {
       "no_results": "No results found for “{{ terms }}”. Check the spelling or use a different word or phrase.",
       "products": "Products",
@@ -118,11 +123,6 @@
         "product_url": "Product",
         "send_form": "Send"
       }
-    },
-    "404": {
-      "title": "404 page not found",
-      "subtext": "The page you requested does not exist",
-      "return_home": "Return home"
     }
   },
   "sections": {
@@ -592,5 +592,32 @@
   "store_selector": {
     "change_my_store": "Change my store",
     "select_your_store": "Select your store"
+  },
+  "varty": {
+    "hero": {
+      "subheading": "Meet your new everyday oat beverage",
+      "heading": "The Oat Beverage That Actually Lives Up to the Label",
+      "subtext": "Certified organic. Three ingredients. No compromise.",
+      "cta": "Explore Flavours",
+      "wholesale_link": "Wholesalers - apply here ->"
+    },
+    "trial": {
+      "title": "New to Varty?",
+      "body": "Trial Pack - one of each. Once per customer. Account required.",
+      "cta": "Try Varty ->",
+      "gate_no_account": "Create an account to claim your Trial Pack - limited to one per customer.",
+      "gate_redeemed": "You've already tried Varty. Build a case ->"
+    },
+    "mix": {
+      "title": "Can't decide?",
+      "body": "Mix Case - any 6 you want. Subscribe and save 5%, free shipping.",
+      "cta": "Build your mix ->"
+    },
+    "subscribe": {
+      "headline": "Never run out.",
+      "subtext": "Subscribe and save 5% - free shipping in QC & ON, every time.",
+      "cta": "Shop subscriptions"
+    },
+    "__tbd": "<<TBD: FR strings pending Lina sign-off"
   }
 }
