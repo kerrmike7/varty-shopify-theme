@@ -71,6 +71,14 @@
   color: #fcf2d3 !important;
 }
 
+[id$="__hero"] .banner__button a,
+[id$="__hero"] .banner__button span {
+  background: #5463b3 !important;
+  background-color: #5463b3 !important;
+  border-color: #5463b3 !important;
+  color: #fcf2d3 !important;
+}
+
 [id$="__stats_bar"] {
   border-top: 2px solid #1c1d1d;
   border-bottom: 2px solid #1c1d1d;
