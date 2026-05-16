@@ -71,12 +71,25 @@
   color: #fcf2d3 !important;
 }
 
+[id$="__hero"] .banner__button {
+  --accent-button-color: 84, 99, 179;
+  --base-button-color: 252, 242, 211;
+  --layout-text-color: 84, 99, 179;
+  --layout-background-color: 252, 242, 211;
+}
+
 [id$="__hero"] .banner__button a,
 [id$="__hero"] .banner__button span {
   background: #5463b3 !important;
   background-color: #5463b3 !important;
   border-color: #5463b3 !important;
   color: #fcf2d3 !important;
+}
+
+[id$="__hero"] .banner__button::before,
+[id$="__hero"] .banner__button .solid-button::before {
+  background: #5463b3 !important;
+  background-color: #5463b3 !important;
 }
 
 [id$="__stats_bar"] {
