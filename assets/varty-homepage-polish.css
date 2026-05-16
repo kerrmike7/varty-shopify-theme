@@ -106,9 +106,11 @@
 
 [id$="__stats_bar"] .product-labels__item-wrapper {
   border-right: 1px solid rgba(252, 242, 211, 0.34);
+  border-top: 0 !important;
 }
 
 [id$="__stats_bar"] .multicolumn__item {
+  border-inline-end: 0 !important;
   min-height: 220px;
   justify-content: center;
   padding: 32px 24px;
@@ -124,6 +126,11 @@
 [id$="__stats_bar"] .multicolumn__card-text {
   margin-top: 14px;
   font-size: 18px;
+  color: #fcf2d3;
+  font-weight: 700;
+}
+
+[id$="__stats_bar"] .multicolumn__card-text p {
   color: #fcf2d3;
   font-weight: 700;
 }
