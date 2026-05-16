@@ -596,8 +596,8 @@
   "varty": {
     "hero": {
       "subheading": "Meet your new everyday oat beverage",
-      "heading": "The Oat Beverage That Actually Lives Up to the Label",
-      "subtext": "Certified organic. Three ingredients. No compromise.",
+      "heading": "Clean You Can Taste and Trust",
+      "subtext": "No gums. No fillers. Just a clean oat beverage that tastes as good as it reads.",
       "cta": "Explore Flavours",
       "wholesale_link": "Wholesalers — apply here →"
     },
@@ -620,8 +620,8 @@
     },
     "__tbd": "<<TBD: FR strings pending Lina sign-off",
     "awards": {
-      "heading": "Awards & Recognition · 2024",
-      "cta": "Press Release"
+      "heading": "Early Proof for a Cleaner Canadian Pantry",
+      "cta": "Read the Press Release →"
     },
     "faq": {
       "heading": "Frequently Asked Questions"
@@ -631,8 +631,8 @@
       "cta": "See stockists →"
     },
     "wholesale": {
-      "heading": "Wholesalers",
-      "cta": "Apply to Wholesale →"
+      "heading": "Wholesale & Food Service",
+      "cta": "Apply for Wholesale →"
     }
   }
 }

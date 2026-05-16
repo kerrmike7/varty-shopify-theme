@@ -597,8 +597,8 @@
     "__tbd": "<<TBD: FR strings pending Lina sign-off",
     "hero": {
       "subheading": "Découvrez votre nouveau rituel à l'avoine",
-      "heading": "La boisson à l'avoine qui tient vraiment ses promesses",
-      "subtext": "Certifiée biologique. Trois ingrédients. Sans compromis.",
+      "heading": "Du clean qu’on goûte et qu’on comprend",
+      "subtext": "Sans gommes. Sans agents de remplissage. Juste une boisson à l’avoine propre, aussi bonne que simple à lire.",
       "cta": "Découvrez nos saveurs",
       "wholesale_link": "Grossistes — postulez ici →"
     },
@@ -620,8 +620,8 @@
       "cta": "Voir les abonnements"
     },
     "awards": {
-      "heading": "Prix et reconnaissance · 2024",
-      "cta": "Communiqué de presse"
+      "heading": "Une reconnaissance précoce pour un garde-manger canadien plus clean",
+      "cta": "Lire le communiqué →"
     },
     "faq": {
       "heading": "Questions fréquentes"
@@ -631,8 +631,8 @@
       "cta": "Voir les points de vente →"
     },
     "wholesale": {
-      "heading": "Grossistes",
-      "cta": "Demander un compte grossiste →"
+      "heading": "Vente en gros & service alimentaire",
+      "cta": "Faire une demande grossiste →"
     }
   }
 }

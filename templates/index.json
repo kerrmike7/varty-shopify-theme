@@ -36,16 +36,16 @@
             "horizontal_content_position": "center",
             "subheading": "t:varty.hero.subheading",
             "heading": "t:varty.hero.heading",
-            "text": "<p>Certified organic. Three ingredients. No compromise.</p>",
+            "text": "<p>Certified organic oats, filtered water, and a pinch of sea salt. No gums. No fillers. Just a clean oat beverage that tastes as good as it reads.</p>",
             "button_label": "t:varty.hero.cta",
             "link": "#flavours",
             "button_style": "solid",
             "image": "shopify://shop_images/varty-stopmotion-01.gif",
-            "overlay_opacity": 15,
+            "overlay_opacity": 8,
             "color_type": "custom",
             "varty_color_scheme": "scheme_brand_beige",
-            "secondary_button_label": "t:varty.hero.wholesale_link",
-            "secondary_button_link": "/pages/wholesale",
+            "secondary_button_label": "",
+            "secondary_button_link": "",
             "secondary_button_style": "outlined"
           }
         }
@@ -55,10 +55,10 @@
       ],
       "settings": {
         "height_mode": "percents",
-        "desktop_height": 70,
-        "mobile_height": 65,
+        "desktop_height": 75,
+        "mobile_height": 70,
         "section_width": "full-width",
-        "narrow_content": true,
+        "narrow_content": false,
         "desktop_padding_top": 64,
         "desktop_padding_bottom": 64,
         "mobile_padding_top": 40,
@@ -72,21 +72,27 @@
           "type": "text",
           "settings": {
             "heading": "3–4",
-            "text": "<p>Ingredients per product</p>"
+            "text": "<p>Ingredients per product</p>",
+            "button_label": "",
+            "button_link": ""
           }
         },
         "s2": {
           "type": "text",
           "settings": {
             "heading": "0%",
-            "text": "<p>Gums, fillers, or additives</p>"
+            "text": "<p>Gums, fillers, or additives</p>",
+            "button_label": "",
+            "button_link": ""
           }
         },
         "s3": {
           "type": "text",
           "settings": {
             "heading": "100%",
-            "text": "<p>Canadian Made</p>"
+            "text": "<p>Canadian Made</p>",
+            "button_label": "",
+            "button_link": ""
           }
         }
       },
@@ -103,11 +109,11 @@
         "title_size": "heading_l",
         "color_type": "custom",
         "background_color_type": "solid",
-        "desktop_padding_top": 24,
-        "desktop_padding_bottom": 24,
-        "mobile_padding_top": 16,
-        "mobile_padding_bottom": 16,
-        "varty_color_scheme": "scheme_brand_purple"
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0,
+        "varty_color_scheme": "scheme_brand_beige"
       }
     },
     "product_trio": {
@@ -315,158 +321,57 @@
         "varty_color_scheme": "scheme_brand_beige"
       }
     },
-    "comparison_table": {
-      "type": "custom-comparison-table",
-      "blocks": {
-        "r1": {
-          "type": "row",
-          "settings": {
-            "feature_label": "Ingredients",
-            "varty_check": true,
-            "varty_value": "3–4 real organic ingredients",
-            "c1_check": false,
-            "competitor_1_value": "10+ ingredients",
-            "c2_check": false,
-            "competitor_2_value": ""
-          }
-        },
-        "r2": {
-          "type": "row",
-          "settings": {
-            "feature_label": "Additives",
-            "varty_check": true,
-            "varty_value": "None. Really. We triple-checked",
-            "c1_check": false,
-            "competitor_1_value": "Gums, stabilizers and natural flavours",
-            "c2_check": false,
-            "competitor_2_value": ""
-          }
-        },
-        "r3": {
-          "type": "row",
-          "settings": {
-            "feature_label": "Portion Size",
-            "varty_check": true,
-            "varty_value": "More oats per serving",
-            "c1_check": false,
-            "competitor_1_value": "Standard industry serving size",
-            "c2_check": false,
-            "competitor_2_value": ""
-          }
-        },
-        "r4": {
-          "type": "row",
-          "settings": {
-            "feature_label": "Taste",
-            "varty_check": true,
-            "varty_value": "Smooth, subtle and tastes like oats, not sugar water",
-            "c1_check": false,
-            "competitor_1_value": "Watery, overly sweet, bland",
-            "c2_check": false,
-            "competitor_2_value": ""
-          }
-        },
-        "r5": {
-          "type": "row",
-          "settings": {
-            "feature_label": "Foam Factor",
-            "varty_check": true,
-            "varty_value": "Foams naturally using organic oil only. Clean, simple, Barista-tested",
-            "c1_check": false,
-            "competitor_1_value": "Relies on gums, fillers, additives to create foam",
-            "c2_check": false,
-            "competitor_2_value": ""
-          }
-        }
-      },
-      "block_order": [
-        "r1",
-        "r2",
-        "r3",
-        "r4",
-        "r5"
-      ],
-      "settings": {
-        "heading": "Why Canadians are Falling in Love with Varty",
-        "subheading": "<p>The Clean Advantage</p>",
-        "varty_label": "Varty All Natural",
-        "competitor_1_label": "Other Oat Beverages",
-        "competitor_2_label": "",
-        "mobile_layout": "stacked",
-        "desktop_padding_top": 64,
-        "desktop_padding_bottom": 64,
-        "mobile_padding_top": 40,
-        "mobile_padding_bottom": 40,
-        "varty_color_scheme": "scheme_brand_purple"
-      }
-    },
     "why_varty": {
       "type": "multicolumn",
       "blocks": {
-        "w1": {
+        "clean_ingredients": {
           "type": "text",
           "settings": {
-            "heading": "100% Mouthwatering",
-            "text": "<p>Healthy does not have to mean meh. Varty makes better choices taste like easy ones. Smooth, creamy, actually enjoyable.</p>"
+            "heading": "3–4 Real Ingredients",
+            "text": "<p>Organic oats, filtered water, sea salt, and sometimes vanilla. The label reads like a pantry shelf, not a lab note.</p>"
           }
         },
-        "w2": {
+        "no_fillers": {
           "type": "text",
           "settings": {
-            "heading": "Affordable Luxury",
-            "text": "<p>Delivering organic quality that is accessible. Because you should not need to splurge to eat well.</p>"
+            "heading": "No Gums. No Fillers.",
+            "text": "<p>No sunflower oil, carrageenan, stabilizers, or natural-flavour fog. Just the texture and taste the oats can earn on their own.</p>"
           }
         },
-        "w3": {
+        "organic": {
+          "type": "text",
+          "settings": {
+            "heading": "Certified Organic",
+            "text": "<p>Certified by Ecocert Canada, made for people who want the everyday carton to meet a higher standard.</p>"
+          }
+        },
+        "canada": {
           "type": "text",
           "settings": {
             "heading": "Made in Canada",
-            "text": "<p>Every bottle is proudly produced at home in Canada, using the freshest locally-sourced ingredients.</p>"
-          }
-        },
-        "w4": {
-          "type": "text",
-          "settings": {
-            "heading": "Naturally Delicious",
-            "text": "<p>Varty is thoughtfully crafted to deliver a naturally rich, oat-forward flavour, without sugar, additives, or compromise on taste.</p>"
-          }
-        },
-        "w5": {
-          "type": "text",
-          "settings": {
-            "heading": "Filler-Free",
-            "text": "<p>At Varty, you will not find any what-even-is-that ingredients here. Just 3–4 you will recognize.</p>"
-          }
-        },
-        "w6": {
-          "type": "text",
-          "settings": {
-            "heading": "Purely Crafted",
-            "text": "<p>If made properly, natural oat beverages should not need stabilizers. The key is in the ingredients used and how they are prepared.</p>"
+            "text": "<p>Built for Canadian shelves, cafes, and kitchens, with a short ingredient list that travels well from morning coffee to weeknight cooking.</p>"
           }
         }
       },
       "block_order": [
-        "w1",
-        "w2",
-        "w3",
-        "w4",
-        "w5",
-        "w6"
+        "clean_ingredients",
+        "no_fillers",
+        "organic",
+        "canada"
       ],
       "settings": {
-        "subheading": "A Clean Oat Beverage Brand You Can Trust",
-        "heading": "Why Choose Varty?",
-        "max_columns": "3",
+        "subheading": "The Clean Advantage",
+        "heading": "Why Canadians Are Falling in Love with Varty",
+        "max_columns": "4",
         "mobile_layout": "1",
         "center_text": true,
         "color_type": "custom",
         "background_color_type": "solid",
-        "desktop_padding_top": 64,
-        "desktop_padding_bottom": 64,
+        "desktop_padding_top": 72,
+        "desktop_padding_bottom": 72,
         "mobile_padding_top": 40,
         "mobile_padding_bottom": 40,
-        "varty_color_scheme": "scheme_brand_beige"
+        "varty_color_scheme": "scheme_brand_purple"
       }
     },
     "subscribe_save": {
@@ -520,30 +425,48 @@
     "awards_strip": {
       "type": "multicolumn",
       "blocks": {
-        "a1": {
+        "award_story": {
           "type": "text",
           "settings": {
-            "heading": "t:varty.awards.heading",
-            "text": "<p>Recognised by Futurpreneur / RBC Future Launch in 2024 as an emerging entrepreneur building a cleaner food system in Canada.</p>",
-            "button_label": "t:varty.awards.cta",
+            "heading": "Emerging Entrepreneur Recognition",
+            "text": "<p>Recognised by Futurpreneur / RBC Future Launch in 2024 as an emerging Canadian food entrepreneur building a cleaner pantry staple.</p>",
+            "button_label": "Read the Press Release →",
             "button_link": "/pages/awards"
+          }
+        },
+        "futurpreneur": {
+          "type": "text",
+          "settings": {
+            "heading": "Futurpreneur Canada",
+            "text": "<p>National support for founders building ambitious Canadian businesses.</p>"
+          }
+        },
+        "rbc": {
+          "type": "text",
+          "settings": {
+            "heading": "RBC Future Launch",
+            "text": "<p>Recognition tied to the next generation of entrepreneurs and community builders.</p>"
           }
         }
       },
       "block_order": [
-        "a1"
+        "award_story",
+        "futurpreneur",
+        "rbc"
       ],
       "settings": {
-        "max_columns": "2",
+        "max_columns": "3",
         "mobile_layout": "1",
         "center_text": true,
         "color_type": "custom",
         "background_color_type": "solid",
-        "desktop_padding_top": 24,
-        "desktop_padding_bottom": 24,
-        "mobile_padding_top": 16,
-        "mobile_padding_bottom": 16,
-        "varty_color_scheme": "scheme_brand_beige"
+        "desktop_padding_top": 72,
+        "desktop_padding_bottom": 72,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48,
+        "varty_color_scheme": "scheme_brand_beige",
+        "subheading": "Awards & Recognition · 2024",
+        "heading": "Early Proof for a Cleaner Canadian Pantry"
       }
     },
     "faq": {
@@ -603,7 +526,7 @@
           "type": "text",
           "settings": {
             "heading": "t:varty.stockists.heading",
-            "text": "<p>Available across Quebec.</p>",
+            "text": "<p>Looking for your next carton? Find Varty in independent grocers, health food shops, and online.</p>",
             "button_label": "t:varty.stockists.cta",
             "button_link": "/pages/where-to-find-us"
           }
@@ -611,9 +534,9 @@
         "wholesale": {
           "type": "text",
           "settings": {
-            "heading": "t:varty.wholesale.heading",
-            "text": "<p>Bring Varty to your shelves. We partner with grocers and food service across Canada.</p>",
-            "button_label": "t:varty.wholesale.cta",
+            "heading": "Wholesale & Food Service",
+            "text": "<p>For grocers, cafes, offices, and food service partners who want a cleaner oat beverage on the shelf.</p>",
+            "button_label": "Apply for Wholesale →",
             "button_link": "/pages/wholesale"
           }
         }
@@ -628,11 +551,13 @@
         "center_text": true,
         "color_type": "custom",
         "background_color_type": "solid",
-        "desktop_padding_top": 64,
-        "desktop_padding_bottom": 64,
+        "desktop_padding_top": 72,
+        "desktop_padding_bottom": 72,
         "mobile_padding_top": 40,
         "mobile_padding_bottom": 40,
-        "varty_color_scheme": "scheme_brand_purple"
+        "varty_color_scheme": "scheme_brand_purple",
+        "subheading": "For shoppers, grocers, cafes, and food service",
+        "heading": "Find Varty, or Bring It to Your Shelves"
       }
     }
   },
@@ -644,11 +569,10 @@
     "trial_mix_cards",
     "pantry_truth",
     "certifications",
-    "comparison_table",
     "why_varty",
     "subscribe_save",
     "awards_strip",
-    "faq",
-    "wholesale_stockists_strip"
+    "wholesale_stockists_strip",
+    "faq"
   ]
 }

@@ -56,6 +56,9 @@
     <script src="{{ 'menu-drawer.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'varty-mix-case.js' | asset_url }}" defer="defer"></script>
     {{ 'varty-sku-accents.css' | asset_url | stylesheet_tag }}
+    {%- if request.page_type == 'index' -%}
+      {{ 'varty-homepage-polish.css' | asset_url | stylesheet_tag }}
+    {%- endif -%}
   
     {%- if request.page_type != 'cart' and settings.enable_cart_drawer and settings.disable_shopping_functionality == false -%}
     <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
