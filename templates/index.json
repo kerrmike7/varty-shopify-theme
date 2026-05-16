@@ -15,7 +15,7 @@
         "ann_ship"
       ],
       "settings": {
-        "announcement_bar": true,
+        "announcement_bar": "show",
         "enable_autoplay": false,
         "center_text": true,
         "text_size": "body_s",
@@ -305,7 +305,7 @@
       "settings": {
         "heading": "",
         "desktop_grid_type": "grid",
-        "max_columns": "9",
+        "max_columns": "4",
         "mobile_layout": "2",
         "center_text": true,
         "icon_or_image_size": 64,
@@ -542,7 +542,7 @@
         "a1"
       ],
       "settings": {
-        "max_columns": "1",
+        "max_columns": "2",
         "mobile_layout": "1",
         "center_text": true,
         "color_type": "custom",
@@ -595,7 +595,7 @@
       ],
       "settings": {
         "heading": "Frequently Asked Questions",
-        "section_width": "page-width",
+        "section_width": "wide",
         "color_type": "custom",
         "background_color_type": "solid",
         "background_color": "#fcf2d3",
