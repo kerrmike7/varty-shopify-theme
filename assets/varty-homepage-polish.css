@@ -124,11 +124,11 @@
 }
 
 [id$="__why_varty"] {
-  background: #5463b3;
-  background-color: #5463b3;
+  background: #5463b3 !important;
+  background-color: #5463b3 !important;
   border-top: 2px solid rgba(252, 242, 211, 0.92);
   border-bottom: 2px solid rgba(252, 242, 211, 0.92);
-  color: #fcf2d3;
+  color: #fcf2d3 !important;
 }
 
 [id$="__why_varty"] .product-labels__header {
