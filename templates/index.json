@@ -305,7 +305,7 @@
       "settings": {
         "heading": "",
         "desktop_grid_type": "grid",
-        "max_columns": 9,
+        "max_columns": "9",
         "mobile_layout": "2",
         "center_text": true,
         "icon_or_image_size": 64,
