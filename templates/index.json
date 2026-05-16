@@ -531,9 +531,10 @@
           "type": "text",
           "settings": {
             "heading": "2024",
-            "text": "<p>Recognised by Futurpreneur / RBC Future Launch as an emerging entrepreneur building a cleaner food system in Canada.</p><!-- <<TBD: futurpreneur logo image -->",
+            "text": "<p>Recognised by Futurpreneur / RBC Future Launch as an emerging entrepreneur building a cleaner food system in Canada.</p>",
             "button_label": "Press Release",
-            "button_link": "/pages/awards"
+            "button_link": "/pages/awards",
+            "tbd_note": "<<TBD: futurpreneur logo image"
           }
         }
       },
