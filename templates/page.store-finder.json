@@ -130,7 +130,253 @@
         "desktop_padding_bottom": 80,
         "mobile_padding_top": 48,
         "mobile_padding_bottom": 48
-      }
+      },
+      "blocks": {
+        "retailer_01": {
+          "type": "retailer",
+          "settings": {
+            "name": "IGA Extra Duchemin",
+            "address": "5600 Bd Henri Bourassa O",
+            "city": "Saint-Laurent",
+            "region": "QC",
+            "postal_code": "H4R 0M6"
+          }
+        },
+        "retailer_02": {
+          "type": "retailer",
+          "settings": {
+            "name": "SmoothiesGo",
+            "address": "5785 Rue Sherbrooke O",
+            "city": "Montréal",
+            "region": "QC",
+            "postal_code": "H4A 1X2"
+          }
+        },
+        "retailer_03": {
+          "type": "retailer",
+          "settings": {
+            "name": "Marché Oda – Villeray",
+            "address": "7654 Rue St-Hubert",
+            "city": "Montréal",
+            "region": "QC",
+            "postal_code": "H2R 2N6"
+          }
+        },
+        "retailer_04": {
+          "type": "retailer",
+          "settings": {
+            "name": "Marché Oda – Outremont",
+            "address": "1290 Ave. Thérèse-Lavoie-Roux",
+            "city": "Outremont",
+            "region": "QC",
+            "postal_code": "H2V 0C2"
+          }
+        },
+        "retailer_05": {
+          "type": "retailer",
+          "settings": {
+            "name": "Marché Bio NDG",
+            "address": "5785 Rue Sherbrooke O",
+            "city": "Montréal",
+            "region": "QC",
+            "postal_code": "H4A 1X2"
+          }
+        },
+        "retailer_06": {
+          "type": "retailer",
+          "settings": {
+            "name": "Ave Greene (Marché Atwater)",
+            "address": "155 Ave Greene 2e étage",
+            "city": "Montréal",
+            "region": "QC",
+            "postal_code": "H4C 2H6"
+          }
+        },
+        "retailer_07": {
+          "type": "retailer",
+          "settings": {
+            "name": "IGA Extra Marchés Emily et Philip",
+            "address": "141 Bd de Mortagne",
+            "city": "Boucherville",
+            "region": "QC",
+            "postal_code": "J4B 6G4"
+          }
+        },
+        "retailer_08": {
+          "type": "retailer",
+          "settings": {
+            "name": "Marché TAU – Brossard",
+            "address": "6845 Bd Taschereau Bureau 425",
+            "city": "Brossard",
+            "region": "QC",
+            "postal_code": "J4Z 1A7"
+          }
+        },
+        "retailer_09": {
+          "type": "retailer",
+          "settings": {
+            "name": "Marché TAU – Blainville",
+            "address": "1325 Bd Michèle-Bohec",
+            "city": "Blainville",
+            "region": "QC",
+            "postal_code": "J7C 5L4"
+          }
+        },
+        "retailer_10": {
+          "type": "retailer",
+          "settings": {
+            "name": "Marché TAU – Pointe-Claire",
+            "address": "2345 Route Transcanadienne",
+            "city": "Pointe-Claire",
+            "region": "QC",
+            "postal_code": "H9R 5Z5"
+          }
+        },
+        "retailer_11": {
+          "type": "retailer",
+          "settings": {
+            "name": "Marché TAU – St-Denis",
+            "address": "4238 R. Saint-Denis",
+            "city": "Montréal",
+            "region": "QC",
+            "postal_code": "H2J 2K8"
+          }
+        },
+        "retailer_12": {
+          "type": "retailer",
+          "settings": {
+            "name": "Marché TAU – Laval",
+            "address": "3216 Blvd. Saint-Martin O",
+            "city": "Laval",
+            "region": "QC",
+            "postal_code": "H7T 1A1"
+          }
+        },
+        "retailer_13": {
+          "type": "retailer",
+          "settings": {
+            "name": "Marché TAU – Saint-Léonard",
+            "address": "7373 Boul Langelier",
+            "city": "Saint-Léonard",
+            "region": "QC",
+            "postal_code": "H1S 1V6"
+          }
+        },
+        "retailer_14": {
+          "type": "retailer",
+          "settings": {
+            "name": "Gaïa Épicerie Santé",
+            "address": "99 Rue St Germain O",
+            "city": "Rimouski",
+            "region": "QC",
+            "postal_code": "G5L 4B6"
+          }
+        },
+        "retailer_15": {
+          "type": "retailer",
+          "settings": {
+            "name": "Fromagerie Atwater",
+            "address": "134 Av. Atwater",
+            "city": "Montréal",
+            "region": "QC",
+            "postal_code": "H3J 2J4"
+          }
+        },
+        "retailer_16": {
+          "type": "retailer",
+          "settings": {
+            "name": "Ecollegey",
+            "address": "6131 Av de Monkland",
+            "city": "Montréal",
+            "region": "QC",
+            "postal_code": "H4A 1H5"
+          }
+        },
+        "retailer_17": {
+          "type": "retailer",
+          "settings": {
+            "name": "Ottawa Organics & Natural Foods",
+            "address": "94 Rue Adrien-Robert",
+            "city": "Gatineau",
+            "region": "QC",
+            "postal_code": "J8Y 3S2"
+          }
+        },
+        "retailer_18": {
+          "type": "retailer",
+          "settings": {
+            "name": "Ici Santé",
+            "address": "2536 Rue Laval",
+            "city": "Nantes",
+            "region": "QC",
+            "postal_code": "G6B 1A1"
+          }
+        },
+        "retailer_19": {
+          "type": "retailer",
+          "settings": {
+            "name": "L'Eau Vive Aliments Naturels",
+            "address": "248 Rue St Georges Bureau 208-B",
+            "city": "Mont-Saint-Hilaire",
+            "region": "QC",
+            "postal_code": "J3H 2Y1"
+          }
+        },
+        "retailer_20": {
+          "type": "retailer",
+          "settings": {
+            "name": "Provigo Le Marché Lacoursiere",
+            "address": "1150 Rue Antoinette-Robidoux",
+            "city": "Longueuil",
+            "region": "QC",
+            "postal_code": "J4N 1P3"
+          }
+        },
+        "retailer_21": {
+          "type": "retailer",
+          "settings": {
+            "name": "Aliments Naturels Pleine Lune",
+            "address": "495 Bd du Séminaire N",
+            "city": "Saint-Jean-sur-Richelieu",
+            "region": "QC",
+            "postal_code": "J3B 5L5"
+          }
+        },
+        "retailer_22": {
+          "type": "retailer",
+          "settings": {
+            "name": "Verveine & Cie",
+            "address": "101 Rue Albert",
+            "city": "Cowansville",
+            "region": "QC",
+            "postal_code": "J2K 2W4"
+          }
+        }
+      },
+      "block_order": [
+        "retailer_01",
+        "retailer_02",
+        "retailer_03",
+        "retailer_04",
+        "retailer_05",
+        "retailer_06",
+        "retailer_07",
+        "retailer_08",
+        "retailer_09",
+        "retailer_10",
+        "retailer_11",
+        "retailer_12",
+        "retailer_13",
+        "retailer_14",
+        "retailer_15",
+        "retailer_16",
+        "retailer_17",
+        "retailer_18",
+        "retailer_19",
+        "retailer_20",
+        "retailer_21",
+        "retailer_22"
+      ]
     },
     "wholesale_nudge": {
       "type": "rich-text",
