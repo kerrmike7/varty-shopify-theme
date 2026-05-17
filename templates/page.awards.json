@@ -1,97 +1,92 @@
 {
   "sections": {
-    "awards_hero": {
+    "awards_title_strip": {
       "type": "rich-text",
       "blocks": {
-        "heading_awards": {
+        "heading_awards_title": {
           "type": "heading",
           "settings": {
-            "heading": "Recognised for Building a Cleaner Food System",
+            "heading": "AWARDS & RECOGNITION",
             "heading_size": "heading_l",
             "heading_tag": "h1",
-            "heading_color": "solid",
-            "heading_gradient": "linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(101,101,101,1) 100%)"
+            "heading_color": "solid"
           }
         }
       },
       "block_order": [
-        "heading_awards"
+        "heading_awards_title"
       ],
       "settings": {
-        "section_width": "narrow",
+        "section_width": "wide",
         "center_text": true,
-        "color_type": "custom",
-        "background_color_type": "solid",
-        "background_color": "#5463B3",
-        "text_color": "#ffffff",
-        "desktop_padding_top": 100,
-        "desktop_padding_bottom": 100,
-        "mobile_padding_top": 64,
-        "mobile_padding_bottom": 64
+        "varty_color_scheme": "scheme_brand_purple",
+        "color_type": "scheme",
+        "desktop_padding_top": 64,
+        "desktop_padding_bottom": 64,
+        "mobile_padding_top": 40,
+        "mobile_padding_bottom": 40
       }
     },
     "award_futurpreneur": {
       "type": "media-with-text",
       "blocks": {
-        "subheading_award": {
-          "type": "subheading",
+        "logo_futurpreneur": {
+          "type": "context_image",
           "settings": {
-            "subheading": "2024",
-            "subheading_size": "default",
-            "subheading_tag": "h3"
+            "context_image_width": 144,
+            "context_image_ratio": "original",
+            "context_image_radius": "0px"
           }
         },
         "heading_award": {
           "type": "heading",
           "settings": {
-            "heading": "Futurpreneur / RBC Future Launch Emerging Entrepreneur Award",
-            "heading_size": "heading_m",
+            "heading": "EMERGING ENTREPRENEUR AWARD",
+            "heading_size": "heading_l",
             "heading_tag": "h2",
-            "heading_color": "solid",
-            "heading_gradient": "linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(101,101,101,1) 100%)"
+            "heading_color": "solid"
           }
         },
         "text_award": {
           "type": "text",
           "settings": {
-            "text": "<p>Futurpreneur Foundation and RBC Future Launch empower young entrepreneurs with $80,000 in Start-up Awards. Varty All Natural was recognised as an emerging entrepreneur committed to building a cleaner, more transparent food system in Canada.</p>",
+            "text": "<p>Futurpreneur, on behalf of Futurpreneur Foundation, and RBC Future Launch empower young entrepreneurs with $80,000 in Start-up Awards</p>",
             "dim_text": false,
             "text_size": "default"
           }
         },
-        "button_press": {
-          "type": "button",
+        "caption_year": {
+          "type": "subheading",
           "settings": {
-            "button_label": "Read press release",
-            "button_link": "",
-            "target_blank": true,
-            "button_style": "solid"
+            "subheading": "2024",
+            "subheading_size": "body_s",
+            "subheading_tag": "p"
           }
         }
       },
       "block_order": [
-        "subheading_award",
+        "logo_futurpreneur",
         "heading_award",
         "text_award",
-        "button_press"
+        "caption_year"
       ],
       "settings": {
+        "image": "",
         "section_width": "wide",
-        "swap_media": true,
+        "swap_media": false,
         "media_size": "half",
         "media_ratio": "square",
         "narrow_content": true,
         "vertical_text_alignment": "center",
-        "horizontal_text_alignment": "flex-start",
-        "color_type": "custom",
-        "background_color_type": "solid",
-        "background_color": "#F0E8C8",
-        "text_color": "#2D2D5E",
+        "horizontal_text_alignment": "center",
+        "varty_color_scheme": "scheme_brand_beige",
+        "color_type": "scheme",
         "fill_section": false,
-        "desktop_padding_top": 80,
-        "desktop_padding_bottom": 80,
-        "mobile_padding_top": 48,
-        "mobile_padding_bottom": 48
+        "desktop_padding_top": 96,
+        "desktop_padding_bottom": 96,
+        "mobile_padding_top": 64,
+        "mobile_padding_bottom": 64,
+        "tbd_note": "<<TBD:upload Futurpreneur logo to shopify://shop_files/futurpreneur-logo.svg; upload/photograph tilted Varty product-trio-on-blue shot for the section-level media; confirm Press Release URL before adding button_press to block_order; decorative stickers deferred.>>"
       }
     },
     "main-page": {
@@ -109,7 +104,7 @@
     }
   },
   "order": [
-    "awards_hero",
+    "awards_title_strip",
     "award_futurpreneur",
     "main-page"
   ]

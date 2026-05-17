@@ -936,3 +936,64 @@
     min-height: 280px;
   }
 }
+
+/* iter4-block-02 - Awards page */
+
+[id$="__awards_title_strip"] h1 {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+}
+
+[id$="__award_futurpreneur"] .media-with-text__card {
+  align-items: stretch;
+}
+
+[id$="__award_futurpreneur"] .media-with-text__content-wrapper {
+  max-width: 34rem;
+  margin-inline: auto;
+}
+
+[id$="__award_futurpreneur"] .context-image,
+[id$="__award_futurpreneur"] .context-image__image,
+[id$="__award_futurpreneur"] .context-image .placeholder-svg {
+  max-width: 140px;
+  height: auto;
+  display: block;
+  margin-inline: auto;
+}
+
+[id$="__award_futurpreneur"] h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+  text-wrap: balance;
+  max-width: 14ch;
+  margin-inline: auto;
+}
+
+[id$="__award_futurpreneur"] .content-text {
+  max-width: 36ch;
+  margin-inline: auto;
+}
+
+[id$="__award_futurpreneur"] .content-subheading {
+  margin-top: 1em;
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+
+[id$="__award_futurpreneur"] .button {
+  border-radius: 999px;
+  padding-inline: 2em;
+}
+
+[id$="__award_futurpreneur"] .media-with-text__media-wrapper {
+  border-radius: 12px;
+}
+
+@media screen and (max-width: 920px) {
+  [id$="__award_futurpreneur"] .media-with-text__content-wrapper {
+    max-width: min(100%, 32rem);
+  }
+}

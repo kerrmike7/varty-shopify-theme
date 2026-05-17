@@ -56,7 +56,7 @@
     <script src="{{ 'menu-drawer.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'varty-mix-case.js' | asset_url }}" defer="defer"></script>
     {{ 'varty-sku-accents.css' | asset_url | stylesheet_tag }}
-    {%- if request.page_type == 'index' or template.suffix == 'about' -%}
+    {%- if request.page_type == 'index' or template.suffix == 'about' or template.suffix == 'awards' -%}
       {{ 'varty-homepage-polish.css' | asset_url | stylesheet_tag }}
     {%- endif -%}
   
