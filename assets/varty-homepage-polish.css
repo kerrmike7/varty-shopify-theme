@@ -367,8 +367,9 @@
   border: 1.5px solid currentColor;
   border-radius: 50%;
   padding: 1.25em;
-  width: 96px;
-  height: 96px;
+  width: 96px !important;
+  height: 96px !important;
+  box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   justify-content: center;
