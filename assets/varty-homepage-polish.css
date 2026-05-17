@@ -1044,8 +1044,14 @@
 
 [id$="__wholesale_hero"] .button,
 [id$="__wholesale_hero"] a[class*="button"] {
+  background: rgb(84, 99, 179) !important;
+  color: rgb(252, 242, 211) !important;
   border-radius: 999px;
   padding-inline: 2em;
+}
+
+[id$="__wholesale_hero"] a[class*="button"]::before {
+  background: rgb(84, 99, 179) !important;
 }
 
 .varty-wholesale-form__inner {
