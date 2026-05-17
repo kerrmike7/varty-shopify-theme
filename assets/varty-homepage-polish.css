@@ -1233,11 +1233,18 @@
   margin-bottom: 2rem;
 }
 
+[id$="__store_finder_main"] .varty-store-finder__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 1rem;
+}
+
 [id$="__store_finder_main"] .varty-store-finder__card {
   background: rgb(var(--layout-background-color, 252, 242, 211));
   border: 1px solid rgba(84, 99, 179, 0.2);
   border-radius: 8px;
   color: rgb(var(--layout-text-color, 84, 99, 179));
+  padding: 1.25rem;
 }
 
 [id$="__store_finder_main"] .varty-store-finder__card-name,
@@ -1247,7 +1254,14 @@
   color: inherit;
 }
 
+[id$="__store_finder_main"] .varty-store-finder__card-name {
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+
 [id$="__store_finder_main"] .varty-store-finder__card-link {
+  display: inline-block;
+  margin-top: 0.85rem;
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }
@@ -1291,5 +1305,9 @@
 
   [id$="__store_finder_main"] .custom-store-finder__controls {
     gap: 1.25rem;
+  }
+
+  [id$="__store_finder_main"] .varty-store-finder__grid {
+    grid-template-columns: 1fr;
   }
 }
