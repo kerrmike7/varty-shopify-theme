@@ -1215,6 +1215,7 @@
                         </div>
                       {% endif %}
                       {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
+                      {% comment %} <<TBD: Seal Subscriptions widget injects here once app is installed (HOMEPAGE_V2_SPEC § E.5) {% endcomment %}
                     {% endif %}
                   {%- when 'image' -%}
                     {% if block.settings.image != blank or request.design_mode %}
@@ -1760,6 +1761,7 @@
                                 </div>
                               {% endif %}
                               {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
+                              {% comment %} <<TBD: Seal Subscriptions widget injects here once app is installed (HOMEPAGE_V2_SPEC § E.5) {% endcomment %}
                             {% endif %}
                           {% when 'stock_indicator' %}
                             {% if block.settings.low_threshold != blank and block.settings.base_quantity != blank %}
