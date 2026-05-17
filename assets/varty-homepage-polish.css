@@ -286,48 +286,145 @@
 
 /* === iter3 / block 01 — cream section typography polish === */
 
-/* Explore the Flavours — bolder heading, consistent with hero */
-[id$="__product_trio"] .section__heading,
+/* Explore the Flavours — cream/purple product section, no Bloop black defaults */
+[id$="__product_trio"] {
+  --layout-background-color: 252, 242, 211;
+  --layout-text-color: 84, 99, 179;
+  background: #fcf2d3 !important;
+  background-color: #fcf2d3 !important;
+  color: #5463B3 !important;
+}
+
+[id$="__product_trio"] .content-heading,
 [id$="__product_trio"] h2 {
+  color: #5463B3;
   font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  font-size: clamp(32px, 3vw, 48px);
+}
+
+[id$="__product_trio"] .card,
+[id$="__product_trio"] .card__title,
+[id$="__product_trio"] .card__title-text,
+[id$="__product_trio"] .card__price,
+[id$="__product_trio"] .price,
+[id$="__product_trio"] .price *,
+[id$="__product_trio"] .regular-price,
+[id$="__product_trio"] .unit-price {
+  color: #5463B3 !important;
+}
+
+[id$="__product_trio"] .card__title {
+  font-size: clamp(20px, 1.6vw, 28px);
+  font-weight: 500;
+}
+
+[id$="__product_trio"] .card__price,
+[id$="__product_trio"] .price {
+  font-size: clamp(20px, 1.4vw, 26px);
+  font-weight: 600;
+}
+
+/* Trial / Mix dual CTA — purple band with cream copy and cream buttons */
+[id$="__trial_mix_cards"] {
+  --layout-background-color: 84, 99, 179;
+  --layout-text-color: 252, 242, 211;
+  background: #5463B3 !important;
+  background-color: #5463B3 !important;
+  color: #fcf2d3 !important;
+}
+
+[id$="__trial_mix_cards"] .product-labels__item,
+[id$="__trial_mix_cards"] .multicolumn__card-title,
+[id$="__trial_mix_cards"] .multicolumn__card-text,
+[id$="__trial_mix_cards"] .multicolumn__card-text p {
+  color: #fcf2d3 !important;
+}
+
+[id$="__trial_mix_cards"] .multicolumn__card-title {
+  font-size: clamp(24px, 2vw, 36px);
+  font-weight: 800;
+  text-transform: uppercase;
   letter-spacing: 0.01em;
 }
 
-/* Trial / Mix dual CTA — labels read as small-caps eyebrow, headings heavier */
-[id$="__trial_mix_cards"] .multicolumn__heading,
-[id$="__trial_mix_cards"] h3 {
-  font-weight: 700;
-  text-transform: none;
+[id$="__trial_mix_cards"] .multicolumn__card-text {
+  font-size: clamp(18px, 1.35vw, 24px);
+  line-height: 1.35;
+}
+
+[id$="__trial_mix_cards"] .solid-button {
+  background: #fcf2d3;
+  border-color: #fcf2d3;
+  color: #5463B3;
+}
+
+[id$="__trial_mix_cards"] .outlined-button {
+  border-color: #fcf2d3;
+  color: #fcf2d3;
 }
 
 /* Step Inside Our Pantry — match Wix reference: heavy uppercase heading,
    body in purple at a slightly heavier weight than default */
-[id$="__pantry_truth"] .media-with-text__heading,
+[id$="__pantry_truth"] {
+  --layout-background-color: 252, 242, 211;
+  --layout-text-color: 84, 99, 179;
+  background: #fcf2d3 !important;
+  background-color: #fcf2d3 !important;
+  color: #5463B3 !important;
+}
+
+[id$="__pantry_truth"] .media-with-text__card {
+  background: #fcf2d3 !important;
+  background-color: #fcf2d3 !important;
+  color: #5463B3 !important;
+}
+
+[id$="__pantry_truth"] .content-heading,
 [id$="__pantry_truth"] h2 {
+  color: #5463B3;
+  font-size: clamp(42px, 5vw, 84px);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.02em;
+  line-height: 0.95;
 }
 
-[id$="__pantry_truth"] .media-with-text__text p,
-[id$="__pantry_truth"] .media-with-text__text li {
+[id$="__pantry_truth"] .content-text,
+[id$="__pantry_truth"] .content-text p,
+[id$="__pantry_truth"] .content-text li {
+  color: #5463B3 !important;
+  font-size: clamp(20px, 1.55vw, 28px);
   font-weight: 500;
+  line-height: 1.35;
 }
 
-[id$="__pantry_truth"] .media-with-text__text ul {
+[id$="__pantry_truth"] .content-text strong {
+  color: #5463B3;
+  font-weight: 800;
+}
+
+[id$="__pantry_truth"] .content-text ul {
   list-style: none;
   padding-left: 0;
 }
 
-[id$="__pantry_truth"] .media-with-text__text ul li {
+[id$="__pantry_truth"] .content-text ul li {
   position: relative;
   padding-left: 1.5em;
 }
 
-[id$="__pantry_truth"] .media-with-text__text ul li::before {
+[id$="__pantry_truth"] .content-text ul li::before {
   content: "✓";
   position: absolute;
   left: 0;
   font-weight: 800;
   color: #5463B3;
+}
+
+[id$="__pantry_truth"] .solid-button {
+  background: #5463B3;
+  border-color: #5463B3;
+  color: #fcf2d3;
 }
