@@ -3,53 +3,122 @@
     "finder_hero": {
       "type": "rich-text",
       "blocks": {
+        "subheading_eyebrow": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Not milk, just better",
+            "subheading_tag": "h3",
+            "subheading_size": "default"
+          }
+        },
         "heading_finder": {
           "type": "heading",
           "settings": {
-            "heading": "Find Varty Near You",
+            "heading": "WHERE TO BUY VARTY OAT BEVERAGE",
             "heading_size": "heading_l",
             "heading_tag": "h1",
-            "heading_color": "solid",
-            "heading_gradient": "linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(101,101,101,1) 100%)"
-          }
-        },
-        "text_finder": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Available at 23 locations across Québec.</p>",
-            "dim_text": false,
-            "text_size": "default"
+            "heading_color": "solid"
           }
         }
       },
       "block_order": [
-        "heading_finder",
-        "text_finder"
+        "subheading_eyebrow",
+        "heading_finder"
       ],
       "settings": {
         "section_width": "narrow",
         "center_text": true,
-        "color_type": "custom",
-        "background_color_type": "solid",
-        "background_color": "#5463B3",
-        "text_color": "#ffffff",
+        "varty_color_scheme": "scheme_brand_purple",
+        "color_type": "scheme",
         "desktop_padding_top": 80,
         "desktop_padding_bottom": 80,
         "mobile_padding_top": 48,
         "mobile_padding_bottom": 48
       }
     },
+    "stockist_map": {
+      "type": "varty-stockist-map",
+      "settings": {
+        "varty_color_scheme": "scheme_brand_beige",
+        "map_embed_url": "<<TBD: Google My Maps iframe src. Admin task: create map at https://mymaps.google.com with 22 stockist pins, then Share -> Embed on my site -> copy iframe src.>>",
+        "desktop_height": 480,
+        "mobile_height": 360
+      }
+    },
+    "stockist_logos": {
+      "type": "varty-stockist-logos",
+      "blocks": {
+        "logo_tau": {
+          "type": "logo",
+          "settings": {
+            "alt": "Marché TAU",
+            "url": "<<TBD: stockist URL for Marché TAU.>>"
+          }
+        },
+        "logo_oda": {
+          "type": "logo",
+          "settings": {
+            "alt": "Marché Oda",
+            "url": "<<TBD: stockist URL for Marché Oda.>>"
+          }
+        },
+        "logo_iga": {
+          "type": "logo",
+          "settings": {
+            "alt": "IGA Extra",
+            "url": "<<TBD: stockist URL for IGA Extra.>>"
+          }
+        },
+        "logo_ave_greene": {
+          "type": "logo",
+          "settings": {
+            "alt": "Ave Greene",
+            "url": "<<TBD: stockist URL for Ave Greene.>>"
+          }
+        },
+        "logo_pho_1929": {
+          "type": "logo",
+          "settings": {
+            "alt": "Maison Pho 1929",
+            "url": "<<TBD: stockist URL for Maison Pho 1929.>>"
+          }
+        },
+        "logo_smoothiesgo": {
+          "type": "logo",
+          "settings": {
+            "alt": "SmoothiesGo",
+            "url": "<<TBD: stockist URL for SmoothiesGo.>>"
+          }
+        }
+      },
+      "block_order": [
+        "logo_tau",
+        "logo_oda",
+        "logo_iga",
+        "logo_ave_greene",
+        "logo_pho_1929",
+        "logo_smoothiesgo"
+      ],
+      "settings": {
+        "varty_color_scheme": "scheme_brand_beige",
+        "heading": "",
+        "logo_max_height": 72,
+        "desktop_padding_top": 56,
+        "desktop_padding_bottom": 56,
+        "mobile_padding_top": 32,
+        "mobile_padding_bottom": 32
+      }
+    },
     "store_finder_main": {
       "type": "custom-store-finder",
       "settings": {
         "heading": "Stockists",
-        "intro_richtext": "<p>23 locations across Québec. Use the search or filter to find the one nearest you.</p>",
+        "intro_richtext": "<p>22 locations across Québec. Use the search or filter to find the one nearest you.</p>",
         "enable_search": true,
         "enable_region_filter": true,
         "cta_label": "",
         "cta_url": "",
-        "background_color": "#A4C78A",
-        "text_color": "#2D2D5E",
+        "varty_color_scheme": "scheme_brand_beige",
         "desktop_padding_top": 80,
         "desktop_padding_bottom": 80,
         "mobile_padding_top": 48,
@@ -65,8 +134,7 @@
             "heading": "Want Varty on your shelves?",
             "heading_size": "heading_m",
             "heading_tag": "h2",
-            "heading_color": "solid",
-            "heading_gradient": "linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(101,101,101,1) 100%)"
+            "heading_color": "solid"
           }
         },
         "button_wholesale": {
@@ -86,10 +154,8 @@
       "settings": {
         "section_width": "narrow",
         "center_text": true,
-        "color_type": "custom",
-        "background_color_type": "solid",
-        "background_color": "#2D2D5E",
-        "text_color": "#ffffff",
+        "varty_color_scheme": "scheme_brand_purple",
+        "color_type": "scheme",
         "desktop_padding_top": 80,
         "desktop_padding_bottom": 80,
         "mobile_padding_top": 48,
@@ -112,6 +178,8 @@
   },
   "order": [
     "finder_hero",
+    "stockist_map",
+    "stockist_logos",
     "store_finder_main",
     "wholesale_nudge",
     "main-page"

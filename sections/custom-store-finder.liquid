@@ -1,7 +1,4 @@
 {% liquid
-  assign bg_color    = section.settings.background_color | default: '#fcf2d3'
-  assign text_color  = section.settings.text_color       | default: '#2D2D5E'
-
   comment
     Primary data source: metaobject type "retailer"
     Fallback: section blocks (used until metaobjects are populated)
@@ -15,8 +12,14 @@
 
 <style>
   #shopify-section-{{ section.id }} {
-    background-color: {{ bg_color }};
-    color: {{ text_color }};
+    {% if section.settings.varty_color_scheme != blank %}
+      {% render 'varty-color-vars', scheme: section.settings.varty_color_scheme %}
+    {% else %}
+      --layout-background-color: {{ section.settings.background_color.red }}, {{ section.settings.background_color.green }}, {{ section.settings.background_color.blue }};
+      --layout-text-color: {{ section.settings.text_color.red }}, {{ section.settings.text_color.green }}, {{ section.settings.text_color.blue }};
+    {% endif %}
+    background-color: rgb(var(--layout-background-color, 252, 242, 211));
+    color: rgb(var(--layout-text-color, 84, 99, 179));
     padding-top: {{ section.settings.desktop_padding_top }}px;
     padding-bottom: {{ section.settings.desktop_padding_bottom }}px;
   }
@@ -195,7 +198,7 @@
       "type": "richtext",
       "id": "intro_richtext",
       "label": "Intro text",
-      "default": "<p>Available at 23 locations across Québec.</p>"
+      "default": "<p>Available at 22 locations across Québec.</p>"
     },
     {
       "type": "checkbox",
@@ -219,6 +222,16 @@
       "type": "url",
       "id": "cta_url",
       "label": "CTA button URL"
+    },
+    {
+      "type": "select",
+      "id": "varty_color_scheme",
+      "label": "Color scheme",
+      "options": [
+        { "value": "scheme_brand_beige", "label": "Brand beige" },
+        { "value": "scheme_brand_purple", "label": "Brand purple" }
+      ],
+      "default": "scheme_brand_beige"
     },
     {
       "type": "header",

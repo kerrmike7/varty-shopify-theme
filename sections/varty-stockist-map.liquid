@@ -1,0 +1,128 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    {% if section.settings.varty_color_scheme != blank %}
+      {% render 'varty-color-vars', scheme: section.settings.varty_color_scheme %}
+    {% endif %}
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockist-map-section {
+    background: rgb(var(--layout-background-color, 252, 242, 211));
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockist-map__wrapper {
+    position: relative;
+    width: 100%;
+    height: {{ section.settings.desktop_height }}px;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockist-map__wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockist-map__placeholder {
+    text-align: center;
+    padding: 64px 24px;
+    color: rgb(var(--layout-text-color, 84, 99, 179));
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockist-map__placeholder p {
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockist-map__placeholder a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .varty-stockist-map__wrapper {
+      height: {{ section.settings.mobile_height }}px;
+    }
+  }
+</style>
+
+<section class="varty-stockist-map-section">
+  {% liquid
+    assign map_embed_url = section.settings.map_embed_url
+    assign has_map_embed = false
+    if map_embed_url != blank
+      unless map_embed_url contains '<<TBD:'
+        assign has_map_embed = true
+      endunless
+    endif
+  %}
+  {% if has_map_embed %}
+    <div class="varty-stockist-map__wrapper">
+      <iframe
+        src="{{ map_embed_url }}"
+        title="Varty stockist locations"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen
+      ></iframe>
+    </div>
+  {% else %}
+    <div class="varty-stockist-map__placeholder">
+      <p>Map coming soon. <a href="#store-finder-cards">Browse stockists by name or region</a></p>
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Varty Stockist Map",
+  "tag": "section",
+  "class": "varty-stockist-map",
+  "settings": [
+    {
+      "type": "select",
+      "id": "varty_color_scheme",
+      "label": "Color scheme",
+      "options": [
+        { "value": "scheme_brand_beige", "label": "Brand beige" },
+        { "value": "scheme_brand_purple", "label": "Brand purple" }
+      ],
+      "default": "scheme_brand_beige"
+    },
+    {
+      "type": "url",
+      "id": "map_embed_url",
+      "label": "Google My Maps embed URL (iframe src)",
+      "info": "Create a My Maps map with all stockist pins, then Share → Embed on my site → copy the iframe src URL."
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "min": 360,
+      "max": 720,
+      "step": 20,
+      "unit": "px",
+      "label": "Desktop map height",
+      "default": 480
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "min": 280,
+      "max": 560,
+      "step": 20,
+      "unit": "px",
+      "label": "Mobile map height",
+      "default": 360
+    }
+  ],
+  "presets": [
+    {
+      "name": "Varty Stockist Map"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["page"]
+  }
+}
+{% endschema %}
