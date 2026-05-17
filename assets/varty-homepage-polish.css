@@ -352,7 +352,7 @@
   margin-top: 2.5em;
 }
 
-#shopify-section-founder_letter .founder-caption {
+#shopify-section-founder_letter .multicolumn__card-text p:last-child {
   margin-top: 0.5em;
   font-size: 0.85em;
   opacity: 0.8;
