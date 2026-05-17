@@ -359,18 +359,38 @@
             "button_label": "",
             "button_link": ""
           }
+        },
+        "barista_ready": {
+          "type": "text",
+          "settings": {
+            "heading": "Barista Ready",
+            "text": "<p>Varty Barista froths cleanly and holds texture under heat. Made for serious coffee, without overpowering it.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "shelf_stable": {
+          "type": "text",
+          "settings": {
+            "heading": "Shelf-Stable",
+            "text": "<p>1L Tetra Pak. No fridge needed until opened. Stock the pantry without taking the fridge real estate.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
         }
       },
       "block_order": [
         "clean_ingredients",
         "no_fillers",
         "organic",
-        "canada"
+        "canada",
+        "barista_ready",
+        "shelf_stable"
       ],
       "settings": {
         "subheading": "The Clean Advantage",
         "heading": "Why Canadians Are Falling in Love with Varty",
-        "max_columns": "4",
+        "max_columns": "3",
         "mobile_layout": "1",
         "center_text": true,
         "color_type": "custom",
