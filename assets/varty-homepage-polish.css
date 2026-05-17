@@ -283,3 +283,51 @@
     border-top: 1px solid rgba(252, 242, 211, 0.34);
   }
 }
+
+/* === iter3 / block 01 — cream section typography polish === */
+
+/* Explore the Flavours — bolder heading, consistent with hero */
+[id$="__product_trio"] .section__heading,
+[id$="__product_trio"] h2 {
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+/* Trial / Mix dual CTA — labels read as small-caps eyebrow, headings heavier */
+[id$="__trial_mix_cards"] .multicolumn__heading,
+[id$="__trial_mix_cards"] h3 {
+  font-weight: 700;
+  text-transform: none;
+}
+
+/* Step Inside Our Pantry — match Wix reference: heavy uppercase heading,
+   body in purple at a slightly heavier weight than default */
+[id$="__pantry_truth"] .media-with-text__heading,
+[id$="__pantry_truth"] h2 {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+[id$="__pantry_truth"] .media-with-text__text p,
+[id$="__pantry_truth"] .media-with-text__text li {
+  font-weight: 500;
+}
+
+[id$="__pantry_truth"] .media-with-text__text ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+[id$="__pantry_truth"] .media-with-text__text ul li {
+  position: relative;
+  padding-left: 1.5em;
+}
+
+[id$="__pantry_truth"] .media-with-text__text ul li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  font-weight: 800;
+  color: #5463B3;
+}

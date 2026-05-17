@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "current": "Bloop",
   "installed_preset_name": "Bloop",
@@ -2464,11 +2455,11 @@
         },
         "scheme_brand_beige": {
           "background": "#fcf2d3",
-          "text": "#1c1d1d",
+          "text": "#5463B3",
           "button": "#5463B3",
           "button_text": "#fcf2d3",
           "secondary_button_label_color": "#5463B3",
-          "shadow": "#1c1d1d"
+          "shadow": "#5463B3"
         },
         "scheme_dark": {
           "background": "#1c1d1d",
