@@ -70,13 +70,13 @@
           "settings": {
             "link": "",
             "target_blank": false,
-            "banner_size": "horizontal",
-            "overlay_color": "#452e7a",
+            "banner_size": "wide",
+            "overlay_color": "#5463B3",
             "overlay_gradient": "",
             "overlay_opacity": 100,
             "heading": "Join us on Instagram",
-            "heading_size": "heading_l",
-            "heading_color": "gradient",
+            "heading_size": "heading_m",
+            "heading_color": "solid",
             "heading_gradient": "linear-gradient(90deg, rgba(114, 255, 179, 1) 14%, rgba(255, 250, 99, 1) 85%)",
             "button_label": "Follow Now",
             "show_button_on_mobile": true,
@@ -87,12 +87,13 @@
             "color_type": "custom",
             "background_color_type": "solid",
             "background_gradient": "",
-            "background_color": "#5d4497",
-            "text_color": "#e9fb8f"
+            "background_color": "#5463B3",
+            "text_color": "#fcf2d3"
           }
         },
         "image_pY6pW4": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "link": "",
             "target_blank": false,
@@ -119,6 +120,7 @@
         },
         "loop_video_eDp9XT": {
           "type": "loop_video",
+          "disabled": true,
           "settings": {
             "link": "",
             "target_blank": false,
@@ -184,15 +186,15 @@
         "mobile_grid_gap": 0,
         "section_width": "wide",
         "image_radius": "0px",
-        "color_type": "default",
+        "color_type": "custom",
         "background_color_type": "solid",
         "background_gradient": "",
-        "background_color": "#ffffff",
-        "layout_margins": "default",
-        "desktop_padding_top": -160,
-        "desktop_padding_bottom": -160,
-        "mobile_padding_top": -80,
-        "mobile_padding_bottom": -80
+        "background_color": "#fcf2d3",
+        "layout_margins": "disable",
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
       }
     },
     "flyout_gh7pXr": {
@@ -322,6 +324,7 @@
         },
         "context_image_6VTEbi": {
           "type": "context_image",
+          "disabled": true,
           "settings": {
             "block_width": "short",
             "context_image_width": 64,
@@ -342,7 +345,7 @@
             "highlight_menu_item": "",
             "highlight_menu_item_color": "#ff0000",
             "menu_view": "column",
-            "menu_font_size": "heading_m",
+            "menu_font_size": "heading_s",
             "menu_horizontal_alignment": "flex-start",
             "menu_vertical_alignment": "flex-start"
           }
@@ -454,16 +457,16 @@
         "color_type": "custom",
         "background_color_type": "solid",
         "background_gradient": "",
-        "background_color": "#db2828",
-        "text_color": "#fffdf3",
-        "desktop_vertical_gap": 0.4,
-        "desktop_horizontal_gap": 0.2,
+        "background_color": "#5463B3",
+        "text_color": "#fcf2d3",
+        "desktop_vertical_gap": 1,
+        "desktop_horizontal_gap": 1,
         "mobile_vertical_gap": 0.5,
         "mobile_horizontal_gap": 1,
-        "desktop_padding_top": -60,
-        "desktop_padding_bottom": -80,
-        "mobile_padding_top": 0,
-        "mobile_padding_bottom": 0
+        "desktop_padding_top": 48,
+        "desktop_padding_bottom": 40,
+        "mobile_padding_top": 32,
+        "mobile_padding_bottom": 32
       }
     }
   },

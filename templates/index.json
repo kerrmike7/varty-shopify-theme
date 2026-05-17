@@ -339,63 +339,72 @@
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/icon-canada-organic.svg",
-            "heading": "Canada Organic"
+            "heading": "Canada Organic",
+            "text": ""
           }
         },
         "c2": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/icon-aliments-quebec-bio.svg",
-            "heading": "Aliments Preparés au Quebec BIO"
+            "heading": "Aliments Preparés au Quebec BIO",
+            "text": ""
           }
         },
         "c3": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/icon-no-artificial-flavours.svg",
-            "heading": "No Artificial Flavours"
+            "heading": "No Artificial Flavours",
+            "text": ""
           }
         },
         "c4": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/icon-carrageenan-free.svg",
-            "heading": "Carrageenan Free"
+            "heading": "Carrageenan Free",
+            "text": ""
           }
         },
         "c5": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/icon-glyphosate-free.svg",
-            "heading": "Glyphosate Free"
+            "heading": "Glyphosate Free",
+            "text": ""
           }
         },
         "c6": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/icon-gluten-free.svg",
-            "heading": "Gluten Free"
+            "heading": "Gluten Free",
+            "text": ""
           }
         },
         "c7": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/icon-dairy-free.svg",
-            "heading": "Dairy Free"
+            "heading": "Dairy Free",
+            "text": ""
           }
         },
         "c8": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/icon-non-gmo.svg",
-            "heading": "Non GMO"
+            "heading": "Non GMO",
+            "text": ""
           }
         },
         "c9": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/icon-kosher-ou.svg",
-            "heading": "Kosher"
+            "heading": "Kosher",
+            "text": ""
           }
         }
       },
@@ -419,6 +428,8 @@
         "icon_or_image_size": 64,
         "color_type": "custom",
         "background_color_type": "solid",
+        "background_color": "#fcf2d3",
+        "text_color": "#5463B3",
         "desktop_padding_top": 24,
         "desktop_padding_bottom": 24,
         "mobile_padding_top": 16,
@@ -500,6 +511,8 @@
         "center_text": true,
         "color_type": "custom",
         "background_color_type": "solid",
+        "background_color": "#5463B3",
+        "text_color": "#fcf2d3",
         "desktop_padding_top": 72,
         "desktop_padding_bottom": 72,
         "mobile_padding_top": 40,
@@ -548,6 +561,8 @@
         "horizontal_content_position": "center",
         "color_type": "custom",
         "background_color_type": "solid",
+        "background_color": "#5463B3",
+        "text_color": "#fcf2d3",
         "desktop_padding_top": 64,
         "desktop_padding_bottom": 64,
         "mobile_padding_top": 40,
@@ -597,6 +612,8 @@
         "center_text": true,
         "color_type": "custom",
         "background_color_type": "solid",
+        "background_color": "#fcf2d3",
+        "text_color": "#5463B3",
         "desktop_padding_top": 72,
         "desktop_padding_bottom": 72,
         "mobile_padding_top": 48,
@@ -649,6 +666,8 @@
         "section_width": "wide",
         "color_type": "custom",
         "background_color_type": "solid",
+        "background_color": "#fcf2d3",
+        "text_color": "#5463B3",
         "desktop_padding_top": 64,
         "desktop_padding_bottom": 64,
         "mobile_padding_top": 40,
@@ -688,6 +707,8 @@
         "center_text": true,
         "color_type": "custom",
         "background_color_type": "solid",
+        "background_color": "#5463B3",
+        "text_color": "#fcf2d3",
         "desktop_padding_top": 72,
         "desktop_padding_bottom": 72,
         "mobile_padding_top": 40,
