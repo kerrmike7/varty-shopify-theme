@@ -1006,7 +1006,7 @@
 
 [id$="__wholesale_hero"] .media-with-text__card {
   align-items: stretch;
-  min-height: clamp(520px, 72vh, 760px);
+  min-height: clamp(480px, 68vh, 680px);
 }
 
 [id$="__wholesale_hero"] .media-with-text__media {
@@ -1021,18 +1021,21 @@
   align-self: center;
   background: rgb(252, 242, 211);
   color: rgb(84, 99, 179);
-  max-width: 38rem;
+  max-width: 42rem;
+  height: auto !important;
+  min-height: 0;
   margin-inline: auto;
-  padding: clamp(2rem, 5vw, 4rem);
+  padding: clamp(2rem, 4vw, 3.5rem);
   border-radius: 8px;
 }
 
 [id$="__wholesale_hero"] h1 {
+  font-size: clamp(2.8rem, 5vw, 4.6rem);
   text-transform: uppercase;
   letter-spacing: 0.02em;
   line-height: 1.05;
   text-wrap: balance;
-  max-width: 18ch;
+  max-width: 14ch;
 }
 
 [id$="__wholesale_hero"] .content-text {
@@ -1161,6 +1164,10 @@
   [id$="__wholesale_hero"] .media-with-text__content-wrapper {
     width: min(100%, 34rem);
     padding: 2rem;
+  }
+
+  [id$="__wholesale_hero"] h1 {
+    font-size: clamp(2.4rem, 13vw, 3.6rem);
   }
 }
 
