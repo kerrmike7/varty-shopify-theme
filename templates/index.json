@@ -194,7 +194,7 @@
         "leaf_1": {
           "type": "context_image",
           "settings": {
-            "context_image": "shopify://shop_images/varty-leaf-glyph.svg",
+            "context_image": "shopify://shop_images/icon-leaf.svg",
             "context_image_width": 40
           }
         },
@@ -208,7 +208,7 @@
         "leaf_2": {
           "type": "context_image",
           "settings": {
-            "context_image": "shopify://shop_images/varty-leaf-glyph.svg",
+            "context_image": "shopify://shop_images/icon-leaf.svg",
             "context_image_width": 40
           }
         },
@@ -222,7 +222,7 @@
         "leaf_3": {
           "type": "context_image",
           "settings": {
-            "context_image": "shopify://shop_images/varty-leaf-glyph.svg",
+            "context_image": "shopify://shop_images/icon-leaf.svg",
             "context_image_width": 40
           }
         },
@@ -236,7 +236,7 @@
         "leaf_4": {
           "type": "context_image",
           "settings": {
-            "context_image": "shopify://shop_images/varty-leaf-glyph.svg",
+            "context_image": "shopify://shop_images/icon-leaf.svg",
             "context_image_width": 40
           }
         },
@@ -250,7 +250,7 @@
         "leaf_5": {
           "type": "context_image",
           "settings": {
-            "context_image": "shopify://shop_images/varty-leaf-glyph.svg",
+            "context_image": "shopify://shop_images/icon-leaf.svg",
             "context_image_width": 40
           }
         }
