@@ -369,6 +369,8 @@
   padding: 1.25em;
   width: 96px !important;
   height: 96px !important;
+  min-width: 96px !important;
+  flex: 0 0 96px !important;
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
