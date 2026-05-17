@@ -29,7 +29,7 @@
           "settings": {
             "show_collapsible": false,
             "show_lines": true,
-            "heading": "Discount",
+            "heading": "Got a discount code?",
             "heading_size": "label_font_uppercase",
             "label": ""
           }
@@ -38,9 +38,9 @@
           "type": "shipping_calculator",
           "settings": {
             "show_lines": true,
-            "shipping_heading": "Estimate",
+            "shipping_heading": "Estimate shipping",
             "shipping_heading_size": "label_font_uppercase",
-            "shipping_country": "United States"
+            "shipping_country": "Canada"
           }
         },
         "f7fba67b-f53b-4852-837c-e36331b14a6f": {
@@ -50,8 +50,8 @@
             "show_lines": true,
             "order_heading": "Order note",
             "order_heading_size": "label_font_uppercase",
-            "order_label": "Add a note to your order",
-            "order_placeholder": "Write your comment for seller here"
+            "order_label": "Add a note to your order (optional)",
+            "order_placeholder": "Delivery note, gift message, or anything we should know."
           }
         }
       },
@@ -71,9 +71,49 @@
         "mobile_padding_top": 0,
         "mobile_padding_bottom": 0
       }
+    },
+    "cart_upsell": {
+      "type": "cart-recommendations",
+      "settings": {
+        "heading": "Need Another Carton?",
+        "heading_size": "heading_m",
+        "heading_tag": "h2",
+        "heading_color": "solid",
+        "heading_gradient": "",
+        "desktop_grid_type": "3",
+        "grid_gap_type": "default",
+        "custom_column_gap_desktop": 48,
+        "custom_column_gap_mobile": 16,
+        "mobile_layout": "2",
+        "mobile_navigation": "arrows",
+        "image_ratio": "square",
+        "focal_point": "center center",
+        "hover_behavior": "nothing",
+        "show_bullets": true,
+        "enable_add_to_cart": true,
+        "enable_quick_view": false,
+        "price_position": "bottom",
+        "show_vendor": false,
+        "max_product_name_characters": 100,
+        "show_rating": false,
+        "show_short_description": false,
+        "enable_color_pills": false,
+        "show_pickup_availability": false,
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_gradient": "",
+        "background_color": "#fcf2d3",
+        "text_color": "#1c1d1d",
+        "layout_margins": "default",
+        "desktop_padding_top": 48,
+        "desktop_padding_bottom": 48,
+        "mobile_padding_top": 32,
+        "mobile_padding_bottom": 32
+      }
     }
   },
   "order": [
-    "main-cart"
+    "main-cart",
+    "cart_upsell"
   ]
 }
