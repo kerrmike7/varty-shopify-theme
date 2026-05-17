@@ -40,7 +40,8 @@
       "type": "varty-stockist-map",
       "settings": {
         "varty_color_scheme": "scheme_brand_beige",
-        "map_embed_url": "<<TBD: Google My Maps iframe src. Admin task: create map at https://mymaps.google.com with 22 stockist pins, then Share -> Embed on my site -> copy iframe src.>>",
+        "map_embed_url": "",
+        "tbd_note": "<<TBD: Google My Maps iframe src. Admin task: create map at https://mymaps.google.com with 22 stockist pins, then Share -> Embed on my site -> copy iframe src.>>",
         "desktop_height": 480,
         "mobile_height": 360
       }
@@ -52,42 +53,48 @@
           "type": "logo",
           "settings": {
             "alt": "Marché TAU",
-            "url": "<<TBD: stockist URL for Marché TAU.>>"
+            "url": "",
+            "tbd_note": "<<TBD: upload logo image and add stockist URL for Marché TAU.>>"
           }
         },
         "logo_oda": {
           "type": "logo",
           "settings": {
             "alt": "Marché Oda",
-            "url": "<<TBD: stockist URL for Marché Oda.>>"
+            "url": "",
+            "tbd_note": "<<TBD: upload logo image and add stockist URL for Marché Oda.>>"
           }
         },
         "logo_iga": {
           "type": "logo",
           "settings": {
             "alt": "IGA Extra",
-            "url": "<<TBD: stockist URL for IGA Extra.>>"
+            "url": "",
+            "tbd_note": "<<TBD: upload logo image and add stockist URL for IGA Extra.>>"
           }
         },
         "logo_ave_greene": {
           "type": "logo",
           "settings": {
             "alt": "Ave Greene",
-            "url": "<<TBD: stockist URL for Ave Greene.>>"
+            "url": "",
+            "tbd_note": "<<TBD: upload logo image and add stockist URL for Ave Greene.>>"
           }
         },
         "logo_pho_1929": {
           "type": "logo",
           "settings": {
             "alt": "Maison Pho 1929",
-            "url": "<<TBD: stockist URL for Maison Pho 1929.>>"
+            "url": "",
+            "tbd_note": "<<TBD: upload logo image and add stockist URL for Maison Pho 1929.>>"
           }
         },
         "logo_smoothiesgo": {
           "type": "logo",
           "settings": {
             "alt": "SmoothiesGo",
-            "url": "<<TBD: stockist URL for SmoothiesGo.>>"
+            "url": "",
+            "tbd_note": "<<TBD: upload logo image and add stockist URL for SmoothiesGo.>>"
           }
         }
       },
