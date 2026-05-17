@@ -284,6 +284,107 @@
   }
 }
 
+/* iter4-block-01 - About page */
+
+#shopify-section-about_hero h1 {
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.05;
+}
+
+#shopify-section-about_hero .media-with-text__content-wrapper {
+  max-width: 46rem;
+}
+
+#shopify-section-about_hero .about-clean-advantage-stamp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 8.5rem;
+  min-height: 4rem;
+  padding: 0.5rem 1.25rem;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1;
+  text-align: center;
+}
+
+#shopify-section-mission_strip h2 {
+  max-width: 38ch;
+  margin-inline: auto;
+  text-wrap: balance;
+}
+
+#shopify-section-mission_strip .product-labels__container {
+  gap: 12px;
+}
+
+#shopify-section-mission_strip .multicolumn__media {
+  min-height: 260px;
+}
+
+#shopify-section-mission_strip .multicolumn__image {
+  height: 100%;
+  object-fit: cover;
+}
+
+#shopify-section-founder_letter .multicolumn__header,
+#shopify-section-founder_letter .product-labels__container {
+  max-width: 780px;
+  margin-inline: 0 auto;
+}
+
+#shopify-section-founder_letter .multicolumn__card-text em {
+  display: block;
+  margin-block: 1.5em;
+  padding-inline: 1em;
+  border-inline-start: 3px solid currentColor;
+  font-style: italic;
+  font-size: 1.05em;
+}
+
+#shopify-section-founder_letter .founder-signature {
+  display: block;
+  max-width: 220px;
+  height: auto;
+  margin-top: 2.5em;
+}
+
+#shopify-section-founder_letter .founder-caption {
+  margin-top: 0.5em;
+  font-size: 0.85em;
+  opacity: 0.8;
+}
+
+#shopify-section-core_values h2 {
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+#shopify-section-core_values .product-labels__icon {
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  padding: 1.25em;
+  width: 96px;
+  height: 96px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 920px) {
+  #shopify-section-about_hero .media-with-text__card {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  #shopify-section-mission_strip .multicolumn__media {
+    min-height: 220px;
+  }
+}
+
 /* === iter3 / block 01 — cream section typography polish === */
 
 /* Explore the Flavours — cream/purple product section, no Bloop black defaults */
