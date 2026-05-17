@@ -1,0 +1,8 @@
+.DS_Store
+
+# Theme rebuild backups — kept on disk for local rollback, never tracked.
+# Mirrors .shopifyignore so backups don't get pushed to Shopify either.
+templates/*.bak-pre-audit-v2
+templates/*.bak-pre-*
+templates/*.bak
+templates/*.v1-bak
