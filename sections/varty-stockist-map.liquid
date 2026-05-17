@@ -24,6 +24,10 @@
   }
 
   #shopify-section-{{ section.id }} .varty-stockist-map__placeholder {
+    min-height: {{ section.settings.desktop_height }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     padding: 64px 24px;
     color: rgb(var(--layout-text-color, 84, 99, 179));
@@ -42,6 +46,10 @@
   @media screen and (max-width: 749px) {
     #shopify-section-{{ section.id }} .varty-stockist-map__wrapper {
       height: {{ section.settings.mobile_height }}px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-stockist-map__placeholder {
+      min-height: {{ section.settings.mobile_height }}px;
     }
   }
 </style>
