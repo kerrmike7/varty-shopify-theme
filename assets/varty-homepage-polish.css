@@ -997,3 +997,180 @@
     max-width: min(100%, 32rem);
   }
 }
+
+/* iter4-block-03 - Wholesale page */
+
+[id$="__wholesale_hero"] .media-with-text {
+  background: rgb(84, 99, 179);
+}
+
+[id$="__wholesale_hero"] .media-with-text__card {
+  align-items: stretch;
+  min-height: clamp(520px, 72vh, 760px);
+}
+
+[id$="__wholesale_hero"] .media-with-text__media {
+  background: rgb(84, 99, 179);
+}
+
+[id$="__wholesale_hero"] .media-with-text__content {
+  display: flex;
+}
+
+[id$="__wholesale_hero"] .media-with-text__content-wrapper {
+  align-self: center;
+  background: rgb(252, 242, 211);
+  color: rgb(84, 99, 179);
+  max-width: 38rem;
+  margin-inline: auto;
+  padding: clamp(2rem, 5vw, 4rem);
+  border-radius: 8px;
+}
+
+[id$="__wholesale_hero"] h1 {
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+  text-wrap: balance;
+  max-width: 18ch;
+}
+
+[id$="__wholesale_hero"] .content-text {
+  max-width: 42ch;
+}
+
+[id$="__wholesale_hero"] .button,
+[id$="__wholesale_hero"] a[class*="button"] {
+  border-radius: 999px;
+  padding-inline: 2em;
+}
+
+.varty-wholesale-form__inner {
+  max-width: 760px;
+  margin-inline: auto;
+}
+
+.varty-wholesale-form__header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.varty-wholesale-form__heading {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+  margin-bottom: 1rem;
+}
+
+.varty-wholesale-form__intro {
+  max-width: 56ch;
+  margin-inline: auto;
+}
+
+.varty-wholesale-form__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem 1.5rem;
+}
+
+.varty-wholesale-form__field--full {
+  grid-column: 1 / -1;
+}
+
+.varty-wholesale-form__field label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+
+.varty-wholesale-form__field input,
+.varty-wholesale-form__field select,
+.varty-wholesale-form__field textarea {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border: 1.5px solid currentColor;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+}
+
+.varty-wholesale-form__field select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 18px) 50%, calc(100% - 12px) 50%;
+  background-size: 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 2.5rem;
+}
+
+.varty-wholesale-form__field textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.varty-wholesale-form__submit-row {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.varty-wholesale-form__submit {
+  border-radius: 999px;
+  padding: 0.9rem 2.5rem;
+  background: rgb(84, 99, 179);
+  color: rgb(252, 242, 211);
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  font: inherit;
+}
+
+.varty-wholesale-form__submit:hover {
+  opacity: 0.9;
+}
+
+.varty-wholesale-form__success {
+  text-align: center;
+  padding: 2rem;
+  border: 1.5px solid currentColor;
+  border-radius: 8px;
+  font-size: 1.1em;
+}
+
+.varty-wholesale-form__errors {
+  background: rgba(220, 50, 50, 0.08);
+  border: 1px solid rgba(220, 50, 50, 0.4);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.varty-wholesale-form__errors ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: rgb(180, 30, 30);
+}
+
+@media screen and (max-width: 920px) {
+  [id$="__wholesale_hero"] .media-with-text__card {
+    min-height: 0;
+  }
+
+  [id$="__wholesale_hero"] .media-with-text__content-wrapper {
+    width: min(100%, 34rem);
+    padding: 2rem;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .varty-wholesale-form__grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .varty-wholesale-form__field--full {
+    grid-column: auto;
+  }
+}

@@ -1,119 +1,72 @@
 {
   "sections": {
     "wholesale_hero": {
-      "type": "image-banner",
+      "type": "media-with-text",
       "blocks": {
         "heading_wholesale": {
           "type": "heading",
           "settings": {
-            "heading": "Bring Varty to Your Shelves",
-            "heading_size": "heading_l",
+            "heading": "LET'S PUT SOMETHING GREAT ON YOUR SHELVES",
+            "heading_size": "heading_xl",
             "heading_tag": "h1",
-            "heading_color": "solid",
-            "heading_gradient": "linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(101,101,101,1) 100%)"
+            "heading_color": "solid"
+          }
+        },
+        "text_wholesale_pitch": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We partner with wholesalers who care about quality and purity as much as we do. Apply today to find out how you can become one of the first stockists of Varty in Canada.</p>",
+            "dim_text": false,
+            "text_size": "default"
+          }
+        },
+        "button_apply_now": {
+          "type": "button",
+          "settings": {
+            "button_label": "Apply Now",
+            "button_link": "#wholesale-application",
+            "target_blank": false,
+            "button_style": "solid"
           }
         }
       },
       "block_order": [
-        "heading_wholesale"
+        "heading_wholesale",
+        "text_wholesale_pitch",
+        "button_apply_now"
       ],
       "settings": {
-        "height_mode": "percents",
-        "desktop_height": 55,
-        "mobile_height": 35,
-        "section_width": "overlap",
-        "center_text": true,
-        "vertical_content_position": "center",
-        "overlay_color": "#5463B3",
-        "overlay_opacity": 50,
-        "color_type": "invert",
-        "background_color": "#5463B3",
-        "text_color": "#ffffff",
+        "image": "",
+        "section_width": "wide",
+        "swap_media": true,
+        "media_size": "half",
+        "media_ratio": "square",
+        "narrow_content": true,
+        "vertical_text_alignment": "center",
+        "horizontal_text_alignment": "flex-start",
+        "varty_color_scheme": "scheme_brand_purple",
+        "color_type": "scheme",
+        "fill_section": true,
         "desktop_padding_top": 0,
         "desktop_padding_bottom": 0,
         "mobile_padding_top": 0,
-        "mobile_padding_bottom": 0
+        "mobile_padding_bottom": 0,
+        "tbd_note": "<<TBD:upload/photograph tilted Varty product-trio-on-blue shot for wholesale hero; do not reuse Awards/About product-trio shot; decorative floral in cream panel deferred.>>"
       }
     },
-    "wholesale_benefits": {
-      "type": "multicolumn",
-      "blocks": {
-        "col_quality": {
-          "type": "image",
-          "settings": {
-            "title": "Premium quality",
-            "text": "<p>Certified organic, 3–4 ingredients. A product your customers can trust and read on the label.</p>"
-          }
-        },
-        "col_demand": {
-          "type": "image",
-          "settings": {
-            "title": "Growing demand",
-            "text": "<p>Clean-label oat beverages are the fastest-growing category in plant-based dairy. Varty leads on transparency.</p>"
-          }
-        },
-        "col_partner": {
-          "type": "image",
-          "settings": {
-            "title": "Partner support",
-            "text": "<p>Dedicated wholesale team, flexible minimum orders, Tuesday fulfillment cadence for retail replenishment.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "col_quality",
-        "col_demand",
-        "col_partner"
-      ],
+    "wholesale_application": {
+      "type": "varty-wholesale-form",
       "settings": {
-        "heading": "Why stock Varty?",
-        "columns_desktop": 3,
-        "image_ratio": "adapt",
-        "column_alignment": "center",
-        "color_type": "custom",
-        "background_color_type": "solid",
-        "background_color": "#F0E8C8",
-        "text_color": "#2D2D5E",
-        "desktop_padding_top": 80,
-        "desktop_padding_bottom": 0,
-        "mobile_padding_top": 48,
-        "mobile_padding_bottom": 0
-      }
-    },
-    "wholesale_form": {
-      "type": "contact-form",
-      "blocks": {
-        "heading_form": {
-          "type": "heading",
-          "settings": {
-            "heading": "Apply to become a stockist",
-            "heading_size": "heading_m",
-            "heading_tag": "h2",
-            "heading_color": "solid",
-            "heading_gradient": "linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(101,101,101,1) 100%)"
-          }
-        },
-        "text_form": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Fill in the form below and Lina will be in touch within 2 business days. Required fields marked *.</p><p><strong>Need to reach us directly?</strong> Email <a href=\"mailto:info@vartyallnatural.ca\">info@vartyallnatural.ca</a></p>",
-            "dim_text": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_form",
-        "text_form"
-      ],
-      "settings": {
-        "color_type": "custom",
-        "background_color_type": "solid",
-        "background_color": "#F0E8C8",
-        "text_color": "#2D2D5E",
-        "desktop_padding_top": 40,
-        "desktop_padding_bottom": 80,
-        "mobile_padding_top": 24,
-        "mobile_padding_bottom": 48
+        "varty_color_scheme": "scheme_brand_beige",
+        "color_type": "scheme",
+        "heading": "Apply to Become a Stockist",
+        "intro_text": "<p>Fill in the form below and Lina will be in touch within 2 business days. Required fields marked *.</p><p><strong>Need to reach us directly?</strong> Email <a href=\"mailto:info@vartyallnatural.ca\">info@vartyallnatural.ca</a></p>",
+        "submit_label": "Submit Application",
+        "success_message": "Thanks — we've received your application. Lina will be in touch within 2 business days.",
+        "desktop_padding_top": 96,
+        "desktop_padding_bottom": 96,
+        "mobile_padding_top": 64,
+        "mobile_padding_bottom": 64
       }
     },
     "main-page": {
@@ -132,8 +85,7 @@
   },
   "order": [
     "wholesale_hero",
-    "wholesale_benefits",
-    "wholesale_form",
+    "wholesale_application",
     "main-page"
   ]
 }

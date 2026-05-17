@@ -1,0 +1,253 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    {% if section.settings.varty_color_scheme != blank and section.settings.varty_color_scheme != 'none' %}
+      {% render 'varty-color-vars', scheme: section.settings.varty_color_scheme %}
+    {% endif %}
+  }
+
+  #shopify-section-{{ section.id }} .varty-wholesale-form-section {
+    background: rgb(var(--layout-background-color, 252, 242, 211));
+    color: rgb(var(--layout-text-color, 84, 99, 179));
+    padding-top: var(--section-pt);
+    padding-bottom: var(--section-pb);
+  }
+
+  @media screen and (max-width: 920px) {
+    #shopify-section-{{ section.id }} .varty-wholesale-form-section {
+      padding-top: var(--section-pt-mobile);
+      padding-bottom: var(--section-pb-mobile);
+    }
+  }
+{% endstyle %}
+
+<section
+  id="wholesale-application"
+  class="varty-wholesale-form-section"
+  style="
+    --section-pt: {{ section.settings.desktop_padding_top }}px;
+    --section-pb: {{ section.settings.desktop_padding_bottom }}px;
+    --section-pt-mobile: {{ section.settings.mobile_padding_top }}px;
+    --section-pb-mobile: {{ section.settings.mobile_padding_bottom }}px;
+  "
+>
+  <div class="varty-wholesale-form__inner page-width">
+    <header class="varty-wholesale-form__header">
+      <h2 class="varty-wholesale-form__heading">{{ section.settings.heading | escape }}</h2>
+      <div class="varty-wholesale-form__intro richtext">{{ section.settings.intro_text }}</div>
+    </header>
+
+    {% form 'contact', id: 'wholesale-application-form', class: 'varty-wholesale-form__form' %}
+      {%- if form.posted_successfully? -%}
+        <div class="varty-wholesale-form__success" role="status" tabindex="-1" autofocus>
+          {{ section.settings.success_message | escape }}
+        </div>
+      {%- else -%}
+        {%- if form.errors -%}
+          <div class="varty-wholesale-form__errors" role="alert">
+            {{ form.errors | default_errors }}
+          </div>
+        {%- endif -%}
+
+        <div class="varty-wholesale-form__grid">
+          <div class="varty-wholesale-form__field">
+            <label for="wholesale-first-name">First name <span aria-hidden="true">*</span></label>
+            <input type="text" id="wholesale-first-name" name="contact[First name]" autocomplete="given-name" required>
+          </div>
+
+          <div class="varty-wholesale-form__field">
+            <label for="wholesale-last-name">Last name <span aria-hidden="true">*</span></label>
+            <input type="text" id="wholesale-last-name" name="contact[Last name]" autocomplete="family-name" required>
+          </div>
+
+          <div class="varty-wholesale-form__field varty-wholesale-form__field--full">
+            <label for="wholesale-business-name">Business name <span aria-hidden="true">*</span></label>
+            <input type="text" id="wholesale-business-name" name="contact[Business name]" autocomplete="organization" required>
+          </div>
+
+          <div class="varty-wholesale-form__field">
+            <label for="wholesale-business-type">Business type <span aria-hidden="true">*</span></label>
+            <select id="wholesale-business-type" name="contact[Business type]" required>
+              <option value="">Select...</option>
+              <option value="Grocery">Grocery</option>
+              <option value="Health food">Health food</option>
+              <option value="Food service">Food service</option>
+              <option value="Café">Café</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="varty-wholesale-form__field">
+            <label for="wholesale-province">Province <span aria-hidden="true">*</span></label>
+            <select id="wholesale-province" name="contact[Province]" required>
+              <option value="">Select...</option>
+              <option value="Alberta">Alberta</option>
+              <option value="British Columbia">British Columbia</option>
+              <option value="Manitoba">Manitoba</option>
+              <option value="New Brunswick">New Brunswick</option>
+              <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+              <option value="Nova Scotia">Nova Scotia</option>
+              <option value="Ontario">Ontario</option>
+              <option value="Prince Edward Island">Prince Edward Island</option>
+              <option value="Québec">Québec</option>
+              <option value="Saskatchewan">Saskatchewan</option>
+              <option value="Northwest Territories">Northwest Territories</option>
+              <option value="Nunavut">Nunavut</option>
+              <option value="Yukon">Yukon</option>
+            </select>
+          </div>
+
+          <div class="varty-wholesale-form__field">
+            <label for="wholesale-city">City <span aria-hidden="true">*</span></label>
+            <input type="text" id="wholesale-city" name="contact[City]" autocomplete="address-level2" required>
+          </div>
+
+          <div class="varty-wholesale-form__field">
+            <label for="wholesale-email">Email address <span aria-hidden="true">*</span></label>
+            <input type="email" id="wholesale-email" name="contact[email]" autocomplete="email" required>
+          </div>
+
+          <div class="varty-wholesale-form__field">
+            <label for="wholesale-phone">Phone number</label>
+            <input type="tel" id="wholesale-phone" name="contact[Phone number]" autocomplete="tel">
+          </div>
+
+          <div class="varty-wholesale-form__field varty-wholesale-form__field--full">
+            <label for="wholesale-volume">Estimated monthly volume <span aria-hidden="true">*</span></label>
+            <select id="wholesale-volume" name="contact[Estimated monthly volume]" required>
+              <option value="">Select...</option>
+              <option value="Less than 50 units">Less than 50 units</option>
+              <option value="50-200 units">50-200 units</option>
+              <option value="200-500 units">200-500 units</option>
+              <option value="500+ units">500+ units</option>
+            </select>
+          </div>
+
+          <div class="varty-wholesale-form__field varty-wholesale-form__field--full">
+            <label for="wholesale-message">Message / additional context</label>
+            <textarea id="wholesale-message" name="contact[body]" rows="5"></textarea>
+          </div>
+
+          <div class="varty-wholesale-form__field varty-wholesale-form__field--full">
+            <label for="wholesale-source">How did you hear about us?</label>
+            <input type="text" id="wholesale-source" name="contact[How did you hear about us?]">
+          </div>
+        </div>
+
+        <div class="varty-wholesale-form__submit-row">
+          <button type="submit" class="varty-wholesale-form__submit">
+            {{ section.settings.submit_label | escape }}
+          </button>
+        </div>
+      {%- endif -%}
+    {% endform %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Varty Wholesale Form",
+  "tag": "section",
+  "class": "varty-wholesale-form section-spacing",
+  "settings": [
+    {
+      "type": "select",
+      "id": "varty_color_scheme",
+      "label": "Varty colour scheme",
+      "options": [
+        { "value": "scheme_brand_beige", "label": "Brand beige" },
+        { "value": "scheme_brand_purple", "label": "Brand purple" },
+        { "value": "scheme_dark", "label": "Dark" },
+        { "value": "scheme_sku_original", "label": "SKU original" },
+        { "value": "scheme_sku_vanilla", "label": "SKU vanilla" },
+        { "value": "scheme_sku_barista", "label": "SKU barista" }
+      ],
+      "default": "scheme_brand_beige"
+    },
+    {
+      "type": "select",
+      "id": "color_type",
+      "label": "Colour type",
+      "options": [
+        { "value": "scheme", "label": "Varty colour scheme" }
+      ],
+      "default": "scheme"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Apply to Become a Stockist"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_text",
+      "label": "Intro text",
+      "default": "<p>Fill in the form below and we'll be in touch within 2 business days.</p>"
+    },
+    {
+      "type": "text",
+      "id": "submit_label",
+      "label": "Submit button label",
+      "default": "Submit Application"
+    },
+    {
+      "type": "textarea",
+      "id": "success_message",
+      "label": "Success message (shown after successful submission)",
+      "default": "Thanks — we've received your application. We'll be in touch within 2 business days."
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 8,
+      "unit": "px",
+      "label": "Desktop padding top",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 8,
+      "unit": "px",
+      "label": "Desktop padding bottom",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 8,
+      "unit": "px",
+      "label": "Mobile padding top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 8,
+      "unit": "px",
+      "label": "Mobile padding bottom",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "Varty Wholesale Form"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["page"]
+  }
+}
+{% endschema %}
