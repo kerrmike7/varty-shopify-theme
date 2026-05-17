@@ -286,17 +286,17 @@
 
 /* iter4-block-01 - About page */
 
-#shopify-section-about_hero h1 {
+[id$="__about_hero"] h1 {
   text-transform: none;
   letter-spacing: 0;
   line-height: 1.05;
 }
 
-#shopify-section-about_hero .media-with-text__content-wrapper {
+[id$="__about_hero"] .media-with-text__content-wrapper {
   max-width: 46rem;
 }
 
-#shopify-section-about_hero .about-clean-advantage-stamp {
+[id$="__about_hero"] .about-clean-advantage-stamp {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -311,32 +311,32 @@
   text-align: center;
 }
 
-#shopify-section-mission_strip h2 {
+[id$="__mission_strip"] h2 {
   max-width: 38ch;
   margin-inline: auto;
   text-wrap: balance;
 }
 
-#shopify-section-mission_strip .product-labels__container {
+[id$="__mission_strip"] .product-labels__container {
   gap: 12px;
 }
 
-#shopify-section-mission_strip .multicolumn__media {
+[id$="__mission_strip"] .multicolumn__media {
   min-height: 260px;
 }
 
-#shopify-section-mission_strip .multicolumn__image {
+[id$="__mission_strip"] .multicolumn__image {
   height: 100%;
   object-fit: cover;
 }
 
-#shopify-section-founder_letter .multicolumn__header,
-#shopify-section-founder_letter .product-labels__container {
+[id$="__founder_letter"] .multicolumn__header,
+[id$="__founder_letter"] .product-labels__container {
   max-width: 780px;
   margin-inline: 0 auto;
 }
 
-#shopify-section-founder_letter .multicolumn__card-text em {
+[id$="__founder_letter"] .multicolumn__card-text em {
   display: block;
   margin-block: 1.5em;
   padding-inline: 1em;
@@ -345,25 +345,25 @@
   font-size: 1.05em;
 }
 
-#shopify-section-founder_letter .founder-signature {
+[id$="__founder_letter"] .founder-signature {
   display: block;
   max-width: 220px;
   height: auto;
   margin-top: 2.5em;
 }
 
-#shopify-section-founder_letter .multicolumn__card-text p:last-child {
+[id$="__founder_letter"] .multicolumn__card-text p:last-child {
   margin-top: 0.5em;
   font-size: 0.85em;
   opacity: 0.8;
 }
 
-#shopify-section-core_values h2 {
+[id$="__core_values"] h2 {
   text-transform: uppercase;
   letter-spacing: 0;
 }
 
-#shopify-section-core_values .product-labels__icon {
+[id$="__core_values"] .product-labels__icon {
   border: 1.5px solid currentColor;
   border-radius: 50%;
   padding: 1.25em;
@@ -375,12 +375,12 @@
 }
 
 @media screen and (max-width: 920px) {
-  #shopify-section-about_hero .media-with-text__card {
+  [id$="__about_hero"] .media-with-text__card {
     display: flex;
     flex-direction: column-reverse;
   }
 
-  #shopify-section-mission_strip .multicolumn__media {
+  [id$="__mission_strip"] .multicolumn__media {
     min-height: 220px;
   }
 }

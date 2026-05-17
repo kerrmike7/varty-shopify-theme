@@ -33,7 +33,7 @@
         "clean_advantage_stamp"
       ],
       "settings": {
-        "image": "shopify://shop_images/varty-all-skus-ecommerce.jpg",
+        "image": "shopify://shop_images/varty-lifestyle-01.jpg",
         "section_width": "wide",
         "swap_media": false,
         "media_size": "half",
@@ -47,7 +47,8 @@
         "desktop_padding_top": 80,
         "desktop_padding_bottom": 80,
         "mobile_padding_top": 48,
-        "mobile_padding_bottom": 48
+        "mobile_padding_bottom": 48,
+        "tbd_note": "<<TBD:upload About hero product-trio image from /Users/michaelkerr/Documents/Second Brain/05_PROJECTS/varty/brand/Product Photoshoot /All_Ecommerce (1).jpg; varty-all-skus-ecommerce.jpg did not resolve in preview.>>"
       }
     },
     "mission_strip": {
@@ -68,7 +69,7 @@
         "mission_image_2": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/varty-all-skus-ecommerce.jpg",
+            "image": "shopify://shop_images/varty-lifestyle-01.jpg",
             "heading": "",
             "text": "",
             "button_label": "",
@@ -120,7 +121,7 @@
         "desktop_padding_bottom": 80,
         "mobile_padding_top": 48,
         "mobile_padding_bottom": 48,
-        "tbd_note": "<<TBD: exact Wix mission-strip left oats/walnuts image and right coffee/oats-pouring image still need admin upload; current section uses already-referenced Shopify image assets as closest available placeholders.>>"
+        "tbd_note": "<<TBD: exact Wix mission-strip left oats/walnuts image, centre product-trio image, and right coffee/oats-pouring image still need admin upload; current section uses already-referenced Shopify image assets as closest available placeholders.>>"
       }
     },
     "founder_letter": {
