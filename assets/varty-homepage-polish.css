@@ -1311,3 +1311,115 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* iter4-block-05 - Recipes blog */
+
+[id$="__recipes_hero"] h1 {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+  text-wrap: balance;
+  max-width: 18ch;
+  margin-inline: auto;
+}
+
+[id$="__recipes_hero"] .content-subheading {
+  color: inherit;
+}
+
+[id$="__main-blog"] {
+  background: rgb(252, 242, 211);
+  color: rgb(84, 99, 179);
+}
+
+[id$="__main-blog"] .blog__heading {
+  color: inherit;
+}
+
+[id$="__main-blog"] .blog-articles {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+[id$="__main-blog"] .blog-articles__article {
+  min-width: 0;
+}
+
+[id$="__main-blog"] .article-card {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: 0;
+  height: 100%;
+  background: rgb(252, 242, 211);
+  color: rgb(84, 99, 179);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+[id$="__main-blog"] .article-card__info,
+[id$="__main-blog"] .article-card__image-wrapper {
+  flex: 0 0 auto !important;
+  width: 100%;
+}
+
+[id$="__main-blog"] .article-card__info {
+  padding-top: 1.1rem;
+}
+
+[id$="__main-blog"] .article-card__title,
+[id$="__main-blog"] .article-card__excerpt,
+[id$="__main-blog"] .article-card__link {
+  color: inherit;
+}
+
+[id$="__main-blog"] .article-card__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgb(84, 99, 179);
+  color: rgb(252, 242, 211);
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+}
+
+[id$="__main-blog"] .article-card__image {
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+[id$="__main-blog"] .article-card__image img {
+  object-fit: cover;
+}
+
+[id$="__media_with_text_dc3xWL"] h2,
+[id$="__media_with_text_dc3xWL"] .content-heading {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+[id$="__media_with_text_dc3xWL"] .video-button-block.disabled {
+  display: none;
+}
+
+[id$="__main-article"] {
+  background: rgb(252, 242, 211);
+  color: rgb(84, 99, 179);
+}
+
+@media screen and (max-width: 1024px) {
+  [id$="__main-blog"] .blog-articles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 749px) {
+  [id$="__recipes_hero"] h1 {
+    font-size: clamp(2rem, 12vw, 3.2rem);
+  }
+
+  [id$="__main-blog"] .blog-articles {
+    grid-template-columns: 1fr;
+  }
+}

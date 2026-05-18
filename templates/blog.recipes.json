@@ -9,6 +9,42 @@
  */
 {
   "sections": {
+    "recipes_hero": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_eyebrow": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Oat Beverage Recipes",
+            "subheading_size": "default",
+            "subheading_tag": "h3"
+          }
+        },
+        "heading_recipes": {
+          "type": "heading",
+          "settings": {
+            "heading": "101 WAYS TO MAKE MAGIC WITH OAT M*LK",
+            "heading_size": "heading_l",
+            "heading_tag": "h1",
+            "heading_color": "solid"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_eyebrow",
+        "heading_recipes"
+      ],
+      "settings": {
+        "section_width": "narrow",
+        "center_text": true,
+        "varty_color_scheme": "scheme_brand_purple",
+        "color_type": "scheme",
+        "desktop_padding_top": 80,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48
+      }
+    },
     "main-blog": {
       "type": "main-blog",
       "blocks": {
@@ -37,7 +73,7 @@
         "bd1ff19b-5e70-4f23-8583-e90395baf1e4": {
           "type": "read_more",
           "settings": {
-            "button_label": "Read more"
+            "button_label": "Get Recipe"
           }
         }
       },
@@ -55,7 +91,7 @@
         "posts_per_page": 12,
         "infinite_scroll": "disable",
         "grid_type": "2",
-        "image_ratio": "portrait",
+        "image_ratio": "square",
         "focal_point": "center center",
         "context_image_radius": "default",
         "layout_margins": "enable",
@@ -67,6 +103,7 @@
     }
   },
   "order": [
+    "recipes_hero",
     "main-blog"
   ]
 }
