@@ -1,0 +1,134 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    {% render 'varty-color-vars', scheme: 'scheme_brand_beige' %}
+    --padding-top: {{ section.settings.desktop_padding_top }}px;
+    --padding-bottom: {{ section.settings.desktop_padding_bottom }}px;
+    background-color: rgb(var(--layout-background-color));
+    color: rgb(var(--layout-text-color));
+  }
+
+  #shopify-section-{{ section.id }} .varty-label-truth {
+    padding-top: var(--padding-top);
+    padding-bottom: var(--padding-bottom);
+  }
+
+  #shopify-section-{{ section.id }} .varty-label-truth__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+    gap: clamp(32px, 5vw, 72px);
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .varty-label-truth__heading {
+    margin: 0;
+    color: #5463b3;
+    line-height: 0.96;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .varty-label-truth__body {
+    max-width: 68ch;
+    margin-top: 24px;
+    color: #5463b3;
+  }
+
+  #shopify-section-{{ section.id }} .varty-label-truth__thumbs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 28px;
+  }
+
+  #shopify-section-{{ section.id }} .varty-label-truth__media,
+  #shopify-section-{{ section.id }} .varty-label-truth__thumb {
+    overflow: hidden;
+    border-radius: 8px;
+    background: rgba(84, 99, 179, 0.08);
+  }
+
+  #shopify-section-{{ section.id }} .varty-label-truth__media img,
+  #shopify-section-{{ section.id }} .varty-label-truth__thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #shopify-section-{{ section.id }} .varty-label-truth__media {
+    aspect-ratio: 4 / 5;
+  }
+
+  #shopify-section-{{ section.id }} .varty-label-truth__thumb {
+    aspect-ratio: 1;
+  }
+
+  @media screen and (max-width: 920px) {
+    #shopify-section-{{ section.id }} {
+      --padding-top: {{ section.settings.mobile_padding_top }}px;
+      --padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-label-truth__grid {
+      grid-template-columns: 1fr;
+    }
+
+    #shopify-section-{{ section.id }} .varty-label-truth__media {
+      order: -1;
+      aspect-ratio: 4 / 3;
+    }
+  }
+{% endstyle %}
+
+<div class="varty-label-truth section-padding--{{ settings.white_space }}">
+  <div class="page-width page-width--{{ settings.max_page_width }}">
+    <div class="varty-label-truth__grid">
+      <div class="varty-label-truth__content">
+        <h2 class="varty-label-truth__heading custom-heading content-heading--{{ settings.typography_preset }} heading_xl">
+          {{ section.settings.heading }}
+        </h2>
+        <div class="varty-label-truth__body richtext body-text--{{ settings.typography_preset }}">
+          {{ section.settings.body }}
+        </div>
+        <div class="varty-label-truth__thumbs" aria-hidden="true">
+          {% if section.settings.thumb_1 != blank %}
+            <div class="varty-label-truth__thumb">
+              <img src="{{ section.settings.thumb_1 | asset_url }}" alt="" loading="lazy" width="600" height="600">
+            </div>
+          {% endif %}
+          {% if section.settings.thumb_2 != blank %}
+            <div class="varty-label-truth__thumb">
+              <img src="{{ section.settings.thumb_2 | asset_url }}" alt="" loading="lazy" width="600" height="600">
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      {% if section.settings.main_image != blank %}
+        <div class="varty-label-truth__media">
+          <img src="{{ section.settings.main_image | asset_url }}" alt="" loading="lazy" width="900" height="1125">
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Varty label truth",
+  "tag": "section",
+  "class": "section-varty-label-truth",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "richtext", "id": "body", "label": "Body" },
+    { "type": "text", "id": "main_image", "label": "Main image asset" },
+    { "type": "text", "id": "thumb_1", "label": "Thumb 1 asset" },
+    { "type": "text", "id": "thumb_2", "label": "Thumb 2 asset" },
+    { "type": "range", "id": "desktop_padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Desktop padding top", "default": 72 },
+    { "type": "range", "id": "desktop_padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Desktop padding bottom", "default": 72 },
+    { "type": "range", "id": "mobile_padding_top", "min": 0, "max": 80, "step": 4, "unit": "px", "label": "Mobile padding top", "default": 44 },
+    { "type": "range", "id": "mobile_padding_bottom", "min": 0, "max": 80, "step": 4, "unit": "px", "label": "Mobile padding bottom", "default": 44 }
+  ],
+  "presets": [
+    { "name": "Varty label truth" }
+  ]
+}
+{% endschema %}

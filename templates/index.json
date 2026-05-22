@@ -480,59 +480,6 @@
         "varty_color_scheme": "scheme_brand_purple"
       }
     },
-    "awards_strip": {
-      "type": "multicolumn",
-      "blocks": {
-        "award_story": {
-          "type": "text",
-          "settings": {
-            "heading": "Emerging Entrepreneur Recognition",
-            "text": "<p>Recognised by Futurpreneur / RBC Future Launch in 2024 as an emerging Canadian food entrepreneur building a cleaner pantry staple.</p>",
-            "button_label": "Read the Press Release →",
-            "button_link": "/pages/awards"
-          }
-        },
-        "futurpreneur": {
-          "type": "text",
-          "settings": {
-            "heading": "Futurpreneur Canada",
-            "text": "<p>National support for founders building ambitious Canadian businesses.</p>",
-            "button_label": "",
-            "button_link": ""
-          }
-        },
-        "rbc": {
-          "type": "text",
-          "settings": {
-            "heading": "RBC Future Launch",
-            "text": "<p>Recognition tied to the next generation of entrepreneurs and community builders.</p>",
-            "button_label": "",
-            "button_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "award_story",
-        "futurpreneur",
-        "rbc"
-      ],
-      "settings": {
-        "max_columns": "3",
-        "mobile_layout": "1",
-        "center_text": true,
-        "color_type": "custom",
-        "background_color_type": "solid",
-        "background_color": "#fcf2d3",
-        "text_color": "#5463B3",
-        "desktop_padding_top": 72,
-        "desktop_padding_bottom": 72,
-        "mobile_padding_top": 48,
-        "mobile_padding_bottom": 48,
-        "varty_color_scheme": "scheme_brand_beige",
-        "subheading": "Awards & Recognition · 2024",
-        "heading": "Early Proof for a Cleaner Canadian Pantry"
-      }
-    },
     "faq": {
       "type": "collapsible-tabs",
       "blocks": {
@@ -627,6 +574,36 @@
         "subheading": "For shoppers, grocers, cafes, and food service",
         "heading": "Find Varty, or Bring It to Your Shelves"
       }
+    },
+    "label_truth": {
+      "type": "varty-label-truth",
+      "settings": {
+        "heading": "THE OAT BEVERAGE THAT (ACTUALLY) LIVES UP TO THE LABEL",
+        "body": "<p>Are \"healthy\" oat beverages as healthy as they claim to be? If you've read the labels like we have – and questioned the claims like we have – then you know the answer.</p><p>Like you, we care about what we put in our bodies, so if an ingredient doesn't belong in your pantry, it won't be in ours. VARTY is taking organic oat beverages back to basics with 3-4 ingredients. Only what matters. Nothing more, nothing masked. Just real ingredients, doing what they do best!</p>",
+        "main_image": "varty-lifestyle-01.jpg",
+        "thumb_1": "varty-lifestyle-02.jpg",
+        "thumb_2": "varty-lifestyle-03.jpg",
+        "desktop_padding_top": 72,
+        "desktop_padding_bottom": 72,
+        "mobile_padding_top": 44,
+        "mobile_padding_bottom": 44
+      }
+    },
+    "awards_card": {
+      "type": "varty-awards-card",
+      "settings": {
+        "eyebrow": "Awards & Recognition",
+        "year": "2024",
+        "heading": "EMERGING ENTREPRENEUR AWARD",
+        "body": "<p>Futurpreneur, on behalf of Futurpreneur Foundation, and RBC Future Launch empower young entrepreneurs with $80,000 in Start-up Awards</p>",
+        "button_label": "Press Release",
+        "button_link": "/pages/awards",
+        "logo_asset": "",
+        "desktop_padding_top": 56,
+        "desktop_padding_bottom": 72,
+        "mobile_padding_top": 40,
+        "mobile_padding_bottom": 48
+      }
     }
   },
   "order": [
@@ -636,11 +613,12 @@
     "product_trio",
     "trial_mix_cards",
     "certifications",
+    "label_truth",
+    "awards_card",
     "organic_marquee",
     "pantry_truth",
     "why_varty",
     "subscribe_save",
-    "awards_strip",
     "wholesale_stockists_strip",
     "faq"
   ]
