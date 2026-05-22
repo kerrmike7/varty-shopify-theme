@@ -62,16 +62,26 @@
             "subheading_size": "body_s",
             "subheading_tag": "p"
           }
+        },
+        "button_press": {
+          "type": "button",
+          "settings": {
+            "button_label": "Press Release",
+            "button_link": "/pages/awards#press-release",
+            "target_blank": false,
+            "button_style": "solid"
+          }
         }
       },
       "block_order": [
         "logo_futurpreneur",
         "heading_award",
         "text_award",
-        "caption_year"
+        "caption_year",
+        "button_press"
       ],
       "settings": {
-        "image": "",
+        "image": "shopify://shop_images/varty-all-skus-ecommerce.jpg",
         "section_width": "wide",
         "swap_media": false,
         "media_size": "half",
@@ -86,7 +96,7 @@
         "desktop_padding_bottom": 96,
         "mobile_padding_top": 64,
         "mobile_padding_bottom": 64,
-        "tbd_note": "<<TBD:upload Futurpreneur logo to shopify://shop_files/futurpreneur-logo.svg; upload/photograph tilted Varty product-trio-on-blue shot for the section-level media; confirm Press Release URL before adding button_press to block_order; decorative stickers deferred.>>"
+        "tbd_note": "<<TODO(asset): futurpreneur-logo.svg and the exact stacked-carton award photo are not present in assets/; using varty-all-skus-ecommerce.jpg as closest product image. TODO(link): replace /pages/awards#press-release with the external Press Release URL when supplied.>>"
       }
     },
     "main-page": {
