@@ -291,29 +291,44 @@
     "pantry_truth": {
       "type": "media-with-text",
       "blocks": {
+        "eyebrow": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Our Natural Oat Beverages",
+            "subheading_size": "body_s",
+            "subheading_tag": "h3"
+          }
+        },
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Step Inside Our Pantry",
-            "heading_size": "heading_l"
+            "heading": "STEP INSIDE OUR PANTRY…",
+            "heading_size": "heading_l",
+            "heading_tag": "h2",
+            "heading_color": "solid",
+            "heading_gradient": ""
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>We said oats, water, and a little salt. That's what's in the carton. No sunflower oil. No gums. No filler. Just certified organic oats, filtered water, and a pinch of sea salt — because a short ingredient list shouldn't be a marketing claim. It should be the standard.</p><p><strong>Step inside our pantry:</strong></p><ul><li>Filtered Water</li><li>Canadian Organic Oats</li><li>Sea Salt</li><li>Sometimes Vanilla</li></ul><p>…That's it.</p>"
+            "text": "<p>Delicious, creamy, clean, and made with ingredients your pantry would approve of. It's an oat beverage that just makes sense.</p><ul><li>Filtered Water</li><li>Canadian Organic Oats</li><li>Sea Salt</li><li>Sometimes Vanilla</li><li>…That's it.</li></ul>",
+            "text_size": "default",
+            "dim_text": false
           }
         },
         "button": {
           "type": "button",
           "settings": {
             "button_label": "Shop Varty",
-            "button_link": "/collections/flavours",
-            "button_style": "solid"
+            "button_link": "/collections/all",
+            "button_style": "solid",
+            "target_blank": false
           }
         }
       },
       "block_order": [
+        "eyebrow",
         "heading",
         "text",
         "button"
@@ -604,6 +619,19 @@
         "mobile_padding_top": 40,
         "mobile_padding_bottom": 48
       }
+    },
+    "pantry_intro": {
+      "type": "varty-pantry-intro",
+      "settings": {
+        "eyebrow": "Our natural oat beverages are",
+        "heading": "Delicious, creamy, clean, and made with ingredients your pantry would approve of",
+        "left_image": "varty-lifestyle-04.jpg",
+        "right_image": "varty-all-skus-ecommerce.jpg",
+        "desktop_padding_top": 104,
+        "desktop_padding_bottom": 96,
+        "mobile_padding_top": 56,
+        "mobile_padding_bottom": 56
+      }
     }
   },
   "order": [
@@ -615,6 +643,7 @@
     "certifications",
     "label_truth",
     "awards_card",
+    "pantry_intro",
     "organic_marquee",
     "pantry_truth",
     "why_varty",
