@@ -43,6 +43,19 @@
     text-underline-offset: 0.2em;
   }
 
+  #shopify-section-{{ section.id }} .varty-stockist-map__directions {
+    padding: 16px 24px 24px;
+    text-align: center;
+    background: rgb(var(--layout-background-color, 252, 242, 211));
+    color: rgb(var(--layout-text-color, 84, 99, 179));
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockist-map__directions a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
   @media screen and (max-width: 749px) {
     #shopify-section-{{ section.id }} .varty-stockist-map__wrapper {
       height: {{ section.settings.mobile_height }}px;
@@ -68,7 +81,7 @@
     <div class="varty-stockist-map__wrapper">
       <iframe
         src="{{ map_embed_url }}"
-        title="Varty stockist locations"
+        title="{{ section.settings.pin_name | escape }}"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
         allowfullscreen
@@ -77,6 +90,11 @@
   {% else %}
     <div class="varty-stockist-map__placeholder">
       <p>Map coming soon. <a href="#store-finder-cards">Browse stockists by name or region</a></p>
+    </div>
+  {% endif %}
+  {% if section.settings.directions_url != blank %}
+    <div class="varty-stockist-map__directions">
+      <a href="{{ section.settings.directions_url }}" target="_blank" rel="noopener">Directions</a>
     </div>
   {% endif %}
 </section>
@@ -102,6 +120,17 @@
       "id": "map_embed_url",
       "label": "Google My Maps embed URL (iframe src)",
       "info": "Create a My Maps map with all stockist pins, then Share → Embed on my site → copy the iframe src URL."
+    },
+    {
+      "type": "text",
+      "id": "pin_name",
+      "label": "Pin name",
+      "default": "L'Eau Vive Aliments Naturels Inc."
+    },
+    {
+      "type": "url",
+      "id": "directions_url",
+      "label": "Directions URL"
     },
     {
       "type": "range",

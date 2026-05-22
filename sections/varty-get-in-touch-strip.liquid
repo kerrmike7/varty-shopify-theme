@@ -1,0 +1,189 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    {% render 'varty-color-vars', scheme: 'scheme_brand_beige' %}
+    background: rgb(var(--layout-background-color));
+    color: rgb(var(--layout-text-color));
+    padding-top: {{ section.settings.desktop_padding_top }}px;
+    padding-bottom: {{ section.settings.desktop_padding_bottom }}px;
+  }
+
+  #shopify-section-{{ section.id }} .varty-touch-strip {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+  }
+
+  #shopify-section-{{ section.id }} .varty-touch-strip__card {
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(24px, 4vw, 48px);
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .varty-touch-strip__card--purple {
+    {% render 'varty-color-vars', scheme: 'scheme_brand_purple' %}
+    background: rgb(var(--layout-background-color));
+    color: rgb(var(--layout-text-color));
+  }
+
+  #shopify-section-{{ section.id }} .varty-touch-strip__heading {
+    margin: 0 0 1rem;
+    color: inherit;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .varty-touch-strip__body {
+    margin: 0;
+    color: inherit;
+  }
+
+  #shopify-section-{{ section.id }} .varty-touch-strip__body a {
+    color: inherit;
+  }
+
+  #shopify-section-{{ section.id }} .varty-touch-strip__social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 1.5rem;
+  }
+
+  #shopify-section-{{ section.id }} .varty-touch-strip__social span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 1.5px solid currentColor;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  #shopify-section-{{ section.id }} .varty-touch-strip__image {
+    padding: 0;
+  }
+
+  #shopify-section-{{ section.id }} .varty-touch-strip__image img {
+    width: 100%;
+    height: 100%;
+    min-height: 320px;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media screen and (max-width: 920px) {
+    #shopify-section-{{ section.id }} {
+      padding-top: {{ section.settings.mobile_padding_top }}px;
+      padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-touch-strip {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstyle %}
+
+<section class="varty-touch-strip">
+  <div class="varty-touch-strip__card varty-touch-strip__card--purple">
+    <h2 class="varty-touch-strip__heading custom-heading heading_m">FOLLOW</h2>
+    <p class="varty-touch-strip__body">@VARTYALLNATURAL</p>
+    <div class="varty-touch-strip__social" aria-label="Social links">
+      <span aria-label="Instagram">IG</span>
+      <span aria-label="Facebook">FB</span>
+      <span aria-label="LinkedIn">LI</span>
+      <span aria-label="TikTok">TT</span>
+    </div>
+  </div>
+
+  <div class="varty-touch-strip__card varty-touch-strip__image">
+    {% if section.settings.image_asset_1 != blank %}
+      <img src="{{ section.settings.image_asset_1 | asset_url }}" alt="" loading="lazy" width="720" height="720">
+    {% else %}
+      <!-- TODO(asset): get-in-touch Vanilla carton lifestyle photo missing from assets/ -->
+    {% endif %}
+  </div>
+
+  <div class="varty-touch-strip__card varty-touch-strip__card--purple">
+    <h2 class="varty-touch-strip__heading custom-heading heading_m">CONTACT</h2>
+    <p class="varty-touch-strip__body">Varty All Natural Inc.<br>Montreal, QC, Canada<br><a href="mailto:info@vartyallnatural.ca">info@vartyallnatural.ca</a></p>
+  </div>
+
+  <div class="varty-touch-strip__card varty-touch-strip__image">
+    {% if section.settings.image_asset_2 != blank %}
+      <img src="{{ section.settings.image_asset_2 | asset_url }}" alt="" loading="lazy" width="720" height="720">
+    {% else %}
+      <!-- TODO(asset): get-in-touch mesh-tote carton trio lifestyle photo missing from assets/ -->
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Varty get in touch strip",
+  "tag": "section",
+  "class": "section-varty-get-in-touch-strip",
+  "settings": [
+    {
+      "type": "text",
+      "id": "image_asset_1",
+      "label": "Image asset 1"
+    },
+    {
+      "type": "text",
+      "id": "image_asset_2",
+      "label": "Image asset 2"
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop padding top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop padding bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile padding top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile padding bottom",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Varty get in touch strip"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["page"]
+  }
+}
+{% endschema %}

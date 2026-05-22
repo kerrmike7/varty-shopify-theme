@@ -23,15 +23,125 @@
     padding-top: {{ section.settings.desktop_padding_top }}px;
     padding-bottom: {{ section.settings.desktop_padding_bottom }}px;
   }
+
+  #shopify-section-{{ section.id }} .custom-store-finder__contact {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(32px, 6vw, 80px);
+    align-items: start;
+  }
+
+  #shopify-section-{{ section.id }} .custom-store-finder__image {
+    display: block;
+    width: min(100%, 420px);
+    height: auto;
+    margin-top: 28px;
+    border-radius: 8px;
+  }
+
+  #shopify-section-{{ section.id }} .custom-store-finder__form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  #shopify-section-{{ section.id }} .custom-store-finder__field--full,
+  #shopify-section-{{ section.id }} .custom-store-finder__submit {
+    grid-column: 1 / -1;
+  }
+
+  #shopify-section-{{ section.id }} .custom-store-finder__field label {
+    display: block;
+    margin-bottom: 8px;
+    color: inherit;
+    font-weight: 700;
+  }
+
+  #shopify-section-{{ section.id }} .custom-store-finder__field input,
+  #shopify-section-{{ section.id }} .custom-store-finder__field textarea {
+    width: 100%;
+    border: 0;
+    border-bottom: 1.5px solid currentColor;
+    border-radius: 0;
+    background: transparent;
+    color: inherit;
+    padding: 12px 0;
+  }
+
+  #shopify-section-{{ section.id }} .custom-store-finder__submit {
+    justify-self: start;
+    border: 0;
+    border-radius: 999px;
+    background: rgb(var(--layout-text-color, 84, 99, 179));
+    color: rgb(var(--layout-background-color, 252, 242, 211));
+    padding: 0.9rem 2.2rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
   @media screen and (max-width: 749px) {
     #shopify-section-{{ section.id }} {
       padding-top: {{ section.settings.mobile_padding_top }}px;
       padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
     }
+
+    #shopify-section-{{ section.id }} .custom-store-finder__contact,
+    #shopify-section-{{ section.id }} .custom-store-finder__form {
+      grid-template-columns: 1fr;
+    }
+
+    #shopify-section-{{ section.id }} .custom-store-finder__submit {
+      width: 100%;
+    }
   }
 </style>
 
 <div class="custom-store-finder page-width" id="varty-store-finder-{{ section.id }}">
+
+  {% if section.settings.contact_mode %}
+    <div class="custom-store-finder__contact">
+      <div class="custom-store-finder__contact-copy">
+        {% if section.settings.heading != blank %}
+          <h2 class="custom-store-finder__heading">{{ section.settings.heading | escape }}</h2>
+        {% endif %}
+        {% if section.settings.intro_richtext != blank %}
+          <div class="custom-store-finder__intro rte">{{ section.settings.intro_richtext }}</div>
+        {% endif %}
+        {% if section.settings.lifestyle_image_asset != blank %}
+          <img
+            class="custom-store-finder__image"
+            src="{{ section.settings.lifestyle_image_asset | asset_url }}"
+            alt=""
+            loading="lazy"
+            width="720"
+            height="540"
+          >
+        {% else %}
+          <!-- TODO(asset): contact form lifestyle image missing from assets/ -->
+        {% endif %}
+      </div>
+
+      {% form 'contact', class: 'custom-store-finder__form' %}
+        <div class="custom-store-finder__field">
+          <label for="ContactFormName-{{ section.id }}">FULL NAME</label>
+          <input id="ContactFormName-{{ section.id }}" type="text" name="contact[name]" required>
+        </div>
+        <div class="custom-store-finder__field">
+          <label for="ContactFormCompany-{{ section.id }}">COMPANY / STORE</label>
+          <input id="ContactFormCompany-{{ section.id }}" type="text" name="contact[company]">
+        </div>
+        <div class="custom-store-finder__field">
+          <label for="ContactFormEmail-{{ section.id }}">EMAIL ADDRESS *</label>
+          <input id="ContactFormEmail-{{ section.id }}" type="email" name="contact[email]" autocomplete="email" required>
+        </div>
+        <div class="custom-store-finder__field custom-store-finder__field--full">
+          <label for="ContactFormMessage-{{ section.id }}">MESSAGE</label>
+          <textarea id="ContactFormMessage-{{ section.id }}" name="contact[body]" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="custom-store-finder__submit">SUBMIT</button>
+      {% endform %}
+    </div>
+  {% else %}
 
   {% if section.settings.heading != blank %}
     <div class="custom-store-finder__header">
@@ -128,6 +238,8 @@
     </div>
   {% endif %}
 
+  {% endif %}
+
 </div>
 
 <script>
@@ -189,6 +301,12 @@
   "class": "section",
   "settings": [
     {
+      "type": "checkbox",
+      "id": "contact_mode",
+      "label": "Render contact form instead of stockist cards",
+      "default": false
+    },
+    {
       "type": "text",
       "id": "heading",
       "label": "Heading",
@@ -199,6 +317,11 @@
       "id": "intro_richtext",
       "label": "Intro text",
       "default": "<p>Available at 22 locations across Québec.</p>"
+    },
+    {
+      "type": "text",
+      "id": "lifestyle_image_asset",
+      "label": "Lifestyle image asset filename"
     },
     {
       "type": "checkbox",

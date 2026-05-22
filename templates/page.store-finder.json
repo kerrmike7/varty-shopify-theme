@@ -6,7 +6,7 @@
         "subheading_eyebrow": {
           "type": "subheading",
           "settings": {
-            "subheading": "Not milk, just better",
+            "subheading": "Not milk, Just better",
             "subheading_tag": "h3",
             "subheading_size": "default"
           }
@@ -40,8 +40,10 @@
       "type": "varty-stockist-map",
       "settings": {
         "varty_color_scheme": "scheme_brand_beige",
-        "map_embed_url": "",
-        "tbd_note": "<<TBD: Google My Maps iframe src. Admin task: create map at https://mymaps.google.com with 22 stockist pins, then Share -> Embed on my site -> copy iframe src.>>",
+        "map_embed_url": "https://www.google.com/maps?q=L%27Eau%20Vive%20Aliments%20Naturels%20Inc.%20Saint-Jean-sur-Richelieu%20QC&output=embed",
+        "pin_name": "L'Eau Vive Aliments Naturels Inc.",
+        "directions_url": "https://www.google.com/maps/dir/?api=1&destination=L%27Eau%20Vive%20Aliments%20Naturels%20Inc.%20Saint-Jean-sur-Richelieu%20QC",
+        "tbd_note": "<<TODO(link): replace generated Google Maps query URL with final embedded map URL if client supplies one.>>",
         "desktop_height": 480,
         "mobile_height": 360
       }
@@ -54,7 +56,7 @@
           "settings": {
             "alt": "Marché TAU",
             "url": "",
-            "tbd_note": "<<TBD: upload logo image and add stockist URL for Marché TAU.>>"
+            "tbd_note": "<<TODO(asset): upload retailer logo image and add stockist URL for Marché TAU.>>"
           }
         },
         "logo_oda": {
@@ -62,39 +64,39 @@
           "settings": {
             "alt": "Marché Oda",
             "url": "",
-            "tbd_note": "<<TBD: upload logo image and add stockist URL for Marché Oda.>>"
+            "tbd_note": "<<TODO(asset): upload retailer logo image and add stockist URL for Marché Oda.>>"
           }
         },
         "logo_iga": {
           "type": "logo",
           "settings": {
-            "alt": "IGA Extra",
+            "alt": "IGA extra",
             "url": "",
-            "tbd_note": "<<TBD: upload logo image and add stockist URL for IGA Extra.>>"
+            "tbd_note": "<<TODO(asset): upload retailer logo image and add stockist URL for IGA extra.>>"
           }
         },
-        "logo_ave_greene": {
+        "logo_the_greene": {
           "type": "logo",
           "settings": {
-            "alt": "Ave Greene",
+            "alt": "The Greene",
             "url": "",
-            "tbd_note": "<<TBD: upload logo image and add stockist URL for Ave Greene.>>"
+            "tbd_note": "<<TODO(asset): upload retailer logo image and add stockist URL for The Greene.>>"
           }
         },
-        "logo_pho_1929": {
+        "logo_100_fils": {
           "type": "logo",
           "settings": {
-            "alt": "Maison Pho 1929",
+            "alt": "Marché des 100 fils",
             "url": "",
-            "tbd_note": "<<TBD: upload logo image and add stockist URL for Maison Pho 1929.>>"
+            "tbd_note": "<<TODO(asset): upload retailer logo image and add stockist URL for Marché des 100 fils.>>"
           }
         },
         "logo_smoothiesgo": {
           "type": "logo",
           "settings": {
-            "alt": "SmoothiesGo",
+            "alt": "SmoothiesGo Marché",
             "url": "",
-            "tbd_note": "<<TBD: upload logo image and add stockist URL for SmoothiesGo.>>"
+            "tbd_note": "<<TODO(asset): upload retailer logo image and add stockist URL for SmoothiesGo Marché.>>"
           }
         }
       },
@@ -102,8 +104,8 @@
         "logo_tau",
         "logo_oda",
         "logo_iga",
-        "logo_ave_greene",
-        "logo_pho_1929",
+        "logo_the_greene",
+        "logo_100_fils",
         "logo_smoothiesgo"
       ],
       "settings": {
@@ -119,10 +121,12 @@
     "store_finder_main": {
       "type": "custom-store-finder",
       "settings": {
-        "heading": "Stockists",
-        "intro_richtext": "<p>22 locations across Québec. Use the search or filter to find the one nearest you.</p>",
-        "enable_search": true,
-        "enable_region_filter": true,
+        "contact_mode": true,
+        "heading": "HOW CAN WE HELP?",
+        "intro_richtext": "<p>Questions, ideas, or just want to say hi? Fill out the form and send us a message!</p>",
+        "lifestyle_image_asset": "varty-all-skus-ecommerce.jpg",
+        "enable_search": false,
+        "enable_region_filter": false,
         "cta_label": "",
         "cta_url": "",
         "varty_color_scheme": "scheme_brand_beige",
@@ -378,6 +382,17 @@
         "retailer_22"
       ]
     },
+    "get_in_touch_strip": {
+      "type": "varty-get-in-touch-strip",
+      "settings": {
+        "image_asset_1": "varty-lifestyle-02.jpg",
+        "image_asset_2": "varty-lifestyle-04.jpg",
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
+    },
     "wholesale_nudge": {
       "type": "rich-text",
       "blocks": {
@@ -434,6 +449,7 @@
     "stockist_map",
     "stockist_logos",
     "store_finder_main",
+    "get_in_touch_strip",
     "wholesale_nudge",
     "main-page"
   ]
