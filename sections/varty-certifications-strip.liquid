@@ -1,0 +1,110 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --padding-top: {{ section.settings.desktop_padding_top }}px;
+    --padding-bottom: {{ section.settings.desktop_padding_bottom }}px;
+    {% render 'varty-color-vars', scheme: 'scheme_brand_beige' %}
+    background-color: rgb(var(--layout-background-color));
+    color: rgb(var(--layout-text-color));
+  }
+
+  #shopify-section-{{ section.id }} .varty-certifications-strip {
+    padding-top: var(--padding-top);
+    padding-bottom: var(--padding-bottom);
+  }
+
+  #shopify-section-{{ section.id }} .varty-certifications-strip__image {
+    display: block;
+    width: min(100%, {{ section.settings.max_width }}px);
+    height: auto;
+    margin-inline: auto;
+  }
+
+  @media screen and (max-width: 920px) {
+    #shopify-section-{{ section.id }} {
+      --padding-top: {{ section.settings.mobile_padding_top }}px;
+      --padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="varty-certifications-strip section-padding--{{ settings.white_space }}">
+  <img
+    class="varty-certifications-strip__image"
+    src="{{ 'certs.avif' | asset_url }}"
+    alt="{{ section.settings.alt_text | escape }}"
+    width="1200"
+    height="320"
+    loading="lazy"
+  >
+</div>
+
+{% schema %}
+{
+  "name": "Varty cert strip",
+  "tag": "section",
+  "class": "section-varty-certifications-strip",
+  "settings": [
+    {
+      "type": "text",
+      "id": "alt_text",
+      "label": "Alt text",
+      "default": "Varty certifications"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 720,
+      "max": 1400,
+      "step": 20,
+      "unit": "px",
+      "label": "Max image width",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop padding bottom",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile padding top",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile padding bottom",
+      "default": 24
+    }
+  ],
+  "presets": [
+    {
+      "name": "Varty cert strip"
+    }
+  ]
+}
+{% endschema %}

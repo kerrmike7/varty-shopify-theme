@@ -36,17 +36,19 @@
             "horizontal_content_position": "center",
             "subheading": "t:varty.hero.subheading",
             "heading": "t:varty.hero.heading",
-            "text": "<p>Certified organic oats, filtered water, and a pinch of sea salt. No gums. No fillers. Just a clean oat beverage that tastes as good as it reads.</p>",
-            "button_label": "t:varty.hero.cta",
-            "link": "#flavours",
+            "text": "<p>No gums. No fillers. Just a clean oat beverage that tastes as good as it reads. Your coffee called…it's already excited.</p>",
+            "button_label": "I'm a Wholesaler",
+            "link": "/pages/wholesale",
             "button_style": "solid",
             "image": "shopify://shop_images/varty-stopmotion-01.gif",
             "overlay_opacity": 8,
             "color_type": "custom",
             "varty_color_scheme": "scheme_brand_beige",
-            "secondary_button_label": "",
-            "secondary_button_link": "",
-            "secondary_button_style": "outlined"
+            "secondary_button_label": "I'm a Customer",
+            "secondary_button_link": "/collections/all",
+            "secondary_button_style": "outlined",
+            "context_image": "shopify://shop_images/flower-3_4x-8.avif",
+            "context_image_width": 152
           }
         }
       },
@@ -59,10 +61,10 @@
         "mobile_height": 70,
         "section_width": "full-width",
         "narrow_content": false,
-        "desktop_padding_top": 64,
-        "desktop_padding_bottom": 64,
-        "mobile_padding_top": 40,
-        "mobile_padding_bottom": 40
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
       }
     },
     "stats_bar": {
@@ -71,8 +73,8 @@
         "s1": {
           "type": "text",
           "settings": {
-            "heading": "3–4",
-            "text": "<p>Ingredients per product</p>",
+            "heading": "3-4",
+            "text": "<p>Ingredients per product. That's it.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -81,7 +83,7 @@
           "type": "text",
           "settings": {
             "heading": "0%",
-            "text": "<p>Gums, fillers, or additives</p>",
+            "text": "<p>Gums, fillers, or additives.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -90,7 +92,7 @@
           "type": "text",
           "settings": {
             "heading": "100%",
-            "text": "<p>Canadian Made</p>",
+            "text": "<p>Canadian Made.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -113,7 +115,9 @@
         "desktop_padding_bottom": 0,
         "mobile_padding_top": 0,
         "mobile_padding_bottom": 0,
-        "varty_color_scheme": "scheme_brand_beige"
+        "varty_color_scheme": "scheme_brand_purple",
+        "background_color": "#5463B3",
+        "text_color": "#fcf2d3"
       }
     },
     "product_trio": {
@@ -333,108 +337,14 @@
       }
     },
     "certifications": {
-      "type": "icons-with-text",
-      "blocks": {
-        "c1": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/icon-canada-organic.svg",
-            "heading": "Canada Organic",
-            "text": ""
-          }
-        },
-        "c2": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/icon-aliments-quebec-bio.svg",
-            "heading": "Aliments Preparés au Quebec BIO",
-            "text": ""
-          }
-        },
-        "c3": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/icon-no-artificial-flavours.svg",
-            "heading": "No Artificial Flavours",
-            "text": ""
-          }
-        },
-        "c4": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/icon-carrageenan-free.svg",
-            "heading": "Carrageenan Free",
-            "text": ""
-          }
-        },
-        "c5": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/icon-glyphosate-free.svg",
-            "heading": "Glyphosate Free",
-            "text": ""
-          }
-        },
-        "c6": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/icon-gluten-free.svg",
-            "heading": "Gluten Free",
-            "text": ""
-          }
-        },
-        "c7": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/icon-dairy-free.svg",
-            "heading": "Dairy Free",
-            "text": ""
-          }
-        },
-        "c8": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/icon-non-gmo.svg",
-            "heading": "Non GMO",
-            "text": ""
-          }
-        },
-        "c9": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/icon-kosher-ou.svg",
-            "heading": "Kosher",
-            "text": ""
-          }
-        }
-      },
-      "block_order": [
-        "c1",
-        "c2",
-        "c3",
-        "c4",
-        "c5",
-        "c6",
-        "c7",
-        "c8",
-        "c9"
-      ],
+      "type": "varty-certifications-strip",
       "settings": {
-        "heading": "",
-        "desktop_grid_type": "grid",
-        "max_columns": "4",
-        "mobile_layout": "2",
-        "center_text": true,
-        "icon_or_image_size": 64,
-        "color_type": "custom",
-        "background_color_type": "solid",
-        "background_color": "#fcf2d3",
-        "text_color": "#5463B3",
-        "desktop_padding_top": 24,
-        "desktop_padding_bottom": 24,
-        "mobile_padding_top": 16,
-        "mobile_padding_bottom": 16,
-        "varty_color_scheme": "scheme_brand_beige"
+        "alt_text": "Varty certifications: Canada Organic, Aliments Préparés au Québec BIO, No Artificial Flavours, Carrageenan Free, Glyphosate Free, Dairy Free, Non GMO, Kosher",
+        "max_width": 1200,
+        "desktop_padding_top": 36,
+        "desktop_padding_bottom": 36,
+        "mobile_padding_top": 24,
+        "mobile_padding_bottom": 24
       }
     },
     "why_varty": {
@@ -725,9 +635,9 @@
     "stats_bar",
     "product_trio",
     "trial_mix_cards",
+    "certifications",
     "organic_marquee",
     "pantry_truth",
-    "certifications",
     "why_varty",
     "subscribe_save",
     "awards_strip",

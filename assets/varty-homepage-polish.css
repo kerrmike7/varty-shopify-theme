@@ -24,6 +24,19 @@
   box-shadow: -16px 16px 0 rgba(84, 99, 179, 0.14);
 }
 
+[id$="__hero"] .banner__content-wrapper > .context-image {
+  position: absolute;
+  right: -32px;
+  bottom: -34px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+[id$="__hero"] .context-image {
+  width: 150px;
+  height: auto;
+}
+
 [id$="__hero"] .banner__content-wrapper::before {
   content: "100% ORGANIC";
   position: absolute;
@@ -76,14 +89,22 @@
   --base-button-color: 252, 242, 211;
   --layout-text-color: 84, 99, 179;
   --layout-background-color: 252, 242, 211;
+  display: inline-flex;
+  margin-inline: 6px;
 }
 
-[id$="__hero"] .banner__button a,
-[id$="__hero"] .banner__button span {
+[id$="__hero"] .banner__button .solid-button {
   background: #5463b3 !important;
   background-color: #5463b3 !important;
   border-color: #5463b3 !important;
   color: #fcf2d3 !important;
+}
+
+[id$="__hero"] .banner__button .outlined-button {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-color: #5463b3 !important;
+  color: #5463b3 !important;
 }
 
 [id$="__hero"] .banner__button::before,
@@ -257,6 +278,15 @@
     width: 128px;
     min-height: 44px;
     font-size: 13px;
+  }
+
+  [id$="__hero"] .banner__content-wrapper > .context-image {
+    right: -8px;
+    bottom: -20px;
+  }
+
+  [id$="__hero"] .context-image {
+    width: 92px;
   }
 
   [id$="__hero"] .content-subheading {
