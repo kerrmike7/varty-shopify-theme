@@ -418,29 +418,29 @@
         "q1": {
           "type": "tab",
           "settings": {
-            "heading": "Is Varty really only 3 ingredients?",
-            "text": "<p>Yes. Varty Original contains certified organic oats, filtered water, and sea salt. That is it. Our Vanilla and Barista versions add one more ingredient each - nothing you cannot pronounce.</p>"
+            "heading": "Why choose Varty over other clean oat beverage brands?",
+            "text": "<p>…Because it's organic, it's real, and it keeps its promises. We only use 3-5 natural, real ingredients that keep your oat beverage simple, clean, and – of course – delicious.</p>"
           }
         },
         "q2": {
           "type": "tab",
           "settings": {
-            "heading": "Is Varty certified organic?",
-            "text": "<p>Yes. Varty is certified organic by Ecocert Canada. Every batch meets certified organic standards from ingredient sourcing to production.</p>"
+            "heading": "Why does Varty cost more than other organic oat beverages?",
+            "text": "<p>Quality ingredients cost more than whatever the other guys are using. Still, we keep Varty as affordable as we can – considering it's higher quality than most popular oat beverage brands.</p>"
           }
         },
         "q3": {
           "type": "tab",
           "settings": {
-            "heading": "Where can I buy Varty?",
-            "text": "<p>Varty is available across Quebec and online here. Use the store finder below to locate your nearest retailer.</p>"
+            "heading": "Is it shelf stable without preservatives?",
+            "text": "<p>Yes. That's because we keep things simple and smart. By using sea salt as a natural shelf-life extending agent, Varty stays fresher for longer, without the need for cryptic additives.</p>"
           }
         },
         "q4": {
           "type": "tab",
           "settings": {
-            "heading": "Do you ship outside Quebec and Ontario?",
-            "text": "<p>We currently offer flat-rate shipping in QC and ON. For other provinces, shipping is calculated at checkout via Canada Post. Subscription orders ship free in our delivery zone.</p>"
+            "heading": "Aren't unsweetened oat beverages bland?",
+            "text": "<p>We've tasted those too…and yeah, we get it. But Varty's naturally sweet, thanks to the way we process our oats. So nope, bland isn't on the label or in the bottle. Its natural sweetness derives from the manufacturing process, eliminating the need for added sugar. Any sugar content you see on the label refers to natural oat sugars created during the production process.</p>"
           }
         }
       },
@@ -451,7 +451,7 @@
         "q4"
       ],
       "settings": {
-        "heading": "t:varty.faq.heading",
+        "heading": "FREQUENTLY ASKED QUESTIONS",
         "section_width": "wide",
         "color_type": "custom",
         "background_color_type": "solid",

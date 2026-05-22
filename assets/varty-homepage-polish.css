@@ -304,6 +304,67 @@
   color: #fcf2d3 !important;
 }
 
+[id$="__faq"] .collapsible-tabs__header {
+  text-align: center;
+}
+
+[id$="__faq"] .collapsible-tabs__heading {
+  color: #5463b3;
+  text-transform: uppercase;
+}
+
+.varty-footer-live {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(180px, 1.2fr) repeat(3, minmax(150px, 1fr));
+  gap: clamp(28px, 5vw, 72px);
+  width: 100%;
+  color: #fcf2d3;
+}
+
+.varty-footer-live,
+.varty-footer-live a {
+  color: #fcf2d3;
+}
+
+.varty-footer-live__brand {
+  position: relative;
+}
+
+.varty-footer-live__logo {
+  display: block;
+  width: min(220px, 100%);
+  height: auto;
+}
+
+.varty-footer-live__flower {
+  width: 132px;
+  height: auto;
+  margin-top: 24px;
+  pointer-events: none;
+}
+
+.varty-footer-live__heading {
+  margin: 0 0 18px;
+  color: #fcf2d3;
+  text-transform: uppercase;
+}
+
+.varty-footer-live__list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.varty-footer-live__copyright {
+  grid-column: 1 / -1;
+  justify-self: end;
+  margin: 18px 0 0;
+  color: #fcf2d3;
+}
+
 @media screen and (max-width: 920px) {
   [id$="__hero"] .banner__content {
     justify-content: center;
@@ -356,6 +417,14 @@
 
   [id$="__stats_bar"] .product-labels__item-wrapper + .product-labels__item-wrapper {
     border-top: 1px solid rgba(252, 242, 211, 0.34);
+  }
+
+  .varty-footer-live {
+    grid-template-columns: 1fr;
+  }
+
+  .varty-footer-live__copyright {
+    justify-self: start;
   }
 }
 

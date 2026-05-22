@@ -14,151 +14,21 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "image_XrrWng": {
-          "type": "image",
-          "disabled": true,
+        "varty_live_footer": {
+          "type": "custom_liquid",
           "settings": {
             "block_width": "wide",
-            "image_ratio": "original",
-            "context_image_radius": "default",
-            "block_image_link": "",
-            "image_target_blank": false,
-            "image_horizontal_alignment": "center",
-            "image_vertical_alignment": "flex-start"
-          }
-        },
-        "context_image_6VTEbi": {
-          "type": "context_image",
-          "disabled": true,
-          "settings": {
-            "block_width": "short",
-            "context_image_width": 64,
-            "context_image_ratio": "original",
-            "context_image_radius": "0px",
-            "context_image_link": "",
-            "context_target_blank": false,
-            "context_image_horizontal_alignment": "flex-start",
-            "context_image_vertical_alignment": "flex-start"
-          }
-        },
-        "main_menu_bpX7ig": {
-          "type": "main_menu",
-          "settings": {
-            "block_width": "short",
-            "menu": "main-menu",
-            "use_accent_color": false,
-            "highlight_menu_item": "",
-            "highlight_menu_item_color": "#5463B3",
-            "menu_view": "column",
-            "menu_font_size": "heading_s",
-            "menu_horizontal_alignment": "flex-start",
-            "menu_vertical_alignment": "flex-start"
-          }
-        },
-        "secondary_menu_aFVk7H": {
-          "type": "secondary_menu",
-          "settings": {
-            "block_width": "short",
-            "menu_view": "column",
-            "dim_text": false,
-            "menu_1_heading": "Explore",
-            "menu_1": "footer",
-            "menu_2_heading": "Legal Info",
-            "menu_2": "footer",
-            "menu_3_heading": "",
-            "menu_3": "",
-            "menu_4_heading": "",
-            "menu_4": "",
-            "menu_5_heading": "",
-            "menu_5": "",
-            "highlight_menu_item": "",
-            "highlight_menu_item_color": "#5463B3",
-            "heading_size": "heading_s",
-            "link_size": "body_m",
-            "menu_horizontal_alignment": "flex-start",
-            "menu_vertical_alignment": "flex-start"
-          }
-        },
-        "line_XaxggL": {
-          "type": "line",
-          "settings": {
-            "block_width": "wide",
-            "line_alignment": "center"
-          }
-        },
-        "contacts_JD43tz": {
-          "type": "contacts",
-          "disabled": true,
-          "settings": {
-            "block_width": "short",
-            "contacts_subheading": "Contact",
-            "subheading_size": "heading_xs",
-            "contacts_1": "hello@shopifystore.com",
-            "contacts_1_type": "email",
-            "contacts_2": "123-456-7890",
-            "contacts_2_type": "phone_number",
-            "use_accent_color": false,
-            "contacts_description": "Mon-Fri, 10AM-9PM",
-            "text_size": "body_m",
-            "contacts_horizontal_alignment": "flex-start",
-            "contacts_vertical_alignment": "flex-start"
-          }
-        },
-        "legal_BQRm3a": {
-          "type": "legal",
-          "settings": {
-            "block_width": "short",
-            "legal_content": "<p>All rights reserved</p>",
-            "text_size": "body_m",
-            "enable_back_to_top": false,
-            "back_to_top_style": "text_with_icon",
-            "back_to_top_label": "Back to top",
-            "label_size": "default",
-            "legal_horizontal_alignment": "flex-start",
-            "legal_vertical_alignment": "flex-start"
-          }
-        },
-        "social_media_xHHm4a": {
-          "type": "social_media",
-          "settings": {
-            "block_width": "short",
-            "social_media_heading": "",
-            "social_media_heading_size": "heading_xs",
-            "social_media_style": "logo_in_circle",
-            "use_accent_color": false,
-            "social_media_horizontal_alignment": "flex-start",
-            "social_media_vertical_alignment": "flex-start"
-          }
-        },
-        "image_m3AG86": {
-          "type": "image",
-          "disabled": true,
-          "settings": {
-            "block_width": "wide",
-            "image_ratio": "original",
-            "context_image_radius": "0px",
-            "block_image_link": "",
-            "image_target_blank": false,
-            "image_horizontal_alignment": "center",
-            "image_vertical_alignment": "center"
+            "custom_liquid": "<div class=\"varty-footer-live\">\n  <div class=\"varty-footer-live__brand\">\n    <img class=\"varty-footer-live__logo\" src=\"{{ 'varty-logo-cream.svg' | asset_url }}\" alt=\"Varty All Natural\" width=\"220\" height=\"96\">\n    <img class=\"varty-footer-live__flower\" src=\"{{ 'flower-3_4x-8.avif' | asset_url }}\" alt=\"\" width=\"132\" height=\"132\" aria-hidden=\"true\">\n  </div>\n  <div>\n    <p class=\"varty-footer-live__heading custom-heading\">CONTACT</p>\n    <ul class=\"varty-footer-live__list\">\n      <li>Varty All Natural Inc.</li>\n      <li>Montreal, QC, Canada</li>\n      <li><a href=\"mailto:info@vartyallnatural.ca\">info@vartyallnatural.ca</a></li>\n    </ul>\n  </div>\n  <div>\n    <p class=\"varty-footer-live__heading custom-heading\">QUICK LINKS</p>\n    <ul class=\"varty-footer-live__list\">\n      <li><a href=\"/collections/all\">Products</a></li>\n      <li><a href=\"/pages/wholesale\">Wholesale</a></li>\n      <li><a href=\"/pages/where-to-find-us\">Where to Find Us</a></li>\n      <li><a href=\"/pages/about\">About</a></li>\n      <li><a href=\"/blogs/recipes\">Recipes</a></li>\n      <li><a href=\"/pages/awards\">Awards</a></li>\n    </ul>\n  </div>\n  <div>\n    <p class=\"varty-footer-live__heading custom-heading\">FOLLOW</p>\n    <ul class=\"varty-footer-live__list\">\n      <li>Facebook</li>\n      <li>Instagram</li>\n      <li>LinkedIn</li>\n      <li>Tiktok</li>\n    </ul>\n  </div>\n  <p class=\"varty-footer-live__copyright\">© 2026 Varty All Natural</p>\n</div>"
           }
         }
       },
       "block_order": [
-        "image_XrrWng",
-        "context_image_6VTEbi",
-        "main_menu_bpX7ig",
-        "secondary_menu_aFVk7H",
-        "line_XaxggL",
-        "contacts_JD43tz",
-        "legal_BQRm3a",
-        "social_media_xHHm4a",
-        "image_m3AG86"
+        "varty_live_footer"
       ],
       "settings": {
         "show_top_line": false,
         "section_width": "full-width",
-        "grid_columns": "3",
+        "grid_columns": "1",
         "color_type": "custom",
         "background_color_type": "solid",
         "background_gradient": "",
@@ -168,10 +38,10 @@
         "desktop_horizontal_gap": 1,
         "mobile_vertical_gap": 0.5,
         "mobile_horizontal_gap": 1,
-        "desktop_padding_top": 48,
-        "desktop_padding_bottom": 40,
-        "mobile_padding_top": 32,
-        "mobile_padding_bottom": 32
+        "desktop_padding_top": 64,
+        "desktop_padding_bottom": 48,
+        "mobile_padding_top": 40,
+        "mobile_padding_bottom": 36
       }
     }
   },
