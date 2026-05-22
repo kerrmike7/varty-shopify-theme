@@ -464,49 +464,6 @@
         "varty_color_scheme": "scheme_brand_beige"
       }
     },
-    "wholesale_stockists_strip": {
-      "type": "multicolumn",
-      "blocks": {
-        "stockists": {
-          "type": "text",
-          "settings": {
-            "heading": "t:varty.stockists.heading",
-            "text": "<p>Looking for your next carton? Find Varty in independent grocers, health food shops, and online.</p>",
-            "button_label": "t:varty.stockists.cta",
-            "button_link": "/pages/where-to-find-us"
-          }
-        },
-        "wholesale": {
-          "type": "text",
-          "settings": {
-            "heading": "Wholesale & Food Service",
-            "text": "<p>For grocers, cafes, offices, and food service partners who want a cleaner oat beverage on the shelf.</p>",
-            "button_label": "Apply for Wholesale →",
-            "button_link": "/pages/wholesale"
-          }
-        }
-      },
-      "block_order": [
-        "stockists",
-        "wholesale"
-      ],
-      "settings": {
-        "max_columns": "2",
-        "mobile_layout": "1",
-        "center_text": true,
-        "color_type": "custom",
-        "background_color_type": "solid",
-        "background_color": "#5463B3",
-        "text_color": "#fcf2d3",
-        "desktop_padding_top": 72,
-        "desktop_padding_bottom": 72,
-        "mobile_padding_top": 40,
-        "mobile_padding_bottom": 40,
-        "varty_color_scheme": "scheme_brand_purple",
-        "subheading": "For shoppers, grocers, cafes, and food service",
-        "heading": "Find Varty, or Bring It to Your Shelves"
-      }
-    },
     "label_truth": {
       "type": "varty-label-truth",
       "settings": {
@@ -687,6 +644,44 @@
         "mobile_padding_top": 48,
         "mobile_padding_bottom": 48
       }
+    },
+    "stockists_split": {
+      "type": "varty-stockists-split",
+      "blocks": {
+        "left": {
+          "type": "panel",
+          "settings": {
+            "scheme": "green",
+            "image_position": "right",
+            "image": "varty-all-skus-ecommerce.jpg",
+            "heading": "COMING TO A STORE NEAR YOU SOON",
+            "body": "<p>Varty is launching soon. If your favorite store hasn't caught on yet, give them a gentle nudge…and tag us when you do! We're always up for making new shelf-space friends.</p>",
+            "button_label": "Shop Varty",
+            "button_link": "/collections/all",
+            "button_style": "solid",
+            "show_flower": false
+          }
+        },
+        "right": {
+          "type": "panel",
+          "settings": {
+            "scheme": "purple",
+            "image_position": "left",
+            "image": "varty-lifestyle-02.jpg",
+            "heading": "LET'S PUT SOMETHING BETTER ON YOUR SHELF",
+            "body": "<p>We partner with retailers and grocers who care about quality as much as we do. Apply today to find out how you can become one of the first stockists of VARTY in Canada.</p>",
+            "button_label": "Apply Now",
+            "button_link": "/pages/wholesale",
+            "button_style": "outlined",
+            "show_flower": true
+          }
+        }
+      },
+      "block_order": [
+        "left",
+        "right"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -704,7 +699,7 @@
     "why_varty_comparison",
     "why_choose_varty",
     "subscribe_save",
-    "wholesale_stockists_strip",
+    "stockists_split",
     "faq"
   ]
 }

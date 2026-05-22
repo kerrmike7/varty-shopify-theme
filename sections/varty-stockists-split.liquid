@@ -1,0 +1,202 @@
+{% style %}
+  #shopify-section-{{ section.id }} .varty-stockists-split {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockists-split__panel {
+    position: relative;
+    overflow: hidden;
+    min-height: 520px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(160px, 0.8fr);
+    gap: 28px;
+    align-items: center;
+    padding: clamp(40px, 5vw, 72px);
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockists-split__panel--green {
+    background: #bfe4d0;
+    color: #5463b3;
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockists-split__panel--purple {
+    grid-template-columns: minmax(160px, 0.8fr) minmax(0, 1fr);
+    background: #5463b3;
+    color: #fcf2d3;
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockists-split__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockists-split__heading {
+    margin: 0;
+    line-height: 0.96;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockists-split__body {
+    max-width: 42ch;
+    margin-top: 22px;
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockists-split__button {
+    margin-top: 28px;
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockists-split__panel--green .varty-stockists-split__heading,
+  #shopify-section-{{ section.id }} .varty-stockists-split__panel--green .varty-stockists-split__body {
+    color: #5463b3;
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockists-split__panel--green .solid-button {
+    background: #5463b3 !important;
+    border-color: #5463b3 !important;
+    color: #fcf2d3 !important;
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockists-split__panel--purple .varty-stockists-split__heading,
+  #shopify-section-{{ section.id }} .varty-stockists-split__panel--purple .varty-stockists-split__body {
+    color: #fcf2d3;
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockists-split__panel--purple .outlined-button {
+    border-color: #fcf2d3 !important;
+    color: #fcf2d3 !important;
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockists-split__media {
+    position: relative;
+    z-index: 1;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockists-split__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockists-split__flower {
+    position: absolute;
+    right: 16px;
+    bottom: 14px;
+    z-index: 0;
+    width: 156px;
+    height: auto;
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 920px) {
+    #shopify-section-{{ section.id }} .varty-stockists-split {
+      grid-template-columns: 1fr;
+    }
+
+    #shopify-section-{{ section.id }} .varty-stockists-split__panel,
+    #shopify-section-{{ section.id }} .varty-stockists-split__panel--purple {
+      min-height: auto;
+      grid-template-columns: 1fr;
+      padding: 40px 24px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-stockists-split__panel--purple .varty-stockists-split__media {
+      order: -1;
+    }
+
+    #shopify-section-{{ section.id }} .varty-stockists-split__flower {
+      display: none;
+    }
+  }
+{% endstyle %}
+
+<div class="varty-stockists-split">
+  {% for block in section.blocks %}
+    <section class="varty-stockists-split__panel varty-stockists-split__panel--{{ block.settings.scheme }}" {{ block.shopify_attributes }}>
+      {% if block.settings.image_position == 'left' %}
+        <div class="varty-stockists-split__media" aria-hidden="true">
+          <img src="{{ block.settings.image | asset_url }}" alt="" loading="lazy" width="640" height="800">
+        </div>
+      {% endif %}
+      <div class="varty-stockists-split__content">
+        <h2 class="varty-stockists-split__heading custom-heading content-heading--{{ settings.typography_preset }} heading_l">
+          {{ block.settings.heading }}
+        </h2>
+        <div class="varty-stockists-split__body richtext body-text--{{ settings.typography_preset }}">
+          {{ block.settings.body }}
+        </div>
+        <a class="varty-stockists-split__button {{ block.settings.button_style }}-button button--{{ settings.typography_preset }}" href="{{ block.settings.button_link }}">
+          {{ block.settings.button_label }}
+        </a>
+      </div>
+      {% if block.settings.image_position == 'right' %}
+        <div class="varty-stockists-split__media" aria-hidden="true">
+          <img src="{{ block.settings.image | asset_url }}" alt="" loading="lazy" width="640" height="800">
+        </div>
+      {% endif %}
+      {% if block.settings.show_flower %}
+        <img class="varty-stockists-split__flower" src="{{ 'flower-3_4x-8.avif' | asset_url }}" alt="" loading="lazy" width="180" height="180" aria-hidden="true">
+      {% endif %}
+    </section>
+  {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "Varty stockists split",
+  "tag": "section",
+  "class": "section-varty-stockists-split",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "panel",
+      "name": "Panel",
+      "settings": [
+        {
+          "type": "select",
+          "id": "scheme",
+          "label": "Scheme",
+          "options": [
+            { "value": "green", "label": "Green" },
+            { "value": "purple", "label": "Purple" }
+          ],
+          "default": "green"
+        },
+        {
+          "type": "select",
+          "id": "image_position",
+          "label": "Image position",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "right"
+        },
+        { "type": "text", "id": "image", "label": "Image asset" },
+        { "type": "text", "id": "heading", "label": "Heading" },
+        { "type": "richtext", "id": "body", "label": "Body" },
+        { "type": "text", "id": "button_label", "label": "Button label" },
+        { "type": "url", "id": "button_link", "label": "Button link" },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            { "value": "solid", "label": "Solid" },
+            { "value": "outlined", "label": "Outlined" }
+          ],
+          "default": "solid"
+        },
+        { "type": "checkbox", "id": "show_flower", "label": "Show flower", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Varty stockists split" }
+  ]
+}
+{% endschema %}
