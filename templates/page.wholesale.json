@@ -28,15 +28,22 @@
             "target_blank": false,
             "button_style": "solid"
           }
+        },
+        "wholesale_flower": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>[id$=\"__wholesale_hero\"] .media-with-text,[id$=\"__wholesale_hero\"] .media-with-text__media{background:rgb(252,242,211)!important;}[id$=\"__wholesale_hero\"] .wholesale-flower{position:absolute;right:clamp(16px,4vw,48px);bottom:clamp(16px,4vw,48px);width:min(120px,24vw);height:auto;pointer-events:none;}</style><img class=\"wholesale-flower\" src=\"{{ 'flower-3_4x-8.avif' | asset_url }}\" alt=\"\" width=\"160\" height=\"160\" loading=\"lazy\">"
+          }
         }
       },
       "block_order": [
         "heading_wholesale",
         "text_wholesale_pitch",
-        "button_apply_now"
+        "button_apply_now",
+        "wholesale_flower"
       ],
       "settings": {
-        "image": "",
+        "image": "shopify://shop_images/varty-all-skus-ecommerce.jpg",
         "section_width": "wide",
         "swap_media": true,
         "media_size": "half",
@@ -44,14 +51,14 @@
         "narrow_content": true,
         "vertical_text_alignment": "center",
         "horizontal_text_alignment": "flex-start",
-        "varty_color_scheme": "scheme_brand_purple",
+        "varty_color_scheme": "scheme_brand_beige",
         "color_type": "scheme",
         "fill_section": true,
         "desktop_padding_top": 0,
         "desktop_padding_bottom": 0,
         "mobile_padding_top": 0,
         "mobile_padding_bottom": 0,
-        "tbd_note": "<<TBD:upload/photograph tilted Varty product-trio-on-blue shot for wholesale hero; do not reuse Awards/About product-trio shot; decorative floral in cream panel deferred.>>"
+        "tbd_note": "<<TODO(asset): exact wholesale three-carton product lineup on blue surface is not present in assets/; using varty-all-skus-ecommerce.jpg as closest existing asset.>>"
       }
     },
     "wholesale_application": {
