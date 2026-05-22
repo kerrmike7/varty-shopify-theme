@@ -18,8 +18,101 @@
         "background_color_type": "solid",
         "background_gradient": "",
         "background_color": "#fcf2d3",
-        "text_color": "#1c1d1d",
+        "text_color": "#5463B3",
         "section_paddings": 16
+      }
+    },
+    "products_hero_strip": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_products": {
+          "type": "heading",
+          "settings": {
+            "heading": "A LITTLE SOMETHING FOR EVERY OAT MOMENT",
+            "heading_size": "heading_l",
+            "heading_tag": "h1",
+            "heading_color": "solid"
+          }
+        }
+      },
+      "block_order": [
+        "heading_products"
+      ],
+      "settings": {
+        "section_width": "wide",
+        "center_text": true,
+        "varty_color_scheme": "scheme_brand_purple",
+        "color_type": "scheme",
+        "desktop_padding_top": 72,
+        "desktop_padding_bottom": 24,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 16
+      }
+    },
+    "products_stats": {
+      "type": "multicolumn",
+      "blocks": {
+        "s1": {
+          "type": "text",
+          "settings": {
+            "heading": "3-4",
+            "text": "<p>Ingredients per product. That's it.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "s2": {
+          "type": "text",
+          "settings": {
+            "heading": "0%",
+            "text": "<p>Gums, fillers, or additives.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "s3": {
+          "type": "text",
+          "settings": {
+            "heading": "100%",
+            "text": "<p>Canadian Made.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {
+        "subheading": "",
+        "heading": "",
+        "max_columns": "3",
+        "mobile_layout": "1",
+        "enable_masonry_grid": false,
+        "center_text": true,
+        "title_size": "heading_l",
+        "text_size": "default",
+        "button_style": "outlined",
+        "varty_color_scheme": "scheme_brand_purple",
+        "color_type": "scheme",
+        "layout_margins": "enable",
+        "desktop_padding_top": 8,
+        "desktop_padding_bottom": 72,
+        "mobile_padding_top": 8,
+        "mobile_padding_bottom": 48
+      }
+    },
+    "products_certifications": {
+      "type": "varty-certifications-strip",
+      "settings": {
+        "alt_text": "Varty certifications",
+        "max_width": 1200,
+        "desktop_padding_top": 48,
+        "desktop_padding_bottom": 48,
+        "mobile_padding_top": 32,
+        "mobile_padding_bottom": 32
       }
     },
     "product-grid": {
@@ -73,10 +166,225 @@
         "mobile_padding_top": 0,
         "mobile_padding_bottom": 0
       }
+    },
+    "product_original_detail": {
+      "type": "media-with-text",
+      "blocks": {
+        "heading_original": {
+          "type": "heading",
+          "settings": {
+            "heading": "Original Unsweetened Oat Beverage Canada",
+            "heading_size": "heading_l",
+            "heading_tag": "h2",
+            "heading_color": "solid"
+          }
+        },
+        "text_original": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pure. Simple. Delicious. Seriously Creamy. This unsweetened, organic oat beverage contains just 3 natural ingredients, delivering the goodness of oats without added sugar or additives. Just the way you like it.</p>",
+            "dim_text": false,
+            "text_size": "default"
+          }
+        },
+        "details_original": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<ul><li><strong>100% Certified Organic</strong></li><li><strong>Versatile</strong></li><li><strong>Creamy, \"Milky\" Texture</strong></li></ul><details open><summary>3 Ingredients</summary><ul><li>Filtered Water</li><li>Organic Canadian Oats</li><li>Sea Salt</li><li>…That's It.</li></ul></details><details><summary>Perfect for</summary><ul><li>Morning Coffee</li><li>Refreshing Smoothies</li><li>Cereal, Muesli or Oats</li><li>Creamy Baked Treats</li></ul></details>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_original",
+        "text_original",
+        "details_original"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/varty-all-skus-ecommerce.jpg",
+        "section_width": "wide",
+        "swap_media": true,
+        "media_size": "half",
+        "media_ratio": "portrait",
+        "narrow_content": true,
+        "vertical_text_alignment": "center",
+        "horizontal_text_alignment": "flex-start",
+        "varty_color_scheme": "scheme_brand_beige",
+        "color_type": "scheme",
+        "fill_section": true,
+        "desktop_padding_top": 80,
+        "desktop_padding_bottom": 40,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 24,
+        "tbd_note": "<<TODO(asset): single Original carton photo is not present in assets/; using varty-all-skus-ecommerce.jpg as closest existing asset.>>"
+      }
+    },
+    "product_vanilla_detail": {
+      "type": "media-with-text",
+      "blocks": {
+        "heading_vanilla": {
+          "type": "heading",
+          "settings": {
+            "heading": "Vanilla Unsweetened Oat Beverage Canada",
+            "heading_size": "heading_l",
+            "heading_tag": "h2",
+            "heading_color": "solid"
+          }
+        },
+        "text_vanilla": {
+          "type": "text",
+          "settings": {
+            "text": "<p>You don't need sugar (you're sweet enough) but a little vanilla goes a long way. Savour the natural flavours of our vanilla-flavoured oat beverage, made with just 4 simple ingredients for a smooth, creamy, and subtly-sweet profile.</p>",
+            "dim_text": false,
+            "text_size": "default"
+          }
+        },
+        "details_vanilla": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<ul><li><strong>100% Certified Organic</strong></li><li><strong>Naturally Flavoured</strong></li><li><strong>Creamy &amp; Smooth</strong></li></ul><details open><summary>4 Ingredients</summary><ul><li>Filtered Water</li><li>Organic Canadian Oats</li><li>Sea Salt</li><li>Organic, Real Vanilla</li><li>…That's It.</li></ul></details><details><summary>Perfect for</summary><ul><li>Morning Coffee</li><li>Warm Tea</li><li>Cozy Oatmeal</li><li>Granola topping</li><li>On its own</li></ul></details>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_vanilla",
+        "text_vanilla",
+        "details_vanilla"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/varty-all-skus-ecommerce.jpg",
+        "section_width": "wide",
+        "swap_media": true,
+        "media_size": "half",
+        "media_ratio": "portrait",
+        "narrow_content": true,
+        "vertical_text_alignment": "center",
+        "horizontal_text_alignment": "flex-start",
+        "varty_color_scheme": "scheme_brand_beige",
+        "color_type": "scheme",
+        "fill_section": true,
+        "desktop_padding_top": 40,
+        "desktop_padding_bottom": 40,
+        "mobile_padding_top": 24,
+        "mobile_padding_bottom": 24,
+        "tbd_note": "<<TODO(asset): single Vanilla carton photo is not present in assets/; using varty-all-skus-ecommerce.jpg as closest existing asset.>>"
+      }
+    },
+    "product_barista_detail": {
+      "type": "media-with-text",
+      "blocks": {
+        "heading_barista": {
+          "type": "heading",
+          "settings": {
+            "heading": "Barista Unsweetened Oat Beverage Canada",
+            "heading_size": "heading_l",
+            "heading_tag": "h2",
+            "heading_color": "solid"
+          }
+        },
+        "text_barista": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Whoever said oat beverages don't froth, hasn't tried Varty. In all fairness, oat beverages don't normally froth. That's why we added organic, locally-sourced high oleic sunflower oil, rich in monounsaturated fats, which helps to stabilize the foam and create a denser, more velvety texture. Made with just 4 simple ingredients, this organic oat beverage is carefully crafted to froth like a coffee-lover's dream – sealing your cup of Joe with a velvety finish every time.</p>",
+            "dim_text": false,
+            "text_size": "default"
+          }
+        },
+        "details_barista": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<ul><li><strong>100% Certified Organic</strong></li><li><strong>Barista-Approved</strong></li><li><strong>Unsweetened for Pure Taste</strong></li><li><strong>Ultra-Creamy &amp; Smooth</strong></li></ul><details open><summary>4 Ingredients</summary><ul><li>Filtered Water</li><li>Organic Canadian Oats</li><li>Contains less than 1%:<ul><li>Organic High Oleic Sunflower Oil</li><li>Potassium Carbonate</li></ul></li><li>…That's It.</li></ul></details><details><summary>Perfect for</summary><ul><li>Lattes</li><li>Cappuccinos</li><li>Iced Coffee</li><li>Espresso</li></ul></details>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_barista",
+        "text_barista",
+        "details_barista"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/varty-all-skus-ecommerce.jpg",
+        "section_width": "wide",
+        "swap_media": true,
+        "media_size": "half",
+        "media_ratio": "portrait",
+        "narrow_content": true,
+        "vertical_text_alignment": "center",
+        "horizontal_text_alignment": "flex-start",
+        "varty_color_scheme": "scheme_brand_beige",
+        "color_type": "scheme",
+        "fill_section": true,
+        "desktop_padding_top": 40,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 24,
+        "mobile_padding_bottom": 48,
+        "tbd_note": "<<TODO(asset): single Barista carton with latte-art photo is not present in assets/; using varty-all-skus-ecommerce.jpg as closest existing asset.>>"
+      }
+    },
+    "products_testimonials": {
+      "type": "multicolumn",
+      "blocks": {
+        "testimonial_1": {
+          "type": "text",
+          "settings": {
+            "heading": "\"",
+            "text": "<p>This oat milk is unbelievably smooth and delicious. I've been adding it to my morning coffee, and it makes every cup taste like a treat!</p><p><strong>Jess Smith</strong><br>Varty Customer</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "testimonial_2": {
+          "type": "text",
+          "settings": {
+            "heading": "\"",
+            "text": "<p>Super smooth, super delicious — this oat milk hits the spot every time. Great for lattes, cereal, or just straight from the glass.</p><p><strong>Drew Carlyle</strong><br>Varty Customer</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "testimonial_3": {
+          "type": "text",
+          "settings": {
+            "heading": "\"",
+            "text": "<p>Can't get enough of this oat milk! It's so smooth and delicious, and it mixes perfectly in coffee and smoothies. Creamy, tasty, and satisfying.</p><p><strong>Charlie McMann</strong><br>Varty Customer</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_1",
+        "testimonial_2",
+        "testimonial_3"
+      ],
+      "settings": {
+        "subheading": "",
+        "heading": "",
+        "max_columns": "3",
+        "mobile_layout": "1",
+        "enable_masonry_grid": false,
+        "center_text": false,
+        "title_size": "heading_l",
+        "text_size": "default",
+        "button_style": "outlined",
+        "varty_color_scheme": "scheme_brand_green",
+        "color_type": "scheme",
+        "layout_margins": "enable",
+        "desktop_padding_top": 80,
+        "desktop_padding_bottom": 96,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 56
+      }
     }
   },
   "order": [
     "breadcrumbs_JjGX79",
-    "product-grid"
+    "products_hero_strip",
+    "products_stats",
+    "products_certifications",
+    "product-grid",
+    "product_original_detail",
+    "product_vanilla_detail",
+    "product_barista_detail",
+    "products_testimonials"
   ]
 }
