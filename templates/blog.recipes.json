@@ -55,21 +55,6 @@
             "title_size": "heading_s"
           }
         },
-        "16030d84-7fbd-4818-a2d3-442a2ea51a3b": {
-          "type": "info",
-          "settings": {
-            "show_date": false,
-            "show_author": false,
-            "show_number_of_comments": false,
-            "text_size": "default"
-          }
-        },
-        "f92259ef-0a71-4c51-ae7f-7c9e850d0dc9": {
-          "type": "excerpt",
-          "settings": {
-            "text_size": "default"
-          }
-        },
         "bd1ff19b-5e70-4f23-8583-e90395baf1e4": {
           "type": "read_more",
           "settings": {
@@ -79,8 +64,6 @@
       },
       "block_order": [
         "e7023741-6210-4c57-99c7-35c69a9be98b",
-        "16030d84-7fbd-4818-a2d3-442a2ea51a3b",
-        "f92259ef-0a71-4c51-ae7f-7c9e850d0dc9",
         "bd1ff19b-5e70-4f23-8583-e90395baf1e4"
       ],
       "settings": {
@@ -88,7 +71,7 @@
         "heading_tag": "h1",
         "show_number_of_posts": false,
         "enable_filtering_by_tags": true,
-        "posts_per_page": 12,
+        "posts_per_page": 18,
         "infinite_scroll": "disable",
         "grid_type": "2",
         "image_ratio": "square",
