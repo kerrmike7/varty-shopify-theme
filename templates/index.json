@@ -618,6 +618,75 @@
         "mobile_padding_top": 56,
         "mobile_padding_bottom": 56
       }
+    },
+    "why_choose_varty": {
+      "type": "varty-choice-grid",
+      "blocks": {
+        "mouthwatering": {
+          "type": "card",
+          "settings": {
+            "heading": "100% Mouthwatering",
+            "body": "Healthy doesn't have to mean \"meh.\" Varty makes better choices taste like easy ones. Smooth, creamy, actually enjoyable.",
+            "icon_todo": "why_choose_varty 100% Mouthwatering icon missing"
+          }
+        },
+        "affordable": {
+          "type": "card",
+          "settings": {
+            "heading": "Affordable Luxury",
+            "body": "Delivering organic quality that's accessible. Because you shouldn't need to splurge to eat well.",
+            "icon_todo": "why_choose_varty Affordable Luxury icon missing"
+          }
+        },
+        "canada": {
+          "type": "card",
+          "settings": {
+            "heading": "Made in Canada",
+            "body": "Every bottle is proudly produced at home in Canada, using the freshest locally-sourced ingredients.",
+            "icon_todo": "why_choose_varty Made in Canada icon missing"
+          }
+        },
+        "delicious": {
+          "type": "card",
+          "settings": {
+            "heading": "Naturally Delicious",
+            "body": "Varty is thoughtfully crafted to deliver a naturally rich, oat-forward flavour, without sugar, additives, or compromise on taste.",
+            "icon_todo": "why_choose_varty Naturally Delicious icon missing"
+          }
+        },
+        "filler_free": {
+          "type": "card",
+          "settings": {
+            "heading": "Filler-Free",
+            "body": "At Varty, you won't find any \"what even is that?\" ingredients here. Just 3-4 you'll recognize (and feel good about!).",
+            "icon_todo": "why_choose_varty Filler-Free icon missing"
+          }
+        },
+        "crafted": {
+          "type": "card",
+          "settings": {
+            "heading": "Purely Crafted",
+            "body": "If made properly, natural oat beverages shouldn't need stabilizers. The key is in the ingredients used and how they're prepared!",
+            "icon_todo": "why_choose_varty Purely Crafted icon missing"
+          }
+        }
+      },
+      "block_order": [
+        "mouthwatering",
+        "affordable",
+        "canada",
+        "delicious",
+        "filler_free",
+        "crafted"
+      ],
+      "settings": {
+        "eyebrow": "A Clean Oat Beverage Brand You Can Trust",
+        "heading": "WHY CHOOSE VARTY?",
+        "desktop_padding_top": 80,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48
+      }
     }
   },
   "order": [
@@ -633,6 +702,7 @@
     "organic_marquee",
     "pantry_truth",
     "why_varty_comparison",
+    "why_choose_varty",
     "subscribe_save",
     "wholesale_stockists_strip",
     "faq"

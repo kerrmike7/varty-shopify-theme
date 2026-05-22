@@ -1,0 +1,134 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    {% render 'varty-color-vars', scheme: 'scheme_brand_beige' %}
+    --padding-top: {{ section.settings.desktop_padding_top }}px;
+    --padding-bottom: {{ section.settings.desktop_padding_bottom }}px;
+    background-color: rgb(var(--layout-background-color));
+    color: rgb(var(--layout-text-color));
+  }
+
+  #shopify-section-{{ section.id }} .varty-choice-grid {
+    padding-top: var(--padding-top);
+    padding-bottom: var(--padding-bottom);
+  }
+
+  #shopify-section-{{ section.id }} .varty-choice-grid__header {
+    max-width: 820px;
+    margin: 0 auto 44px;
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .varty-choice-grid__eyebrow,
+  #shopify-section-{{ section.id }} .varty-choice-grid__heading,
+  #shopify-section-{{ section.id }} .varty-choice-grid__card-title,
+  #shopify-section-{{ section.id }} .varty-choice-grid__card-text {
+    color: #5463b3;
+  }
+
+  #shopify-section-{{ section.id }} .varty-choice-grid__eyebrow {
+    margin: 0 0 14px;
+  }
+
+  #shopify-section-{{ section.id }} .varty-choice-grid__heading {
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .varty-choice-grid__cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  #shopify-section-{{ section.id }} .varty-choice-grid__card {
+    min-height: 100%;
+    padding: 30px;
+    border: 1px solid rgba(84, 99, 179, 0.24);
+    border-radius: 8px;
+    background: rgba(84, 99, 179, 0.06);
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .varty-choice-grid__icon {
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 18px;
+    border: 2px solid #5463b3;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at center, #5463b3 0 4px, transparent 5px),
+      #fcf2d3;
+  }
+
+  #shopify-section-{{ section.id }} .varty-choice-grid__card-title {
+    margin: 0 0 12px;
+  }
+
+  #shopify-section-{{ section.id }} .varty-choice-grid__card-text {
+    margin: 0;
+  }
+
+  @media screen and (max-width: 920px) {
+    #shopify-section-{{ section.id }} {
+      --padding-top: {{ section.settings.mobile_padding_top }}px;
+      --padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-choice-grid__cards {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstyle %}
+
+<div class="varty-choice-grid section-padding--{{ settings.white_space }}">
+  <div class="page-width page-width--{{ settings.max_page_width }}">
+    <div class="varty-choice-grid__header">
+      <p class="varty-choice-grid__eyebrow custom-heading body_s">{{ section.settings.eyebrow }}</p>
+      <h2 class="varty-choice-grid__heading custom-heading content-heading--{{ settings.typography_preset }} heading_l">
+        {{ section.settings.heading }}
+      </h2>
+    </div>
+    <div class="varty-choice-grid__cards">
+      {% for block in section.blocks %}
+        <article class="varty-choice-grid__card" {{ block.shopify_attributes }}>
+          <div class="varty-choice-grid__icon" aria-hidden="true"></div>
+          {% if block.settings.icon_todo != blank %}
+            <!-- TODO(asset): {{ block.settings.icon_todo }} -->
+          {% endif %}
+          <h3 class="varty-choice-grid__card-title custom-heading heading_s">{{ block.settings.heading }}</h3>
+          <p class="varty-choice-grid__card-text body-text--{{ settings.typography_preset }}">{{ block.settings.body }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Varty choice grid",
+  "tag": "section",
+  "class": "section-varty-choice-grid",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "range", "id": "desktop_padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Desktop padding top", "default": 80 },
+    { "type": "range", "id": "desktop_padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Desktop padding bottom", "default": 80 },
+    { "type": "range", "id": "mobile_padding_top", "min": 0, "max": 80, "step": 4, "unit": "px", "label": "Mobile padding top", "default": 48 },
+    { "type": "range", "id": "mobile_padding_bottom", "min": 0, "max": 80, "step": 4, "unit": "px", "label": "Mobile padding bottom", "default": 48 }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading" },
+        { "type": "textarea", "id": "body", "label": "Body" },
+        { "type": "text", "id": "icon_todo", "label": "Icon TODO" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Varty choice grid" }
+  ]
+}
+{% endschema %}
