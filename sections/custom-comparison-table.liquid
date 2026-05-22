@@ -1,5 +1,6 @@
 {% liquid
   assign mobile_layout = section.settings.mobile_layout
+  assign feature_label  = section.settings.feature_label
   assign varty_label    = section.settings.varty_label | default: 'Varty'
   assign c1_label       = section.settings.competitor_1_label | default: 'Brand A'
   assign c2_label       = section.settings.competitor_2_label | default: 'Brand B'
@@ -12,7 +13,7 @@
       assign text_color = '#fcf2d3'
     when 'scheme_brand_beige'
       assign bg_color = '#fcf2d3'
-      assign text_color = '#1c1d1d'
+      assign text_color = '#5463B3'
     when 'scheme_dark'
       assign bg_color = '#1c1d1d'
       assign text_color = '#fcf2d3'
@@ -36,6 +37,9 @@
 </style>
 
 <div class="custom-comparison-table page-width" id="shopify-section-inner-{{ section.id }}">
+  {% if section.settings.badge != blank %}
+    <div class="custom-comparison-table__badge">{{ section.settings.badge }}</div>
+  {% endif %}
   {% if section.settings.heading != blank %}
     <div class="custom-comparison-table__header">
       <h2 class="custom-comparison-table__heading">{{ section.settings.heading | escape }}</h2>
@@ -53,7 +57,7 @@
     >
       <thead>
         <tr>
-          <th scope="col">{{ 'sections.comparison_table.feature_col' | t }}</th>
+          <th scope="col">{% if feature_label != blank %}{{ feature_label }}{% else %}<span class="visually-hidden">{{ 'sections.comparison_table.feature_col' | t }}</span>{% endif %}</th>
           <th scope="col">{{ varty_label }}</th>
           <th scope="col">{{ c1_label }}</th>
           {% unless c2_label == blank %}<th scope="col">{{ c2_label }}</th>{% endunless %}
@@ -91,7 +95,7 @@
             <tr {{ block.shopify_attributes }}>
               <td
                 scope="row"
-                data-label="{{ 'sections.comparison_table.feature_col' | t }}"
+                data-label="{% if feature_label != blank %}{{ feature_label }}{% else %}{{ 'sections.comparison_table.feature_col' | t }}{% endif %}"
               >{{ block.settings.feature_label | escape }}</td>
               <td data-label="{{ varty_label }}">
                 {% if varty_val != blank %}
@@ -124,15 +128,45 @@
 
 <style>
   #shopify-section-{{ section.id }} .custom-comparison-table {
+    position: relative;
     padding-top: {{ section.settings.desktop_padding_top }}px;
     padding-bottom: {{ section.settings.desktop_padding_bottom }}px;
   }
+  #shopify-section-{{ section.id }} .custom-comparison-table::after {
+    content: "";
+    position: absolute;
+    right: clamp(16px, 4vw, 54px);
+    bottom: 18px;
+    width: 152px;
+    height: 152px;
+    background: url({{ 'flower-3_4x-8.avif' | asset_url }}) center / contain no-repeat;
+    pointer-events: none;
+  }
+  #shopify-section-{{ section.id }} .custom-comparison-table__badge {
+    position: absolute;
+    top: 52px;
+    left: clamp(20px, 7vw, 96px);
+    z-index: 1;
+    display: inline-grid;
+    place-items: center;
+    min-width: 172px;
+    min-height: 58px;
+    padding: 10px 20px;
+    border: 2px solid #bfe4d0;
+    border-radius: 999px;
+    color: #bfe4d0;
+    font-weight: 800;
+    line-height: 1;
+    text-align: center;
+    transform: rotate(-8deg);
+  }
   #shopify-section-{{ section.id }} .custom-comparison-table__header {
     text-align: center;
-    margin-bottom: 40px;
+    max-width: 920px;
+    margin: 0 auto 40px;
   }
   #shopify-section-{{ section.id }} .custom-comparison-table__heading {
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: 4.5rem;
     font-weight: 800;
     text-transform: uppercase;
     margin-bottom: 12px;
@@ -145,13 +179,48 @@
     margin: 0 auto;
   }
   #shopify-section-{{ section.id }} .custom-comparison-table__wrapper {
+    position: relative;
+    z-index: 1;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+  }
+  #shopify-section-{{ section.id }} .varty-comparison-table {
+    width: min(100%, 1080px);
+    margin-inline: auto;
+    border-collapse: collapse;
+    border: 2px solid rgba(252, 242, 211, 0.92);
+    background: rgba(252, 242, 211, 0.08);
+  }
+  #shopify-section-{{ section.id }} .varty-comparison-table th,
+  #shopify-section-{{ section.id }} .varty-comparison-table td {
+    padding: 18px 20px;
+    border: 1px solid rgba(252, 242, 211, 0.54);
+    color: #fcf2d3;
+    text-align: left;
+    vertical-align: top;
+  }
+  #shopify-section-{{ section.id }} .varty-comparison-table th:nth-child(2),
+  #shopify-section-{{ section.id }} .varty-comparison-table td:nth-child(2) {
+    background: #fcf2d3;
+    color: #5463b3;
+  }
+  #shopify-section-{{ section.id }} .varty-comparison-table th {
+    font-weight: 800;
   }
   @media screen and (max-width: 749px) {
     #shopify-section-{{ section.id }} .custom-comparison-table {
       padding-top: {{ section.settings.mobile_padding_top }}px;
       padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
+    }
+    #shopify-section-{{ section.id }} .custom-comparison-table__heading {
+      font-size: 2.25rem;
+    }
+    #shopify-section-{{ section.id }} .custom-comparison-table__badge {
+      position: static;
+      margin: 0 auto 28px;
+    }
+    #shopify-section-{{ section.id }} .custom-comparison-table::after {
+      display: none;
     }
   }
 </style>
@@ -173,6 +242,16 @@
       "id": "subheading",
       "label": "Subheading",
       "default": "<p>See how Varty stacks up</p>"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge"
+    },
+    {
+      "type": "text",
+      "id": "feature_label",
+      "label": "Feature column label"
     },
     {
       "type": "text",

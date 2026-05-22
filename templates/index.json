@@ -362,89 +362,6 @@
         "mobile_padding_bottom": 24
       }
     },
-    "why_varty": {
-      "type": "multicolumn",
-      "blocks": {
-        "clean_ingredients": {
-          "type": "text",
-          "settings": {
-            "heading": "3–4 Real Ingredients",
-            "text": "<p>Organic oats, filtered water, sea salt, and sometimes vanilla. The label reads like a pantry shelf, not a lab note.</p>",
-            "button_label": "",
-            "button_link": ""
-          }
-        },
-        "no_fillers": {
-          "type": "text",
-          "settings": {
-            "heading": "No Gums. No Fillers.",
-            "text": "<p>No sunflower oil, carrageenan, stabilizers, or natural-flavour fog. Just the texture and taste the oats can earn on their own.</p>",
-            "button_label": "",
-            "button_link": ""
-          }
-        },
-        "organic": {
-          "type": "text",
-          "settings": {
-            "heading": "Certified Organic",
-            "text": "<p>Certified by Ecocert Canada, made for people who want the everyday carton to meet a higher standard.</p>",
-            "button_label": "",
-            "button_link": ""
-          }
-        },
-        "canada": {
-          "type": "text",
-          "settings": {
-            "heading": "Made in Canada",
-            "text": "<p>Built for Canadian shelves, cafes, and kitchens, with a short ingredient list that travels well from morning coffee to weeknight cooking.</p>",
-            "button_label": "",
-            "button_link": ""
-          }
-        },
-        "barista_ready": {
-          "type": "text",
-          "settings": {
-            "heading": "Barista Ready",
-            "text": "<p>Varty Barista froths cleanly and holds texture under heat. Made for serious coffee, without overpowering it.</p>",
-            "button_label": "",
-            "button_link": ""
-          }
-        },
-        "shelf_stable": {
-          "type": "text",
-          "settings": {
-            "heading": "Shelf-Stable",
-            "text": "<p>1L Tetra Pak. No fridge needed until opened. Stock the pantry without taking the fridge real estate.</p>",
-            "button_label": "",
-            "button_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "clean_ingredients",
-        "no_fillers",
-        "organic",
-        "canada",
-        "barista_ready",
-        "shelf_stable"
-      ],
-      "settings": {
-        "subheading": "The Clean Advantage",
-        "heading": "Why Canadians Are Falling in Love with Varty",
-        "max_columns": "3",
-        "mobile_layout": "1",
-        "center_text": true,
-        "color_type": "custom",
-        "background_color_type": "solid",
-        "background_color": "#5463B3",
-        "text_color": "#fcf2d3",
-        "desktop_padding_top": 72,
-        "desktop_padding_bottom": 72,
-        "mobile_padding_top": 40,
-        "mobile_padding_bottom": 40,
-        "varty_color_scheme": "scheme_brand_purple"
-      }
-    },
     "subscribe_save": {
       "type": "image-banner",
       "blocks": {
@@ -632,6 +549,75 @@
         "mobile_padding_top": 56,
         "mobile_padding_bottom": 56
       }
+    },
+    "why_varty_comparison": {
+      "type": "custom-comparison-table",
+      "blocks": {
+        "ingredients": {
+          "type": "row",
+          "settings": {
+            "feature_label": "Ingredients",
+            "varty_value": "3-4 real organic ingredients",
+            "competitor_1_value": "10+ ingredients"
+          }
+        },
+        "additives": {
+          "type": "row",
+          "settings": {
+            "feature_label": "Additives",
+            "varty_value": "None. Really. We triple-checked.",
+            "competitor_1_value": "Gums, stabilizers and \"natural flavours\""
+          }
+        },
+        "portion": {
+          "type": "row",
+          "settings": {
+            "feature_label": "Portion Size",
+            "varty_value": "More oats per serving",
+            "competitor_1_value": "Standard industry serving size"
+          }
+        },
+        "taste": {
+          "type": "row",
+          "settings": {
+            "feature_label": "Taste",
+            "varty_value": "Smooth, subtle & tastes like oats, not sugar water",
+            "competitor_1_value": "Watery, overly sweet, bland"
+          }
+        },
+        "foam": {
+          "type": "row",
+          "settings": {
+            "feature_label": "Foam Factor",
+            "varty_value": "Foams naturally using organic oil ONLY. Clean, simple, Barista-tested.",
+            "competitor_1_value": "Relies on a cocktail of gums, fillers, and additives to create a foam."
+          }
+        }
+      },
+      "block_order": [
+        "ingredients",
+        "additives",
+        "portion",
+        "taste",
+        "foam"
+      ],
+      "settings": {
+        "badge": "THE CLEAN ADVANTAGE",
+        "heading": "WHY CANADIANS ARE FALLING IN LOVE WITH VARTY",
+        "subheading": "",
+        "feature_label": "",
+        "varty_label": "Varty All Natural",
+        "competitor_1_label": "Other Oat Beverages",
+        "competitor_2_label": "",
+        "mobile_layout": "scroll",
+        "varty_color_scheme": "scheme_brand_purple",
+        "background_color": "#5463B3",
+        "text_color": "#fcf2d3",
+        "desktop_padding_top": 96,
+        "desktop_padding_bottom": 104,
+        "mobile_padding_top": 56,
+        "mobile_padding_bottom": 56
+      }
     }
   },
   "order": [
@@ -646,7 +632,7 @@
     "pantry_intro",
     "organic_marquee",
     "pantry_truth",
-    "why_varty",
+    "why_varty_comparison",
     "subscribe_save",
     "wholesale_stockists_strip",
     "faq"
