@@ -33,7 +33,7 @@
         "clean_advantage_stamp"
       ],
       "settings": {
-        "image": "shopify://shop_images/varty-lifestyle-01.jpg",
+        "image": "shopify://shop_images/varty-all-skus-ecommerce.jpg",
         "section_width": "wide",
         "swap_media": false,
         "media_size": "half",
@@ -48,7 +48,7 @@
         "desktop_padding_bottom": 80,
         "mobile_padding_top": 48,
         "mobile_padding_bottom": 48,
-        "tbd_note": "<<TBD:upload About hero product-trio image from /Users/michaelkerr/Documents/Second Brain/05_PROJECTS/varty/brand/Product Photoshoot /All_Ecommerce (1).jpg; varty-all-skus-ecommerce.jpg did not resolve in preview.>>"
+        "tbd_note": "<<TODO(asset): exact Wix About hero with three cartons plus Quebec flag illustrations is not present in assets/; using varty-all-skus-ecommerce.jpg as closest existing asset.>>"
       }
     },
     "mission_strip": {
@@ -69,7 +69,7 @@
         "mission_image_2": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/varty-lifestyle-01.jpg",
+            "image": "shopify://shop_images/varty-all-skus-ecommerce.jpg",
             "heading": "",
             "text": "",
             "button_label": "",
@@ -81,7 +81,7 @@
         "mission_image_3": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/varty-stopmotion-01.gif",
+            "image": "shopify://shop_images/varty-lifestyle-03.jpg",
             "heading": "",
             "text": "",
             "button_label": "",
@@ -121,7 +121,7 @@
         "desktop_padding_bottom": 80,
         "mobile_padding_top": 48,
         "mobile_padding_bottom": 48,
-        "tbd_note": "<<TBD: exact Wix mission-strip left oats/walnuts image, centre product-trio image, and right coffee/oats-pouring image still need admin upload; current section uses already-referenced Shopify image assets as closest available placeholders.>>"
+        "tbd_note": "<<TODO(asset): exact Wix mission-strip oats/walnuts and pour-into-cup images are not present in assets/; using varty-lifestyle-01.jpg, varty-all-skus-ecommerce.jpg, and varty-lifestyle-03.jpg as closest existing assets.>>"
       }
     },
     "founder_letter": {
@@ -131,7 +131,19 @@
           "type": "text",
           "settings": {
             "heading": "",
-            "text": "<p>Hi there! We're Lina and Tony – the friendly faces behind VARTY, and the most relentless label-readers you'll ever meet. Like many health-conscious consumers, we used to spend way too much time in grocery aisles, flipping cartons over and wondering how \"natural\" could still mean gums, fillers, and things we couldn't pronounce.</p><p>We started Varty because we couldn't find an oat beverage we actually felt good about. Not just nutritionally, but ethically too. So, we made our own - something that was clean, organic, and proudly made at home on Canadian soil.</p><p><em>\"At Varty, we truly believe that packaged food should simplify our lives, without sacrificing quality for convenience. In a world where shortcuts are standard, oat beverages stopped tasting like oats. Ingredient lists grew longer and longer, and \"natural\" lost all its meaning.\"</em></p><p>But not anymore. Varty is our way of restoring what food was always meant to be: Simple, nourishing, and honest. You won't ever catch us cutting corners or masking natural flavours.</p><p>We made Varty for ourselves, and now, we're thrilled to be sharing it with the world. Whether you're a health-conscious consumer or wholesaler, Varty was made for you. We made this for us – but now it's yours. Hope you love it as much as we do.</p><p>Lina &amp; Tony | Co-Founders</p>",
+            "text": "<p>Hi there! We're Lina and Tony – the friendly faces behind VARTY, and the most relentless label-readers you'll ever meet. Like many health-conscious consumers, we used to spend way too much time in grocery aisles, flipping cartons over and wondering how \"natural\" could still mean gums, fillers, and things we couldn't pronounce.</p><p>We started Varty because we couldn't find an oat beverage we actually felt good about. Not just nutritionally, but ethically too. So, we made our own - something that was clean, organic, and proudly made at home on Canadian soil.</p><p><em>\"At Varty, we truly believe that packaged food should simplify our lives, without sacrificing quality for convenience. In a world where shortcuts are standard, oat beverages stopped tasting like oats. Ingredient lists grew longer and longer, and \"natural\" lost all its meaning.\"</em></p><p>But not anymore. Varty is our way of restoring what food was always meant to be: Simple, nourishing, and honest. You won't ever catch us cutting corners or masking natural flavours.</p><p>We made Varty for ourselves, and now, we're thrilled to be sharing it with the world. Whether you're a health-conscious consumer or wholesaler, Varty was made for you. We made this for us – but now it's yours. Hope you love it as much as we do.</p><p><em>Lina &amp; Tony</em></p><p>Lina &amp; Tony  |  Co-Founders</p>",
+            "button_label": "",
+            "button_link": "",
+            "target_blank": false,
+            "full_block_clickable": false
+          }
+        },
+        "founder_product_trio": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/varty-all-skus-ecommerce.jpg",
+            "heading": "",
+            "text": "",
             "button_label": "",
             "button_link": "",
             "target_blank": false,
@@ -140,12 +152,13 @@
         }
       },
       "block_order": [
-        "founder_letter_body"
+        "founder_letter_body",
+        "founder_product_trio"
       ],
       "settings": {
         "subheading": "",
-        "heading": "Where it all began",
-        "max_columns": "default",
+        "heading": "WHERE IT ALL BEGAN",
+        "max_columns": "2",
         "mobile_layout": "1",
         "enable_masonry_grid": false,
         "heading_size": "heading_l",
@@ -165,7 +178,7 @@
         "desktop_padding_bottom": 96,
         "mobile_padding_top": 48,
         "mobile_padding_bottom": 48,
-        "tbd_note": "<<TBD:signature handwritten Lina & Tony signature asset not found as a standalone Shopify image; omitted until admin upload.>>"
+        "tbd_note": "<<TODO(asset): exact handwritten Lina & Tony signature asset is not present in assets/; rendering signature as styled italic text.>>"
       }
     },
     "core_values": {
