@@ -462,6 +462,23 @@
   text-align: center;
 }
 
+[id$="__about_hero"] {
+  position: relative;
+  overflow: hidden;
+}
+
+[id$="__about_hero"]::before {
+  content: "";
+  position: absolute;
+  left: -32px;
+  bottom: -24px;
+  z-index: 1;
+  width: clamp(140px, 14vw, 220px);
+  aspect-ratio: 1 / 1;
+  background: url("flower-1.avif") no-repeat center / contain;
+  pointer-events: none;
+}
+
 [id$="__mission_strip"] h2 {
   max-width: 38ch;
   margin-inline: auto;
@@ -488,12 +505,17 @@
 }
 
 [id$="__founder_letter"] .multicolumn__card-text em {
-  display: block;
-  margin-block: 1.5em;
-  padding-inline: 1em;
-  border-inline-start: 3px solid currentColor;
-  font-style: italic;
-  font-size: 1.05em;
+  display: inline-block;
+  margin-top: 8px;
+  margin-bottom: -4px;
+  padding-inline: 0;
+  border-inline-start: 0;
+  font-family: "Caveat", "Dancing Script", "Brush Script MT", cursive;
+  font-style: normal;
+  font-weight: 500;
+  font-size: clamp(32px, 3.2vw, 44px);
+  line-height: 1.1;
+  color: inherit;
 }
 
 [id$="__founder_letter"] .founder-signature {
@@ -512,6 +534,23 @@
 [id$="__core_values"] h2 {
   text-transform: uppercase;
   letter-spacing: 0;
+}
+
+[id$="__core_values"] {
+  position: relative;
+  overflow: hidden;
+}
+
+[id$="__core_values"]::before {
+  content: "";
+  position: absolute;
+  top: -16px;
+  right: -24px;
+  z-index: 1;
+  width: clamp(120px, 12vw, 200px);
+  aspect-ratio: 1 / 1;
+  background: url("flower-2.avif") no-repeat center / contain;
+  pointer-events: none;
 }
 
 [id$="__core_values"] .product-labels__icon {
@@ -536,6 +575,12 @@
 
   [id$="__mission_strip"] .multicolumn__media {
     min-height: 220px;
+  }
+
+  [id$="__about_hero"]::before,
+  [id$="__core_values"]::before {
+    width: 96px;
+    opacity: 0.6;
   }
 }
 
