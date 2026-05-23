@@ -458,7 +458,7 @@
         "body": "<p>Futurpreneur, on behalf of Futurpreneur Foundation, and RBC Future Launch empower young entrepreneurs with $80,000 in Start-up Awards</p>",
         "button_label": "Press Release",
         "button_link": "/pages/awards",
-        "logo_asset": "",
+        "logo_asset": "futurpreneur-logo.svg",
         "desktop_padding_top": 56,
         "desktop_padding_bottom": 72,
         "mobile_padding_top": 40,
