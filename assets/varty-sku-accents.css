@@ -18,6 +18,30 @@
   background: var(--sku-accent, #5463B3);
 }
 
+.solid-button,
+.outlined-button,
+.big-button,
+.button:not(.slider-button):not(.icon-button):not(.button-close),
+button[type="submit"]:not(.slider-button):not(.icon-button):not(.button-close),
+input[type="submit"],
+.shopify-payment-button__button,
+.collapsible-tabs__button {
+  border-radius: 9999px !important;
+  -webkit-border-radius: 9999px !important;
+}
+
+.solid-button::before,
+.solid-button::after,
+.outlined-button::before,
+.outlined-button::after,
+.big-button::before,
+.big-button::after,
+.button:not(.slider-button):not(.icon-button):not(.button-close)::before,
+.button:not(.slider-button):not(.icon-button):not(.button-close)::after {
+  border-radius: inherit !important;
+  -webkit-border-radius: inherit !important;
+}
+
 .varty-lang-switch {
   align-items: center;
   display: inline-flex;
