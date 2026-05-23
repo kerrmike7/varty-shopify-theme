@@ -22,6 +22,7 @@
   #shopify-section-{{ section.id }} .varty-label-truth__heading {
     margin: 0;
     color: #5463b3;
+    font-size: clamp(40px, 4.45vw, 64px);
     line-height: 0.96;
     text-transform: uppercase;
   }
@@ -30,13 +31,20 @@
     max-width: 68ch;
     margin-top: 24px;
     color: #5463b3;
+    font-size: 20px;
+    line-height: 1.45;
+  }
+
+  #shopify-section-{{ section.id }} .varty-label-truth__body p {
+    font-size: inherit;
+    line-height: inherit;
   }
 
   #shopify-section-{{ section.id }} .varty-label-truth__thumbs {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
-    margin-top: 28px;
+    gap: 20px;
+    margin-top: 34px;
   }
 
   #shopify-section-{{ section.id }} .varty-label-truth__media,
@@ -59,7 +67,7 @@
   }
 
   #shopify-section-{{ section.id }} .varty-label-truth__thumb {
-    aspect-ratio: 1;
+    aspect-ratio: 4 / 3;
   }
 
   @media screen and (max-width: 920px) {
@@ -75,6 +83,14 @@
     #shopify-section-{{ section.id }} .varty-label-truth__media {
       order: -1;
       aspect-ratio: 4 / 3;
+    }
+
+    #shopify-section-{{ section.id }} .varty-label-truth__heading {
+      font-size: 42px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-label-truth__body {
+      font-size: 18px;
     }
   }
 {% endstyle %}
