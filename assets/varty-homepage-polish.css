@@ -639,20 +639,26 @@
 [id$="__pantry_truth"] .content-heading,
 [id$="__pantry_truth"] h2 {
   color: #5463B3;
-  font-size: clamp(42px, 5vw, 84px);
+  font-size: clamp(40px, 4.45vw, 64px) !important;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
   line-height: 0.95;
 }
 
 [id$="__pantry_truth"] .content-text,
-[id$="__pantry_truth"] .content-text p,
+[id$="__pantry_truth"] .content-text p {
+  color: #5463B3 !important;
+  font-size: clamp(18px, 1.39vw, 20px) !important;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
 [id$="__pantry_truth"] .content-text li {
   color: #5463B3 !important;
-  font-size: clamp(20px, 1.55vw, 28px);
+  font-size: 17px !important;
   font-weight: 500;
-  line-height: 1.35;
+  line-height: 1.45;
 }
 
 [id$="__pantry_truth"] .content-text strong {
