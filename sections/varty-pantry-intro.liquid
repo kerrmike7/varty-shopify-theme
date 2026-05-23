@@ -71,8 +71,9 @@
   }
 
   #shopify-section-{{ section.id }} .varty-pantry-intro__heading {
-    max-width: 13ch;
+    max-width: 18ch;
     margin: 0 auto;
+    font-size: clamp(36px, 3.05vw, 44px);
     line-height: 1.04;
   }
 
@@ -107,6 +108,11 @@
 
     #shopify-section-{{ section.id }} .varty-pantry-intro__image {
       display: none;
+    }
+
+    #shopify-section-{{ section.id }} .varty-pantry-intro__heading {
+      max-width: 15ch;
+      font-size: 30px;
     }
   }
 {% endstyle %}
