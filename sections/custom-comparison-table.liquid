@@ -166,11 +166,12 @@
     margin: 0 auto 40px;
   }
   #shopify-section-{{ section.id }} .custom-comparison-table__heading {
-    font-size: 4.5rem;
+    font-size: clamp(56px, 5vw, 72px);
     font-weight: 800;
     text-transform: uppercase;
     margin-bottom: 12px;
     color: {{ text_color }};
+    line-height: 0.95;
   }
   #shopify-section-{{ section.id }} .custom-comparison-table__subheading {
     font-size: 1rem;
@@ -213,7 +214,7 @@
       padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
     }
     #shopify-section-{{ section.id }} .custom-comparison-table__heading {
-      font-size: 2.25rem;
+      font-size: 44px;
     }
     #shopify-section-{{ section.id }} .custom-comparison-table__badge {
       position: static;
