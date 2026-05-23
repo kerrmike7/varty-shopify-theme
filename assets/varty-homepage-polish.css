@@ -947,7 +947,7 @@
 
 [id$="__faq"] .collapsible-tabs__heading {
   color: #5463B3 !important;
-  font-size: clamp(34px, 3.8vw, 64px);
+  font-size: clamp(40px, 4.45vw, 64px) !important;
   font-weight: 800;
   letter-spacing: 0;
   line-height: 1.02;
@@ -973,10 +973,11 @@
 
 [id$="__faq"] .summary__title-name,
 [id$="__faq"] .accordion__title {
-  font-size: clamp(18px, 1.35vw, 26px);
-  font-weight: 700;
+  font-size: 18px !important;
+  font-weight: 400;
   letter-spacing: 0;
-  text-transform: uppercase;
+  line-height: 1.35;
+  text-transform: none;
 }
 
 [id$="__faq"] .accordion__text {
