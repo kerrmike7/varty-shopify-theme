@@ -26,45 +26,17 @@
       }
     },
     "hero": {
-      "type": "split-banner",
-      "blocks": {
-        "hero_content": {
-          "type": "banner",
-          "settings": {
-            "center_text": true,
-            "vertical_content_position": "center",
-            "horizontal_content_position": "center",
-            "subheading": "t:varty.hero.subheading",
-            "heading": "t:varty.hero.heading",
-            "text": "<p>No gums. No fillers. Just a clean oat beverage that tastes as good as it reads. Your coffee called…it's already excited.</p>",
-            "button_label": "I'm a Wholesaler",
-            "link": "/pages/wholesale",
-            "button_style": "solid",
-            "image": "shopify://shop_images/varty-stopmotion-01.gif",
-            "overlay_opacity": 8,
-            "color_type": "custom",
-            "varty_color_scheme": "scheme_brand_beige",
-            "secondary_button_label": "I'm a Customer",
-            "secondary_button_link": "/collections/all",
-            "secondary_button_style": "outlined",
-            "context_image": "shopify://shop_images/flower-3_4x-8.avif",
-            "context_image_width": 152
-          }
-        }
-      },
-      "block_order": [
-        "hero_content"
-      ],
+      "type": "varty-hero-video",
       "settings": {
-        "height_mode": "percents",
-        "desktop_height": 75,
-        "mobile_height": 70,
-        "section_width": "full-width",
-        "narrow_content": false,
-        "desktop_padding_top": 0,
-        "desktop_padding_bottom": 0,
-        "mobile_padding_top": 0,
-        "mobile_padding_bottom": 0
+        "video_src": "hero-pour.mp4",
+        "poster_image": "hero-pour-poster.jpg",
+        "eyebrow": "t:varty.hero.subheading",
+        "heading": "t:varty.hero.heading",
+        "subtitle": "<p>t:varty.hero.subtext</p>",
+        "cta_text": "t:varty.hero.cta",
+        "cta_url": "/collections/all",
+        "show_organic_stamp": true,
+        "show_flower_decoration": true
       }
     },
     "stats_bar": {

@@ -1,0 +1,284 @@
+{% liquid
+  assign video_asset = section.settings.video_src | default: 'hero-pour.mp4'
+  assign poster_asset = section.settings.poster_image | default: 'hero-pour-poster.jpg'
+
+  capture eyebrow_text
+    render 'varty-translate-setting', value: section.settings.eyebrow
+  endcapture
+  capture heading_text
+    render 'varty-translate-setting', value: section.settings.heading
+  endcapture
+  capture subtitle_text
+    render 'varty-translate-setting', value: section.settings.subtitle
+  endcapture
+  capture cta_text
+    render 'varty-translate-setting', value: section.settings.cta_text
+  endcapture
+
+  assign subtitle_clean = subtitle_text | strip
+  assign subtitle_key_candidate = subtitle_clean | remove_first: '<p>' | remove_first: '</p>' | strip
+  assign subtitle_key_prefix = subtitle_key_candidate | slice: 0, 2
+  if subtitle_key_prefix == 't:'
+    capture subtitle_text
+      render 'varty-translate-setting', value: subtitle_key_candidate
+    endcapture
+    assign subtitle_clean = subtitle_text | strip
+  endif
+%}
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --varty-purple: #5463B3;
+    --varty-beige: #fcf2d3;
+    --varty-green: #4f9f68;
+    background: var(--varty-beige);
+    color: var(--varty-purple);
+  }
+
+  #shopify-section-{{ section.id }} .varty-hero-video {
+    display: grid;
+    min-height: 100svh;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    overflow: hidden;
+    background: var(--varty-beige);
+  }
+
+  #shopify-section-{{ section.id }} .varty-hero-video__media {
+    position: relative;
+    min-height: 100svh;
+    overflow: hidden;
+    background: #d98d83;
+  }
+
+  #shopify-section-{{ section.id }} .varty-hero-video__video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 100svh;
+    object-fit: cover;
+  }
+
+  #shopify-section-{{ section.id }} .varty-hero-video__panel {
+    position: relative;
+    display: flex;
+    min-height: 100svh;
+    align-items: center;
+    overflow: hidden;
+    padding: clamp(80px, 8vw, 128px) clamp(48px, 6vw, 96px) clamp(72px, 7vw, 112px);
+    background: var(--varty-beige);
+    color: var(--varty-purple);
+  }
+
+  #shopify-section-{{ section.id }} .varty-hero-video__content {
+    position: relative;
+    z-index: 2;
+    max-width: 640px;
+  }
+
+  #shopify-section-{{ section.id }} .varty-hero-video__stamp {
+    position: absolute;
+    top: clamp(28px, 4vw, 58px);
+    right: clamp(28px, 4vw, 64px);
+    z-index: 3;
+    width: clamp(116px, 10vw, 158px);
+    height: auto;
+    color: var(--varty-green);
+    transform: rotate(45deg);
+    transform-origin: center;
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .varty-hero-video__eyebrow {
+    margin: 0 0 18px;
+    color: var(--varty-purple);
+    font-size: clamp(16px, 1.25vw, 18px);
+    font-weight: 400;
+    line-height: 1.3;
+    text-transform: none;
+  }
+
+  #shopify-section-{{ section.id }} .varty-hero-video__heading {
+    max-width: 10.8ch;
+    margin: 0;
+    color: var(--varty-purple);
+    font-size: clamp(88px, 7vw, 104px);
+    font-weight: 800;
+    letter-spacing: 0;
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .varty-hero-video__subtitle {
+    max-width: 35ch;
+    margin-top: 26px;
+    color: var(--varty-purple);
+    font-size: clamp(18px, 1.39vw, 20px);
+    font-weight: 400;
+    line-height: 1.42;
+  }
+
+  #shopify-section-{{ section.id }} .varty-hero-video__subtitle p {
+    margin: 0;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  #shopify-section-{{ section.id }} .varty-hero-video__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 190px;
+    margin-top: 34px;
+    padding: 17px 34px;
+    border: 2px solid var(--varty-purple);
+    border-radius: 999px;
+    background: var(--varty-purple);
+    color: #ffffff;
+    font-size: clamp(16px, 1.18vw, 18px);
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  #shopify-section-{{ section.id }} .varty-hero-video__flower {
+    position: absolute;
+    right: clamp(-34px, -2.8vw, -18px);
+    bottom: clamp(-34px, -2.8vw, -18px);
+    z-index: 1;
+    width: clamp(120px, 11vw, 160px);
+    height: auto;
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .varty-hero-video {
+      min-height: 0;
+      grid-template-columns: 1fr;
+    }
+
+    #shopify-section-{{ section.id }} .varty-hero-video__media,
+    #shopify-section-{{ section.id }} .varty-hero-video__video {
+      min-height: 56svh;
+      height: 56svh;
+    }
+
+    #shopify-section-{{ section.id }} .varty-hero-video__panel {
+      min-height: auto;
+      align-items: flex-start;
+      padding: 72px 24px 84px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-hero-video__stamp {
+      top: 22px;
+      right: 22px;
+      width: 106px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-hero-video__eyebrow {
+      max-width: 18ch;
+      margin-bottom: 16px;
+      font-size: 16px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-hero-video__heading {
+      max-width: 9.6ch;
+      font-size: clamp(52px, 15vw, 64px);
+    }
+
+    #shopify-section-{{ section.id }} .varty-hero-video__subtitle {
+      max-width: 31ch;
+      margin-top: 22px;
+      font-size: 18px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-hero-video__cta {
+      width: min(100%, 342px);
+      margin-top: 30px;
+      padding: 17px 28px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-hero-video__flower {
+      right: -26px;
+      bottom: -26px;
+      width: 112px;
+    }
+  }
+{% endstyle %}
+
+<section class="varty-hero-video" aria-labelledby="varty-hero-video-heading-{{ section.id }}">
+  <div class="varty-hero-video__media">
+    <video
+      class="varty-hero-video__video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      poster="{{ poster_asset | asset_url }}"
+      aria-hidden="true"
+    >
+      <source src="{{ video_asset | asset_url }}" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="varty-hero-video__panel">
+    {% if section.settings.show_organic_stamp %}
+      <svg class="varty-hero-video__stamp" viewBox="0 0 180 96" role="img" aria-label="100% Organic">
+        <ellipse cx="90" cy="48" rx="78" ry="35" fill="none" stroke="currentColor" stroke-width="4"></ellipse>
+        <text x="90" y="43" text-anchor="middle" fill="currentColor" font-size="31" font-weight="800" font-family="Arial Rounded MT Bold, Arial, sans-serif">100%</text>
+        <text x="90" y="66" text-anchor="middle" fill="currentColor" font-size="22" font-weight="800" font-family="Arial Rounded MT Bold, Arial, sans-serif">ORGANIC</text>
+      </svg>
+    {% endif %}
+
+    <div class="varty-hero-video__content">
+      {% if eyebrow_text != blank %}
+        <p class="varty-hero-video__eyebrow custom-heading">{{ eyebrow_text | strip }}</p>
+      {% endif %}
+      {% if heading_text != blank %}
+        <h1 id="varty-hero-video-heading-{{ section.id }}" class="varty-hero-video__heading custom-heading content-heading--{{ settings.typography_preset }}">
+          {{ heading_text | strip }}
+        </h1>
+      {% endif %}
+      {% if subtitle_clean != blank %}
+        <div class="varty-hero-video__subtitle richtext body-text--{{ settings.typography_preset }}">
+          {% if subtitle_clean contains '<' %}
+            {{ subtitle_clean }}
+          {% else %}
+            <p>{{ subtitle_clean }}</p>
+          {% endif %}
+        </div>
+      {% endif %}
+      {% if cta_text != blank and section.settings.cta_url != blank %}
+        <a class="varty-hero-video__cta" href="{{ section.settings.cta_url }}">{{ cta_text | strip }}</a>
+      {% endif %}
+    </div>
+
+    {% if section.settings.show_flower_decoration %}
+      <img class="varty-hero-video__flower" src="{{ 'flower-3_4x-8.avif' | asset_url }}" alt="" width="180" height="180" loading="eager" aria-hidden="true">
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Varty hero video",
+  "tag": "section",
+  "class": "section-varty-hero-video",
+  "settings": [
+    { "type": "text", "id": "video_src", "label": "Video asset filename (.mp4)", "default": "hero-pour.mp4" },
+    { "type": "text", "id": "poster_image", "label": "Poster asset filename", "default": "hero-pour-poster.jpg" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Meet Your New Everyday Oat Beverage" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "CLEAN YOU CAN TASTE AND TRUST" },
+    { "type": "richtext", "id": "subtitle", "label": "Subtitle", "default": "<p>No gums. No fillers. Just a clean oat beverage that tastes as good as it reads. Your coffee called…it’s already excited.</p>" },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "I'm a Customer" },
+    { "type": "url", "id": "cta_url", "label": "CTA URL" },
+    { "type": "checkbox", "id": "show_organic_stamp", "label": "Show organic stamp", "default": true },
+    { "type": "checkbox", "id": "show_flower_decoration", "label": "Show flower decoration", "default": true }
+  ],
+  "presets": [
+    { "name": "Varty hero video" }
+  ]
+}
+{% endschema %}

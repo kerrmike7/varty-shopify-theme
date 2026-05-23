@@ -596,11 +596,10 @@
   "varty": {
     "__tbd": "<<TBD: FR strings pending Lina sign-off",
     "hero": {
-      "subheading": "Découvrez votre nouveau rituel à l'avoine",
-      "heading": "Du clean qu’on goûte et qu’on comprend",
-      "subtext": "Sans gommes. Sans agents de remplissage. Juste une boisson à l’avoine propre, aussi bonne que simple à lire.",
-      "cta": "Découvrez nos saveurs",
-      "wholesale_link": "Grossistes — postulez ici →"
+      "subheading": "Meet Your New Everyday Oat Beverage",
+      "heading": "CLEAN YOU CAN TASTE AND TRUST",
+      "subtext": "No gums. No fillers. Just a clean oat beverage that tastes as good as it reads. Your coffee called…it’s already excited.",
+      "cta": "I'm a Customer"
     },
     "trial": {
       "title": "Nouveau chez Varty ?",
