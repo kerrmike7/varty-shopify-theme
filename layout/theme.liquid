@@ -59,6 +59,9 @@
     {%- if request.page_type == 'index' or request.page_type == 'blog' or request.page_type == 'article' or template.suffix == 'about' or template.suffix == 'awards' or template.suffix == 'wholesale' or template.suffix == 'store-finder' -%}
       {{ 'varty-homepage-polish.css' | asset_url | stylesheet_tag }}
     {%- endif -%}
+    {%- if request.page_type == 'product' -%}
+      {{ 'varty-pdp-polish.css' | asset_url | stylesheet_tag }}
+    {%- endif -%}
   
     {%- if request.page_type != 'cart' and settings.enable_cart_drawer and settings.disable_shopping_functionality == false -%}
     <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>

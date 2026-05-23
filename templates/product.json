@@ -23,7 +23,7 @@
         "5dc5b007-724d-4c23-96b1-6555fc3ac5c4": {
           "type": "title",
           "settings": {
-            "title_size": "heading_m",
+            "title_size": "heading_xl",
             "heading_tag": "h1",
             "heading_color": "solid",
             "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
@@ -42,7 +42,7 @@
         "4c78cd40-51a5-46c7-96a0-00b968c047eb": {
           "type": "price",
           "settings": {
-            "text_size": "heading_s",
+            "text_size": "heading_m",
             "badge_size": "default",
             "show_price": true,
             "show_badges": true,
@@ -89,8 +89,8 @@
           "settings": {
             "heading": "",
             "heading_size": "default",
-            "text_size": "label_font",
-            "icon_size": "small",
+            "text_size": "body_m",
+            "icon_size": "medium",
             "icon_weight": "medium",
             "context_icon_radius": "default",
             "fill_container": false,
@@ -345,89 +345,14 @@
       }
     },
     "icons_with_text_pdp_certs": {
-      "type": "icons-with-text",
-      "blocks": {
-        "c1": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/icon-canada-organic.svg",
-            "heading": "Canada Organic"
-          }
-        },
-        "c2": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/icon-aliments-quebec-bio.svg",
-            "heading": "Aliments Preparés au Quebec BIO"
-          }
-        },
-        "c3": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/icon-no-artificial-flavours.svg",
-            "heading": "No Artificial Flavours"
-          }
-        },
-        "c4": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/icon-carrageenan-free.svg",
-            "heading": "Carrageenan Free"
-          }
-        },
-        "c5": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/icon-glyphosate-free.svg",
-            "heading": "Glyphosate Free"
-          }
-        },
-        "c6": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/icon-gluten-free.svg",
-            "heading": "Gluten Free"
-          }
-        }
-      },
-      "block_order": [
-        "c1",
-        "c2",
-        "c3",
-        "c4",
-        "c5",
-        "c6"
-      ],
+      "type": "varty-certifications-strip",
       "settings": {
-        "heading": "Clean Carton Credentials",
-        "desktop_grid_type": "grid",
-        "max_columns": "3",
-        "mobile_layout": "2",
-        "mobile_navigation": "arrows",
-        "center_text": true,
-        "icon_or_image_size": 64,
-        "fill_container": false,
-        "context_icon_radius": "default",
-        "icon_weight": "regular",
-        "item_heading_size": "default",
-        "item_heading_color": "solid",
-        "item_heading_gradient": "",
-        "text_size": "default",
-        "dim_text": false,
-        "heading_size": "heading_m",
-        "heading_tag": "h2",
-        "heading_color": "solid",
-        "heading_gradient": "",
-        "varty_color_scheme": "scheme_brand_beige",
-        "color_type": "custom",
-        "background_color_type": "solid",
-        "background_gradient": "",
-        "background_color": "#fcf2d3",
-        "text_color": "#1c1d1d",
-        "desktop_padding_top": 48,
-        "desktop_padding_bottom": 48,
-        "mobile_padding_top": 32,
-        "mobile_padding_bottom": 32
+        "alt_text": "Varty certifications: Canada Organic, Aliments Préparés au Québec BIO, No Artificial Flavours, Carrageenan Free, Glyphosate Free, Dairy Free, Non GMO, Kosher",
+        "max_width": 1200,
+        "desktop_padding_top": 36,
+        "desktop_padding_bottom": 36,
+        "mobile_padding_top": 24,
+        "mobile_padding_bottom": 24
       }
     },
     "afaa1caf-6b34-4fbe-aa72-e50883d86941": {

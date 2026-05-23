@@ -1,18 +1,17 @@
 {% style %}
   #shopify-section-{{ section.id }} .varty-stockists-split {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
 
   #shopify-section-{{ section.id }} .varty-stockists-split__panel {
     position: relative;
     overflow: hidden;
-    min-height: 520px;
+    min-height: 560px;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(160px, 0.8fr);
-    gap: 28px;
-    align-items: center;
-    padding: clamp(40px, 5vw, 72px);
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    align-items: stretch;
   }
 
   #shopify-section-{{ section.id }} .varty-stockists-split__panel--green {
@@ -21,7 +20,6 @@
   }
 
   #shopify-section-{{ section.id }} .varty-stockists-split__panel--purple {
-    grid-template-columns: minmax(160px, 0.8fr) minmax(0, 1fr);
     background: #5463b3;
     color: #fcf2d3;
   }
@@ -29,20 +27,26 @@
   #shopify-section-{{ section.id }} .varty-stockists-split__content {
     position: relative;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(48px, 6vw, 96px);
+    max-width: 640px;
   }
 
   #shopify-section-{{ section.id }} .varty-stockists-split__heading {
     margin: 0;
-    font-size: clamp(40px, 3.61vw, 52px);
+    font-size: clamp(48px, 4.8vw, 72px) !important;
     line-height: 0.96;
     text-transform: uppercase;
+    color: #fcf2d3;
   }
 
   #shopify-section-{{ section.id }} .varty-stockists-split__body {
-    max-width: 42ch;
+    max-width: 44ch;
     margin-top: 22px;
     font-size: clamp(16px, 1.25vw, 18px);
-    line-height: 1.45;
+    line-height: 1.5;
   }
 
   #shopify-section-{{ section.id }} .varty-stockists-split__body p {
@@ -51,10 +55,13 @@
   }
 
   #shopify-section-{{ section.id }} .varty-stockists-split__button {
-    margin-top: 28px;
+    align-self: flex-start;
+    margin-top: 32px;
+    border-radius: 9999px !important;
+    padding: 14px 36px !important;
+    font-weight: 700;
   }
 
-  #shopify-section-{{ section.id }} .varty-stockists-split__panel--green .varty-stockists-split__heading,
   #shopify-section-{{ section.id }} .varty-stockists-split__panel--green .varty-stockists-split__body {
     color: #5463b3;
   }
@@ -65,22 +72,23 @@
     color: #fcf2d3 !important;
   }
 
-  #shopify-section-{{ section.id }} .varty-stockists-split__panel--purple .varty-stockists-split__heading,
   #shopify-section-{{ section.id }} .varty-stockists-split__panel--purple .varty-stockists-split__body {
     color: #fcf2d3;
   }
 
-  #shopify-section-{{ section.id }} .varty-stockists-split__panel--purple .outlined-button {
+  #shopify-section-{{ section.id }} .varty-stockists-split__panel--purple .solid-button {
+    background: #fcf2d3 !important;
     border-color: #fcf2d3 !important;
-    color: #fcf2d3 !important;
+    color: #5463b3 !important;
   }
 
   #shopify-section-{{ section.id }} .varty-stockists-split__media {
     position: relative;
     z-index: 1;
-    aspect-ratio: 4 / 5;
     overflow: hidden;
-    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+    min-height: 560px;
   }
 
   #shopify-section-{{ section.id }} .varty-stockists-split__media img {
@@ -101,23 +109,27 @@
   }
 
   @media screen and (max-width: 920px) {
-    #shopify-section-{{ section.id }} .varty-stockists-split {
-      grid-template-columns: 1fr;
-    }
-
     #shopify-section-{{ section.id }} .varty-stockists-split__panel,
     #shopify-section-{{ section.id }} .varty-stockists-split__panel--purple {
       min-height: auto;
       grid-template-columns: 1fr;
-      padding: 40px 24px;
     }
 
     #shopify-section-{{ section.id }} .varty-stockists-split__panel--purple .varty-stockists-split__media {
       order: -1;
     }
 
+    #shopify-section-{{ section.id }} .varty-stockists-split__content {
+      padding: 48px 24px;
+      max-width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .varty-stockists-split__media {
+      min-height: 320px;
+    }
+
     #shopify-section-{{ section.id }} .varty-stockists-split__heading {
-      font-size: 36px;
+      font-size: 40px !important;
     }
 
     #shopify-section-{{ section.id }} .varty-stockists-split__body {

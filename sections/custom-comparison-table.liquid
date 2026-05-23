@@ -3,7 +3,7 @@
   assign feature_label  = section.settings.feature_label
   assign varty_label    = section.settings.varty_label | default: 'Varty'
   assign c1_label       = section.settings.competitor_1_label | default: 'Brand A'
-  assign c2_label       = section.settings.competitor_2_label | default: 'Brand B'
+  assign c2_label       = section.settings.competitor_2_label
   assign bg_color       = section.settings.background_color | default: '#5463B3'
   assign text_color     = section.settings.text_color | default: '#ffffff'
 
@@ -152,9 +152,9 @@
     min-width: 172px;
     min-height: 58px;
     padding: 10px 20px;
-    border: 2px solid #bfe4d0;
+    border: 2px solid #bfe4d0 !important;
     border-radius: 999px;
-    color: #bfe4d0;
+    color: #bfe4d0 !important;
     font-weight: 800;
     line-height: 1;
     text-align: center;
@@ -166,12 +166,12 @@
     margin: 0 auto 40px;
   }
   #shopify-section-{{ section.id }} .custom-comparison-table__heading {
-    font-size: clamp(56px, 5vw, 72px);
+    font-size: clamp(36px, 3.6vw, 54px);
     font-weight: 800;
     text-transform: uppercase;
     margin-bottom: 12px;
     color: {{ text_color }};
-    line-height: 0.95;
+    line-height: 1.05;
   }
   #shopify-section-{{ section.id }} .custom-comparison-table__subheading {
     font-size: 1rem;
@@ -188,25 +188,61 @@
   #shopify-section-{{ section.id }} .varty-comparison-table {
     width: min(100%, 1080px);
     margin-inline: auto;
-    border-collapse: collapse;
-    border: 2px solid rgba(252, 242, 211, 0.92);
-    background: rgba(252, 242, 211, 0.08);
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fcf2d3;
+    border: none;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   }
   #shopify-section-{{ section.id }} .varty-comparison-table th,
   #shopify-section-{{ section.id }} .varty-comparison-table td {
-    padding: 18px 20px;
-    border: 1px solid rgba(252, 242, 211, 0.54);
-    color: #fcf2d3;
-    text-align: left;
-    vertical-align: top;
-  }
-  #shopify-section-{{ section.id }} .varty-comparison-table th:nth-child(2),
-  #shopify-section-{{ section.id }} .varty-comparison-table td:nth-child(2) {
-    background: #fcf2d3;
+    padding: 22px 24px;
+    border: none;
+    border-bottom: 1px solid rgba(84, 99, 179, 0.12);
     color: #5463b3;
+    text-align: center;
+    vertical-align: middle;
   }
-  #shopify-section-{{ section.id }} .varty-comparison-table th {
+  #shopify-section-{{ section.id }} .varty-comparison-table thead th {
+    background: #3d4995;
+    color: #fcf2d3;
     font-weight: 800;
+    font-size: 1.05rem;
+    border-bottom: none;
+    padding: 24px;
+  }
+  #shopify-section-{{ section.id }} .varty-comparison-table thead th:first-child {
+    background: transparent;
+  }
+  #shopify-section-{{ section.id }} .varty-comparison-table tbody td:first-child {
+    font-weight: 700;
+  }
+  #shopify-section-{{ section.id }} .varty-comparison-table tbody tr:nth-child(odd) td {
+    background: #fcf2d3;
+  }
+  #shopify-section-{{ section.id }} .varty-comparison-table tbody tr:nth-child(even) td {
+    background: #fffaea;
+  }
+  #shopify-section-{{ section.id }} .varty-comparison-table tbody tr:nth-child(odd) td:nth-child(2) {
+    background: #e3eedb;
+  }
+  #shopify-section-{{ section.id }} .varty-comparison-table tbody tr:nth-child(even) td:nth-child(2) {
+    background: #eef5e6;
+  }
+  #shopify-section-{{ section.id }} .varty-comparison-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+  #shopify-section-{{ section.id }} .varty-comparison-table .check--yes {
+    color: #4f9f68;
+    font-weight: 800;
+    font-size: 1.2rem;
+  }
+  #shopify-section-{{ section.id }} .varty-comparison-table .check--no {
+    color: #b85050;
+    font-weight: 800;
+    font-size: 1.2rem;
   }
   @media screen and (max-width: 749px) {
     #shopify-section-{{ section.id }} .custom-comparison-table {
@@ -270,7 +306,7 @@
       "type": "text",
       "id": "competitor_2_label",
       "label": "Competitor 2 label",
-      "default": "Brand B"
+      "default": ""
     },
     {
       "type": "select",

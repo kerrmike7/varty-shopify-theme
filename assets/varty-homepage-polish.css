@@ -82,6 +82,9 @@
   background-color: #5463b3 !important;
   border-color: #5463b3 !important;
   color: #fcf2d3 !important;
+  border-radius: 9999px !important;
+  padding-left: 32px !important;
+  padding-right: 32px !important;
 }
 
 [id$="__hero"] .banner__button {
@@ -98,6 +101,9 @@
   background-color: #5463b3 !important;
   border-color: #5463b3 !important;
   color: #fcf2d3 !important;
+  border-radius: 9999px !important;
+  padding-left: 32px !important;
+  padding-right: 32px !important;
 }
 
 [id$="__hero"] .banner__button .outlined-button {
@@ -105,6 +111,9 @@
   background-color: transparent !important;
   border-color: #5463b3 !important;
   color: #5463b3 !important;
+  border-radius: 9999px !important;
+  padding-left: 32px !important;
+  padding-right: 32px !important;
 }
 
 [id$="__hero"] .banner__button::before,
@@ -278,21 +287,37 @@
   line-height: 0.96;
 }
 
-[id$="__pantry_truth"] .content-text ul {
-  display: grid;
+[id$="__pantry_truth"] .content-text ul,
+[id$="__pantry_truth"] .content-text.richtext ul {
+  display: grid !important;
   gap: 10px;
   margin: 24px 0 0;
-  padding: 0;
-  list-style: none;
+  padding: 0 !important;
+  list-style: none !important;
+  width: 100% !important;
 }
 
-[id$="__pantry_truth"] .content-text li {
+[id$="__pantry_truth"] .content-text ul li,
+[id$="__pantry_truth"] .content-text.richtext ul li {
   position: relative;
-  padding-left: 30px;
+  display: block !important;
+  list-style: none !important;
+  list-style-type: none !important;
+  list-style-position: outside !important;
+  padding-left: 30px !important;
   color: #5463b3;
+  width: 100% !important;
+  text-align: start;
 }
 
-[id$="__pantry_truth"] .content-text li::before {
+[id$="__pantry_truth"] .content-text ul li::marker,
+[id$="__pantry_truth"] .content-text.richtext ul li::marker {
+  content: "" !important;
+  color: transparent !important;
+}
+
+[id$="__pantry_truth"] .content-text ul li::before,
+[id$="__pantry_truth"] .content-text.richtext ul li::before {
   content: "✓";
   position: absolute;
   left: 0;
@@ -301,10 +326,15 @@
   font-weight: 800;
 }
 
-[id$="__pantry_truth"] .solid-button {
+[id$="__pantry_truth"] .solid-button,
+[id$="__pantry_truth"] .outlined-button,
+[id$="__pantry_truth"] .button {
   background: #5463b3 !important;
   border-color: #5463b3 !important;
   color: #fcf2d3 !important;
+  border-radius: 9999px !important;
+  padding-left: 28px !important;
+  padding-right: 28px !important;
 }
 
 [id$="__faq"] .collapsible-tabs__header {
@@ -1034,6 +1064,8 @@
   background: #5463B3 !important;
   border-color: #5463B3 !important;
   color: #fcf2d3 !important;
+  border-radius: 9999px !important;
+  padding: 14px 36px !important;
 }
 
 [id$="__banner_grid_WChBPx"] {
