@@ -596,10 +596,11 @@
   "varty": {
     "__tbd": "<<TBD: FR strings pending Lina sign-off",
     "hero": {
-      "subheading": "Meet Your New Everyday Oat Beverage",
-      "heading": "CLEAN YOU CAN TASTE AND TRUST",
-      "subtext": "No gums. No fillers. Just a clean oat beverage that tastes as good as it reads. Your coffee called…it’s already excited.",
-      "cta": "I'm a Customer"
+      "subheading": "Your Favourite Organic Oat Beverage, Now Ready to Order Online",
+      "heading": "Varty: Clean You Can Taste. And Trust.",
+      "subtext": "<p>No gums. No added sugar. No fillers. No \"what even is that?\" ingredients. Just organic oat beverage made with 3-4 simple ingredients, now available in easy online bundles. Try all 3 flavours, build your own 6-pack, or subscribe and keep your pantry stocked with free delivery every time.</p>",
+      "cta": "Shop Bundles",
+      "__hero_tbd": "FR hero copy pending Lina sign-off."
     },
     "trial": {
       "title": "Nouveau chez Varty ?",

@@ -3,6 +3,13 @@
     "announcement_bar": {
       "type": "announcement-bar",
       "blocks": {
+        "ann_offer": {
+          "type": "text",
+          "settings": {
+            "desktop_text": "<p>Try the Tasting Box, build your 6-pack, or subscribe for free delivery.</p>",
+            "mobile_text": "<p>Try the Tasting Box or subscribe for free delivery.</p>"
+          }
+        },
         "ann_ship": {
           "type": "text",
           "settings": {
@@ -12,6 +19,7 @@
         }
       },
       "block_order": [
+        "ann_offer",
         "ann_ship"
       ],
       "settings": {
@@ -22,7 +30,9 @@
         "color_type": "custom",
         "background_color_type": "solid",
         "section_paddings": 10,
-        "varty_color_scheme": "scheme_brand_purple"
+        "varty_color_scheme": "scheme_brand_purple",
+        "background_color": "#C5C9E8",
+        "text_color": "#5463B3"
       }
     },
     "hero": {
@@ -46,7 +56,7 @@
           "type": "text",
           "settings": {
             "heading": "3-4",
-            "text": "<p>Ingredients per product. That's it.</p>",
+            "text": "<p>Organic Ingredients per product. That's it.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -55,7 +65,7 @@
           "type": "text",
           "settings": {
             "heading": "0%",
-            "text": "<p>Gums, fillers, or additives.</p>",
+            "text": "<p>Gums, added sugar, fillers, or additives.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -64,7 +74,7 @@
           "type": "text",
           "settings": {
             "heading": "100%",
-            "text": "<p>Canadian Made.</p>",
+            "text": "<p>Canadian-Made.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -99,7 +109,7 @@
         "anchor_id": "flavours",
         "media_style": "hide",
         "subheading": "",
-        "heading": "Explore the Flavours",
+        "heading": "Our Organic Oat Beverages",
         "text": "",
         "button_label": "",
         "max_columns": "3",
@@ -117,7 +127,8 @@
         "desktop_padding_bottom": 64,
         "mobile_padding_top": 40,
         "mobile_padding_bottom": 40,
-        "varty_color_scheme": "scheme_brand_beige"
+        "varty_color_scheme": "scheme_brand_beige",
+        "heading_size": "heading_s"
       }
     },
     "trial_mix_cards": {
@@ -390,28 +401,28 @@
           "type": "tab",
           "settings": {
             "heading": "Why choose Varty over other clean oat beverage brands?",
-            "text": "<p>…Because it's organic, it's real, and it keeps its promises. We only use 3-5 natural, real ingredients that keep your oat beverage simple, clean, and – of course – delicious.</p>"
+            "text": "<p>Because it's organic, it's real, and it keeps its promises. We only use 3-4 organic ingredients, the kind you'd actually find in your kitchen. No gums, no added sugar, no stabilizers, no \"natural flavours\" doing mysterious things. Just clean.</p>"
           }
         },
         "q2": {
           "type": "tab",
           "settings": {
             "heading": "Why does Varty cost more than other organic oat beverages?",
-            "text": "<p>Quality ingredients cost more than whatever the other guys are using. Still, we keep Varty as affordable as we can – considering it's higher quality than most popular oat beverage brands.</p>"
+            "text": "<p>Quality ingredients cost more than whatever the other guys are using. We keep Varty as accessible as we can while using higher-quality ingredients than most brands on the shelf.</p>"
           }
         },
         "q3": {
           "type": "tab",
           "settings": {
             "heading": "Is it shelf stable without preservatives?",
-            "text": "<p>Yes. That's because we keep things simple and smart. By using sea salt as a natural shelf-life extending agent, Varty stays fresher for longer, without the need for cryptic additives.</p>"
+            "text": "<p>Yes. Sea salt works as a natural shelf-life extender, so Varty stays fresh for longer, with no cryptic additives required. Once opened, refrigerate and use within 7-10 days.</p>"
           }
         },
         "q4": {
           "type": "tab",
           "settings": {
             "heading": "Aren't unsweetened oat beverages bland?",
-            "text": "<p>We've tasted those too…and yeah, we get it. But Varty's naturally sweet, thanks to the way we process our oats. So nope, bland isn't on the label or in the bottle. Its natural sweetness derives from the manufacturing process, eliminating the need for added sugar. Any sugar content you see on the label refers to natural oat sugars created during the production process.</p>"
+            "text": "<p>We've tasted those too, so we get it. Varty's naturally sweet thanks to the way we process our oats, not because we added sugar. Any sugar on the label is natural oat sugar from the production process. Nothing added, nothing hidden.</p>"
           }
         }
       },
@@ -438,8 +449,8 @@
     "label_truth": {
       "type": "varty-label-truth",
       "settings": {
-        "heading": "THE OAT BEVERAGE THAT (ACTUALLY) LIVES UP TO THE LABEL",
-        "body": "<p>Are \"healthy\" oat beverages as healthy as they claim to be? If you've read the labels like we have – and questioned the claims like we have – then you know the answer.</p><p>Like you, we care about what we put in our bodies, so if an ingredient doesn't belong in your pantry, it won't be in ours. VARTY is taking organic oat beverages back to basics with 3-4 ingredients. Only what matters. Nothing more, nothing masked. Just real ingredients, doing what they do best!</p>",
+        "heading": "VARTY: THE ORGANIC OAT BEVERAGE THAT (ACTUALLY) LIVES UP TO THE LABEL",
+        "body": "<p>Are \"healthy\" oat beverages as healthy as they claim to be? If you've read the labels like we have, and questioned the claims like we have, then you know the answer. Like you, we care about what we put in our bodies, so if an ingredient doesn't belong in your pantry, it won't be in ours.</p><p>VARTY is taking organic oat beverages back to basics with 3-4 ingredients. Only what matters. Nothing more, nothing masked. Just real ingredients, doing what they do best.</p><p>Now available online in easy bundles, so your pantry can stay stocked with the clean oat beverage you already trust.</p>",
         "main_image": "varty-lifestyle-01.jpg",
         "thumb_1": "varty-lifestyle-02.jpg",
         "thumb_2": "varty-lifestyle-03.jpg",
@@ -485,15 +496,15 @@
         "ingredients": {
           "type": "row",
           "settings": {
-            "feature_label": "Ingredients",
-            "varty_value": "3-4 real organic ingredients",
+            "feature_label": "INGREDIENTS",
+            "varty_value": "3-4 real, organic ingredients",
             "competitor_1_value": "10+ ingredients"
           }
         },
         "additives": {
           "type": "row",
           "settings": {
-            "feature_label": "Additives",
+            "feature_label": "ADDITIVES",
             "varty_value": "None. Really. We triple-checked.",
             "competitor_1_value": "Gums, stabilizers and \"natural flavours\""
           }
@@ -501,7 +512,7 @@
         "portion": {
           "type": "row",
           "settings": {
-            "feature_label": "Portion Size",
+            "feature_label": "PORTION SIZE",
             "varty_value": "More oats per serving",
             "competitor_1_value": "Standard industry serving size"
           }
@@ -509,7 +520,7 @@
         "taste": {
           "type": "row",
           "settings": {
-            "feature_label": "Taste",
+            "feature_label": "TASTE",
             "varty_value": "Smooth, subtle & tastes like oats, not sugar water",
             "competitor_1_value": "Watery, overly sweet, bland"
           }
@@ -517,9 +528,9 @@
         "foam": {
           "type": "row",
           "settings": {
-            "feature_label": "Foam Factor",
-            "varty_value": "Foams naturally using organic oil ONLY. Clean, simple, Barista-tested.",
-            "competitor_1_value": "Relies on a cocktail of gums, fillers, and additives to create a foam."
+            "feature_label": "FOAM FACTOR",
+            "varty_value": "Foams naturally using less than 1% of locally sourced organic high oleic sunflower oil ONLY. Clean, simple, barista-approved. The cleanest Barista on the market.",
+            "competitor_1_value": "Relies on a cocktail of added sugars, gums, fillers, and additives to create a foam."
           }
         }
       },
@@ -632,10 +643,10 @@
             "scheme": "green",
             "image_position": "right",
             "image": "varty-all-skus-ecommerce.jpg",
-            "heading": "COMING TO A STORE NEAR YOU SOON",
-            "body": "<p>Varty is launching soon. If your favorite store hasn't caught on yet, give them a gentle nudge…and tag us when you do! We're always up for making new shelf-space friends.</p>",
-            "button_label": "Shop Varty",
-            "button_link": "/collections/all",
+            "heading": "ONLINE, IN STORES, AND PROBABLY CLOSER THAN YOU THINK",
+            "body": "<p>Varty is now available to order online and stocked in 40+ active doors across Canada, with more shelves joining the party soon. Shop your favourite bundle online, or use our store locator to find Varty near you.</p>",
+            "button_label": "Find Varty Near You",
+            "button_link": "/pages/stockists",
             "button_style": "solid",
             "show_flower": false
           }
@@ -647,8 +658,8 @@
             "image_position": "left",
             "image": "varty-lifestyle-02.jpg",
             "heading": "LET'S PUT SOMETHING BETTER ON YOUR SHELF",
-            "body": "<p>We partner with retailers and grocers who care about quality as much as we do. Apply today to find out how you can become one of the first stockists of VARTY in Canada.</p>",
-            "button_label": "Apply Now",
+            "body": "<p>We partner with retailers and grocers who care about quality as much as we do.</p>",
+            "button_label": "APPLY NOW",
             "button_link": "/pages/wholesale",
             "button_style": "solid",
             "show_flower": true
@@ -666,11 +677,9 @@
     "announcement_bar",
     "hero",
     "stats_bar",
-    "product_trio",
-    "trial_mix_cards",
     "certifications",
     "label_truth",
-    "awards_card",
+    "product_trio",
     "pantry_intro",
     "organic_marquee",
     "pantry_truth",
