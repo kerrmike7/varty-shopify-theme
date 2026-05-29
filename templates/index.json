@@ -48,7 +48,7 @@
         "show_organic_stamp": true,
         "show_flower_decoration": true,
         "secondary_cta_text": "Subscribe & Save",
-        "secondary_cta_url": "/collections/subscription"
+        "secondary_cta_url": "/collections/all"
       }
     },
     "stats_bar": {

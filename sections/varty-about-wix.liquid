@@ -1,0 +1,531 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --varty-about-purple: #5865ad;
+    --varty-about-cream: #fcf2d3;
+    --varty-about-green: #a8d996;
+    --varty-about-blue-text: #4f5eaa;
+    background: var(--varty-about-cream);
+    color: var(--varty-about-blue-text);
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-wix {
+    overflow: hidden;
+    background: var(--varty-about-cream);
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-wix img {
+    display: block;
+    max-width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.25fr);
+    min-height: clamp(760px, 83vw, 1120px);
+    padding: clamp(72px, 7vw, 126px) clamp(44px, 5.3vw, 156px) clamp(56px, 5vw, 96px);
+    background: var(--varty-about-purple);
+    color: var(--varty-about-cream);
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-hero__copy {
+    position: relative;
+    z-index: 2;
+    align-self: center;
+    padding-top: clamp(96px, 10vw, 170px);
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-hero__eyebrow,
+  #shopify-section-{{ section.id }} .varty-about-mission__eyebrow {
+    display: block;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(24px, 1.75vw, 34px);
+    line-height: 1.2;
+    letter-spacing: 0;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-hero__title {
+    max-width: 12ch;
+    margin: clamp(30px, 2.4vw, 46px) 0 0;
+    font-family: "Avenir Next", "Arial Black", Arial, sans-serif;
+    font-size: clamp(48px, 4.35vw, 82px);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-hero__stamp {
+    position: absolute;
+    top: clamp(34px, 4vw, 78px);
+    left: min(52vw, 770px);
+    z-index: 3;
+    width: clamp(230px, 18vw, 370px);
+    color: var(--varty-about-green);
+    transform: rotate(3deg);
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-hero__stamp svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-hero__media {
+    position: relative;
+    z-index: 2;
+    align-self: start;
+    justify-self: end;
+    width: min(100%, 1370px);
+    margin-top: 18px;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-hero__image {
+    width: 100%;
+    border-radius: 44px;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-hero__flower {
+    position: absolute;
+    left: -54px;
+    bottom: -26px;
+    z-index: 1;
+    width: clamp(280px, 25vw, 520px);
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-mission {
+    position: relative;
+    min-height: clamp(760px, 78vw, 1160px);
+    padding: clamp(120px, 10vw, 210px) 6vw 0;
+    background: var(--varty-about-cream);
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-mission__copy {
+    position: relative;
+    z-index: 4;
+    max-width: 1760px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-mission__eyebrow {
+    color: var(--varty-about-blue-text);
+    font-family: "Avenir Next", Arial, sans-serif;
+    font-size: clamp(26px, 1.8vw, 38px);
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-mission__heading {
+    max-width: 42ch;
+    margin: 38px auto 0;
+    color: var(--varty-about-blue-text);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(42px, 3.2vw, 72px);
+    font-weight: 400;
+    line-height: 1.18;
+    letter-spacing: 0;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-collage {
+    position: relative;
+    z-index: 3;
+    width: min(100%, 1980px);
+    height: clamp(500px, 41vw, 820px);
+    margin: clamp(86px, 8vw, 150px) auto 0;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-collage__image {
+    position: absolute;
+    overflow: hidden;
+    border-radius: 32px;
+    box-shadow: none;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-collage__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-collage__image--left {
+    top: 0;
+    left: 1.5%;
+    z-index: 1;
+    width: 32%;
+    height: 62%;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-collage__image--center {
+    top: 18%;
+    left: 23%;
+    z-index: 2;
+    width: 58%;
+    height: 68%;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-collage__image--right {
+    top: 0;
+    right: 3%;
+    z-index: 3;
+    width: 30%;
+    height: 65%;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-wave {
+    position: absolute;
+    right: 0;
+    bottom: -2px;
+    left: 0;
+    z-index: 2;
+    height: clamp(118px, 13vw, 230px);
+    color: var(--varty-about-purple);
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-wave svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-founder {
+    position: relative;
+    padding: clamp(92px, 7vw, 140px) clamp(44px, 15.5vw, 470px) clamp(110px, 9vw, 174px);
+    background: var(--varty-about-purple);
+    color: var(--varty-about-cream);
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-founder__inner {
+    position: relative;
+    z-index: 2;
+    max-width: 2020px;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-founder h2 {
+    margin: 0 0 clamp(48px, 4.3vw, 82px);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(48px, 3.7vw, 76px);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: 0;
+    color: var(--varty-about-cream);
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-founder__body {
+    max-width: 2100px;
+    font-family: "Avenir Next", Arial, sans-serif;
+    font-size: clamp(20px, 1.45vw, 36px);
+    font-style: italic;
+    line-height: 1.46;
+    letter-spacing: 0;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-founder__body p {
+    margin: 0 0 clamp(32px, 2.9vw, 56px);
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-founder__body strong {
+    color: var(--varty-about-cream);
+    font-weight: 800;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-founder__signature {
+    margin-top: clamp(48px, 4vw, 76px);
+    color: var(--varty-about-green);
+    font-family: "Caveat", "Dancing Script", "Brush Script MT", cursive;
+    font-size: clamp(48px, 4vw, 78px);
+    line-height: 1;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-founder__caption {
+    margin-top: 24px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(18px, 1.2vw, 28px);
+    line-height: 1.2;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-founder__flower {
+    position: absolute;
+    right: -66px;
+    bottom: -120px;
+    z-index: 1;
+    width: clamp(320px, 25vw, 600px);
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-values {
+    position: relative;
+    padding: clamp(160px, 11vw, 230px) clamp(44px, 8vw, 240px) clamp(190px, 12vw, 270px);
+    background: var(--varty-about-cream);
+    color: var(--varty-about-blue-text);
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-values__flower {
+    position: absolute;
+    top: -92px;
+    right: clamp(36px, 6vw, 156px);
+    width: clamp(180px, 12vw, 280px);
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-values h2 {
+    margin: 0;
+    color: var(--varty-about-blue-text);
+    font-family: "Avenir Next", "Arial Black", Arial, sans-serif;
+    font-size: clamp(46px, 4vw, 76px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-values__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(54px, 6vw, 150px);
+    max-width: 1840px;
+    margin: clamp(88px, 7vw, 132px) auto 0;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-value__icon {
+    display: grid;
+    place-items: center;
+    width: 136px;
+    height: 136px;
+    margin: 0 auto clamp(34px, 2.4vw, 48px);
+    border: 1.5px solid rgba(79, 94, 170, 0.72);
+    border-radius: 50%;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-value__icon svg {
+    width: 72px;
+    height: 72px;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-value h3 {
+    margin: 0 0 26px;
+    color: var(--varty-about-blue-text);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(46px, 3.2vw, 72px);
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: 0;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-value p {
+    max-width: 440px;
+    margin: 0 auto;
+    color: var(--varty-about-blue-text);
+    font-family: "Avenir Next", Arial, sans-serif;
+    font-size: clamp(21px, 1.45vw, 32px);
+    line-height: 1.42;
+    letter-spacing: 0;
+  }
+
+  @media screen and (max-width: 980px) {
+    #shopify-section-{{ section.id }} .varty-about-hero {
+      grid-template-columns: 1fr;
+      min-height: auto;
+      padding: 56px 22px 92px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-about-hero__copy {
+      padding-top: 24px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-about-hero__title {
+      max-width: 14ch;
+      font-size: clamp(42px, 13vw, 64px);
+    }
+
+    #shopify-section-{{ section.id }} .varty-about-hero__stamp {
+      position: relative;
+      top: auto;
+      left: auto;
+      width: 220px;
+      margin: 28px 0 0 auto;
+    }
+
+    #shopify-section-{{ section.id }} .varty-about-hero__media {
+      margin-top: 42px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-about-hero__flower {
+      width: 250px;
+      left: -110px;
+      bottom: -54px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-about-mission {
+      min-height: auto;
+      padding: 88px 20px 130px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-about-mission__heading {
+      font-size: clamp(34px, 9vw, 48px);
+    }
+
+    #shopify-section-{{ section.id }} .varty-about-collage {
+      display: grid;
+      height: auto;
+      gap: 18px;
+      margin-top: 56px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-about-collage__image {
+      position: relative;
+      top: auto;
+      right: auto;
+      left: auto;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1.35 / 1;
+    }
+
+    #shopify-section-{{ section.id }} .varty-about-wave {
+      height: 86px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-about-founder {
+      padding: 76px 22px 116px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-about-founder__flower {
+      right: -156px;
+      bottom: -74px;
+      width: 320px;
+      opacity: 0.9;
+    }
+
+    #shopify-section-{{ section.id }} .varty-about-values {
+      padding: 100px 22px 120px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-about-values__flower {
+      top: -64px;
+      right: -26px;
+      width: 150px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-about-values__grid {
+      grid-template-columns: 1fr;
+      gap: 70px;
+    }
+  }
+{% endstyle %}
+
+<div class="varty-about-wix">
+  <section class="varty-about-hero" aria-labelledby="varty-about-hero-title">
+    <div class="varty-about-hero__copy">
+      <span class="varty-about-hero__eyebrow">Meet Varty:</span>
+      <h1 id="varty-about-hero-title" class="varty-about-hero__title" aria-label="Meet Varty: The Real, Organic Oat Beverage Canada Has Been Waiting For">THE REAL, ORGANIC OAT BEVERAGE CANADA HAS BEEN WAITING FOR</h1>
+    </div>
+    <div class="varty-about-hero__stamp" aria-hidden="true">
+      <svg viewBox="0 0 380 130" role="img">
+        <ellipse cx="190" cy="65" rx="178" ry="48" fill="none" stroke="currentColor" stroke-width="6"/>
+        <text x="190" y="55" text-anchor="middle" fill="currentColor" font-family="Avenir Next, Arial Black, Arial, sans-serif" font-size="34" font-weight="900">THE CLEAN</text>
+        <text x="190" y="91" text-anchor="middle" fill="currentColor" font-family="Avenir Next, Arial Black, Arial, sans-serif" font-size="34" font-weight="900">ADVANTAGE</text>
+      </svg>
+    </div>
+    <div class="varty-about-hero__media">
+      <img class="varty-about-hero__image" src="{{ 'varty-about-wix-hero-card.png' | asset_url }}" alt="Three Varty oat beverage cartons with Quebec flag illustration" width="1370" height="1400" loading="eager">
+    </div>
+    <img class="varty-about-hero__flower" src="{{ 'flower-1.avif' | asset_url }}" alt="" width="520" height="520" aria-hidden="true">
+  </section>
+
+  <section class="varty-about-mission" aria-labelledby="varty-about-mission-title">
+    <div class="varty-about-mission__copy">
+      <span class="varty-about-mission__eyebrow">Our Mission</span>
+      <h2 id="varty-about-mission-title" class="varty-about-mission__heading">To create a natural oat beverage you can trust, with ingredients you’d put in your own kitchen, not a lab.</h2>
+    </div>
+    <div class="varty-about-collage" aria-label="Varty ingredient and product collage">
+      <div class="varty-about-collage__image varty-about-collage__image--left">
+        <img src="{{ 'varty-about-wix-mission-left.png' | asset_url }}" alt="Oats, walnuts, cinnamon, and Varty carton on a turquoise surface" width="674" height="655" loading="lazy">
+      </div>
+      <div class="varty-about-collage__image varty-about-collage__image--center">
+        <img src="{{ 'varty-about-wix-mission-center.png' | asset_url }}" alt="Varty cartons with a glass of oat beverage" width="1290" height="860" loading="lazy">
+      </div>
+      <div class="varty-about-collage__image varty-about-collage__image--right">
+        <img src="{{ 'varty-about-wix-mission-right.png' | asset_url }}" alt="Oats pouring into a mug next to a Varty carton" width="582" height="673" loading="lazy">
+      </div>
+    </div>
+    <div class="varty-about-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 160" preserveAspectRatio="none">
+        <path d="M0 58C216 19 417 5 626 44C826 82 1032 112 1440 58V160H0V58Z" fill="currentColor"/>
+      </svg>
+    </div>
+  </section>
+
+  <section class="varty-about-founder" aria-labelledby="varty-about-founder-title">
+    <div class="varty-about-founder__inner">
+      <h2 id="varty-about-founder-title">Where it all began</h2>
+      <div class="varty-about-founder__body">
+        <p>“Hi there! We’re Lina and Tony - the friendly faces behind VARTY, and the most relentless label-readers you’ll ever meet. Like many health-conscious consumers, we used to spend way too much time in grocery aisles, flipping cartons over and wondering how “natural” could still mean gums, fillers, and things we couldn’t pronounce.</p>
+        <p>We started Varty because we couldn’t find an oat beverage we actually felt good about. Not just nutritionally, but ethically too. So, we made our own - something that was clean, organic, and proudly made at home on Canadian soil.</p>
+        <p><strong>At Varty, we truly believe that packaged food should simplify our lives, without sacrificing quality for convenience. In a world where shortcuts are standard, oat beverages stopped tasting like oats. Ingredient lists grew longer and longer, and “natural” lost all its meaning.</strong></p>
+        <p>But not anymore. Varty is our way of restoring what food was always meant to be: Simple, nourishing, and honest. You won’t ever catch us cutting corners or masking natural flavours.</p>
+        <p>We made Varty for ourselves, and now, we’re thrilled to be sharing it with the world. Whether you’re a health-conscious consumer or wholesaler, Varty was made for you. We made this for us – but now it’s yours. Hope you love it as much as we do.”</p>
+      </div>
+      <div class="varty-about-founder__signature">Lina &amp; Tony</div>
+      <div class="varty-about-founder__caption">Lina &amp; Tony&nbsp;&nbsp;|&nbsp;&nbsp;Co-Founders</div>
+    </div>
+    <img class="varty-about-founder__flower" src="{{ 'flower-2.avif' | asset_url }}" alt="" width="600" height="600" aria-hidden="true">
+  </section>
+
+  <section class="varty-about-values" aria-labelledby="varty-about-values-title">
+    <img class="varty-about-values__flower" src="{{ 'flower-1.avif' | asset_url }}" alt="" width="280" height="280" aria-hidden="true">
+    <h2 id="varty-about-values-title">OUR CORE VALUES:</h2>
+    <div class="varty-about-values__grid">
+      <article class="varty-about-value">
+        <div class="varty-about-value__icon" aria-hidden="true">
+          <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M40 70V45"/>
+            <path d="M40 45L24 61M40 45l16 16"/>
+            <path d="M40 10l6 15 15-5-8 15 15 6-16 5 7 15-14-8-5 16-5-16-14 8 7-15-16-5 15-6-8-15 15 5 6-15Z"/>
+          </svg>
+        </div>
+        <h3>Local</h3>
+        <p>Proudly Canadian and made in Quebec. Supporting local producers close to home.</p>
+      </article>
+      <article class="varty-about-value">
+        <div class="varty-about-value__icon" aria-hidden="true">
+          <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 30h44L40 62 18 30Z"/>
+            <path d="M27 18h26l9 12H18l9-12Z"/>
+            <path d="M30 30l10 32 10-32M32 18l8 12 8-12"/>
+            <path d="M18 16l-4-6M12 24H5M64 18l5-6M69 30h7M61 58l6 6"/>
+          </svg>
+        </div>
+        <h3>Premium</h3>
+        <p>Only 3-4 organic ingredients. If it’s not in your kitchen, you won’t find it in our bottle.</p>
+      </article>
+      <article class="varty-about-value">
+        <div class="varty-about-value__icon" aria-hidden="true">
+          <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M40 62V38"/>
+            <path d="M40 52c-13-1-20-8-23-18 13 1 20 8 23 18Z"/>
+            <path d="M40 44c-11-1-17-7-19-15 11 1 17 7 19 15Z"/>
+            <path d="M40 52c13-1 20-8 23-18-13 1-20 8-23 18Z"/>
+            <path d="M40 44c11-1 17-7 19-15-11 1-17 7-19 15Z"/>
+            <path d="M29 65h22M34 70h12"/>
+          </svg>
+        </div>
+        <h3>Truthful</h3>
+        <p>We don’t hide behind cryptic jargon and buzzwords. We’ll let our labels do the talking.</p>
+      </article>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Varty About Wix",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Varty About Wix"
+    }
+  ]
+}
+{% endschema %}
