@@ -366,14 +366,14 @@
 
 .varty-footer-live__logo {
   display: block;
-  width: min(220px, 100%);
+  width: min(280px, 100%);
   height: auto;
 }
 
 .varty-footer-live__flower {
-  width: 132px;
+  width: min(280px, 58vw);
   height: auto;
-  margin-top: 24px;
+  margin-top: 30px;
   pointer-events: none;
 }
 

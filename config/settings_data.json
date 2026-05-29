@@ -1362,7 +1362,7 @@
                 "text_logo": "",
                 "logo_font": "bricolage_grotesque_n7",
                 "logo_font_size": 24,
-                "logo_horizontal_alignment": "center"
+                "logo_horizontal_alignment": "flex-start"
               }
             },
             "63f065f6-f1ee-4bf4-8383-2a4aea5a061e": {
@@ -1381,7 +1381,7 @@
                 "enable_store_selector": false,
                 "show_icon": false,
                 "search_style": "icon",
-                "news_style": "icon",
+                "news_style": "disable",
                 "news_heading": "News",
                 "news_icon": "fire",
                 "account_style": "disable",
@@ -1680,11 +1680,22 @@
                 "vertical_text_alignment_2": "flex-end",
                 "horizontal_text_alignment_2": "flex-start"
               }
+            },
+            "varty_main_menu": {
+              "type": "main_menu",
+              "settings": {
+                "menu": "main-menu",
+                "use_accent_color": false,
+                "highlight_menu_item": "",
+                "highlight_menu_item_color": "#5463B3",
+                "link_size": "label_font",
+                "menu_horizontal_alignment": "center"
+              }
             }
           },
           "block_order": [
-            "dae99e80-df66-409e-a2a0-7428d3522662",
             "13338b8d-9ca8-4bee-95df-8201e17013fb",
+            "varty_main_menu",
             "63f065f6-f1ee-4bf4-8383-2a4aea5a061e",
             "hover_mega_menu_NfnBEC",
             "mega_menu_6wqrh7",
@@ -1704,7 +1715,7 @@
             "highlight_menu_item": "",
             "highlight_menu_item_color": "#6e52f9",
             "link_size": "body_l",
-            "menu_horizontal_alignment": "space-between",
+            "menu_horizontal_alignment": "center",
             "color_type": "custom",
             "background_color_type": "solid",
             "background_gradient": "",
@@ -1866,7 +1877,7 @@
               "settings": {
                 "enable_language": false,
                 "search_style": "disable",
-                "news_style": "icon",
+                "news_style": "disable",
                 "news_heading": "News",
                 "news_icon": "fire",
                 "account_style": "disable",

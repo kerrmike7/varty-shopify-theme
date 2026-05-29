@@ -3,7 +3,7 @@
     {% render 'varty-color-vars', scheme: 'scheme_brand_beige' %}
     --padding-top: {{ section.settings.desktop_padding_top }}px;
     --padding-bottom: {{ section.settings.desktop_padding_bottom }}px;
-    background-color: rgb(var(--layout-background-color));
+    background-color: #f6c5d1;
     color: rgb(var(--layout-text-color));
   }
 
@@ -45,26 +45,26 @@
   #shopify-section-{{ section.id }} .varty-choice-grid__card {
     min-height: 100%;
     padding: 30px;
-    border: 1px solid rgba(84, 99, 179, 0.24);
+    border: 0;
     border-radius: 8px;
-    background: rgba(84, 99, 179, 0.06);
+    background: rgba(252, 242, 211, 0.72);
     text-align: center;
   }
 
   #shopify-section-{{ section.id }} .varty-choice-grid__icon {
-    width: 64px;
-    height: 64px;
+    width: 96px;
+    height: 96px;
     margin: 0 auto 18px;
-    border: 2px solid #5463b3;
-    border-radius: 50%;
-    background: #fcf2d3;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
     display: grid;
     place-items: center;
   }
 
   #shopify-section-{{ section.id }} .varty-choice-grid__icon img {
-    width: 32px;
-    height: 32px;
+    width: 82px;
+    height: 82px;
     object-fit: contain;
   }
 

@@ -43,10 +43,12 @@
         "eyebrow": "t:varty.hero.subheading",
         "heading": "t:varty.hero.heading",
         "subtitle": "<p>t:varty.hero.subtext</p>",
-        "cta_text": "t:varty.hero.cta",
+        "cta_text": "Shop Bundles",
         "cta_url": "/collections/all",
         "show_organic_stamp": true,
-        "show_flower_decoration": true
+        "show_flower_decoration": true,
+        "secondary_cta_text": "Subscribe & Save",
+        "secondary_cta_url": "/collections/subscription"
       }
     },
     "stats_bar": {
@@ -74,7 +76,7 @@
           "type": "text",
           "settings": {
             "heading": "100%",
-            "text": "<p>Canadian-Made.</p>",
+            "text": "<p>Canadian- Made.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -269,7 +271,8 @@
         "desktop_padding_bottom": 24,
         "mobile_padding_top": 16,
         "mobile_padding_bottom": 16
-      }
+      },
+      "disabled": true
     },
     "pantry_truth": {
       "type": "media-with-text",
@@ -332,7 +335,8 @@
         "mobile_padding_top": 40,
         "mobile_padding_bottom": 40,
         "varty_color_scheme": "scheme_brand_beige"
-      }
+      },
+      "disabled": true
     },
     "certifications": {
       "type": "varty-certifications-strip",
@@ -393,7 +397,8 @@
         "mobile_padding_top": 40,
         "mobile_padding_bottom": 40,
         "varty_color_scheme": "scheme_brand_purple"
-      }
+      },
+      "disabled": true
     },
     "faq": {
       "type": "collapsible-tabs",
@@ -450,11 +455,11 @@
     "label_truth": {
       "type": "varty-label-truth",
       "settings": {
-        "heading": "VARTY: THE ORGANIC OAT BEVERAGE THAT (ACTUALLY) LIVES UP TO THE LABEL",
+        "heading": "VARTY: The Organic Oat Beverage That<br>(Actually) Lives Up to the Label",
         "body": "<p>Are \"healthy\" oat beverages as healthy as they claim to be? If you've read the labels like we have, and questioned the claims like we have, then you know the answer. Like you, we care about what we put in our bodies, so if an ingredient doesn't belong in your pantry, it won't be in ours.</p><p>VARTY is taking organic oat beverages back to basics with 3-4 ingredients. Only what matters. Nothing more, nothing masked. Just real ingredients, doing what they do best.</p><p>Now available online in easy bundles, so your pantry can stay stocked with the clean oat beverage you already trust.</p>",
-        "main_image": "varty-lifestyle-01.jpg",
-        "thumb_1": "varty-lifestyle-02.jpg",
-        "thumb_2": "varty-lifestyle-03.jpg",
+        "main_image": "varty-home-wix-label-1.jpeg",
+        "thumb_1": "varty-home-wix-label-2.jpeg",
+        "thumb_2": "varty-home-wix-label-3.jpeg",
         "desktop_padding_top": 72,
         "desktop_padding_bottom": 72,
         "mobile_padding_top": 44,
@@ -490,7 +495,8 @@
         "desktop_padding_bottom": 96,
         "mobile_padding_top": 56,
         "mobile_padding_bottom": 56
-      }
+      },
+      "disabled": true
     },
     "why_varty_comparison": {
       "type": "custom-comparison-table",
@@ -672,7 +678,137 @@
         "left",
         "right"
       ],
-      "settings": {}
+      "settings": {},
+      "disabled": true
+    },
+    "pantry_step_inside": {
+      "type": "varty-home-feature",
+      "blocks": {
+        "water": {
+          "type": "bullet",
+          "settings": {
+            "text": "Filtered Water"
+          }
+        },
+        "oats": {
+          "type": "bullet",
+          "settings": {
+            "text": "Organic Canadian Oats"
+          }
+        },
+        "salt": {
+          "type": "bullet",
+          "settings": {
+            "text": "Sea Salt"
+          }
+        },
+        "vanilla": {
+          "type": "bullet",
+          "settings": {
+            "text": "Sometimes Organic Vanilla"
+          }
+        },
+        "thats_it": {
+          "type": "bullet",
+          "settings": {
+            "text": "…That’s it."
+          }
+        }
+      },
+      "block_order": [
+        "water",
+        "oats",
+        "salt",
+        "vanilla",
+        "thats_it"
+      ],
+      "settings": {
+        "scheme": "cream",
+        "image_position": "right",
+        "image": "varty-home-wix-pantry.jpeg",
+        "eyebrow": "",
+        "heading": "Step Inside Our Pantry…",
+        "body": "<p>Creamy, clean, and made with ingredients your pantry would approve of. It’s oat beverage that just makes sense.</p>",
+        "button_label": "SHOP VARTY BUNDLES",
+        "button_link": "/collections/all",
+        "show_flower": false,
+        "desktop_padding_top": 80,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48
+      }
+    },
+    "stockists_standalone": {
+      "type": "varty-home-feature",
+      "settings": {
+        "scheme": "green",
+        "image_position": "right",
+        "image": "varty-all-skus-ecommerce.jpg",
+        "eyebrow": "",
+        "heading": "Online, In Stores, and Probably Closer Than You Think",
+        "body": "<p>Varty is now available to order online and stocked in 40+ active doors across Canada, with more shelves joining the party soon. Shop your favourite bundle online, or use our store locator to find Varty near you.</p>",
+        "button_label": "Find Varty Near You",
+        "button_link": "/pages/stockists",
+        "show_flower": false,
+        "desktop_padding_top": 84,
+        "desktop_padding_bottom": 84,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48
+      }
+    },
+    "pantry_just_got_smarter": {
+      "type": "varty-home-feature",
+      "settings": {
+        "scheme": "purple",
+        "image_position": "right",
+        "image": "varty-home-wix-pantry.jpeg",
+        "eyebrow": "",
+        "heading": "Your Pantry Just Got a Whole Lot Smarter",
+        "body": "<p>Varty is now available to order online, which means your favourite clean oat beverage doesn’t have to depend on your next grocery run. Start with a Tasting Box, stock up with a 6-pack, or subscribe and save 10% on every order, with free delivery in our Quebec and Ontario delivery zone.</p><p>Not ready to commit? Try one of each flavour first. Already found your favourite? Build your 6-pack and let future-you feel wildly organized.</p>",
+        "button_label": "SHOP VARTY ONLINE",
+        "button_link": "/collections/all",
+        "show_flower": true,
+        "desktop_padding_top": 88,
+        "desktop_padding_bottom": 88,
+        "mobile_padding_top": 52,
+        "mobile_padding_bottom": 52
+      }
+    },
+    "never_run_out": {
+      "type": "varty-home-feature",
+      "settings": {
+        "scheme": "cream",
+        "image_position": "left",
+        "image": "varty-home-wix-subscribe.jpeg",
+        "eyebrow": "",
+        "heading": "Never Run Out of the Good Stuff",
+        "body": "<p>Your coffee deserves consistency. Your pantry does too. Subscribe to your favourite Varty bundle and get 10% off every recurring order, plus free delivery every time in our Quebec and Ontario delivery zone. Choose delivery every 4, 6, or 8 weeks, then pause, swap, or adjust after your second order.</p>",
+        "button_label": "SUBSCRIBE & SAVE",
+        "button_link": "/collections/subscription",
+        "show_flower": false,
+        "desktop_padding_top": 84,
+        "desktop_padding_bottom": 84,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48
+      }
+    },
+    "wholesale_standalone": {
+      "type": "varty-home-feature",
+      "settings": {
+        "scheme": "purple",
+        "image_position": "right",
+        "image": "varty-home-wix-wholesale.jpeg",
+        "eyebrow": "",
+        "heading": "Let’s Put Something Better on Your Shelf",
+        "body": "<p>We partner with retailers and grocers who care about quality as much as we do.</p>",
+        "button_label": "APPLY NOW",
+        "button_link": "/pages/wholesale",
+        "show_flower": true,
+        "desktop_padding_top": 84,
+        "desktop_padding_bottom": 84,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48
+      }
     }
   },
   "order": [
@@ -682,15 +818,20 @@
     "certifications",
     "label_truth",
     "product_trio",
+    "pantry_step_inside",
+    "stockists_standalone",
+    "why_varty_comparison",
+    "why_choose_varty",
+    "pantry_just_got_smarter",
+    "never_run_out",
+    "wholesale_standalone",
+    "faq",
     "trial_mix_cards",
     "awards_card",
     "pantry_intro",
     "organic_marquee",
     "pantry_truth",
-    "why_varty_comparison",
-    "why_choose_varty",
     "subscribe_save",
-    "stockists_split",
-    "faq"
+    "stockists_split"
   ]
 }

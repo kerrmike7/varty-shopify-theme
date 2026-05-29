@@ -14,6 +14,9 @@
   capture cta_text
     render 'varty-translate-setting', value: section.settings.cta_text
   endcapture
+  capture secondary_cta_text
+    render 'varty-translate-setting', value: section.settings.secondary_cta_text
+  endcapture
 
   assign subtitle_clean = subtitle_text | strip
   assign subtitle_key_candidate = subtitle_clean | remove_first: '<p>' | remove_first: '</p>' | strip
@@ -37,7 +40,7 @@
 
   #shopify-section-{{ section.id }} .varty-hero-video {
     display: grid;
-    min-height: 100svh;
+    min-height: clamp(560px, 68svh, 720px);
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     overflow: hidden;
     background: var(--varty-beige);
@@ -45,7 +48,7 @@
 
   #shopify-section-{{ section.id }} .varty-hero-video__media {
     position: relative;
-    min-height: 100svh;
+    min-height: clamp(560px, 68svh, 720px);
     overflow: hidden;
     background: #d98d83;
   }
@@ -54,14 +57,14 @@
     display: block;
     width: 100%;
     height: 100%;
-    min-height: 100svh;
+    min-height: clamp(560px, 68svh, 720px);
     object-fit: cover;
   }
 
   #shopify-section-{{ section.id }} .varty-hero-video__panel {
     position: relative;
     display: flex;
-    min-height: 100svh;
+    min-height: clamp(560px, 68svh, 720px);
     align-items: center;
     overflow: hidden;
     padding: clamp(80px, 8vw, 128px) clamp(48px, 6vw, 96px) clamp(72px, 7vw, 112px);
@@ -91,9 +94,9 @@
   #shopify-section-{{ section.id }} .varty-hero-video__eyebrow {
     margin: 0 0 18px;
     color: var(--varty-purple);
-    font-size: clamp(16px, 1.25vw, 18px);
-    font-weight: 400;
-    line-height: 1.3;
+    font-size: clamp(24px, 2.2vw, 34px);
+    font-weight: 800;
+    line-height: 1.08;
     text-transform: none;
   }
 
@@ -124,22 +127,33 @@
     line-height: inherit;
   }
 
+  #shopify-section-{{ section.id }} .varty-hero-video__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 34px;
+  }
+
   #shopify-section-{{ section.id }} .varty-hero-video__cta {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     min-width: 190px;
-    margin-top: 34px;
     padding: 17px 34px;
     border: 2px solid var(--varty-purple);
     border-radius: 999px;
     background: var(--varty-purple);
-    color: #ffffff;
-    font-size: clamp(16px, 1.18vw, 18px);
-    font-weight: 700;
+    color: var(--varty-beige);
+    font-size: clamp(17px, 1.25vw, 20px);
+    font-weight: 800;
     line-height: 1;
     text-align: center;
     text-decoration: none;
+  }
+
+  #shopify-section-{{ section.id }} .varty-hero-video__cta--secondary {
+    background: transparent;
+    color: var(--varty-purple);
   }
 
   #shopify-section-{{ section.id }} .varty-hero-video__flower {
@@ -179,7 +193,7 @@
     #shopify-section-{{ section.id }} .varty-hero-video__eyebrow {
       max-width: 18ch;
       margin-bottom: 16px;
-      font-size: 16px;
+      font-size: 24px;
     }
 
     #shopify-section-{{ section.id }} .varty-hero-video__heading {
@@ -193,9 +207,12 @@
       font-size: 18px;
     }
 
+    #shopify-section-{{ section.id }} .varty-hero-video__actions {
+      margin-top: 30px;
+    }
+
     #shopify-section-{{ section.id }} .varty-hero-video__cta {
       width: min(100%, 342px);
-      margin-top: 30px;
       padding: 17px 28px;
     }
 
@@ -251,7 +268,12 @@
         </div>
       {% endif %}
       {% if cta_text != blank and section.settings.cta_url != blank %}
-        <a class="varty-hero-video__cta" href="{{ section.settings.cta_url }}">{{ cta_text | strip }}</a>
+        <div class="varty-hero-video__actions">
+          <a class="varty-hero-video__cta" href="{{ section.settings.cta_url }}">{{ cta_text | strip }}</a>
+          {% if secondary_cta_text != blank and section.settings.secondary_cta_url != blank %}
+            <a class="varty-hero-video__cta varty-hero-video__cta--secondary" href="{{ section.settings.secondary_cta_url }}">{{ secondary_cta_text | strip }}</a>
+          {% endif %}
+        </div>
       {% endif %}
     </div>
 
@@ -274,6 +296,8 @@
     { "type": "richtext", "id": "subtitle", "label": "Subtitle", "default": "<p>No gums. No fillers. Just a clean oat beverage that tastes as good as it reads. Your coffee called…it’s already excited.</p>" },
     { "type": "text", "id": "cta_text", "label": "CTA text", "default": "I'm a Customer" },
     { "type": "url", "id": "cta_url", "label": "CTA URL" },
+    { "type": "text", "id": "secondary_cta_text", "label": "Secondary CTA text" },
+    { "type": "url", "id": "secondary_cta_url", "label": "Secondary CTA URL" },
     { "type": "checkbox", "id": "show_organic_stamp", "label": "Show organic stamp", "default": true },
     { "type": "checkbox", "id": "show_flower_decoration", "label": "Show flower decoration", "default": true }
   ],
