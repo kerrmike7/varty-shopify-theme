@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": "Bloop",
   "installed_preset_name": "Bloop",
@@ -1372,10 +1381,10 @@
                 "highlight_menu_item": "",
                 "highlight_menu_item_color": "#5463B3",
                 "link_size": "label_font",
-                "enable_country": false,
-                "short_country_name": false,
+                "enable_country": true,
+                "short_country_name": true,
                 "enable_language": true,
-                "short_language_name": true,
+                "short_language_name": false,
                 "social_media_style": "disable",
                 "use_accent_color": false,
                 "enable_store_selector": false,
@@ -2016,24 +2025,41 @@
         "announcement-bar": {
           "type": "announcement-bar",
           "blocks": {
+            "countdown_timer_WPN4Tx": {
+              "type": "countdown_timer",
+              "settings": {
+                "countdown_enable": true,
+                "countdown_end_date": "2026-06-25",
+                "countdown_end_time": "23:59",
+                "countdown_expiration_action": "show_zeros",
+                "countdown_text_color": "#b40000",
+                "countdown_show_labels": true,
+                "countdown_labels_color": "#b40000",
+                "countdown_enable_animation": true,
+                "desktop_text": "<p>NEW FLAVORS LAUNCH IN</p>",
+                "mobile_text": "<p>NEW FLAVORS IN</p>",
+                "icon": "stop_watch"
+              }
+            },
             "text_7Qf7WF": {
               "type": "text",
               "settings": {
-                "desktop_text": "<p><a href=\"/collections/all\">Try the Tasting Box, build your 6-pack, or subscribe for free delivery.</a></p>",
-                "mobile_text": "<p><a href=\"/collections/all\">Try the Tasting Box or subscribe for free delivery.</a></p>",
-                "icon": "none"
+                "desktop_text": "<p>Get 10$ OFF on your first order</p>",
+                "mobile_text": "<p>10$ OFF on your first order</p>",
+                "icon": "satisfied"
               }
             }
           },
           "block_order": [
+            "countdown_timer_WPN4Tx",
             "text_7Qf7WF"
           ],
           "settings": {
             "announcement_bar": "show",
-            "text_size": "body_s",
+            "text_size": "label_font_uppercase",
             "show_bottom_line": false,
             "center_text": true,
-            "enable_autoplay": false,
+            "enable_autoplay": true,
             "autoplay_speed": 5,
             "image_ratio": "original",
             "image_width": 24,
@@ -2042,8 +2068,8 @@
             "color_type": "custom",
             "background_color_type": "solid",
             "background_gradient": "",
-            "background_color": "#f6d6df",
-            "text_color": "#5463B3",
+            "background_color": "#FFD6E0",
+            "text_color": "#b40000",
             "section_paddings": 10
           }
         },
@@ -2980,7 +3006,7 @@
             "5e6ad0c3-e619-47d4-a0e6-ab86dd0c9282": {
               "type": "miscellaneous",
               "settings": {
-                "enable_language": true,
+                "enable_language": false,
                 "search_style": "disable",
                 "news_style": "disable",
                 "news_heading": "News",
