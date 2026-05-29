@@ -1,3 +1,54 @@
+[id="shopify-section-header"] .header__wrapper {
+  background: #5463b3;
+}
+
+@media screen and (min-width: 921px) {
+  [id="shopify-section-header"] .header__content {
+    display: grid !important;
+    grid-template-columns: minmax(180px, 0.8fr) minmax(420px, 1.4fr) minmax(180px, 0.8fr);
+    gap: clamp(24px, 4vw, 72px);
+    align-items: center;
+    min-height: 86px;
+  }
+
+  [id="shopify-section-header"] .logo--header {
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  [id="shopify-section-header"] .menu-container--header,
+  [id="shopify-section-header"] .miscellaneous-container--header:has(.menu-container--header) {
+    grid-column: 2;
+    justify-self: center;
+    width: auto;
+  }
+
+  [id="shopify-section-header"] .menu-container--header .menu__list {
+    justify-content: center;
+    gap: clamp(22px, 2.2vw, 40px);
+  }
+
+  [id="shopify-section-header"] .miscellaneous-container--header:has(.search-block),
+  [id="shopify-section-header"] .miscellaneous-container--header:has(.cart-block),
+  [id="shopify-section-header"] .miscellaneous-container--header:has(.localization-container) {
+    grid-column: 3;
+    justify-self: end;
+  }
+
+  [id="shopify-section-header"] .miscellaneous__items,
+  [id="shopify-section-header"] .miscellaneous__subblock {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 18px;
+  }
+
+  [id="shopify-section-header"] .burger-menu-block,
+  [id="shopify-section-header"] .news-block {
+    display: none !important;
+  }
+}
+
 [id$="__hero"] .split-banner__block--hero_content {
   color: #5463b3;
 }

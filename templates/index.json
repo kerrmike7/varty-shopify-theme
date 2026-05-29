@@ -40,9 +40,9 @@
       "settings": {
         "video_src": "hero-pour.mp4",
         "poster_image": "hero-pour-poster.jpg",
-        "eyebrow": "t:varty.hero.subheading",
-        "heading": "t:varty.hero.heading",
-        "subtitle": "<p>t:varty.hero.subtext</p>",
+        "eyebrow": "Your Favourite Organic Oat Beverage, Now Ready to Order Online",
+        "heading": "Varty: Clean You Can Taste. And Trust.",
+        "subtitle": "<p>No gums. No added sugar. No fillers. No “what even is that?” ingredients. Just organic oat beverage made with 3-4 simple ingredients, now available in easy online bundles. Try all 3 flavours, build your own 6-pack, or subscribe and keep your pantry stocked with free delivery every time.</p>",
         "cta_text": "Shop Bundles",
         "cta_url": "/collections/all",
         "show_organic_stamp": true,
