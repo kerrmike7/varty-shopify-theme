@@ -170,7 +170,8 @@
         "mobile_padding_top": 40,
         "mobile_padding_bottom": 40,
         "varty_color_scheme": "scheme_brand_purple"
-      }
+      },
+      "disabled": true
     },
     "organic_marquee": {
       "type": "scrolling-promotion",
@@ -475,7 +476,8 @@
         "desktop_padding_bottom": 72,
         "mobile_padding_top": 40,
         "mobile_padding_bottom": 48
-      }
+      },
+      "disabled": true
     },
     "pantry_intro": {
       "type": "varty-pantry-intro",
@@ -680,6 +682,8 @@
     "certifications",
     "label_truth",
     "product_trio",
+    "trial_mix_cards",
+    "awards_card",
     "pantry_intro",
     "organic_marquee",
     "pantry_truth",
