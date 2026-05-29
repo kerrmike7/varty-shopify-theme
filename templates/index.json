@@ -725,7 +725,7 @@
       "settings": {
         "scheme": "cream",
         "image_position": "right",
-        "image": "varty-home-wix-pantry.jpeg",
+        "image": "varty-home-step-inside-rich.jpg",
         "eyebrow": "",
         "heading": "Step Inside Our Pantry…",
         "body": "<p>Creamy, clean, and made with ingredients your pantry would approve of. It’s oat beverage that just makes sense.</p>",
@@ -743,7 +743,7 @@
       "settings": {
         "scheme": "green",
         "image_position": "right",
-        "image": "varty-all-skus-ecommerce.jpg",
+        "image": "varty-home-stockists-rich.jpg",
         "eyebrow": "",
         "heading": "Online, In Stores, and Probably Closer Than You Think",
         "body": "<p>Varty is now available to order online and stocked in 40+ active doors across Canada, with more shelves joining the party soon. Shop your favourite bundle online, or use our store locator to find Varty near you.</p>",
@@ -761,7 +761,7 @@
       "settings": {
         "scheme": "purple",
         "image_position": "right",
-        "image": "varty-home-wix-pantry.jpeg",
+        "image": "varty-home-pantry-smarter-rich.jpg",
         "eyebrow": "",
         "heading": "Your Pantry Just Got a Whole Lot Smarter",
         "body": "<p>Varty is now available to order online, which means your favourite clean oat beverage doesn’t have to depend on your next grocery run. Start with a Tasting Box, stock up with a 6-pack, or subscribe and save 10% on every order, with free delivery in our Quebec and Ontario delivery zone.</p><p>Not ready to commit? Try one of each flavour first. Already found your favourite? Build your 6-pack and let future-you feel wildly organized.</p>",
@@ -778,8 +778,8 @@
       "type": "varty-home-feature",
       "settings": {
         "scheme": "cream",
-        "image_position": "left",
-        "image": "varty-home-wix-subscribe.jpeg",
+        "image_position": "right",
+        "image": "varty-home-never-run-out-rich.jpg",
         "eyebrow": "",
         "heading": "Never Run Out of the Good Stuff",
         "body": "<p>Your coffee deserves consistency. Your pantry does too. Subscribe to your favourite Varty bundle and get 10% off every recurring order, plus free delivery every time in our Quebec and Ontario delivery zone. Choose delivery every 4, 6, or 8 weeks, then pause, swap, or adjust after your second order.</p>",
@@ -797,7 +797,7 @@
       "settings": {
         "scheme": "purple",
         "image_position": "right",
-        "image": "varty-home-wix-wholesale.jpeg",
+        "image": "varty-home-wholesale-rich.jpg",
         "eyebrow": "",
         "heading": "Let’s Put Something Better on Your Shelf",
         "body": "<p>We partner with retailers and grocers who care about quality as much as we do.</p>",
