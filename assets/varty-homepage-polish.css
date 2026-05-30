@@ -1673,15 +1673,17 @@
 
 [id$="__recipes_hero"] h1 {
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0;
   line-height: 1.05;
   text-wrap: balance;
-  max-width: 18ch;
+  max-width: min(94vw, 1320px);
   margin-inline: auto;
 }
 
 [id$="__recipes_hero"] .content-subheading {
   color: inherit;
+  font-size: clamp(1.3rem, 1.7vw, 1.75rem);
+  line-height: 1.15;
 }
 
 [id$="__main-blog"] {
@@ -1690,12 +1692,12 @@
 }
 
 [id$="__main-blog"] .blog__heading {
-  color: inherit;
+  display: none;
 }
 
 [id$="__main-blog"] .blog-articles {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2rem;
+  gap: 0.75rem;
 }
 
 [id$="__main-blog"] .blog-articles__article {
@@ -1708,10 +1710,11 @@
   justify-content: flex-end;
   gap: 0;
   height: 100%;
-  background: rgb(252, 242, 211);
+  background: #fff;
   color: rgb(84, 99, 179);
-  border-radius: 8px;
+  border-radius: 2px;
   overflow: hidden;
+  padding: 1.5rem 1.5rem 2rem;
 }
 
 [id$="__main-blog"] .article-card__info,
@@ -1721,7 +1724,14 @@
 }
 
 [id$="__main-blog"] .article-card__info {
-  padding-top: 1.1rem;
+  padding-top: 1.35rem;
+}
+
+[id$="__main-blog"] .article-card__title {
+  font-size: clamp(1.8rem, 2.4vw, 2.65rem) !important;
+  line-height: 1.12 !important;
+  letter-spacing: 0;
+  margin-bottom: 1.8rem;
 }
 
 [id$="__main-blog"] .article-card__title,
@@ -1739,11 +1749,16 @@
   color: rgb(252, 242, 211);
   padding: 0.75rem 1.5rem;
   text-decoration: none;
+  font-size: clamp(1rem, 1.15vw, 1.25rem);
+  font-weight: 700;
+  min-width: 8.5rem;
 }
 
 [id$="__main-blog"] .article-card__image {
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 0.72;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 [id$="__main-blog"] .article-card__image img {
@@ -1766,6 +1781,10 @@
 }
 
 @media screen and (max-width: 1024px) {
+  [id$="__recipes_hero"] h1 {
+    max-width: 14ch;
+  }
+
   [id$="__main-blog"] .blog-articles {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
