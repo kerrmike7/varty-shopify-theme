@@ -853,20 +853,20 @@
   }
 }
 
-/* === iter3 / block 01 — cream section typography polish === */
+/* === iter3 / block 01 — product trio section typography polish === */
 
-/* Explore the Flavours — cream/purple product section, no Bloop black defaults */
+/* Explore the Flavours — blue section with cream copy, no Bloop black defaults */
 [id$="__product_trio"] {
-  --layout-background-color: 252, 242, 211;
-  --layout-text-color: 84, 99, 179;
-  background: #fcf2d3 !important;
-  background-color: #fcf2d3 !important;
-  color: #5463B3 !important;
+  --layout-background-color: 84, 99, 179;
+  --layout-text-color: 252, 242, 211;
+  background: #5463B3 !important;
+  background-color: #5463B3 !important;
+  color: #fcf2d3 !important;
 }
 
 [id$="__product_trio"] .content-heading,
 [id$="__product_trio"] h2 {
-  color: #5463B3;
+  color: #fcf2d3 !important;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.01em;
@@ -881,7 +881,7 @@
 [id$="__product_trio"] .price *,
 [id$="__product_trio"] .regular-price,
 [id$="__product_trio"] .unit-price {
-  color: #5463B3 !important;
+  color: #fcf2d3 !important;
 }
 
 [id$="__product_trio"] .card__title {
