@@ -574,8 +574,8 @@
 .varty-footer-live {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(160px, 0.8fr) minmax(170px, 0.72fr) repeat(3, minmax(150px, 1fr));
-  gap: clamp(24px, 3.8vw, 58px);
+  grid-template-columns: minmax(190px, 0.9fr) minmax(110px, 0.5fr) repeat(3, minmax(150px, 1fr));
+  gap: clamp(18px, 2.8vw, 44px);
   width: 100%;
   color: #fcf2d3;
 }
@@ -588,23 +588,28 @@
 .varty-footer-live__brand {
   position: relative;
   grid-column: 1 / span 2;
-  min-height: 280px;
+  min-height: 176px;
 }
 
 .varty-footer-live__logo {
   display: block;
-  width: min(280px, 100%);
+  width: min(240px, 100%);
   height: auto;
 }
 
 .varty-footer-live__flower {
   position: absolute;
-  top: 64px;
-  left: clamp(172px, 14vw, 248px);
-  width: clamp(190px, 17vw, 280px);
+  top: 50%;
+  left: calc(100% - 24px);
+  transform: translateY(-50%);
+  width: clamp(132px, 10vw, 170px);
   height: auto;
   margin-top: 0;
   pointer-events: none;
+}
+
+.varty-footer-live > div:nth-child(n + 2):nth-child(-n + 4) {
+  margin-left: clamp(16px, 1.8vw, 34px);
 }
 
 .varty-footer-live__heading {
@@ -624,8 +629,14 @@
 .varty-footer-live__copyright {
   grid-column: 1 / -1;
   justify-self: end;
-  margin: 18px 0 0;
+  margin: 10px 0 0;
   color: #fcf2d3;
+}
+
+[id$="__footer"] .footer {
+  border-top-left-radius: 28px;
+  border-top-right-radius: 28px;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 920px) {
