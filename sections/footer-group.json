@@ -38,10 +38,10 @@
         "desktop_horizontal_gap": 1,
         "mobile_vertical_gap": 0.5,
         "mobile_horizontal_gap": 1,
-        "desktop_padding_top": 24,
-        "desktop_padding_bottom": 16,
+        "desktop_padding_top": 16,
+        "desktop_padding_bottom": 10,
         "mobile_padding_top": 40,
-        "mobile_padding_bottom": 20
+        "mobile_padding_bottom": 16
       }
     }
   },
