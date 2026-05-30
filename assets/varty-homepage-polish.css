@@ -301,6 +301,59 @@
   object-position: center center;
 }
 
+:is(#varty-stockists-standalone, [id$="__stockists_standalone"]) .varty-home-feature.varty-home-feature {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+:is(#varty-stockists-standalone, [id$="__stockists_standalone"]) .page-width {
+  max-width: none;
+  width: 100%;
+  padding-inline: 0;
+}
+
+:is(#varty-stockists-standalone, [id$="__stockists_standalone"]) .varty-home-feature .varty-home-feature__grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  gap: 0 !important;
+  align-items: stretch !important;
+  min-height: clamp(560px, 48vw, 720px);
+}
+
+:is(#varty-stockists-standalone, [id$="__stockists_standalone"]) .varty-home-feature .varty-home-feature__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: none;
+  padding: clamp(56px, 6vw, 104px);
+  text-align: center;
+}
+
+:is(#varty-stockists-standalone, [id$="__stockists_standalone"]) .varty-home-feature .varty-home-feature__heading {
+  max-width: 740px;
+  font-size: clamp(44px, 4.1vw, 64px) !important;
+  line-height: 1.02 !important;
+}
+
+:is(#varty-stockists-standalone, [id$="__stockists_standalone"]) .varty-home-feature .varty-home-feature__body {
+  max-width: 58ch;
+  margin-top: 28px;
+}
+
+:is(#varty-stockists-standalone, [id$="__stockists_standalone"]) .varty-home-feature .varty-home-feature__button {
+  margin-top: 36px;
+}
+
+:is(#varty-stockists-standalone, [id$="__stockists_standalone"]) .varty-home-feature .varty-home-feature__media {
+  min-height: inherit;
+  height: auto;
+}
+
+:is(#varty-stockists-standalone, [id$="__stockists_standalone"]) .varty-home-feature .varty-home-feature__media img {
+  min-height: 100%;
+  object-fit: cover;
+}
+
 [id$="__why_varty"] {
   background: #5463b3 !important;
   background-color: #5463b3 !important;
@@ -1313,6 +1366,23 @@
 
   [id$="__banner_grid_WChBPx"] .banner-grid__card {
     min-height: 280px;
+  }
+
+  :is(#varty-stockists-standalone, [id$="__stockists_standalone"]) .varty-home-feature .varty-home-feature__grid {
+    grid-template-columns: 1fr !important;
+    min-height: 0;
+  }
+
+  :is(#varty-stockists-standalone, [id$="__stockists_standalone"]) .varty-home-feature .varty-home-feature__content {
+    padding: 48px 24px;
+  }
+
+  :is(#varty-stockists-standalone, [id$="__stockists_standalone"]) .varty-home-feature .varty-home-feature__heading {
+    font-size: 40px !important;
+  }
+
+  :is(#varty-stockists-standalone, [id$="__stockists_standalone"]) .varty-home-feature .varty-home-feature__media {
+    min-height: 340px;
   }
 }
 
