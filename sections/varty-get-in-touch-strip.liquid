@@ -7,19 +7,34 @@
     padding-bottom: {{ section.settings.desktop_padding_bottom }}px;
   }
 
+  #shopify-section-{{ section.id }} .varty-touch-strip-wrap {
+    width: min(100% - 48px, 1780px);
+    margin-inline: auto;
+  }
+
+  #shopify-section-{{ section.id }} .varty-touch-strip__title {
+    margin: 0 0 2.5rem;
+    color: inherit;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    font-size: clamp(3rem, 5vw, 5.25rem) !important;
+    line-height: 0.95 !important;
+  }
+
   #shopify-section-{{ section.id }} .varty-touch-strip {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0;
+    gap: 24px;
   }
 
   #shopify-section-{{ section.id }} .varty-touch-strip__card {
-    min-height: 320px;
+    min-height: 330px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: clamp(24px, 4vw, 48px);
     overflow: hidden;
+    border-radius: 24px;
   }
 
   #shopify-section-{{ section.id }} .varty-touch-strip__card--purple {
@@ -29,14 +44,19 @@
   }
 
   #shopify-section-{{ section.id }} .varty-touch-strip__heading {
-    margin: 0 0 1rem;
+    margin: 0 0 2rem;
     color: inherit;
     text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: clamp(1.65rem, 2vw, 2rem) !important;
+    line-height: 1.1 !important;
   }
 
   #shopify-section-{{ section.id }} .varty-touch-strip__body {
     margin: 0;
     color: inherit;
+    font-size: clamp(1.25rem, 1.5vw, 1.55rem);
+    line-height: 1.55;
   }
 
   #shopify-section-{{ section.id }} .varty-touch-strip__body a {
@@ -46,7 +66,7 @@
   #shopify-section-{{ section.id }} .varty-touch-strip__social {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 28px;
     margin-top: 1.5rem;
   }
 
@@ -54,12 +74,11 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 38px;
-    height: 38px;
-    border: 1.5px solid currentColor;
-    border-radius: 50%;
-    font-size: 0.75rem;
+    width: 34px;
+    height: 34px;
+    font-size: 1.6rem;
     font-weight: 700;
+    line-height: 1;
   }
 
   #shopify-section-{{ section.id }} .varty-touch-strip__image {
@@ -69,7 +88,7 @@
   #shopify-section-{{ section.id }} .varty-touch-strip__image img {
     width: 100%;
     height: 100%;
-    min-height: 320px;
+    min-height: 330px;
     object-fit: cover;
     display: block;
   }
@@ -82,41 +101,48 @@
 
     #shopify-section-{{ section.id }} .varty-touch-strip {
       grid-template-columns: 1fr;
+      gap: 16px;
     }
   }
 {% endstyle %}
 
-<section class="varty-touch-strip">
-  <div class="varty-touch-strip__card varty-touch-strip__card--purple">
-    <h2 class="varty-touch-strip__heading custom-heading heading_m">FOLLOW</h2>
-    <p class="varty-touch-strip__body">@VARTYALLNATURAL</p>
-    <div class="varty-touch-strip__social" aria-label="Social links">
-      <span aria-label="Instagram">IG</span>
-      <span aria-label="Facebook">FB</span>
-      <span aria-label="LinkedIn">LI</span>
-      <span aria-label="TikTok">TT</span>
+<section class="varty-touch-strip-wrap">
+  {% if section.settings.heading != blank %}
+    <h2 class="varty-touch-strip__title custom-heading heading_l">{{ section.settings.heading | escape }}</h2>
+  {% endif %}
+
+  <div class="varty-touch-strip">
+    <div class="varty-touch-strip__card varty-touch-strip__card--purple">
+      <h3 class="varty-touch-strip__heading custom-heading heading_m">FOLLOW</h3>
+      <p class="varty-touch-strip__body">@VARTYALLNATURAL</p>
+      <div class="varty-touch-strip__social" aria-label="Social links">
+        <span aria-label="Instagram">◎</span>
+        <span aria-label="Facebook">f</span>
+        <span aria-label="LinkedIn">in</span>
+        <span aria-label="TikTok">♪</span>
+      </div>
     </div>
-  </div>
 
-  <div class="varty-touch-strip__card varty-touch-strip__image">
-    {% if section.settings.image_asset_1 != blank %}
-      <img src="{{ section.settings.image_asset_1 | asset_url }}" alt="" loading="lazy" width="720" height="720">
-    {% else %}
-      <!-- TODO(asset): get-in-touch Vanilla carton lifestyle photo missing from assets/ -->
-    {% endif %}
-  </div>
+    <div class="varty-touch-strip__card varty-touch-strip__image">
+      {% if section.settings.image_1 != blank %}
+        {{ section.settings.image_1 | image_url: width: 900 | image_tag: alt: '', loading: 'lazy' }}
+      {% else %}
+        <img src="{{ 'varty-lifestyle-02.jpg' | asset_url }}" alt="" loading="lazy" width="720" height="720">
+      {% endif %}
+    </div>
 
-  <div class="varty-touch-strip__card varty-touch-strip__card--purple">
-    <h2 class="varty-touch-strip__heading custom-heading heading_m">CONTACT</h2>
-    <p class="varty-touch-strip__body">Varty All Natural Inc.<br>Montreal, QC, Canada<br><a href="mailto:info@vartyallnatural.ca">info@vartyallnatural.ca</a></p>
-  </div>
+    <div class="varty-touch-strip__card varty-touch-strip__card--purple">
+      <h3 class="varty-touch-strip__heading custom-heading heading_m">CONTACT</h3>
+      <p class="varty-touch-strip__body">Varty All Natural Inc.<br>Montreal, QC, Canada<br><br><a href="mailto:info@vartyallnatural.ca">info@vartyallnatural.ca</a></p>
+    </div>
 
-  <div class="varty-touch-strip__card varty-touch-strip__image">
-    {% if section.settings.image_asset_2 != blank %}
-      <img src="{{ section.settings.image_asset_2 | asset_url }}" alt="" loading="lazy" width="720" height="720">
-    {% else %}
-      <!-- TODO(asset): get-in-touch mesh-tote carton trio lifestyle photo missing from assets/ -->
-    {% endif %}
+    <div class="varty-touch-strip__card varty-touch-strip__image">
+      {% if section.settings.image_2 != blank %}
+        {{ section.settings.image_2 | image_url: width: 900 | image_tag: alt: '', loading: 'lazy' }}
+      {% else %}
+        <img src="{{ 'varty-lifestyle-04.jpg' | asset_url }}" alt="" loading="lazy" width="720" height="720">
+      {% endif %}
+    </div>
   </div>
 </section>
 
@@ -128,13 +154,19 @@
   "settings": [
     {
       "type": "text",
-      "id": "image_asset_1",
-      "label": "Image asset 1"
+      "id": "heading",
+      "label": "Heading",
+      "default": "GET IN TOUCH"
     },
     {
-      "type": "text",
-      "id": "image_asset_2",
-      "label": "Image asset 2"
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
     },
     {
       "type": "range",

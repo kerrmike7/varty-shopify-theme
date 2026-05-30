@@ -6,7 +6,7 @@
         "subheading_eyebrow": {
           "type": "subheading",
           "settings": {
-            "subheading": "Not milk, Just better",
+            "subheading": "Not milk. Just better",
             "subheading_tag": "h3",
             "subheading_size": "default"
           }
@@ -42,80 +42,57 @@
         "varty_color_scheme": "scheme_brand_beige",
         "map_embed_url": "https://www.google.com/maps?q=L%27Eau%20Vive%20Aliments%20Naturels%20Inc.%20Saint-Jean-sur-Richelieu%20QC&output=embed",
         "pin_name": "L'Eau Vive Aliments Naturels Inc.",
-        "directions_url": "https://www.google.com/maps/dir/?api=1&destination=L%27Eau%20Vive%20Aliments%20Naturels%20Inc.%20Saint-Jean-sur-Richelieu%20QC",
-        "tbd_note": "<<TODO(link): replace generated Google Maps query URL with final embedded map URL if client supplies one.>>",
-        "desktop_height": 480,
+        "directions_url": "",
+        "desktop_height": 660,
         "mobile_height": 360
       }
     },
     "stockist_logos": {
       "type": "varty-stockist-logos",
       "blocks": {
+        "logo_avril": {
+          "type": "logo",
+          "settings": {
+            "alt": "Avril Supermarché Santé",
+            "url": ""
+          }
+        },
         "logo_tau": {
           "type": "logo",
           "settings": {
             "alt": "Marché TAU",
-            "url": "",
-            "tbd_note": "<<TODO(asset): upload retailer logo image and add stockist URL for Marché TAU.>>"
+            "url": ""
           }
         },
         "logo_oda": {
           "type": "logo",
           "settings": {
             "alt": "Marché Oda",
-            "url": "",
-            "tbd_note": "<<TODO(asset): upload retailer logo image and add stockist URL for Marché Oda.>>"
+            "url": ""
           }
         },
         "logo_iga": {
           "type": "logo",
           "settings": {
             "alt": "IGA extra",
-            "url": "",
-            "tbd_note": "<<TODO(asset): upload retailer logo image and add stockist URL for IGA extra.>>"
-          }
-        },
-        "logo_the_greene": {
-          "type": "logo",
-          "settings": {
-            "alt": "The Greene",
-            "url": "",
-            "tbd_note": "<<TODO(asset): upload retailer logo image and add stockist URL for The Greene.>>"
-          }
-        },
-        "logo_100_fils": {
-          "type": "logo",
-          "settings": {
-            "alt": "Marché des 100 fils",
-            "url": "",
-            "tbd_note": "<<TODO(asset): upload retailer logo image and add stockist URL for Marché des 100 fils.>>"
-          }
-        },
-        "logo_smoothiesgo": {
-          "type": "logo",
-          "settings": {
-            "alt": "SmoothiesGo Marché",
-            "url": "",
-            "tbd_note": "<<TODO(asset): upload retailer logo image and add stockist URL for SmoothiesGo Marché.>>"
+            "url": ""
           }
         }
       },
       "block_order": [
+        "logo_avril",
         "logo_tau",
         "logo_oda",
-        "logo_iga",
-        "logo_the_greene",
-        "logo_100_fils",
-        "logo_smoothiesgo"
+        "logo_iga"
       ],
       "settings": {
         "varty_color_scheme": "scheme_brand_beige",
         "heading": "",
-        "logo_max_height": 72,
-        "desktop_padding_top": 56,
-        "desktop_padding_bottom": 56,
+        "logo_max_height": 120,
+        "desktop_padding_top": 72,
+        "desktop_padding_bottom": 120,
         "mobile_padding_top": 32,
-        "mobile_padding_bottom": 32
+        "mobile_padding_bottom": 80
       }
     },
     "store_finder_main": {
@@ -124,14 +101,13 @@
         "contact_mode": true,
         "heading": "HOW CAN WE HELP?",
         "intro_richtext": "<p>Questions, ideas, or just want to say hi? Fill out the form and send us a message!</p>",
-        "lifestyle_image_asset": "varty-all-skus-ecommerce.jpg",
         "enable_search": false,
         "enable_region_filter": false,
         "cta_label": "",
         "cta_url": "",
         "varty_color_scheme": "scheme_brand_beige",
-        "desktop_padding_top": 80,
-        "desktop_padding_bottom": 80,
+        "desktop_padding_top": 96,
+        "desktop_padding_bottom": 112,
         "mobile_padding_top": 48,
         "mobile_padding_bottom": 48
       },
@@ -385,49 +361,11 @@
     "get_in_touch_strip": {
       "type": "varty-get-in-touch-strip",
       "settings": {
-        "image_asset_1": "varty-lifestyle-02.jpg",
-        "image_asset_2": "varty-lifestyle-04.jpg",
-        "desktop_padding_top": 0,
-        "desktop_padding_bottom": 0,
-        "mobile_padding_top": 0,
-        "mobile_padding_bottom": 0
-      }
-    },
-    "wholesale_nudge": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_wholesale": {
-          "type": "heading",
-          "settings": {
-            "heading": "Want Varty on your shelves?",
-            "heading_size": "heading_m",
-            "heading_tag": "h2",
-            "heading_color": "solid"
-          }
-        },
-        "button_wholesale": {
-          "type": "button",
-          "settings": {
-            "button_label": "Apply to Wholesale",
-            "button_link": "/pages/wholesale",
-            "target_blank": false,
-            "button_style": "solid"
-          }
-        }
-      },
-      "block_order": [
-        "heading_wholesale",
-        "button_wholesale"
-      ],
-      "settings": {
-        "section_width": "narrow",
-        "center_text": true,
-        "varty_color_scheme": "scheme_brand_purple",
-        "color_type": "scheme",
-        "desktop_padding_top": 80,
-        "desktop_padding_bottom": 80,
-        "mobile_padding_top": 48,
-        "mobile_padding_bottom": 48
+        "heading": "GET IN TOUCH",
+        "desktop_padding_top": 36,
+        "desktop_padding_bottom": 120,
+        "mobile_padding_top": 32,
+        "mobile_padding_bottom": 72
       }
     },
     "main-page": {
@@ -450,7 +388,6 @@
     "stockist_logos",
     "store_finder_main",
     "get_in_touch_strip",
-    "wholesale_nudge",
     "main-page"
   ]
 }

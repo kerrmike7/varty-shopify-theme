@@ -13,7 +13,7 @@
   }
 
   #shopify-section-{{ section.id }} .varty-stockist-logos__inner {
-    max-width: 1200px;
+    max-width: 1180px;
     margin-inline: auto;
     padding-inline: 24px;
   }
@@ -32,8 +32,8 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-around;
-    gap: 24px;
+    justify-content: center;
+    gap: clamp(40px, 7vw, 96px);
   }
 
   #shopify-section-{{ section.id }} .varty-stockist-logos__item {
@@ -58,12 +58,67 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 44px;
-    font-size: 0.85em;
-    opacity: 0.72;
-    border: 1.5px dashed currentColor;
-    padding: 12px 18px;
-    border-radius: 999px;
+    min-width: 150px;
+    min-height: 96px;
+    color: #424242;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(2rem, 3vw, 3.4rem);
+    font-weight: 800;
+    line-height: 0.9;
+    text-align: center;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockist-logos__placeholder small {
+    display: block;
+    margin-top: 0.25rem;
+    color: #96b84d;
+    font-size: 0.28em;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockist-logos__placeholder--tau {
+    width: 138px;
+    min-width: 138px;
+    height: 138px;
+    border: 4px solid #1d1d1d;
+    border-radius: 50%;
+    color: #198d48;
+    font-size: 2.6rem;
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockist-logos__placeholder--tau small {
+    color: #1d1d1d;
+    font-size: 0.2em;
+    letter-spacing: 0.18em;
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockist-logos__placeholder--oda {
+    width: 138px;
+    min-width: 138px;
+    height: 138px;
+    border: 5px solid #4f9f68;
+    border-radius: 50%;
+    color: #1d1d1d;
+    font-size: 2.2rem;
+    font-weight: 500;
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockist-logos__placeholder--iga {
+    color: #e3362f;
+    font-style: italic;
+    font-size: clamp(3.2rem, 4.6vw, 5rem);
+  }
+
+  #shopify-section-{{ section.id }} .varty-stockist-logos__placeholder--iga small {
+    color: #3ca547;
+    font-size: 0.44em;
+    letter-spacing: 0;
+    text-transform: none;
   }
 
   @media screen and (max-width: 749px) {
@@ -103,7 +158,33 @@
             {% if block.settings.image != blank %}
               {{ block.settings.image | image_url: width: 300 | image_tag: alt: logo_alt, class: 'varty-stockist-logos__img', loading: 'lazy' }}
             {% else %}
-              <span class="varty-stockist-logos__placeholder">{{ logo_alt | escape }}</span>
+              {% liquid
+                assign logo_key = ''
+                assign logo_alt_downcase = logo_alt | downcase
+                if logo_alt_downcase contains 'avril'
+                  assign logo_key = 'avril'
+                elsif logo_alt_downcase contains 'tau'
+                  assign logo_key = 'tau'
+                elsif logo_alt_downcase contains 'oda'
+                  assign logo_key = 'oda'
+                elsif logo_alt_downcase contains 'iga'
+                  assign logo_key = 'iga'
+                endif
+              %}
+              <span class="varty-stockist-logos__placeholder{% if logo_key != blank %} varty-stockist-logos__placeholder--{{ logo_key }}{% endif %}">
+                {% case logo_key %}
+                  {% when 'avril' %}
+                    avril<small>Supermarché Santé</small>
+                  {% when 'tau' %}
+                    TAU<small>Marchés Naturels</small>
+                  {% when 'oda' %}
+                    Marché<br>Oda
+                  {% when 'iga' %}
+                    IGA<small>extra</small>
+                  {% else %}
+                    {{ logo_alt | escape }}
+                {% endcase %}
+              </span>
             {% endif %}
           {% if has_logo_url %}
             </a>

@@ -26,35 +26,79 @@
 
   #shopify-section-{{ section.id }} .custom-store-finder__contact {
     display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-    gap: clamp(32px, 6vw, 80px);
-    align-items: start;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.15fr);
+    gap: clamp(48px, 8vw, 120px);
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .custom-store-finder__heading {
+    margin: 0 0 1.25rem;
+    color: inherit;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    font-size: clamp(3.1rem, 5.1vw, 5.25rem) !important;
+    line-height: 0.95 !important;
+  }
+
+  #shopify-section-{{ section.id }} .custom-store-finder__intro {
+    max-width: 44rem;
+    color: inherit;
+    font-size: clamp(1.45rem, 1.75vw, 1.95rem);
+    line-height: 1.35;
+  }
+
+  #shopify-section-{{ section.id }} .custom-store-finder__image-stack {
+    position: relative;
+    width: min(100%, 420px);
+    min-height: 300px;
+    margin-top: clamp(72px, 10vw, 140px);
   }
 
   #shopify-section-{{ section.id }} .custom-store-finder__image {
+    position: absolute;
     display: block;
-    width: min(100%, 420px);
-    height: auto;
-    margin-top: 28px;
     border-radius: 8px;
+    object-fit: cover;
+    box-shadow: none;
+  }
+
+  #shopify-section-{{ section.id }} .custom-store-finder__image--back {
+    left: 0;
+    bottom: 0;
+    width: 72%;
+    aspect-ratio: 0.82;
+    background: linear-gradient(140deg, #8f5a31, #c9834d 48%, #563720);
+  }
+
+  #shopify-section-{{ section.id }} .custom-store-finder__image--front {
+    right: 0;
+    top: 0;
+    width: 72%;
+    aspect-ratio: 1.04;
+    z-index: 1;
   }
 
   #shopify-section-{{ section.id }} .custom-store-finder__form {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    background: #fff;
+    border-radius: 32px;
+    padding: clamp(40px, 5vw, 64px);
   }
 
   #shopify-section-{{ section.id }} .custom-store-finder__field--full,
   #shopify-section-{{ section.id }} .custom-store-finder__submit {
-    grid-column: 1 / -1;
+    grid-column: auto;
   }
 
   #shopify-section-{{ section.id }} .custom-store-finder__field label {
     display: block;
     margin-bottom: 8px;
     color: inherit;
-    font-weight: 700;
+    font-size: clamp(1.05rem, 1.25vw, 1.3rem);
+    font-weight: 500;
+    letter-spacing: 0.04em;
   }
 
   #shopify-section-{{ section.id }} .custom-store-finder__field input,
@@ -65,17 +109,25 @@
     border-radius: 0;
     background: transparent;
     color: inherit;
-    padding: 12px 0;
+    padding: 12px 0 16px;
+    min-height: 48px;
+  }
+
+  #shopify-section-{{ section.id }} .custom-store-finder__field textarea {
+    min-height: 144px;
+    resize: vertical;
   }
 
   #shopify-section-{{ section.id }} .custom-store-finder__submit {
-    justify-self: start;
+    justify-self: stretch;
     border: 0;
     border-radius: 999px;
     background: rgb(var(--layout-text-color, 84, 99, 179));
     color: rgb(var(--layout-background-color, 252, 242, 211));
-    padding: 0.9rem 2.2rem;
+    padding: 1.1rem 2.2rem;
     font-weight: 700;
+    font-size: clamp(1.15rem, 1.45vw, 1.65rem);
+    letter-spacing: 0.03em;
     cursor: pointer;
   }
 
@@ -93,6 +145,16 @@
     #shopify-section-{{ section.id }} .custom-store-finder__submit {
       width: 100%;
     }
+
+    #shopify-section-{{ section.id }} .custom-store-finder__image-stack {
+      margin-top: 40px;
+      min-height: 240px;
+    }
+
+    #shopify-section-{{ section.id }} .custom-store-finder__form {
+      padding: 28px 22px;
+      border-radius: 20px;
+    }
   }
 </style>
 
@@ -107,18 +169,26 @@
         {% if section.settings.intro_richtext != blank %}
           <div class="custom-store-finder__intro rte">{{ section.settings.intro_richtext }}</div>
         {% endif %}
-        {% if section.settings.lifestyle_image_asset != blank %}
-          <img
-            class="custom-store-finder__image"
-            src="{{ section.settings.lifestyle_image_asset | asset_url }}"
-            alt=""
-            loading="lazy"
-            width="720"
-            height="540"
-          >
-        {% else %}
-          <!-- TODO(asset): contact form lifestyle image missing from assets/ -->
-        {% endif %}
+        <div class="custom-store-finder__image-stack" aria-hidden="true">
+          {% if section.settings.contact_back_image != blank %}
+            {{ section.settings.contact_back_image | image_url: width: 720 | image_tag: class: 'custom-store-finder__image custom-store-finder__image--back', loading: 'lazy', alt: '' }}
+          {% else %}
+            <div class="custom-store-finder__image custom-store-finder__image--back"></div>
+          {% endif %}
+
+          {% if section.settings.contact_front_image != blank %}
+            {{ section.settings.contact_front_image | image_url: width: 720 | image_tag: class: 'custom-store-finder__image custom-store-finder__image--front', loading: 'lazy', alt: '' }}
+          {% else %}
+            <img
+              class="custom-store-finder__image custom-store-finder__image--front"
+              src="{{ 'varty-about-wix-mission-left.png' | asset_url }}"
+              alt=""
+              loading="lazy"
+              width="720"
+              height="540"
+            >
+          {% endif %}
+        </div>
       </div>
 
       {% form 'contact', class: 'custom-store-finder__form' %}
@@ -319,9 +389,14 @@
       "default": "<p>Available at 22 locations across Québec.</p>"
     },
     {
-      "type": "text",
-      "id": "lifestyle_image_asset",
-      "label": "Lifestyle image asset filename"
+      "type": "image_picker",
+      "id": "contact_back_image",
+      "label": "Contact collage back image"
+    },
+    {
+      "type": "image_picker",
+      "id": "contact_front_image",
+      "label": "Contact collage front image"
     },
     {
       "type": "checkbox",
