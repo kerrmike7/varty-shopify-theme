@@ -38,8 +38,8 @@
         "desktop_horizontal_gap": 1,
         "mobile_vertical_gap": 0.5,
         "mobile_horizontal_gap": 1,
-        "desktop_padding_top": 16,
-        "desktop_padding_bottom": 12,
+        "desktop_padding_top": 12,
+        "desktop_padding_bottom": 8,
         "mobile_padding_top": 40,
         "mobile_padding_bottom": 16
       }

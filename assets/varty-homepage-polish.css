@@ -589,7 +589,7 @@
 .varty-footer-live__brand {
   position: relative;
   grid-column: 1 / span 2;
-  min-height: 156px;
+  min-height: 132px;
 }
 
 .varty-footer-live__logo {
