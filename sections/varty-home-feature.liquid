@@ -49,13 +49,13 @@
 
   #shopify-section-{{ section.id }} .varty-home-feature__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.92fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: clamp(32px, 5vw, 76px);
-    align-items: center;
+    align-items: stretch;
   }
 
   #shopify-section-{{ section.id }} .varty-home-feature__grid--image-left {
-    grid-template-columns: minmax(320px, 0.92fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
 
   #shopify-section-{{ section.id }} .varty-home-feature__grid--image-left .varty-home-feature__media {
@@ -63,7 +63,11 @@
   }
 
   #shopify-section-{{ section.id }} .varty-home-feature__content {
-    max-width: 710px;
+    max-width: none;
+    min-height: clamp(500px, 42vw, 660px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   #shopify-section-{{ section.id }} .varty-home-feature__eyebrow {
@@ -177,6 +181,10 @@
 
     #shopify-section-{{ section.id }} .varty-home-feature__heading {
       font-size: 40px !important;
+    }
+
+    #shopify-section-{{ section.id }} .varty-home-feature__content {
+      min-height: 0;
     }
 
     #shopify-section-{{ section.id }} .varty-home-feature__media {
