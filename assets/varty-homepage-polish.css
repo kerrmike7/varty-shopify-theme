@@ -601,10 +601,10 @@
 .varty-footer-live__flower {
   position: absolute;
   top: auto;
-  bottom: -18px;
-  left: clamp(208px, 16vw, 284px);
+  bottom: -10px;
+  left: clamp(236px, 18.5vw, 336px);
   transform: none;
-  width: clamp(128px, 9.2vw, 158px);
+  width: clamp(168px, 12.5vw, 236px);
   height: auto;
   margin-top: 0;
   pointer-events: none;
