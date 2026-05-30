@@ -786,10 +786,10 @@
         "button_label": "SUBSCRIBE & SAVE",
         "button_link": "/collections/subscription",
         "show_flower": false,
-        "desktop_padding_top": 84,
-        "desktop_padding_bottom": 84,
-        "mobile_padding_top": 48,
-        "mobile_padding_bottom": 48
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
       }
     },
     "wholesale_standalone": {
@@ -804,10 +804,10 @@
         "button_label": "APPLY NOW",
         "button_link": "/pages/wholesale",
         "show_flower": true,
-        "desktop_padding_top": 84,
-        "desktop_padding_bottom": 84,
-        "mobile_padding_top": 48,
-        "mobile_padding_bottom": 48
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
       }
     }
   },
