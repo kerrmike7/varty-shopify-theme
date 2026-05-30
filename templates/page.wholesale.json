@@ -1,79 +1,12 @@
 {
   "sections": {
     "wholesale_hero": {
-      "type": "media-with-text",
-      "blocks": {
-        "heading_wholesale": {
-          "type": "heading",
-          "settings": {
-            "heading": "LET'S PUT SOMETHING GREAT ON YOUR SHELVES",
-            "heading_size": "heading_xl",
-            "heading_tag": "h1",
-            "heading_color": "solid"
-          }
-        },
-        "text_wholesale_pitch": {
-          "type": "text",
-          "settings": {
-            "text": "<p>We partner with wholesalers who care about quality and purity as much as we do. Apply today to find out how you can become one of the first stockists of Varty in Canada.</p>",
-            "dim_text": false,
-            "text_size": "default"
-          }
-        },
-        "button_apply_now": {
-          "type": "button",
-          "settings": {
-            "button_label": "Apply Now",
-            "button_link": "#wholesale-application",
-            "target_blank": false,
-            "button_style": "solid"
-          }
-        },
-        "wholesale_flower": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "<style>[id$=\"__wholesale_hero\"] .media-with-text,[id$=\"__wholesale_hero\"] .media-with-text__media{background:rgb(252,242,211)!important;}[id$=\"__wholesale_hero\"] .wholesale-flower{position:absolute;right:clamp(16px,4vw,48px);bottom:clamp(16px,4vw,48px);width:min(120px,24vw);height:auto;pointer-events:none;}</style><img class=\"wholesale-flower\" src=\"{{ 'flower-3_4x-8.avif' | asset_url }}\" alt=\"\" width=\"160\" height=\"160\" loading=\"lazy\">"
-          }
-        }
-      },
-      "block_order": [
-        "heading_wholesale",
-        "text_wholesale_pitch",
-        "button_apply_now",
-        "wholesale_flower"
-      ],
+      "type": "varty-wholesale-wix",
       "settings": {
-        "image": "shopify://shop_images/varty-all-skus-ecommerce.jpg",
-        "section_width": "wide",
-        "swap_media": true,
-        "media_size": "half",
-        "media_ratio": "square",
-        "narrow_content": true,
-        "vertical_text_alignment": "center",
-        "horizontal_text_alignment": "flex-start",
-        "varty_color_scheme": "scheme_brand_beige",
-        "color_type": "scheme",
-        "fill_section": true,
-        "desktop_padding_top": 0,
-        "desktop_padding_bottom": 0,
-        "mobile_padding_top": 0,
-        "mobile_padding_bottom": 0,
-        "tbd_note": "<<TODO(asset): exact wholesale three-carton product lineup on blue surface is not present in assets/; using varty-all-skus-ecommerce.jpg as closest existing asset.>>"
-      }
-    },
-    "wholesale_application": {
-      "type": "varty-wholesale-form",
-      "settings": {
-        "varty_color_scheme": "scheme_brand_beige",
-        "color_type": "scheme",
-        "heading": "Apply to Become a Stockist",
-        "intro_text": "<p>Fill in the form below and Lina will be in touch within 2 business days. Required fields marked *.</p><p><strong>Need to reach us directly?</strong> Email <a href=\"mailto:info@vartyallnatural.ca\">info@vartyallnatural.ca</a></p>",
-        "submit_label": "Submit Application",
-        "success_message": "Thanks — we've received your application. Lina will be in touch within 2 business days.",
-        "desktop_padding_top": 96,
-        "desktop_padding_bottom": 96,
-        "mobile_padding_top": 64,
-        "mobile_padding_bottom": 64
+        "heading": "Let’s Put Something Great on Your Shelves",
+        "body": "<p>Interested in carrying Varty? Tell us about your store and we’ll be in touch within 3 business days.</p><p>We partner with independent grocers, health food stores, pharmacies, gyms, wellness spaces, and retailers who care about what goes on their shelves. If your customers are looking for a clean, organic oat beverage made with 3–4 simple ingredients, we’d love to hear from you.</p>",
+        "button_label": "APPLY TO CARRY VARTY",
+        "button_link": "mailto:info@vartyallnatural.ca"
       }
     },
     "main-page": {
@@ -92,7 +25,6 @@
   },
   "order": [
     "wholesale_hero",
-    "wholesale_application",
     "main-page"
   ]
 }
