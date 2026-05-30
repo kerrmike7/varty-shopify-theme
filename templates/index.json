@@ -29,7 +29,7 @@
         "text_size": "body_s",
         "color_type": "custom",
         "background_color_type": "solid",
-        "section_paddings": 10,
+        "section_paddings": 6,
         "varty_color_scheme": "scheme_brand_purple",
         "background_color": "#C5C9E8",
         "text_color": "#5463B3"
@@ -58,7 +58,7 @@
           "type": "text",
           "settings": {
             "heading": "3-4",
-            "text": "<p>Organic Ingredients per product. That's it.</p>",
+            "text": "<p>Organic ingredients per product. That's it.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -76,7 +76,7 @@
           "type": "text",
           "settings": {
             "heading": "100%",
-            "text": "<p>Canadian- Made.</p>",
+            "text": "<p>Canadian-made.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -342,9 +342,9 @@
       "type": "varty-certifications-strip",
       "settings": {
         "alt_text": "Varty certifications: Canada Organic, Aliments Préparés au Québec BIO, No Artificial Flavours, Carrageenan Free, Glyphosate Free, Dairy Free, Non GMO, Kosher",
-        "max_width": 1040,
-        "desktop_padding_top": 20,
-        "desktop_padding_bottom": 20,
+        "max_width": 1120,
+        "desktop_padding_top": 16,
+        "desktop_padding_bottom": 16,
         "mobile_padding_top": 24,
         "mobile_padding_bottom": 24
       }

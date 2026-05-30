@@ -162,7 +162,7 @@
   }
   #shopify-section-{{ section.id }} .custom-comparison-table__header {
     text-align: center;
-    max-width: 920px;
+    max-width: 1120px;
     margin: 0 auto 40px;
   }
   #shopify-section-{{ section.id }} .custom-comparison-table__heading {
@@ -186,8 +186,9 @@
     -webkit-overflow-scrolling: touch;
   }
   #shopify-section-{{ section.id }} .varty-comparison-table {
-    width: min(100%, 920px);
+    width: min(100%, 1120px);
     margin-inline: auto;
+    table-layout: fixed;
     border-collapse: separate;
     border-spacing: 0;
     border-radius: 16px;
@@ -198,7 +199,9 @@
   }
   #shopify-section-{{ section.id }} .varty-comparison-table th,
   #shopify-section-{{ section.id }} .varty-comparison-table td {
-    padding: 22px 24px;
+    width: 33.333%;
+    height: 108px;
+    padding: 24px 26px;
     border: none;
     border-bottom: 1px solid rgba(84, 99, 179, 0.12);
     color: #5463b3;

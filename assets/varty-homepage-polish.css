@@ -1,10 +1,49 @@
 [id="shopify-section-header"] .header__wrapper {
-  background: #5463b3;
+  background: #fffdf3 !important;
+  color: #5463b3 !important;
+}
+
+[id="shopify-section-header"] .header__wrapper,
+[id="shopify-section-header"] .header__wrapper a,
+[id="shopify-section-header"] .header__wrapper button,
+[id="shopify-section-header"] .header__wrapper .menu__link {
+  color: #5463b3 !important;
+}
+
+[id="shopify-section-header"] .header__wrapper svg,
+[id="shopify-section-header"] .header__wrapper svg * {
+  color: #5463b3 !important;
+  stroke: currentColor !important;
+}
+
+[id="shopify-section-header"] .logo--header .logo__image {
+  position: relative;
+  display: block;
+}
+
+[id="shopify-section-header"] .logo--header .logo__image-item {
+  opacity: 0;
+}
+
+[id="shopify-section-header"] .logo--header .logo__image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("varty-logo-purple.svg") left center / contain no-repeat;
 }
 
 [id="shopify-section-announcement-bar"] .announcement-bar a {
   color: inherit;
   text-decoration: none;
+}
+
+[id*="announcement-bar"] .announcement-bar--spacious {
+  min-height: 0;
+}
+
+[id*="announcement-bar"] .announcement-bar .text-blocks {
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 
 @media screen and (min-width: 921px) {
@@ -188,49 +227,58 @@
 [id$="__stats_bar"] {
   background: #5463b3 !important;
   background-color: #5463b3 !important;
-  border-top: 1px solid #fcf2d3;
-  border-bottom: 1px solid #fcf2d3;
+  border-top: 0;
+  border-bottom: 0;
   color: #fcf2d3 !important;
 }
 
 [id$="__stats_bar"] .product-labels__container {
-  border-left: 1px solid rgba(252, 242, 211, 0.34);
-  max-width: 1040px;
+  border-left: 0;
+  max-width: 1120px;
   margin-inline: auto;
 }
 
 [id$="__stats_bar"] .product-labels__item-wrapper {
-  border-right: 1px solid rgba(252, 242, 211, 0.34);
+  border-right: 0;
   border-top: 0 !important;
 }
 
 [id$="__stats_bar"] .multicolumn__item {
   border-inline-end: 0 !important;
-  min-height: 132px;
+  min-height: 92px;
   justify-content: center;
-  padding: 20px 24px;
+  padding: 12px 24px;
 }
 
 [id$="__stats_bar"] .multicolumn__card-title {
-  font-size: clamp(46px, 4.4vw, 68px) !important;
+  font-size: clamp(38px, 3.3vw, 54px) !important;
   line-height: 0.95;
   letter-spacing: 0;
   color: #fcf2d3;
 }
 
 [id$="__stats_bar"] .multicolumn__card-text {
-  margin-top: 8px;
-  font-size: 13px !important;
+  margin-top: 6px;
+  font-size: 12.5px !important;
   color: #fcf2d3;
   font-weight: 700;
-  letter-spacing: 0.04em;
-  line-height: 1.25;
-  text-transform: uppercase;
+  font-variant-caps: small-caps;
+  letter-spacing: 0.02em;
+  line-height: 1.22;
+  text-transform: none;
 }
 
 [id$="__stats_bar"] .multicolumn__card-text p {
   color: #fcf2d3;
   font-weight: 700;
+}
+
+[id$="__pantry_step_inside"] .varty-home-feature__media img,
+[id$="__pantry_just_got_smarter"] .varty-home-feature__media img,
+[id$="__never_run_out"] .varty-home-feature__media img,
+[id$="__wholesale_standalone"] .varty-home-feature__media img,
+[id$="__stockists_standalone"] .varty-home-feature__media img {
+  object-position: center center;
 }
 
 [id$="__why_varty"] {
@@ -414,8 +462,8 @@
 .varty-footer-live {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(180px, 1.2fr) repeat(3, minmax(150px, 1fr));
-  gap: clamp(28px, 5vw, 72px);
+  grid-template-columns: minmax(160px, 0.8fr) minmax(170px, 0.72fr) repeat(3, minmax(150px, 1fr));
+  gap: clamp(24px, 3.8vw, 58px);
   width: 100%;
   color: #fcf2d3;
 }
@@ -427,6 +475,8 @@
 
 .varty-footer-live__brand {
   position: relative;
+  grid-column: 1 / span 2;
+  min-height: 280px;
 }
 
 .varty-footer-live__logo {
@@ -436,9 +486,12 @@
 }
 
 .varty-footer-live__flower {
-  width: min(280px, 58vw);
+  position: absolute;
+  top: 64px;
+  left: clamp(172px, 14vw, 248px);
+  width: clamp(190px, 17vw, 280px);
   height: auto;
-  margin-top: 30px;
+  margin-top: 0;
   pointer-events: none;
 }
 
@@ -523,6 +576,10 @@
 
   .varty-footer-live {
     grid-template-columns: 1fr;
+  }
+
+  .varty-footer-live__brand {
+    grid-column: auto;
   }
 
   .varty-footer-live__copyright {

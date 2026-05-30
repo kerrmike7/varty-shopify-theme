@@ -2070,7 +2070,7 @@
             "background_gradient": "",
             "background_color": "#FFD6E0",
             "text_color": "#b40000",
-            "section_paddings": 10
+            "section_paddings": 6
           }
         },
         "menu-drawer": {
