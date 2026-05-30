@@ -244,8 +244,8 @@
 }
 
 [id$="__stats_bar"] .product-labels {
-  padding-top: clamp(26px, 2.4vw, 36px) !important;
-  padding-bottom: clamp(26px, 2.4vw, 36px) !important;
+  padding-top: clamp(12px, 1.2vw, 18px) !important;
+  padding-bottom: clamp(12px, 1.2vw, 18px) !important;
 }
 
 [id$="__stats_bar"] .product-labels__container {
@@ -253,6 +253,7 @@
   gap: 0;
   max-width: 1120px;
   margin-inline: auto;
+  min-height: 0;
 }
 
 [id$="__stats_bar"] .product-labels__item-wrapper {
@@ -265,21 +266,21 @@
 [id$="__stats_bar"] .multicolumn__item {
   border: 0 !important;
   border-inline-end: 0 !important;
-  min-height: 76px;
+  min-height: 56px;
   justify-content: center;
-  padding: 6px 24px;
+  padding: 2px 24px;
 }
 
 [id$="__stats_bar"] .multicolumn__card-title {
-  font-size: clamp(38px, 3.3vw, 54px) !important;
+  font-size: clamp(34px, 2.8vw, 44px) !important;
   line-height: 0.95;
   letter-spacing: 0;
   color: #fcf2d3;
 }
 
 [id$="__stats_bar"] .multicolumn__card-text {
-  margin-top: 6px;
-  font-size: 12.5px !important;
+  margin-top: 4px;
+  font-size: 12px !important;
   color: #fcf2d3;
   font-weight: 700;
   font-variant-caps: small-caps;
@@ -661,13 +662,16 @@
     font-size: 17px;
   }
 
-  [id$="__hero"] .content-heading,
-  [id$="__stats_bar"] .multicolumn__card-title {
+  [id$="__hero"] .content-heading {
     font-size: 64px !important;
   }
 
+  [id$="__stats_bar"] .multicolumn__card-title {
+    font-size: 42px !important;
+  }
+
   [id$="__stats_bar"] .multicolumn__card-text {
-    font-size: 13px !important;
+    font-size: 12px !important;
   }
 
   [id$="__hero"] .content-text {
