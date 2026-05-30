@@ -1,24 +1,35 @@
 [id="shopify-section-header"] .header__wrapper {
-  background: #fffdf3 !important;
-  color: #5463b3 !important;
+  background: #5463b3 !important;
+  color: #fffdf3 !important;
+}
+
+[id="shopify-section-header"] .header-section,
+[id="shopify-section-header"] .header {
+  background: #5463b3 !important;
 }
 
 [id="shopify-section-header"] .header__wrapper,
 [id="shopify-section-header"] .header__wrapper a,
 [id="shopify-section-header"] .header__wrapper button,
 [id="shopify-section-header"] .header__wrapper .menu__link {
-  color: #5463b3 !important;
+  color: #fffdf3 !important;
 }
 
 [id="shopify-section-header"] .header__wrapper svg,
 [id="shopify-section-header"] .header__wrapper svg * {
-  color: #5463b3 !important;
+  color: #fffdf3 !important;
   stroke: currentColor !important;
+}
+
+[id="shopify-section-header"] .header__wrapper {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 [id="shopify-section-header"] .logo--header .logo__image {
   position: relative;
   display: block;
+  max-height: 70px;
 }
 
 [id="shopify-section-header"] .logo--header .logo__image-item {
@@ -29,7 +40,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: url("varty-logo-purple.svg") left center / contain no-repeat;
+  background: url("varty-logo-white.svg") left center / contain no-repeat;
 }
 
 [id="shopify-section-announcement-bar"] .announcement-bar a {
@@ -52,7 +63,7 @@
     grid-template-columns: minmax(150px, 0.55fr) minmax(0, 1.9fr) minmax(170px, 0.7fr);
     gap: clamp(18px, 2.4vw, 48px);
     align-items: center;
-    min-height: 78px;
+    min-height: 86px;
   }
 
   [id="shopify-section-header"] .logo--header {
