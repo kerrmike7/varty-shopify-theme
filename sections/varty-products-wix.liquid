@@ -1,0 +1,507 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --varty-products-purple: #5865ad;
+    --varty-products-cream: #fcf2d3;
+    --varty-products-green: #c8dfc0;
+    --varty-products-text: #4f5eaa;
+    background: var(--varty-products-cream);
+    color: var(--varty-products-text);
+  }
+
+  #shopify-section-{{ section.id }} .varty-products {
+    overflow: hidden;
+    background: var(--varty-products-cream);
+  }
+
+  #shopify-section-{{ section.id }} .varty-products__hero {
+    padding: clamp(142px, 10vw, 198px) clamp(24px, 5vw, 120px) clamp(70px, 6vw, 116px);
+    background: var(--varty-products-purple);
+    color: var(--varty-products-cream);
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .varty-products__hero h1 {
+    margin: 0;
+    color: var(--varty-products-cream);
+    font-family: "Avenir Next", "Arial Black", Arial, sans-serif;
+    font-size: clamp(42px, 4.05vw, 78px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .varty-products__stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(40px, 7vw, 160px);
+    width: min(100%, 1450px);
+    margin: clamp(128px, 9vw, 176px) auto 0;
+  }
+
+  #shopify-section-{{ section.id }} .varty-products__stat-number {
+    display: block;
+    color: var(--varty-products-cream);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(70px, 5.4vw, 104px);
+    line-height: 0.92;
+  }
+
+  #shopify-section-{{ section.id }} .varty-products__stat-label {
+    display: block;
+    margin-top: 28px;
+    color: var(--varty-products-cream);
+    font-family: "Avenir Next", Arial, sans-serif;
+    font-size: clamp(20px, 1.35vw, 28px);
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  #shopify-section-{{ section.id }} .varty-products__certs {
+    padding: clamp(64px, 5.8vw, 112px) clamp(24px, 5.4vw, 108px) clamp(96px, 8vw, 156px);
+  }
+
+  #shopify-section-{{ section.id }} .varty-products__certs img {
+    display: block;
+    width: min(100%, 1700px);
+    height: auto;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .varty-product {
+    display: grid;
+    grid-template-columns: minmax(320px, 0.78fr) minmax(0, 1.18fr);
+    gap: clamp(48px, 4.8vw, 96px);
+    align-items: center;
+    width: min(100%, 1900px);
+    margin: 0 auto;
+    padding: clamp(52px, 4.6vw, 86px) clamp(42px, 4vw, 96px);
+  }
+
+  #shopify-section-{{ section.id }} .varty-product__media {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: clamp(640px, 50vw, 980px);
+    border-radius: 28px;
+    background: #fff;
+  }
+
+  #shopify-section-{{ section.id }} .varty-product__image {
+    display: block;
+    width: auto;
+    max-width: 76%;
+    max-height: clamp(560px, 44vw, 850px);
+    object-fit: contain;
+  }
+
+  #shopify-section-{{ section.id }} .varty-product__arrow {
+    position: absolute;
+    top: 50%;
+    width: 26px;
+    height: 26px;
+    border-top: 2px solid var(--varty-products-text);
+    border-right: 2px solid var(--varty-products-text);
+    opacity: 0.82;
+  }
+
+  #shopify-section-{{ section.id }} .varty-product__arrow--left {
+    left: 44px;
+    transform: translateY(-50%) rotate(-135deg);
+  }
+
+  #shopify-section-{{ section.id }} .varty-product__arrow--right {
+    right: 44px;
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  #shopify-section-{{ section.id }} .varty-product__copy {
+    color: var(--varty-products-text);
+    font-family: "Avenir Next", Arial, sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .varty-product__copy h2 {
+    margin: 0 0 clamp(28px, 2vw, 38px);
+    color: var(--varty-products-text);
+    font-family: "Avenir Next", Arial, sans-serif;
+    font-size: clamp(38px, 3vw, 58px);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: 0;
+  }
+
+  #shopify-section-{{ section.id }} .varty-product__intro {
+    max-width: 47em;
+    margin: 0 0 clamp(34px, 2.6vw, 52px);
+    font-size: clamp(21px, 1.45vw, 30px);
+    line-height: 1.5;
+  }
+
+  #shopify-section-{{ section.id }} .varty-product__badges,
+  #shopify-section-{{ section.id }} .varty-product__list {
+    margin: 0;
+    padding-left: 1.35em;
+    font-size: clamp(21px, 1.42vw, 29px);
+    line-height: 1.48;
+  }
+
+  #shopify-section-{{ section.id }} .varty-product__badges {
+    margin-bottom: clamp(48px, 3.7vw, 72px);
+    font-weight: 800;
+  }
+
+  #shopify-section-{{ section.id }} .varty-product details {
+    border-bottom: 2px solid rgba(79, 94, 170, 0.78);
+  }
+
+  #shopify-section-{{ section.id }} .varty-product summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 0;
+    cursor: pointer;
+    color: var(--varty-products-text);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(26px, 1.9vw, 36px);
+    line-height: 1.15;
+    list-style: none;
+  }
+
+  #shopify-section-{{ section.id }} .varty-product summary::-webkit-details-marker {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .varty-product summary::after {
+    content: "+";
+    font-family: "Avenir Next", Arial, sans-serif;
+    font-size: clamp(30px, 2.2vw, 40px);
+    font-weight: 900;
+  }
+
+  #shopify-section-{{ section.id }} .varty-product details[open] summary::after {
+    content: "-";
+  }
+
+  #shopify-section-{{ section.id }} .varty-product__panel {
+    padding: 0 0 32px;
+  }
+
+  #shopify-section-{{ section.id }} .varty-products__testimonials {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(26px, 2vw, 34px);
+    width: min(100%, 1500px);
+    margin: clamp(70px, 6vw, 120px) auto clamp(106px, 8vw, 154px);
+    padding-inline: 24px;
+  }
+
+  #shopify-section-{{ section.id }} .varty-products__quote {
+    min-height: 410px;
+    padding: clamp(44px, 4vw, 74px) clamp(32px, 3vw, 54px);
+    border-radius: 24px;
+    background: var(--varty-products-green);
+    color: var(--varty-products-text);
+  }
+
+  #shopify-section-{{ section.id }} .varty-products__quote-mark {
+    display: block;
+    margin-bottom: 42px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 110px;
+    font-weight: 900;
+    line-height: 0.45;
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .varty-products__quote p {
+    margin: 0;
+    font-family: "Avenir Next", Arial, sans-serif;
+    font-size: clamp(21px, 1.35vw, 28px);
+    line-height: 1.48;
+  }
+
+  #shopify-section-{{ section.id }} .varty-products__quote cite {
+    display: block;
+    margin-top: clamp(48px, 4vw, 70px);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(24px, 1.75vw, 34px);
+    font-style: normal;
+    line-height: 1.2;
+  }
+
+  #shopify-section-{{ section.id }} .varty-products__quote small {
+    display: block;
+    margin-top: 12px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(17px, 1.2vw, 22px);
+  }
+
+  @media screen and (max-width: 920px) {
+    #shopify-section-{{ section.id }} .varty-products__hero {
+      padding: 70px 22px 58px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-products__stats,
+    #shopify-section-{{ section.id }} .varty-product,
+    #shopify-section-{{ section.id }} .varty-products__testimonials {
+      grid-template-columns: 1fr;
+    }
+
+    #shopify-section-{{ section.id }} .varty-products__stats {
+      margin-top: 70px;
+      gap: 46px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-products__certs {
+      padding: 44px 18px 58px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-product {
+      padding: 32px 20px 58px;
+      gap: 34px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-product__media {
+      min-height: 520px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-product__image {
+      max-height: 460px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-product__arrow--left {
+      left: 22px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-product__arrow--right {
+      right: 22px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-products__testimonials {
+      margin-top: 36px;
+      margin-bottom: 80px;
+    }
+  }
+{% endstyle %}
+
+<div class="varty-products">
+  <section class="varty-products__hero" aria-labelledby="varty-products-title">
+    <h1 id="varty-products-title">A LITTLE SOMETHING FOR EVERY OAT MOMENT</h1>
+    <div class="varty-products__stats" aria-label="Varty product facts">
+      <div>
+        <span class="varty-products__stat-number">3-4</span>
+        <span class="varty-products__stat-label">Ingredients per product</span>
+      </div>
+      <div>
+        <span class="varty-products__stat-number">0%</span>
+        <span class="varty-products__stat-label">Gums, fillers, or additives</span>
+      </div>
+      <div>
+        <span class="varty-products__stat-number">100%</span>
+        <span class="varty-products__stat-label">Canadian Made</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="varty-products__certs" aria-label="Varty certifications and product attributes">
+    {% if section.settings.certifications_image != blank %}
+      {{ section.settings.certifications_image | image_url: width: 1800 | image_tag: loading: 'lazy', alt: 'Varty certifications and product attributes' }}
+    {% else %}
+      <img src="{{ 'certs.avif' | asset_url }}" alt="Varty certifications and product attributes" width="1200" height="320" loading="lazy">
+    {% endif %}
+  </section>
+
+  <section class="varty-product" aria-labelledby="varty-original-title">
+    <div class="varty-product__media">
+      <span class="varty-product__arrow varty-product__arrow--left" aria-hidden="true"></span>
+      {% if section.settings.original_image != blank %}
+        {{ section.settings.original_image | image_url: width: 900 | image_tag: class: 'varty-product__image', loading: 'lazy', alt: 'Original Unsweetened Varty oat beverage carton' }}
+      {% else %}
+        <img class="varty-product__image" src="{{ 'varty-product-original-side.jpg' | asset_url }}" alt="Original Unsweetened Varty oat beverage carton" width="900" height="1200" loading="lazy">
+      {% endif %}
+      <span class="varty-product__arrow varty-product__arrow--right" aria-hidden="true"></span>
+    </div>
+    <div class="varty-product__copy">
+      <h2 id="varty-original-title">Original Unsweetened Oat Beverage Canada</h2>
+      <p class="varty-product__intro">Pure. Simple. Seriously Creamy. This unsweetened, organic oat beverage contains just 3 organic ingredients, delivering the goodness of oats without added sugar or additives. Just the way you like it 🙂</p>
+      <ul class="varty-product__badges">
+        <li>100% Certified Organic</li>
+        <li>No added sugar</li>
+        <li>Versatile</li>
+        <li>Creamy, “Milky” Texture</li>
+      </ul>
+      <details open>
+        <summary>3 Ingredients</summary>
+        <div class="varty-product__panel">
+          <ul class="varty-product__list">
+            <li>Filtered Water</li>
+            <li>Organic Canadian Oats</li>
+            <li>Sea Salt</li>
+            <li>…That’s It.</li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary>Perfect for</summary>
+        <div class="varty-product__panel">
+          <ul class="varty-product__list">
+            <li>Morning Coffee</li>
+            <li>Refreshing Smoothies</li>
+            <li>Cereal, Muesli or Oats</li>
+            <li>Creamy Baked Treats</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="varty-product" aria-labelledby="varty-vanilla-title">
+    <div class="varty-product__media">
+      <span class="varty-product__arrow varty-product__arrow--left" aria-hidden="true"></span>
+      {% if section.settings.vanilla_image != blank %}
+        {{ section.settings.vanilla_image | image_url: width: 900 | image_tag: class: 'varty-product__image', loading: 'lazy', alt: 'Vanilla Unsweetened Varty oat beverage carton' }}
+      {% else %}
+        <img class="varty-product__image" src="{{ 'varty-product-vanilla-front.jpg' | asset_url }}" alt="Vanilla Unsweetened Varty oat beverage carton" width="900" height="1200" loading="lazy">
+      {% endif %}
+      <span class="varty-product__arrow varty-product__arrow--right" aria-hidden="true"></span>
+    </div>
+    <div class="varty-product__copy">
+      <h2 id="varty-vanilla-title">Vanilla Unsweetened Oat Beverage Canada</h2>
+      <p class="varty-product__intro">You don’t need sugar (you’re sweet enough) but a little vanilla goes a long way. Savor the natural flavors of our vanilla-flavored oat beverage, made with just 4 simple ingredients for a smooth, creamy, and subtly-sweet profile.</p>
+      <ul class="varty-product__badges">
+        <li>100% Certified Organic</li>
+        <li>No added sugar</li>
+        <li>Naturally Flavoured</li>
+        <li>Creamy &amp; Smooth</li>
+      </ul>
+      <details open>
+        <summary>4 Ingredients</summary>
+        <div class="varty-product__panel">
+          <ul class="varty-product__list">
+            <li>Filtered Water</li>
+            <li>Organic Canadian Oats</li>
+            <li>Sea Salt</li>
+            <li>Organic, Real Vanilla</li>
+            <li>…That’s It.</li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary>Perfect for</summary>
+        <div class="varty-product__panel">
+          <ul class="varty-product__list">
+            <li>Morning Coffee</li>
+            <li>Warm Tea</li>
+            <li>Cozy Oatmeal</li>
+            <li>Granola topping</li>
+            <li>On its own</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="varty-product" aria-labelledby="varty-barista-title">
+    <div class="varty-product__media">
+      <span class="varty-product__arrow varty-product__arrow--left" aria-hidden="true"></span>
+      {% if section.settings.barista_image != blank %}
+        {{ section.settings.barista_image | image_url: width: 900 | image_tag: class: 'varty-product__image', loading: 'lazy', alt: 'Barista Unsweetened Varty oat beverage carton' }}
+      {% else %}
+        <img class="varty-product__image" src="{{ 'varty-product-barista-front.jpg' | asset_url }}" alt="Barista Unsweetened Varty oat beverage carton" width="900" height="1200" loading="lazy">
+      {% endif %}
+      <span class="varty-product__arrow varty-product__arrow--right" aria-hidden="true"></span>
+    </div>
+    <div class="varty-product__copy">
+      <h2 id="varty-barista-title">Barista Unsweetened Oat Beverage Canada</h2>
+      <p class="varty-product__intro">Whoever said oat beverages don’t froth, hasn’t tried Varty. In all fairness, oat beverages don’t normally froth. That’s why we added less than 1% of organic, locally-sourced high oleic sunflower oil, rich in monosaturated fats, which helps to stabilize the foam and create a denser, more velvety texture. Made with just 4 simple ingredients, this organic oat beverage is carefully crafted to froth like a coffee-lover’s dream – sealing your cup of Joe with a velvety finish every time.</p>
+      <ul class="varty-product__badges">
+        <li>100% Certified Organic</li>
+        <li>No added sugar</li>
+        <li>Barista-Approved</li>
+        <li>Unsweetened for Pure Taste</li>
+        <li>Ultra-Creamy &amp; Smooth</li>
+        <li>Cleanest Barista on the market</li>
+      </ul>
+      <details open>
+        <summary>4 Ingredients</summary>
+        <div class="varty-product__panel">
+          <ul class="varty-product__list">
+            <li>Filtered Water</li>
+            <li>Organic Canadian Oats</li>
+          </ul>
+          <p class="varty-product__intro">Contains less than 1%:</p>
+          <ul class="varty-product__list">
+            <li>Organic High-Oleic Sunflower Oil</li>
+            <li>Potassium Carbonate</li>
+            <li>…That’s It.</li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary>Perfect for</summary>
+        <div class="varty-product__panel">
+          <ul class="varty-product__list">
+            <li>Lattes</li>
+            <li>Cappuccinos</li>
+            <li>Iced Coffee</li>
+            <li>Espresso</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="varty-products__testimonials" aria-label="Varty customer testimonials">
+    <article class="varty-products__quote">
+      <span class="varty-products__quote-mark" aria-hidden="true">”</span>
+      <p>This oat milk is unbelievably smooth and delicious. I’ve been adding it to my morning coffee, and it makes every cup taste like a treat!</p>
+      <cite>Jess Smith</cite>
+      <small>Varty Customer</small>
+    </article>
+    <article class="varty-products__quote">
+      <span class="varty-products__quote-mark" aria-hidden="true">”</span>
+      <p>Super smooth, super delicious — this oat milk hits the spot every time. Great for lattes, cereal, or just straight from the glass.</p>
+      <cite>Drew Carlyle</cite>
+      <small>Varty Customer</small>
+    </article>
+    <article class="varty-products__quote">
+      <span class="varty-products__quote-mark" aria-hidden="true">”</span>
+      <p>Can’t get enough of this oat milk! It’s so smooth and delicious, and it mixes perfectly in coffee and smoothies. Creamy, tasty, and satisfying.</p>
+      <cite>Charlie McMann</cite>
+      <small>Varty Customer</small>
+    </article>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Varty Products Wix",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "certifications_image",
+      "label": "Certification strip image"
+    },
+    {
+      "type": "image_picker",
+      "id": "original_image",
+      "label": "Original product image"
+    },
+    {
+      "type": "image_picker",
+      "id": "vanilla_image",
+      "label": "Vanilla product image"
+    },
+    {
+      "type": "image_picker",
+      "id": "barista_image",
+      "label": "Barista product image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Varty Products Wix"
+    }
+  ]
+}
+{% endschema %}
