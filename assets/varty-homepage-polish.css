@@ -1427,6 +1427,18 @@
   font-size: clamp(15px, 1vw, 18px);
 }
 
+/* Base theme adds very large vertical padding to footer__content (160px+ in spacious mode). */
+:is(#shopify-section-footer, [id$="__footer"]) .footer__content--spacious {
+  padding-top: max(calc(20px + var(--padding-top)), 0px) !important;
+  padding-bottom: max(calc(20px + var(--padding-bottom)), 0px) !important;
+  gap: clamp(18px, 2vw, 34px) clamp(24px, 3vw, 56px) !important;
+}
+
+:is(#shopify-section-footer, [id$="__footer"]) .footer__content--compact {
+  padding-top: max(calc(14px + var(--padding-top)), 0px) !important;
+  padding-bottom: max(calc(14px + var(--padding-bottom)), 0px) !important;
+}
+
 @media screen and (max-width: 920px) {
   [id$="__certifications"] .product-labels__container {
     row-gap: 28px;
