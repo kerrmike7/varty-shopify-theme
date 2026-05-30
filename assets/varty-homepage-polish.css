@@ -354,6 +354,44 @@
   object-fit: cover;
 }
 
+:is(#varty-pantry-smarter, [id$="__pantry_just_got_smarter"]) {
+  --layout-background-color: 84, 99, 179;
+  --layout-text-color: 252, 242, 211;
+  background: #5463B3 !important;
+  background-color: #5463B3 !important;
+  color: #fcf2d3 !important;
+}
+
+:is(#varty-pantry-smarter, [id$="__pantry_just_got_smarter"]) .varty-home-feature {
+  background: #5463B3 !important;
+  color: #fcf2d3 !important;
+}
+
+:is(#varty-pantry-smarter, [id$="__pantry_just_got_smarter"]) .varty-home-feature__heading,
+:is(#varty-pantry-smarter, [id$="__pantry_just_got_smarter"]) h2.content-heading {
+  max-width: 760px;
+  color: #fcf2d3 !important;
+  font-family: var(--accent-font-family) !important;
+  font-size: clamp(42px, 4.6vw, 70px) !important;
+  font-weight: 400 !important;
+  line-height: 0.98 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+:is(#varty-pantry-smarter, [id$="__pantry_just_got_smarter"]) .varty-home-feature__body,
+:is(#varty-pantry-smarter, [id$="__pantry_just_got_smarter"]) .varty-home-feature__body p,
+:is(#varty-pantry-smarter, [id$="__pantry_just_got_smarter"]) .content-text,
+:is(#varty-pantry-smarter, [id$="__pantry_just_got_smarter"]) .content-text p {
+  color: #fcf2d3 !important;
+}
+
+:is(#varty-pantry-smarter, [id$="__pantry_just_got_smarter"]) .varty-home-feature__button {
+  background: #fcf2d3 !important;
+  border-color: #fcf2d3 !important;
+  color: #5463B3 !important;
+}
+
 [id$="__why_varty"] {
   background: #5463b3 !important;
   background-color: #5463b3 !important;
