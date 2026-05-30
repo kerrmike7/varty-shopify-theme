@@ -1,0 +1,212 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --varty-awards-purple: #5865ad;
+    --varty-awards-cream: #fcf2d3;
+    --varty-awards-text: #4f5eaa;
+    background: var(--varty-awards-cream);
+    color: var(--varty-awards-text);
+  }
+
+  #shopify-section-{{ section.id }} .varty-awards {
+    overflow: hidden;
+    background: var(--varty-awards-cream);
+  }
+
+  #shopify-section-{{ section.id }} .varty-awards__title-band {
+    display: grid;
+    place-items: start center;
+    min-height: clamp(132px, 9vw, 186px);
+    padding: clamp(20px, 1.35vw, 28px) 24px 24px;
+    background: var(--varty-awards-purple);
+  }
+
+  #shopify-section-{{ section.id }} .varty-awards__title {
+    margin: 0;
+    color: var(--varty-awards-cream);
+    font-family: "Avenir Next", "Arial Black", Arial, sans-serif;
+    font-size: clamp(42px, 4vw, 78px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .varty-awards__body {
+    padding: clamp(112px, 7vw, 168px) clamp(24px, 5.4vw, 112px) clamp(104px, 7vw, 156px);
+  }
+
+  #shopify-section-{{ section.id }} .varty-awards__card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    width: min(100%, 1780px);
+    min-height: clamp(680px, 42vw, 860px);
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .varty-awards__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(64px, 6vw, 126px) clamp(36px, 5vw, 96px);
+    border-radius: 28px 0 0 28px;
+    background: #f7f7f7;
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .varty-awards__logo {
+    width: clamp(220px, 16vw, 330px);
+    height: auto;
+    margin-bottom: clamp(92px, 7.6vw, 150px);
+  }
+
+  #shopify-section-{{ section.id }} .varty-awards__award-title {
+    max-width: 12ch;
+    margin: 0;
+    color: var(--varty-awards-text);
+    font-family: "Avenir Next", "Arial Black", Arial, sans-serif;
+    font-size: clamp(48px, 4.65vw, 88px);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .varty-awards__description {
+    max-width: 42ch;
+    margin: clamp(34px, 2.6vw, 52px) auto 0;
+    color: var(--varty-awards-text);
+    font-family: "Avenir Next", Arial, sans-serif;
+    font-size: clamp(21px, 1.48vw, 30px);
+    line-height: 1.5;
+    letter-spacing: 0;
+  }
+
+  #shopify-section-{{ section.id }} .varty-awards__year {
+    margin: clamp(58px, 4.5vw, 86px) 0 0;
+    color: var(--varty-awards-text);
+    font-family: "Avenir Next", Arial, sans-serif;
+    font-size: clamp(22px, 1.45vw, 30px);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+
+  #shopify-section-{{ section.id }} .varty-awards__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 224px;
+    min-height: 78px;
+    margin-top: clamp(48px, 3.8vw, 72px);
+    padding: 20px 42px;
+    border: 2px solid var(--varty-awards-purple);
+    border-radius: 999px;
+    background: var(--varty-awards-purple);
+    color: var(--varty-awards-cream);
+    font-family: "Avenir Next", Arial, sans-serif;
+    font-size: clamp(20px, 1.35vw, 28px);
+    font-weight: 800;
+    line-height: 1;
+    text-decoration: none;
+  }
+
+  #shopify-section-{{ section.id }} .varty-awards__media {
+    overflow: hidden;
+    background: #acd3f0;
+  }
+
+  #shopify-section-{{ section.id }} .varty-awards__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  @media screen and (max-width: 920px) {
+    #shopify-section-{{ section.id }} .varty-awards__title-band {
+      min-height: 110px;
+      place-items: center;
+      padding: 20px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-awards__body {
+      padding: 48px 20px 72px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-awards__card {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+
+    #shopify-section-{{ section.id }} .varty-awards__copy {
+      min-height: 560px;
+      border-radius: 24px 24px 0 0;
+      padding: 54px 24px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-awards__logo {
+      margin-bottom: 64px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-awards__media {
+      aspect-ratio: 1 / 1;
+    }
+  }
+{% endstyle %}
+
+<div class="varty-awards">
+  <header class="varty-awards__title-band">
+    <h1 class="varty-awards__title">AWARDS &amp; RECOGNITION</h1>
+  </header>
+
+  <section class="varty-awards__body" aria-labelledby="varty-awards-title">
+    <div class="varty-awards__card">
+      <div class="varty-awards__copy">
+        {% if section.settings.logo_image != blank %}
+          {{ section.settings.logo_image | image_url: width: 420 | image_tag: class: 'varty-awards__logo', loading: 'lazy', alt: 'Futurpreneur' }}
+        {% else %}
+          <img class="varty-awards__logo" src="{{ 'futurpreneur-logo.svg' | asset_url }}" alt="Futurpreneur" width="330" height="92" loading="lazy">
+        {% endif %}
+
+        <h2 id="varty-awards-title" class="varty-awards__award-title">EMERGING ENTREPRENEUR AWARD</h2>
+        <p class="varty-awards__description">Futurpreneur, on behalf of Futurpreneur Foundation, and RBC Future Launch empower young entrepreneurs with $80,000 in Start-up Awards</p>
+        <p class="varty-awards__year">2024</p>
+        <a class="varty-awards__button" href="/pages/awards#press-release">Press Release</a>
+      </div>
+
+      <div class="varty-awards__media">
+        {% if section.settings.award_image != blank %}
+          {{ section.settings.award_image | image_url: width: 1200 | image_tag: class: 'varty-awards__image', loading: 'eager', alt: 'Varty cartons stacked on a blue background' }}
+        {% else %}
+          <img class="varty-awards__image" src="{{ 'varty-all-skus-ecommerce.jpg' | asset_url }}" alt="Varty cartons stacked on a blue background" width="1200" height="1200" loading="eager">
+        {% endif %}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Varty Awards Wix",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Award logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "award_image",
+      "label": "Award product image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Varty Awards Wix"
+    }
+  ]
+}
+{% endschema %}

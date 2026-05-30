@@ -1,103 +1,8 @@
 {
   "sections": {
-    "awards_title_strip": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_awards_title": {
-          "type": "heading",
-          "settings": {
-            "heading": "AWARDS & RECOGNITION",
-            "heading_size": "heading_l",
-            "heading_tag": "h1",
-            "heading_color": "solid"
-          }
-        }
-      },
-      "block_order": [
-        "heading_awards_title"
-      ],
-      "settings": {
-        "section_width": "wide",
-        "center_text": true,
-        "varty_color_scheme": "scheme_brand_purple",
-        "color_type": "scheme",
-        "desktop_padding_top": 64,
-        "desktop_padding_bottom": 64,
-        "mobile_padding_top": 40,
-        "mobile_padding_bottom": 40
-      }
-    },
-    "award_futurpreneur": {
-      "type": "media-with-text",
-      "blocks": {
-        "logo_futurpreneur": {
-          "type": "context_image",
-          "settings": {
-            "context_image_width": 144,
-            "context_image_ratio": "original",
-            "context_image_radius": "0px"
-          }
-        },
-        "heading_award": {
-          "type": "heading",
-          "settings": {
-            "heading": "EMERGING ENTREPRENEUR AWARD",
-            "heading_size": "heading_l",
-            "heading_tag": "h2",
-            "heading_color": "solid"
-          }
-        },
-        "text_award": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Futurpreneur, on behalf of Futurpreneur Foundation, and RBC Future Launch empower young entrepreneurs with $80,000 in Start-up Awards</p>",
-            "dim_text": false,
-            "text_size": "default"
-          }
-        },
-        "caption_year": {
-          "type": "subheading",
-          "settings": {
-            "subheading": "2024",
-            "subheading_size": "body_s",
-            "subheading_tag": "p"
-          }
-        },
-        "button_press": {
-          "type": "button",
-          "settings": {
-            "button_label": "Press Release",
-            "button_link": "/pages/awards#press-release",
-            "target_blank": false,
-            "button_style": "solid"
-          }
-        }
-      },
-      "block_order": [
-        "logo_futurpreneur",
-        "heading_award",
-        "text_award",
-        "caption_year",
-        "button_press"
-      ],
-      "settings": {
-        "image": "shopify://shop_images/varty-all-skus-ecommerce.jpg",
-        "section_width": "wide",
-        "swap_media": false,
-        "media_size": "half",
-        "media_ratio": "square",
-        "narrow_content": true,
-        "vertical_text_alignment": "center",
-        "horizontal_text_alignment": "center",
-        "varty_color_scheme": "scheme_brand_beige",
-        "color_type": "scheme",
-        "fill_section": false,
-        "desktop_padding_top": 96,
-        "desktop_padding_bottom": 96,
-        "mobile_padding_top": 64,
-        "mobile_padding_bottom": 64,
-        "tbd_note": "<<TODO(asset): futurpreneur-logo.svg and the exact stacked-carton award photo are not present in assets/; using varty-all-skus-ecommerce.jpg as closest product image. TODO(link): replace /pages/awards#press-release with the external Press Release URL when supplied.>>"
-      }
+    "varty_awards_wix": {
+      "type": "varty-awards-wix",
+      "settings": {}
     },
     "main-page": {
       "type": "main-page",
@@ -114,8 +19,7 @@
     }
   },
   "order": [
-    "awards_title_strip",
-    "award_futurpreneur",
+    "varty_awards_wix",
     "main-page"
   ]
 }
