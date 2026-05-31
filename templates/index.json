@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "announcement_bar": {
@@ -7,14 +16,16 @@
           "type": "text",
           "settings": {
             "desktop_text": "<p>Try the Tasting Box, build your 6-pack, or subscribe for free delivery.</p>",
-            "mobile_text": "<p>Try the Tasting Box or subscribe for free delivery.</p>"
+            "mobile_text": "<p>Try the Tasting Box or subscribe for free delivery.</p>",
+            "icon": "truck"
           }
         },
         "ann_ship": {
           "type": "text",
           "settings": {
             "desktop_text": "<p>Orders ship every Tuesday. Place yours by midnight Sunday ET to make this week's run.</p>",
-            "mobile_text": "<p>Ships every Tuesday</p>"
+            "mobile_text": "<p>Ships every Tuesday</p>",
+            "icon": "truck"
           }
         }
       },
@@ -24,15 +35,22 @@
       ],
       "settings": {
         "announcement_bar": "show",
-        "enable_autoplay": false,
-        "center_text": true,
         "text_size": "body_s",
+        "show_bottom_line": false,
+        "center_text": true,
+        "enable_autoplay": false,
+        "autoplay_speed": 7,
+        "image_ratio": "square",
+        "image_width": 24,
+        "context_image_radius": "default",
+        "icon_weight": "regular",
+        "varty_color_scheme": "scheme_brand_purple",
         "color_type": "custom",
         "background_color_type": "solid",
-        "section_paddings": 6,
-        "varty_color_scheme": "scheme_brand_purple",
-        "background_color": "#FFFFFF",
-        "text_color": "#5463B3"
+        "background_gradient": "",
+        "background_color": "#ffffff",
+        "text_color": "#5463b3",
+        "section_paddings": 6
       }
     },
     "hero": {
@@ -45,10 +63,10 @@
         "subtitle": "<p>No gums. No added sugar. No fillers. No “what even is that?” ingredients. Just organic oat beverage made with 3-4 simple ingredients, now available in easy online bundles. Try all 3 flavours, build your own 6-pack, or subscribe and keep your pantry stocked with free delivery every time.</p>",
         "cta_text": "Shop Bundles",
         "cta_url": "/collections/all",
-        "show_organic_stamp": true,
-        "show_flower_decoration": true,
         "secondary_cta_text": "Subscribe & Save",
-        "secondary_cta_url": "/collections/all"
+        "secondary_cta_url": "/collections/all",
+        "show_organic_stamp": true,
+        "show_flower_decoration": true
       }
     },
     "stats_bar": {
@@ -60,7 +78,9 @@
             "heading": "3-4",
             "text": "<p>Organic ingredients per product. That's it.</p>",
             "button_label": "",
-            "button_link": ""
+            "button_link": "",
+            "target_blank": false,
+            "full_block_clickable": false
           }
         },
         "s2": {
@@ -69,7 +89,9 @@
             "heading": "0%",
             "text": "<p>Gums, added sugar, fillers, or additives.</p>",
             "button_label": "",
-            "button_link": ""
+            "button_link": "",
+            "target_blank": false,
+            "full_block_clickable": false
           }
         },
         "s3": {
@@ -78,7 +100,9 @@
             "heading": "100%",
             "text": "<p>Canadian-made.</p>",
             "button_label": "",
-            "button_link": ""
+            "button_link": "",
+            "target_blank": false,
+            "full_block_clickable": false
           }
         }
       },
@@ -88,255 +112,37 @@
         "s3"
       ],
       "settings": {
+        "subheading": "",
         "heading": "",
         "max_columns": "3",
         "mobile_layout": "1",
+        "enable_masonry_grid": false,
+        "subheading_size": "default",
+        "subheading_tag": "h3",
+        "heading_size": "default",
+        "heading_tag": "h2",
+        "heading_color": "solid",
+        "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
+        "media_ratio": "square",
         "center_text": true,
         "title_size": "heading_l",
+        "title_heading_color": "solid",
+        "title_heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
+        "text_size": "default",
+        "image_radius": "default",
+        "button_style": "outlined",
+        "varty_color_scheme": "scheme_brand_purple",
         "color_type": "custom",
         "background_color_type": "solid",
+        "background_gradient": "",
+        "background_color": "#5463b3",
+        "text_color": "#fcf2d3",
+        "layout_margins": "default",
         "desktop_padding_top": 0,
         "desktop_padding_bottom": 0,
         "mobile_padding_top": 0,
-        "mobile_padding_bottom": 0,
-        "varty_color_scheme": "scheme_brand_purple",
-        "background_color": "#5463B3",
-        "text_color": "#fcf2d3"
+        "mobile_padding_bottom": 0
       }
-    },
-    "product_trio": {
-      "type": "featured-collection-with-product-grid",
-      "settings": {
-        "collection": "flavours",
-        "anchor_id": "flavours",
-        "media_style": "hide",
-        "subheading": "",
-        "heading": "Our Organic Oat Beverages",
-        "text": "",
-        "button_label": "",
-        "max_columns": "3",
-        "mobile_layout": "1",
-        "enable_add_to_cart": true,
-        "enable_quick_view": true,
-        "show_vendor": false,
-        "price_position": "bottom",
-        "card_image_ratio": "square",
-        "color_type": "custom",
-        "background_color_type": "solid",
-        "background_color": "#5463B3",
-        "text_color": "#fcf2d3",
-        "desktop_padding_top": 64,
-        "desktop_padding_bottom": 64,
-        "mobile_padding_top": 40,
-        "mobile_padding_bottom": 40,
-        "varty_color_scheme": "scheme_brand_purple",
-        "heading_size": "heading_s"
-      }
-    },
-    "trial_mix_cards": {
-      "type": "multicolumn",
-      "blocks": {
-        "trial": {
-          "type": "text",
-          "settings": {
-            "heading": "t:varty.trial.title",
-            "text": "<p>Trial Pack - one of each. Once per customer. Account required.</p>",
-            "button_label": "t:varty.trial.cta",
-            "button_link": "/products/trial-pack"
-          }
-        },
-        "mix": {
-          "type": "text",
-          "settings": {
-            "heading": "t:varty.mix.title",
-            "text": "<p>Mix Case - any 6 you want. Subscribe and save 5%, free shipping.</p>",
-            "button_label": "t:varty.mix.cta",
-            "button_link": "/products/mix-case"
-          }
-        }
-      },
-      "block_order": [
-        "trial",
-        "mix"
-      ],
-      "settings": {
-        "max_columns": "2",
-        "mobile_layout": "1",
-        "center_text": true,
-        "color_type": "custom",
-        "background_color_type": "solid",
-        "background_color": "#5463B3",
-        "text_color": "#fcf2d3",
-        "desktop_padding_top": 64,
-        "desktop_padding_bottom": 64,
-        "mobile_padding_top": 40,
-        "mobile_padding_bottom": 40,
-        "varty_color_scheme": "scheme_brand_purple"
-      },
-      "disabled": true
-    },
-    "organic_marquee": {
-      "type": "scrolling-promotion",
-      "blocks": {
-        "text_1": {
-          "type": "text",
-          "settings": {
-            "desktop_text": "100% ORGANIC",
-            "mobile_text": "100% ORGANIC"
-          }
-        },
-        "leaf_1": {
-          "type": "context_image",
-          "settings": {
-            "context_image": "shopify://shop_images/icon-leaf.svg",
-            "context_image_width": 40
-          }
-        },
-        "text_2": {
-          "type": "text",
-          "settings": {
-            "desktop_text": "100% ORGANIC",
-            "mobile_text": "100% ORGANIC"
-          }
-        },
-        "leaf_2": {
-          "type": "context_image",
-          "settings": {
-            "context_image": "shopify://shop_images/icon-leaf.svg",
-            "context_image_width": 40
-          }
-        },
-        "text_3": {
-          "type": "text",
-          "settings": {
-            "desktop_text": "100% ORGANIC",
-            "mobile_text": "100% ORGANIC"
-          }
-        },
-        "leaf_3": {
-          "type": "context_image",
-          "settings": {
-            "context_image": "shopify://shop_images/icon-leaf.svg",
-            "context_image_width": 40
-          }
-        },
-        "text_4": {
-          "type": "text",
-          "settings": {
-            "desktop_text": "100% ORGANIC",
-            "mobile_text": "100% ORGANIC"
-          }
-        },
-        "leaf_4": {
-          "type": "context_image",
-          "settings": {
-            "context_image": "shopify://shop_images/icon-leaf.svg",
-            "context_image_width": 40
-          }
-        },
-        "text_5": {
-          "type": "text",
-          "settings": {
-            "desktop_text": "100% ORGANIC",
-            "mobile_text": "100% ORGANIC"
-          }
-        },
-        "leaf_5": {
-          "type": "context_image",
-          "settings": {
-            "context_image": "shopify://shop_images/icon-leaf.svg",
-            "context_image_width": 40
-          }
-        }
-      },
-      "block_order": [
-        "text_1",
-        "leaf_1",
-        "text_2",
-        "leaf_2",
-        "text_3",
-        "leaf_3",
-        "text_4",
-        "leaf_4",
-        "text_5",
-        "leaf_5"
-      ],
-      "settings": {
-        "text_size": "heading_m_uppercase",
-        "color_type": "custom",
-        "background_color_type": "solid",
-        "background_color": "#5463B3",
-        "text_color": "#fcf2d3",
-        "desktop_padding_top": 24,
-        "desktop_padding_bottom": 24,
-        "mobile_padding_top": 16,
-        "mobile_padding_bottom": 16
-      },
-      "disabled": true
-    },
-    "pantry_truth": {
-      "type": "media-with-text",
-      "blocks": {
-        "eyebrow": {
-          "type": "subheading",
-          "settings": {
-            "subheading": "Our Natural Oat Beverages",
-            "subheading_size": "body_s",
-            "subheading_tag": "h3"
-          }
-        },
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "STEP INSIDE OUR PANTRY…",
-            "heading_size": "heading_l",
-            "heading_tag": "h2",
-            "heading_color": "solid",
-            "heading_gradient": ""
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Delicious, creamy, clean, and made with ingredients your pantry would approve of. It's an oat beverage that just makes sense.</p><ul><li>Filtered Water</li><li>Canadian Organic Oats</li><li>Sea Salt</li><li>Sometimes Vanilla</li><li>…That's it.</li></ul>",
-            "text_size": "default",
-            "dim_text": false
-          }
-        },
-        "button": {
-          "type": "button",
-          "settings": {
-            "button_label": "Shop Varty",
-            "button_link": "/collections/all",
-            "button_style": "solid",
-            "target_blank": false
-          }
-        }
-      },
-      "block_order": [
-        "eyebrow",
-        "heading",
-        "text",
-        "button"
-      ],
-      "settings": {
-        "image": "shopify://shop_images/varty-all-skus-ecommerce.jpg",
-        "swap_media": true,
-        "media_size": "half",
-        "media_ratio": "square",
-        "vertical_text_alignment": "center",
-        "horizontal_text_alignment": "flex-start",
-        "color_type": "custom",
-        "background_color_type": "solid",
-        "background_color": "#fcf2d3",
-        "text_color": "#5463B3",
-        "desktop_padding_top": 64,
-        "desktop_padding_bottom": 64,
-        "mobile_padding_top": 40,
-        "mobile_padding_bottom": 40,
-        "varty_color_scheme": "scheme_brand_beige"
-      },
-      "disabled": true
     },
     "certifications": {
       "type": "varty-certifications-strip",
@@ -347,109 +153,6 @@
         "desktop_padding_bottom": 16,
         "mobile_padding_top": 24,
         "mobile_padding_bottom": 24
-      }
-    },
-    "subscribe_save": {
-      "type": "image-banner",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "t:varty.subscribe.headline",
-            "heading_size": "heading_l"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Subscribe and save 5% - free shipping in QC &amp; ON, every time.</p>"
-          }
-        },
-        "button": {
-          "type": "button",
-          "settings": {
-            "button_label": "t:varty.subscribe.cta",
-            "button_link": "/collections/subscription",
-            "button_style": "solid"
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text",
-        "button"
-      ],
-      "settings": {
-        "first_image": "shopify://shop_images/varty-lifestyle-01.jpg",
-        "overlay_opacity": 30,
-        "height_mode": "percents",
-        "desktop_height": 55,
-        "mobile_height": 50,
-        "center_text": true,
-        "vertical_content_position": "center",
-        "horizontal_content_position": "center",
-        "color_type": "custom",
-        "background_color_type": "solid",
-        "background_color": "#5463B3",
-        "text_color": "#fcf2d3",
-        "desktop_padding_top": 64,
-        "desktop_padding_bottom": 64,
-        "mobile_padding_top": 40,
-        "mobile_padding_bottom": 40,
-        "varty_color_scheme": "scheme_brand_purple"
-      },
-      "disabled": true
-    },
-    "faq": {
-      "type": "collapsible-tabs",
-      "blocks": {
-        "q1": {
-          "type": "tab",
-          "settings": {
-            "heading": "Why choose Varty over other clean oat beverage brands?",
-            "text": "<p>Because it's organic, it's real, and it keeps its promises. We only use 3-4 organic ingredients, the kind you'd actually find in your kitchen. No gums, no added sugar, no stabilizers, no \"natural flavours\" doing mysterious things. Just clean.</p>"
-          }
-        },
-        "q2": {
-          "type": "tab",
-          "settings": {
-            "heading": "Why does Varty cost more than other organic oat beverages?",
-            "text": "<p>Quality ingredients cost more than whatever the other guys are using. We keep Varty as accessible as we can while using higher-quality ingredients than most brands on the shelf.</p>"
-          }
-        },
-        "q3": {
-          "type": "tab",
-          "settings": {
-            "heading": "Is it shelf stable without preservatives?",
-            "text": "<p>Yes. Sea salt works as a natural shelf-life extender, so Varty stays fresh for longer, with no cryptic additives required. Once opened, refrigerate and use within 7-10 days.</p>"
-          }
-        },
-        "q4": {
-          "type": "tab",
-          "settings": {
-            "heading": "Aren't unsweetened oat beverages bland?",
-            "text": "<p>We've tasted those too, so we get it. Varty's naturally sweet thanks to the way we process our oats, not because we added sugar. Any sugar on the label is natural oat sugar from the production process. Nothing added, nothing hidden.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "q1",
-        "q2",
-        "q3",
-        "q4"
-      ],
-      "settings": {
-        "heading": "FREQUENTLY ASKED QUESTIONS",
-        "section_width": "wide",
-        "color_type": "custom",
-        "background_color_type": "solid",
-        "background_color": "#fcf2d3",
-        "text_color": "#5463B3",
-        "desktop_padding_top": 64,
-        "desktop_padding_bottom": 64,
-        "mobile_padding_top": 40,
-        "mobile_padding_bottom": 40,
-        "varty_color_scheme": "scheme_brand_beige"
       }
     },
     "label_truth": {
@@ -466,37 +169,80 @@
         "mobile_padding_bottom": 44
       }
     },
-    "awards_card": {
-      "type": "varty-awards-card",
+    "pantry_step_inside": {
+      "type": "varty-home-feature",
+      "blocks": {
+        "water": {
+          "type": "bullet",
+          "settings": {
+            "text": "Filtered Water"
+          }
+        },
+        "oats": {
+          "type": "bullet",
+          "settings": {
+            "text": "Organic Canadian Oats"
+          }
+        },
+        "salt": {
+          "type": "bullet",
+          "settings": {
+            "text": "Sea Salt"
+          }
+        },
+        "vanilla": {
+          "type": "bullet",
+          "settings": {
+            "text": "Sometimes Organic Vanilla"
+          }
+        },
+        "thats_it": {
+          "type": "bullet",
+          "settings": {
+            "text": "…That’s it."
+          }
+        }
+      },
+      "block_order": [
+        "water",
+        "oats",
+        "salt",
+        "vanilla",
+        "thats_it"
+      ],
       "settings": {
-        "eyebrow": "Awards & Recognition",
-        "year": "2024",
-        "heading": "EMERGING ENTREPRENEUR AWARD",
-        "body": "<p>Futurpreneur, on behalf of Futurpreneur Foundation, and RBC Future Launch empower young entrepreneurs with $80,000 in Start-up Awards</p>",
-        "button_label": "Press Release",
-        "button_link": "/pages/awards",
-        "logo_asset": "futurpreneur-logo.svg",
-        "star_asset": "awards-star.avif",
-        "desktop_padding_top": 56,
-        "desktop_padding_bottom": 72,
-        "mobile_padding_top": 40,
+        "scheme": "cream",
+        "image_position": "left",
+        "image": "varty-home-step-inside-rich.jpg",
+        "eyebrow": "",
+        "heading": "Step Inside Our Pantry…",
+        "body": "<p>Creamy, clean, and made with ingredients your pantry would approve of. It’s oat beverage that just makes sense.</p>",
+        "button_label": "SHOP VARTY BUNDLES",
+        "button_link": "/collections/all",
+        "show_flower": false,
+        "desktop_padding_top": 80,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 48,
         "mobile_padding_bottom": 48
-      },
-      "disabled": true
+      }
     },
-    "pantry_intro": {
-      "type": "varty-pantry-intro",
+    "stockists_standalone": {
+      "type": "varty-home-feature",
       "settings": {
-        "eyebrow": "Our natural oat beverages are",
-        "heading": "Delicious, creamy, clean, and made with ingredients your pantry would approve of",
-        "left_image": "varty-lifestyle-04.jpg",
-        "right_image": "varty-all-skus-ecommerce.jpg",
-        "desktop_padding_top": 104,
-        "desktop_padding_bottom": 96,
-        "mobile_padding_top": 56,
-        "mobile_padding_bottom": 56
-      },
-      "disabled": true
+        "scheme": "green",
+        "image_position": "right",
+        "image": "varty-home-stockists-rich.jpg",
+        "eyebrow": "",
+        "heading": "Online, In Stores, and Probably Closer Than You Think",
+        "body": "<p>Varty is now available to order online and stocked in 40+ active doors across Canada, with more shelves joining the party soon. Shop your favourite bundle online, or use our store locator to find Varty near you.</p>",
+        "button_label": "Find Varty Near You",
+        "button_link": "/pages/stockists",
+        "show_flower": false,
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
     },
     "why_varty_comparison": {
       "type": "custom-comparison-table",
@@ -505,40 +251,60 @@
           "type": "row",
           "settings": {
             "feature_label": "INGREDIENTS",
+            "varty_check": true,
             "varty_value": "3-4 real, organic ingredients",
-            "competitor_1_value": "10+ ingredients"
+            "c1_check": false,
+            "competitor_1_value": "10+ ingredients",
+            "c2_check": false,
+            "competitor_2_value": ""
           }
         },
         "additives": {
           "type": "row",
           "settings": {
             "feature_label": "ADDITIVES",
+            "varty_check": true,
             "varty_value": "None. Really. We triple-checked.",
-            "competitor_1_value": "Gums, stabilizers and \"natural flavours\""
+            "c1_check": false,
+            "competitor_1_value": "Gums, stabilizers and \"natural flavours\"",
+            "c2_check": false,
+            "competitor_2_value": ""
           }
         },
         "portion": {
           "type": "row",
           "settings": {
             "feature_label": "PORTION SIZE",
+            "varty_check": true,
             "varty_value": "More oats per serving",
-            "competitor_1_value": "Standard industry serving size"
+            "c1_check": false,
+            "competitor_1_value": "Standard industry serving size",
+            "c2_check": false,
+            "competitor_2_value": ""
           }
         },
         "taste": {
           "type": "row",
           "settings": {
             "feature_label": "TASTE",
+            "varty_check": true,
             "varty_value": "Smooth, subtle & tastes like oats, not sugar water",
-            "competitor_1_value": "Watery, overly sweet, bland"
+            "c1_check": false,
+            "competitor_1_value": "Watery, overly sweet, bland",
+            "c2_check": false,
+            "competitor_2_value": ""
           }
         },
         "foam": {
           "type": "row",
           "settings": {
             "feature_label": "FOAM FACTOR",
+            "varty_check": true,
             "varty_value": "Foams naturally using less than 1% of locally sourced organic high oleic sunflower oil ONLY. Clean, simple, barista-approved. The cleanest Barista on the market.",
-            "competitor_1_value": "Relies on a cocktail of added sugars, gums, fillers, and additives to create a foam."
+            "c1_check": false,
+            "competitor_1_value": "Relies on a cocktail of added sugars, gums, fillers, and additives to create a foam.",
+            "c2_check": false,
+            "competitor_2_value": ""
           }
         }
       },
@@ -550,16 +316,16 @@
         "foam"
       ],
       "settings": {
-        "badge": "THE CLEAN ADVANTAGE",
         "heading": "WHY CANADIANS ARE FALLING IN LOVE WITH VARTY",
         "subheading": "",
+        "badge": "THE CLEAN ADVANTAGE",
         "feature_label": "",
         "varty_label": "Varty All Natural",
         "competitor_1_label": "Other Oat Beverages",
         "competitor_2_label": "",
         "mobile_layout": "scroll",
         "varty_color_scheme": "scheme_brand_purple",
-        "background_color": "#5463B3",
+        "background_color": "#5463b3",
         "text_color": "#fcf2d3",
         "desktop_padding_top": 96,
         "desktop_padding_bottom": 104,
@@ -642,6 +408,567 @@
         "mobile_padding_bottom": 48
       }
     },
+    "product_trio": {
+      "type": "featured-collection-with-product-grid",
+      "settings": {
+        "collection": "flavours",
+        "items_per_batch": 8,
+        "infinite_scroll": "button",
+        "media_style": "hide",
+        "swap_image": false,
+        "image_size": "large",
+        "subheading": "",
+        "heading": "Your Pantry Just Got a Whole Lot Smarter",
+        "text": "<p>Varty is now available to order online, which means your favourite clean oat beverage doesn’t have to depend on your next grocery run. Start with a Tasting Box, stock up with a 6-pack, or subscribe and save 10% on every order, with free delivery in our Quebec and Ontario delivery zone.</p><p>Not ready to commit? Try one of each flavour first. Already found your favourite? Build your 6-pack and let future-you feel wildly organized.</p>",
+        "button_label": "",
+        "anchor_id": "flavours",
+        "button_style": "outlined",
+        "vertical_text_alignment": "center",
+        "horizontal_text_alignment": "flex-start",
+        "narrow_content": true,
+        "max_columns": "3",
+        "grid_gap_type": "default",
+        "custom_column_gap_desktop": 48,
+        "custom_row_gap_desktop": 64,
+        "custom_column_gap_mobile": 16,
+        "custom_row_gap_mobile": 16,
+        "mobile_layout": "1",
+        "image_ratio": "landscape",
+        "focal_point": "center center",
+        "image_radius": "default",
+        "subheading_size": "default",
+        "subheading_tag": "h3",
+        "heading_size": "heading_l",
+        "heading_tag": "h2",
+        "heading_color": "solid",
+        "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
+        "main_text_size": "body_l",
+        "card_image_ratio": "square",
+        "card_focal_point": "center center",
+        "hover_behavior": "second_image",
+        "show_bullets": true,
+        "enable_add_to_cart": true,
+        "enable_quick_view": true,
+        "price_position": "bottom",
+        "show_vendor": false,
+        "max_product_name_characters": 100,
+        "show_rating": true,
+        "show_short_description": false,
+        "enable_color_pills": false,
+        "show_pickup_availability": false,
+        "varty_color_scheme": "scheme_brand_purple",
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_gradient": "",
+        "background_color": "#5463b3",
+        "text_color": "#fcf2d3",
+        "layout_margins": "default",
+        "desktop_padding_top": 64,
+        "desktop_padding_bottom": 64,
+        "mobile_padding_top": 40,
+        "mobile_padding_bottom": 40
+      }
+    },
+    "never_run_out": {
+      "type": "varty-home-feature",
+      "settings": {
+        "scheme": "green",
+        "image_position": "right",
+        "image": "varty-home-never-run-out-rich.jpg",
+        "eyebrow": "",
+        "heading": "Never Run Out of the Good Stuff",
+        "body": "<p>Your coffee deserves consistency. Your pantry does too. Subscribe to your favourite Varty bundle and get 10% off every recurring order, plus free delivery every time in our Quebec and Ontario delivery zone. Choose delivery every 4, 6, or 8 weeks, then pause, swap, or adjust after your second order.</p>",
+        "button_label": "SUBSCRIBE & SAVE",
+        "button_link": "/collections/subscription",
+        "show_flower": false,
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
+    },
+    "wholesale_standalone": {
+      "type": "varty-home-feature",
+      "settings": {
+        "scheme": "purple",
+        "image_position": "right",
+        "image": "varty-home-wholesale-rich.jpg",
+        "eyebrow": "",
+        "heading": "Let’s Put Something Better on Your Shelf",
+        "body": "<p>We partner with retailers and grocers who care about quality as much as we do.</p>",
+        "button_label": "APPLY NOW",
+        "button_link": "/pages/wholesale",
+        "show_flower": true,
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
+    },
+    "faq": {
+      "type": "collapsible-tabs",
+      "blocks": {
+        "q1": {
+          "type": "tab",
+          "settings": {
+            "heading": "Why choose Varty over other clean oat beverage brands?",
+            "text": "<p>Because it's organic, it's real, and it keeps its promises. We only use 3-4 organic ingredients, the kind you'd actually find in your kitchen. No gums, no added sugar, no stabilizers, no \"natural flavours\" doing mysterious things. Just clean.</p>",
+            "icon": "none",
+            "page": ""
+          }
+        },
+        "q2": {
+          "type": "tab",
+          "settings": {
+            "heading": "Why does Varty cost more than other organic oat beverages?",
+            "text": "<p>Quality ingredients cost more than whatever the other guys are using. We keep Varty as accessible as we can while using higher-quality ingredients than most brands on the shelf.</p>",
+            "icon": "none",
+            "page": ""
+          }
+        },
+        "q3": {
+          "type": "tab",
+          "settings": {
+            "heading": "Is it shelf stable without preservatives?",
+            "text": "<p>Yes. Sea salt works as a natural shelf-life extender, so Varty stays fresh for longer, with no cryptic additives required. Once opened, refrigerate and use within 7-10 days.</p>",
+            "icon": "none",
+            "page": ""
+          }
+        },
+        "q4": {
+          "type": "tab",
+          "settings": {
+            "heading": "Aren't unsweetened oat beverages bland?",
+            "text": "<p>We've tasted those too, so we get it. Varty's naturally sweet thanks to the way we process our oats, not because we added sugar. Any sugar on the label is natural oat sugar from the production process. Nothing added, nothing hidden.</p>",
+            "icon": "none",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
+      "settings": {
+        "subheading": "",
+        "heading": "FREQUENTLY ASKED QUESTIONS",
+        "text": "",
+        "dim_text": false,
+        "button_label": "View all",
+        "button_link": "",
+        "target_blank": false,
+        "button_style": "solid",
+        "section_width": "wide",
+        "subheading_size": "default",
+        "subheading_tag": "h3",
+        "heading_size": "heading_m_uppercase",
+        "heading_tag": "h2",
+        "heading_color": "solid",
+        "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
+        "main_text_size": "default",
+        "collapsible_tabs_size": "default",
+        "collapsible_tabs_heading_color": "solid",
+        "collapsible_tabs_heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
+        "text_size": "default",
+        "topic_heading_size": "heading_xs_uppercase",
+        "topic_heading_color": "solid",
+        "topic_heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
+        "topic_text_size": "default",
+        "varty_color_scheme": "scheme_brand_beige",
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_gradient": "",
+        "background_color": "#fcf2d3",
+        "text_color": "#5463b3",
+        "desktop_padding_top": 64,
+        "desktop_padding_bottom": 64,
+        "mobile_padding_top": 40,
+        "mobile_padding_bottom": 40
+      }
+    },
+    "trial_mix_cards": {
+      "type": "multicolumn",
+      "blocks": {
+        "trial": {
+          "type": "text",
+          "settings": {
+            "heading": "t:varty.trial.title",
+            "text": "<p>Trial Pack - one of each. Once per customer. Account required.</p>",
+            "button_label": "t:varty.trial.cta",
+            "button_link": "/products/trial-pack",
+            "target_blank": false,
+            "full_block_clickable": false
+          }
+        },
+        "mix": {
+          "type": "text",
+          "settings": {
+            "heading": "t:varty.mix.title",
+            "text": "<p>Mix Case - any 6 you want. Subscribe and save 5%, free shipping.</p>",
+            "button_label": "t:varty.mix.cta",
+            "button_link": "/products/mix-case",
+            "target_blank": false,
+            "full_block_clickable": false
+          }
+        }
+      },
+      "block_order": [
+        "trial",
+        "mix"
+      ],
+      "disabled": true,
+      "settings": {
+        "subheading": "",
+        "heading": "",
+        "max_columns": "2",
+        "mobile_layout": "1",
+        "enable_masonry_grid": false,
+        "subheading_size": "default",
+        "subheading_tag": "h3",
+        "heading_size": "default",
+        "heading_tag": "h2",
+        "heading_color": "solid",
+        "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
+        "media_ratio": "square",
+        "center_text": true,
+        "title_size": "default",
+        "title_heading_color": "solid",
+        "title_heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
+        "text_size": "default",
+        "image_radius": "default",
+        "button_style": "outlined",
+        "varty_color_scheme": "scheme_brand_purple",
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_gradient": "",
+        "background_color": "#5463b3",
+        "text_color": "#fcf2d3",
+        "layout_margins": "default",
+        "desktop_padding_top": 64,
+        "desktop_padding_bottom": 64,
+        "mobile_padding_top": 40,
+        "mobile_padding_bottom": 40
+      }
+    },
+    "awards_card": {
+      "type": "varty-awards-card",
+      "disabled": true,
+      "settings": {
+        "eyebrow": "Awards & Recognition",
+        "year": "2024",
+        "heading": "EMERGING ENTREPRENEUR AWARD",
+        "body": "<p>Futurpreneur, on behalf of Futurpreneur Foundation, and RBC Future Launch empower young entrepreneurs with $80,000 in Start-up Awards</p>",
+        "button_label": "Press Release",
+        "button_link": "/pages/awards",
+        "logo_asset": "futurpreneur-logo.svg",
+        "star_asset": "awards-star.avif",
+        "desktop_padding_top": 56,
+        "desktop_padding_bottom": 72,
+        "mobile_padding_top": 40,
+        "mobile_padding_bottom": 48
+      }
+    },
+    "pantry_intro": {
+      "type": "varty-pantry-intro",
+      "disabled": true,
+      "settings": {
+        "eyebrow": "Our natural oat beverages are",
+        "heading": "Delicious, creamy, clean, and made with ingredients your pantry would approve of",
+        "left_image": "varty-lifestyle-04.jpg",
+        "right_image": "varty-all-skus-ecommerce.jpg",
+        "arrow_asset": "arrow.avif",
+        "desktop_padding_top": 104,
+        "desktop_padding_bottom": 96,
+        "mobile_padding_top": 56,
+        "mobile_padding_bottom": 56
+      }
+    },
+    "organic_marquee": {
+      "type": "scrolling-promotion",
+      "blocks": {
+        "text_1": {
+          "type": "text",
+          "settings": {
+            "desktop_text": "100% ORGANIC",
+            "mobile_text": "100% ORGANIC",
+            "text_link": "",
+            "target_blank": false
+          }
+        },
+        "leaf_1": {
+          "type": "context_image",
+          "settings": {
+            "context_image": "shopify://shop_images/icon-leaf.svg",
+            "context_image_width": 40,
+            "context_image_ratio": "original",
+            "context_image_radius": "default",
+            "context_image_link": "",
+            "context_target_blank": false
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "desktop_text": "100% ORGANIC",
+            "mobile_text": "100% ORGANIC",
+            "text_link": "",
+            "target_blank": false
+          }
+        },
+        "leaf_2": {
+          "type": "context_image",
+          "settings": {
+            "context_image": "shopify://shop_images/icon-leaf.svg",
+            "context_image_width": 40,
+            "context_image_ratio": "original",
+            "context_image_radius": "default",
+            "context_image_link": "",
+            "context_target_blank": false
+          }
+        },
+        "text_3": {
+          "type": "text",
+          "settings": {
+            "desktop_text": "100% ORGANIC",
+            "mobile_text": "100% ORGANIC",
+            "text_link": "",
+            "target_blank": false
+          }
+        },
+        "leaf_3": {
+          "type": "context_image",
+          "settings": {
+            "context_image": "shopify://shop_images/icon-leaf.svg",
+            "context_image_width": 40,
+            "context_image_ratio": "original",
+            "context_image_radius": "default",
+            "context_image_link": "",
+            "context_target_blank": false
+          }
+        },
+        "text_4": {
+          "type": "text",
+          "settings": {
+            "desktop_text": "100% ORGANIC",
+            "mobile_text": "100% ORGANIC",
+            "text_link": "",
+            "target_blank": false
+          }
+        },
+        "leaf_4": {
+          "type": "context_image",
+          "settings": {
+            "context_image": "shopify://shop_images/icon-leaf.svg",
+            "context_image_width": 40,
+            "context_image_ratio": "original",
+            "context_image_radius": "default",
+            "context_image_link": "",
+            "context_target_blank": false
+          }
+        },
+        "text_5": {
+          "type": "text",
+          "settings": {
+            "desktop_text": "100% ORGANIC",
+            "mobile_text": "100% ORGANIC",
+            "text_link": "",
+            "target_blank": false
+          }
+        },
+        "leaf_5": {
+          "type": "context_image",
+          "settings": {
+            "context_image": "shopify://shop_images/icon-leaf.svg",
+            "context_image_width": 40,
+            "context_image_ratio": "original",
+            "context_image_radius": "default",
+            "context_image_link": "",
+            "context_target_blank": false
+          }
+        }
+      },
+      "block_order": [
+        "text_1",
+        "leaf_1",
+        "text_2",
+        "leaf_2",
+        "text_3",
+        "leaf_3",
+        "text_4",
+        "leaf_4",
+        "text_5",
+        "leaf_5"
+      ],
+      "disabled": true,
+      "settings": {
+        "text_size": "heading_m_uppercase",
+        "heading_color": "solid",
+        "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)",
+        "line_show": "disable",
+        "line_padding": 24,
+        "gap_items": 48,
+        "scroll_direction": "left",
+        "speed": 1.6,
+        "image_ratio": "original",
+        "image_radius": "default",
+        "image_on_hover": false,
+        "hover_image_width": 30,
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_gradient": "",
+        "background_color": "#5463b3",
+        "text_color": "#fcf2d3",
+        "layout_margins": "default",
+        "desktop_padding_top": 24,
+        "desktop_padding_bottom": 24,
+        "mobile_padding_top": 16,
+        "mobile_padding_bottom": 16
+      }
+    },
+    "pantry_truth": {
+      "type": "media-with-text",
+      "blocks": {
+        "eyebrow": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Our Natural Oat Beverages",
+            "subheading_size": "body_s",
+            "subheading_tag": "h3"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "STEP INSIDE OUR PANTRY…",
+            "heading_size": "heading_l",
+            "heading_tag": "h2",
+            "heading_color": "solid",
+            "heading_gradient": ""
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Delicious, creamy, clean, and made with ingredients your pantry would approve of. It's an oat beverage that just makes sense.</p><ul><li>Filtered Water</li><li>Canadian Organic Oats</li><li>Sea Salt</li><li>Sometimes Vanilla</li><li>…That's it.</li></ul>",
+            "dim_text": false,
+            "text_size": "default"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop Varty",
+            "button_link": "/collections/all",
+            "target_blank": false,
+            "button_style": "solid"
+          }
+        }
+      },
+      "block_order": [
+        "eyebrow",
+        "heading",
+        "text",
+        "button"
+      ],
+      "disabled": true,
+      "settings": {
+        "image": "shopify://shop_images/varty-all-skus-ecommerce.jpg",
+        "link": "",
+        "target_blank": false,
+        "video_focal_point": "center center",
+        "section_width": "wide",
+        "swap_media": true,
+        "media_size": "half",
+        "media_ratio": "square",
+        "narrow_content": true,
+        "vertical_text_alignment": "center",
+        "horizontal_text_alignment": "flex-start",
+        "varty_color_scheme": "scheme_brand_beige",
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_gradient": "",
+        "background_color": "#fcf2d3",
+        "text_color": "#5463b3",
+        "fill_section": false,
+        "desktop_padding_top": 64,
+        "desktop_padding_bottom": 64,
+        "mobile_padding_top": 40,
+        "mobile_padding_bottom": 40
+      }
+    },
+    "subscribe_save": {
+      "type": "image-banner",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "t:varty.subscribe.headline",
+            "heading_size": "heading_l",
+            "heading_tag": "h2",
+            "heading_color": "solid",
+            "heading_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, rgba(101, 101, 101, 1) 100%)"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Subscribe and save 5% - free shipping in QC &amp; ON, every time.</p>",
+            "dim_text": false,
+            "text_size": "default"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "t:varty.subscribe.cta",
+            "button_link": "/collections/subscription",
+            "target_blank": false,
+            "button_style": "solid"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
+      "disabled": true,
+      "settings": {
+        "content_on_hover": false,
+        "first_image": "shopify://shop_images/varty-lifestyle-01.jpg",
+        "height_mode": "percents",
+        "desktop_height": 55,
+        "desktop_pixels_height": 600,
+        "section_link": "",
+        "target_blank": false,
+        "section_width": "full-width",
+        "center_text": true,
+        "vertical_content_position": "center",
+        "horizontal_content_position": "center",
+        "narrow_content": true,
+        "fill_content": true,
+        "overlay_color": "#000000",
+        "overlay_gradient": "",
+        "overlay_opacity": 30,
+        "mobile_height": 50,
+        "mobile_pixels_height": 400,
+        "content_under_image": false,
+        "only_first_image": false,
+        "varty_color_scheme": "scheme_brand_purple",
+        "color_type": "custom",
+        "background_color_type": "solid",
+        "background_gradient": "",
+        "background_color": "#5463b3",
+        "text_color": "#fcf2d3",
+        "fill_section": false,
+        "desktop_padding_top": 64,
+        "desktop_padding_bottom": 64,
+        "mobile_padding_top": 40,
+        "mobile_padding_bottom": 40
+      }
+    },
     "stockists_split": {
       "type": "varty-stockists-split",
       "blocks": {
@@ -678,137 +1005,8 @@
         "left",
         "right"
       ],
-      "settings": {},
-      "disabled": true
-    },
-    "pantry_step_inside": {
-      "type": "varty-home-feature",
-      "blocks": {
-        "water": {
-          "type": "bullet",
-          "settings": {
-            "text": "Filtered Water"
-          }
-        },
-        "oats": {
-          "type": "bullet",
-          "settings": {
-            "text": "Organic Canadian Oats"
-          }
-        },
-        "salt": {
-          "type": "bullet",
-          "settings": {
-            "text": "Sea Salt"
-          }
-        },
-        "vanilla": {
-          "type": "bullet",
-          "settings": {
-            "text": "Sometimes Organic Vanilla"
-          }
-        },
-        "thats_it": {
-          "type": "bullet",
-          "settings": {
-            "text": "…That’s it."
-          }
-        }
-      },
-      "block_order": [
-        "water",
-        "oats",
-        "salt",
-        "vanilla",
-        "thats_it"
-      ],
-      "settings": {
-        "scheme": "cream",
-        "image_position": "left",
-        "image": "varty-home-step-inside-rich.jpg",
-        "eyebrow": "",
-        "heading": "Step Inside Our Pantry…",
-        "body": "<p>Creamy, clean, and made with ingredients your pantry would approve of. It’s oat beverage that just makes sense.</p>",
-        "button_label": "SHOP VARTY BUNDLES",
-        "button_link": "/collections/all",
-        "show_flower": false,
-        "desktop_padding_top": 80,
-        "desktop_padding_bottom": 80,
-        "mobile_padding_top": 48,
-        "mobile_padding_bottom": 48
-      }
-    },
-    "stockists_standalone": {
-      "type": "varty-home-feature",
-      "settings": {
-        "scheme": "green",
-        "image_position": "right",
-        "image": "varty-home-stockists-rich.jpg",
-        "eyebrow": "",
-        "heading": "Online, In Stores, and Probably Closer Than You Think",
-        "body": "<p>Varty is now available to order online and stocked in 40+ active doors across Canada, with more shelves joining the party soon. Shop your favourite bundle online, or use our store locator to find Varty near you.</p>",
-        "button_label": "Find Varty Near You",
-        "button_link": "/pages/stockists",
-        "show_flower": false,
-        "desktop_padding_top": 84,
-        "desktop_padding_bottom": 84,
-        "mobile_padding_top": 48,
-        "mobile_padding_bottom": 48
-      }
-    },
-    "pantry_just_got_smarter": {
-      "type": "varty-home-feature",
-      "settings": {
-        "scheme": "purple",
-        "image_position": "right",
-        "image": "varty-home-pantry-smarter-rich.jpg",
-        "eyebrow": "",
-        "heading": "Your Pantry Just Got a Whole Lot Smarter",
-        "body": "<p>Varty is now available to order online, which means your favourite clean oat beverage doesn’t have to depend on your next grocery run. Start with a Tasting Box, stock up with a 6-pack, or subscribe and save 10% on every order, with free delivery in our Quebec and Ontario delivery zone.</p><p>Not ready to commit? Try one of each flavour first. Already found your favourite? Build your 6-pack and let future-you feel wildly organized.</p>",
-        "button_label": "SHOP VARTY ONLINE",
-        "button_link": "/collections/all",
-        "show_flower": true,
-        "desktop_padding_top": 88,
-        "desktop_padding_bottom": 88,
-        "mobile_padding_top": 52,
-        "mobile_padding_bottom": 52
-      }
-    },
-    "never_run_out": {
-      "type": "varty-home-feature",
-      "settings": {
-        "scheme": "cream",
-        "image_position": "right",
-        "image": "varty-home-never-run-out-rich.jpg",
-        "eyebrow": "",
-        "heading": "Never Run Out of the Good Stuff",
-        "body": "<p>Your coffee deserves consistency. Your pantry does too. Subscribe to your favourite Varty bundle and get 10% off every recurring order, plus free delivery every time in our Quebec and Ontario delivery zone. Choose delivery every 4, 6, or 8 weeks, then pause, swap, or adjust after your second order.</p>",
-        "button_label": "SUBSCRIBE & SAVE",
-        "button_link": "/collections/subscription",
-        "show_flower": false,
-        "desktop_padding_top": 0,
-        "desktop_padding_bottom": 0,
-        "mobile_padding_top": 0,
-        "mobile_padding_bottom": 0
-      }
-    },
-    "wholesale_standalone": {
-      "type": "varty-home-feature",
-      "settings": {
-        "scheme": "purple",
-        "image_position": "right",
-        "image": "varty-home-wholesale-rich.jpg",
-        "eyebrow": "",
-        "heading": "Let’s Put Something Better on Your Shelf",
-        "body": "<p>We partner with retailers and grocers who care about quality as much as we do.</p>",
-        "button_label": "APPLY NOW",
-        "button_link": "/pages/wholesale",
-        "show_flower": true,
-        "desktop_padding_top": 0,
-        "desktop_padding_bottom": 0,
-        "mobile_padding_top": 0,
-        "mobile_padding_bottom": 0
-      }
+      "disabled": true,
+      "settings": {}
     }
   },
   "order": [
@@ -817,12 +1015,11 @@
     "stats_bar",
     "certifications",
     "label_truth",
-    "product_trio",
     "pantry_step_inside",
     "stockists_standalone",
     "why_varty_comparison",
     "why_choose_varty",
-    "pantry_just_got_smarter",
+    "product_trio",
     "never_run_out",
     "wholesale_standalone",
     "faq",

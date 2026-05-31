@@ -129,16 +129,18 @@
 <style>
   #shopify-section-{{ section.id }} .custom-comparison-table {
     position: relative;
+    padding-right: clamp(16px, 4.5vw, 120px);
     padding-top: {{ section.settings.desktop_padding_top }}px;
     padding-bottom: {{ section.settings.desktop_padding_bottom }}px;
   }
   #shopify-section-{{ section.id }} .custom-comparison-table::after {
     content: "";
     position: absolute;
-    right: clamp(16px, 4vw, 54px);
-    bottom: 18px;
-    width: 152px;
-    height: 152px;
+    right: clamp(4px, 2.1vw, 22px);
+    bottom: clamp(12px, 2vw, 26px);
+    z-index: 2;
+    width: clamp(148px, 14vw, 220px);
+    height: clamp(148px, 14vw, 220px);
     background: url({{ 'flower-3_4x-8.avif' | asset_url }}) center / contain no-repeat;
     pointer-events: none;
   }
@@ -183,10 +185,11 @@
     position: relative;
     z-index: 1;
     overflow-x: auto;
+    overflow-y: visible;
     -webkit-overflow-scrolling: touch;
   }
   #shopify-section-{{ section.id }} .varty-comparison-table {
-    width: min(100%, 1120px);
+    width: min(100%, 1020px);
     margin-inline: auto;
     table-layout: fixed;
     border-collapse: separate;
