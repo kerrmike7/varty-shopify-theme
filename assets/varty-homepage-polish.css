@@ -303,11 +303,12 @@
 }
 
 :is(#varty-pantry-step-inside, [id$="__pantry_step_inside"], [id*="pantry_step_inside"]) .varty-home-feature__media {
-  border-radius: 8px;
+  overflow: hidden !important;
+  border-radius: 8px !important;
 }
 
 :is(#varty-pantry-step-inside, [id$="__pantry_step_inside"], [id*="pantry_step_inside"]) .varty-home-feature__media img {
-  border-radius: inherit;
+  border-radius: inherit !important;
 }
 
 :is(#varty-stockists-standalone, [id$="__stockists_standalone"], [id*="stockists_standalone"]) .varty-home-feature.varty-home-feature {
