@@ -30,8 +30,8 @@
         "center_text": true,
         "varty_color_scheme": "scheme_brand_purple",
         "color_type": "scheme",
-        "desktop_padding_top": 80,
-        "desktop_padding_bottom": 80,
+        "desktop_padding_top": 64,
+        "desktop_padding_bottom": 64,
         "mobile_padding_top": 48,
         "mobile_padding_bottom": 48
       }
@@ -43,7 +43,7 @@
         "map_embed_url": "https://www.google.com/maps?q=L%27Eau%20Vive%20Aliments%20Naturels%20Inc.%20Saint-Jean-sur-Richelieu%20QC&output=embed",
         "pin_name": "L'Eau Vive Aliments Naturels Inc.",
         "directions_url": "",
-        "desktop_height": 660,
+        "desktop_height": 540,
         "mobile_height": 360
       }
     },
@@ -88,9 +88,9 @@
       "settings": {
         "varty_color_scheme": "scheme_brand_beige",
         "heading": "",
-        "logo_max_height": 120,
-        "desktop_padding_top": 72,
-        "desktop_padding_bottom": 120,
+        "logo_max_height": 104,
+        "desktop_padding_top": 52,
+        "desktop_padding_bottom": 72,
         "mobile_padding_top": 32,
         "mobile_padding_bottom": 80
       }
@@ -106,8 +106,8 @@
         "cta_label": "",
         "cta_url": "",
         "varty_color_scheme": "scheme_brand_beige",
-        "desktop_padding_top": 96,
-        "desktop_padding_bottom": 112,
+        "desktop_padding_top": 72,
+        "desktop_padding_bottom": 76,
         "mobile_padding_top": 48,
         "mobile_padding_bottom": 48
       },
@@ -362,8 +362,8 @@
       "type": "varty-get-in-touch-strip",
       "settings": {
         "heading": "GET IN TOUCH",
-        "desktop_padding_top": 36,
-        "desktop_padding_bottom": 120,
+        "desktop_padding_top": 24,
+        "desktop_padding_bottom": 72,
         "mobile_padding_top": 32,
         "mobile_padding_bottom": 72
       }

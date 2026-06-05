@@ -88,10 +88,10 @@
 
   #shopify-section-{{ section.id }} .varty-about-hero__flower {
     position: absolute;
-    left: clamp(-150px, -5vw, -62px);
-    bottom: clamp(-360px, -18vw, -260px);
+    left: clamp(-168px, -6vw, -78px);
+    bottom: clamp(-560px, -30vw, -420px);
     z-index: 1;
-    width: clamp(360px, 26vw, 560px);
+    width: clamp(340px, 22vw, 500px);
     opacity: 1;
     pointer-events: none;
   }
@@ -276,13 +276,16 @@
 
   #shopify-section-{{ section.id }} .varty-about-values__flower {
     position: absolute;
-    top: clamp(-126px, -6.2vw, -88px);
-    right: clamp(-44px, 2vw, 54px);
-    width: clamp(280px, 18vw, 420px);
+    top: clamp(-92px, -4.8vw, -64px);
+    right: clamp(-210px, -7vw, -118px);
+    z-index: 1;
+    width: clamp(220px, 13vw, 320px);
     pointer-events: none;
   }
 
   #shopify-section-{{ section.id }} .varty-about-values h2 {
+    position: relative;
+    z-index: 2;
     margin: 0;
     color: var(--varty-about-blue-text);
     font-family: "Avenir Next", "Arial Black", Arial, sans-serif;
@@ -294,6 +297,8 @@
   }
 
   #shopify-section-{{ section.id }} .varty-about-values__grid {
+    position: relative;
+    z-index: 2;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: clamp(46px, 5vw, 120px);
@@ -365,9 +370,9 @@
     }
 
     #shopify-section-{{ section.id }} .varty-about-hero__flower {
-      width: 300px;
-      left: -82px;
-      bottom: -168px;
+      width: 230px;
+      left: -80px;
+      bottom: -190px;
       opacity: 1;
     }
 
@@ -417,9 +422,9 @@
     }
 
     #shopify-section-{{ section.id }} .varty-about-values__flower {
-      top: -72px;
-      right: -70px;
-      width: 220px;
+      top: -56px;
+      right: -122px;
+      width: 170px;
     }
 
     #shopify-section-{{ section.id }} .varty-about-values__grid {

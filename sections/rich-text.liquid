@@ -53,6 +53,50 @@
           }
       {% endcase %}
     {% endfor %}
+
+    {% if section.id contains 'finder_hero' %}
+      #shopify-section-{{ section.id }} .rich-text {
+        min-height: clamp(300px, 25vw, 420px);
+        display: flex;
+        align-items: center;
+      }
+
+      #shopify-section-{{ section.id }} .rich-text__wrapper {
+        max-width: min(100%, 1180px);
+      }
+
+      #shopify-section-{{ section.id }} .content-subheading {
+        margin: 0 0 clamp(24px, 2vw, 34px);
+        color: inherit;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(1.35rem, 1.45vw, 1.7rem) !important;
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 1.1;
+        text-transform: none;
+      }
+
+      #shopify-section-{{ section.id }} .content-heading {
+        margin: 0;
+        color: inherit;
+        font-family: "Avenir Next", "Arial Black", Arial, sans-serif !important;
+        font-size: clamp(3.25rem, 4.6vw, 6rem) !important;
+        font-weight: 900 !important;
+        letter-spacing: 0;
+        line-height: 0.95 !important;
+        text-transform: uppercase;
+      }
+
+      @media screen and (max-width: 749px) {
+        #shopify-section-{{ section.id }} .rich-text {
+          min-height: auto;
+        }
+
+        #shopify-section-{{ section.id }} .content-heading {
+          font-size: clamp(2.5rem, 12vw, 4rem) !important;
+        }
+      }
+    {% endif %}
 {% endstyle %}
 
 <div class="rich-text rich-text--{{ settings.white_space }} ordinal-section ordinal-section--{{ settings.white_space }} section-padding--{{ settings.white_space }} {% if settings.show_lines %}ordinal-section--lines lines{% endif %} {% if settings.max_page_width == '1400' or settings.max_page_width == '1200' %}page-width {% endif %} page-width--{{ settings.max_page_width }} color-{{ section.settings.color_type }} {% if section.settings.color_type != 'default' %}no-default-color{% endif %}">
