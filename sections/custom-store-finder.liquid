@@ -39,9 +39,11 @@
   #shopify-section-{{ section.id }} .custom-store-finder__heading {
     margin: 0 0 1.25rem;
     color: inherit;
+    font: var(--base-heading-l-font);
     text-transform: uppercase;
     letter-spacing: 0;
-    font-size: clamp(2.8rem, 4.2vw, 4.6rem) !important;
+    font-size: clamp(2.85rem, 3.9vw, 4.4rem) !important;
+    font-weight: 800;
     line-height: 0.95 !important;
   }
 
@@ -91,7 +93,7 @@
     gap: 24px;
     background: #fff;
     border-radius: 28px;
-    padding: clamp(34px, 4vw, 54px);
+    padding: clamp(34px, 4vw, 54px) clamp(36px, 4.2vw, 64px);
   }
 
   #shopify-section-{{ section.id }} .custom-store-finder__field--full,
@@ -101,11 +103,14 @@
 
   #shopify-section-{{ section.id }} .custom-store-finder__field label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     color: inherit;
-    font-size: clamp(1.05rem, 1.25vw, 1.3rem);
-    font-weight: 500;
+    font: var(--base-body-m-font);
+    font-size: clamp(1.05rem, 1.08vw, 1.25rem) !important;
+    font-weight: 500 !important;
+    line-height: 1.1;
     letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
   #shopify-section-{{ section.id }} .custom-store-finder__field input,
@@ -118,6 +123,8 @@
     color: inherit;
     padding: 12px 0 16px;
     min-height: 48px;
+    font: var(--base-body-m-font);
+    font-size: 1rem;
   }
 
   #shopify-section-{{ section.id }} .custom-store-finder__field textarea {
