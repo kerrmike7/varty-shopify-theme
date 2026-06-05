@@ -71,9 +71,10 @@
   }
 
   #shopify-section-{{ section.id }} .varty-touch-strip__social {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
+    display: grid;
+    grid-template-columns: repeat(4, 42px);
+    justify-content: start;
+    gap: clamp(12px, 1.1vw, 18px);
     margin-top: 1.5rem;
   }
 
@@ -152,7 +153,7 @@
       {% if section.settings.image_2 != blank %}
         {{ section.settings.image_2 | image_url: width: 900 | image_tag: alt: '', loading: 'lazy' }}
       {% else %}
-        <img src="{{ 'varty-finder-touch-vanilla.jpg' | asset_url }}" alt="" loading="lazy" width="720" height="720">
+        <img src="{{ 'varty-finder-touch-bag.jpg' | asset_url }}" alt="" loading="lazy" width="720" height="960">
       {% endif %}
     </div>
   </div>
