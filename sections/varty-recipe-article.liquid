@@ -11,6 +11,42 @@
   if all_recipes_link == blank
     assign all_recipes_link = blog.url
   endif
+
+  assign recipe_content = article.content
+  assign recipe_split_marker = ''
+  assign recipe_right_prefix = ''
+  assign recipe_has_grid = false
+  if recipe_content contains 'varty-recipe-grid'
+    assign recipe_has_grid = true
+  endif
+
+  unless recipe_has_grid
+    if recipe_content contains '<p>---</p>'
+      assign recipe_split_marker = '<p>---</p>'
+    elsif recipe_content contains '<p>--- </p>'
+      assign recipe_split_marker = '<p>--- </p>'
+    elsif recipe_content contains '<hr>'
+      assign recipe_split_marker = '<hr>'
+    elsif recipe_content contains '<h2>Instructions:</h2>'
+      assign recipe_split_marker = '<h2>Instructions:</h2>'
+      assign recipe_right_prefix = '<h2>Instructions:</h2>'
+    elsif recipe_content contains '<h3>Instructions:</h3>'
+      assign recipe_split_marker = '<h3>Instructions:</h3>'
+      assign recipe_right_prefix = '<h2>Instructions:</h2>'
+    elsif recipe_content contains '<h4>Instructions:</h4>'
+      assign recipe_split_marker = '<h4>Instructions:</h4>'
+      assign recipe_right_prefix = '<h2>Instructions:</h2>'
+    elsif recipe_content contains '<p><strong>Instructions:</strong></p>'
+      assign recipe_split_marker = '<p><strong>Instructions:</strong></p>'
+      assign recipe_right_prefix = '<h2>Instructions:</h2>'
+    elsif recipe_content contains '<p><b>Instructions:</b></p>'
+      assign recipe_split_marker = '<p><b>Instructions:</b></p>'
+      assign recipe_right_prefix = '<h2>Instructions:</h2>'
+    elsif recipe_content contains 'Instructions:'
+      assign recipe_split_marker = 'Instructions:'
+      assign recipe_right_prefix = '<h2>Instructions:</h2>'
+    endif
+  endunless
 -%}
 
 <article class="varty-recipe-article">
@@ -73,7 +109,21 @@
   <section class="varty-recipe-content" aria-label="{{ section.settings.recipe_content_label | escape }}">
     <div class="varty-recipe-content__inner">
       <div class="varty-recipe-content__body">
-        {{ article.content }}
+        {%- if recipe_has_grid -%}
+          {{ recipe_content }}
+        {%- elsif recipe_split_marker != blank -%}
+          {%- assign recipe_parts = recipe_content | split: recipe_split_marker -%}
+          <div class="varty-recipe-grid">
+            <section class="varty-recipe-column varty-recipe-column--ingredients">
+              {{ recipe_parts[0] }}
+            </section>
+            <section class="varty-recipe-column varty-recipe-column--instructions">
+              {{ recipe_right_prefix }}{{ recipe_parts[1] }}
+            </section>
+          </div>
+        {%- else -%}
+          {{ recipe_content }}
+        {%- endif -%}
       </div>
 
       <nav class="varty-recipe-nav" aria-label="Recipe navigation">
