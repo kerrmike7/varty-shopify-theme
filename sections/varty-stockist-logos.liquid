@@ -33,7 +33,7 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: clamp(34px, 5.8vw, 76px);
+    gap: clamp(44px, 7vw, 108px);
   }
 
   #shopify-section-{{ section.id }} .varty-stockist-logos__item {
@@ -50,6 +50,7 @@
 
   #shopify-section-{{ section.id }} .varty-stockist-logos__img {
     max-height: {{ section.settings.logo_max_height }}px;
+    max-width: min(250px, 28vw);
     width: auto;
     object-fit: contain;
   }
@@ -176,20 +177,23 @@
                   assign logo_key = 'iga'
                 endif
               %}
-              <span class="varty-stockist-logos__placeholder{% if logo_key != blank %} varty-stockist-logos__placeholder--{{ logo_key }}{% endif %}">
-                {% case logo_key %}
-                  {% when 'avril' %}
-                    avril<small>Supermarché Santé</small>
-                  {% when 'tau' %}
-                    TAU<small>Marchés Naturels</small>
-                  {% when 'oda' %}
-                    Marché<br>Oda
-                  {% when 'iga' %}
-                    IGA<small>extra</small>
-                  {% else %}
-                    {{ logo_alt | escape }}
-                {% endcase %}
-              </span>
+              {% case logo_key %}
+                {% when 'tau' %}
+                  <img class="varty-stockist-logos__img" src="{{ 'varty-stockist-logo-tau.avif' | asset_url }}" alt="{{ logo_alt | escape }}" loading="lazy" width="300" height="180">
+                {% when 'oda' %}
+                  <img class="varty-stockist-logos__img" src="{{ 'varty-stockist-logo-marche-oda.avif' | asset_url }}" alt="{{ logo_alt | escape }}" loading="lazy" width="300" height="180">
+                {% when 'iga' %}
+                  <img class="varty-stockist-logos__img" src="{{ 'varty-stockist-logo-iga-extra.avif' | asset_url }}" alt="{{ logo_alt | escape }}" loading="lazy" width="300" height="180">
+                {% else %}
+                  <span class="varty-stockist-logos__placeholder{% if logo_key != blank %} varty-stockist-logos__placeholder--{{ logo_key }}{% endif %}">
+                    {% case logo_key %}
+                      {% when 'avril' %}
+                        avril<small>Supermarché Santé</small>
+                      {% else %}
+                        {{ logo_alt | escape }}
+                    {% endcase %}
+                  </span>
+              {% endcase %}
             {% endif %}
           {% if has_logo_url %}
             </a>

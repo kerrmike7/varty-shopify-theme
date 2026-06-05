@@ -8,7 +8,7 @@
   }
 
   #shopify-section-{{ section.id }} .varty-touch-strip-wrap {
-    width: min(100% - 56px, 1700px);
+    width: min(100% - 112px, 1720px);
     margin-inline: auto;
   }
 
@@ -24,17 +24,17 @@
   #shopify-section-{{ section.id }} .varty-touch-strip {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 20px;
+    gap: 24px;
   }
 
   #shopify-section-{{ section.id }} .varty-touch-strip__card {
-    min-height: 280px;
+    min-height: clamp(250px, 21vw, 326px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: clamp(24px, 4vw, 48px);
     overflow: hidden;
-    border-radius: 22px;
+    border-radius: 8px;
   }
 
   #shopify-section-{{ section.id }} .varty-touch-strip__card--purple {
@@ -74,9 +74,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 34px;
-    height: 34px;
-    font-size: 1.6rem;
+    width: 42px;
+    height: 42px;
+    font-size: 2rem;
     font-weight: 700;
     line-height: 1;
   }
@@ -88,7 +88,7 @@
   #shopify-section-{{ section.id }} .varty-touch-strip__image img {
     width: 100%;
     height: 100%;
-    min-height: 280px;
+    min-height: clamp(250px, 21vw, 326px);
     object-fit: cover;
     display: block;
   }
@@ -97,6 +97,10 @@
     #shopify-section-{{ section.id }} {
       padding-top: {{ section.settings.mobile_padding_top }}px;
       padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
+    }
+
+    #shopify-section-{{ section.id }} .varty-touch-strip-wrap {
+      width: min(100% - 32px, 1720px);
     }
 
     #shopify-section-{{ section.id }} .varty-touch-strip {
@@ -127,7 +131,7 @@
       {% if section.settings.image_1 != blank %}
         {{ section.settings.image_1 | image_url: width: 900 | image_tag: alt: '', loading: 'lazy' }}
       {% else %}
-        <img src="{{ 'varty-lifestyle-02.jpg' | asset_url }}" alt="" loading="lazy" width="720" height="720">
+        <img src="{{ 'varty-home-stockists-rich.jpg' | asset_url }}" alt="" loading="lazy" width="720" height="720">
       {% endif %}
     </div>
 
@@ -140,7 +144,7 @@
       {% if section.settings.image_2 != blank %}
         {{ section.settings.image_2 | image_url: width: 900 | image_tag: alt: '', loading: 'lazy' }}
       {% else %}
-        <img src="{{ 'varty-lifestyle-04.jpg' | asset_url }}" alt="" loading="lazy" width="720" height="720">
+        <img src="{{ 'varty-finder-touch-vanilla.jpg' | asset_url }}" alt="" loading="lazy" width="720" height="720">
       {% endif %}
     </div>
   </div>

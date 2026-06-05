@@ -89,8 +89,8 @@
         "varty_color_scheme": "scheme_brand_beige",
         "heading": "",
         "logo_max_height": 104,
-        "desktop_padding_top": 52,
-        "desktop_padding_bottom": 72,
+        "desktop_padding_top": 56,
+        "desktop_padding_bottom": 76,
         "mobile_padding_top": 32,
         "mobile_padding_bottom": 80
       }
@@ -106,8 +106,8 @@
         "cta_label": "",
         "cta_url": "",
         "varty_color_scheme": "scheme_brand_beige",
-        "desktop_padding_top": 72,
-        "desktop_padding_bottom": 76,
+        "desktop_padding_top": 68,
+        "desktop_padding_bottom": 72,
         "mobile_padding_top": 48,
         "mobile_padding_bottom": 48
       },
@@ -362,7 +362,7 @@
       "type": "varty-get-in-touch-strip",
       "settings": {
         "heading": "GET IN TOUCH",
-        "desktop_padding_top": 24,
+        "desktop_padding_top": 20,
         "desktop_padding_bottom": 72,
         "mobile_padding_top": 32,
         "mobile_padding_bottom": 72

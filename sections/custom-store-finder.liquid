@@ -24,10 +24,15 @@
     padding-bottom: {{ section.settings.desktop_padding_bottom }}px;
   }
 
+  #shopify-section-{{ section.id }} .custom-store-finder.page-width {
+    width: min(100% - 112px, 1700px);
+    margin-inline: auto;
+  }
+
   #shopify-section-{{ section.id }} .custom-store-finder__contact {
     display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.08fr);
-    gap: clamp(42px, 5.5vw, 92px);
+    grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.08fr);
+    gap: clamp(46px, 5.8vw, 104px);
     align-items: center;
   }
 
@@ -50,8 +55,9 @@
   #shopify-section-{{ section.id }} .custom-store-finder__image-stack {
     position: relative;
     width: min(100%, 360px);
-    min-height: 258px;
-    margin-top: clamp(54px, 7vw, 108px);
+    min-height: 270px;
+    margin-top: clamp(72px, 8vw, 128px);
+    margin-left: clamp(24px, 4.8vw, 88px);
   }
 
   #shopify-section-{{ section.id }} .custom-store-finder__image {
@@ -60,13 +66,14 @@
     border-radius: 8px;
     object-fit: cover;
     box-shadow: none;
+    height: auto;
   }
 
   #shopify-section-{{ section.id }} .custom-store-finder__image--back {
     left: 0;
     bottom: 0;
-    width: 72%;
-    aspect-ratio: 0.82;
+    width: 74%;
+    aspect-ratio: 0.86;
     background: linear-gradient(140deg, #8f5a31, #c9834d 48%, #563720);
   }
 
@@ -137,6 +144,10 @@
       padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
     }
 
+    #shopify-section-{{ section.id }} .custom-store-finder.page-width {
+      width: min(100% - 32px, 1700px);
+    }
+
     #shopify-section-{{ section.id }} .custom-store-finder__contact,
     #shopify-section-{{ section.id }} .custom-store-finder__form {
       grid-template-columns: 1fr;
@@ -173,7 +184,14 @@
           {% if section.settings.contact_back_image != blank %}
             {{ section.settings.contact_back_image | image_url: width: 720 | image_tag: class: 'custom-store-finder__image custom-store-finder__image--back', loading: 'lazy', alt: '' }}
           {% else %}
-            <div class="custom-store-finder__image custom-store-finder__image--back"></div>
+            <img
+              class="custom-store-finder__image custom-store-finder__image--back"
+              src="{{ 'varty-finder-contact-back.avif' | asset_url }}"
+              alt=""
+              loading="lazy"
+              width="720"
+              height="840"
+            >
           {% endif %}
 
           {% if section.settings.contact_front_image != blank %}
@@ -181,7 +199,7 @@
           {% else %}
             <img
               class="custom-store-finder__image custom-store-finder__image--front"
-              src="{{ 'varty-about-wix-mission-left.png' | asset_url }}"
+              src="{{ 'varty-finder-contact-front.avif' | asset_url }}"
               alt=""
               loading="lazy"
               width="720"
