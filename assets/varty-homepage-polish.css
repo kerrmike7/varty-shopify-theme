@@ -1933,12 +1933,20 @@
   text-wrap: balance;
   max-width: min(94vw, 1320px);
   margin-inline: auto;
+  color: rgb(252, 242, 211);
+  font-size: clamp(3.35rem, 4.9vw, 6.15rem) !important;
+  font-weight: 800;
 }
 
 [id$="__recipes_hero"] .content-subheading {
   color: inherit;
-  font-size: clamp(1.3rem, 1.7vw, 1.75rem);
+  font-size: clamp(1.3rem, 1.7vw, 1.75rem) !important;
+  font-weight: 400;
   line-height: 1.15;
+  letter-spacing: 0;
+  text-transform: none !important;
+  color: rgb(252, 242, 211);
+  margin-bottom: clamp(1.45rem, 2vw, 2rem);
 }
 
 [id$="__main-blog"] {
