@@ -21,9 +21,9 @@
   #shopify-section-{{ section.id }} .varty-about-hero {
     position: relative;
     display: grid;
-    grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.24fr);
-    min-height: clamp(760px, 55vw, 1040px);
-    padding: clamp(62px, 5.4vw, 110px) clamp(44px, 5.3vw, 112px) clamp(54px, 4.8vw, 92px);
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr);
+    min-height: clamp(820px, 57vw, 1090px);
+    padding: clamp(58px, 4.8vw, 98px) clamp(44px, 5.1vw, 104px) clamp(62px, 5.2vw, 112px);
     background: var(--varty-about-purple);
     color: var(--varty-about-cream);
   }
@@ -32,7 +32,7 @@
     position: relative;
     z-index: 2;
     align-self: center;
-    padding-top: clamp(116px, 12vw, 220px);
+    padding-top: clamp(34px, 6vw, 116px);
   }
 
   #shopify-section-{{ section.id }} .varty-about-hero__eyebrow,
@@ -45,22 +45,22 @@
   }
 
   #shopify-section-{{ section.id }} .varty-about-hero__title {
-    max-width: 17ch;
-    margin: clamp(30px, 2.4vw, 46px) 0 0;
+    max-width: 18ch;
+    margin: clamp(28px, 2.2vw, 42px) 0 0;
     font-family: "Avenir Next", "Arial Black", Arial, sans-serif;
-    font-size: clamp(50px, 4vw, 76px);
+    font-size: clamp(44px, 3.5vw, 74px);
     font-weight: 900;
-    line-height: 1.12;
+    line-height: 1.1;
     letter-spacing: 0;
     text-transform: uppercase;
   }
 
   #shopify-section-{{ section.id }} .varty-about-hero__stamp {
     position: absolute;
-    top: clamp(170px, 19vw, 290px);
-    left: min(31vw, 680px);
+    top: clamp(168px, 18vw, 282px);
+    left: min(31vw, 660px);
     z-index: 3;
-    width: clamp(220px, 15vw, 320px);
+    width: clamp(232px, 15.5vw, 338px);
     color: var(--varty-about-green);
     transform: rotate(3deg);
   }
@@ -76,28 +76,29 @@
     z-index: 2;
     align-self: start;
     justify-self: end;
-    width: min(100%, 1180px);
+    width: min(100%, 1160px);
     margin-top: 0;
   }
 
   #shopify-section-{{ section.id }} .varty-about-hero__image {
     width: 100%;
-    border-radius: 44px;
+    height: auto;
+    border-radius: clamp(32px, 2.4vw, 46px);
   }
 
   #shopify-section-{{ section.id }} .varty-about-hero__flower {
     position: absolute;
-    left: -86px;
-    bottom: -42px;
+    left: -138px;
+    bottom: -190px;
     z-index: 1;
-    width: clamp(280px, 25vw, 520px);
+    width: clamp(360px, 29vw, 610px);
     pointer-events: none;
   }
 
   #shopify-section-{{ section.id }} .varty-about-mission {
     position: relative;
-    min-height: clamp(820px, 55vw, 1110px);
-    padding: clamp(54px, 4.6vw, 86px) 6vw 0;
+    min-height: clamp(790px, 53vw, 1050px);
+    padding: clamp(74px, 5.6vw, 118px) 6vw 0;
     background: var(--varty-about-cream);
   }
 
@@ -116,11 +117,11 @@
   }
 
   #shopify-section-{{ section.id }} .varty-about-mission__heading {
-    max-width: 42ch;
-    margin: 28px auto 0;
+    max-width: 40ch;
+    margin: 24px auto 0;
     color: var(--varty-about-blue-text);
     font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(42px, 3.2vw, 72px);
+    font-size: clamp(44px, 3.25vw, 74px);
     font-weight: 400;
     line-height: 1.18;
     letter-spacing: 0;
@@ -130,14 +131,14 @@
     position: relative;
     z-index: 3;
     width: min(100%, 1980px);
-    height: clamp(500px, 37vw, 760px);
-    margin: clamp(86px, 7vw, 138px) auto 0;
+    height: clamp(520px, 38vw, 780px);
+    margin: clamp(92px, 7.2vw, 148px) auto 0;
   }
 
   #shopify-section-{{ section.id }} .varty-about-collage__image {
     position: absolute;
     overflow: hidden;
-    border-radius: 32px;
+    border-radius: clamp(26px, 2vw, 40px);
     box-shadow: none;
   }
 
@@ -148,27 +149,39 @@
   }
 
   #shopify-section-{{ section.id }} .varty-about-collage__image--left {
-    top: 0;
+    top: 1%;
     left: 1.2%;
     z-index: 1;
-    width: 32%;
-    height: 62%;
+    width: 31.5%;
+    height: 61%;
   }
 
   #shopify-section-{{ section.id }} .varty-about-collage__image--center {
-    top: 19%;
-    left: 22.5%;
+    top: 18.5%;
+    left: 22%;
     z-index: 2;
-    width: 58%;
-    height: 68%;
+    width: 58.5%;
+    height: 69%;
   }
 
   #shopify-section-{{ section.id }} .varty-about-collage__image--right {
-    top: 0;
-    right: 2.4%;
+    top: 1%;
+    right: 2.2%;
     z-index: 3;
     width: 30%;
-    height: 65%;
+    height: 66%;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-collage__image--left img {
+    object-position: 50% 28%;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-collage__image--center img {
+    object-position: 50% 54%;
+  }
+
+  #shopify-section-{{ section.id }} .varty-about-collage__image--right img {
+    object-position: 50% 48%;
   }
 
   #shopify-section-{{ section.id }} .varty-about-wave {
@@ -245,10 +258,10 @@
 
   #shopify-section-{{ section.id }} .varty-about-founder__flower {
     position: absolute;
-    right: -66px;
-    bottom: -120px;
+    right: -136px;
+    bottom: -132px;
     z-index: 1;
-    width: clamp(320px, 25vw, 600px);
+    width: clamp(420px, 29vw, 720px);
     pointer-events: none;
   }
 
@@ -262,9 +275,9 @@
 
   #shopify-section-{{ section.id }} .varty-about-values__flower {
     position: absolute;
-    top: -92px;
-    right: clamp(36px, 6vw, 156px);
-    width: clamp(180px, 12vw, 280px);
+    top: -120px;
+    right: clamp(-18px, 3vw, 82px);
+    width: clamp(250px, 18vw, 430px);
     pointer-events: none;
   }
 
@@ -351,9 +364,10 @@
     }
 
     #shopify-section-{{ section.id }} .varty-about-hero__flower {
-      width: 250px;
-      left: -110px;
-      bottom: -54px;
+      width: 240px;
+      left: -118px;
+      bottom: -96px;
+      opacity: 0.92;
     }
 
     #shopify-section-{{ section.id }} .varty-about-mission {
@@ -431,7 +445,7 @@
       {% if section.settings.hero_image != blank %}
         {{ section.settings.hero_image | image_url: width: 1400 | image_tag: class: 'varty-about-hero__image', loading: 'eager', alt: 'Three Varty oat beverage cartons with Quebec flag illustration' }}
       {% else %}
-        <img class="varty-about-hero__image" src="{{ 'varty-about-wix-hero-card.png' | asset_url }}" alt="Three Varty oat beverage cartons with Quebec flag illustration" width="1370" height="1400" loading="eager">
+        <img class="varty-about-hero__image" src="{{ 'varty-about-hero-lifestyle-60.jpg' | asset_url }}" alt="Three Varty oat beverage cartons with Quebec flag illustration" width="2200" height="2750" loading="eager">
       {% endif %}
     </div>
     {% if section.settings.hero_flower_image != blank %}
@@ -451,21 +465,21 @@
         {% if section.settings.mission_left_image != blank %}
           {{ section.settings.mission_left_image | image_url: width: 760 | image_tag: loading: 'lazy', alt: 'Oats, walnuts, cinnamon, and Varty carton on a turquoise surface' }}
         {% else %}
-          <img src="{{ 'varty-about-wix-mission-left.png' | asset_url }}" alt="Oats, walnuts, cinnamon, and Varty carton on a turquoise surface" width="674" height="655" loading="lazy">
+          <img src="{{ 'varty-about-mission-left-lifestyle-7.jpg' | asset_url }}" alt="Oats, walnuts, cinnamon, and Varty carton on a turquoise surface" width="1200" height="1799" loading="lazy">
         {% endif %}
       </div>
       <div class="varty-about-collage__image varty-about-collage__image--center">
         {% if section.settings.mission_center_image != blank %}
           {{ section.settings.mission_center_image | image_url: width: 1400 | image_tag: loading: 'lazy', alt: 'Varty cartons with a glass of oat beverage' }}
         {% else %}
-          <img src="{{ 'varty-about-wix-mission-center.png' | asset_url }}" alt="Varty cartons with a glass of oat beverage" width="1290" height="860" loading="lazy">
+          <img src="{{ 'varty-about-mission-center-lifestyle-16.jpg' | asset_url }}" alt="Varty cartons with a glass of oat beverage" width="2200" height="2750" loading="lazy">
         {% endif %}
       </div>
       <div class="varty-about-collage__image varty-about-collage__image--right">
         {% if section.settings.mission_right_image != blank %}
           {{ section.settings.mission_right_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: 'Oats pouring into a mug next to a Varty carton' }}
         {% else %}
-          <img src="{{ 'varty-about-wix-mission-right.png' | asset_url }}" alt="Oats pouring into a mug next to a Varty carton" width="582" height="673" loading="lazy">
+          <img src="{{ 'varty-about-mission-right-lifestyle-48.jpg' | asset_url }}" alt="Oats pouring into a mug next to a Varty carton" width="1200" height="1800" loading="lazy">
         {% endif %}
       </div>
     </div>
