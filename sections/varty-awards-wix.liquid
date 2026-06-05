@@ -14,9 +14,9 @@
 
   #shopify-section-{{ section.id }} .varty-awards__title-band {
     display: grid;
-    place-items: start center;
-    min-height: clamp(132px, 9vw, 186px);
-    padding: clamp(20px, 1.35vw, 28px) 24px 24px;
+    place-items: center;
+    min-height: clamp(300px, 18.7vw, 384px);
+    padding: clamp(46px, 3vw, 68px) 24px clamp(52px, 3.6vw, 76px);
     background: var(--varty-awards-purple);
   }
 
@@ -33,14 +33,14 @@
   }
 
   #shopify-section-{{ section.id }} .varty-awards__body {
-    padding: clamp(112px, 7vw, 168px) clamp(24px, 5.4vw, 112px) clamp(104px, 7vw, 156px);
+    padding: clamp(124px, 6.1vw, 142px) clamp(24px, 5.9vw, 126px) clamp(124px, 7vw, 160px);
   }
 
   #shopify-section-{{ section.id }} .varty-awards__card {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    width: min(100%, 1780px);
-    min-height: clamp(680px, 42vw, 860px);
+    width: min(100%, 1764px);
+    min-height: clamp(690px, 43.2vw, 884px);
     margin: 0 auto;
   }
 
@@ -49,33 +49,35 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: clamp(64px, 6vw, 126px) clamp(36px, 5vw, 96px);
+    padding: clamp(72px, 5.3vw, 118px) clamp(38px, 4.8vw, 92px) clamp(74px, 5.5vw, 124px);
     border-radius: 28px 0 0 28px;
     background: #f7f7f7;
     text-align: center;
   }
 
   #shopify-section-{{ section.id }} .varty-awards__logo {
-    width: clamp(220px, 16vw, 330px);
+    width: clamp(214px, 15.5vw, 318px);
     height: auto;
-    margin-bottom: clamp(92px, 7.6vw, 150px);
+    margin-bottom: clamp(94px, 7.3vw, 144px);
   }
 
   #shopify-section-{{ section.id }} .varty-awards__award-title {
-    max-width: 12ch;
+    max-width: 13.8ch;
     margin: 0;
     color: var(--varty-awards-text);
     font-family: "Avenir Next", "Arial Black", Arial, sans-serif;
-    font-size: clamp(48px, 4.65vw, 88px);
+    font-size: clamp(50px, 4.55vw, 86px);
     font-weight: 900;
     line-height: 1.08;
     letter-spacing: 0;
     text-transform: uppercase;
+    overflow-wrap: normal;
+    word-break: normal;
   }
 
   #shopify-section-{{ section.id }} .varty-awards__description {
     max-width: 42ch;
-    margin: clamp(34px, 2.6vw, 52px) auto 0;
+    margin: clamp(40px, 2.65vw, 54px) auto 0;
     color: var(--varty-awards-text);
     font-family: "Avenir Next", Arial, sans-serif;
     font-size: clamp(21px, 1.48vw, 30px);
@@ -84,7 +86,7 @@
   }
 
   #shopify-section-{{ section.id }} .varty-awards__year {
-    margin: clamp(58px, 4.5vw, 86px) 0 0;
+    margin: clamp(58px, 4.2vw, 82px) 0 0;
     color: var(--varty-awards-text);
     font-family: "Avenir Next", Arial, sans-serif;
     font-size: clamp(22px, 1.45vw, 30px);
@@ -99,7 +101,7 @@
     justify-content: center;
     min-width: 224px;
     min-height: 78px;
-    margin-top: clamp(48px, 3.8vw, 72px);
+    margin-top: clamp(46px, 3.4vw, 68px);
     padding: 20px 42px;
     border: 2px solid var(--varty-awards-purple);
     border-radius: 999px;
@@ -122,14 +124,13 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: center 49%;
   }
 
   @media screen and (max-width: 920px) {
     #shopify-section-{{ section.id }} .varty-awards__title-band {
-      min-height: 110px;
-      place-items: center;
-      padding: 20px;
+      min-height: 150px;
+      padding: 30px 20px;
     }
 
     #shopify-section-{{ section.id }} .varty-awards__body {
@@ -181,7 +182,7 @@
         {% if section.settings.award_image != blank %}
           {{ section.settings.award_image | image_url: width: 1200 | image_tag: class: 'varty-awards__image', loading: 'eager', alt: 'Varty cartons stacked on a blue background' }}
         {% else %}
-          <img class="varty-awards__image" src="{{ 'varty-all-skus-ecommerce.jpg' | asset_url }}" alt="Varty cartons stacked on a blue background" width="1200" height="1200" loading="eager">
+          <img class="varty-awards__image" src="{{ 'varty-awards-lifestyle-11.jpg' | asset_url }}" alt="Varty cartons stacked on a blue background" width="1800" height="2250" loading="eager">
         {% endif %}
       </div>
     </div>

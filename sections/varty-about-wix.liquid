@@ -88,11 +88,11 @@
 
   #shopify-section-{{ section.id }} .varty-about-hero__flower {
     position: absolute;
-    left: clamp(-440px, -20vw, -300px);
-    bottom: -16px;
+    left: clamp(-150px, -5vw, -62px);
+    bottom: clamp(-360px, -18vw, -260px);
     z-index: 1;
-    width: clamp(320px, 24vw, 520px);
-    opacity: 0.92;
+    width: clamp(360px, 26vw, 560px);
+    opacity: 1;
     pointer-events: none;
   }
 
@@ -276,9 +276,9 @@
 
   #shopify-section-{{ section.id }} .varty-about-values__flower {
     position: absolute;
-    top: -104px;
-    right: clamp(-18px, 3vw, 82px);
-    width: clamp(220px, 15vw, 360px);
+    top: clamp(-126px, -6.2vw, -88px);
+    right: clamp(-44px, 2vw, 54px);
+    width: clamp(280px, 18vw, 420px);
     pointer-events: none;
   }
 
@@ -365,10 +365,10 @@
     }
 
     #shopify-section-{{ section.id }} .varty-about-hero__flower {
-      width: 240px;
-      left: -118px;
-      bottom: -96px;
-      opacity: 0.92;
+      width: 300px;
+      left: -82px;
+      bottom: -168px;
+      opacity: 1;
     }
 
     #shopify-section-{{ section.id }} .varty-about-mission {
@@ -417,9 +417,9 @@
     }
 
     #shopify-section-{{ section.id }} .varty-about-values__flower {
-      top: -64px;
-      right: -26px;
-      width: 150px;
+      top: -72px;
+      right: -70px;
+      width: 220px;
     }
 
     #shopify-section-{{ section.id }} .varty-about-values__grid {
@@ -452,7 +452,7 @@
     {% if section.settings.hero_flower_image != blank %}
       {{ section.settings.hero_flower_image | image_url: width: 640 | image_tag: class: 'varty-about-hero__flower', alt: '' }}
     {% else %}
-      <img class="varty-about-hero__flower" src="{{ 'flower-1.avif' | asset_url }}" alt="" width="520" height="520" aria-hidden="true">
+      <img class="varty-about-hero__flower" src="{{ 'flower-3_4x-8.avif' | asset_url }}" alt="" width="720" height="720" aria-hidden="true">
     {% endif %}
   </section>
 
@@ -515,7 +515,7 @@
     {% if section.settings.values_flower_image != blank %}
       {{ section.settings.values_flower_image | image_url: width: 360 | image_tag: class: 'varty-about-values__flower', alt: '' }}
     {% else %}
-      <img class="varty-about-values__flower" src="{{ 'flower-1.avif' | asset_url }}" alt="" width="280" height="280" aria-hidden="true">
+      <img class="varty-about-values__flower" src="{{ 'flower-3_4x-8.avif' | asset_url }}" alt="" width="420" height="420" aria-hidden="true">
     {% endif %}
     <h2 id="varty-about-values-title">OUR CORE VALUES:</h2>
     <div class="varty-about-values__grid">
