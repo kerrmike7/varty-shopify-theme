@@ -1,0 +1,160 @@
+{%- liquid
+  assign share_url = canonical_url
+  assign share_title = article.title | url_encode
+  assign share_link = share_url | url_encode
+  assign share_image = ''
+  if article.image
+    assign share_image = article.image | image_url: width: 1200 | url_encode
+  endif
+
+  assign all_recipes_link = section.settings.all_recipes_link
+  if all_recipes_link == blank
+    assign all_recipes_link = blog.url
+  endif
+-%}
+
+<article class="varty-recipe-article">
+  <section class="varty-recipe-hero" aria-labelledby="varty-recipe-title-{{ section.id }}">
+    <div class="varty-recipe-hero__copy">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="varty-recipe-hero__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+
+      <h1 id="varty-recipe-title-{{ section.id }}" class="varty-recipe-hero__title">{{ article.title }}</h1>
+
+      <div class="varty-recipe-share" aria-label="{{ section.settings.share_label | escape }}">
+        <p class="varty-recipe-share__label">{{ section.settings.share_label }}</p>
+        <ul class="varty-recipe-share__list" role="list">
+          <li>
+            <a class="varty-recipe-share__link varty-recipe-share__link--facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ share_link }}" target="_blank" rel="noopener" aria-label="Share on Facebook">f</a>
+          </li>
+          <li>
+            <a class="varty-recipe-share__link varty-recipe-share__link--whatsapp" href="https://api.whatsapp.com/send?text={{ share_title }}%20{{ share_link }}" target="_blank" rel="noopener" aria-label="Share on WhatsApp">w</a>
+          </li>
+          <li>
+            <a class="varty-recipe-share__link varty-recipe-share__link--pinterest" href="https://pinterest.com/pin/create/button/?url={{ share_link }}&description={{ share_title }}{% if share_image != blank %}&media={{ share_image }}{% endif %}" target="_blank" rel="noopener" aria-label="Share on Pinterest">p</a>
+          </li>
+          <li>
+            <a class="varty-recipe-share__link varty-recipe-share__link--copy" href="{{ share_url }}" aria-label="Copy recipe link">link</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="varty-recipe-hero__media">
+      {%- if article.image -%}
+        <img
+          srcset="
+            {%- if article.image.width >= 750 -%}{{ article.image | image_url: width: 750 }} 750w,{%- endif -%}
+            {%- if article.image.width >= 1100 -%}{{ article.image | image_url: width: 1100 }} 1100w,{%- endif -%}
+            {%- if article.image.width >= 1500 -%}{{ article.image | image_url: width: 1500 }} 1500w,{%- endif -%}
+            {{ article.image | image_url }} {{ article.image.width }}w"
+          src="{{ article.image | image_url: width: 1500 }}"
+          sizes="(min-width: 990px) 50vw, 100vw"
+          width="{{ article.image.width }}"
+          height="{{ article.image.height }}"
+          alt="{{ article.image.alt | default: article.title | escape }}"
+          loading="eager"
+          fetchpriority="high"
+          draggable="false">
+      {%- elsif section.settings.fallback_image -%}
+        <img
+          src="{{ section.settings.fallback_image | image_url: width: 1500 }}"
+          width="{{ section.settings.fallback_image.width }}"
+          height="{{ section.settings.fallback_image.height }}"
+          alt="{{ section.settings.fallback_image.alt | default: article.title | escape }}"
+          loading="eager"
+          fetchpriority="high"
+          draggable="false">
+      {%- endif -%}
+    </div>
+  </section>
+
+  <section class="varty-recipe-content" aria-label="{{ section.settings.recipe_content_label | escape }}">
+    <div class="varty-recipe-content__inner">
+      <div class="varty-recipe-content__body">
+        {{ article.content }}
+      </div>
+
+      <nav class="varty-recipe-nav" aria-label="Recipe navigation">
+        <span class="varty-recipe-nav__rule" aria-hidden="true"></span>
+        <div class="varty-recipe-nav__links">
+          <a class="varty-recipe-nav__text-link{% unless blog.previous_article %} is-disabled{% endunless %}" href="{% if blog.previous_article %}{{ blog.previous_article.url }}{% else %}#{% endif %}" {% unless blog.previous_article %}aria-disabled="true" tabindex="-1"{% endunless %}>
+            {{ section.settings.previous_label }}
+          </a>
+          <a class="varty-recipe-nav__button" href="{{ all_recipes_link }}">
+            {{ section.settings.all_recipes_label }}
+          </a>
+          <a class="varty-recipe-nav__text-link{% unless blog.next_article %} is-disabled{% endunless %}" href="{% if blog.next_article %}{{ blog.next_article.url }}{% else %}#{% endif %}" {% unless blog.next_article %}aria-disabled="true" tabindex="-1"{% endunless %}>
+            {{ section.settings.next_label }}
+          </a>
+        </div>
+      </nav>
+    </div>
+  </section>
+</article>
+
+<script type="application/ld+json">
+  {{ article | structured_data }}
+</script>
+
+{% schema %}
+{
+  "name": "Varty recipe article",
+  "tag": "section",
+  "class": "varty-recipe-article-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Varty All Natural Recipe"
+    },
+    {
+      "type": "text",
+      "id": "share_label",
+      "label": "Share label",
+      "default": "Share Recipe"
+    },
+    {
+      "type": "text",
+      "id": "recipe_content_label",
+      "label": "Recipe content accessibility label",
+      "default": "Recipe ingredients and instructions"
+    },
+    {
+      "type": "image_picker",
+      "id": "fallback_image",
+      "label": "Fallback image"
+    },
+    {
+      "type": "text",
+      "id": "previous_label",
+      "label": "Previous recipe label",
+      "default": "Previous Recipe"
+    },
+    {
+      "type": "text",
+      "id": "all_recipes_label",
+      "label": "All recipes label",
+      "default": "View All Recipes"
+    },
+    {
+      "type": "url",
+      "id": "all_recipes_link",
+      "label": "All recipes link"
+    },
+    {
+      "type": "text",
+      "id": "next_label",
+      "label": "Next recipe label",
+      "default": "Next Recipe"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Varty recipe article"
+    }
+  ]
+}
+{% endschema %}

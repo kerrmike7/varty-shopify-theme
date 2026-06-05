@@ -9,121 +9,20 @@
  */
 {
   "sections": {
-    "media_with_text_dc3xWL": {
-      "type": "media-with-text",
-      "blocks": {
-        "heading_r7EG3z": {
-          "type": "heading",
-          "settings": {
-            "heading": "{{ article.title }}",
-            "heading_size": "heading_xl",
-            "heading_tag": "h2",
-            "heading_color": "solid"
-          }
-        },
-        "text_Tydx9k": {
-          "type": "text",
-          "settings": {
-            "text": "<p>{{ article.excerpt }}</p>",
-            "dim_text": false,
-            "text_size": "default"
-          }
-        },
-        "video_button_CeV8iC": {
-          "type": "video_button",
-          "settings": {
-            "video_url": "",
-            "button_label": "Recipe Video",
-            "video_alt": "",
-            "button_style": "outlined"
-          }
-        },
-        "button_TxeedH": {
-          "type": "button",
-          "settings": {
-            "button_label": "Buy now",
-            "button_link": "/collections/all",
-            "target_blank": false,
-            "button_style": "solid"
-          }
-        }
-      },
-      "block_order": [
-        "heading_r7EG3z",
-        "text_Tydx9k",
-        "video_button_CeV8iC",
-        "button_TxeedH"
-      ],
-      "name": "t:sections.media-with-text.name",
+    "recipe_article": {
+      "type": "varty-recipe-article",
       "settings": {
-        "image": "{{ article.image }}",
-        "link": "",
-        "target_blank": false,
-        "video_focal_point": "center center",
-        "section_width": "wide",
-        "swap_media": false,
-        "media_size": "half",
-        "media_ratio": "square",
-        "narrow_content": false,
-        "vertical_text_alignment": "center",
-        "horizontal_text_alignment": "center",
-        "color_type": "scheme",
-        "varty_color_scheme": "scheme_brand_beige",
-        "fill_section": false,
-        "desktop_padding_top": 0,
-        "desktop_padding_bottom": -160,
-        "mobile_padding_top": 0,
-        "mobile_padding_bottom": -80
-      }
-    },
-    "main-article": {
-      "type": "main-article",
-      "blocks": {
-        "b8485a0f-b536-4e1d-8d46-1de091e22f5c": {
-          "type": "content",
-          "settings": {
-            "text_size": "body_m",
-            "use_accent_color": true
-          }
-        },
-        "74046771-9dfb-41c4-b84b-358092ebef8a": {
-          "type": "tags",
-          "settings": {
-            "text_size": "default"
-          }
-        },
-        "cc320052-fb8b-4811-8674-414c2927eec1": {
-          "type": "share",
-          "settings": {
-            "text_size": "default",
-            "display_collapsible_link": false,
-            "show_only_icons": false
-          }
-        },
-        "b5408d87-fff5-4181-9a01-cafcb30c0c36": {
-          "type": "prev_and_next",
-          "settings": {
-            "button_label": "All Recipes"
-          }
-        }
-      },
-      "block_order": [
-        "b8485a0f-b536-4e1d-8d46-1de091e22f5c",
-        "74046771-9dfb-41c4-b84b-358092ebef8a",
-        "cc320052-fb8b-4811-8674-414c2927eec1",
-        "b5408d87-fff5-4181-9a01-cafcb30c0c36"
-      ],
-      "settings": {
-        "section_width": "narrow",
-        "desktop_padding_top": 0,
-        "desktop_padding_bottom": 0,
-        "mobile_padding_top": 0,
-        "mobile_padding_bottom": 0
+        "eyebrow": "Varty All Natural Recipe",
+        "share_label": "Share Recipe",
+        "recipe_content_label": "Recipe ingredients and instructions",
+        "previous_label": "Previous Recipe",
+        "all_recipes_label": "View All Recipes",
+        "all_recipes_link": "/blogs/recipes",
+        "next_label": "Next Recipe"
       }
     }
   },
   "order": [
-    "media_with_text_dc3xWL",
-    "main-article"
+    "recipe_article"
   ]
 }
