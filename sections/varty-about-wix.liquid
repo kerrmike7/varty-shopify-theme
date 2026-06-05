@@ -88,10 +88,10 @@
 
   #shopify-section-{{ section.id }} .varty-about-hero__flower {
     position: absolute;
-    left: clamp(-168px, -6vw, -78px);
-    bottom: clamp(-560px, -30vw, -420px);
+    left: clamp(-150px, -5.7vw, -84px);
+    bottom: clamp(-170px, -8.6vw, -102px);
     z-index: 1;
-    width: clamp(340px, 22vw, 500px);
+    width: clamp(300px, 21vw, 470px);
     opacity: 1;
     pointer-events: none;
   }
@@ -259,10 +259,10 @@
 
   #shopify-section-{{ section.id }} .varty-about-founder__flower {
     position: absolute;
-    right: clamp(-260px, -8vw, -120px);
-    bottom: -86px;
+    right: clamp(-250px, -8.6vw, -132px);
+    bottom: clamp(-196px, -9.6vw, -134px);
     z-index: 1;
-    width: clamp(360px, 24vw, 600px);
+    width: clamp(390px, 27vw, 660px);
     pointer-events: none;
   }
 
@@ -275,12 +275,7 @@
   }
 
   #shopify-section-{{ section.id }} .varty-about-values__flower {
-    position: absolute;
-    top: clamp(-92px, -4.8vw, -64px);
-    right: clamp(-210px, -7vw, -118px);
-    z-index: 1;
-    width: clamp(220px, 13vw, 320px);
-    pointer-events: none;
+    display: none;
   }
 
   #shopify-section-{{ section.id }} .varty-about-values h2 {
@@ -370,9 +365,9 @@
     }
 
     #shopify-section-{{ section.id }} .varty-about-hero__flower {
-      width: 230px;
-      left: -80px;
-      bottom: -190px;
+      width: 210px;
+      left: -72px;
+      bottom: -72px;
       opacity: 1;
     }
 
@@ -411,20 +406,14 @@
     }
 
     #shopify-section-{{ section.id }} .varty-about-founder__flower {
-      right: -156px;
-      bottom: -74px;
-      width: 320px;
-      opacity: 0.9;
+      right: -122px;
+      bottom: -86px;
+      width: 280px;
+      opacity: 0.95;
     }
 
     #shopify-section-{{ section.id }} .varty-about-values {
-      padding: 100px 22px 120px;
-    }
-
-    #shopify-section-{{ section.id }} .varty-about-values__flower {
-      top: -56px;
-      right: -122px;
-      width: 170px;
+      padding: 112px 22px 120px;
     }
 
     #shopify-section-{{ section.id }} .varty-about-values__grid {
@@ -512,7 +501,7 @@
     {% if section.settings.founder_flower_image != blank %}
       {{ section.settings.founder_flower_image | image_url: width: 700 | image_tag: class: 'varty-about-founder__flower', alt: '' }}
     {% else %}
-      <img class="varty-about-founder__flower" src="{{ 'flower-2.avif' | asset_url }}" alt="" width="600" height="600" aria-hidden="true">
+      <img class="varty-about-founder__flower" src="{{ 'flower-3_4x-8.avif' | asset_url }}" alt="" width="720" height="720" aria-hidden="true">
     {% endif %}
   </section>
 
