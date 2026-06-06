@@ -2209,9 +2209,9 @@
 }
 
 .varty-recipe-content__inner {
-  width: min(100%, 1680px);
+  width: min(100%, 960px);
   margin-inline: auto;
-  padding: clamp(5rem, 8vw, 7.5rem) clamp(2rem, 7.8vw, 9.5rem) clamp(3.6rem, 5vw, 5.2rem);
+  padding: clamp(4.5rem, 7vw, 7rem) clamp(1.5rem, 4vw, 3rem) clamp(3.6rem, 5vw, 5.2rem);
 }
 
 .varty-recipe-content__body {
@@ -2220,8 +2220,8 @@
 
 .varty-recipe-content__body .varty-recipe-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: clamp(3rem, 7vw, 8rem);
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(3rem, 5vw, 4.75rem);
 }
 
 .varty-recipe-content__body h2,

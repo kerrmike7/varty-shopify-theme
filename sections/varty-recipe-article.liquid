@@ -27,6 +27,8 @@
       assign recipe_split_marker = '<p>--- </p>'
     elsif recipe_content contains '<hr>'
       assign recipe_split_marker = '<hr>'
+    elsif recipe_content contains '---'
+      assign recipe_split_marker = '---'
     elsif recipe_content contains '<h2>Instructions:</h2>'
       assign recipe_split_marker = '<h2>Instructions:</h2>'
       assign recipe_right_prefix = '<h2>Instructions:</h2>'
@@ -136,7 +138,13 @@
               {{ recipe_parts[0] }}
             </section>
             <section class="varty-recipe-column varty-recipe-column--instructions">
-              {{ recipe_right_prefix }}{{ recipe_parts[1] }}
+              {%- if recipe_right_prefix != blank -%}
+                {{ recipe_right_prefix }}
+              {%- elsif recipe_parts[1] contains 'Instructions' -%}
+              {%- else -%}
+                <h2>Instructions:</h2>
+              {%- endif -%}
+              {{ recipe_parts[1] }}
             </section>
           </div>
         {%- else -%}
