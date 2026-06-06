@@ -179,8 +179,8 @@
   #shopify-section-{{ section.id }} .varty-product__badges,
   #shopify-section-{{ section.id }} .varty-product__list {
     margin: 0;
-    padding-left: 1.35em;
-    list-style: disc;
+    padding-left: 1.28em;
+    list-style: disc outside !important;
     font-size: clamp(21px, 1.42vw, 29px);
     line-height: 1.48;
   }
@@ -194,6 +194,19 @@
   #shopify-section-{{ section.id }} .varty-product__list li::marker {
     color: var(--varty-products-text);
     font-size: 0.78em;
+  }
+
+  #shopify-section-{{ section.id }} .varty-product__badges li,
+  #shopify-section-{{ section.id }} .varty-product__list li {
+    display: list-item !important;
+    list-style: disc outside !important;
+    padding-left: 0.15em;
+  }
+
+  #shopify-section-{{ section.id }} .varty-product__minor-note {
+    margin: clamp(42px, 3vw, 58px) 0 12px;
+    font-size: clamp(21px, 1.42vw, 29px);
+    line-height: 1.48;
   }
 
   #shopify-section-{{ section.id }} .varty-product details {
@@ -381,10 +394,9 @@
     </div>
     <div class="varty-product__copy">
       <h2 id="varty-original-title">Original Unsweetened Oat Beverage Canada</h2>
-      <p class="varty-product__intro">Pure. Simple. Seriously Creamy. This unsweetened, organic oat beverage contains just 3 organic ingredients, delivering the goodness of oats without added sugar or additives. Just the way you like it 🙂</p>
+      <p class="varty-product__intro">Pure. Simple. Delicious. Seriously Creamy. This unsweetened, organic oat beverage contains just 3 natural ingredients, delivering the goodness of oats without added sugar or additives. Just the way you like it.</p>
       <ul class="varty-product__badges">
         <li>100% Certified Organic</li>
-        <li>No added sugar</li>
         <li>Versatile</li>
         <li>Creamy, “Milky” Texture</li>
       </ul>
@@ -437,10 +449,9 @@
     </div>
     <div class="varty-product__copy">
       <h2 id="varty-vanilla-title">Vanilla Unsweetened Oat Beverage Canada</h2>
-      <p class="varty-product__intro">You don’t need sugar (you’re sweet enough) but a little vanilla goes a long way. Savor the natural flavors of our vanilla-flavored oat beverage, made with just 4 simple ingredients for a smooth, creamy, and subtly-sweet profile.</p>
+      <p class="varty-product__intro">You don’t need sugar (you’re sweet enough) but a little vanilla goes a long way. Savour the natural flavours of our vanilla-flavoured oat beverage, made with just 4 simple ingredients for a smooth, creamy, and subtly-sweet profile.</p>
       <ul class="varty-product__badges">
         <li>100% Certified Organic</li>
-        <li>No added sugar</li>
         <li>Naturally Flavoured</li>
         <li>Creamy &amp; Smooth</li>
       </ul>
@@ -495,14 +506,12 @@
     </div>
     <div class="varty-product__copy">
       <h2 id="varty-barista-title">Barista Unsweetened Oat Beverage Canada</h2>
-      <p class="varty-product__intro">Whoever said oat beverages don’t froth, hasn’t tried Varty. In all fairness, oat beverages don’t normally froth. That’s why we added less than 1% of organic, locally-sourced high oleic sunflower oil, rich in monosaturated fats, which helps to stabilize the foam and create a denser, more velvety texture. Made with just 4 simple ingredients, this organic oat beverage is carefully crafted to froth like a coffee-lover’s dream – sealing your cup of Joe with a velvety finish every time.</p>
+      <p class="varty-product__intro">Whoever said oat beverages don’t froth, hasn’t tried Varty. In all fairness, oat beverages don’t normally froth. That’s why we added organic, locally-sourced high oleic sunflower oil, rich in monounsaturated fats, which helps to stabilize the foam and create a denser, more velvety texture. Made with just 4 simple ingredients, this organic oat beverage is carefully crafted to froth like a coffee-lover’s dream – sealing your cup of Joe with a velvety finish every time.</p>
       <ul class="varty-product__badges">
         <li>100% Certified Organic</li>
-        <li>No added sugar</li>
         <li>Barista-Approved</li>
         <li>Unsweetened for Pure Taste</li>
         <li>Ultra-Creamy &amp; Smooth</li>
-        <li>Cleanest Barista on the market</li>
       </ul>
       <details open>
         <summary>4 Ingredients</summary>
@@ -511,7 +520,7 @@
             <li>Filtered Water</li>
             <li>Organic Canadian Oats</li>
           </ul>
-          <p class="varty-product__intro">Contains less than 1%:</p>
+          <p class="varty-product__minor-note">Contains less than 1%:</p>
           <ul class="varty-product__list">
             <li>Organic High-Oleic Sunflower Oil</li>
             <li>Potassium Carbonate</li>
