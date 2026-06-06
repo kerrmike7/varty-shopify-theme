@@ -1843,7 +1843,11 @@
   text-transform: uppercase;
   letter-spacing: 0.04em;
   line-height: 1.05;
-  text-wrap: balance;
+  text-wrap: normal;
+  white-space: nowrap;
+  max-width: none;
+  margin-inline: auto;
+  font-size: clamp(2.15rem, 3.2vw, 4.5rem) !important;
 }
 
 [id$="__finder_hero"] .content-subheading {
@@ -1949,7 +1953,8 @@
 
 @media screen and (max-width: 749px) {
   [id$="__finder_hero"] h1 {
-    font-size: clamp(2rem, 12vw, 3.25rem);
+    font-size: clamp(1.05rem, 4.5vw, 2rem) !important;
+    letter-spacing: 0.025em;
   }
 
   [id$="__store_finder_main"] .custom-store-finder__controls {
@@ -1963,23 +1968,21 @@
 
 /* iter4-block-05 - Recipes blog */
 
-[id$="__recipes_hero"] .rich-text__wrapper {
+:is([id$="__recipes_hero"], [id$="__finder_hero"]) .rich-text__wrapper {
   width: 100%;
   max-width: min(calc(100vw - 4rem), 1520px);
 }
 
 [id$="__recipes_hero"] h1 {
   text-transform: uppercase;
-  font-family: var(--base-font-family) !important;
-  letter-spacing: 0.035em;
+  letter-spacing: 0.04em;
   line-height: 1.05;
   text-wrap: normal;
   white-space: nowrap;
   max-width: none;
   margin-inline: auto;
   color: rgb(252, 242, 211);
-  font-size: clamp(2.2rem, 3.05vw, 4.25rem) !important;
-  font-weight: 900 !important;
+  font-size: clamp(2.05rem, 2.85vw, 4.25rem) !important;
 }
 
 [id$="__recipes_hero"] .content-subheading {
@@ -2323,9 +2326,10 @@
 
 @media screen and (max-width: 1024px) {
   [id$="__recipes_hero"] h1 {
-    max-width: 14ch;
-    text-wrap: balance;
-    white-space: normal;
+    max-width: none;
+    text-wrap: normal;
+    white-space: nowrap;
+    font-size: clamp(1.55rem, 3.2vw, 2.5rem) !important;
   }
 
   [id$="__main-blog"] .blog-articles {
@@ -2359,7 +2363,8 @@
 
 @media screen and (max-width: 749px) {
   [id$="__recipes_hero"] h1 {
-    font-size: clamp(2rem, 12vw, 3.2rem);
+    font-size: clamp(1.05rem, 4.5vw, 2rem) !important;
+    letter-spacing: 0.025em;
   }
 
   [id$="__main-blog"] .blog-articles {
