@@ -154,6 +154,16 @@
 {% endstyle %}
 
 <section class="varty-wholesale-wix">
+  {% liquid
+    assign wholesale_heading = section.settings.heading
+    assign wholesale_body = section.settings.body
+    assign wholesale_button_label = section.settings.button_label
+    if request.locale.iso_code contains 'fr'
+      assign wholesale_heading = 'varty.wholesale.page_heading' | t
+      assign wholesale_body = 'varty.wholesale.page_body_html' | t
+      assign wholesale_button_label = 'varty.wholesale.page_button' | t
+    endif
+  %}
   <div class="varty-wholesale-wix__grid">
     <div class="varty-wholesale-wix__image-panel" aria-hidden="true">
       {% if section.settings.hero_image != blank %}
@@ -165,21 +175,21 @@
 
     <div class="varty-wholesale-wix__content-panel">
       <div class="varty-wholesale-wix__content">
-        {% if section.settings.heading != blank %}
+        {% if wholesale_heading != blank %}
           <h1 class="varty-wholesale-wix__heading custom-heading heading_xl">
-            {{ section.settings.heading | escape }}
+            {{ wholesale_heading }}
           </h1>
         {% endif %}
 
-        {% if section.settings.body != blank %}
+        {% if wholesale_body != blank %}
           <div class="varty-wholesale-wix__body rte">
-            {{ section.settings.body }}
+            {{ wholesale_body }}
           </div>
         {% endif %}
 
-        {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+        {% if wholesale_button_label != blank and section.settings.button_link != blank %}
           <a class="varty-wholesale-wix__button" href="{{ section.settings.button_link }}">
-            {{ section.settings.button_label | escape }}
+            {{ wholesale_button_label }}
           </a>
         {% endif %}
       </div>

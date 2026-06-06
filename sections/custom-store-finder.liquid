@@ -218,22 +218,22 @@
 
       {% form 'contact', class: 'custom-store-finder__form' %}
         <div class="custom-store-finder__field">
-          <label for="ContactFormName-{{ section.id }}">FULL NAME</label>
+          <label for="ContactFormName-{{ section.id }}">{{ 'varty.contact.name' | t }}</label>
           <input id="ContactFormName-{{ section.id }}" type="text" name="contact[name]" required>
         </div>
         <div class="custom-store-finder__field">
-          <label for="ContactFormCompany-{{ section.id }}">COMPANY / STORE</label>
+          <label for="ContactFormCompany-{{ section.id }}">{{ 'varty.contact.company' | t }}</label>
           <input id="ContactFormCompany-{{ section.id }}" type="text" name="contact[company]">
         </div>
         <div class="custom-store-finder__field">
-          <label for="ContactFormEmail-{{ section.id }}">EMAIL ADDRESS *</label>
+          <label for="ContactFormEmail-{{ section.id }}">{{ 'varty.contact.email' | t }}</label>
           <input id="ContactFormEmail-{{ section.id }}" type="email" name="contact[email]" autocomplete="email" required>
         </div>
         <div class="custom-store-finder__field custom-store-finder__field--full">
-          <label for="ContactFormMessage-{{ section.id }}">MESSAGE</label>
+          <label for="ContactFormMessage-{{ section.id }}">{{ 'varty.contact.message' | t }}</label>
           <textarea id="ContactFormMessage-{{ section.id }}" name="contact[body]" rows="5" required></textarea>
         </div>
-        <button type="submit" class="custom-store-finder__submit">SUBMIT</button>
+        <button type="submit" class="custom-store-finder__submit">{{ 'varty.contact.submit' | t }}</button>
       {% endform %}
     </div>
   {% else %}

@@ -429,14 +429,14 @@
 <div class="varty-about-wix">
   <section class="varty-about-hero" aria-labelledby="varty-about-hero-title">
     <div class="varty-about-hero__copy">
-      <span class="varty-about-hero__eyebrow">Meet Varty:</span>
-      <h1 id="varty-about-hero-title" class="varty-about-hero__title" aria-label="Meet Varty: The Real, Organic Oat Beverage Canada Has Been Waiting For">THE REAL, ORGANIC OAT BEVERAGE CANADA HAS BEEN WAITING FOR</h1>
+      <span class="varty-about-hero__eyebrow">{{ 'varty.about.hero_eyebrow' | t }}</span>
+      <h1 id="varty-about-hero-title" class="varty-about-hero__title" aria-label="{{ 'varty.about.hero_aria' | t | escape }}">{{ 'varty.about.hero_title' | t }}</h1>
     </div>
     <div class="varty-about-hero__stamp" aria-hidden="true">
       <svg viewBox="0 0 380 130" role="img">
         <ellipse cx="190" cy="65" rx="178" ry="48" fill="none" stroke="currentColor" stroke-width="6"/>
-        <text x="190" y="55" text-anchor="middle" fill="currentColor" font-family="Avenir Next, Arial Black, Arial, sans-serif" font-size="34" font-weight="900">THE CLEAN</text>
-        <text x="190" y="91" text-anchor="middle" fill="currentColor" font-family="Avenir Next, Arial Black, Arial, sans-serif" font-size="34" font-weight="900">ADVANTAGE</text>
+        <text x="190" y="55" text-anchor="middle" fill="currentColor" font-family="Avenir Next, Arial Black, Arial, sans-serif" font-size="34" font-weight="900">{{ 'varty.about.stamp_line_1' | t }}</text>
+        <text x="190" y="91" text-anchor="middle" fill="currentColor" font-family="Avenir Next, Arial Black, Arial, sans-serif" font-size="34" font-weight="900">{{ 'varty.about.stamp_line_2' | t }}</text>
       </svg>
     </div>
     <div class="varty-about-hero__media">
@@ -451,8 +451,8 @@
 
   <section class="varty-about-mission" aria-labelledby="varty-about-mission-title">
     <div class="varty-about-mission__copy">
-      <span class="varty-about-mission__eyebrow">Our Mission</span>
-      <h2 id="varty-about-mission-title" class="varty-about-mission__heading">To create a natural oat beverage you can trust, with ingredients you’d put in your own kitchen, not a lab.</h2>
+      <span class="varty-about-mission__eyebrow">{{ 'varty.about.mission_eyebrow' | t }}</span>
+      <h2 id="varty-about-mission-title" class="varty-about-mission__heading">{{ 'varty.about.mission_heading' | t }}</h2>
     </div>
     <div class="varty-about-collage" aria-label="Varty ingredient and product collage">
       <div class="varty-about-collage__image varty-about-collage__image--left">
@@ -486,22 +486,22 @@
 
   <section class="varty-about-founder" aria-labelledby="varty-about-founder-title">
     <div class="varty-about-founder__inner">
-      <h2 id="varty-about-founder-title">Where it all began</h2>
+      <h2 id="varty-about-founder-title">{{ 'varty.about.founder_heading' | t }}</h2>
       <div class="varty-about-founder__body">
-        <p>“Hi there! We’re Lina and Tony - the friendly faces behind VARTY, and the most relentless label-readers you’ll ever meet. Like many health-conscious consumers, we used to spend way too much time in grocery aisles, flipping cartons over and wondering how “natural” could still mean gums, fillers, and things we couldn’t pronounce.</p>
-        <p>“We started Varty because we couldn’t find an oat beverage we actually felt good about. Not just nutritionally, but ethically too. So, we made our own - something that was clean, organic, and proudly made at home on Canadian soil.</p>
-        <p><strong>“At Varty, we truly believe that packaged food should simplify our lives, without sacrificing quality for convenience. In a world where shortcuts are standard, oat beverages stopped tasting like oats. Ingredient lists grew longer and longer, and “natural” lost all its meaning.”</strong></p>
-        <p>“But not anymore. Varty is our way of restoring what food was always meant to be: Simple, nourishing, and honest. You won’t ever catch us cutting corners or masking natural flavours.</p>
-        <p>“We made Varty for ourselves, and now, we’re thrilled to be sharing it with the world. Whether you’re a health-conscious consumer or wholesaler, Varty was made for you. We made this for us – but now it’s yours. Hope you love it as much as we do.”</p>
+        <p>{{ 'varty.about.founder_p1' | t }}</p>
+        <p>{{ 'varty.about.founder_p2' | t }}</p>
+        <p><strong>{{ 'varty.about.founder_p3' | t }}</strong></p>
+        <p>{{ 'varty.about.founder_p4' | t }}</p>
+        <p>{{ 'varty.about.founder_p5' | t }}</p>
       </div>
       <div class="varty-about-founder__signature">Lina &amp; Tony</div>
-      <div class="varty-about-founder__caption">Lina &amp; Tony&nbsp;&nbsp;|&nbsp;&nbsp;Co-Founders</div>
+      <div class="varty-about-founder__caption">{{ 'varty.about.founder_caption' | t }}</div>
     </div>
     <img class="varty-about-founder__flower" src="{{ 'varty-about-flower.avif' | asset_url }}" alt="" width="720" height="720" loading="lazy" aria-hidden="true">
   </section>
 
   <section class="varty-about-values" aria-labelledby="varty-about-values-title">
-    <h2 id="varty-about-values-title">OUR CORE VALUES:</h2>
+    <h2 id="varty-about-values-title">{{ 'varty.about.values_heading' | t }}</h2>
     <div class="varty-about-values__grid">
       <article class="varty-about-value">
         <div class="varty-about-value__icon" aria-hidden="true">
@@ -511,8 +511,8 @@
             <path d="M40 10l6 15 15-5-8 15 15 6-16 5 7 15-14-8-5 16-5-16-14 8 7-15-16-5 15-6-8-15 15 5 6-15Z"/>
           </svg>
         </div>
-        <h3>Local</h3>
-        <p>Proudly Canadian and made in Quebec. Supporting local producers close to home.</p>
+        <h3>{{ 'varty.about.value_local_title' | t }}</h3>
+        <p>{{ 'varty.about.value_local_body' | t }}</p>
       </article>
       <article class="varty-about-value">
         <div class="varty-about-value__icon" aria-hidden="true">
@@ -523,8 +523,8 @@
             <path d="M18 16l-4-6M12 24H5M64 18l5-6M69 30h7M61 58l6 6"/>
           </svg>
         </div>
-        <h3>Premium</h3>
-        <p>Only 3-4 organic ingredients. If it’s not in your kitchen, you won’t find it in our bottle.</p>
+        <h3>{{ 'varty.about.value_premium_title' | t }}</h3>
+        <p>{{ 'varty.about.value_premium_body' | t }}</p>
       </article>
       <article class="varty-about-value">
         <div class="varty-about-value__icon" aria-hidden="true">
@@ -537,8 +537,8 @@
             <path d="M29 65h22M34 70h12"/>
           </svg>
         </div>
-        <h3>Truthful</h3>
-        <p>We don’t hide behind cryptic jargon and buzzwords. We’ll let our labels do the talking.</p>
+        <h3>{{ 'varty.about.value_truthful_title' | t }}</h3>
+        <p>{{ 'varty.about.value_truthful_body' | t }}</p>
       </article>
     </div>
   </section>

@@ -141,20 +141,26 @@
                         {%- endcase -%}
                     {%- endfor -%}
                     {% if localization.available_languages.size > 1 %}
-                      <form action="{{ routes.root_url }}/localization" method="POST" class="varty-lang-switch section-navigation-block">
-                        <input type="hidden" name="_method" value="PUT">
+                      {% form 'localization', class: 'varty-lang-switch section-navigation-block' %}
                         <input type="hidden" name="return_to" value="{{ request.path }}">
                         {% for lang in localization.available_languages %}
+                          {% liquid
+                            assign lang_code = lang.iso_code | split: '-' | first | upcase
+                            if lang_code != 'EN' and lang_code != 'FR'
+                              assign lang_code = lang.iso_code | upcase
+                            endif
+                          %}
                           <button
                             type="submit"
                             name="locale_code"
                             value="{{ lang.iso_code }}"
                             class="{% if lang.iso_code == localization.language.iso_code %}is-active{% endif %}"
+                            aria-label="{{ lang.endonym_name | escape }}"
                           >
-                            {{ lang.endonym_name | upcase }}
+                            {{ lang_code }}
                           </button>
                         {% endfor %}
-                      </form>
+                      {% endform %}
                     {% endif %}
                 </div>
             {% endif %}

@@ -127,21 +127,21 @@
   },
   "sections": {
     "homepage": {
-      "lineup_heading": "Découvrez la gamme",
-      "lineup_subheading": "Trois produits. Une promesse. Moins de 5 ingrédients.",
-      "pantry_subheading": "Nos boissons d'avoine naturelles",
-      "pantry_heading": "ENTREZ DANS NOTRE GARDE-MANGER...",
+      "lineup_heading": "Nos Boissons d’Avoine Naturelles",
+      "lineup_subheading": "Une option pour chaque moment à l’avoine.",
+      "pantry_subheading": "Nos Boissons d’Avoine Naturelles",
+      "pantry_heading": "ENTREZ DANS NOTRE GARDE-MANGER…",
       "pantry_cta": "Acheter Varty",
       "store_teaser_subheading": "Disponible dans 23 points de vente au Québec",
-      "store_teaser_heading": "Bientôt près de chez vous",
-      "store_teaser_cta": "Trouver un point de vente",
+      "store_teaser_heading": "BIENTÔT EN MAGASIN PRÈS DE CHEZ VOUS",
+      "store_teaser_cta": "Trouver un magasin",
       "comparison_heading": "POURQUOI LES CANADIENS TOMBENT AMOUREUX DE VARTY",
       "features_heading": "POURQUOI CHOISIR VARTY ?",
       "awards_subheading": "Prix & Reconnaissance · 2024",
       "awards_heading": "Prix Emerging Entrepreneur",
       "awards_cta": "Lire le communiqué de presse",
-      "wholesale_heading": "Mettons quelque chose de mieux sur vos tablettes",
-      "wholesale_cta": "Soumettre une demande"
+      "wholesale_heading": "METTONS QUELQUE CHOSE DE MIEUX SUR VOS TABLETTES",
+      "wholesale_cta": "Postulez maintenant"
     },
     "cart": {
       "title_cart": "Votre panier",
@@ -234,8 +234,8 @@
       "feature_col": "Caractéristique"
     },
     "store_finder": {
-      "heading": "Trouvez Varty près de chez vous",
-      "intro": "Disponible dans des points de vente au Québec.",
+      "heading": "Où acheter la boisson d’avoine Varty ?",
+      "intro": "Trouvez Varty à l’épicerie près de chez vous.",
       "search_placeholder": "Rechercher par nom ou ville…",
       "all_regions": "Toutes les régions",
       "no_results": "Aucun résultat. Essayez une autre recherche.",
@@ -594,13 +594,36 @@
     "select_your_store": "Sélectionnez votre magasin"
   },
   "varty": {
-    "__tbd": "<<TBD: FR strings pending Lina sign-off",
+    "__tbd": "<<TBD: non-French locale strings pending sign-off",
     "hero": {
-      "subheading": "Your Favourite Organic Oat Beverage, Now Ready to Order Online",
-      "heading": "Varty: Clean You Can Taste. And Trust.",
-      "subtext": "<p>No gums. No added sugar. No fillers. No \"what even is that?\" ingredients. Just organic oat beverage made with 3-4 simple ingredients, now available in easy online bundles. Try all 3 flavours, build your own 6-pack, or subscribe and keep your pantry stocked with free delivery every time.</p>",
-      "cta": "Shop Bundles",
-      "__hero_tbd": "FR hero copy pending Lina sign-off."
+      "subheading": "Découvrez votre nouveau rituel à l’avoine, crémeux, pur et 100 % naturel.",
+      "heading": "Varty : La Pureté au Goût de Confiance.",
+      "subtext": "<p>Sans gommes, sans additifs superflus. Juste une boisson d’avoine honnête et délicieuse. Et oui, votre café s’en réjouit déjà.</p>",
+      "cta": "Magasinez Varty",
+      "__hero_tbd": "French copy supplied in Varty All Natural - Website Copy - French.docx."
+    },
+    "about": {
+      "hero_eyebrow": "À propos de Varty :",
+      "hero_aria": "À propos de Varty : enfin une boisson d’avoine biologique digne de ce nom au Canada !",
+      "hero_title": "ENFIN UNE BOISSON D’AVOINE BIOLOGIQUE DIGNE DE CE NOM AU CANADA !",
+      "stamp_line_1": "L’AVANTAGE",
+      "stamp_line_2": "PROPRE",
+      "mission_eyebrow": "Notre Mission",
+      "mission_heading": "Créer une boisson d’avoine naturelle et fiable, avec des ingrédients que vous utilisez dans votre propre cuisine, jamais dans un laboratoire.",
+      "founder_heading": "Nos Débuts",
+      "founder_p1": "« Bonjour ! Nous sommes Lina et Tony, les fondateurs de VARTY, et sans doute les lecteurs d’étiquettes les plus exigeants que vous croiserez. Comme beaucoup de consommateurs soucieux de leur santé, nous passions des heures à scruter les rayons, retournant chaque carton pour lire les ingrédients, en nous demandant comment le mot “naturel” pouvait encore inclure des gommes, des additifs et des ingrédients impossibles à prononcer.",
+      "founder_p2": "On a créé Varty parce qu’on ne trouvait aucune boisson à l’avoine qui nous faisait vraiment du bien. Pas juste sur le plan nutritionnel, mais aussi éthique. Alors on a décidé de la faire nous-mêmes – propre, biologique, et fièrement fabriquée ici, au Canada.",
+      "founder_p3": "Chez Varty, on croit sincèrement que les aliments emballés devraient nous simplifier la vie, sans compromettre la qualité au profit de la commodité. Dans un monde où les raccourcis sont la norme, les boissons à l’avoine ont cessé de goûter l’avoine. Les listes d’ingrédients se sont allongées, et “naturel” a perdu tout son sens.",
+      "founder_p4": "Mais ça, c’était avant. Varty est notre façon de redonner à l’alimentation sa vraie nature : simple, nourrissante, et honnête. Jamais on ne coupera les coins ronds. Jamais on ne camouflera les saveurs naturelles.",
+      "founder_p5": "On a créé Varty pour nous. Et maintenant, on est ravis de le partager avec vous. Que vous soyez consommateur ou distributeur, Varty est pour vous. On l’a fait pour nous – mais maintenant, il est à vous. En espérant que vous l’aimerez autant que nous. »",
+      "founder_caption": "Lina & Tony  |  Co-fondateurs",
+      "values_heading": "NOS VALEURS FONDAMENTALES :",
+      "value_local_title": "Local",
+      "value_local_body": "Fièrement canadien, et fabriqué au Québec. Nous soutenons les producteurs locaux, tout près d’ici.",
+      "value_premium_title": "Premium",
+      "value_premium_body": "Seulement 3 à 4 ingrédients biologiques. Si ce n’est pas dans votre cuisine, vous ne le trouverez pas dans notre bouteille.",
+      "value_truthful_title": "Authentique",
+      "value_truthful_body": "On ne se cache pas derrière des mots flous ou des tendances. On laisse nos étiquettes parler d’elles-mêmes."
     },
     "trial": {
       "title": "Nouveau chez Varty ?",
@@ -620,19 +643,33 @@
       "cta": "Voir les abonnements"
     },
     "awards": {
-      "heading": "Une reconnaissance précoce pour un garde-manger canadien plus clean",
-      "cta": "Lire le communiqué →"
+      "heading": "Une marque de confiance",
+      "cta": "Lire le communiqué →",
+      "page_title": "Prix et reconnaissance",
+      "award_title": "Prix Emerging Entrepreneur",
+      "description": "Futurpreneur, au nom de la Fondation Futurpreneur, et RBC Lancement de carrière donnent à de jeunes entrepreneurs les moyens de propulser leur projet grâce à 80 000 $ en prix de démarrage.",
+      "button": "Communiqué de presse"
     },
     "faq": {
       "heading": "Questions fréquentes"
     },
     "stockists": {
-      "heading": "Trouvez Varty près de chez vous",
+      "heading": "Où acheter la boisson d’avoine Varty ?",
       "cta": "Voir les points de vente →"
     },
     "wholesale": {
-      "heading": "Vente en gros & service alimentaire",
-      "cta": "Faire une demande grossiste →"
+      "heading": "Offrons mieux à vos clients",
+      "cta": "Postulez maintenant →",
+      "page_heading": "Offrons mieux à vos clients",
+      "page_body_html": "<p>Nous travaillons avec des distributeurs qui apprécient autant que nous la qualité et la transparence. Postulez aujourd’hui pour devenir l’un des premiers points de vente Varty au Canada.</p>",
+      "page_button": "Postulez maintenant"
+    },
+    "contact": {
+      "name": "Votre nom",
+      "company": "Entreprise / magasin",
+      "email": "Votre courriel *",
+      "message": "Votre message",
+      "submit": "Envoyer"
     }
   }
 }

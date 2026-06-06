@@ -601,6 +601,29 @@
       "cta": "Shop Bundles",
       "__hero_tbd": "Hero copy is final English source for translation placeholders."
     },
+    "about": {
+      "hero_eyebrow": "Meet Varty:",
+      "hero_aria": "Meet Varty: The Real, Organic Oat Beverage Canada Has Been Waiting For",
+      "hero_title": "THE REAL, ORGANIC OAT BEVERAGE CANADA HAS BEEN WAITING FOR",
+      "stamp_line_1": "THE CLEAN",
+      "stamp_line_2": "ADVANTAGE",
+      "mission_eyebrow": "Our Mission",
+      "mission_heading": "To create a natural oat beverage you can trust, with ingredients you’d put in your own kitchen, not a lab.",
+      "founder_heading": "Where it all began",
+      "founder_p1": "“Hi there! We’re Lina and Tony - the friendly faces behind VARTY, and the most relentless label-readers you’ll ever meet. Like many health-conscious consumers, we used to spend way too much time in grocery aisles, flipping cartons over and wondering how “natural” could still mean gums, fillers, and things we couldn’t pronounce.",
+      "founder_p2": "“We started Varty because we couldn’t find an oat beverage we actually felt good about. Not just nutritionally, but ethically too. So, we made our own - something that was clean, organic, and proudly made at home on Canadian soil.",
+      "founder_p3": "“At Varty, we truly believe that packaged food should simplify our lives, without sacrificing quality for convenience. In a world where shortcuts are standard, oat beverages stopped tasting like oats. Ingredient lists grew longer and longer, and “natural” lost all its meaning.”",
+      "founder_p4": "“But not anymore. Varty is our way of restoring what food was always meant to be: Simple, nourishing, and honest. You won’t ever catch us cutting corners or masking natural flavours.",
+      "founder_p5": "“We made Varty for ourselves, and now, we’re thrilled to be sharing it with the world. Whether you’re a health-conscious consumer or wholesaler, Varty was made for you. We made this for us – but now it’s yours. Hope you love it as much as we do.”",
+      "founder_caption": "Lina & Tony  |  Co-Founders",
+      "values_heading": "OUR CORE VALUES:",
+      "value_local_title": "Local",
+      "value_local_body": "Proudly Canadian and made in Quebec. Supporting local producers close to home.",
+      "value_premium_title": "Premium",
+      "value_premium_body": "Only 3-4 organic ingredients. If it’s not in your kitchen, you won’t find it in our bottle.",
+      "value_truthful_title": "Truthful",
+      "value_truthful_body": "We don’t hide behind cryptic jargon and buzzwords. We’ll let our labels do the talking."
+    },
     "trial": {
       "title": "New to Varty?",
       "body": "Trial Pack — one of each. Once per customer. Account required.",
@@ -621,7 +644,11 @@
     "__tbd": "<<TBD: FR strings pending Lina sign-off",
     "awards": {
       "heading": "Early Proof for a Cleaner Canadian Pantry",
-      "cta": "Read the Press Release →"
+      "cta": "Read the Press Release →",
+      "page_title": "Awards & Recognition",
+      "award_title": "Emerging Entrepreneur Award",
+      "description": "Futurpreneur, on behalf of Futurpreneur Foundation, and RBC Future Launch empower young entrepreneurs with $80,000 in Start-up Awards",
+      "button": "Press Release"
     },
     "faq": {
       "heading": "Frequently Asked Questions"
@@ -632,7 +659,17 @@
     },
     "wholesale": {
       "heading": "Wholesale & Food Service",
-      "cta": "Apply for Wholesale →"
+      "cta": "Apply for Wholesale →",
+      "page_heading": "Let’s Put Something Great on Your Shelves",
+      "page_body_html": "<p>Interested in carrying Varty? Tell us about your store and we’ll be in touch within 3 business days.</p><p>We partner with independent grocers, health food stores, pharmacies, gyms, wellness spaces, and retailers who care about what goes on their shelves. If your customers are looking for a clean, organic oat beverage made with 3–4 simple ingredients, we’d love to hear from you.</p>",
+      "page_button": "Apply Now"
+    },
+    "contact": {
+      "name": "Full name",
+      "company": "Company / store",
+      "email": "Email address *",
+      "message": "Message",
+      "submit": "Submit"
     }
   }
 }
