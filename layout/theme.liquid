@@ -56,7 +56,7 @@
     <script src="{{ 'menu-drawer.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'varty-mix-case.js' | asset_url }}" defer="defer"></script>
     {{ 'varty-sku-accents.css' | asset_url | stylesheet_tag }}
-    {%- if request.page_type == 'index' or request.page_type == 'blog' or request.page_type == 'article' or template.suffix == 'about' or template.suffix == 'awards' or template.suffix == 'wholesale' or template.suffix == 'store-finder' -%}
+    {%- if request.page_type == 'index' or request.page_type == 'collection' or request.page_type == 'blog' or request.page_type == 'article' or template.suffix == 'about' or template.suffix == 'awards' or template.suffix == 'wholesale' or template.suffix == 'store-finder' -%}
       {{ 'varty-homepage-polish.css' | asset_url | stylesheet_tag }}
     {%- endif -%}
     {%- if request.page_type == 'product' -%}
