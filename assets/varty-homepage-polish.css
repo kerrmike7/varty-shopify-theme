@@ -1996,6 +1996,8 @@
 [id$="__main-blog"] {
   background: rgb(252, 242, 211);
   color: rgb(84, 99, 179);
+  width: 100%;
+  max-width: none;
 }
 
 [id$="__main-blog"] .blog__heading {
@@ -2004,12 +2006,17 @@
 
 [id$="__main-blog"] .blog-articles {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.65rem;
-  padding-inline: clamp(0.65rem, 4vw, 3rem);
+  align-items: stretch;
+  gap: clamp(0.7rem, 1.15vw, 1.35rem) !important;
+  width: 100%;
+  max-width: 1840px;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 2vw, 2.75rem);
 }
 
 [id$="__main-blog"] .blog-articles__article {
   min-width: 0;
+  width: 100%;
   height: 100%;
 }
 
@@ -2018,19 +2025,19 @@
 }
 
 [id$="__main-blog"] .article-card {
-  --varty-recipe-card-image-ratio: 0.72;
-  --varty-recipe-card-info-min: clamp(13.5rem, 15vw, 18rem);
+  --varty-recipe-card-image-ratio: 0.78;
+  --varty-recipe-card-info-min: clamp(12.25rem, 13.5vw, 16rem);
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto minmax(var(--varty-recipe-card-info-min), 1fr);
   align-content: start;
   gap: 0;
   height: 100%;
-  min-height: clamp(720px, 54vw, 980px);
+  min-height: clamp(640px, 44vw, 900px);
   background: #fff;
   color: rgb(84, 99, 179);
   border-radius: 4px;
   overflow: hidden;
-  padding: 1.5rem 1.5rem 2rem;
+  padding: clamp(1.15rem, 1.45vw, 1.5rem) clamp(1.15rem, 1.45vw, 1.5rem) clamp(1.6rem, 1.8vw, 2rem);
 }
 
 [id$="__main-blog"] .article-card__info,
@@ -2043,8 +2050,9 @@
   order: 2;
   display: flex;
   flex-direction: column;
-  min-height: var(--varty-recipe-card-info-min);
-  padding-top: 1.35rem;
+  min-height: 0;
+  height: 100%;
+  padding-top: clamp(1.35rem, 1.7vw, 1.85rem);
 }
 
 [id$="__main-blog"] .article-card__image-wrapper {
@@ -2052,10 +2060,10 @@
 }
 
 [id$="__main-blog"] .article-card__title {
-  font-size: clamp(1.8rem, 2.2vw, 2.35rem) !important;
+  font-size: clamp(1.75rem, 1.95vw, 2.35rem) !important;
   line-height: 1.12 !important;
   letter-spacing: 0;
-  margin: 0 0 1.8rem;
+  margin: 0 0 clamp(1.3rem, 1.6vw, 1.8rem);
   overflow-wrap: anywhere;
 }
 
