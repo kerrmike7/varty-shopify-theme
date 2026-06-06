@@ -1970,16 +1970,16 @@
 
 [id$="__recipes_hero"] h1 {
   text-transform: uppercase;
-  font-family: "Avenir Next", "Arial Black", Arial, sans-serif !important;
-  letter-spacing: 0;
+  font-family: var(--base-font-family) !important;
+  letter-spacing: 0.035em;
   line-height: 1.05;
   text-wrap: normal;
   white-space: nowrap;
   max-width: none;
   margin-inline: auto;
   color: rgb(252, 242, 211);
-  font-size: clamp(2.6rem, 3.45vw, 4.45rem) !important;
-  font-weight: 800;
+  font-size: clamp(2.2rem, 3.05vw, 4.25rem) !important;
+  font-weight: 900 !important;
 }
 
 [id$="__recipes_hero"] .content-subheading {
