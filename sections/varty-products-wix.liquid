@@ -87,6 +87,14 @@
     background: #fff;
   }
 
+  #shopify-section-{{ section.id }} .varty-product__carousel {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+  }
+
   #shopify-section-{{ section.id }} .varty-product__image {
     display: block;
     width: auto;
@@ -95,24 +103,55 @@
     object-fit: contain;
   }
 
+  #shopify-section-{{ section.id }} .varty-product__image[hidden] {
+    display: none !important;
+  }
+
   #shopify-section-{{ section.id }} .varty-product__arrow {
     position: absolute;
     top: 50%;
-    width: 26px;
-    height: 26px;
-    border-top: 2px solid var(--varty-products-text);
-    border-right: 2px solid var(--varty-products-text);
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 72px;
+    height: 72px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--varty-products-text);
+    cursor: pointer;
     opacity: 0.82;
+    transform: translateY(-50%);
+  }
+
+  #shopify-section-{{ section.id }} .varty-product__arrow::before {
+    content: "";
+    display: block;
+    width: 28px;
+    height: 28px;
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
   }
 
   #shopify-section-{{ section.id }} .varty-product__arrow--left {
     left: 44px;
-    transform: translateY(-50%) rotate(-135deg);
+  }
+
+  #shopify-section-{{ section.id }} .varty-product__arrow--left::before {
+    transform: rotate(-135deg);
   }
 
   #shopify-section-{{ section.id }} .varty-product__arrow--right {
     right: 44px;
-    transform: translateY(-50%) rotate(45deg);
+  }
+
+  #shopify-section-{{ section.id }} .varty-product__arrow--right::before {
+    transform: rotate(45deg);
+  }
+
+  #shopify-section-{{ section.id }} .varty-product__arrow:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
   }
 
   #shopify-section-{{ section.id }} .varty-product__copy {
@@ -141,6 +180,7 @@
   #shopify-section-{{ section.id }} .varty-product__list {
     margin: 0;
     padding-left: 1.35em;
+    list-style: disc;
     font-size: clamp(21px, 1.42vw, 29px);
     line-height: 1.48;
   }
@@ -148,6 +188,12 @@
   #shopify-section-{{ section.id }} .varty-product__badges {
     margin-bottom: clamp(48px, 3.7vw, 72px);
     font-weight: 800;
+  }
+
+  #shopify-section-{{ section.id }} .varty-product__badges li::marker,
+  #shopify-section-{{ section.id }} .varty-product__list li::marker {
+    color: var(--varty-products-text);
+    font-size: 0.78em;
   }
 
   #shopify-section-{{ section.id }} .varty-product details {
@@ -312,14 +358,26 @@
   </section>
 
   <section class="varty-product" aria-labelledby="varty-original-title">
-    <div class="varty-product__media">
-      <span class="varty-product__arrow varty-product__arrow--left" aria-hidden="true"></span>
-      {% if section.settings.original_image != blank %}
-        {{ section.settings.original_image | image_url: width: 900 | image_tag: class: 'varty-product__image', loading: 'lazy', alt: 'Original Unsweetened Varty oat beverage carton' }}
-      {% else %}
-        <img class="varty-product__image" src="{{ 'varty-product-original-side.jpg' | asset_url }}" alt="Original Unsweetened Varty oat beverage carton" width="900" height="1200" loading="lazy">
-      {% endif %}
-      <span class="varty-product__arrow varty-product__arrow--right" aria-hidden="true"></span>
+    <div class="varty-product__media" data-varty-product-media>
+      <button class="varty-product__arrow varty-product__arrow--left" type="button" data-varty-carousel-control="previous" aria-label="Previous Original Unsweetened product image"></button>
+      <div class="varty-product__carousel" data-varty-product-carousel>
+        {% if section.settings.original_image != blank %}
+          <img class="varty-product__image" data-varty-carousel-slide src="{{ section.settings.original_image | image_url: width: 1200 }}" alt="Original Unsweetened Varty oat beverage carton front" width="{{ section.settings.original_image.width }}" height="{{ section.settings.original_image.height }}" loading="lazy">
+        {% else %}
+          <img class="varty-product__image" data-varty-carousel-slide src="{{ 'varty-product-original-front.jpg' | asset_url }}" alt="Original Unsweetened Varty oat beverage carton front" width="4000" height="5000" loading="lazy">
+        {% endif %}
+        {% if section.settings.original_side_one_image != blank %}
+          <img class="varty-product__image" data-varty-carousel-slide src="{{ section.settings.original_side_one_image | image_url: width: 1200 }}" alt="Original Unsweetened Varty oat beverage carton nutrition side" width="{{ section.settings.original_side_one_image.width }}" height="{{ section.settings.original_side_one_image.height }}" loading="lazy" hidden>
+        {% else %}
+          <img class="varty-product__image" data-varty-carousel-slide src="{{ 'varty-product-original-side-1.jpg' | asset_url }}" alt="Original Unsweetened Varty oat beverage carton nutrition side" width="4000" height="5000" loading="lazy" hidden>
+        {% endif %}
+        {% if section.settings.original_side_two_image != blank %}
+          <img class="varty-product__image" data-varty-carousel-slide src="{{ section.settings.original_side_two_image | image_url: width: 1200 }}" alt="Original Unsweetened Varty oat beverage carton story side" width="{{ section.settings.original_side_two_image.width }}" height="{{ section.settings.original_side_two_image.height }}" loading="lazy" hidden>
+        {% else %}
+          <img class="varty-product__image" data-varty-carousel-slide src="{{ 'varty-product-original-side-2.jpg' | asset_url }}" alt="Original Unsweetened Varty oat beverage carton story side" width="4000" height="5000" loading="lazy" hidden>
+        {% endif %}
+      </div>
+      <button class="varty-product__arrow varty-product__arrow--right" type="button" data-varty-carousel-control="next" aria-label="Next Original Unsweetened product image"></button>
     </div>
     <div class="varty-product__copy">
       <h2 id="varty-original-title">Original Unsweetened Oat Beverage Canada</h2>
@@ -356,14 +414,26 @@
   </section>
 
   <section class="varty-product" aria-labelledby="varty-vanilla-title">
-    <div class="varty-product__media">
-      <span class="varty-product__arrow varty-product__arrow--left" aria-hidden="true"></span>
-      {% if section.settings.vanilla_image != blank %}
-        {{ section.settings.vanilla_image | image_url: width: 900 | image_tag: class: 'varty-product__image', loading: 'lazy', alt: 'Vanilla Unsweetened Varty oat beverage carton' }}
-      {% else %}
-        <img class="varty-product__image" src="{{ 'varty-product-vanilla-front.jpg' | asset_url }}" alt="Vanilla Unsweetened Varty oat beverage carton" width="900" height="1200" loading="lazy">
-      {% endif %}
-      <span class="varty-product__arrow varty-product__arrow--right" aria-hidden="true"></span>
+    <div class="varty-product__media" data-varty-product-media>
+      <button class="varty-product__arrow varty-product__arrow--left" type="button" data-varty-carousel-control="previous" aria-label="Previous Vanilla Unsweetened product image"></button>
+      <div class="varty-product__carousel" data-varty-product-carousel>
+        {% if section.settings.vanilla_image != blank %}
+          <img class="varty-product__image" data-varty-carousel-slide src="{{ section.settings.vanilla_image | image_url: width: 1200 }}" alt="Vanilla Unsweetened Varty oat beverage carton front" width="{{ section.settings.vanilla_image.width }}" height="{{ section.settings.vanilla_image.height }}" loading="lazy">
+        {% else %}
+          <img class="varty-product__image" data-varty-carousel-slide src="{{ 'varty-product-vanilla-front.jpg' | asset_url }}" alt="Vanilla Unsweetened Varty oat beverage carton front" width="4000" height="5000" loading="lazy">
+        {% endif %}
+        {% if section.settings.vanilla_side_one_image != blank %}
+          <img class="varty-product__image" data-varty-carousel-slide src="{{ section.settings.vanilla_side_one_image | image_url: width: 1200 }}" alt="Vanilla Unsweetened Varty oat beverage carton nutrition side" width="{{ section.settings.vanilla_side_one_image.width }}" height="{{ section.settings.vanilla_side_one_image.height }}" loading="lazy" hidden>
+        {% else %}
+          <img class="varty-product__image" data-varty-carousel-slide src="{{ 'varty-product-vanilla-side-1.jpg' | asset_url }}" alt="Vanilla Unsweetened Varty oat beverage carton nutrition side" width="4000" height="5000" loading="lazy" hidden>
+        {% endif %}
+        {% if section.settings.vanilla_side_two_image != blank %}
+          <img class="varty-product__image" data-varty-carousel-slide src="{{ section.settings.vanilla_side_two_image | image_url: width: 1200 }}" alt="Vanilla Unsweetened Varty oat beverage carton story side" width="{{ section.settings.vanilla_side_two_image.width }}" height="{{ section.settings.vanilla_side_two_image.height }}" loading="lazy" hidden>
+        {% else %}
+          <img class="varty-product__image" data-varty-carousel-slide src="{{ 'varty-product-vanilla-side-2.jpg' | asset_url }}" alt="Vanilla Unsweetened Varty oat beverage carton story side" width="4000" height="5000" loading="lazy" hidden>
+        {% endif %}
+      </div>
+      <button class="varty-product__arrow varty-product__arrow--right" type="button" data-varty-carousel-control="next" aria-label="Next Vanilla Unsweetened product image"></button>
     </div>
     <div class="varty-product__copy">
       <h2 id="varty-vanilla-title">Vanilla Unsweetened Oat Beverage Canada</h2>
@@ -402,14 +472,26 @@
   </section>
 
   <section class="varty-product" aria-labelledby="varty-barista-title">
-    <div class="varty-product__media">
-      <span class="varty-product__arrow varty-product__arrow--left" aria-hidden="true"></span>
-      {% if section.settings.barista_image != blank %}
-        {{ section.settings.barista_image | image_url: width: 900 | image_tag: class: 'varty-product__image', loading: 'lazy', alt: 'Barista Unsweetened Varty oat beverage carton' }}
-      {% else %}
-        <img class="varty-product__image" src="{{ 'varty-product-barista-front.jpg' | asset_url }}" alt="Barista Unsweetened Varty oat beverage carton" width="900" height="1200" loading="lazy">
-      {% endif %}
-      <span class="varty-product__arrow varty-product__arrow--right" aria-hidden="true"></span>
+    <div class="varty-product__media" data-varty-product-media>
+      <button class="varty-product__arrow varty-product__arrow--left" type="button" data-varty-carousel-control="previous" aria-label="Previous Barista Unsweetened product image"></button>
+      <div class="varty-product__carousel" data-varty-product-carousel>
+        {% if section.settings.barista_image != blank %}
+          <img class="varty-product__image" data-varty-carousel-slide src="{{ section.settings.barista_image | image_url: width: 1200 }}" alt="Barista Unsweetened Varty oat beverage carton front" width="{{ section.settings.barista_image.width }}" height="{{ section.settings.barista_image.height }}" loading="lazy">
+        {% else %}
+          <img class="varty-product__image" data-varty-carousel-slide src="{{ 'varty-product-barista-front.jpg' | asset_url }}" alt="Barista Unsweetened Varty oat beverage carton front" width="4000" height="5000" loading="lazy">
+        {% endif %}
+        {% if section.settings.barista_side_one_image != blank %}
+          <img class="varty-product__image" data-varty-carousel-slide src="{{ section.settings.barista_side_one_image | image_url: width: 1200 }}" alt="Barista Unsweetened Varty oat beverage carton nutrition side" width="{{ section.settings.barista_side_one_image.width }}" height="{{ section.settings.barista_side_one_image.height }}" loading="lazy" hidden>
+        {% else %}
+          <img class="varty-product__image" data-varty-carousel-slide src="{{ 'varty-product-barista-side-1.jpg' | asset_url }}" alt="Barista Unsweetened Varty oat beverage carton nutrition side" width="4000" height="5000" loading="lazy" hidden>
+        {% endif %}
+        {% if section.settings.barista_side_two_image != blank %}
+          <img class="varty-product__image" data-varty-carousel-slide src="{{ section.settings.barista_side_two_image | image_url: width: 1200 }}" alt="Barista Unsweetened Varty oat beverage carton story side" width="{{ section.settings.barista_side_two_image.width }}" height="{{ section.settings.barista_side_two_image.height }}" loading="lazy" hidden>
+        {% else %}
+          <img class="varty-product__image" data-varty-carousel-slide src="{{ 'varty-product-barista-side-2.jpg' | asset_url }}" alt="Barista Unsweetened Varty oat beverage carton story side" width="4000" height="5000" loading="lazy" hidden>
+        {% endif %}
+      </div>
+      <button class="varty-product__arrow varty-product__arrow--right" type="button" data-varty-carousel-control="next" aria-label="Next Barista Unsweetened product image"></button>
     </div>
     <div class="varty-product__copy">
       <h2 id="varty-barista-title">Barista Unsweetened Oat Beverage Canada</h2>
@@ -473,6 +555,52 @@
   </section>
 </div>
 
+<script>
+  (() => {
+    const sectionSelector = '#shopify-section-{{ section.id }}';
+
+    function initVartyProductCarousels(root = document) {
+      const scope = root.querySelector ? root : document;
+      const carousels = scope === document
+        ? document.querySelectorAll(`${sectionSelector} [data-varty-product-carousel]`)
+        : scope.querySelectorAll('[data-varty-product-carousel]');
+
+      carousels.forEach((carousel) => {
+        if (carousel.dataset.vartyCarouselReady === 'true') return;
+
+        const media = carousel.closest('[data-varty-product-media]');
+        const slides = Array.from(carousel.querySelectorAll('[data-varty-carousel-slide]'));
+        if (!media || slides.length < 2) return;
+
+        carousel.dataset.vartyCarouselReady = 'true';
+        let activeIndex = slides.findIndex((slide) => !slide.hidden);
+        if (activeIndex < 0) activeIndex = 0;
+
+        function showSlide(nextIndex) {
+          slides[activeIndex].hidden = true;
+          activeIndex = (nextIndex + slides.length) % slides.length;
+          slides[activeIndex].hidden = false;
+        }
+
+        media.querySelectorAll('[data-varty-carousel-control]').forEach((control) => {
+          control.addEventListener('click', () => {
+            const direction = control.dataset.vartyCarouselControl === 'next' ? 1 : -1;
+            showSlide(activeIndex + direction);
+          });
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => initVartyProductCarousels());
+    } else {
+      initVartyProductCarousels();
+    }
+
+    document.addEventListener('shopify:section:load', (event) => initVartyProductCarousels(event.target));
+  })();
+</script>
+
 {% schema %}
 {
   "name": "Varty Products Wix",
@@ -485,17 +613,47 @@
     {
       "type": "image_picker",
       "id": "original_image",
-      "label": "Original product image"
+      "label": "Original product image - front"
+    },
+    {
+      "type": "image_picker",
+      "id": "original_side_one_image",
+      "label": "Original product image - side 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "original_side_two_image",
+      "label": "Original product image - side 2"
     },
     {
       "type": "image_picker",
       "id": "vanilla_image",
-      "label": "Vanilla product image"
+      "label": "Vanilla product image - front"
+    },
+    {
+      "type": "image_picker",
+      "id": "vanilla_side_one_image",
+      "label": "Vanilla product image - side 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "vanilla_side_two_image",
+      "label": "Vanilla product image - side 2"
     },
     {
       "type": "image_picker",
       "id": "barista_image",
-      "label": "Barista product image"
+      "label": "Barista product image - front"
+    },
+    {
+      "type": "image_picker",
+      "id": "barista_side_one_image",
+      "label": "Barista product image - side 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "barista_side_two_image",
+      "label": "Barista product image - side 2"
     }
   ],
   "presets": [
