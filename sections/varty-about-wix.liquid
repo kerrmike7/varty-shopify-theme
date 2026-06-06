@@ -89,11 +89,12 @@
 
   #shopify-section-{{ section.id }} .varty-about-hero__flower {
     position: absolute;
-    left: clamp(-150px, -7vw, -96px);
-    bottom: clamp(-172px, -8.8vw, -118px);
+    left: clamp(-178px, -8vw, -118px);
+    bottom: clamp(-98px, -4.6vw, -62px);
     z-index: 1;
-    width: clamp(360px, 24vw, 520px);
-    opacity: 1;
+    width: clamp(230px, 16vw, 340px);
+    height: auto;
+    opacity: 0.96;
     pointer-events: none;
   }
 
@@ -205,7 +206,8 @@
   #shopify-section-{{ section.id }} .varty-about-founder {
     position: relative;
     padding: clamp(58px, 4.8vw, 96px) clamp(44px, 12vw, 300px) clamp(82px, 6vw, 124px);
-    overflow: hidden;
+    z-index: 2;
+    overflow: visible;
     background: var(--varty-about-purple);
     color: var(--varty-about-cream);
   }
@@ -261,15 +263,18 @@
 
   #shopify-section-{{ section.id }} .varty-about-founder__flower {
     position: absolute;
-    right: clamp(-300px, -12vw, -190px);
-    bottom: clamp(-150px, -7vw, -96px);
-    z-index: 1;
-    width: clamp(380px, 25vw, 560px);
+    right: clamp(-132px, -5.8vw, -74px);
+    bottom: clamp(-132px, -5.8vw, -76px);
+    z-index: 3;
+    width: clamp(210px, 15vw, 300px);
+    height: auto;
+    opacity: 0.96;
     pointer-events: none;
   }
 
   #shopify-section-{{ section.id }} .varty-about-values {
     position: relative;
+    z-index: 1;
     padding: clamp(88px, 6.5vw, 136px) clamp(44px, 8vw, 220px) clamp(108px, 7vw, 160px);
     background: var(--varty-about-cream);
     color: var(--varty-about-blue-text);
@@ -363,10 +368,10 @@
     }
 
     #shopify-section-{{ section.id }} .varty-about-hero__flower {
-      width: 240px;
-      left: -88px;
-      bottom: -92px;
-      opacity: 1;
+      width: 176px;
+      left: -82px;
+      bottom: -48px;
+      opacity: 0.96;
     }
 
     #shopify-section-{{ section.id }} .varty-about-mission {
@@ -404,9 +409,9 @@
     }
 
     #shopify-section-{{ section.id }} .varty-about-founder__flower {
-      right: -136px;
-      bottom: -78px;
-      width: 290px;
+      right: -94px;
+      bottom: -64px;
+      width: 190px;
       opacity: 0.95;
     }
 
@@ -441,11 +446,7 @@
         <img class="varty-about-hero__image" src="{{ 'varty-about-hero-lifestyle-60.jpg' | asset_url }}" alt="Three Varty oat beverage cartons with Quebec flag illustration" width="2200" height="2750" loading="eager">
       {% endif %}
     </div>
-    {% if section.settings.hero_flower_image != blank %}
-      {{ section.settings.hero_flower_image | image_url: width: 640 | image_tag: class: 'varty-about-hero__flower', alt: '' }}
-    {% else %}
-      <img class="varty-about-hero__flower" src="{{ 'flower-3_4x-8.avif' | asset_url }}" alt="" width="720" height="720" aria-hidden="true">
-    {% endif %}
+    <img class="varty-about-hero__flower" src="{{ 'varty-about-flower.avif' | asset_url }}" alt="" width="720" height="720" loading="eager" aria-hidden="true">
   </section>
 
   <section class="varty-about-mission" aria-labelledby="varty-about-mission-title">
@@ -496,11 +497,7 @@
       <div class="varty-about-founder__signature">Lina &amp; Tony</div>
       <div class="varty-about-founder__caption">Lina &amp; Tony&nbsp;&nbsp;|&nbsp;&nbsp;Co-Founders</div>
     </div>
-    {% if section.settings.founder_flower_image != blank %}
-      {{ section.settings.founder_flower_image | image_url: width: 700 | image_tag: class: 'varty-about-founder__flower', alt: '' }}
-    {% else %}
-      <img class="varty-about-founder__flower" src="{{ 'flower-3_4x-8.avif' | asset_url }}" alt="" width="720" height="720" aria-hidden="true">
-    {% endif %}
+    <img class="varty-about-founder__flower" src="{{ 'varty-about-flower.avif' | asset_url }}" alt="" width="720" height="720" loading="lazy" aria-hidden="true">
   </section>
 
   <section class="varty-about-values" aria-labelledby="varty-about-values-title">
@@ -558,11 +555,6 @@
     },
     {
       "type": "image_picker",
-      "id": "hero_flower_image",
-      "label": "Hero flower image"
-    },
-    {
-      "type": "image_picker",
       "id": "mission_left_image",
       "label": "Mission collage left image"
     },
@@ -575,11 +567,6 @@
       "type": "image_picker",
       "id": "mission_right_image",
       "label": "Mission collage right image"
-    },
-    {
-      "type": "image_picker",
-      "id": "founder_flower_image",
-      "label": "Founder flower image"
     }
   ],
   "presets": [
