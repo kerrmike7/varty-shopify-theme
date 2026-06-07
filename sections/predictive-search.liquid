@@ -38,7 +38,6 @@
       assign predictive_tabs_first = true
     -%}
     <component-tabs role="tablist" aria-orientation="horizontal" class="predictive-search-results-tabs component-tabs">
-      {{ 'component-tab.css' | asset_url | stylesheet_tag }}
       {%- if predictive_search.resources.products.size > 0 -%}
         <button type="button" role="tab" tabindex="{% if predictive_tabs_first %}0{% else %}-1{% endif %}" id="predictive-search-products" aria-controls="content-predictive-search-products" aria-selected="{% if predictive_tabs_first %}true{% else %}false{% endif %}" class="predictive-search__heading predictive-search__tab-button component-tabs__tab component-tabs__tab--{{ settings.typography_preset }}{% if uppercase_body_l %} uppercase{% endif %}{% if bolder_body_l %} bolder-font{% endif %} tab-js tab-js-block-id--products">{{ 'templates.search.products' | t }}</button>
         {%- assign predictive_tabs_first = false -%}
@@ -126,8 +125,6 @@
             endif
           endif
         %}
-
-        {{ 'component-card.css' | asset_url | stylesheet_tag }}
 
         <li role="presentation">
         <div role="tabpanel" {% unless predictive_panel_first %}tabindex="-1"{% endunless %} aria-labelledby="predictive-search-collections" id="content-predictive-search-collections" class="tab-content-js">
@@ -305,7 +302,6 @@
 
     <span class="{% if totalResults > 0 %}visually-hidden{% endif %} {{ totalResults}} predictive-search-results-empty title--empty body-text--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_m %} uppercase{% endif %}{% if settings.bolder_font_body_m %} bolder-font{% endif %}{% endif %}" data-predictive-search-live-region-count-value>
       {{ 'templates.search.no_results' | t: terms: predictive_search.terms }}
-    </span> 
+    </span>
   </div>
 {%- endif -%}
-  

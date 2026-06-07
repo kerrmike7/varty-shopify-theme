@@ -39,9 +39,13 @@
         </div>
         {% if label != blank %}
             <div class="{% if settings.enable_buttons_zoom %}buttons-zoom{% endif %}">
-                <{% if link != blank %}a href="{{ link }}"{% if target_blank %} target="_blank"{% endif %}{% else %}span{% endif %} class="stories-slider-content__button button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {{ button_style }}-button {% if button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">
+                {% if link != blank %}
+                <a href="{{ link }}"{% if target_blank %} target="_blank"{% endif %} class="stories-slider-content__button button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {{ button_style }}-button {% if button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">
+                {% else %}
+                <span class="stories-slider-content__button button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {{ button_style }}-button {% if button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">
+                {% endif %}
                     {{ label }}
-                </{% if link != blank %}a{% else %}span{% endif %}>
+                {% if link != blank %}</a>{% else %}</span>{% endif %}
             </div>
         {% endif %}
         <div class="stories-slider-button stories-slider-button-prev"></div>

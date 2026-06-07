@@ -132,7 +132,11 @@
                                       --image-radius: {%- render 'radius-xxl-then-var', v: _nbx -%};
                                   }
                                 {% endstyle %}
-                                <{% if block.settings.block_link != blank %}a href="{{ block.settings.block_link }}" {% if block.settings.target_blank %}target="_blank"{% endif %}{% else %}div{% endif %} class="news-drawer__block news-drawer__block--{{ block.id }} {% unless forloop.first %}content-wrapper--block{% endunless %}{% if settings.enable_drawer_animations %} stagger__item{% endif %}" style="--spacing: {{ block.settings.top_spacing }}; --mobile-spacing: {{ block.settings.mobile_top_spacing }};{% if settings.enable_drawer_animations %} --item-index: {{ animated_drawer_item_index }};{% endif %}" {{ block.shopify_attributes }}>
+                                {% if block.settings.block_link != blank %}
+                                  <a href="{{ block.settings.block_link }}" {% if block.settings.target_blank %}target="_blank"{% endif %} class="news-drawer__block news-drawer__block--{{ block.id }} {% unless forloop.first %}content-wrapper--block{% endunless %}{% if settings.enable_drawer_animations %} stagger__item{% endif %}" style="--spacing: {{ block.settings.top_spacing }}; --mobile-spacing: {{ block.settings.mobile_top_spacing }};{% if settings.enable_drawer_animations %} --item-index: {{ animated_drawer_item_index }};{% endif %}" {{ block.shopify_attributes }}>
+                                {% else %}
+                                  <div class="news-drawer__block news-drawer__block--{{ block.id }} {% unless forloop.first %}content-wrapper--block{% endunless %}{% if settings.enable_drawer_animations %} stagger__item{% endif %}" style="--spacing: {{ block.settings.top_spacing }}; --mobile-spacing: {{ block.settings.mobile_top_spacing }};{% if settings.enable_drawer_animations %} --item-index: {{ animated_drawer_item_index }};{% endif %}" {{ block.shopify_attributes }}>
+                                {% endif %}
                                   {% if block.settings.image != blank or request.design_mode %}
                                     <div class="news-drawer__image-container news-drawer__block-elem ratio-{{ block.settings.image_ratio }}" {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}>
                                       {%- if block.settings.image != blank -%}
@@ -234,7 +238,7 @@
                                         {%- unless block.settings.block_link != blank -%}</span>{%- endunless -%}{%- if block.settings.block_link != blank -%}</a></object>{%- endif -%}
                                     </div>
                                     {%- endif -%}
-                                </{% if block.settings.block_link != blank %}a{% else %}div{% endif %}>
+                                {% if block.settings.block_link != blank %}</a>{% else %}</div>{% endif %}
                             {% endif %}
                           {%- when 'promo_code' -%}
                             {% if block.settings.image != blank or block.settings.heading != blank or block.settings.text != blank or block.settings.promo_code != blank %}

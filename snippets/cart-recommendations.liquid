@@ -127,14 +127,21 @@
                   endif
               endfor
             %}
-            <{% unless section.id contains 'cart-drawer' %}{{ cart_recommendations_settings.heading_tag }}{% else %}h2{% endunless %} class="slider__heading custom-heading {% if settings.accent_color_for_headings %}slider__heading--accent{% endif %} slider__heading--{{ settings.typography_preset }} {% if cart_recommendations_settings.heading_size != 'default' %}{{ cart_recommendations_settings.heading_size }}{% else %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}{% endif %} 
+            {% liquid
+              if section.id contains 'cart-drawer'
+                assign cart_recommendations_heading_tag = 'h2'
+              else
+                assign cart_recommendations_heading_tag = cart_recommendations_settings.heading_tag
+              endif
+            %}
+            <{{ cart_recommendations_heading_tag }} class="slider__heading custom-heading {% if settings.accent_color_for_headings %}slider__heading--accent{% endif %} slider__heading--{{ settings.typography_preset }} {% if cart_recommendations_settings.heading_size != 'default' %}{{ cart_recommendations_settings.heading_size }}{% else %}{% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %}{% endif %}
               {% if disable_layout_margins %} {% if settings.max_page_width == '1400' or settings.max_page_width == '1200' %}page-width {% endif %} page-width--{{ settings.max_page_width }}{% endif %}">
               {% if cart_recommendations_settings.heading_color == 'gradient' and cart_recommendations_settings.heading_gradient != blank %}
                 <span class="gradient-heading-text gradient-heading-text--{{ section.id }}">{{ final_text }}</span>
               {% else %}
                 {{ final_text }}
               {% endif %}
-            </{% unless section.id contains 'cart-drawer' %}{{ cart_recommendations_settings.heading_tag }}{% else %}h2{% endunless %}>
+            </{{ cart_recommendations_heading_tag }}>
           {% endif %}
 
           {% if cart_recommendations_settings.desktop_grid_type == 'heading_with_two' or cart_recommendations_settings.desktop_grid_type == 'heading_with_three' %}

@@ -43,7 +43,7 @@
         </p>
     {% endif %}
     {% if options.size > 0 %}
-    <div class="form__variants {% if block.settings.pills_layout == 'two' %} form__variants--two-columns {% elsif block.settings.pills_layout == 'three' %} form__variants--three-columns{% endif %}"">
+    <div class="form__variants {% if block.settings.pills_layout == 'two' %} form__variants--two-columns {% elsif block.settings.pills_layout == 'three' %} form__variants--three-columns{% endif %}">
         {% for option in options %}
             {% liquid
                 assign swatch_file_extension = 'png'

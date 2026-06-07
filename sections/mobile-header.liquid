@@ -44,8 +44,13 @@
 {%- liquid
     assign blocks = section.blocks 
     assign blocksSize = section.blocks.size
+    if section.settings.sticky_header == 'stick_on_scroll'
+        assign mobile_header_tag = 'mobile-sticky-header'
+    else
+        assign mobile_header_tag = 'div'
+    endif
   -%}
-<{% if section.settings.sticky_header == 'stick_on_scroll' %}mobile-sticky-header{% else %}div{% endif %} class="mobile-header-section {% if settings.allow_transparent_navigation and settings.allow_mobile_transparent_navigation %}transparent-header{% endif %}">
+<{{ mobile_header_tag }} class="mobile-header-section {% if settings.allow_transparent_navigation and settings.allow_mobile_transparent_navigation %}transparent-header{% endif %}">
 {% if blocks.size > 0 %}
     <header class="mobile-header {% unless section.settings.sticky_header %}header--sticky{% endunless %} color-{{ section.settings.color_type }} {% if section.settings.color_type != 'default' %}no-default-color{% endif %} {% if section.settings.sticky_header == 'disable' %}header--disable-sticky{% endif %}{% if section.settings.sticky_header == 'always_stick' %} header--sticky{% endif %}">
         <div class="mobile-header__content {% if section.settings.show_bottom_line %}mobile-header__content--line{% endif %} mobile-header__content--{% if section.settings.block_alignment == 'stretched' %}stretched{% endif %}">   
@@ -98,7 +103,7 @@
         </div> 
     </header>
 {% endif %}
-</{% if section.settings.sticky_header == 'stick_on_scroll' %}mobile-sticky-header{% else %}div{% endif %}>
+</{{ mobile_header_tag }}>
 
 {% style %}
 .mobile-header__content {

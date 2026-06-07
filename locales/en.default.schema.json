@@ -2569,7 +2569,7 @@
       }
     },
     "horizontal-banners": {
-      "name": "Horizontal scrolling banners",
+      "name": "Scrolling banners",
       "settings": {
         "show_scroll_down": {
           "label": "Show ‘Scroll down’ text on desktop"
@@ -4442,7 +4442,7 @@
       "name": "Video banner"
     },
     "featured-products": {
-      "name": "Products with sticky content",
+      "name": "Sticky products",
       "blocks": {
         "product": {
           "name": "Product"
@@ -4467,7 +4467,7 @@
       }
     },
     "editorial-banners": {
-      "name": "Banners with sticky content",
+      "name": "Sticky banners",
       "settings": {
         "header__1": {
           "content": "Media content"
@@ -4549,7 +4549,7 @@
       }
     },
     "collection-list": {
-      "name": "Collection list with popover image",
+      "name": "Collections popover",
       "settings": {
         "hover_image": {
           "label": "Display collection image on hover"
@@ -4566,7 +4566,7 @@
       }
     },
     "link-list": {
-      "name": "Link list with popover image",
+      "name": "Links popover",
       "blocks": {
         "link": {
           "name": "Link"
@@ -4701,13 +4701,11 @@
     "custom-html": {
       "name": "Custom HTML",
       "settings": {
-        "custom_html": {
-          "label": "HTML"
-        }
+          "custom_html": "HTML"
       }
     },
     "collection-with-products": {
-      "name": "Collection with sticky image",
+      "name": "Sticky collection",
       "settings": {
         "products_to_show": {
           "label": "Products to show"
@@ -4730,7 +4728,7 @@
       }
     },
     "featured-collection-with-media": {
-      "name": "Featured collection with media",
+      "name": "Collection with media",
       "settings": {
         "button_label": {
           "info": "Leads to Collection page. Leave empty to hide button."
@@ -5186,7 +5184,7 @@
       }
     },
     "featured-collection-with-product-grid": {
-      "name": "Featured collection with product grid",
+      "name": "Collection product grid",
       "settings": {
         "paragraph__1": {
           "content": "To use the section for displaying new arrivals, please [learn more](https:\/\/www.notion.so\/staylime\/In-progress-New-arrivals-sections-configuration-2efc82de62444e8dbb77c82ac7431a0c?pvs=4) how to set it up."

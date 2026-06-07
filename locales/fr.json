@@ -670,6 +670,17 @@
       "email": "Votre courriel *",
       "message": "Votre message",
       "submit": "Envoyer"
+    },
+    "footer": {
+      "contact": "Contact",
+      "quick_links": "Liens rapides",
+      "products": "Produits",
+      "wholesale": "Vente en gros",
+      "where_to_find": "Où nous trouver",
+      "about": "À propos",
+      "recipes": "Recettes",
+      "awards": "Prix",
+      "follow": "Suivre"
     }
   }
 }

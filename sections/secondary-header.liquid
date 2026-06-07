@@ -47,9 +47,14 @@
     assign hover_mega_menu_banners_blocks = section.blocks | where: 'type', "hover_mega_menu_banners"
     assign blocksSize = section.blocks.size | minus: mega_menu_blocks.size | minus: hover_mega_menu_blocks.size | minus: hover_mega_menu_banners_blocks.size
     assign blocks = section.blocks 
+    if section.settings.sticky_header == 'stick_on_scroll'
+        assign secondary_header_tag = 'sticky-secondary-header'
+    else
+        assign secondary_header_tag = 'div'
+    endif
 %}
 
-    <{% if section.settings.sticky_header == 'stick_on_scroll' %}sticky-secondary-header{% else %}div{% endif %} class="header-section secondary-header-section {{ section.settings.sticky_header }} {% if settings.allow_transparent_navigation %}transparent-header{% endif %}">
+    <{{ secondary_header_tag }} class="header-section secondary-header-section {{ section.settings.sticky_header }} {% if settings.allow_transparent_navigation %}transparent-header{% endif %}">
     <header class="header
                 header--{{ settings.white_space }}
                 section-padding--{{ settings.white_space }} 
@@ -164,7 +169,7 @@
             {%- endif -%}
         </div>
     </header>
-<{% if section.settings.sticky_header == 'stick_on_scroll' %}/sticky-secondary-header{% else %}/div{% endif %}>
+</{{ secondary_header_tag }}>
 
 {% style %}
 .header__content {

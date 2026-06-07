@@ -670,6 +670,17 @@
       "email": "Email address *",
       "message": "Message",
       "submit": "Submit"
+    },
+    "footer": {
+      "contact": "Contact",
+      "quick_links": "Quick Links",
+      "products": "Products",
+      "wholesale": "Wholesale",
+      "where_to_find": "Where to Find Us",
+      "about": "About",
+      "recipes": "Recipes",
+      "awards": "Awards",
+      "follow": "Follow"
     }
   }
 }

@@ -181,14 +181,27 @@
                       <div class="topic-block__description topic-block__description--{{ settings.typography_preset }} {% if section.settings.topic_text_size != 'default' %}{{ section.settings.topic_text_size }}{% else %}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_m %} uppercase{% endif %}{% if settings.bolder_font_body_m %} bolder-font{% endif %}{% endif %}{% endif %} {% if block.settings.dim_text %}dim{% endif %} richtext {% if settings.enable_animated_underline %}richtext-link--underline{% endif %}">{{ block.settings.text }}</div>{% endif %}
                   </div>
                 {% endif %}
-                {% if block.settings.button_label != blank %}<{% if block.settings.button_link != blank %}a href="{{ block.settings.button_link }}" {% if block.settings.target_blank %}target="_blank"{% endif %} {% else%}span disabled{% endif %} class="topic-block__button {{ block.settings.button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if block.settings.button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{{ block.settings.button_label }}</{% if block.settings.button_link != blank %}a{% else%}span{% endif %}>{% endif %}
+                {% if block.settings.button_label != blank %}
+                  {% if block.settings.button_link != blank %}
+                    <a href="{{ block.settings.button_link }}" {% if block.settings.target_blank %}target="_blank"{% endif %} class="topic-block__button {{ block.settings.button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if block.settings.button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{{ block.settings.button_label }}</a>
+                  {% else %}
+                    <span disabled class="topic-block__button {{ block.settings.button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if block.settings.button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{{ block.settings.button_label }}</span>
+                  {% endif %}
+                {% endif %}
               </div>
               {% endif %}
           {%- endcase -%}
         {%- endfor -%}
       </div>
     {% endif %}
-        {% if section.settings.button_label != blank %}{%- capture button_label -%}{%- render 'varty-translate-setting', value: section.settings.button_label -%}{%- endcapture -%}<{% if section.settings.button_link != blank %}a href="{{ section.settings.button_link }}" {% if section.settings.target_blank %}target="_blank"{% endif %} {% else %}span disabled{% endif %} class="collapsible-tabs__button {{ section.settings.button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if section.settings.button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{{ button_label }}</{% if section.settings.button_link != blank %}a{% else %}span{% endif %}>{% endif %}
+        {% if section.settings.button_label != blank %}
+          {%- capture button_label -%}{%- render 'varty-translate-setting', value: section.settings.button_label -%}{%- endcapture -%}
+          {% if section.settings.button_link != blank %}
+            <a href="{{ section.settings.button_link }}" {% if section.settings.target_blank %}target="_blank"{% endif %} class="collapsible-tabs__button {{ section.settings.button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if section.settings.button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{{ button_label }}</a>
+          {% else %}
+            <span disabled class="collapsible-tabs__button {{ section.settings.button_style }}-button button--{{ settings.typography_preset }} {% if settings.typography_preset == 'custom' %}{% if settings.regular_button_size == 'default' %}button-font--default{% else %}{{ settings.regular_button_size }}{% endif %}{% endif %} {% if section.settings.button_style == 'link' and settings.enable_animated_underline %}link-button--underline{% endif %}">{{ button_label }}</span>
+          {% endif %}
+        {% endif %}
   </div>
 </div>
 {% endif %}

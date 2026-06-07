@@ -132,13 +132,20 @@
       endfor
     %}
 
-    <{% if section_content %}{{ related_collections_settings.heading_tag }}{% else %}h2{% endif %} class="related-collections__heading custom-heading {% if section_content %}{% if settings.accent_color_for_headings %}related-collections__heading--accent{% endif %}{% endif %} 
+    {% liquid
+      if section_content
+        assign related_collections_heading_tag = related_collections_settings.heading_tag
+      else
+        assign related_collections_heading_tag = 'h2'
+      endif
+    %}
+    <{{ related_collections_heading_tag }} class="related-collections__heading custom-heading {% if section_content %}{% if settings.accent_color_for_headings %}related-collections__heading--accent{% endif %}{% endif %}
       {% if section_content == false %}block-heading--{{ settings.typography_preset }}{% if settings.typography_preset == 'custom' %}{% if settings.uppercase_body_s %} uppercase{% endif %}{% if settings.bolder_font_body_s %} bolder-font{% endif %}{% endif %}{% else %}related-collections__heading--{{ settings.typography_preset }}{% endif %}{% if related_collections_settings.heading_size != 'default' %} {{ related_collections_settings.heading_size }}{% else %}{% if settings.uppercase_heading_xs %} uppercase{% endif %}{% if settings.bolder_font_heading_xs %} bolder-font{% endif %}{% endif %}
       {% if settings.center_text %}center-elements{% endif %}">
       {% if related_collections_settings.heading_color == 'gradient' and related_collections_settings.heading_gradient != blank %}<span class="gradient-heading-text gradient-heading-text--{{ section.id }}">{% endif %}
       {{ final_text }}
       {% if related_collections_settings.heading_color == 'gradient' and related_collections_settings.heading_gradient != blank %}</span>{% endif %}
-    </{% if section_content %}{{ related_collections_settings.heading_tag }}{% else %}h2{% endif %}>
+    </{{ related_collections_heading_tag }}>
   {% endif %}
 
   {% if show_collection_by_brand or show_shop_by_brand or show_shop_the_collection %}

@@ -50,9 +50,14 @@
     assign hover_mega_menu_banners_blocks = section.blocks | where: 'type', "hover_mega_menu_banners"
     assign blocksSize = section.blocks.size | minus: mega_menu_blocks.size | minus: hover_mega_menu_blocks.size | minus: hover_mega_menu_banners_blocks.size
     assign blocks = section.blocks 
+    if section.settings.sticky_header == 'stick_on_scroll'
+        assign header_tag = 'sticky-header'
+    else
+        assign header_tag = 'div'
+    endif
 %}
 
-    <{% if section.settings.sticky_header == 'stick_on_scroll' %}sticky-header{% else %}div{% endif %} class="header-section {{ section.settings.sticky_header }} {% if settings.allow_transparent_navigation %}transparent-header{% endif %} color-{{ section.settings.color_type }} {% if section.settings.color_type != 'default' %}no-default-color{% endif %} header-without-sidebars">
+    <{{ header_tag }} class="header-section {{ section.settings.sticky_header }} {% if settings.allow_transparent_navigation %}transparent-header{% endif %} color-{{ section.settings.color_type }} {% if section.settings.color_type != 'default' %}no-default-color{% endif %} header-without-sidebars">
     <header class="header header--{{ settings.white_space }} section-padding--{{ settings.white_space }} 
         {%- if section.settings.sticky_header == 'disable' %} header--disable-sticky {% endif -%}
         {%- if section.settings.sticky_header == 'always_stick' %} header--sticky {% endif -%}
@@ -185,7 +190,7 @@
             {%- endif -%}
         </div>
     </header>
-<{% if section.settings.sticky_header == 'stick_on_scroll' %}/sticky-header{% else %}/div{% endif %}>
+</{{ header_tag }}>
 
 {% style %}
 .header__content {

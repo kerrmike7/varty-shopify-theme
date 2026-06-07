@@ -47,7 +47,11 @@
             {{ settings.layout_background_color.blue }};
         }
     {% endstyle %}
-    <{% if banner_settings.banner_link != blank %}a{% else %}div{% endif %} class="block__banner-link"{% if banner_settings.banner_link != blank %} href="{{ banner_settings.banner_link }}"{% else %} role="link" aria-disabled="true"{% endif %}>
+    {% if banner_settings.banner_link != blank %}
+    <a class="block__banner-link" href="{{ banner_settings.banner_link }}">
+    {% else %}
+    <div class="block__banner-link" role="link" aria-disabled="true">
+    {% endif %}
         <div class="block__banner-image ratio-{{ banner_settings.image_ratio }}" {% if settings.disable_right_click %}oncontextmenu="return false"{% endif %}>
             {%- if banner_settings.banner_image != blank -%}
             {% if settings.images_loading != 'disable' %}
@@ -99,7 +103,7 @@
             </div>
         {%- endif -%}
         {% endif %}
-    </{% if banner_settings.banner_link != blank %}a{% else %}div{% endif %}>
+    {% if banner_settings.banner_link != blank %}</a>{% else %}</div>{% endif %}
     {% if banner_settings.banner_style == 'below' %}
         {%- if banner_settings.subheading != blank or banner_settings.heading != blank -%}
             <div class="block__banner-content {% if banner_settings.horizontal_text_alignment == "center" %}block__banner-content--center{% endif %}">

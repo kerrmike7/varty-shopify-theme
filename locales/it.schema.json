@@ -4701,9 +4701,7 @@
     "custom-html": {
       "name": "Personalizzato HTML",
       "settings": {
-        "custom_html": {
-          "label": "HTML"
-        }
+          "custom_html": "HTML"
       }
     },
     "collection-with-products": {

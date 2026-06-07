@@ -114,12 +114,19 @@
                 endif
             endfor
           %} 
-          <{% if section_content %}{{ selected_products_settings.heading_tag }}{% else %}h2{% endif %} class="slider__heading custom-heading {% if section_content %}{% if settings.accent_color_for_headings %}slider__heading--accent{% endif %}{% endif %} {% if section_content == false %}block-heading--{{ settings.typography_preset }}{% else %}slider__heading--{{ settings.typography_preset }}{% endif %} {% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% unless selected_products_settings.heading_size == 'default' %}{{ selected_products_settings.heading_size }}{% endunless %} 
+          {% liquid
+            if section_content
+              assign selected_products_heading_tag = selected_products_settings.heading_tag
+            else
+              assign selected_products_heading_tag = 'h2'
+            endif
+          %}
+          <{{ selected_products_heading_tag }} class="slider__heading custom-heading {% if section_content %}{% if settings.accent_color_for_headings %}slider__heading--accent{% endif %}{% endif %} {% if section_content == false %}block-heading--{{ settings.typography_preset }}{% else %}slider__heading--{{ settings.typography_preset }}{% endif %} {% if uppercase_font %} uppercase{% endif %}{% if bolder_font %} bolder-font{% endif %} {% unless selected_products_settings.heading_size == 'default' %}{{ selected_products_settings.heading_size }}{% endunless %}
             {% if disable_layout_margins %}{% if section.settings.desktop_grid_type == 'heading_with_two' or section.settings.desktop_grid_type == 'heading_with_three' %}{% else %} {% if settings.max_page_width == '1400' or settings.max_page_width == '1200' %}page-width {% endif %} page-width--{{ settings.max_page_width }}{% endif %}{% endif %}">
             {% if selected_products_settings.heading_color == 'gradient' and selected_products_settings.heading_gradient != blank %}<span class="gradient-heading-text gradient-heading-text--{{ section.id }}">{% endif %}
             {{ final_text }}
             {% if selected_products_settings.heading_color == 'gradient' and selected_products_settings.heading_gradient != blank %}</span>{% endif %}
-            </{% if section_content %}{{ selected_products_settings.heading_tag }}{% else %}h2{% endif %}>
+            </{{ selected_products_heading_tag }}>
         {% endif %}
         {% if selected_products_settings.desktop_grid_type == 'heading_with_two' or selected_products_settings.desktop_grid_type == 'heading_with_three' %}
             {% if section_content %}
